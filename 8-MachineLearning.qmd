@@ -31,8 +31,8 @@ summary(ozone.lm)
  
 # Let's look now at how a decision tree looks like:
 
-install.packages("tree") # not available for R version 3.5.3
-devtools::install_version('tree', version = '1.0-39')
+#install.packages("tree") # not available for R version 3.5.3
+#devtools::install_version('tree', version = '1.0-39')
 # we use this, because newest version of tree does not work with R version
 
 ozone.tree = tree(Ozone ~ ., data=airquality[complete.cases(airquality),])

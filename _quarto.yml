@@ -20,10 +20,10 @@ book:
     - 4-SimpleRegression.qmd
     - 5-MultipleRegression.qmd
     - 6-GLM.qmd
-    - Multivariate.qmd
-    - MachineLearning.qmd
-    - 5-DataScienceSkills.qmd
-    - 6-Outlook.qmd
+    - 7-Multivariate.qmd
+    - 8-MachineLearning.qmd
+    - 9-DataScienceSkills.qmd
+    - 10-Outlook.qmd
     
 engine: knitr
   
