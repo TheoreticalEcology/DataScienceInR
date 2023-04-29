@@ -1,0 +1,363 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r, include=FALSE}
+set.seed(42)
+```
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+rm(list=ls())
+treedata <- read.csv('data/treedata.csv', sep = ';')
+species <- read.csv('data/species.csv', sep = ';')
+```
+
+# Data handling
+
+
+## Exercise
+
+In this exercise you will practice common steps of the data preparation procedure using a dataset that was gathered in a forest in Switzerland. 
+
+The main steps are as follows (**to solve the tasks, please carefully read the detailed instructions and hints below**):   
+
+1. Read the provided datasets *treedata.csv* and *species.csv* to R. 
+2. Have a look at the dataset properties.    
+3. Find values that prevent a column you expect to be numeric to do so.    
+4. Does the dataset contain NA-values in `height`? How many?  
+5. Have a look at the data: Check for implausible values. For now, remove these values.  
+7. Add the species names to the dataset.  
+8. Create a new dataset containing only trees with both, height and dbh measurements.  
+6. Are there any correlations within the new dataset?   
+9. Remove all trees with `rem` = F4 from the dataset  
+10. Calculate mean dbh by species.
+
+*** 
+
+To thorougly check the dataset and perform the operations, you will need the following functions:  
+
+- `read.csv()`: Check the different options using `?read.csv`  
+- `str()`: Structure of an object  
+- `table()`: Check the optional arguments!  
+- `merge()`: Combine to data.frames  
+- `as.character()`: Change a vector's class to character
+- `as.numeric()`: Change a vector's class to numeric.
+- `%in%`
+- `is.na()`  
+- `max()`
+- `summary()`  
+- `complete.cases()`  
+- `cor.test()`
+- `%>%` and `group_by()` and `summarize()` from the dlyr package (check demonstration Part 2)
+
+Regarding the solutions, note we don't expect you to come up with exactly this code - there are many ways to solve the problem. The solutions just give you an idea of a possible solution
+
+### 1. Read data
+
+Read the provided datasets *treedata.csv* and *species.csv* to R. Use the option **stringsAsFactors = FALSE** in the function `read.csv`.
+
+Read the dataset *treedata.csv* and call it treedata. It has the following columns:
+
+- `species_code`: tree species code    
+- `dbh`: diameter at breast height (1.3 m) [cm]  
+- `height`: total height of the tree [m]. Measured only on a subset of trees.  
+- `rem`: coded values, containing remarks
+
+Read the dataset *species.csv* and call it species. The dataset consists of the following columns:  
+
+- `species_code`: tree species code (matching the one used in treedata.csv)  
+- `species_scientific`: Scientific species name  
+- `species_english`: English species name  
+
+*** 
+
+::: {.callout-tip collapse="true" appearance="minimal" icon="false"}
+#### Solution
+
+First, you read in the file using `read.csv`. You have to specify the correct separator for your dataset, here this is ";".
+
+```{r, eval = F}
+treedata <- read.csv('Where/ever/you/put/it/treedata.csv', sep = ";")
+species <- read.csv('Hopefully/in/the/same/folder/species.csv', sep = ";")
+```
+
+
+:::
+
+
+
+
+
+### 2. Dataset properties
+
+Have a look at the properties of the dataset:
+
+- Which classes do the columns have?  
+- Did you expect these classes?
+
+*** 
+
+::: {.callout-tip collapse="true" appearance="minimal" icon="false"}
+#### Solution
+
+The `data.frame` `dat` contains 4 columns: species, dbh (diameter at breast height [cm]), height [m] and bem1, a remark.  
+We expect the following formats:
+
+column   | format
+---------|--------
+species  | character
+dbh      | numeric
+height   | numeric
+rem      | factor  
+
+Using `str` we get an overview of the structure of a dataset:
+
+```{r}
+str(treedata)
+```
+
+Column `dbh` is a `character`, altough we would have expected this one to be class numeric.
+This indicates, that a letter or special characters are in that column (we do not want these to be in there at all!). 
+
+:::
+
+
+
+### 3. Turn character to numeric
+
+One column, which we expect to be numeric, is of class character. Find the value causing this column to be character, set it to `NA` and turn the column into class numeric. 
+
+Note that using 'is.numeric()' is not enough, if the column is a factor. This may be the case if you have used the option **stringAsFactor = T** in `read.csv` or an older version of R. Use a combination of 'as.character()' and 'as.numeric()' in that case. 
+
+***
+
+::: {.callout-tip collapse="true" appearance="minimal" icon="false"}
+#### Solution
+
+We suspect `dbh` to contain a character and we want to remove this. With the function 'table()', we can check all existing values in the column. There seems to be an 'X' in the data.
+
+```{r}
+table(treedata$dbh)
+```
+
+To automatically search for characters, we can check if `dbh` contains a character that is part of `LETTERS` (capital letters) or `letters`:
+
+```{r}
+treedata[treedata$dbh %in% LETTERS | treedata$dbh %in% letters,]
+```
+
+A more advanced option would be to use `grepl`. If we are using the solution above, we will only find the value if it is exactly one character. Things get a bit more complicated, if we have special characters, e.g, a *.
+
+```{r}
+
+x <- rep(c(1, 3, 5, '*', 'AA', ',', 9), 2)
+x[grepl("^[A-Za-z]+$", x, perl = T)]
+x[!grepl('[^[:punct:]]', x, perl =T)]
+
+```
+
+We want to set the X in `dbh` to `NA` (probably, this is a transcription error, so one could also have a look at the field forms...). 
+
+```{r}
+
+treedata$dbh[treedata$dbh == 'X'] <- NA
+str(treedata)
+
+```
+Just removing the 'X' does not turn a character to numeric! R provides the function `as.numeric`, which might be of use in this case. 
+
+```{r}
+treedata$dbh <- as.numeric(treedata$dbh)
+head(treedata$dbh)
+```
+
+:::
+
+
+
+### 4. `NA`- values in `height`
+
+Check for NA's in the column `height`:  
+
+- How many `NA`'s do appear in this column?  
+- Did you expect this column to contain `NA`'s? Why?  
+
+***
+
+::: {.callout-tip collapse="true" appearance="minimal" icon="false"}
+#### Solution
+
+```{r}
+summary(treedata)
+
+sum(is.na(treedata$height))
+table(is.na(treedata$height))
+
+nrow(treedata[is.na(treedata$height),])
+table(treedata$height, useNA = 'ifany')
+
+```
+
+- As only on a subset of the trees, height has been measured, we expect this column to contain `NA`-values.   
+- The dataset contains 221 `NA`.  
+
+:::
+
+
+
+### 5. Implausible values  
+
+The dataset contains some implausible values (completely out of range!). Find and replace these values with `NA`.  
+
+*** 
+
+::: {.callout-tip collapse="true" appearance="minimal" icon="false"}
+#### Solution
+
+*What values are implausible? The dataset contains different species. A value which is plausible for species A might be implausible for species B. However, for now, we will not go into the details here.*
+
+Do a visual check of the dataset
+
+```{r}
+boxplot(treedata$height, main = 'Height')
+boxplot(treedata$dbh, main ='DBH')
+
+max(treedata$dbh, na.rm = T)
+max(treedata$height, na.rm = T)
+
+treedata[treedata$dbh > 500 & !is.na(treedata$dbh),]
+treedata[treedata$height > 50 & !is.na(treedata$height),]
+```
+
+There seems to be one outlier in both datasets which can be seen as implausible: 
+No tree is more than 100 m of height and no tree has a diameter > 20 m (These values can be considered implausible for trees in Switzerland).  
+We will now remove these values from our dataset by setting them to `NA` - this might not always be the best option, there are also statistical models that can account for such errors!
+
+```{r}
+treedata$dbh[treedata$dbh > 500] <- NA
+treedata$height[treedata$height > 50] <- NA
+
+boxplot(treedata$dbh, main = 'DBH')
+boxplot(treedata$height, main = 'Height')
+```
+
+:::
+
+
+
+### 6. Add species names  
+
+Add the species names from the species dataset to the treedata dataset.  
+*Hint: `?merge`*
+
+***
+
+::: {.callout-tip collapse="true" appearance="minimal" icon="false"}
+#### Solution
+
+Use `merge` to add species names to the dataset treedata. For adding only one column, `match` is a helpful function.
+
+```{r}
+treedata = merge(treedata, species, by = "species_code")
+head(treedata)
+
+# treedata$species_english <- species$species_english[match(treedata$species_code, species$species_code)]
+
+```
+
+:::
+
+
+
+### 7. Remove F4  
+
+The remark F4 indicates, that the dbh-measurments might be flawed. Remove these trees from treedata.
+
+*** 
+
+::: {.callout-tip collapse="true" appearance="minimal" icon="false"}
+#### Solution
+
+
+```{r}
+treedata <- treedata[!treedata$rem %in% 'F4',]
+```
+
+
+:::
+
+
+
+### 8. Select trees that contain both dbh and height measurements  
+
+Subset treedata to trees where both height and dbh measurements were carried out. Call the result dbh_height.  
+
+*** 
+
+::: {.callout-tip collapse="true" appearance="minimal" icon="false"}
+#### Solution
+
+This can be done using `complete.cases` using
+
+```{r}
+dbh_height <- treedata[complete.cases(treedata$dbh, treedata$height),]
+```
+
+
+:::
+
+
+
+### 9. Correlations?
+
+Check for correlations in the dataset dbh_height. Use a test and plot dbh vs height.   
+
+*** 
+
+::: {.callout-tip collapse="true" appearance="minimal" icon="false"}
+#### Solution
+
+```{r}
+cor.test(dbh_height$dbh
+         , dbh_height$height)
+
+plot(dbh_height$dbh
+     , dbh_height$height
+     , ylab = 'Height'
+     , xlab = 'DBH')
+```
+
+:::
+
+
+
+### 10. Calculate mean dbh per species.
+
+For calculating summary statistics, the dplyr package is really helpful. It is part of the tidyverse environment, which was designed for data science. 
+If you work with large and complex datasets or if you have to derive many new variables, I really recommend that you have a look at this. 
+Also, the syntax for dplyr is quite intuitive.
+
+For help on this, check the demonstration of Part 2 where we calculated summary statistics for groups using the dplyr package!
+
+::: {.callout-tip collapse="true" appearance="minimal" icon="false"}
+#### Solution
+
+```{r}
+library(dplyr)
+treedata %>% 
+  group_by(species_english) %>% 
+  summarize(N = n(),
+            meanDBH = mean(dbh, na.rm = T), 
+            sdDBH = sd(dbh, na.rm = T))
+```
+
+
+
+:::
+
+
+

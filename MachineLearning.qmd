@@ -1,0 +1,96 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r, include=FALSE}
+set.seed(42)
+```
+
+# Machine Learning
+
+## Classroom demo
+
+```{r}
+# Machine Learning --------------------------------------------------------
+
+library(tree)
+library(randomForest)
+#library(forestFloor)
+
+
+# 1. Regression with random forest:------------------------
+# We want to compare performance (%variability explained by the model) of lm 
+# with performance of randomforest
+
+ozone.lm <- lm(Ozone ~ ., data=airquality, na.action=na.omit)
+summary(ozone.lm)
+# lm explains about 62% of the variance in the data
+
+ 
+# Let's look now at how a decision tree looks like:
+
+install.packages("tree") # not available for R version 3.5.3
+devtools::install_version('tree', version = '1.0-39')
+# we use this, because newest version of tree does not work with R version
+
+ozone.tree = tree(Ozone ~ ., data=airquality[complete.cases(airquality),])
+plot(ozone.tree)
+text(ozone.tree)
+# this is based on all variables and all observations
+#### explain how decision trees are produced with 2-variable-example on the blackboard:
+#### correlation of variable A with Ozone > split at a point so that variance left and right of the split is minimized, remember outcome 
+#### correlate Ozone with variable B > split > minimze variance >> compare this with performance of variable A >> if A removes more variability, choose splitof A for first node
+#### then split dataset according to the split  and redo the wholethingfor the two groups that wer generated >>> leads to 1 decision tree for the dataset
+
+# plot:
+# split-points are given at nodes of the tree
+# importacne of different variables related to how often they appear at these nodes
+
+
+
+# Now, let's look at the random forest
+# Difference here: for each iteration, only a random subset 
+# (about 66%) of observations) and a random subset of the variables is used
+# > we get a large number of different trees whose prediction ability is worse 
+# than a tree derived from the whole data
+# > then: average over these trees (similar to model averaging)
+# >> get 1 final tree which predicts better than each single tree 
+
+
+ozone.rf <- randomForest(Ozone ~ ., data=airquality, mtry=3,
+                         importance=TRUE, na.action=na.omit, keep.inbag=T)
+# mtry = number of predictors used in each split
+print(ozone.rf) # explains about 72% of the variance >> = better than lm!
+
+# random forest does not give p-values for explanatory variables, but 
+# you can get the variables importance for predictions (no causal assumptions here!):
+ 
+importance(ozone.rf)
+# the same as a plot:
+varImpPlot(ozone.rf)
+
+
+
+# 2. Classification with random forest:-------------------
+#Let's do a decision tree on the whole data first (all observations, all predictors):
+iris.tree <- tree(Species ~ ., data=iris)
+plot(iris.tree)
+text(iris.tree)
+
+# then try randomforest:
+model <- randomForest(Species ~ ., data=iris, importance=TRUE, ntree=500, mtry = 2, do.trace=100,  keep.inbag=T)
+# two random steps in RF:
+# 1. bootstrap for each tree
+# 2. mtry: random subset of predictors in each split
+
+#plot importance of predictors:
+varImpPlot(model)
+importance(model)
+#how many samples were distributed to the wrong species?
+print(model)
+#> 4% average error rate
+
+```
+

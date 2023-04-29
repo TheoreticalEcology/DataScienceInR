@@ -1,0 +1,498 @@
+---
+output: html_document
+editor_options:
+  chunk_output_type: console
+---
+
+```{r, include=FALSE}
+set.seed(42)
+```
+
+# Plotting and describing data
+
+## Classroom demo
+
+```{r}
+
+# Part 2
+# Descriptive statistics and graphics
+
+
+# Summary statistics for one numerical variable ---------------
+
+# summary statistics
+mean(airquality$Temp)
+median(airquality$Temp)
+min(airquality$Temp)
+max(airquality$Temp)
+range(airquality$Temp)
+
+var(airquality$Temp)
+sd(airquality$Temp)
+#the same:
+sqrt(var(airquality$Temp))
+
+quantile(airquality$Temp)
+
+mean(airquality$Ozone, na.rm = T) #na.rm: removes NAs
+
+
+
+# How to look for NA values: 
+airquality[is.na(airquality$Ozone),] 
+
+#or:
+summary(airquality)
+
+
+
+# summary statistics by group, use dplyr ----------------------------------
+
+
+# install.packages("dplyr")
+library(dplyr) # uses tidyverse syntax
+
+air_grouped <- airquality %>% # define dataset to be summarised
+  group_by(Month) %>% # define grouping factor (note that you don't need to tell which dataset to look in here (no $))
+  summarise(meanwind = mean(Wind), 
+            meansolar = mean(Solar.R), 
+            maxOzone = max(Ozone), 
+            varTemp = var(Temp)) # define which summary statistics you want to be calculated
+air_grouped
+
+# What kind of object do you get?
+# a tibble (= the data.frame class for tidyverse) AND data.frame
+class(air_grouped)
+air_grouped = as.data.frame(air_grouped) # make only a data.frame
+
+
+
+
+
+# plots for one numerical variable ----------------------------------------
+
+
+# plot: histogram
+hist(airquality$Temp)
+
+# add axes labels and title... see help for other parameters
+hist(airquality$Temp, 
+     main = "Temperature distribution",
+     xlab = "Temperature")
+
+# Save figures either via menu or script: (create folder "plots" first!)
+# script is preferred
+# pdf(file = "plots/histogram.pdf") # opens pdf file 
+hist(airquality$Temp, breaks = 20, col = "#FF0099",
+     main = "Temperature distribution",
+     xlab = "Temperature") # contents into pdf
+# dev.off() # close pdf file
+
+# if pdf is opened in adobe or similar, you cannot write in it! (Windows)
+# same procedure for other file formats (jpg, png, eps...)
+
+
+
+# 1 categorial variable --------------------------------------------------
+
+str(mtcars)
+
+counts = table(mtcars$cyl)
+
+# barplot
+plot(counts)
+barplot(counts)
+barplot(table(mtcars$cyl))
+
+
+
+# 2 caterogial variables --------------------------------------------------
+
+
+# mosaic plot
+table(cyl = mtcars$cyl, gear = mtcars$gear)
+plot(table(mtcars$cyl, mtcars$gear))
+
+
+
+# 1 categorial + 1 numeric variable ---------------------------------------
+
+
+# Boxplot
+boxplot(mpg ~ cyl, mtcars) # formula notation
+#or the same:
+plot(mpg ~ as.factor(cyl), mtcars)
+
+
+
+
+# Plot correlations ---------------------------------------------------------
+
+
+# Scatterplot
+plot(airquality$Solar.R, airquality$Ozone)
+plot(Ozone ~ Solar.R, data = airquality)#the same
+
+# different symbol for each month
+plot(Ozone ~ Solar.R, data = airquality, pch = Month)
+
+# color depends on the month, size on Wind
+plot(Ozone ~ Solar.R, data = airquality, col = Month, cex = Wind/5)
+
+# low-level plotting functions 
+# only add something to an existing plots: points() lines() etc.
+points(200, 150, pch = 16)
+abline(h = 50)
+
+# combining two plots
+oldPar = par(mfrow = c(1,2)) # c(number of rows, number of colums)
+# you can also specify various other plot characteristics, see ?par
+
+hist(airquality$Temp, breaks = 20, col = "#FF0099",
+     main = "Temperaturverteilung",
+     xlab = "Temperatur")
+plot(airquality$Solar.R, airquality$Ozone, col = airquality$Month-4, cex = airquality$Wind/5)
+
+# restore old par settings
+par(oldPar)
+
+
+
+
+# Calculate correlations --------------------------------------------------
+
+
+cor(airquality$Solar.R, airquality$Ozone, use = "complete.obs") # pearson = default
+cor(airquality$Solar.R, airquality$Ozone, use = "complete.obs", method = "spearman")
+
+# pairs plot: correlates all variables to each other
+plot(airquality)
+pairs(airquality) #the same
+
+# you can change what is plotted in upper and lower panel:
+# copy function from help
+panel.cor <- function(x, y, digits = 2, prefix = "", cex.cor, ...)
+{
+  usr <- par("usr"); on.exit(par(usr))
+  par(usr = c(0, 1, 0, 1))
+  r <- abs(cor(x, y, use = "complete.obs")) ### complete.obs must be added manually
+  txt <- format(c(r, 0.123456789), digits = digits)[1]
+  txt <- paste0(prefix, txt)
+  if(missing(cex.cor)) cex.cor <- 0.8/strwidth(txt)
+  text(0.5, 0.5, txt, cex = cex.cor * r)
+}
+pairs(airquality, lower.panel = panel.smooth, upper.panel = panel.cor)
+
+```
+
+
+
+## Exercises 
+
+```{r libraries, include=FALSE}
+library(vcd)
+library(EcoData)
+library(grDevices)
+```
+
+In this exercise you will practice:  
+  
+ * creating and plotting contingency tables for categorial variables (mosaicplot)  
+ * plotting a numerical variable (histogram)  
+ * plotting two numerical variables against each other (scatterplot)
+ * calculating correlations
+  
+  
+To perform this exercise use the help of the according functions. Also have a look at the examples at the bottom of the help page. You can obtain help for a specific function in several ways:  
+
+ * select the function in your script (e.g. double click it or simply place the cursor in the word) and press F1
+ * "?" + function name (e.g. ?hist) and execute 
+ * go to the "help" panel (below the environment) and search for the function
+
+
+Let's get started!  
+
+
+### Contingency tables  
+
+Here, we will have a look at the data set "Arthritis" from the "vcd" package. The study was conducted as a double-blind clinical trial investigating a new treatment against arthritis. The improvement was measured as a categorial variable with the possible outcomes "improved", "some" or "none". 
+
+Install and then load the package "vcd" and have a look at the data using the *View()* function. This will open a new tab next to your R script. To return to your script, close the new tab or click on your script.  
+
+```{r, eval=FALSE}
+library(vcd)
+View(Arthritis)
+```
+
+An important function for categorial data is *table()*. It produces a contingency table counting the occurences of the different categories of one variable or of each combination of the categories of two (or more) variables.  
+
+We are curious how many patients actually improved in the study and how this is influenced by the treatment. To show this graphically, we produced two plots (see below) using the following functions:
+
+
+ * *table()*
+ * *plot()* and *barplot()*
+ * (*str()*)
+ * (*summary()*)
+  
+Your task is now to reconstruct the two plots shown below by using these functions. 
+
+```{r, echo = FALSE}
+Improvedcounts <- table(Arthritis$Improved)  # create a table which gives you counts of the three categories in the "Improved" variable
+barplot(Improvedcounts,  # create a barplot of your table
+        ylim = c(0,50),  # change the limits of your y axis: starting from zero to 50
+        xlab = "Improved",  # add a label to your x axis
+        ylab = "Frequency")  # add a label to your y axis
+``` 
+
+**Hints for plot 1**
+
+What kind of plot is shown here? How many variables are shown in the plot? Approach: First, create a new object consisting of the table of the variable of interest (check "demonstration.R", if you have problems with the table function). Then use this object for plotting. Changing plot elements: Have a look at the help of the plotting-function to find out how to change the y- and x-axis labels. What do you notice on the y-axis? You can change the limits of the y-axis using "ylim = c(from, to)" as an argument in the plotting function.  
+
+
+ 
+```{r, echo = FALSE}
+Ratios <- table(Improved = Arthritis$Improved, Treatment = Arthritis$Treatment)
+plot(Ratios)
+```
+  
+
+**Hints for plot 2**
+
+What kind of plot can you see here? How many variables does it show? To plot this you need to create a contingency table with the variables of interest (check "demonstration.R", if you have problems doing this). Changing plot elements: You can name the variables in your contingency table (e.g. name = variable, othername = othervariable). The name you assign to your table will be used as the title in the plot.
+
+What do you think of the study now? Could you already draw conclusions from this plot? Provide your answer to the last question on **elearning-extern**. 
+
+
+::: {.callout-tip collapse="true" appearance="minimal" icon="false"}
+#### Solution
+
+Plot 1
+
+```{r barplot of table, message=FALSE}
+library(vcd)
+
+Improvedcounts <- table(Arthritis$Improved)  # create a table which counts the occurences of the three categories in the "Improved" variable, the table is assigne to the name "Improvedcounts"
+barplot(Improvedcounts,  # create a barplot of the table "Improvedcounts
+        ylim = c(0,50),  # change the limits of your y axis: starting from zero to 50
+        xlab = "Improved",  # add the label "Improved" to your x axis
+        ylab = "Frequency")  # add the label "Frequency" to your y axis
+``` 
+  
+    
+Plot 2
+
+```{r mosaic plot of table}
+Ratios <- table(Improved = Arthritis$Improved, Treatment = Arthritis$Treatment)  # create a table with the assigned name "ratios", give the name "Improved" to the first variable which is the variable Improved from the data set Arthritis, give the name "Treatment" to the second variable which is the variable Treatment from the data set Arthritis
+plot(Ratios)  # create a plot of the table "ratios"
+```
+  
+To view the tables with the names "Improvedcounts" and "ratios" you can simply execute their names:  
+```{r}
+Improvedcounts
+Ratios
+```
+  
+*Could you already draw conclusions from this plot?*  
+No, because this is only a descriptive plot. You can say that a large proportion of the patients that got a placebo treatment did not improve while a large proportion of the patients that got the new treatment improved markedly. However, this could also be the result of random variation and sampling. We need inferential statistics to make conclusions about the effectiveness of the treatment.
+  
+:::
+
+
+
+### Histogram  
+  
+Now let's have a look at the "birdabundance" dataset, which is in the "EcoData" package. This is not stored at CRAN (the official platform for R packages, but at github where we host our own code collections). If you haven't done this yet, use the code below to install the package (note that you also need the "devtools" package to do this. Again, to load it and make the data set accessible, execute the function *library(EcoData)*. To view the data set you can use the *View()* function again. 
+
+You can also get more explanations on the data set via the help.  
+
+```{r, eval=FALSE}
+install.packages("devtools")
+library(devtools)
+devtools::install_github(repo = "TheoreticalEcology/EcoData", subdir = "EcoData", dependencies = T, build_vignettes = T)
+library(EcoData)
+View(birdabundance)
+```
+  
+  
+The dataset has been assessed by scientists in Australia who counted birds in forest fragments and looked for drivers that influence these bird abundances, e.g. the size of a forest fragment and the distance to the next fragment. We want to see how these distances vary. A histogram is the standard figure to depict one numerical variable, such as for example distance measurements.
+
+Your task is now to reconstruct the following histogram including the labels, colors and lines using the functions:  
+
+  * *hist()* to create a histogram
+  * *abline()* to add (vertical) lines to your histogram  
+  
+Think about what the histogram tells you about the distances between each forest fragement and the next forest fragment.
+What do the red and purple lines represent? Give your answer on **elearning-extern**.
+
+
+```{r histogram, echo=FALSE}
+hist(birdabundance$DIST,  # plot a histogram of the varriable distance from the data set birdabundance
+     breaks = 20,  # change bar widths, here we make them smaller
+     col = "blue",  # change color to blue
+     ylim = c(0,20),  # change the range of the y axis to from 0 to 20
+     main = "Distance distribution",  # change title of the plot
+     xlab = "Distance to the next forest fragment")  # change x axis name
+abline(v = mean(birdabundance$DIST), col = "red")  # add a vertical line with an x value equal to the mean of the variable distance
+abline(v = median(birdabundance$DIST), col = "purple")  # add a vertical line with an x value equal to the median of the variable distance
+```
+  
+**Hints for plotting**
+
+Change the color (look at the help to see how). You can also try other colors, e.g. your favorite color (you can find all available colors with the function *colors()*). 
+Change the bar widths (breaks). Play around to see how they change. When changing the bar widths, what do you notice on the y-axis? 
+You can change the y-axis limits using "ylim" (see examples for *hist()*, second last line). 
+Change the title and the x-axis name of your histogram using the arguments "main" and "xlab".
+
+To add the lines, try the *abline()* function with the argument "v = 90" and look what happens. To remove the line, you have to execute the code producing your histogram again. Remember that *abline()* is a low level plotting function, which means it only adds an element to an existing plot! 
+Instead of calculating the depicted values with a function and then pasting the values into your abline function, you can also directly use the function in *abline()*.  
+See an *example* here:  
+
+```{r abline example code}
+hist(airquality$Temp)
+abline(v = 90, col = "blue")
+abline(v = median(airquality$Temp), col = "red")
+```
+  
+::: {.callout-tip collapse="true" appearance="minimal" icon="false"}
+#### Solution
+
+You can either create a scatterplot of two numerical variables like this:    
+```{r}
+#Create a function to generate a continuous color palette from red to blue
+rbPal <- colorRampPalette(c('red','blue')) # rpPal for red to blue palette
+
+plot(birdabundance$DIST, birdabundance$ABUND,  # create a plot of the variables DIST against ABUND from the data set birdabundance
+     ylab = "Distance (m)",  # add the label "Distance" to the y axis
+     xlab = "Bird abundance",  # add the label "Bird abundance" to the x axis
+     col = rbPal(5)[birdabundance$GRAZE],  # color the data points according to their category in the variable GRAZE from the data set birdabundance
+     pch = 17) # change the point shape
+```
+  
+Or like this:  
+```{r}
+plot(ABUND ~ DIST, data = birdabundance,  # create a plot of the variables DIST against ABUND from the data set birdabundance
+     xlab = "Distance (m)",  # add the label "Distance" to the x axis
+     ylab = "Bird abundance",  # add the label "Bird abundance" to the y axis
+     col = rbPal(5)[GRAZE],  # color the data points according to their category in the variable GRAZE as a gradient
+     pch = 17) # change the point shape
+```
+ 
+The advantage of the second version is that it uses the structure of "response variable (y) explained by (~) explanatory variable (x)". Also, you tell the plot function which data set to use once and it will automatically draw the variables from there, while in the first version you name the data set and the respective variable each time (even for the color).
+  
+*What do you notice about the distribution of the colors along bird abundance?*  
+  
+You can see that the blue data points are only at the low abundances, whereas the red data points are rather at the higher abundances. Purple data points are throughout all abundances. There thus seems to be a correlation between the grazing classes and bird abundances.
+
+:::
+
+
+  
+### Scatterplot
+
+As you've learned by now, *plot()* can create different types of plots depending on the type of the input data. It creates a scatterplot when plotting two numerical variables. Now we are interested to see how the abundance of birds is affected by the distance to the next forest fragment, and if there is another variable that is important for this relationship (visualized here by the color of the points).  
+
+Again, your task is to reconstruct the following plot using the following functions:  
+
+ * *plot() *
+ * (*str()*)  
+ * (*summary()*)
+ 
+What do you notice about the distribution of the colors along bird abundance?
+
+```{r, echo = FALSE}
+#Create a function to generate a continuous color palette from red to blue
+rbPal <- colorRampPalette(c('red','blue')) # rpPal for red to blue palette
+
+plot(ABUND ~ DIST, data = birdabundance,  # create a plot of the variables DIST against ABUND from the data set birdabundance
+     xlab = "Distance (m)",  # add the label "Distance" to the x axis
+     ylab = "Bird abundance",  # add the label "Bird abundance" to the y axis
+     col = rbPal(5)[GRAZE],  # color the data points according to their category in the variable GRAZE as a gradient
+     pch = 17) # change the point shape
+```
+  
+
+**Hints for plotting:**
+
+What is plotted on the x-axis, what on the y-axis?  
+There are two different ways to write the plot function. One is to stick with the "Usage" in the help of the plot function (giving coordinates along the x-axis as the first attribute and those along the y-axis as the second attribute). The other way is to write the relationship between x and y as a formula that is: "y~x, data = dataset" 
+Use google to find out how you can change the point shapes in your plot.
+
+Look at the dataset to find out which variable is indicated by the color of the points in the plot. Hint: It is a variable indicating 5 intensity levels. To change the color, include the attribute "color"" in your plot function and set it equal to the variable.  
+To get a color gradient you can create a function with the following code. Apply it before producing your plot and use the created function *rbPal()* as the color in the plot. 
+
+```{r, eval = F}
+# Palettes can be created with a function for the grDevices package
+install.packages("grDevices")
+library(grDevices)
+
+# Create a function to generate a continuous color palette from red to blue
+rbPal <- colorRampPalette(c('red','blue'))
+
+# Example for color in a plot
+plot(Ozone ~ Solar.R, data = airquality, 
+     col = rbPal(12)[Month]) # you can use any number, here it's 12 because we have 12 months
+```
+ 
+::: {.callout-tip collapse="true" appearance="minimal" icon="false"}
+#### Solution
+
+You can either create a scatterplot of two numerical variables like this:    
+```{r}
+#Create a function to generate a continuous color palette from red to blue
+rbPal <- colorRampPalette(c('red','blue')) # rpPal for red to blue palette
+
+plot(birdabundance$DIST, birdabundance$ABUND,  # create a plot of the variables DIST against ABUND from the data set birdabundance
+     ylab = "Distance (m)",  # add the label "Distance" to the y axis
+     xlab = "Bird abundance",  # add the label "Bird abundance" to the x axis
+     col = rbPal(5)[birdabundance$GRAZE],  # color the data points according to their category in the variable GRAZE from the data set birdabundance
+     pch = 17) # change the point shape
+```
+  
+Or like this:  
+```{r}
+plot(ABUND ~ DIST, data = birdabundance,  # create a plot of the variables DIST against ABUND from the data set birdabundance
+     xlab = "Distance (m)",  # add the label "Distance" to the x axis
+     ylab = "Bird abundance",  # add the label "Bird abundance" to the y axis
+     col = rbPal(5)[GRAZE],  # color the data points according to their category in the variable GRAZE as a gradient
+     pch = 17) # change the point shape
+```
+ 
+The advantage of the second version is that it uses the structure of "response variable (y) explained by (~) explanatory variable (x)". Also, you tell the plot function which data set to use once and it will automatically draw the variables from there, while in the first version you name the data set and the respective variable each time (even for the color).
+  
+*What do you notice about the distribution of the colors along bird abundance?*  
+  
+You can see that the blue data points are only at the low abundances, whereas the red data points are rather at the higher abundances. Purple data points are throughout all abundances. There thus seems to be a correlation between the grazing classes and bird abundances.
+
+:::
+
+
+
+### Correlation
+
+In the previous plot on bird abundance you've seen three variables. Now we want to know, how they are correlated with each other. Remember that we can use the function *cor()* to calculate correlations. Which of the following correlation coefficients (Pearson) belongs to which variable pair? Can you see these correlations in your previous plot?
+  
+```{r, echo = FALSE}
+cor(birdabundance$ABUND, birdabundance$DIST); cor(birdabundance$ABUND, birdabundance$GRAZE); cor(birdabundance$GRAZE, birdabundance$DIST)
+```
+  
+Give your answer to the second last question on **elearning-extern**. 
+Think about the meaning of the correlation values (positive/negative, strength). Is it what you would have expected by looking at the plot?
+
+::: {.callout-tip collapse="true" appearance="minimal" icon="false"}
+#### Solution
+
+ 
+```{r}
+cor(birdabundance$ABUND, birdabundance$DIST)
+cor(birdabundance$ABUND, birdabundance$GRAZE)
+cor(birdabundance$GRAZE, birdabundance$DIST)
+```
+  
+The first correlation (abundance to distance) tells us that there is a small positive correlation between the two variables, but it does not tell us whether it is significant or not. We will properly test such relationships later in the course. In the scatter plot we have seen this weak positive correlation already. 
+The second correlation (abundance to grazing) tells us that there is a stronger negative correlation between abundance and grazing. We have already seen a pattern of the color of the data points along bird abundances (red towards higher, blue towards lower abundances).
+The third correlation (grazing to distance) tells us that there is a small negative correlation between the two variables. However, the color pattern along distance is not as obvious as for abundance.
+
+:::
+
+
+

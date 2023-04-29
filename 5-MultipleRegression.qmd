@@ -1,0 +1,334 @@
+```{r, include=FALSE}
+set.seed(42)
+```
+
+
+# Multiple regression
+
+## Classroom demo
+
+```{r}
+# Multiple linear regression
+
+## first remove observations with NA values
+newAirquality = airquality[complete.cases(airquality),]
+summary(newAirquality)
+
+# simple regression
+m0 = lm(Ozone ~ Temp , data = newAirquality)
+summary(m0)
+plot(m0)
+plot(Ozone ~ Temp , data = newAirquality)
+abline(m0, col = "blue", lwd = 3)
+
+# Today: multiple linear regression
+m1 = lm(Ozone ~ Temp + Wind , data = newAirquality)
+# have a look at the residuals:
+op <- par(mfrow = c(2,2))
+plot(m1)
+par(op)
+
+summary(m1)
+
+# plotting multiple regression outputs
+library(effects)
+plot(allEffects(m1))
+
+# Include interaction
+m2 = lm(Ozone ~  scale(Wind)* scale(Temp) , data = newAirquality)
+# if including interactions, always scale your predictor variables!
+# scale: subtracts the mean and divides by standard deviation
+summary(m2)
+op <- par(mfrow = c(2,2))
+plot(m2)
+par(op)
+
+plot(allEffects(m2))
+
+# transform response values 
+m3 = lm(sqrt(Ozone) ~ scale(Wind) * scale(Temp) , data = newAirquality)
+summary(m3)
+# Are residuals better now?
+op <- par(mfrow = c(2,2))
+plot(m3)
+par(op) # a little bit better
+
+# now plot and interpret the results
+plot(allEffects(m3))
+summary(m3)
+
+
+## Omitted variable bias
+
+both = lm(Ozone ~ Wind + Temp, newAirquality)
+wind = lm(Ozone ~ Wind , newAirquality)
+temp = lm(Ozone ~ Temp, newAirquality)
+summary(both)
+summary(wind)
+
+slopes <- data.frame(
+  predictor = c("Wind", "Temp"),
+  both.pred = round(coef(both)[2:3], digits = 2),
+  only.wind = c(round(coef(wind)[2], digits = 2), "NA"),
+  only.temp = c("NA", round(coef(temp)[2], digits = 2))
+)
+slopes
+
+## Making everything more complex
+str(newAirquality)
+
+# How does everything change, if we have factorial predictors?
+newAirquality$MonthFactor = as.factor(newAirquality$Month)
+
+m4 = lm(sqrt(Ozone) ~ MonthFactor + scale(Wind) * scale(Temp) * scale(Solar.R) , 
+        data = newAirquality)
+summary(m4)
+
+m5 = lm(sqrt(Ozone) ~ MonthFactor + scale(Wind) + scale(Temp) + scale(Solar.R) 
+                      + scale(Wind):scale(Temp)
+                      + scale(Wind):scale(Solar.R)
+                      + scale(Temp):scale(Solar.R), 
+        data = newAirquality)
+summary(m5)
+
+# short form for including only two-wac interactions:
+
+m5 = lm(sqrt(Ozone) ~ MonthFactor + (scale(Wind) + scale(Temp) + scale(Solar.R))^2,
+        data = newAirquality)
+summary(m5)
+# get overall effect of Month:
+anova(m5)
+# this is doing a type I ANOVA = sequential
+# order in which you include the predictors changes the estimates and p-values
+
+# If you want to do a type II ANOVA, use ANova() from the car package
+library(car)
+Anova(m5) # Anova with capital A
+#type II ANOVA: all other predictors have already been taken into account
+# Does an additional predictor explain some of the variance on top of that?
+
+
+# Model selection-----
+
+# Compare different competing models:
+# let's compare models m3 and m5 to decide which one explains our data better:
+# 1. LRT
+anova(m3, m5)
+# RSS = residual sum of squares = variance not explained by the model
+# smaller RSS = better model
+# p-value
+
+#2. AIC
+AIC(m3)
+AIC(m5)
+# also here, model m5 is better
+
+
+#### Demonstration: Why interpretation of effect sizes and p-values 
+### after extensive model selection is not a good idea:
+library(MASS)
+set.seed(1)
+#make up predictors:
+dat = data.frame(matrix(runif(20000), ncol = 100))
+# create a response variable
+dat$y = rnorm(200)
+fullModel = lm(y ~ ., data = dat)
+sum <- summary(fullModel)
+mean(sum$coefficients[,4] < 0.05)
+# 0.019: less than 2 % false positives = type I error rate
+
+selection = stepAIC(fullModel)
+sum.sel <- summary(selection)
+mean(sum.sel$coefficients[,4] < 0.05)
+# 0.48: Now almost 50 % of our results are false positives!!!
+
+```
+
+
+## Exercises
+
+
+In this exercise you will:  
+  
+ * perform multiple linear regressions
+ * interpret regression output and check the residuals
+ * plot model predictions including interactions
+
+Before you start, remember to clean your global environment (if you haven't already) using *rm(list=ls())*. 
+
+To conduct the exercise, please load the following packages:
+
+```{r, eval=FALSE}
+library(effects)
+library(MuMIn)
+```
+
+You will work with the following datasets: 
+
+ * mtcars 
+ * Cement{MuMIn}
+ 
+The second dataset is from the MuMIn package (as shown by the curly brackets). 
+  
+#### Useful functions 
+
+for multiple linear regression
+  
+*lm()* - fit linear model  
+*summary(fit)* - apply to fitted model object to display regression table  
+*plot(fit)* - plot residuals for model validation  
+*anova(fit)* - apply type I ANOVA (variables included sequentially) to model to test for effects all levels of a factor  
+*Anova(fit)* - *car* package; use type II ANOVA (effects for predictors when all other predictors are already included) for overall effects  
+*scale()* - scale variable  
+*sqrt()* - square-root  
+*log()* - calculates natural logarithm  
+*plot(allEffects(fit))* - apply to fitted model object to plot marginal effect; *effects* package  
+*par()* - change graphical parameters  
+use *oldpar <- par(mfrow = c(number_rows, number_cols))* to change figure layout including more than 1 plot per figure  
+use *par(oldpar)* to reset graphic parameter  
+  
+for model selection
+  
+*stepAIC(fullModel)* - perform stepwise AIC model selection; apply to full model object, *MASS* package  
+*dredge(fullModel)* - perform global model selection, *MuMIn* package  
+*model.avg()* - perform model averaging   
+*AIC(fit)* - get AIC for a fitted model  
+*anova(fit1, fit2)* - compare two fitted models via Likelihood Ratio Test (LRT)  
+
+
+
+### Analyzing the *mtcars* dataset
+
+Imagine a start up company wants to rebuild a car with a nice retro look from the 70ies. The car should be modern though, meaning the fuel consumption should be as low as possible. They've discovered the *mtcars* dataset with all the necessary measurements and they've somehow heard about you and your R skills and asked you for help. And of course you promised to help, kind as you are.  
+
+The company wants you to find out which of the following characteristics affects  the fuel consumption measured in miles per gallon (*mpg*). Lower values for *mpg* thus reflect a higher fuel consumption. The company wants you to include the following variables into your analysis:
+
+* number of cylinders (*cyl*)
+* weight (*wt*)
+* horsepower (*hp*)
+* whether the car is driven manually or with automatic (*am*)
+
+In addition, Pawl, one of the founders of the company suggested that the effect of weight (*wt*) might be irrelevant for powerful cars (high *hp* values). You are thus asked to test for this interaction in your analysis as well.   
+
+
+::: {.callout-caution icon="false"}
+#### Question
+
+Carry out the following tasks:
+
+* Perform a multiple linear regression (change class for *cyl* and *am* to factor)
+* Check the model residuals
+* Interpret and plot all effects
+
+You may need the following functions:
+
+* as.factor()
+* lm()
+* summary()
+* anova()
+* plot()
+* allEffects()
+
+Use your results to **answer the questions on elearning-extern**.
+
+:::
+
+::: {.callout-tip collapse="true" appearance="minimal" icon="false"}
+#### Solution
+
+This is the code that you need to interpret the results.
+
+```{r mtcars}
+# change am and cyl from numeric to factor
+mtcars$am <- as.factor(mtcars$am)
+mtcars$cyl <- as.factor(mtcars$cyl)
+
+# multiple linear regression and results:
+carsfit <- lm(mpg ~ wt + hp + am + cyl + wt:hp, dat = mtcars) 
+#weight is included as the first predictor in order to have 
+#it as the grouping factor in the allEffects plot 
+summary(carsfit)
+anova(carsfit)
+
+# check residuals
+old.par = par(mfrow = c(2, 2))
+plot(carsfit)
+par(old.par)
+
+#plot effects
+plot(allEffects(carsfit))
+```
+
+
+:::
+
+### Model-selection with the *Cement* dataset
+
+The process of cement hardening involves exogenous chemical reactions and thus produces heat. The amount of heat produced by the cement depends on the mixture of its constituents. The *Cement* dataset includes heat measurements for different types of cement that consist of different relative amounts calcium aluminate (*X1*), tricalcium silicate (*X2*), tetracalcium alumino ferrite (*X3*) and dicalcium silicate (*X4*). A cement producing company wants to optimize the composition of its product and wants to know, which of these compounds are mainly responsible for heat production.
+
+::: {.callout-caution icon="false"}
+#### Question
+
+Carry out the following tasks:
+
+* Perform a multiple linear regression including all predictor variables and all two-way interactions (remember the notation *(var1 + var2 + var3)^2*.
+* Perform backward, forward and global model selection and compare the results
+* Fit the model considered optimal by global model selection and compare it with the full model based on AIC (or AICc) and LRT.
+
+You may need the following functions:
+
+* lm()
+* summary()
+* stepAIC()
+* options()
+* dredge()
+* AIC() or AICc() (for small datasets)
+* anova()
+
+
+Use your results to **answer the questions on elearning-extern**.
+
+:::
+
+::: {.callout-tip collapse="true" appearance="minimal" icon="false"}
+#### Solution
+
+This is the code that you need to obtain the results.
+
+```{r  Cement}
+library(MuMIn)
+# full model 
+full = lm(y ~ (X1 + X2 + X3 + X4)^2, data = Cement)
+summary(full)
+
+# backward model selection
+red1 = stepAIC(full, direction = "backward")
+summary(red1)
+
+# forward model selection
+red2 = stepAIC(full, direction = "forward")
+summary(red2)
+
+# global model selection
+options(na.action = "na.fail")
+dd = dredge(full)
+head(dd)
+
+opt = lm(y ~ X1 + X2, data = Cement)
+summary(opt)
+
+AIC(opt)
+AIC(full) # full model is better
+anova(opt, full) # no difference between the models
+
+# sample size in the Cement dataset:
+str(Cement) #or
+nrow(Cement)
+
+# If the sample size is low, a corrected version of the AIC is recommended to avoid overfitting:
+AICc(opt)
+AICc(full) # This is inf! opt model is better
+
+```
+
+:::

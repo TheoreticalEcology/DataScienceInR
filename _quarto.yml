@@ -1,0 +1,41 @@
+project:
+  type: book
+  output-dir: docs
+
+book:
+  title: "Introduction to Data Science with R"
+  author: 
+     name: "Florian Hartig, Lisa Hülsmann, Alexandra Koch, Magdalena Mair, Maximilian Pichler"
+  date: "April 2023"
+  site-url: https://TheoreticalEcology.github.io/DataScienceInR/
+  repo-url: https://github.com/TheoreticalEcology/DataScienceInR
+  repo-branch: master
+  repo-actions: [edit]
+  sharing: [twitter, facebook, linkedin]
+  chapters:
+    - index.qmd
+    - 1-GettingStarted.qmd
+    - 2-DescriptiveStatistics.qmd
+    - 3-HypothesisTesting.qmd
+    - 4-SimpleRegression.qmd
+    - 5-MultipleRegression.qmd
+    - 6-GLM.qmd
+    - Multivariate.qmd
+    - MachineLearning.qmd
+    - 5-DataScienceSkills.qmd
+    - 6-Outlook.qmd
+    
+engine: knitr
+  
+google-scholar: true
+
+execute:
+  freeze: auto
+  cache: false
+
+format:
+  html:
+    theme: cosmo
+editor: visual
+
+

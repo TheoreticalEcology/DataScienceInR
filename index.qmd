@@ -1,0 +1,22 @@
+# Preface {.unnumbered}
+
+```{r, eval=TRUE, include=FALSE}
+# Automatically create a bib database for R packages.
+knitr::write_bib(c(.packages(), 'bookdown', 'knitr', 'rmarkdown'),
+                 'packages.bib')
+
+knitr::opts_chunk$set(cache = TRUE)
+set.seed(123)
+```
+
+Material for a first 1-week course in Data Science, taught at the University of Regensburg.
+
+Day 1: Getting started, descriptive
+
+Day2: Hypothesis testes
+
+Day3: Linear regression (simple, multivariate)
+
+Day4: GLM, Multivariate
+
+Day5: Machine Learning, Data Orga

@@ -1,0 +1,361 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r, include=FALSE}
+set.seed(42)
+```
+
+# Simple linear regression
+
+In this cahpter, you will practice to:
+  
+ * formulate a research question
+ * perform simple linear regression for numeric and categorial predictors
+ * interpret regression outputs
+ * check the residuals of regression models
+
+## Classroom demo
+
+```{r}
+
+
+# Part 5
+# Simple linear regression
+
+
+
+
+# cleaning workspace ------------------------------------------------------
+
+
+# let's clean our workspace:
+ls() # gives a list of objects that are currently stored
+rm(cl) # remove object m1
+rm(list = ls()) #remove all objects
+
+
+
+
+
+# Simple linear regression ------------------------------------------------
+
+
+pairs(airquality)
+# first think about what is explanatory / predictor 
+# and what is the dependent variable (e.g. in Ozone and Temp)
+
+# par(mfrow = c(1, 1))
+plot(Ozone ~ Temp, data = airquality)
+fit1 = lm(Ozone ~ Temp, data = airquality)
+summary(fit1)
+# gives a negative values for the intercept = negative Ozone levels when Temp = 0
+# this does not make sense (>extrapolation)
+
+# we can also fit a model without intercept, 
+# without means: intercept = 0; y = a*x 
+# although this doesn't make much sense here
+fit2 = lm(Ozone ~ Temp - 1, data = airquality)
+summary(fit2)
+
+
+plot(Ozone ~ Temp, data = airquality, xlim = c(0,100), ylim = c(-150, 150))
+abline(fit1, col = "green")
+abline(fit2, col = "red", lty = 2)
+
+
+# there is no need to check normality of Ozone
+hist(airquality$Ozone) # this is not normal, and that's no problem !
+
+
+# instead: the residuals must be normal!!!!!!!!
+residuals(fit1)
+hist(residuals(fit1))
+# residuals are not normally distributed
+# we do not use a test for this, but instead look at the residuals visually
+
+# let's plot resiuals versus predictor
+plot(airquality$Temp[!is.na(airquality$Ozone)], residuals(fit1))
+
+# model checking plots
+oldpar= par(mfrow = c(2,2))
+plot(fit1)
+par(oldpar)
+#> there's a pattern in the residuals > the model does not fit very well!
+
+
+# Quadratic term ----------------------------------------------------------
+
+## what does simple linear regression mean?
+# simple = one predictor!
+# linear = linear in the parameters
+# a0 + a1 * x + a2 * x^2 
+# even if we add a quadratic term, this is a linear combination
+# this is called polynomial
+
+fit3 = lm(Ozone ~ Temp + I(Temp^2), data = airquality)
+summary(fit3)
+
+oldpar= par(mfrow = c(2,2))
+plot(fit3)
+par(oldpar)
+
+
+# Residual vs. fitted looks okay, but Outliers are still there, and additionally
+# too wide. But for now, let's plot prediction with uncertainty (plot line plus confidence interval)
+
+plot(Ozone ~ Temp, data = airquality)
+
+# if the relationship between x and y is not linear, we cannot use abline
+# instead we predict values of x for different values of y based on the model 
+newDat = data.frame(Temp = 55:100)
+predictions = predict(fit3, newdata = newDat, se.fit = T)
+# and plot these into our figure:
+lines(newDat$Temp, predictions$fit, col= "red")
+# let's also plot the confidence intervals:
+lines(newDat$Temp, predictions$fit + 1.96*predictions$se.fit, col= "red", lty = 2)
+lines(newDat$Temp, predictions$fit - 1.96*predictions$se.fit, col= "red", lty = 2)
+
+# add a polygon (shading for confidence interval)
+x = c(newDat$Temp, rev(newDat$Temp))
+y = c(predictions$fit - 1.96*predictions$se.fit, 
+      rev(predictions$fit + 1.96*predictions$se.fit))
+
+polygon(x,y, col="#99009922", border = F )
+
+
+# alternative: use package effects
+#install.packages("effects")
+library(effects)
+plot(allEffects(fit3))
+plot(allEffects(fit3, partial.residuals = T)) 
+#to check patterns in residuals (plots measurements and partial residuals)
+
+# or jtools package
+library(jtools)
+effect_plot(fit3, pred = Temp, interval = TRUE, plot.points = TRUE)
+
+
+
+# Categorial predictors ---------------------------------------------------
+
+
+summary(chickwts)
+
+plot(weight ~ feed, chickwts)
+fit4 = lm(weight ~ feed, chickwts)
+
+summary(fit4)
+anova(fit4) #get overall effect of feeding treatment
+
+plot(allEffects(fit4))
+plot(allEffects(fit4, partial.residuals = T))
+effect_plot(fit4, pred = feed, interval = TRUE, plot.points = F)
+
+
+old.par = par(mfrow = c(2, 2))
+plot(fit4)
+par(old.par)
+
+boxplot(residuals(fit4) ~ chickwts$feed)
+
+```
+
+
+
+## Exercises 
+
+You will work with the following datasets: 
+
+ * regrowth {EcoData}
+ * birdabundance {EcoData}
+ * simulated data
+ 
+
+### Analyzing the "regrowth" dataset
+
+Imagine you have a garden with some fruit trees and you were thinking of adding some berry bushes between them. However, you don't want them to suffer from malnutrition so you want to estimate the volume of root biomass as a function of the fruit biomass.
+
+Carry out the following tasks
+
+  * Perform a simple linear regression for the influence of fruit biomass on root biomass.
+  * Visualize the data and add the regression line to the plot.
+  
+You will need the following functions:  
+
+ * *lm()*
+ * *summary()* 
+ * *plot()*
+ * *abline()*  
+
+::: {.callout-caution icon="false"}
+#### Question
+
+Use your results to **chose the correct statements on elearning-extern**.
+
+:::
+
+::: {.callout-tip collapse="true" appearance="minimal" icon="false"}
+#### Solution
+
+This is the code that you need to interpret the results.
+
+```{r regrowth}
+library(EcoData)
+# simple linear regression
+fit <- lm(Root ~ Fruit, data = regrowth)
+
+# check summary for regression coefficient and p-value
+summary(fit)
+
+# plot root explained by fruit biomass
+plot(Root ~ Fruit, data = regrowth, 
+     ylab = "Root biomass in cubic meters",
+     xlab = "Fruit biomass in g")
+
+abline(fit) # add regression line
+abline(v = 70, col = "purple") # add line at x value (here fruit biomass of 70g)
+abline(h = 4.184256 + 0.050444*70, col = "brown") # add line at y value according to x = 70 using the intercept and regression coefficient of x
+```
+:::
+
+
+### Analyzing the "birdabundance" dataset
+
+The dataset provides bird abundances in forest fragments with different characteristics in Australia. We want to look at the relationship of the variables "abundance", "distance" and "grazing".
+
+::: {.callout-caution icon="false"}
+#### Question
+
+First, **answer the following questions on elearning-extern**:
+
+ * What is the most reasonable research question regarding these variables?
+ * What is the response variable?
+ * What is the predictor variable?
+
+Then, perform the following tasks:
+
+ * Fit a simple linear regression relating the response variable to the categorial predictor (that is the one with five levels, make sure that it is indeed a factor using *as.factor()*)
+ * Apply an ANOVA to your model.
+ 
+You may need the following functions:  
+
+ * *lm()*
+ * *summary()* 
+ * *anova()* 
+ 
+Use your results to **chose the correct statements on elearning-extern**.
+
+:::
+
+::: {.callout-tip collapse="true" appearance="minimal" icon="false"}
+#### Solution
+
+This is the code that you need to interpret the results.
+
+```{r  abund~graze}
+# change variable from integer to factor
+birdabundance$GRAZE <- as.factor(birdabundance$GRAZE) 
+fit <- lm(ABUND ~ GRAZE, data = birdabundance)
+summary(fit)
+
+# anova to check global effect of the factor grazing intensity
+anova(fit)
+
+# boxplot
+plot(ABUND ~ GRAZE, data = birdabundance)
+```
+
+:::
+
+
+### Model validation: Residual checks
+
+Now, we will have a closer look at model diagnostics and residual checks in particular. Of course, we should have done this for all models above as well (we simply didn't do this, because of time restrictions). So remember that you always have to validate your model, if you want to be sure that your conclusions are correct. 
+
+For this exercise, you can prepare a dataset yourself called "dat" with the variables "x" and "y". Simply copy the following code to generate the data:
+
+```{r}
+set.seed(234)
+x = rnorm(40, mean = 10, sd = 5)
+y = 10 - 2*x + 0.9 * x^2 + rnorm(40, mean=5, sd = 20)
+dat <- data.frame(x, y)
+head(dat)
+```
+
+Perform the following tasks:
+
+ * Fit a simple linear regression.
+ * Check the residuals.
+ * Perform another simple linear regression with a modified formula, if needed.
+ * Create a scatter plot of the data and add a regression line for the first fit in black and one for the second fit in red. The second model cannot be plotted with the *abline()* function. Use the following code instead:
+ 
+```{r eval = F}
+lines(sort(x), predict(fit2, newdata = data.frame(x = sort(x))), col = "red")
+```
+
+You may also need the following functions:  
+
+ * *lm()*
+ * *summary()*
+ * *par(mfrow = c(2, 2))*
+ * *plot()*
+ * *abline()*
+ 
+Use your results to **answer the questions on elearning-extern**.
+
+
+::: {.callout-caution icon="false"}
+#### Question
+
+TODO
+
+
+:::
+
+::: {.callout-tip collapse="true" appearance="minimal" icon="false"}
+#### Solution
+
+```{r resid-check}
+set.seed(234)
+x = rnorm(40, mean = 10, sd = 5)
+y = 10 - 2*x + 0.9 * x^2 + rnorm(40, mean=5, sd = 20)
+dat <- data.frame(x, y)
+
+# simple linear regression
+fit <- lm(y ~ x, dat)
+
+# check residuals
+op = par(mfrow=c(2,2))
+plot(fit) # residuals show a parabolic relationship (first plot) -> quadratic relationship
+par(op)
+
+# scatter plot
+plot(y ~ x, data = dat)
+abline(fit)
+
+summary(fit) # significantly positively correlated, but this doesn't tell the full story because the residuals are not okay
+
+# improved regression model
+fit2 = lm(y ~ x + I(x^2), dat)
+
+# check residuals
+op = par(mfrow=c(2,2))
+plot(fit2) # no pattern in residuals anymore (first plot) -> fit is fine
+par(op)
+
+# scatter plot
+plot(y ~ x, data = dat)
+abline(fit)
+lines(sort(x), predict(fit2, newdata = data.frame(x = sort(x))), col = "red")
+
+
+summary(fit2) # significantly negatively correlated, trustworthy now, because residuals are sufficiently uniformly distributed (first plot in plot(fit2))
+```
+
+:::
+
+
+
