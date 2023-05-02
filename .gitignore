@@ -5,7 +5,6 @@
 
 /.quarto/
 _freeze/
-docs/
 data/species.csv
 data/treedata.csv
 MachineLearning_files/execute-results/html.json

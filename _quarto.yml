@@ -33,6 +33,10 @@ execute:
   freeze: auto
   cache: false
 
+knitr:
+  opts_chunk: 
+    collapse: true
+
 format:
   html:
     theme: cosmo
