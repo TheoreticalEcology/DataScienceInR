@@ -63,7 +63,7 @@ quantile(airquality$Temp)
 mean(airquality$Ozone, na.rm = TRUE) #na.rm: removes NAs
 ```
 
-::: {.callout-tip appearance="minimal"}
+::: {.callout-tip appearance="default" collapse="true"}
 ## How to look for NAs
 
 How to look for NA values:
@@ -92,27 +92,11 @@ How often do different events occur?
 table(mtcars$gear)
 ```
 
-### Visualizations for two variables
+**Numeric with categorical**
 
-| Scenario                     | Which plot                    | R command                                                                       |
-|------------------------|------------------------|------------------------|
-| Numeric                      | Histogram or boxplot          | `hist()` and`boxplot`                                                           |
-| Numeric with numeric         | Scatterplot                   | `plot`                                                                          |
-| Numeric with categorical     | Boxplot                       | `boxplot(numeric~categorical)`                                                  |
-| Categorical with categorical | mosaicplot or grouped barplot | `mosaicplot(table(categorical, categorical))` or `barplot(data, beside=TRUE)` |
-
-## Classroom demo
+We can also calculate summary statistics per level of a categorical variable for a numerical variable of interest. We can do with base R but it is easier with the `dplyr` package:
 
 ```{r}
-
-
-
-
-
-# summary statistics by group, use dplyr ----------------------------------
-
-
-# install.packages("dplyr")
 library(dplyr) # uses tidyverse syntax
 
 air_grouped <- airquality %>% # define dataset to be summarised
@@ -122,39 +106,50 @@ air_grouped <- airquality %>% # define dataset to be summarised
             maxOzone = max(Ozone), 
             varTemp = var(Temp)) # define which summary statistics you want to be calculated
 air_grouped
+```
 
-# What kind of object do you get?
-# a tibble (= the data.frame class for tidyverse) AND data.frame
-class(air_grouped)
-air_grouped = as.data.frame(air_grouped) # make only a data.frame
+::: {.callout-note appearance="default" collapse="true"}
+## dplyr and tidyverse
 
+The `dplyr` package is part of a big software environment called tidyverse. Unique features of the tidyverse are the pipe `%>%` operator and `tibble` objects.
 
+-   The `%>%` operator:
 
+    Applying several functions in sequence on an object often results in uncountable/confusing number of round brackets:
 
+    ```{r}
+    max(mean(range(c(5, 3, 2, 1))))
+    ```
 
-# plots for one numerical variable ----------------------------------------
+    The pipe operator simplifies that by saying "apply the next function on the result of the current function":
 
+    ```{r}
+    c(5, 3, 2, 1) %>% range %>% mean %>% max
+    ```
 
-# plot: histogram
-hist(airquality$Temp)
+    Which is easier to write, read, and to understand!
 
-# add axes labels and title... see help for other parameters
-hist(airquality$Temp, 
-     main = "Temperature distribution",
-     xlab = "Temperature")
+-   `tibble` objects are just an extension of data.frames. In the course we will use mostly data.frames, so it is better to transform the tibbles back do data.frames:
 
-# Save figures either via menu or script: (create folder "plots" first!)
-# script is preferred
-# pdf(file = "plots/histogram.pdf") # opens pdf file 
-hist(airquality$Temp, breaks = 20, col = "#FF0099",
-     main = "Temperature distribution",
-     xlab = "Temperature") # contents into pdf
-# dev.off() # close pdf file
+    ```{r}
+    class(air_grouped)
+    air_grouped = as.data.frame(air_grouped)
+    class(air_grouped)
+    ```
+:::
 
-# if pdf is opened in adobe or similar, you cannot write in it! (Windows)
-# same procedure for other file formats (jpg, png, eps...)
+### Visualizations for two variables
 
+| Scenario                     | Which plot                    | R command                                                                     |
+|------------------------|------------------------|------------------------|
+| Numeric                      | Histogram or boxplot          | `hist()` and`boxplot`                                                         |
+| Numeric with numeric         | Scatterplot                   | `plot`                                                                        |
+| Numeric with categorical     | Boxplot                       | `boxplot(numeric~categorical)`                                                |
+| Categorical with categorical | mosaicplot or grouped barplot | `mosaicplot(table(categorical, categorical))` or `barplot(data, beside=TRUE)` |
 
+#### Examples
+
+```{r}
 
 # 1 categorial variable --------------------------------------------------
 
@@ -166,31 +161,25 @@ counts = table(mtcars$cyl)
 plot(counts)
 barplot(counts)
 barplot(table(mtcars$cyl))
+```
 
+The general idea of plotting is to look for correlations / associations between variables, i.e. is there a non-random pattern between the two variables:
 
-
+```{r}
 # 2 caterogial variables --------------------------------------------------
-
-
 # mosaic plot
 table(cyl = mtcars$cyl, gear = mtcars$gear)
 plot(table(mtcars$cyl, mtcars$gear))
 
-
-
 # 1 categorial + 1 numeric variable ---------------------------------------
-
-
 # Boxplot
 boxplot(mpg ~ cyl, mtcars) # formula notation
 #or the same:
 plot(mpg ~ as.factor(cyl), mtcars)
+```
 
-
-
-
-# Plot correlations ---------------------------------------------------------
-
+```{r}
+# 1 numeric + 1 numeric variable ---------------------------------------
 
 # Scatterplot
 plot(airquality$Solar.R, airquality$Ozone)
@@ -219,12 +208,50 @@ plot(airquality$Solar.R, airquality$Ozone, col = airquality$Month-4, cex = airqu
 # restore old par settings
 par(oldPar)
 
+```
 
+### Correlation
 
+If two variables A and B are related, we say that they are correlated (correlation != causality!!). We can calculate the magnitude of this relatedness with correlation factors. Correlation factors are normalized covariances (two variables have two variances, how they vary independent of each other, and they share a covariance, how much they vary together) are in the range of $[-1,1]$. The Pearson's correlation coefficient/factor can be calculated by:
 
-# Calculate correlations --------------------------------------------------
+$$
+r = cor(x_1, x_2) = \frac{ \frac{1}{N} \sum_{i=1}^n (x_{1i} - \overline{x_{1}}) (x_{2i} - \overline{x_{2}}) }{ \sqrt{\frac{1}{N} \sum_{i=1}^n (x_{1i} - \overline{x_{1}})^2 (x_{2i} - \overline{x_{2}})^2} } 
+$$
 
+The Pearson correlation works well with linear relationship, but poorly with non-linear relationships and is sensitive to outliers. Also transforming one of the variables affects the correlation:
 
+```{r}
+#| code-fold: true
+A = runif(1000, -6, 6)
+B = plogis(A*3.5)
+par(mfrow = c(1, 2))
+plot(B, A)
+text(x = 0.6, y = -4, paste0("Pearson: ", round(cor(A, B, method = "pearson"), 3)))
+plot(log(B), A)
+text(x = -12, y = 0, paste0("Pearson: ", round(cor(A, log(B), method = "pearson"), 3)))
+```
+
+The correlation factor for the untransformed data is 0.9 but they have a perfect relationship.
+
+**Rank correlation factors**
+
+Idea: arranging the data following their order and using their rank 1..n for x und y, respectively and there two different rank correlation factors:
+
+-   Spearman: calculate Pearson based on ranks
+
+-   Kendall: counts the number of data pairs that point in the same direction
+
+```{r}
+cor(A, B)
+cor(order(A), order(B)) # Spearman
+cor(A, B, method = "spearman") # Spearman
+cor(A, B, method = "kendall")
+```
+
+**Example:**
+
+```{r}
+#| warning: false
 cor(airquality$Solar.R, airquality$Ozone, use = "complete.obs") # pearson = default
 cor(airquality$Solar.R, airquality$Ozone, use = "complete.obs", method = "spearman")
 
@@ -247,6 +274,10 @@ panel.cor <- function(x, y, digits = 2, prefix = "", cex.cor, ...)
 pairs(airquality, lower.panel = panel.smooth, upper.panel = panel.cor)
 
 ```
+
+::: {.callout-warning appearance="default"}
+Descriptive statistics characterize properties of the data without providing any test or statement of probability.
+:::
 
 ## Exercises
 

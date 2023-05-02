@@ -356,14 +356,17 @@ cmake</code></pre>
 <li><p>Dependent / response variable variable of interest we want to know what it is influenced by. Typically, there is one variable of particular interest.</p></li>
 <li><p>Explanatory or independent variables, aka. predictors / covariates / treatments variables that potentially influence the response variable</p></li>
 </ul>
-<div class="callout-tip callout callout-style-simple no-icon">
-<div class="callout-body d-flex">
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
+<i class="callout-icon"></i>
 </div>
-<div class="callout-body-container">
+<div class="callout-caption-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <p>Example: We measure plant growth and nitrogen in the soil. Growth is the dependent variable and nitrogen is the explanatory variable</p>
-</div>
 </div>
 </div>
 <p>Variables differ in range and scale:</p>
@@ -377,15 +380,17 @@ cmake</code></pre>
 <li><p>Special case: binary variable (0,1), technically it is also categorial, but with two levels only we call in binary</p></li>
 </ul></li>
 </ul>
-<div class="callout-note callout callout-style-simple callout-captioned">
-<div class="callout-header d-flex align-content-center">
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-caption-container flex-fill">
 Remarks on data handling
 </div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Typically, data will be recorded electronically with a measurement device, or you have to enter it manually using a spreadsheet program, e.g.&nbsp;MS Excel. The best format for data storage is csv (comma separated values) because it is long-term compatibility with all kinds of programs / systems (Excel can export to csv).</p>
 <p>After raw data is entered, it should never be manipulated by hand! If you modify data by hand, make a copy and document all changes (additional text file). <strong>Better:</strong> Make changes using a script</p>
@@ -396,6 +401,7 @@ Remarks on data handling
 <li><p>clean data (remove NAs, impossible values etc.)</p></li>
 <li><p>save as Rdata (derived data)</p></li>
 </ul>
+</div>
 </div>
 </div>
 </section>
@@ -426,17 +432,17 @@ Remarks on data handling
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="callout-tip callout callout-style-simple no-icon callout-captioned">
+<div class="callout-tip callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
+<i class="callout-icon"></i>
 </div>
 <div class="callout-caption-container flex-fill">
 Help
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>A list and description of all arguments can be found in the help of a function (which can be accessed via ?mean or if you place the cursor on the function and press F1)</p>
+<p>A list and description of all arguments can be found in the help of a function (which can be accessed via <code>?mean</code> or if you place the cursor on the function and press F1)</p>
 </div>
 </div>
 <section id="data-types-and-data-structures" class="level3" data-number="1.4.1">
@@ -546,14 +552,16 @@ Help
 <span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a><span class="do">## 7 1 5</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="callout-tip callout callout-style-default callout-captioned">
-<div class="callout-header d-flex align-content-center">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-caption-container flex-fill">
 Logical operators
 </div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <table class="table">
 <caption>Logical operators in R</caption>
@@ -606,6 +614,7 @@ Logical operators
 </tr>
 </tbody>
 </table>
+</div>
 </div>
 </div>
 <p>Add an additional column with NA values:</p>
@@ -781,7 +790,7 @@ Question
 </div>
 </div>
 <div class="callout-tip callout callout-style-simple no-icon callout-captioned">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
@@ -790,23 +799,23 @@ Solution
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>What is the most common atomic class in the airquality dataset?</p>
 <ul>
 <li>integer</li>
-<li>function <em>str()</em> helps to find this out</li>
+<li>function <code>str()</code> helps to find this out</li>
 </ul>
 <p>How many rows does the dataset have?</p>
 <ul>
 <li>153</li>
-<li>this is easiest to see when using the function <em>str(dat)</em></li>
-<li><em>dim(dat)</em> or <em>nrow(dat)</em> give the same information</li>
+<li>this is easiest to see when using the function <code>str(dat)</code></li>
+<li><code>dim(dat)</code> or <code>nrow(dat)</code> give the same information</li>
 </ul>
 <p>What is the last value in the column “Temp”?</p>
 <ul>
 <li>68</li>
-<li><em>tail(dat)</em> helps to find this out very fast</li>
+<li><code>tail(dat)</code> helps to find this out very fast</li>
 </ul>
 <p>To see all this, run</p>
 <div class="cell">
@@ -822,7 +831,7 @@ Solution
 </section>
 <section id="accessing-rows-and-columns-of-a-data-frame" class="level3" data-number="1.5.4">
 <h3 data-number="1.5.4" class="anchored" data-anchor-id="accessing-rows-and-columns-of-a-data-frame"><span class="header-section-number">1.5.4</span> Accessing rows and columns of a data frame</h3>
-<p>You have seen how you can use squared brackets [] and the dollar sign $ to extract parts of your data. Some people find this confusing, so let’s repeat the basic concepts:</p>
+<p>You have seen how you can use squared brackets <code>[ ]</code> and the dollar sign <code>$</code> to extract parts of your data. Some people find this confusing, so let’s repeat the basic concepts:</p>
 <ul>
 <li>squared brackets are used as follows: data[rowNumber, columnNumber]</li>
 <li>the dollar sign helps to extract colums with their name (good for readability): data$columnName</li>
@@ -861,7 +870,7 @@ Question
 </div>
 </div>
 <div class="callout-tip callout callout-style-simple no-icon callout-captioned">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
@@ -870,7 +879,7 @@ Solution
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>get second row</p>
 <ul>
@@ -935,7 +944,7 @@ Question
 </div>
 </div>
 <div class="callout-tip callout callout-style-simple no-icon callout-captioned">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
@@ -944,7 +953,7 @@ Solution
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>This is the corrected code:</p>
 <div class="cell">

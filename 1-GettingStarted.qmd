@@ -75,7 +75,7 @@ One row per observation is the standard format for most programs. There are diff
 
 -   Explanatory or independent variables, aka. predictors / covariates / treatments variables that potentially influence the response variable
 
-::: {.callout-tip appearance="minimal"}
+::: {.callout-tip appearance="default"}
 Example: We measure plant growth and nitrogen in the soil. Growth is the dependent variable and nitrogen is the explanatory variable
 :::
 
@@ -93,7 +93,7 @@ Variables differ in range and scale:
 
     -   Special case: binary variable (0,1), technically it is also categorial, but with two levels only we call in binary
 
-::: {.callout-note appearance="simple"}
+::: {.callout-note appearance="default" collapse="true"}
 ## Remarks on data handling
 
 Typically, data will be recorded electronically with a measurement device, or you have to enter it manually using a spreadsheet program, e.g. MS Excel. The best format for data storage is csv (comma separated values) because it is long-term compatibility with all kinds of programs / systems (Excel can export to csv).
@@ -140,10 +140,10 @@ Note that both operators '\<-' or "=" work. Functions in R (e.g. `sum()`, `mean(
 mean(x = c(2, 2))
 ```
 
-::: {.callout-tip appearance="minimal"}
+::: {.callout-tip appearance="default"}
 ## Help
 
-A list and description of all arguments can be found in the help of a function (which can be accessed via ?mean or if you place the cursor on the function and press F1)
+A list and description of all arguments can be found in the help of a function (which can be accessed via `?mean` or if you place the cursor on the function and press F1)
 :::
 
 ### Data types and data structures
@@ -226,7 +226,7 @@ df[df$y == 5 & df$x == 1,] #show only data where y equals 5 AND x equals 1
 df[df$y == 5 | df$x == 3,] #show data where y equals 5 OR x equals 3
 ```
 
-::: callout-tip
+::: {.callout-tip appearance="default" collapse="true"}
 ## Logical operators
 
 | Operators | Meaning               |
@@ -394,18 +394,18 @@ Try out these functions and **provide answers to the following questions on elea
 What is the most common atomic class in the airquality dataset?
 
 -   integer
--   function *str()* helps to find this out
+-   function `str()` helps to find this out
 
 How many rows does the dataset have?
 
 -   153
--   this is easiest to see when using the function *str(dat)*
--   *dim(dat)* or *nrow(dat)* give the same information
+-   this is easiest to see when using the function `str(dat)`
+-   `dim(dat)` or `nrow(dat)` give the same information
 
 What is the last value in the column "Temp"?
 
 -   68
--   *tail(dat)* helps to find this out very fast
+-   `tail(dat)` helps to find this out very fast
 
 To see all this, run
 
@@ -421,7 +421,7 @@ tail(dat)
 
 ### Accessing rows and columns of a data frame
 
-You have seen how you can use squared brackets \[\] and the dollar sign \$ to extract parts of your data. Some people find this confusing, so let's repeat the basic concepts:
+You have seen how you can use squared brackets `[ ]` and the dollar sign `$` to extract parts of your data. Some people find this confusing, so let's repeat the basic concepts:
 
 -   squared brackets are used as follows: data\[rowNumber, columnNumber\]
 -   the dollar sign helps to extract colums with their name (good for readability): data\$columnName
