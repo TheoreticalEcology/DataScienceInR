@@ -10,85 +10,162 @@ set.seed(42)
 
 # Hypothesis Tests
 
-In this section you will:  
-  
- * get to know the most common hypothesis tests 
- * learn how to choose an appropriate test and interpret its result
- * practice these tests in R
- * practice the simulation of data and error rates.
- 
-## Classrom demo
+In this section you will:
+
+-   get to know the most common hypothesis tests
+-   learn how to choose an appropriate test and interpret its result
+-   practice these tests in R
+-   practice the simulation of data and error rates
+
+### 
+
+## A recipe for hypothesis testing
+
+**Aim:** We want to know if there is a difference between the control and the treatment
+
+1.  We introduce a **Null hypothesis H~0~** (e.g. no effect, no difference between control and treatment)
+2.  We invent a **test statistic**
+3.  We calculate the **expected distribution** of our test statistic given H~0~ (this is from our data-generating model)
+4.  We calculate the **p-value** = probability of getting observed test statistic or more extreme given that H~0~ is true (there is no effect): $p-value = P(d\ge D_{obs} | H_0)$
+
+::: {.callout-warning collapse="true"}
+## Interpretation of the p-value
+
+p-values make a statement on the probability of the data or more extreme values given H~0~ (no effect exists), **but not on the probability of H~0~ (no effect) and not on the size of the effect or on the probability of an effect!**
+:::
+
+**Example:**
+
+Imagine we do an experiment with two groups, one treatment and one control group Test outcomes are binary (e.g. whether individuals are cured)
+
+1.  We need a test statistic for example: number cured of total patients: treat/(treat+control)
+
+
+2.  We need the distribution of this test statistic under the null Let's create a true world without effect:
 
 ```{r}
-
-
-
-# Part 3
-# Hypothesis testing
-
-
-
-
-# Simulation of p-values -------------------------------------------------
-# Imagine we do an experiment with two groups, one treatment and one control group
-# Test outcomes are binary (e.g. whether individuals are cured)
-
-# 1. We need a test statistic
-# for example: number cured in control minus number cured in treatment: control - treatment
-
-# 2. We need the distribution of this test statistic under the null
-
+set.seed(123)
 # Let's create a true world without effect:
 PperGroup = 50 # number of replicates (e.g., persons per treatment group)
 pC = 0.5 #probability of being cured in control group
 pT = 0.5 #probability of being cured in treatment group; = same because we want to use these to get the distribution of the test statistic we define below when H0 is true (no effect)
 
-set.seed(123)
 # Let's draw a sample from this world without effect
 control = rbinom(n = 1, size = PperGroup, prob = pC)
 treat = rbinom(n = 1, size = PperGroup, prob = pT)
 #calculate the test statistic: 
-control - treat
+treat/(treat+control)
 #and plot
 barplot(c(control, treat), ylim = c(0, 50))
+```
 
-# Now, let's do this very often to get the distribution under H0
+3.  Now, let's do this very often to get the distribution under H~0~
+
+```{r}
 testStatistic = rep(NA, 100000) 
 for (i in 1:100000) {
   control = rbinom(n = 1, size = PperGroup, prob = pC)
   treat = rbinom(n = 1, size = PperGroup, prob = pT)
-  testStatistic[i] = control - treat # test statistic 
+  testStatistic[i] = control/(treat+control) # test statistic 
 }
 hist(testStatistic, breaks = 50)
+```
 
-# okay, we have our test statistic + the frequency distribution of our statistic 
-# if the H0 = true
-# now we make an experiment:
-# assume that we observed the following data: C = 30 T = 23
-testStatisticData = 30 - 23
+4.  We have now our test statistic + the frequency distribution of our statistic if the H~0~ = true now we make an experiment: Assume that we observed the following data: C = 30 T = 23
+
+```{r}
+hist(testStatistic, breaks = 50)
+testStatisticData = 30/(30+23)
 abline(v = testStatisticData, col = "red")
 
-mean(testStatistic > testStatisticData) #compare each value in our testStatistic 
+mean(testStatistic > testStatisticData)
+#compare each value in our testStatistic 
 #distribution with the observed value and calculate proportion of TRUE values 
 #(where testStatistic > testStatisticData)
+```
 
+But we know actually that the test statistic follows a Chi^2^ distribution. So to get correct p-values we can use the `prop.test` for this test statistic:
 
-# how you would do this correctly
+```{r}
 prop.test(c(30, 23), c(PperGroup, PperGroup))
 # other test statistic with known distribution
 # Pearson's chi-squared test statistic
 # no need to simulate
+```
 
+We pass the data to the function which first calculates the test statistic and then calculates the p-value using the Chi^2^ distribution.
 
+## T-test
 
+Originally developed by Wiliam Sealy Gosset (1876-1937) who has worked in the Guinness brewery. He wanted to measure which ingredients result in a better beer. The aim was to compare two beer recipes and decide whether one of the recipes was better (e.g. to test if it results in more alcohol). He published under the pseudonym 'Student' because the company considered his statistical methods as a commercial secret.
 
+::: callout-important
+## T-test assumptions
 
-##########################THEORY FIRST##############################
+-   Data in both groups is normally distributed
 
+-   H~0~ : the means of both groups are equal
+:::
 
-# The t-test  -------------------------------------------------------------
+The idea is that we have two normal distributions (e.g. alcohol distributions):
 
+```{r}
+#| code-fold: true
+set.seed(1)
+A = rnorm(100, mean = -.3)
+B = rnorm(100, mean = .3)
+plot(density(A), col = "red", xlim = c(-2, 2), ylim = c(0, 0.6))
+lines(density(B))
+abline(v = mean(A), col = "red")
+abline(v = mean(B))
+```
 
+And our goals is know to test if the difference between the two means of the variables is statistically significant or not.
+
+**Procedure:**
+
+-   Calculate variances and means of both variables
+
+    ```{r}
+    A_m = mean(A)
+    B_m = mean(B)
+    A_v = var(A)
+    B_v = var(B)
+    ```
+
+-   Calculate t-statistic (difference between means / (Standard deviation/sample size)
+
+    ```{r}
+    t_statistic = (A_m - B_m) / sqrt( A_v  / length(A) + B_v / length(B))
+    t_statistic
+    ```
+
+-   Compare observed t with t distribution under H~0~ (which we can do by using the CDF function of the t-distribution:
+
+    ```{r}
+    pt( t_statistic,  # test statistic
+       df = length(A)+length(B)-2, # degrees of freedom, roughly = n_obs - n_parameters
+       lower.tail = TRUE
+      )*2
+    ```
+
+::: callout-caution
+## One-sided or two-sided
+
+If we do NOT know if the dataset from one group is larger or smaller than the other, we must use two-sided tests (that's why we multiply the p-values with 2). Only if we are sure that the effect MUST be positive / negative, we can test for greater / less. Decide BEFORE you look at the data!
+:::
+
+Let's compare it to the output of the `t.test` function which does everything for us, we only need to pass the data to the function:
+
+```{r}
+t.test(A, B, var.equal = TRUE)
+```
+
+Usually we also have to test for normality of our data, which we can do with another test.
+
+**Example airquality**
+
+```{r}
 # with real data
 head(PlantGrowth)
 boxplot(weight ~ group, data = PlantGrowth)
@@ -100,10 +177,6 @@ trt1 = PlantGrowth$weight[PlantGrowth$group == "trt1"]
 # test normality before doing the t test:
 shapiro.test(ctrl)
 shapiro.test(trt1)
-# ATTENTION: If you have a small sample size, the shapiro.test will always be 
-# non-significant (i.e. not significantly different from a normal distribution)!
-# This is because small sample size leads to low power for rejecting H0 of 
-# normal distribution
 
 
 t.test(ctrl, trt1)
@@ -114,16 +187,51 @@ t.test(ctrl, trt1)
 # What is the result? test is not significant, H0 is not rejected
 # Explain the different values in the output!
 
+```
 
+::: callout-warning
+## Shapiro - Test for normality
 
+If you have a small sample size, the shapiro.test will always be non-significant (i.e. not significantly different from a normal distribution)! This is because small sample size leads to low power for rejecting H~0~ of normal distribution
+:::
 
+## Type I error rate
 
+Let's start with a small simulation example:
 
-##########################THEORY FIRST##############################
+```{r}
+results = replicate(1000, {
+  A = rnorm(100, mean = 0.0)
+  B = rnorm(100, mean = 0.0)
+  t.test(A, B)$p.value
+})
+hist(results)
+```
 
-#  Multiple testing -------------------------------------------------------
+What's happening here? We have no effect in our simulation but there are many p-values lower than $\alpha = 0.5$:
 
+```{r}
+mean(results < 0.05)
+```
 
+So in `r mean(results < 0.05)` of our experiments we would reject H~0~ even when there is no effect at all! This is called the type I error rate. Those are false positives.
+
+::: {.callout-note collapse="true"}
+## Type I error rate and multiple testing
+
+If there is no effect, the probability of having a positive test result is equal to the significance level $\alpha$. If you test 20 things that don\'t have an effect, you will have one significant result on average when using a significance level of 0.05. If multiple tests are done, a correction for multiple testing should be used.
+
+This problem is called multiple testing
+
+-   e.g.: if you try 20 different analyses (Null hypotheses), on average one of them will be significant.
+
+-   e.g.: if you test 1000 different genes for their association with cancer, and in reality, none of them is related to cancer, 50 out of the tests will still be significant.
+
+-   If multiple tests are done, a correction for multiple testing should be used
+
+-   increases the p-values for each test in a way that the overall alpha level is 0.05
+
+```{r}
 # conduct a t-test for each of the treatment combinations
 # save each test as a new object (test 1 to 3)
 control = PlantGrowth$weight[PlantGrowth$group == "ctrl"]
@@ -134,8 +242,6 @@ test1 = t.test(control, trt1)
 test2 = t.test(control, trt2)
 test3 = t.test(trt1, trt2)
 
-
-
 c(test1$p.value, test2$p.value, test3$p.value)
 
 # now adjust these values
@@ -143,6 +249,36 @@ p.adjust(c(test1$p.value, test2$p.value, test3$p.value)) # standard is holm, ave
 p.adjust(c(test1$p.value, test2$p.value, test3$p.value), method = "bonferroni") # conservative
 p.adjust(c(test1$p.value, test2$p.value, test3$p.value), method = "BH") # least conservative
 # for details on the methods see help
+```
+:::
+
+If multiple testing is a problem and if we want to avoid false positives (type I errors), why don\'t we use a smaller alpha level? Because if would increase the type II error rate
+
+## Type II error rate
+
+It can also happen the other way around:
+
+```{r}
+results = replicate(1000, {
+  A = rnorm(100, mean = 0.0)
+  B = rnorm(100, mean = 0.2) # effect is there
+  t.test(A, B)$p.value
+})
+hist(results)
+```
+
+```{r}
+mean(results < 0.05)
+```
+
+No we wouldn't reject the H~0~ in `r 1-mean(results < 0.05)`% of our experiments. This is the type II error rate (false negatives).
+
+1-type II error rate is the so called statistical power. We want a high power because it reduces the rate of type II errors.
+
+## Classroom demo
+
+```{r}
+
 
 
 
@@ -175,7 +311,6 @@ plot(seq(0.5,1.5,0.05), sapply(seq(0.5,1.5,0.05), pow),
 
 ```
 
-
 The following three sections provide an overview over the most important hypothesis tests, a guideline to select an appropriate test (see decision tree) and the necessary code to apply these tests in R. It is not necessary to read and understand every detail. These explanations are also meant as an advice if you want to select an appropriate hypothesis test after the course. Note that some of the examples use simulated data instead of real observation (all functions that start with r=random, e.g. rnorm() or runif()). Simulated data is useful, because then we know the true distribution and its true mean.
 
 In the last section at the end of this file, you find exercises that you should solve using the explanations above. It may be helpful to use the table of content and/or the search option to find the respective example in the explanations.
@@ -184,8 +319,7 @@ In the last section at the end of this file, you find exercises that you should 
 
 Many tests aim at showing that variables are significantly different between groups, i.e. have different means/medians. In all these tests, H0 is that there is no difference between the groups. The following decision tree helps to select the appropriate test.
 
-
-![Fig. 1. Decision tree for the comparison of two groups](Decision tree.jpg)
+![Fig. 1. Decision tree for the comparison of two groups](Decision%20tree.jpg)
 
 **Remark 1**: Tests for 2 groups also work for one group only. Then they test whether the mean is equal to 0.
 
@@ -193,13 +327,11 @@ Many tests aim at showing that variables are significantly different between gro
 
 **Remark 3**: Parametric: assumption of normal distribution. Non-parametric = no assumption for the distribution.
 
-**Remark 4**: Blue text: If a test for more than two groups is significant, post-hoc tests are carried out in a second step. These check all possible comparisons of groups for significant differences by adjusting p-values for multiple testing. 
-
-
+**Remark 4**: Blue text: If a test for more than two groups is significant, post-hoc tests are carried out in a second step. These check all possible comparisons of groups for significant differences by adjusting p-values for multiple testing.
 
 ### Tests for 2 groups
 
-#### t-Test 
+#### t-Test
 
 The t-test can draw conclusions about the mean(s) of 1 or 2 normally-distributed groups.
 
@@ -214,31 +346,37 @@ plot(extra ~ group, data = sleep)
 ## Formula interface
 t.test(extra ~ group, data = sleep)
 ```
-This output tells us, that the difference in means between the 2 groups is not significant(p-value ≥ 0.05, specifically: p-value = 0.07939), provided that our significance level is 0.05.  
-The underlying Null-hypothesis is that the true difference in means is equal to 0. In the last two lines of the output you can see the means of the respective groups. Even though the means seem to be quite different, the difference is not significant, this could be due to the small sample size of only 10 students per group.  
+
+This output tells us, that the difference in means between the 2 groups is not significant(p-value ≥ 0.05, specifically: p-value = 0.07939), provided that our significance level is 0.05.\
+The underlying Null-hypothesis is that the true difference in means is equal to 0. In the last two lines of the output you can see the means of the respective groups. Even though the means seem to be quite different, the difference is not significant, this could be due to the small sample size of only 10 students per group.
 
 Let's look at different settings of the t-test:
-
 
 ##### t-test, H0: one group, mean = 0
 
 The Null-hypothesis here is that the mean of the observed group is equal to 0.
+
 ```{r}
 x = rnorm(20, mean = 2)
 t.test(x)
 ```
-p-value < 0.05 means we can reject the Null-hypothesis, i.e. the mean of the observed group is significantly different from 0.
+
+p-value \< 0.05 means we can reject the Null-hypothesis, i.e. the mean of the observed group is significantly different from 0.
 
 ##### t-test, H0: two groups, equal means, equal variances
+
 The Null-hypothesis here is that the two observed groups have the same mean and the same variance (specified by the argument *var.equal = T*).
+
 ```{r}
 x1 = rnorm(20, mean = 2)
 x2 = rnorm(20, mean = 3)
 t.test(x1,x2, var.equal = T)
 ```
 
-##### t-test, H0: two groups, equal means, variable variance 
+##### t-test, H0: two groups, equal means, variable variance
+
 The Null-hypothesis here is that the two observed groups have the same mean and variable variances (the default setting of the argument *var.equal = F*).
+
 ```{r}
 x1 = rnorm(20, mean = 2, sd = 1)
 x2 = rnorm(20, mean = 3, sd = 2)
@@ -246,18 +384,18 @@ t.test(x1,x2)
 ```
 
 ##### t-test, H0: two groups, equal means, variance can be different (can also set to equal)
+
 The Null-hypothesis here is that the two groups are paired observations (e.g. group 1 before treatment and group 2 after treatment) have the same mean and variable variance (specified by the argument *var.equal = F*, which is also the default setting).
+
 ```{r}
 x1 = rnorm(20, mean = 2)
 x2 = rnorm(20, mean = 3)
 t.test(x1,x2, paired = T, var.equal = F)
 ```
 
-
 #### Wilcoxon Rank Sum and Mann-Whitney U Test
 
 In R, there is only one function for both tests together: wilcox.test(). The Wilcoxon rank sum test with (paired = F) is classically called Mann-Whitney U test.
-
 
 ##### Mann-Whitney U Test
 
@@ -279,12 +417,11 @@ wilcox.test(x1, x2, paired = T)
 
 ```
 
-
-### Tests for > 2 groups
+### Tests for \> 2 groups
 
 #### Anova, unpaired
 
-H0 >2 groups, normal distribution, equal variance, equal means, unpaired
+H0 \>2 groups, normal distribution, equal variance, equal means, unpaired
 
 ```{r}
 x = aov(weight ~ group, data = PlantGrowth)
@@ -299,7 +436,7 @@ TukeyHSD(x)
 
 Alternatively, you can also perform several tests each comparing two groups and then correct for multiple testing. This is what we did before.
 
-Pairwise comparisons are often visualized using different letters to significantly different groups: 
+Pairwise comparisons are often visualized using different letters to significantly different groups:
 
 ```{r, message=FALSE}
 # install.packages("multcomp")
@@ -314,11 +451,11 @@ par(old.par)
 
 #### Anova, paired
 
-aov is not good in doing repeated = paired ANOVA. In simple cases, you can just subtract the paired groups. In general, you should use so-called mixed models! 
+aov is not good in doing repeated = paired ANOVA. In simple cases, you can just subtract the paired groups. In general, you should use so-called mixed models!
 
 #### Kruskal-Wallis
 
-Non-parametric test for differences in the mean of  >2 groups, unpaired
+Non-parametric test for differences in the mean of \>2 groups, unpaired
 
 ```{r}
 boxplot(Ozone ~ Month, data = airquality)
@@ -327,8 +464,7 @@ kruskal.test(Ozone ~ Month, data = airquality)
 
 #### Friedmann Test
 
-Non-parametric test for differences in the mean of  >2 groups, paired.
-
+Non-parametric test for differences in the mean of \>2 groups, paired.
 
 ```{r}
 wb <- aggregate(warpbreaks$breaks,
@@ -340,7 +476,6 @@ friedman.test(wb$x, wb$w, wb$t)
 # Alternative: friedman.test(x ~ w | t, data = wb)
 # Note that x is the response, w is the group, and t are the blocks that are paired
 ```
-
 
 ## Comparison of variances
 
@@ -367,7 +502,7 @@ bartlett.test(list(x, y, z))                # Do x, y and z have the same varian
 
 Discrete proportions are typically analyzed assuming the binomial model (k/n with probability p)
 
-### Exact Binomial Test 
+### Exact Binomial Test
 
 H0 is that the data are binomially distributed with a fixed probability p.
 
@@ -385,7 +520,7 @@ binom.test(682, 682 + 243, p = 3/4)   # The same.
 ## => Data are in agreement with H0
 ```
 
-### Test of Equal or Given Proportions 
+### Test of Equal or Given Proportions
 
 based on Chi-squared-test, H0 is that the data in two groups are binomially distributed with the same probability p.
 
@@ -413,8 +548,6 @@ dimnames(M) <- list(gender = c("F", "M"),
 chisq.test(M)
 ```
 
-
-
 ## Distribution tests
 
 Often we are interested in the distribution of a variable. This can be tested with distribution tests. All these tests are defined as follows: H0 is that the data follow a specific distribution. So in case H0 is rejected, the data significantly deviates from the specified distribution.
@@ -431,12 +564,9 @@ Because many tests require normal distribution, this is the test needed most oft
 shapiro.test(rnorm(100, mean = 5, sd = 3))
 ```
 
+### Kolmogorov-Smirnov Test
 
-
-###  Kolmogorov-Smirnov Test 
-
-For everything else, the KS test can be used. It compares two different distributions, or a distribution against a reference. 
-
+For everything else, the KS test can be used. It compares two different distributions, or a distribution against a reference.
 
 ```{r}
 x <- rnorm(50)
@@ -461,10 +591,10 @@ A test for the significance of a correlation:
 ```{r}
 cor.test(airquality$Ozone, airquality$Wind)
 ```
-Interpretation: Ozone and Wind are significantly negatively correlated with a p-value < 0.05 and a correlation coefficient of -0.6015465.
 
+Interpretation: Ozone and Wind are significantly negatively correlated with a p-value \< 0.05 and a correlation coefficient of -0.6015465.
 
-### Mantel test 
+### Mantel test
 
 The Mantel test compares two distance matrices
 
@@ -479,9 +609,7 @@ mantel(veg.dist, env.dist)
 mantel(veg.dist, env.dist, method="spear")
 ```
 
-
 ## Exercises
-
 
 ### Streams
 
@@ -493,10 +621,10 @@ dat = read.table("https://raw.githubusercontent.com/biometry/APES/master/Data/Si
 
 Visualize and analyze the data and answer the following questions at **elearning-extern**.
 
-1. For identifying an appropriate test for the effect of the water treatment filter, what are your first two choices in the decision tree?
-2. The next decision you have to make is whether you can use a parametric test or not. Apply the Shapiro-Wilk test to check if the data are normally distributed. Are the tests significant and what does that tell you?
-3. Which test is appropriate for evaluating the effect of the filter?
-4. Does the filter influence the water quality? (The warnings are related to identical values, i.e. ties, and zero differences; we ignore these here)
+1.  For identifying an appropriate test for the effect of the water treatment filter, what are your first two choices in the decision tree?
+2.  The next decision you have to make is whether you can use a parametric test or not. Apply the Shapiro-Wilk test to check if the data are normally distributed. Are the tests significant and what does that tell you?
+3.  Which test is appropriate for evaluating the effect of the filter?
+4.  Does the filter influence the water quality? (The warnings are related to identical values, i.e. ties, and zero differences; we ignore these here)
 
 ::: {.callout-tip collapse="true" appearance="minimal" icon="false"}
 #### Solution
@@ -511,22 +639,20 @@ matplot(t(dat), type = "l") # each line is one river, left is down and right is 
 par(mfrow = c(1, 1))
 ```
 
-1. The number of groups to compare is **two**, up versus down stream. The observations are **paired** because the water tested up and down stream of the filter is not independent from each other, i.e. the "same" water is measured twice!
-2. The Shapiro-Wilk test is significant (p < 0.05) for down stream data, i.e. we reject H0 (the data is normally distributed). Thus, the data significantly deviate from a normal distribution. The test is not significant for upstream data; the data does not significantly deviate from a normal distribution.
+1.  The number of groups to compare is **two**, up versus down stream. The observations are **paired** because the water tested up and down stream of the filter is not independent from each other, i.e. the "same" water is measured twice!
+2.  The Shapiro-Wilk test is significant (p \< 0.05) for down stream data, i.e. we reject H0 (the data is normally distributed). Thus, the data significantly deviate from a normal distribution. The test is not significant for upstream data; the data does not significantly deviate from a normal distribution.
 
 ```{r}
 shapiro.test(dat$down)
 shapiro.test(dat$up)
 ```
 
-3. We select a **Wilcoxon signed rank test** that is appropriate to compare not-normal, paired observations in two groups. 
-4. H0 of the Wilcoxon signed rank test is that the location shift between the two groups equals zero, i.e. the difference between the pairs follows a symmetric distribution around zero. As p < 0.05, we can reject H0. The filter significantly influences water quality. (In case of ties also see the function wilcox.test() in the package coin for exact, asymptotic and Monte Carlo conditional p-values)
+3.  We select a **Wilcoxon signed rank test** that is appropriate to compare not-normal, paired observations in two groups.
+4.  H0 of the Wilcoxon signed rank test is that the location shift between the two groups equals zero, i.e. the difference between the pairs follows a symmetric distribution around zero. As p \< 0.05, we can reject H0. The filter significantly influences water quality. (In case of ties also see the function wilcox.test() in the package coin for exact, asymptotic and Monte Carlo conditional p-values)
 
 ```{r}
 wilcox.test(dat$down, dat$up, paired = T)
 ```
-
-
 :::
 
 ### Chicken
@@ -539,18 +665,17 @@ dat = chickwts
 
 Analyze the data and answer the following questions at **elearning-extern**.
 
-1. Visualize the data. What is an appropriate plot for this kind of data?
-2. Can you apply an ANOVA to this data? What are the assumptions for an ANOVA? Remember: you have to test two things for the groups (for this exercise it is enough if you test the groups "casein" and "horsebean" only).
-3. Apply an ANOVA or the non-parametric test. How would you describe the result in a thesis or publication?
-4. Also apply the alternative test and compare p-values. Which of the tests has a higher power? 
-5. Use the result of the ANOVA to carry out a post-hoc test. How many of the pairwise comparisons indicate significant differences between the groups?
-6. Which conclusion about the feed types 'meatmeal' and 'casein' is correct?
-
+1.  Visualize the data. What is an appropriate plot for this kind of data?
+2.  Can you apply an ANOVA to this data? What are the assumptions for an ANOVA? Remember: you have to test two things for the groups (for this exercise it is enough if you test the groups "casein" and "horsebean" only).
+3.  Apply an ANOVA or the non-parametric test. How would you describe the result in a thesis or publication?
+4.  Also apply the alternative test and compare p-values. Which of the tests has a higher power?
+5.  Use the result of the ANOVA to carry out a post-hoc test. How many of the pairwise comparisons indicate significant differences between the groups?
+6.  Which conclusion about the feed types 'meatmeal' and 'casein' is correct?
 
 ::: {.callout-tip collapse="true" appearance="minimal" icon="false"}
 #### Solution
 
-1. An appropriate visualization for one numeric and one categorial variable is a **boxplot**. Using 'notch = T' in the function boxplot(), adds confidence interval for the median (the warning here indicates that we are not very confident in the estimates of the medians as the number of observations is rather small, you can see at the notches that go beyond the boxes).
+1.  An appropriate visualization for one numeric and one categorial variable is a **boxplot**. Using 'notch = T' in the function boxplot(), adds confidence interval for the median (the warning here indicates that we are not very confident in the estimates of the medians as the number of observations is rather small, you can see at the notches that go beyond the boxes).
 
 ```{r}
 dat = chickwts
@@ -558,7 +683,7 @@ boxplot(weight ~ feed, data = dat)
 boxplot(weight ~ feed, data = dat, notch = T)
 ```
 
-2. The two requirements for applying an ANOVA are 1) the data in each group are normally distributed, and 2) the variances of the different groups are equal. For 1) we again use a Shapiro-Wilk test. For 2) we can use the function var.test() or for all feed types the function bartlett.test(). All tests are not significant, and we thus have no indication to assume that the data is not-normally distributed or that the variances are different. We can use an ANOVA.
+2.  The two requirements for applying an ANOVA are 1) the data in each group are normally distributed, and 2) the variances of the different groups are equal. For 1) we again use a Shapiro-Wilk test. For 2) we can use the function var.test() or for all feed types the function bartlett.test(). All tests are not significant, and we thus have no indication to assume that the data is not-normally distributed or that the variances are different. We can use an ANOVA.
 
 ```{r}
 # get data of each group
@@ -588,35 +713,31 @@ bartlett.test(weight ~ feed, dat)
 
 ```
 
-3. H0 of the ANOVA is that feed has no influence on the chicken weight. As p < 0.05, we reject H0. In the result section, we would write something like: "The feed type significantly influenced the chicken weight (ANOVA, p = 5.94e-10)."
+3.  H0 of the ANOVA is that feed has no influence on the chicken weight. As p \< 0.05, we reject H0. In the result section, we would write something like: "The feed type significantly influenced the chicken weight (ANOVA, p = 5.94e-10)."
 
 ```{r}
 fit = aov(weight ~ feed, data = dat)
 summary(fit)
 ```
 
-4. The non-parametric alternative of an ANOVA is the Kruskal-Wallis test, which should be applied if the data is not normally distributed. In this example, the test comes to the same conclusion: H0 is rejected, the feed type has a significant effect on the chicken weight. The p-value, however, is not as small as in the ANOVA. The reason for this is that non-parametric tests have a lower power than parametric ones as they only use the ranks of the data. Therefore, the ANOVA is preferred over the non-parametric alternative in case its assumptions are fulfilled. 
+4.  The non-parametric alternative of an ANOVA is the Kruskal-Wallis test, which should be applied if the data is not normally distributed. In this example, the test comes to the same conclusion: H0 is rejected, the feed type has a significant effect on the chicken weight. The p-value, however, is not as small as in the ANOVA. The reason for this is that non-parametric tests have a lower power than parametric ones as they only use the ranks of the data. Therefore, the ANOVA is preferred over the non-parametric alternative in case its assumptions are fulfilled.
 
 ```{r}
 kruskal.test(chickwts$weight, chickwts$feed)
 ```
 
-5. From the 15 comparisons among feed types, 8 are significantly different. 
+5.  From the 15 comparisons among feed types, 8 are significantly different.
 
 ```{r}
 TukeyHSD(fit)
 ```
 
-6. The experiment did not reveal a significant weight difference between the feed types 'meatmeal' and 'casein'. Remember that we cannot prove or accept H0; we can only reject it. 
-
-
-
+6.  The experiment did not reveal a significant weight difference between the feed types 'meatmeal' and 'casein'. Remember that we cannot prove or accept H0; we can only reject it.
 :::
-
 
 ### Titanic
 
-The dataset 'titanic' from the EcoData package (not to confuse with the dataset 'Titanic') provides information on individual passengers of the Titanic. 
+The dataset 'titanic' from the EcoData package (not to confuse with the dataset 'Titanic') provides information on individual passengers of the Titanic.
 
 ```{r echo=TRUE,message=FALSE, warning=FALSE,results='hide'}
 library(EcoData) #or: load("EcoData.Rdata"), if you had problems with installing the package
@@ -625,17 +746,16 @@ dat = titanic
 
 Answer the following questions at **elearning-extern**.
 
-1. We are interested in first and second class differences only. Reduce the dataset to these classes only. How can you do this in R?
-2. Does the survival rate between the first and second class differ? Hint: you can apply the test to a contigency table of passenger class versus survived, i.e. `table(dat$pclass, dat$survived)`.
-3. Is the variable passenger age normally distributed?
-4. Is the variable Body Identification Number (body) uniformly distributed? 
-5. Is the correlation between fare and age significant?
-
+1.  We are interested in first and second class differences only. Reduce the dataset to these classes only. How can you do this in R?
+2.  Does the survival rate between the first and second class differ? Hint: you can apply the test to a contigency table of passenger class versus survived, i.e. `table(dat$pclass, dat$survived)`.
+3.  Is the variable passenger age normally distributed?
+4.  Is the variable Body Identification Number (body) uniformly distributed?
+5.  Is the correlation between fare and age significant?
 
 ::: {.callout-tip collapse="true" appearance="minimal" icon="false"}
 #### Solution
 
-1. The dataset can be reduced in different ways. All three options result in a dataset with class 1 and 2 only. 
+1.  The dataset can be reduced in different ways. All three options result in a dataset with class 1 and 2 only.
 
 ```{r echo=TRUE,message=FALSE, warning=FALSE,results='hide'}
 library(EcoData)
@@ -646,43 +766,40 @@ dat = dat[dat$pclass %in% 1:2, ] # the same
 dat = dat[dat$pclass != 3, ] # the same
 ```
 
-2. We use the test of equal proportions here. H0, proportions in the two groups are equal, is rejected. The survival probability in class 1 and class 2 is significantly different. Note that the estimated proportions are for mortality not for survival because 0=died is in the first column of the table. Thus it is considered the "success" in the prop.test().
+2.  We use the test of equal proportions here. H0, proportions in the two groups are equal, is rejected. The survival probability in class 1 and class 2 is significantly different. Note that the estimated proportions are for mortality not for survival because 0=died is in the first column of the table. Thus it is considered the "success" in the prop.test().
 
 ```{r}
 table(dat$pclass, dat$survived)
 prop.test(table(dat$pclass, dat$survived))
 ```
 
-3. The distribution of passenger age significantly differs from normal.
+3.  The distribution of passenger age significantly differs from normal.
 
 ```{r}
 hist(dat$age, breaks = 20)
 shapiro.test(dat$age)
 ```
 
-
-4. The distribution of body significantly differs from uniform.
+4.  The distribution of body significantly differs from uniform.
 
 ```{r}
 hist(dat$body, breaks = 20)
 ks.test(dat$body, "punif")
 ```
 
-5. The correlation between fare and age is non-significant. You can also plot the data using the scatter.smooth function.
+5.  The correlation between fare and age is non-significant. You can also plot the data using the scatter.smooth function.
 
 ```{r}
 cor.test(dat$fare, dat$age)
 scatter.smooth(dat$fare, dat$age)
 ```
-
 :::
 
 ### Simulation of Type I and II error
 
 *This is an additional task for those who are fast! Please finish the other parts first and submit your solution in elearning-extern before you continue here!*
 
-Analogously to the previous example of simulating the test statistic, we can also simulate error rates.
-Complete the code ...
+Analogously to the previous example of simulating the test statistic, we can also simulate error rates. Complete the code ...
 
 ```{r}
 PperGroup = 50
@@ -699,23 +816,20 @@ for(i in 1:1000){
 
 ```
 
-
 ... and answer the following questions for the prop.test in R:
 
-1. How does the distribution of p-values and the number of false positive (Type I error) look like if pC = pT
+1.  How does the distribution of p-values and the number of false positive (Type I error) look like if pC = pT
 
-2. How does the distribution of p-values and the number of true positive (Power) look like if pC != pT, e.g. 0.5, 0.6 
+2.  How does the distribution of p-values and the number of true positive (Power) look like if pC != pT, e.g. 0.5, 0.6
 
-3. How does the distribution of p-values and the number of false positive (Type I error) look like if you modify the for loop in a way that you first look at the data, and then decide if you test for greater or less?
-
+3.  How does the distribution of p-values and the number of false positive (Type I error) look like if you modify the for loop in a way that you first look at the data, and then decide if you test for greater or less?
 
 ::: {.callout-tip collapse="true" appearance="minimal" icon="false"}
 #### Solution
 
-Analogously to our previous example with simulating the test statistic, we can also simulate the error rates.
-This is the completed code the different examples:
+Analogously to our previous example with simulating the test statistic, we can also simulate the error rates. This is the completed code the different examples:
 
-1. pC = pT
+1.  pC = pT
 
 ```{r}
 PperGroup = 50
@@ -739,7 +853,7 @@ mean(positives)
 
 ```
 
-2. pC != pT with difference 0.1
+2.  pC != pT with difference 0.1
 
 ```{r}
 PperGroup = 50
@@ -767,7 +881,7 @@ mean(pvalues < 0.05) # = power (rate at which effect is detected by the test)
 
 ```
 
-3. You first look at the data, and then decide if you test for greater or less:
+3.  You first look at the data, and then decide if you test for greater or less:
 
 ```{r}
 # ifelse(test,yes,no)
@@ -790,14 +904,4 @@ table(positives)
 mean(pvalues < 0.05) 
 # higher false discovery rate
 ```
-
-
-
-
-
-
 :::
-
-
-
-
