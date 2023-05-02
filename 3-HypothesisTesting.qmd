@@ -319,7 +319,7 @@ In the last section at the end of this file, you find exercises that you should 
 
 Many tests aim at showing that variables are significantly different between groups, i.e. have different means/medians. In all these tests, H0 is that there is no difference between the groups. The following decision tree helps to select the appropriate test.
 
-![Fig. 1. Decision tree for the comparison of two groups](Decision%20tree.jpg)
+<!-- ![Fig. 1. Decision tree for the comparison of two groups](Decision%20tree.jpg) -->
 
 **Remark 1**: Tests for 2 groups also work for one group only. Then they test whether the mean is equal to 0.
 
@@ -554,7 +554,7 @@ Often we are interested in the distribution of a variable. This can be tested wi
 
 Often, we want to know whether a variable is normally distributed because this is an important assumption for parametric hypothesis tests. But data can follow many other distributions:
 
-![Fig. 2. Decision tree for distributions](distributions.png)
+<!-- ![Fig. 2. Decision tree for distributions](distributions.png) -->
 
 ### Shapiro-Wilk Normality Test
 
