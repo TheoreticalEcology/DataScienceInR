@@ -17,7 +17,6 @@ In this section you will:
 -   practice these tests in R
 -   practice the simulation of data and error rates
 
-### 
 
 ## A recipe for hypothesis testing
 
@@ -36,11 +35,13 @@ p-values make a statement on the probability of the data or more extreme values 
 
 **Example:**
 
-Imagine we do an experiment with two groups, one treatment and one control group Test outcomes are binary (e.g. whether individuals are cured)
+Imagine we do an experiment with two groups, one treatment and one control group. Test outcomes are binary, e.g. whether individuals are cured.
 
-1.  We need a test statistic for example: number cured of total patients: treat/(treat+control)
+1.  We need a test statistic. For example: number cured of total patients: treat/(treat+control)
 
-2.  We need the distribution of this test statistic under the null Let's create a true world without effect:
+2.  We need the distribution of this test statistic under the null.
+
+Let's create a true world without effect:
 
 ```{r}
 set.seed(123)
@@ -70,7 +71,7 @@ for (i in 1:100000) {
 hist(testStatistic, breaks = 50)
 ```
 
-4.  We have now our test statistic + the frequency distribution of our statistic if the H~0~ = true now we make an experiment: Assume that we observed the following data: C = 30 T = 23
+4.  We now have our test statistic + the frequency distribution of our statistic if the H~0~ = true. Now we make an experiment: Assume that we observed the following data: C = 30, T = 23.
 
 ```{r}
 hist(testStatistic, breaks = 50)
@@ -78,9 +79,9 @@ testStatisticData = 30/(30+23)
 abline(v = testStatisticData, col = "red")
 
 mean(testStatistic > testStatisticData)
-#compare each value in our testStatistic 
-#distribution with the observed value and calculate proportion of TRUE values 
-#(where testStatistic > testStatisticData)
+# compare each value in our testStatistic distribution with
+# the observed value and calculate proportion of TRUE values 
+# (where testStatistic > testStatisticData)
 ```
 
 But we know actually that the test statistic follows a Chi^2^ distribution. So to get correct p-values we can use the `prop.test` for this test statistic:
@@ -119,7 +120,7 @@ abline(v = mean(A), col = "red")
 abline(v = mean(B))
 ```
 
-And our goals is know to test if the difference between the two means of the variables is statistically significant or not.
+And our goals is now to test if the difference between the two means of the variables is statistically significant or not.
 
 **Procedure:**
 
@@ -644,7 +645,7 @@ mantel(veg.dist, env.dist, method="spear")
 
 ### Streams
 
-The dataset 'streams' contains water measurements taken at different location along 16 rivers: 'up' and 'down' are water quality measurements of the same river taken before and after a water treatment filter, respectively. We want to find out if this water filter is effective. Use the decision tree to identify the appropriate test for this situation.
+The dataset 'streams' contains water measurements taken at different locations along 16 rivers: 'up' and 'down' are water quality measurements of the same river taken before and after a water treatment filter, respectively. We want to find out if this water filter is effective. Use the decision tree to identify the appropriate test for this situation.
 
 ```{r}
 dat = read.table("https://raw.githubusercontent.com/biometry/APES/master/Data/Simone/streams.txt", header = T)

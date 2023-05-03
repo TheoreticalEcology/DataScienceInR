@@ -10,7 +10,7 @@ set.seed(42)
 
 # Simple linear regression
 
-In this cahpter, you will practice to:
+In this chapter, you will practice to:
   
  * formulate a research question
  * perform simple linear regression for numeric and categorial predictors

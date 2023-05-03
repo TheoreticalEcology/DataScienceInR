@@ -194,7 +194,7 @@ vec[1] # access first element
 vec[5] # access last element
 ```
 
-A data.frame is a two dimensional data structure. Let's start with a data.frame:
+A data.frame is a two dimensional data structure. Let's define a data.frame from two vectors:
 
 ```{r}
 df = data.frame(
@@ -532,7 +532,7 @@ dat[dat$Month %in% 7:8, ] # alternative expression
 ```
 :::
 
-### Last task - check if the EcoData packages works for you
+### Last task - check if the EcoData package works for you
 
 During the course, we will use some datasets that we compiled in the $EcoData$ package. You should have installed this package already(see instructions above). To check if this works, run
 
@@ -541,4 +541,4 @@ library(EcoData)
 soep
 ```
 
-If you see some data being displayed in your console, everything is fine
+If you see some data being displayed in your console, everything is fine.
