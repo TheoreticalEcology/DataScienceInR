@@ -1,12 +1,9 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
-
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.2.475">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-
-
 <title>Introduction to Data Science with R - 5&nbsp; Multiple regression</title>
 <style>
 code{white-space: pre-wrap;}
@@ -85,7 +82,6 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
-
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/quarto-nav/headroom.min.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
@@ -103,8 +99,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
-<script id="quarto-search-options" type="application/json">{
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -123,51 +118,44 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     "search-submit-button-title": "Submit"
   }
 }</script>
-
-
 <meta name="citation_title" content="[5]{.chapter-number}&nbsp; [Multiple regression]{.chapter-title}">
 <meta name="citation_fulltext_html_url" content="https://TheoreticalEcology.github.io/DataScienceInR//5-MultipleRegression.html">
 <meta name="citation_language" content="en">
 </head>
-
 <body class="nav-sidebar floating">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-    <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Multiple regression</span></h1>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }"><div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title">
+<span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Multiple regression</span>
+</h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
     </div>
-  </nav>
-</header>
-<!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Introduction to Data Science with R</a> 
         <div class="sidebar-tools-main">
     <a href="https://github.com/TheoreticalEcology/DataScienceInR" title="Source Code" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
     <a href="" title="Share" id="sidebar-tool-dropdown-0" class="sidebar-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-share"></i></a>
     <ul class="dropdown-menu" aria-labelledby="sidebar-tool-dropdown-0">
-        <li>
-          <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=|url|">
+<li>
+          <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=%7Curl%7C">
             <i class="bi bi-bi-twitter pe-1"></i>
           Twitter
           </a>
         </li>
         <li>
-          <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=|url|">
+          <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=%7Curl%7C">
             <i class="bi bi-bi-facebook pe-1"></i>
           Facebook
           </a>
         </li>
         <li>
-          <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=|url|">
+          <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=%7Curl%7C">
             <i class="bi bi-bi-linkedin pe-1"></i>
           LinkedIn
           </a>
@@ -183,7 +171,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-        <li class="sidebar-item">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">Preface</a>
   </div>
@@ -239,29 +227,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </div>
 </li>
     </ul>
-    </div>
-</nav>
-<!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
+</div>
+</nav><!-- margin-sidebar --><div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#classroom-demo" id="toc-classroom-demo" class="nav-link active" data-scroll-target="#classroom-demo"><span class="toc-section-number">5.1</span>  Classroom demo</a></li>
-  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="toc-section-number">5.2</span>  Exercises</a>
+<li><a href="#classroom-demo" id="toc-classroom-demo" class="nav-link active" data-scroll-target="#classroom-demo"><span class="toc-section-number">5.1</span>  Classroom demo</a></li>
+  <li>
+<a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="toc-section-number">5.2</span>  Exercises</a>
   <ul class="collapse">
-  <li><a href="#analyzing-the-mtcars-dataset" id="toc-analyzing-the-mtcars-dataset" class="nav-link" data-scroll-target="#analyzing-the-mtcars-dataset"><span class="toc-section-number">5.2.1</span>  Analyzing the <em>mtcars</em> dataset</a></li>
+<li><a href="#analyzing-the-mtcars-dataset" id="toc-analyzing-the-mtcars-dataset" class="nav-link" data-scroll-target="#analyzing-the-mtcars-dataset"><span class="toc-section-number">5.2.1</span>  Analyzing the <em>mtcars</em> dataset</a></li>
   <li><a href="#model-selection-with-the-cement-dataset" id="toc-model-selection-with-the-cement-dataset" class="nav-link" data-scroll-target="#model-selection-with-the-cement-dataset"><span class="toc-section-number">5.2.2</span>  Model-selection with the <em>Cement</em> dataset</a></li>
-  </ul></li>
   </ul>
-<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/TheoreticalEcology/DataScienceInR/edit/master/5-MultipleRegression.qmd" class="toc-action">Edit this page</a></p></div></div></nav>
+</li>
+  </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/TheoreticalEcology/DataScienceInR/edit/master/5-MultipleRegression.qmd" class="toc-action">Edit this page</a></p></div></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title d-none d-lg-block"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Multiple regression</span></h1>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<h1 class="title d-none d-lg-block">
+<span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Multiple regression</span>
+</h1>
 </div>
 
 
@@ -274,16 +259,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </div>
   
 
-</header>
-
-<section id="classroom-demo" class="level2" data-number="5.1">
-<h2 data-number="5.1" class="anchored" data-anchor-id="classroom-demo"><span class="header-section-number">5.1</span> Classroom demo</h2>
+</header><section id="classroom-demo" class="level2" data-number="5.1"><h2 data-number="5.1" class="anchored" data-anchor-id="classroom-demo">
+<span class="header-section-number">5.1</span> Classroom demo</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Multiple linear regression</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="do">## first remove observations with NA values</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>newAirquality <span class="ot">=</span> airquality[<span class="fu">complete.cases</span>(airquality),]</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(newAirquality)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># Multiple linear regression</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a></span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="do">## first remove observations with NA values</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a>newAirquality <span class="ot">=</span> airquality[<span class="fu">complete.cases</span>(airquality),]</span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="fu">summary</span>(newAirquality)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     Ozone          Solar.R           Wind            Temp      
  Min.   :  1.0   Min.   :  7.0   Min.   : 2.30   Min.   :57.00  
@@ -300,9 +283,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
  3rd Qu.:9.000   3rd Qu.:22.50  
  Max.   :9.000   Max.   :31.00  </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># simple regression</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>m0 <span class="ot">=</span> <span class="fu">lm</span>(Ozone <span class="sc">~</span> Temp , <span class="at">data =</span> newAirquality)</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m0)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># simple regression</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a>m0 <span class="ot">=</span> <span class="fu">lm</span>(Ozone <span class="sc">~</span> Temp , <span class="at">data =</span> newAirquality)</span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="fu">summary</span>(m0)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -323,7 +306,7 @@ Residual standard error: 23.92 on 109 degrees of freedom
 Multiple R-squared:  0.488, Adjusted R-squared:  0.4833 
 F-statistic: 103.9 on 1 and 109 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(m0)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="fu">plot</span>(m0)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="5-MultipleRegression_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -336,22 +319,22 @@ F-statistic: 103.9 on 1 and 109 DF,  p-value: &lt; 2.2e-16</code></pre>
 <div class="cell-output-display">
 <p><img src="5-MultipleRegression_files/figure-html/unnamed-chunk-2-4.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(Ozone <span class="sc">~</span> Temp , <span class="at">data =</span> newAirquality)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(m0, <span class="at">col =</span> <span class="st">"blue"</span>, <span class="at">lwd =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="fu">plot</span>(Ozone <span class="sc">~</span> Temp , <span class="at">data =</span> newAirquality)</span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="fu">abline</span>(m0, <span class="at">col =</span> <span class="st">"blue"</span>, <span class="at">lwd =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="5-MultipleRegression_files/figure-html/unnamed-chunk-2-5.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Today: multiple linear regression</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>m1 <span class="ot">=</span> <span class="fu">lm</span>(Ozone <span class="sc">~</span> Temp <span class="sc">+</span> Wind , <span class="at">data =</span> newAirquality)</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># have a look at the residuals:</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>op <span class="ot">&lt;-</span> <span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(m1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="co"># Today: multiple linear regression</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a>m1 <span class="ot">=</span> <span class="fu">lm</span>(Ozone <span class="sc">~</span> Temp <span class="sc">+</span> Wind , <span class="at">data =</span> newAirquality)</span>
+<span id="cb7-3"><a href="#cb7-3"></a><span class="co"># have a look at the residuals:</span></span>
+<span id="cb7-4"><a href="#cb7-4"></a>op <span class="ot">&lt;-</span> <span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
+<span id="cb7-5"><a href="#cb7-5"></a><span class="fu">plot</span>(m1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="5-MultipleRegression_files/figure-html/unnamed-chunk-2-6.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(op)</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">par</span>(op)</span>
+<span id="cb8-2"><a href="#cb8-2"></a></span>
+<span id="cb8-3"><a href="#cb8-3"></a><span class="fu">summary</span>(m1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -373,8 +356,8 @@ Residual standard error: 21.73 on 108 degrees of freedom
 Multiple R-squared:  0.5814,    Adjusted R-squared:  0.5736 
 F-statistic: 74.99 on 2 and 108 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plotting multiple regression outputs</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(effects)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="co"># plotting multiple regression outputs</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a><span class="fu">library</span>(effects)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Loading required package: carData</code></pre>
 </div>
@@ -382,15 +365,15 @@ F-statistic: 74.99 on 2 and 108 DF,  p-value: &lt; 2.2e-16</code></pre>
 <pre><code>lattice theme set by effectsTheme()
 See ?effectsTheme for details.</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">allEffects</span>(m1))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="fu">plot</span>(<span class="fu">allEffects</span>(m1))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="5-MultipleRegression_files/figure-html/unnamed-chunk-2-7.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Include interaction</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>m2 <span class="ot">=</span> <span class="fu">lm</span>(Ozone <span class="sc">~</span>  <span class="fu">scale</span>(Wind)<span class="sc">*</span> <span class="fu">scale</span>(Temp) , <span class="at">data =</span> newAirquality)</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co"># if including interactions, always scale your predictor variables!</span></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co"># scale: subtracts the mean and divides by standard deviation</span></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="co"># Include interaction</span></span>
+<span id="cb14-2"><a href="#cb14-2"></a>m2 <span class="ot">=</span> <span class="fu">lm</span>(Ozone <span class="sc">~</span>  <span class="fu">scale</span>(Wind)<span class="sc">*</span> <span class="fu">scale</span>(Temp) , <span class="at">data =</span> newAirquality)</span>
+<span id="cb14-3"><a href="#cb14-3"></a><span class="co"># if including interactions, always scale your predictor variables!</span></span>
+<span id="cb14-4"><a href="#cb14-4"></a><span class="co"># scale: subtracts the mean and divides by standard deviation</span></span>
+<span id="cb14-5"><a href="#cb14-5"></a><span class="fu">summary</span>(m2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -413,14 +396,14 @@ Residual standard error: 20.37 on 107 degrees of freedom
 Multiple R-squared:  0.6355,    Adjusted R-squared:  0.6253 
 F-statistic: 62.19 on 3 and 107 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>op <span class="ot">&lt;-</span> <span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(m2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>op <span class="ot">&lt;-</span> <span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
+<span id="cb16-2"><a href="#cb16-2"></a><span class="fu">plot</span>(m2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="5-MultipleRegression_files/figure-html/unnamed-chunk-2-8.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(op)</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">allEffects</span>(m2))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="fu">par</span>(op)</span>
+<span id="cb17-2"><a href="#cb17-2"></a></span>
+<span id="cb17-3"><a href="#cb17-3"></a><span class="fu">plot</span>(<span class="fu">allEffects</span>(m2))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning in Analyze.model(focal.predictors, mod, xlevels, default.levels, : the
 predictors scale(Wind), scale(Temp) are one-column matrices that were converted
@@ -429,9 +412,9 @@ to vectors</code></pre>
 <div class="cell-output-display">
 <p><img src="5-MultipleRegression_files/figure-html/unnamed-chunk-2-9.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># transform response values </span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>m3 <span class="ot">=</span> <span class="fu">lm</span>(<span class="fu">sqrt</span>(Ozone) <span class="sc">~</span> <span class="fu">scale</span>(Wind) <span class="sc">*</span> <span class="fu">scale</span>(Temp) , <span class="at">data =</span> newAirquality)</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="co"># transform response values </span></span>
+<span id="cb19-2"><a href="#cb19-2"></a>m3 <span class="ot">=</span> <span class="fu">lm</span>(<span class="fu">sqrt</span>(Ozone) <span class="sc">~</span> <span class="fu">scale</span>(Wind) <span class="sc">*</span> <span class="fu">scale</span>(Temp) , <span class="at">data =</span> newAirquality)</span>
+<span id="cb19-3"><a href="#cb19-3"></a><span class="fu">summary</span>(m3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -454,16 +437,16 @@ Residual standard error: 1.437 on 107 degrees of freedom
 Multiple R-squared:  0.6628,    Adjusted R-squared:  0.6534 
 F-statistic: 70.12 on 3 and 107 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Are residuals better now?</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>op <span class="ot">&lt;-</span> <span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(m3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="co"># Are residuals better now?</span></span>
+<span id="cb21-2"><a href="#cb21-2"></a>op <span class="ot">&lt;-</span> <span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
+<span id="cb21-3"><a href="#cb21-3"></a><span class="fu">plot</span>(m3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="5-MultipleRegression_files/figure-html/unnamed-chunk-2-10.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(op) <span class="co"># a little bit better</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="co"># now plot and interpret the results</span></span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">allEffects</span>(m3))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="fu">par</span>(op) <span class="co"># a little bit better</span></span>
+<span id="cb22-2"><a href="#cb22-2"></a></span>
+<span id="cb22-3"><a href="#cb22-3"></a><span class="co"># now plot and interpret the results</span></span>
+<span id="cb22-4"><a href="#cb22-4"></a><span class="fu">plot</span>(<span class="fu">allEffects</span>(m3))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning in Analyze.model(focal.predictors, mod, xlevels, default.levels, : the
 predictors scale(Wind), scale(Temp) are one-column matrices that were converted
@@ -472,7 +455,7 @@ to vectors</code></pre>
 <div class="cell-output-display">
 <p><img src="5-MultipleRegression_files/figure-html/unnamed-chunk-2-11.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="fu">summary</span>(m3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -495,12 +478,12 @@ Residual standard error: 1.437 on 107 degrees of freedom
 Multiple R-squared:  0.6628,    Adjusted R-squared:  0.6534 
 F-statistic: 70.12 on 3 and 107 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Omitted variable bias</span></span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>both <span class="ot">=</span> <span class="fu">lm</span>(Ozone <span class="sc">~</span> Wind <span class="sc">+</span> Temp, newAirquality)</span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>wind <span class="ot">=</span> <span class="fu">lm</span>(Ozone <span class="sc">~</span> Wind , newAirquality)</span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>temp <span class="ot">=</span> <span class="fu">lm</span>(Ozone <span class="sc">~</span> Temp, newAirquality)</span>
-<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(both)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="do">## Omitted variable bias</span></span>
+<span id="cb26-2"><a href="#cb26-2"></a></span>
+<span id="cb26-3"><a href="#cb26-3"></a>both <span class="ot">=</span> <span class="fu">lm</span>(Ozone <span class="sc">~</span> Wind <span class="sc">+</span> Temp, newAirquality)</span>
+<span id="cb26-4"><a href="#cb26-4"></a>wind <span class="ot">=</span> <span class="fu">lm</span>(Ozone <span class="sc">~</span> Wind , newAirquality)</span>
+<span id="cb26-5"><a href="#cb26-5"></a>temp <span class="ot">=</span> <span class="fu">lm</span>(Ozone <span class="sc">~</span> Temp, newAirquality)</span>
+<span id="cb26-6"><a href="#cb26-6"></a><span class="fu">summary</span>(both)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -522,7 +505,7 @@ Residual standard error: 21.73 on 108 degrees of freedom
 Multiple R-squared:  0.5814,    Adjusted R-squared:  0.5736 
 F-statistic: 74.99 on 2 and 108 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(wind)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a><span class="fu">summary</span>(wind)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -543,20 +526,20 @@ Residual standard error: 26.42 on 109 degrees of freedom
 Multiple R-squared:  0.3752,    Adjusted R-squared:  0.3694 
 F-statistic: 65.44 on 1 and 109 DF,  p-value: 9.089e-13</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>slopes <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">predictor =</span> <span class="fu">c</span>(<span class="st">"Wind"</span>, <span class="st">"Temp"</span>),</span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">both.pred =</span> <span class="fu">round</span>(<span class="fu">coef</span>(both)[<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>], <span class="at">digits =</span> <span class="dv">2</span>),</span>
-<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">only.wind =</span> <span class="fu">c</span>(<span class="fu">round</span>(<span class="fu">coef</span>(wind)[<span class="dv">2</span>], <span class="at">digits =</span> <span class="dv">2</span>), <span class="st">"NA"</span>),</span>
-<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">only.temp =</span> <span class="fu">c</span>(<span class="st">"NA"</span>, <span class="fu">round</span>(<span class="fu">coef</span>(temp)[<span class="dv">2</span>], <span class="at">digits =</span> <span class="dv">2</span>))</span>
-<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>slopes</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a>slopes <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb30-2"><a href="#cb30-2"></a>  <span class="at">predictor =</span> <span class="fu">c</span>(<span class="st">"Wind"</span>, <span class="st">"Temp"</span>),</span>
+<span id="cb30-3"><a href="#cb30-3"></a>  <span class="at">both.pred =</span> <span class="fu">round</span>(<span class="fu">coef</span>(both)[<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>], <span class="at">digits =</span> <span class="dv">2</span>),</span>
+<span id="cb30-4"><a href="#cb30-4"></a>  <span class="at">only.wind =</span> <span class="fu">c</span>(<span class="fu">round</span>(<span class="fu">coef</span>(wind)[<span class="dv">2</span>], <span class="at">digits =</span> <span class="dv">2</span>), <span class="st">"NA"</span>),</span>
+<span id="cb30-5"><a href="#cb30-5"></a>  <span class="at">only.temp =</span> <span class="fu">c</span>(<span class="st">"NA"</span>, <span class="fu">round</span>(<span class="fu">coef</span>(temp)[<span class="dv">2</span>], <span class="at">digits =</span> <span class="dv">2</span>))</span>
+<span id="cb30-6"><a href="#cb30-6"></a>)</span>
+<span id="cb30-7"><a href="#cb30-7"></a>slopes</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     predictor both.pred only.wind only.temp
 Wind      Wind     -3.29     -5.73        NA
 Temp      Temp      1.83        NA      2.44</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Making everything more complex</span></span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(newAirquality)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a><span class="do">## Making everything more complex</span></span>
+<span id="cb32-2"><a href="#cb32-2"></a><span class="fu">str</span>(newAirquality)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>'data.frame':   111 obs. of  6 variables:
  $ Ozone  : int  41 36 12 18 23 19 8 16 11 14 ...
@@ -566,12 +549,12 @@ Temp      Temp      1.83        NA      2.44</code></pre>
  $ Month  : int  5 5 5 5 5 5 5 5 5 5 ...
  $ Day    : int  1 2 3 4 7 8 9 12 13 14 ...</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># How does everything change, if we have factorial predictors?</span></span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>newAirquality<span class="sc">$</span>MonthFactor <span class="ot">=</span> <span class="fu">as.factor</span>(newAirquality<span class="sc">$</span>Month)</span>
-<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>m4 <span class="ot">=</span> <span class="fu">lm</span>(<span class="fu">sqrt</span>(Ozone) <span class="sc">~</span> MonthFactor <span class="sc">+</span> <span class="fu">scale</span>(Wind) <span class="sc">*</span> <span class="fu">scale</span>(Temp) <span class="sc">*</span> <span class="fu">scale</span>(Solar.R) , </span>
-<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">data =</span> newAirquality)</span>
-<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a><span class="co"># How does everything change, if we have factorial predictors?</span></span>
+<span id="cb34-2"><a href="#cb34-2"></a>newAirquality<span class="sc">$</span>MonthFactor <span class="ot">=</span> <span class="fu">as.factor</span>(newAirquality<span class="sc">$</span>Month)</span>
+<span id="cb34-3"><a href="#cb34-3"></a></span>
+<span id="cb34-4"><a href="#cb34-4"></a>m4 <span class="ot">=</span> <span class="fu">lm</span>(<span class="fu">sqrt</span>(Ozone) <span class="sc">~</span> MonthFactor <span class="sc">+</span> <span class="fu">scale</span>(Wind) <span class="sc">*</span> <span class="fu">scale</span>(Temp) <span class="sc">*</span> <span class="fu">scale</span>(Solar.R) , </span>
+<span id="cb34-5"><a href="#cb34-5"></a>        <span class="at">data =</span> newAirquality)</span>
+<span id="cb34-6"><a href="#cb34-6"></a><span class="fu">summary</span>(m4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -603,12 +586,12 @@ Residual standard error: 1.328 on 99 degrees of freedom
 Multiple R-squared:  0.7335,    Adjusted R-squared:  0.7039 
 F-statistic: 24.78 on 11 and 99 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>m5 <span class="ot">=</span> <span class="fu">lm</span>(<span class="fu">sqrt</span>(Ozone) <span class="sc">~</span> MonthFactor <span class="sc">+</span> <span class="fu">scale</span>(Wind) <span class="sc">+</span> <span class="fu">scale</span>(Temp) <span class="sc">+</span> <span class="fu">scale</span>(Solar.R) </span>
-<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>                      <span class="sc">+</span> <span class="fu">scale</span>(Wind)<span class="sc">:</span><span class="fu">scale</span>(Temp)</span>
-<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>                      <span class="sc">+</span> <span class="fu">scale</span>(Wind)<span class="sc">:</span><span class="fu">scale</span>(Solar.R)</span>
-<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>                      <span class="sc">+</span> <span class="fu">scale</span>(Temp)<span class="sc">:</span><span class="fu">scale</span>(Solar.R), </span>
-<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">data =</span> newAirquality)</span>
-<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m5)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a>m5 <span class="ot">=</span> <span class="fu">lm</span>(<span class="fu">sqrt</span>(Ozone) <span class="sc">~</span> MonthFactor <span class="sc">+</span> <span class="fu">scale</span>(Wind) <span class="sc">+</span> <span class="fu">scale</span>(Temp) <span class="sc">+</span> <span class="fu">scale</span>(Solar.R) </span>
+<span id="cb36-2"><a href="#cb36-2"></a>                      <span class="sc">+</span> <span class="fu">scale</span>(Wind)<span class="sc">:</span><span class="fu">scale</span>(Temp)</span>
+<span id="cb36-3"><a href="#cb36-3"></a>                      <span class="sc">+</span> <span class="fu">scale</span>(Wind)<span class="sc">:</span><span class="fu">scale</span>(Solar.R)</span>
+<span id="cb36-4"><a href="#cb36-4"></a>                      <span class="sc">+</span> <span class="fu">scale</span>(Temp)<span class="sc">:</span><span class="fu">scale</span>(Solar.R), </span>
+<span id="cb36-5"><a href="#cb36-5"></a>        <span class="at">data =</span> newAirquality)</span>
+<span id="cb36-6"><a href="#cb36-6"></a><span class="fu">summary</span>(m5)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -640,11 +623,11 @@ Residual standard error: 1.321 on 100 degrees of freedom
 Multiple R-squared:  0.7334,    Adjusted R-squared:  0.7068 
 F-statistic: 27.51 on 10 and 100 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># short form for including only two-wac interactions:</span></span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>m5 <span class="ot">=</span> <span class="fu">lm</span>(<span class="fu">sqrt</span>(Ozone) <span class="sc">~</span> MonthFactor <span class="sc">+</span> (<span class="fu">scale</span>(Wind) <span class="sc">+</span> <span class="fu">scale</span>(Temp) <span class="sc">+</span> <span class="fu">scale</span>(Solar.R))<span class="sc">^</span><span class="dv">2</span>,</span>
-<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">data =</span> newAirquality)</span>
-<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m5)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1"></a><span class="co"># short form for including only two-wac interactions:</span></span>
+<span id="cb38-2"><a href="#cb38-2"></a></span>
+<span id="cb38-3"><a href="#cb38-3"></a>m5 <span class="ot">=</span> <span class="fu">lm</span>(<span class="fu">sqrt</span>(Ozone) <span class="sc">~</span> MonthFactor <span class="sc">+</span> (<span class="fu">scale</span>(Wind) <span class="sc">+</span> <span class="fu">scale</span>(Temp) <span class="sc">+</span> <span class="fu">scale</span>(Solar.R))<span class="sc">^</span><span class="dv">2</span>,</span>
+<span id="cb38-4"><a href="#cb38-4"></a>        <span class="at">data =</span> newAirquality)</span>
+<span id="cb38-5"><a href="#cb38-5"></a><span class="fu">summary</span>(m5)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -675,8 +658,8 @@ Residual standard error: 1.321 on 100 degrees of freedom
 Multiple R-squared:  0.7334,    Adjusted R-squared:  0.7068 
 F-statistic: 27.51 on 10 and 100 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># get overall effect of Month:</span></span>
-<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(m5)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1"></a><span class="co"># get overall effect of Month:</span></span>
+<span id="cb40-2"><a href="#cb40-2"></a><span class="fu">anova</span>(m5)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Analysis of Variance Table
 
@@ -693,12 +676,12 @@ Residuals                  100 174.616   1.746
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># this is doing a type I ANOVA = sequential</span></span>
-<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="co"># order in which you include the predictors changes the estimates and p-values</span></span>
-<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a><span class="co"># If you want to do a type II ANOVA, use ANova() from the car package</span></span>
-<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car)</span>
-<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a><span class="fu">Anova</span>(m5) <span class="co"># Anova with capital A</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1"></a><span class="co"># this is doing a type I ANOVA = sequential</span></span>
+<span id="cb42-2"><a href="#cb42-2"></a><span class="co"># order in which you include the predictors changes the estimates and p-values</span></span>
+<span id="cb42-3"><a href="#cb42-3"></a></span>
+<span id="cb42-4"><a href="#cb42-4"></a><span class="co"># If you want to do a type II ANOVA, use ANova() from the car package</span></span>
+<span id="cb42-5"><a href="#cb42-5"></a><span class="fu">library</span>(car)</span>
+<span id="cb42-6"><a href="#cb42-6"></a><span class="fu">Anova</span>(m5) <span class="co"># Anova with capital A</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Anova Table (Type II tests)
 
@@ -715,16 +698,16 @@ Residuals                  174.616 100
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co">#type II ANOVA: all other predictors have already been taken into account</span></span>
-<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Does an additional predictor explain some of the variance on top of that?</span></span>
-<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Model selection-----</span></span>
-<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare different competing models:</span></span>
-<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a><span class="co"># let's compare models m3 and m5 to decide which one explains our data better:</span></span>
-<span id="cb44-9"><a href="#cb44-9" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. LRT</span></span>
-<span id="cb44-10"><a href="#cb44-10" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(m3, m5)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1"></a><span class="co">#type II ANOVA: all other predictors have already been taken into account</span></span>
+<span id="cb44-2"><a href="#cb44-2"></a><span class="co"># Does an additional predictor explain some of the variance on top of that?</span></span>
+<span id="cb44-3"><a href="#cb44-3"></a></span>
+<span id="cb44-4"><a href="#cb44-4"></a></span>
+<span id="cb44-5"><a href="#cb44-5"></a><span class="co"># Model selection-----</span></span>
+<span id="cb44-6"><a href="#cb44-6"></a></span>
+<span id="cb44-7"><a href="#cb44-7"></a><span class="co"># Compare different competing models:</span></span>
+<span id="cb44-8"><a href="#cb44-8"></a><span class="co"># let's compare models m3 and m5 to decide which one explains our data better:</span></span>
+<span id="cb44-9"><a href="#cb44-9"></a><span class="co"># 1. LRT</span></span>
+<span id="cb44-10"><a href="#cb44-10"></a><span class="fu">anova</span>(m3, m5)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Analysis of Variance Table
 
@@ -736,39 +719,39 @@ Model 2: sqrt(Ozone) ~ MonthFactor + (scale(Wind) + scale(Temp) + scale(Solar.R)
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co"># RSS = residual sum of squares = variance not explained by the model</span></span>
-<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="co"># smaller RSS = better model</span></span>
-<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a><span class="co"># p-value</span></span>
-<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a><span class="co">#2. AIC</span></span>
-<span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a><span class="fu">AIC</span>(m3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1"></a><span class="co"># RSS = residual sum of squares = variance not explained by the model</span></span>
+<span id="cb46-2"><a href="#cb46-2"></a><span class="co"># smaller RSS = better model</span></span>
+<span id="cb46-3"><a href="#cb46-3"></a><span class="co"># p-value</span></span>
+<span id="cb46-4"><a href="#cb46-4"></a></span>
+<span id="cb46-5"><a href="#cb46-5"></a><span class="co">#2. AIC</span></span>
+<span id="cb46-6"><a href="#cb46-6"></a><span class="fu">AIC</span>(m3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 401.3714</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">AIC</span>(m5)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1"></a><span class="fu">AIC</span>(m5)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 389.2942</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co"># also here, model m5 is better</span></span>
-<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a><span class="do">#### Demonstration: Why interpretation of effect sizes and p-values </span></span>
-<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a><span class="do">### after extensive model selection is not a good idea:</span></span>
-<span id="cb50-6"><a href="#cb50-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MASS)</span>
-<span id="cb50-7"><a href="#cb50-7" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb50-8"><a href="#cb50-8" aria-hidden="true" tabindex="-1"></a><span class="co">#make up predictors:</span></span>
-<span id="cb50-9"><a href="#cb50-9" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="fu">matrix</span>(<span class="fu">runif</span>(<span class="dv">20000</span>), <span class="at">ncol =</span> <span class="dv">100</span>))</span>
-<span id="cb50-10"><a href="#cb50-10" aria-hidden="true" tabindex="-1"></a><span class="co"># create a response variable</span></span>
-<span id="cb50-11"><a href="#cb50-11" aria-hidden="true" tabindex="-1"></a>dat<span class="sc">$</span>y <span class="ot">=</span> <span class="fu">rnorm</span>(<span class="dv">200</span>)</span>
-<span id="cb50-12"><a href="#cb50-12" aria-hidden="true" tabindex="-1"></a>fullModel <span class="ot">=</span> <span class="fu">lm</span>(y <span class="sc">~</span> ., <span class="at">data =</span> dat)</span>
-<span id="cb50-13"><a href="#cb50-13" aria-hidden="true" tabindex="-1"></a>sum <span class="ot">&lt;-</span> <span class="fu">summary</span>(fullModel)</span>
-<span id="cb50-14"><a href="#cb50-14" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(sum<span class="sc">$</span>coefficients[,<span class="dv">4</span>] <span class="sc">&lt;</span> <span class="fl">0.05</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1"></a><span class="co"># also here, model m5 is better</span></span>
+<span id="cb50-2"><a href="#cb50-2"></a></span>
+<span id="cb50-3"><a href="#cb50-3"></a></span>
+<span id="cb50-4"><a href="#cb50-4"></a><span class="do">#### Demonstration: Why interpretation of effect sizes and p-values </span></span>
+<span id="cb50-5"><a href="#cb50-5"></a><span class="do">### after extensive model selection is not a good idea:</span></span>
+<span id="cb50-6"><a href="#cb50-6"></a><span class="fu">library</span>(MASS)</span>
+<span id="cb50-7"><a href="#cb50-7"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb50-8"><a href="#cb50-8"></a><span class="co">#make up predictors:</span></span>
+<span id="cb50-9"><a href="#cb50-9"></a>dat <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="fu">matrix</span>(<span class="fu">runif</span>(<span class="dv">20000</span>), <span class="at">ncol =</span> <span class="dv">100</span>))</span>
+<span id="cb50-10"><a href="#cb50-10"></a><span class="co"># create a response variable</span></span>
+<span id="cb50-11"><a href="#cb50-11"></a>dat<span class="sc">$</span>y <span class="ot">=</span> <span class="fu">rnorm</span>(<span class="dv">200</span>)</span>
+<span id="cb50-12"><a href="#cb50-12"></a>fullModel <span class="ot">=</span> <span class="fu">lm</span>(y <span class="sc">~</span> ., <span class="at">data =</span> dat)</span>
+<span id="cb50-13"><a href="#cb50-13"></a>sum <span class="ot">&lt;-</span> <span class="fu">summary</span>(fullModel)</span>
+<span id="cb50-14"><a href="#cb50-14"></a><span class="fu">mean</span>(sum<span class="sc">$</span>coefficients[,<span class="dv">4</span>] <span class="sc">&lt;</span> <span class="fl">0.05</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.01980198</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 0.019: less than 2 % false positives = type I error rate</span></span>
-<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>selection <span class="ot">=</span> <span class="fu">stepAIC</span>(fullModel)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1"></a><span class="co"># 0.019: less than 2 % false positives = type I error rate</span></span>
+<span id="cb52-2"><a href="#cb52-2"></a></span>
+<span id="cb52-3"><a href="#cb52-3"></a>selection <span class="ot">=</span> <span class="fu">stepAIC</span>(fullModel)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Start:  AIC=21.85
 y ~ X1 + X2 + X3 + X4 + X5 + X6 + X7 + X8 + X9 + X10 + X11 + 
@@ -6299,16 +6282,15 @@ y ~ X1 + X2 + X3 + X5 + X7 + X13 + X20 + X23 + X30 + X37 + X42 +
 - X71   1    4.0437 102.825 -77.058
 - X48   1    4.0522 102.833 -77.041</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>sum.sel <span class="ot">&lt;-</span> <span class="fu">summary</span>(selection)</span>
-<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(sum.sel<span class="sc">$</span>coefficients[,<span class="dv">4</span>] <span class="sc">&lt;</span> <span class="fl">0.05</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1"></a>sum.sel <span class="ot">&lt;-</span> <span class="fu">summary</span>(selection)</span>
+<span id="cb54-2"><a href="#cb54-2"></a><span class="fu">mean</span>(sum.sel<span class="sc">$</span>coefficients[,<span class="dv">4</span>] <span class="sc">&lt;</span> <span class="fl">0.05</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.5172414</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 0.48: Now almost 50 % of our results are false positives!!!</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1"></a><span class="co"># 0.48: Now almost 50 % of our results are false positives!!!</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section>
-<section id="exercises" class="level2" data-number="5.2">
-<h2 data-number="5.2" class="anchored" data-anchor-id="exercises"><span class="header-section-number">5.2</span> Exercises</h2>
+</section><section id="exercises" class="level2" data-number="5.2"><h2 data-number="5.2" class="anchored" data-anchor-id="exercises">
+<span class="header-section-number">5.2</span> Exercises</h2>
 <p>In this exercise you will:</p>
 <ul>
 <li>perform multiple linear regressions</li>
@@ -6318,8 +6300,8 @@ y ~ X1 + X2 + X3 + X5 + X7 + X13 + X20 + X23 + X30 + X37 + X42 +
 <p>Before you start, remember to clean your global environment (if you haven’t already) using <em>rm(list=ls())</em>.</p>
 <p>To conduct the exercise, please load the following packages:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(effects)</span>
-<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MuMIn)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1"></a><span class="fu">library</span>(effects)</span>
+<span id="cb57-2"><a href="#cb57-2"></a><span class="fu">library</span>(MuMIn)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>You will work with the following datasets:</p>
 <ul>
@@ -6327,30 +6309,16 @@ y ~ X1 + X2 + X3 + X5 + X7 + X13 + X20 + X23 + X30 + X37 + X42 +
 <li>Cement{MuMIn}</li>
 </ul>
 <p>The second dataset is from the MuMIn package (as shown by the curly brackets).</p>
-<section id="useful-functions" class="level4" data-number="5.2.0.1">
-<h4 data-number="5.2.0.1" class="anchored" data-anchor-id="useful-functions"><span class="header-section-number">5.2.0.1</span> Useful functions</h4>
+<section id="useful-functions" class="level4" data-number="5.2.0.1"><h4 data-number="5.2.0.1" class="anchored" data-anchor-id="useful-functions">
+<span class="header-section-number">5.2.0.1</span> Useful functions</h4>
 <p>for multiple linear regression</p>
-<p><em>lm()</em> - fit linear model<br>
-<em>summary(fit)</em> - apply to fitted model object to display regression table<br>
-<em>plot(fit)</em> - plot residuals for model validation<br>
-<em>anova(fit)</em> - apply type I ANOVA (variables included sequentially) to model to test for effects all levels of a factor<br>
-<em>Anova(fit)</em> - <em>car</em> package; use type II ANOVA (effects for predictors when all other predictors are already included) for overall effects<br>
-<em>scale()</em> - scale variable<br>
-<em>sqrt()</em> - square-root<br>
-<em>log()</em> - calculates natural logarithm<br>
-<em>plot(allEffects(fit))</em> - apply to fitted model object to plot marginal effect; <em>effects</em> package<br>
-<em>par()</em> - change graphical parameters<br>
+<p><em>lm()</em> - fit linear model<br><em>summary(fit)</em> - apply to fitted model object to display regression table<br><em>plot(fit)</em> - plot residuals for model validation<br><em>anova(fit)</em> - apply type I ANOVA (variables included sequentially) to model to test for effects all levels of a factor<br><em>Anova(fit)</em> - <em>car</em> package; use type II ANOVA (effects for predictors when all other predictors are already included) for overall effects<br><em>scale()</em> - scale variable<br><em>sqrt()</em> - square-root<br><em>log()</em> - calculates natural logarithm<br><em>plot(allEffects(fit))</em> - apply to fitted model object to plot marginal effect; <em>effects</em> package<br><em>par()</em> - change graphical parameters<br>
 use <em>oldpar &lt;- par(mfrow = c(number_rows, number_cols))</em> to change figure layout including more than 1 plot per figure<br>
 use <em>par(oldpar)</em> to reset graphic parameter</p>
 <p>for model selection</p>
-<p><em>stepAIC(fullModel)</em> - perform stepwise AIC model selection; apply to full model object, <em>MASS</em> package<br>
-<em>dredge(fullModel)</em> - perform global model selection, <em>MuMIn</em> package<br>
-<em>model.avg()</em> - perform model averaging<br>
-<em>AIC(fit)</em> - get AIC for a fitted model<br>
-<em>anova(fit1, fit2)</em> - compare two fitted models via Likelihood Ratio Test (LRT)</p>
-</section>
-<section id="analyzing-the-mtcars-dataset" class="level3" data-number="5.2.1">
-<h3 data-number="5.2.1" class="anchored" data-anchor-id="analyzing-the-mtcars-dataset"><span class="header-section-number">5.2.1</span> Analyzing the <em>mtcars</em> dataset</h3>
+<p><em>stepAIC(fullModel)</em> - perform stepwise AIC model selection; apply to full model object, <em>MASS</em> package<br><em>dredge(fullModel)</em> - perform global model selection, <em>MuMIn</em> package<br><em>model.avg()</em> - perform model averaging<br><em>AIC(fit)</em> - get AIC for a fitted model<br><em>anova(fit1, fit2)</em> - compare two fitted models via Likelihood Ratio Test (LRT)</p>
+</section><section id="analyzing-the-mtcars-dataset" class="level3" data-number="5.2.1"><h3 data-number="5.2.1" class="anchored" data-anchor-id="analyzing-the-mtcars-dataset">
+<span class="header-section-number">5.2.1</span> Analyzing the <em>mtcars</em> dataset</h3>
 <p>Imagine a start up company wants to rebuild a car with a nice retro look from the 70ies. The car should be modern though, meaning the fuel consumption should be as low as possible. They’ve discovered the <em>mtcars</em> dataset with all the necessary measurements and they’ve somehow heard about you and your R skills and asked you for help. And of course you promised to help, kind as you are.</p>
 <p>The company wants you to find out which of the following characteristics affects the fuel consumption measured in miles per gallon (<em>mpg</em>). Lower values for <em>mpg</em> thus reflect a higher fuel consumption. The company wants you to include the following variables into your analysis:</p>
 <ul>
@@ -6402,15 +6370,15 @@ Solution
 <div class="callout-body-container callout-body">
 <p>This is the code that you need to interpret the results.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="co"># change am and cyl from numeric to factor</span></span>
-<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>mtcars<span class="sc">$</span>am <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(mtcars<span class="sc">$</span>am)</span>
-<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a>mtcars<span class="sc">$</span>cyl <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(mtcars<span class="sc">$</span>cyl)</span>
-<span id="cb58-4"><a href="#cb58-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb58-5"><a href="#cb58-5" aria-hidden="true" tabindex="-1"></a><span class="co"># multiple linear regression and results:</span></span>
-<span id="cb58-6"><a href="#cb58-6" aria-hidden="true" tabindex="-1"></a>carsfit <span class="ot">&lt;-</span> <span class="fu">lm</span>(mpg <span class="sc">~</span> wt <span class="sc">+</span> hp <span class="sc">+</span> am <span class="sc">+</span> cyl <span class="sc">+</span> wt<span class="sc">:</span>hp, <span class="at">dat =</span> mtcars) </span>
-<span id="cb58-7"><a href="#cb58-7" aria-hidden="true" tabindex="-1"></a><span class="co">#weight is included as the first predictor in order to have </span></span>
-<span id="cb58-8"><a href="#cb58-8" aria-hidden="true" tabindex="-1"></a><span class="co">#it as the grouping factor in the allEffects plot </span></span>
-<span id="cb58-9"><a href="#cb58-9" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(carsfit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1"></a><span class="co"># change am and cyl from numeric to factor</span></span>
+<span id="cb58-2"><a href="#cb58-2"></a>mtcars<span class="sc">$</span>am <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(mtcars<span class="sc">$</span>am)</span>
+<span id="cb58-3"><a href="#cb58-3"></a>mtcars<span class="sc">$</span>cyl <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(mtcars<span class="sc">$</span>cyl)</span>
+<span id="cb58-4"><a href="#cb58-4"></a></span>
+<span id="cb58-5"><a href="#cb58-5"></a><span class="co"># multiple linear regression and results:</span></span>
+<span id="cb58-6"><a href="#cb58-6"></a>carsfit <span class="ot">&lt;-</span> <span class="fu">lm</span>(mpg <span class="sc">~</span> wt <span class="sc">+</span> hp <span class="sc">+</span> am <span class="sc">+</span> cyl <span class="sc">+</span> wt<span class="sc">:</span>hp, <span class="at">dat =</span> mtcars) </span>
+<span id="cb58-7"><a href="#cb58-7"></a><span class="co">#weight is included as the first predictor in order to have </span></span>
+<span id="cb58-8"><a href="#cb58-8"></a><span class="co">#it as the grouping factor in the allEffects plot </span></span>
+<span id="cb58-9"><a href="#cb58-9"></a><span class="fu">summary</span>(carsfit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -6436,7 +6404,7 @@ Residual standard error: 2.246 on 25 degrees of freedom
 Multiple R-squared:  0.888, Adjusted R-squared:  0.8612 
 F-statistic: 33.05 on 6 and 25 DF,  p-value: 1.021e-10</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(carsfit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1"></a><span class="fu">anova</span>(carsfit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Analysis of Variance Table
 
@@ -6451,16 +6419,16 @@ Residuals 25 126.07    5.04
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="co"># check residuals</span></span>
-<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>old.par <span class="ot">=</span> <span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
-<span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(carsfit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1"></a><span class="co"># check residuals</span></span>
+<span id="cb62-2"><a href="#cb62-2"></a>old.par <span class="ot">=</span> <span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
+<span id="cb62-3"><a href="#cb62-3"></a><span class="fu">plot</span>(carsfit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="5-MultipleRegression_files/figure-html/mtcars-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(old.par)</span>
-<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a><span class="co">#plot effects</span></span>
-<span id="cb63-4"><a href="#cb63-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">allEffects</span>(carsfit))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1"></a><span class="fu">par</span>(old.par)</span>
+<span id="cb63-2"><a href="#cb63-2"></a></span>
+<span id="cb63-3"><a href="#cb63-3"></a><span class="co">#plot effects</span></span>
+<span id="cb63-4"><a href="#cb63-4"></a><span class="fu">plot</span>(<span class="fu">allEffects</span>(carsfit))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="5-MultipleRegression_files/figure-html/mtcars-2.png" class="img-fluid" width="672"></p>
 </div>
@@ -6468,9 +6436,8 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 </div>
 </div>
-</section>
-<section id="model-selection-with-the-cement-dataset" class="level3" data-number="5.2.2">
-<h3 data-number="5.2.2" class="anchored" data-anchor-id="model-selection-with-the-cement-dataset"><span class="header-section-number">5.2.2</span> Model-selection with the <em>Cement</em> dataset</h3>
+</section><section id="model-selection-with-the-cement-dataset" class="level3" data-number="5.2.2"><h3 data-number="5.2.2" class="anchored" data-anchor-id="model-selection-with-the-cement-dataset">
+<span class="header-section-number">5.2.2</span> Model-selection with the <em>Cement</em> dataset</h3>
 <p>The process of cement hardening involves exogenous chemical reactions and thus produces heat. The amount of heat produced by the cement depends on the mixture of its constituents. The <em>Cement</em> dataset includes heat measurements for different types of cement that consist of different relative amounts calcium aluminate (<em>X1</em>), tricalcium silicate (<em>X2</em>), tetracalcium alumino ferrite (<em>X3</em>) and dicalcium silicate (<em>X4</em>). A cement producing company wants to optimize the composition of its product and wants to know, which of these compounds are mainly responsible for heat production.</p>
 <div class="callout-caution callout callout-style-default no-icon callout-captioned">
 <div class="callout-header d-flex align-content-center">
@@ -6515,10 +6482,10 @@ Solution
 <div class="callout-body-container callout-body">
 <p>This is the code that you need to obtain the results.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MuMIn)</span>
-<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a><span class="co"># full model </span></span>
-<span id="cb64-3"><a href="#cb64-3" aria-hidden="true" tabindex="-1"></a>full <span class="ot">=</span> <span class="fu">lm</span>(y <span class="sc">~</span> (X1 <span class="sc">+</span> X2 <span class="sc">+</span> X3 <span class="sc">+</span> X4)<span class="sc">^</span><span class="dv">2</span>, <span class="at">data =</span> Cement)</span>
-<span id="cb64-4"><a href="#cb64-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(full)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1"></a><span class="fu">library</span>(MuMIn)</span>
+<span id="cb64-2"><a href="#cb64-2"></a><span class="co"># full model </span></span>
+<span id="cb64-3"><a href="#cb64-3"></a>full <span class="ot">=</span> <span class="fu">lm</span>(y <span class="sc">~</span> (X1 <span class="sc">+</span> X2 <span class="sc">+</span> X3 <span class="sc">+</span> X4)<span class="sc">^</span><span class="dv">2</span>, <span class="at">data =</span> Cement)</span>
+<span id="cb64-4"><a href="#cb64-4"></a><span class="fu">summary</span>(full)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -6550,8 +6517,8 @@ Residual standard error: 0.9303 on 2 degrees of freedom
 Multiple R-squared:  0.9994,    Adjusted R-squared:  0.9962 
 F-statistic: 313.6 on 10 and 2 DF,  p-value: 0.003183</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="co"># backward model selection</span></span>
-<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a>red1 <span class="ot">=</span> <span class="fu">stepAIC</span>(full, <span class="at">direction =</span> <span class="st">"backward"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1"></a><span class="co"># backward model selection</span></span>
+<span id="cb66-2"><a href="#cb66-2"></a>red1 <span class="ot">=</span> <span class="fu">stepAIC</span>(full, <span class="at">direction =</span> <span class="st">"backward"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Start:  AIC=-4.21
 y ~ (X1 + X2 + X3 + X4)^2
@@ -6576,7 +6543,7 @@ y ~ X1 + X2 + X3 + X4 + X1:X3 + X1:X4 + X2:X3 + X2:X4 + X3:X4
 - X1:X4  1    20.110 21.841 24.745
 - X2:X4  1    37.583 39.314 32.386</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(red1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1"></a><span class="fu">summary</span>(red1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -6608,13 +6575,13 @@ Residual standard error: 0.7596 on 3 degrees of freedom
 Multiple R-squared:  0.9994,    Adjusted R-squared:  0.9975 
 F-statistic: 522.6 on 9 and 3 DF,  p-value: 0.0001247</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="co"># forward model selection</span></span>
-<span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a>red2 <span class="ot">=</span> <span class="fu">stepAIC</span>(full, <span class="at">direction =</span> <span class="st">"forward"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1"></a><span class="co"># forward model selection</span></span>
+<span id="cb70-2"><a href="#cb70-2"></a>red2 <span class="ot">=</span> <span class="fu">stepAIC</span>(full, <span class="at">direction =</span> <span class="st">"forward"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Start:  AIC=-4.21
 y ~ (X1 + X2 + X3 + X4)^2</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(red2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1"></a><span class="fu">summary</span>(red2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -6646,13 +6613,13 @@ Residual standard error: 0.9303 on 2 degrees of freedom
 Multiple R-squared:  0.9994,    Adjusted R-squared:  0.9962 
 F-statistic: 313.6 on 10 and 2 DF,  p-value: 0.003183</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="co"># global model selection</span></span>
-<span id="cb74-2"><a href="#cb74-2" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">na.action =</span> <span class="st">"na.fail"</span>)</span>
-<span id="cb74-3"><a href="#cb74-3" aria-hidden="true" tabindex="-1"></a>dd <span class="ot">=</span> <span class="fu">dredge</span>(full)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1"></a><span class="co"># global model selection</span></span>
+<span id="cb74-2"><a href="#cb74-2"></a><span class="fu">options</span>(<span class="at">na.action =</span> <span class="st">"na.fail"</span>)</span>
+<span id="cb74-3"><a href="#cb74-3"></a>dd <span class="ot">=</span> <span class="fu">dredge</span>(full)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Fixed term is "(Intercept)"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(dd)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1"></a><span class="fu">head</span>(dd)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Global model call: lm(formula = y ~ (X1 + X2 + X3 + X4)^2, data = Cement)
 ---
@@ -6666,8 +6633,8 @@ Model selection table
 20  53.71 1.275 0.6358               0.004197  5 -28.072 74.7  5.40  0.037
 Models ranked by AICc(x) </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a>opt <span class="ot">=</span> <span class="fu">lm</span>(y <span class="sc">~</span> X1 <span class="sc">+</span> X2, <span class="at">data =</span> Cement)</span>
-<span id="cb78-2"><a href="#cb78-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(opt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1"></a>opt <span class="ot">=</span> <span class="fu">lm</span>(y <span class="sc">~</span> X1 <span class="sc">+</span> X2, <span class="at">data =</span> Cement)</span>
+<span id="cb78-2"><a href="#cb78-2"></a><span class="fu">summary</span>(opt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -6689,15 +6656,15 @@ Residual standard error: 2.406 on 10 degrees of freedom
 Multiple R-squared:  0.9787,    Adjusted R-squared:  0.9744 
 F-statistic: 229.5 on 2 and 10 DF,  p-value: 4.407e-09</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb80"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a><span class="fu">AIC</span>(opt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb80"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1"></a><span class="fu">AIC</span>(opt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 64.31239</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb82"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="fu">AIC</span>(full) <span class="co"># full model is better</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb82"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1"></a><span class="fu">AIC</span>(full) <span class="co"># full model is better</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 34.68067</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb84"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(opt, full) <span class="co"># no difference between the models</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb84"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1"></a><span class="fu">anova</span>(opt, full) <span class="co"># no difference between the models</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Analysis of Variance Table
 
@@ -6707,8 +6674,8 @@ Model 2: y ~ (X1 + X2 + X3 + X4)^2
 1     10 57.904                           
 2      2  1.731  8    56.174 8.1132 0.1143</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb86"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="co"># sample size in the Cement dataset:</span></span>
-<span id="cb86-2"><a href="#cb86-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(Cement) <span class="co">#or</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb86"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1"></a><span class="co"># sample size in the Cement dataset:</span></span>
+<span id="cb86-2"><a href="#cb86-2"></a><span class="fu">str</span>(Cement) <span class="co">#or</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>'data.frame':   13 obs. of  5 variables:
  $ y : num  78.5 74.3 104.3 87.6 95.9 ...
@@ -6717,16 +6684,16 @@ Model 2: y ~ (X1 + X2 + X3 + X4)^2
  $ X3: int  6 15 8 8 6 9 17 22 18 4 ...
  $ X4: int  60 52 20 47 33 22 6 44 22 26 ...</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb88"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(Cement)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb88"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1"></a><span class="fu">nrow</span>(Cement)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 13</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb90"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb90-1"><a href="#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="co"># If the sample size is low, a corrected version of the AIC is recommended to avoid overfitting:</span></span>
-<span id="cb90-2"><a href="#cb90-2" aria-hidden="true" tabindex="-1"></a><span class="fu">AICc</span>(opt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb90"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb90-1"><a href="#cb90-1"></a><span class="co"># If the sample size is low, a corrected version of the AIC is recommended to avoid overfitting:</span></span>
+<span id="cb90-2"><a href="#cb90-2"></a><span class="fu">AICc</span>(opt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 69.31239</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb92"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb92-1"><a href="#cb92-1" aria-hidden="true" tabindex="-1"></a><span class="fu">AICc</span>(full) <span class="co"># This is inf! opt model is better</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb92"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb92-1"><a href="#cb92-1"></a><span class="fu">AICc</span>(full) <span class="co"># This is inf! opt model is better</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] Inf</code></pre>
 </div>
@@ -6736,11 +6703,7 @@ Model 2: y ~ (X1 + X2 + X3 + X4)^2
 </div>
 
 
-</section>
-</section>
-
-</main> <!-- /main -->
-<script id="quarto-html-after-body" type="application/javascript">
+</section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
@@ -6872,9 +6835,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
 });
-</script>
-<nav class="page-navigation">
-  <div class="nav-page nav-page-previous">
+</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="./4-SimpleRegression.html" class="pagination-link">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Simple linear regression</span></span>
       </a>          

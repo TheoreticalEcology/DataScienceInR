@@ -40,7 +40,6 @@ Imagine we do an experiment with two groups, one treatment and one control group
 
 1.  We need a test statistic for example: number cured of total patients: treat/(treat+control)
 
-
 2.  We need the distribution of this test statistic under the null Let's create a true world without effect:
 
 ```{r}
@@ -208,7 +207,7 @@ results = replicate(1000, {
 hist(results)
 ```
 
-What's happening here? We have no effect in our simulation but there are many p-values lower than $\alpha = 0.5$:
+What's happening here? We have no effect in our simulation but there are many p-values lower than $\alpha = 0.05$:
 
 ```{r}
 mean(results < 0.05)
@@ -219,7 +218,7 @@ So in `r mean(results < 0.05)` of our experiments we would reject H~0~ even when
 ::: {.callout-note collapse="true"}
 ## Type I error rate and multiple testing
 
-If there is no effect, the probability of having a positive test result is equal to the significance level $\alpha$. If you test 20 things that don\'t have an effect, you will have one significant result on average when using a significance level of 0.05. If multiple tests are done, a correction for multiple testing should be used.
+If there is no effect, the probability of having a positive test result is equal to the significance level $\alpha$. If you test 20 things that don't have an effect, you will have one significant result on average when using a significance level of 0.05. If multiple tests are done, a correction for multiple testing should be used.
 
 This problem is called multiple testing
 
@@ -252,7 +251,9 @@ p.adjust(c(test1$p.value, test2$p.value, test3$p.value), method = "BH") # least 
 ```
 :::
 
-If multiple testing is a problem and if we want to avoid false positives (type I errors), why don\'t we use a smaller alpha level? Because if would increase the type II error rate
+If multiple testing is a problem and if we want to avoid false positives (type I errors), why don't we use a smaller alpha level? Because if would increase the type II error rate
+
+
 
 ## Type II error rate
 
@@ -273,24 +274,41 @@ mean(results < 0.05)
 
 No we wouldn't reject the H~0~ in `r 1-mean(results < 0.05)`% of our experiments. This is the type II error rate (false negatives).
 
-1-type II error rate is the so called statistical power. We want a high power because it reduces the rate of type II errors.
+The type II error rate ($\beta$) is affected by
 
-## Classroom demo
+-   sample size $\uparrow$ , decreases $\beta$
+-   true effect size $\uparrow$, decreases $\beta$
+-   $\alpha$ $\uparrow$, decreases $\beta$
+-   variability (variance) $\uparrow$, increases $\beta$
+
+After the experiment, the only parameter we could change would be the significance level $\alpha$, but increasing it would result in too high Type I error rates.
+
+## Statistical power
+
+We can reduce $\alpha$ and we will get fewer type I errors (false positives), but type II errors (false negatives) will increase. So what can we do with this in practice?
+
+1- $\beta$ is the so called statistical power which is the rate at which a test is significant if the effect truly exists. Power increases with stronger effect, smaller variability, (larget $\alpha$ ), and more data (sample size). So, collect more data? How much data do we need?
+
+Before the experiment, you can estimate the effect size and the variability. Together with alpha (known), you can calculate the power depending on the sample size:
 
 ```{r}
+#| code-fold: true
+results = 
+  sapply(seq(10, 500, by = 20), function(n) {
+    results = replicate(100, {
+      A = rnorm(n, mean = 0.0)
+      B = rnorm(n, mean = 0.2) # effect is there
+      t.test(A, B)$p.value
+    })
+    power = 1 - mean(results > 0.05)
+    return(power)
+  })
+plot(seq(10, 500, by = 20), results, xlab = "Sample size", ylab = "Power", main = "")
+```
 
+We call that a power analysis and there's a function in R to do that:
 
-
-
-
-
-##########################THEORY FIRST##############################
-
-
-# Power  ----------------------------------------------------------
-
-
-# Poweranalysis
+```{r}
 power.t.test(n = 10, delta = 1, sd = 1, type = "one.sample")
 
 # Power increases with sample size (effect size constant, sd constant):
@@ -308,8 +326,21 @@ pow <- function(s) power.t.test(n = 20, delta = 1, sd = s,
                                 type = "one.sample")$power
 plot(seq(0.5,1.5,0.05), sapply(seq(0.5,1.5,0.05), pow), 
      xlab = "Standard deviation", ylab = "Power", pch = 20)
-
 ```
+
+
+## False discovery rate
+
+You may have realized that if we do an experiment with a (weak) effect, we can get a significant result because of the effect but also significant results because of the Type I error rate. How to distinguish between those two? How can we decide whether a significant result is a false positive? This error rate is called the false discovery rate and to lower it we need to increase the power:
+
+$$
+FDR = \frac{p(H_0)\cdot\alpha}{p(H_0)\cdot\alpha + p(!H_0)\cdot(1-\beta)}
+$$
+
+$p(H_0)$ = probability of H~0~ (no effect); $p(!H_0)$ = probability of not H~0~ (effect exists). Both are unknown and the only parameters we can influence is $\alpha$ and $\beta$ . But decreasing $\alpha$ leads to too high false negatives, so $\beta$ is left.
+
+
+## Statistical tests
 
 The following three sections provide an overview over the most important hypothesis tests, a guideline to select an appropriate test (see decision tree) and the necessary code to apply these tests in R. It is not necessary to read and understand every detail. These explanations are also meant as an advice if you want to select an appropriate hypothesis test after the course. Note that some of the examples use simulated data instead of real observation (all functions that start with r=random, e.g. rnorm() or runif()). Simulated data is useful, because then we know the true distribution and its true mean.
 
