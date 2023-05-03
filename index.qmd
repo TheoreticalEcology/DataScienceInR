@@ -11,12 +11,12 @@ set.seed(123)
 
 Material for a first 1-week course in Data Science, taught at the University of Regensburg.
 
-Day 1: Getting started, descriptive
+Day 1: Getting started, descriptive statistics
 
-Day2: Hypothesis testes
+Day2: Hypothesis tests
 
 Day3: Linear regression (simple, multivariate)
 
-Day4: GLM, Multivariate
+Day4: Generalised linear models (GLM), Multivariate statistics
 
-Day5: Machine Learning, Data Orga
+Day5: Machine Learning, Data organisation

@@ -129,7 +129,7 @@ The `dplyr` package is part of a big software environment called tidyverse. Uniq
 
     Which is easier to write, read, and to understand!
 
--   `tibble` objects are just an extension of data.frames. In the course we will use mostly data.frames, so it is better to transform the tibbles back do data.frames:
+-   `tibble` objects are just an extension of data.frames. In the course we will use mostly data.frames, so it is better to transform the tibbles back to data.frames:
 
     ```{r}
     class(air_grouped)
@@ -235,7 +235,7 @@ The correlation factor for the untransformed data is 0.9 but they have a perfect
 
 **Rank correlation factors**
 
-Idea: arranging the data following their order and using their rank 1..n for x und y, respectively and there two different rank correlation factors:
+Idea: Arranging the data following their order and using their rank 1\...n for x und y, respectively. There two different rank correlation factors:
 
 -   Spearman: calculate Pearson based on ranks
 
@@ -345,7 +345,7 @@ plot(Ratios)
 
 What kind of plot can you see here? How many variables does it show? To plot this you need to create a contingency table with the variables of interest (check "demonstration.R", if you have problems doing this). Changing plot elements: You can name the variables in your contingency table (e.g. name = variable, othername = othervariable). The name you assign to your table will be used as the title in the plot.
 
-What do you think of the study now? Could you already draw conclusions from this plot? Provide your answer to the last question on **elearning-extern**.
+What do you think of the study now? Could you already draw conclusions from this plot? Provide your answer to the last question on **elearning-extern** [("02_Test for Exercise in R")](https://elearning.uni-regensburg.de/mod/quiz/view.php?id=2046676).
 
 ::: {.callout-tip collapse="true" appearance="minimal" icon="false"}
 #### Solution
@@ -401,7 +401,7 @@ Your task is now to reconstruct the following histogram including the labels, co
 -   *hist()* to create a histogram
 -   *abline()* to add (vertical) lines to your histogram
 
-Think about what the histogram tells you about the distances between each forest fragement and the next forest fragment. What do the red and purple lines represent? Give your answer on **elearning-extern**.
+Think about what the histogram tells you about the distances between each forest fragment and the next forest fragment. What do the red and purple lines represent? Which site was the furthest away from forest fragments? Give your answer on **elearning-extern**.
 
 ```{r histogram, echo=FALSE}
 hist(birdabundance$DIST,  # plot a histogram of the varriable distance from the data set birdabundance
@@ -430,34 +430,31 @@ abline(v = median(airquality$Temp), col = "red")
 ::: {.callout-tip collapse="true" appearance="minimal" icon="false"}
 #### Solution
 
-You can either create a scatterplot of two numerical variables like this:
+You can plot the histogram like this:
 
 ```{r}
-#Create a function to generate a continuous color palette from red to blue
-rbPal <- colorRampPalette(c('red','blue')) # rpPal for red to blue palette
-
-plot(birdabundance$DIST, birdabundance$ABUND,  # create a plot of the variables DIST against ABUND from the data set birdabundance
-     ylab = "Distance (m)",  # add the label "Distance" to the y axis
-     xlab = "Bird abundance",  # add the label "Bird abundance" to the x axis
-     col = rbPal(5)[birdabundance$GRAZE],  # color the data points according to their category in the variable GRAZE from the data set birdabundance
-     pch = 17) # change the point shape
+hist(birdabundance$DIST,  # plot a histogram of the varriable distance from the data set birdabundance
+     breaks = 20,  # change bar widths, here we make them smaller
+     col = "blue",  # change color to blue
+     ylim = c(0,20),  # change the range of the y axis to from 0 to 20
+     main = "Distance distribution",  # change title of the plot
+     xlab = "Distance to the next forest fragment")  # change x axis name
+abline(v = mean(birdabundance$DIST), col = "red")  # add a vertical line with an x value equal to the mean of the variable distance
+abline(v = median(birdabundance$DIST), col = "purple")  # add a vertical line with an x value equal to the median of the variable distance
 ```
 
-Or like this:
+*What do the red and purple lines represent?*
+
+The red line represents the mean distance between forest fragments, while the purple line represents the median.
+
+*Which site was the furthest away from forest fragments?*
 
 ```{r}
-plot(ABUND ~ DIST, data = birdabundance,  # create a plot of the variables DIST against ABUND from the data set birdabundance
-     xlab = "Distance (m)",  # add the label "Distance" to the x axis
-     ylab = "Bird abundance",  # add the label "Bird abundance" to the y axis
-     col = rbPal(5)[GRAZE],  # color the data points according to their category in the variable GRAZE as a gradient
-     pch = 17) # change the point shape
+# Extract the line in which the variable DIST takes its maximum
+birdabundance[which.max(birdabundance$DIST),]
 ```
 
-The advantage of the second version is that it uses the structure of "response variable (y) explained by (\~) explanatory variable (x)". Also, you tell the plot function which data set to use once and it will automatically draw the variables from there, while in the first version you name the data set and the respective variable each time (even for the color).
-
-*What do you notice about the distribution of the colors along bird abundance?*
-
-You can see that the blue data points are only at the low abundances, whereas the red data points are rather at the higher abundances. Purple data points are throughout all abundances. There thus seems to be a correlation between the grazing classes and bird abundances.
+The site number 48 was the furthest away.
 :::
 
 ### Scatterplot
@@ -467,10 +464,12 @@ As you've learned by now, *plot()* can create different types of plots depending
 Again, your task is to reconstruct the following plot using the following functions:
 
 -   *plot()*
--   (*str()*)\
+-   (*str()*)
 -   (*summary()*)
 
 What do you notice about the distribution of the colors along bird abundance?
+
+What is the mean bird abundance per color?
 
 ```{r, echo = FALSE}
 #Create a function to generate a continuous color palette from red to blue
@@ -488,7 +487,7 @@ plot(ABUND ~ DIST, data = birdabundance,  # create a plot of the variables DIST 
 What is plotted on the x-axis, what on the y-axis?\
 There are two different ways to write the plot function. One is to stick with the "Usage" in the help of the plot function (giving coordinates along the x-axis as the first attribute and those along the y-axis as the second attribute). The other way is to write the relationship between x and y as a formula that is: "y\~x, data = dataset" Use google to find out how you can change the point shapes in your plot.
 
-Look at the dataset to find out which variable is indicated by the color of the points in the plot. Hint: It is a variable indicating 5 intensity levels. To change the color, include the attribute "color"" in your plot function and set it equal to the variable.\
+Look at the dataset to find out which variable is indicated by the color of the points in the plot. Hint: It is a variable indicating 5 intensity levels. To change the color, include the attribute "col" in your plot function and set it equal to the variable.\
 To get a color gradient you can create a function with the following code. Apply it before producing your plot and use the created function *rbPal()* as the color in the plot.
 
 ```{r, eval = F}
@@ -535,6 +534,15 @@ The advantage of the second version is that it uses the structure of "response v
 *What do you notice about the distribution of the colors along bird abundance?*
 
 You can see that the blue data points are only at the low abundances, whereas the red data points are rather at the higher abundances. Purple data points are throughout all abundances. There thus seems to be a correlation between the grazing classes and bird abundances.
+
+What is the mean bird abundance per color / level of grazing intensity?
+
+```{r}
+bird_grouped <- birdabundance %>% # define dataset to be summarised
+  group_by(GRAZE) %>% # define grouping factor
+  summarise(mean.abund = mean(ABUND)) # summarise by taking the mean of abundance
+bird_grouped
+```
 :::
 
 ### Correlation
