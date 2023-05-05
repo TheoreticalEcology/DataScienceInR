@@ -251,7 +251,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#getting-an-overview-of-a-dataset" id="toc-getting-an-overview-of-a-dataset" class="nav-link" data-scroll-target="#getting-an-overview-of-a-dataset"><span class="toc-section-number">1.5.3</span>  Getting an overview of a dataset</a></li>
   <li><a href="#accessing-rows-and-columns-of-a-data-frame" id="toc-accessing-rows-and-columns-of-a-data-frame" class="nav-link" data-scroll-target="#accessing-rows-and-columns-of-a-data-frame"><span class="toc-section-number">1.5.4</span>  Accessing rows and columns of a data frame</a></li>
   <li><a href="#filtering-data" id="toc-filtering-data" class="nav-link" data-scroll-target="#filtering-data"><span class="toc-section-number">1.5.5</span>  Filtering data</a></li>
-  <li><a href="#last-task---check-if-the-ecodata-packages-works-for-you" id="toc-last-task---check-if-the-ecodata-packages-works-for-you" class="nav-link" data-scroll-target="#last-task---check-if-the-ecodata-packages-works-for-you"><span class="toc-section-number">1.5.6</span>  Last task - check if the EcoData packages works for you</a></li>
+  <li><a href="#last-task---check-if-the-ecodata-package-works-for-you" id="toc-last-task---check-if-the-ecodata-package-works-for-you" class="nav-link" data-scroll-target="#last-task---check-if-the-ecodata-package-works-for-you"><span class="toc-section-number">1.5.6</span>  Last task - check if the EcoData package works for you</a></li>
   </ul>
 </li>
   </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/TheoreticalEcology/DataScienceInR/edit/master/1-GettingStarted.qmd" class="toc-action">Edit this page</a></p></div></div></nav>
@@ -298,7 +298,7 @@ Click to see more on installing libraries in R
 <div class="callout-body-container callout-body">
 <p>To install a package from a library, use the command</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">install.packages</span>(LIBRARY)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="va">LIBRARY</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Exchange “LIBRARY” with the name of the library you want to install. The default is to search the package in CRAN, but you can specify other repositories or file locations in the function. For Windows / Mac, R should work out of the box. For other UNIX based systems, may also need to install</p>
 <pre><code>build-essential
@@ -313,12 +313,12 @@ cmake</code></pre>
 </div>
 <p>In this book, we will often use data sets from the <code class="sourceCode r">EcoData</code> package, which is not on CRAN, but on a GitHub page. To install the package, if you don’t have the devtools package installed already, first install devtools from CRAN by running</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">install.packages</span>(<span class="st">"devtools"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"devtools"</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Then install the EcoData package via</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="at">repo =</span> <span class="st">"TheoreticalEcology/EcoData"</span>,</span>
-<span id="cb5-2"><a href="#cb5-2"></a>                         <span class="at">dependencies =</span> T, <span class="at">build_vignettes =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/remote-reexports.html">install_github</a></span><span class="op">(</span>repo <span class="op">=</span> <span class="st">"TheoreticalEcology/EcoData"</span>,
+                         dependencies <span class="op">=</span> <span class="cn">T</span>, build_vignettes <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>For your convenience, the EcoData installation also forces the installation of most of the packages needed in this book, so this may take a while. If you want to load only the EcoData package, or if you encounter problems during the install, set <code>dependencies = F, build_vignettes = F</code>.</p>
 </section><section id="data" class="level2" data-number="1.3"><h2 data-number="1.3" class="anchored" data-anchor-id="data">
@@ -392,28 +392,28 @@ Remarks on data handling
 <span class="header-section-number">1.4</span> Data manipulation in R</h2>
 <p>R works like a calculator:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="dv">2</span><span class="sc">+</span><span class="dv">2</span></span>
-<span id="cb7-2"><a href="#cb7-2"></a><span class="do">## [1] 4</span></span>
-<span id="cb7-3"><a href="#cb7-3"></a><span class="dv">5</span><span class="sc">*</span><span class="dv">4</span></span>
-<span id="cb7-4"><a href="#cb7-4"></a><span class="do">## [1] 20</span></span>
-<span id="cb7-5"><a href="#cb7-5"></a><span class="dv">2</span><span class="sc">^</span><span class="dv">2</span></span>
-<span id="cb7-6"><a href="#cb7-6"></a><span class="do">## [1] 4</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fl">2</span><span class="op">+</span><span class="fl">2</span>
+<span class="co">## [1] 4</span>
+<span class="fl">5</span><span class="op">*</span><span class="fl">4</span>
+<span class="co">## [1] 20</span>
+<span class="fl">2</span><span class="op">^</span><span class="fl">2</span>
+<span class="co">## [1] 4</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We can also use functions that perform specific calculations:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">sqrt</span>(<span class="dv">4</span>)</span>
-<span id="cb8-2"><a href="#cb8-2"></a><span class="do">## [1] 2</span></span>
-<span id="cb8-3"><a href="#cb8-3"></a><span class="fu">sum</span>(<span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
-<span id="cb8-4"><a href="#cb8-4"></a><span class="do">## [1] 4</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="fl">4</span><span class="op">)</span>
+<span class="co">## [1] 2</span>
+<span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span>
+<span class="co">## [1] 4</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We can assign values/data to variables:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>object.name <span class="ot">&lt;-</span> <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">object.name</span> <span class="op">&lt;-</span> <span class="fl">1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Note that both operators ‘&lt;-’ or “=” work. Functions in R (e.g.&nbsp;<code><a href="https://rdrr.io/r/base/sum.html">sum()</a></code>, <code><a href="https://rdrr.io/r/base/mean.html">mean()</a></code>, etc.) have arguments that control/change their behavior and are also used to pass the data to the function:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="fu">mean</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
-<span id="cb10-2"><a href="#cb10-2"></a><span class="do">## [1] 2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span>
+<span class="co">## [1] 2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="callout-tip callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center">
@@ -443,100 +443,100 @@ Help
 <li>
 <p>Vector: Several values of <strong>one</strong> data type, can be created with the <code>c</code> function:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">6</span>) <span class="co"># numeric vector</span></span>
-<span id="cb11-2"><a href="#cb11-2"></a><span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>) <span class="co"># logical vector</span></span>
-<span id="cb11-3"><a href="#cb11-3"></a><span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>) <span class="co"># character vector</span></span>
-<span id="cb11-4"><a href="#cb11-4"></a><span class="fu">as.factor</span>(<span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>)) <span class="co"># factor vector</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">3</span>, <span class="fl">5</span>, <span class="fl">6</span><span class="op">)</span> <span class="co"># numeric vector</span>
+<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span><span class="op">)</span> <span class="co"># logical vector</span>
+<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span><span class="op">)</span> <span class="co"># character vector</span>
+<span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span><span class="op">)</span><span class="op">)</span> <span class="co"># factor vector</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </li>
 <li>
 <p>Matrix: two-dimensional data structure of <strong>one</strong> data type, can be created with the <code>matrix</code> function (we can pass a vector to the matrix function and tell it via arguments how the matrix should be constructed):</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>), <span class="at">nrow =</span> <span class="dv">3</span>, <span class="at">ncol =</span> <span class="dv">2</span>)</span>
-<span id="cb12-2"><a href="#cb12-2"></a><span class="do">##      [,1] [,2]</span></span>
-<span id="cb12-3"><a href="#cb12-3"></a><span class="do">## [1,]    1    4</span></span>
-<span id="cb12-4"><a href="#cb12-4"></a><span class="do">## [2,]    2    5</span></span>
-<span id="cb12-5"><a href="#cb12-5"></a><span class="do">## [3,]    3    6</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">4</span>, <span class="fl">5</span>, <span class="fl">6</span><span class="op">)</span>, nrow <span class="op">=</span> <span class="fl">3</span>, ncol <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>
+<span class="co">##      [,1] [,2]</span>
+<span class="co">## [1,]    1    4</span>
+<span class="co">## [2,]    2    5</span>
+<span class="co">## [3,]    3    6</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </li>
 <li>
 <p>Data.frame: Often our data has variables of different types which makes a matrix unsuitable data structure. Data.frames can handle different data types and is organized in columns (one column = one variables) and can be created with the <code>data.frame</code> function:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="fu">data.frame</span>(<span class="at">A =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>), <span class="at">B =</span> <span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>), <span class="at">C =</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>))</span>
-<span id="cb13-2"><a href="#cb13-2"></a><span class="do">##   A B     C</span></span>
-<span id="cb13-3"><a href="#cb13-3"></a><span class="do">## 1 1 A  TRUE</span></span>
-<span id="cb13-4"><a href="#cb13-4"></a><span class="do">## 2 2 B FALSE</span></span>
-<span id="cb13-5"><a href="#cb13-5"></a><span class="do">## 3 3 C FALSE</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>A <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span>, B <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span><span class="op">)</span>, C <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span>
+<span class="co">##   A B     C</span>
+<span class="co">## 1 1 A  TRUE</span>
+<span class="co">## 2 2 B FALSE</span>
+<span class="co">## 3 3 C FALSE</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </li>
 </ul></section><section id="data-manipulation" class="level3" data-number="1.4.2"><h3 data-number="1.4.2" class="anchored" data-anchor-id="data-manipulation">
 <span class="header-section-number">1.4.2</span> Data manipulation</h3>
 <p>A vector is a one dimensional data structure and we can access the values by using <code>[ ]</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>vec <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>)</span>
-<span id="cb14-2"><a href="#cb14-2"></a>vec[<span class="dv">1</span>] <span class="co"># access first element</span></span>
-<span id="cb14-3"><a href="#cb14-3"></a><span class="do">## [1] 1</span></span>
-<span id="cb14-4"><a href="#cb14-4"></a>vec[<span class="dv">5</span>] <span class="co"># access last element</span></span>
-<span id="cb14-5"><a href="#cb14-5"></a><span class="do">## [1] 5</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">vec</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">4</span>, <span class="fl">5</span><span class="op">)</span>
+<span class="va">vec</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="co"># access first element</span>
+<span class="co">## [1] 1</span>
+<span class="va">vec</span><span class="op">[</span><span class="fl">5</span><span class="op">]</span> <span class="co"># access last element</span>
+<span class="co">## [1] 5</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>A data.frame is a two dimensional data structure. Let’s start with a data.frame:</p>
+<p>A data.frame is a two dimensional data structure. Let’s define a data.frame from two vectors:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>df <span class="ot">=</span> <span class="fu">data.frame</span>(</span>
-<span id="cb15-2"><a href="#cb15-2"></a>  <span class="at">x =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">1</span>), <span class="co">#add column named x with 2 elements</span></span>
-<span id="cb15-3"><a href="#cb15-3"></a>  <span class="at">y =</span> <span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">3</span>,<span class="dv">5</span>) <span class="co">#add a second column named y</span></span>
-<span id="cb15-4"><a href="#cb15-4"></a>)</span>
-<span id="cb15-5"><a href="#cb15-5"></a><span class="co">#Let's see how this looks like:</span></span>
-<span id="cb15-6"><a href="#cb15-6"></a>df</span>
-<span id="cb15-7"><a href="#cb15-7"></a><span class="do">##   x y</span></span>
-<span id="cb15-8"><a href="#cb15-8"></a><span class="do">## 1 2 4</span></span>
-<span id="cb15-9"><a href="#cb15-9"></a><span class="do">## 2 2 5</span></span>
-<span id="cb15-10"><a href="#cb15-10"></a><span class="do">## 3 2 5</span></span>
-<span id="cb15-11"><a href="#cb15-11"></a><span class="do">## 4 3 4</span></span>
-<span id="cb15-12"><a href="#cb15-12"></a><span class="do">## 5 2 5</span></span>
-<span id="cb15-13"><a href="#cb15-13"></a><span class="do">## 6 2 3</span></span>
-<span id="cb15-14"><a href="#cb15-14"></a><span class="do">## 7 1 5</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">df</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>
+  x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span>,<span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">2</span>,<span class="fl">2</span>,<span class="fl">1</span><span class="op">)</span>, <span class="co">#add column named x with 2 elements</span>
+  y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span>,<span class="fl">5</span>,<span class="fl">5</span>,<span class="fl">4</span>,<span class="fl">5</span>,<span class="fl">3</span>,<span class="fl">5</span><span class="op">)</span> <span class="co">#add a second column named y</span>
+<span class="op">)</span>
+<span class="co">#Let's see how this looks like:</span>
+<span class="va">df</span>
+<span class="co">##   x y</span>
+<span class="co">## 1 2 4</span>
+<span class="co">## 2 2 5</span>
+<span class="co">## 3 2 5</span>
+<span class="co">## 4 3 4</span>
+<span class="co">## 5 2 5</span>
+<span class="co">## 6 2 3</span>
+<span class="co">## 7 1 5</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Access parts of the data.frame:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>df[<span class="dv">1</span>,<span class="dv">2</span>] <span class="co">#get element in row 1, column 1</span></span>
-<span id="cb16-2"><a href="#cb16-2"></a><span class="do">## [1] 4</span></span>
-<span id="cb16-3"><a href="#cb16-3"></a>df[<span class="dv">7</span>,<span class="dv">1</span>] <span class="co">#get element in row 7, column 1</span></span>
-<span id="cb16-4"><a href="#cb16-4"></a><span class="do">## [1] 1</span></span>
-<span id="cb16-5"><a href="#cb16-5"></a>df[<span class="dv">2</span>,] <span class="co">#get row 2</span></span>
-<span id="cb16-6"><a href="#cb16-6"></a><span class="do">##   x y</span></span>
-<span id="cb16-7"><a href="#cb16-7"></a><span class="do">## 2 2 5</span></span>
-<span id="cb16-8"><a href="#cb16-8"></a>df[,<span class="dv">2</span>] <span class="co">#get column 2</span></span>
-<span id="cb16-9"><a href="#cb16-9"></a><span class="do">## [1] 4 5 5 4 5 3 5</span></span>
-<span id="cb16-10"><a href="#cb16-10"></a><span class="co">#or use the $ sign to access columns:</span></span>
-<span id="cb16-11"><a href="#cb16-11"></a>df<span class="sc">$</span>y</span>
-<span id="cb16-12"><a href="#cb16-12"></a><span class="do">## [1] 4 5 5 4 5 3 5</span></span>
-<span id="cb16-13"><a href="#cb16-13"></a>df[<span class="dv">2</span><span class="sc">:</span><span class="dv">4</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>] <span class="co">#get rows 2 to 4 and only columns 1 and 2</span></span>
-<span id="cb16-14"><a href="#cb16-14"></a><span class="do">##   x y</span></span>
-<span id="cb16-15"><a href="#cb16-15"></a><span class="do">## 2 2 5</span></span>
-<span id="cb16-16"><a href="#cb16-16"></a><span class="do">## 3 2 5</span></span>
-<span id="cb16-17"><a href="#cb16-17"></a><span class="do">## 4 3 4</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">df</span><span class="op">[</span><span class="fl">1</span>,<span class="fl">2</span><span class="op">]</span> <span class="co">#get element in row 1, column 1</span>
+<span class="co">## [1] 4</span>
+<span class="va">df</span><span class="op">[</span><span class="fl">7</span>,<span class="fl">1</span><span class="op">]</span> <span class="co">#get element in row 7, column 1</span>
+<span class="co">## [1] 1</span>
+<span class="va">df</span><span class="op">[</span><span class="fl">2</span>,<span class="op">]</span> <span class="co">#get row 2</span>
+<span class="co">##   x y</span>
+<span class="co">## 2 2 5</span>
+<span class="va">df</span><span class="op">[</span>,<span class="fl">2</span><span class="op">]</span> <span class="co">#get column 2</span>
+<span class="co">## [1] 4 5 5 4 5 3 5</span>
+<span class="co">#or use the $ sign to access columns:</span>
+<span class="va">df</span><span class="op">$</span><span class="va">y</span>
+<span class="co">## [1] 4 5 5 4 5 3 5</span>
+<span class="va">df</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="fl">4</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span> <span class="co">#get rows 2 to 4 and only columns 1 and 2</span>
+<span class="co">##   x y</span>
+<span class="co">## 2 2 5</span>
+<span class="co">## 3 2 5</span>
+<span class="co">## 4 3 4</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We can also set filters:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a>df[df<span class="sc">$</span>x <span class="sc">&gt;</span> <span class="dv">2</span>,] <span class="co"># show only data where x is larger than 2</span></span>
-<span id="cb17-2"><a href="#cb17-2"></a><span class="do">##   x y</span></span>
-<span id="cb17-3"><a href="#cb17-3"></a><span class="do">## 4 3 4</span></span>
-<span id="cb17-4"><a href="#cb17-4"></a>df[df<span class="sc">$</span>y <span class="sc">==</span> <span class="dv">5</span>,] <span class="co">#show only data where y equals 5</span></span>
-<span id="cb17-5"><a href="#cb17-5"></a><span class="do">##   x y</span></span>
-<span id="cb17-6"><a href="#cb17-6"></a><span class="do">## 2 2 5</span></span>
-<span id="cb17-7"><a href="#cb17-7"></a><span class="do">## 3 2 5</span></span>
-<span id="cb17-8"><a href="#cb17-8"></a><span class="do">## 5 2 5</span></span>
-<span id="cb17-9"><a href="#cb17-9"></a><span class="do">## 7 1 5</span></span>
-<span id="cb17-10"><a href="#cb17-10"></a>df[df<span class="sc">$</span>y <span class="sc">==</span> <span class="dv">5</span> <span class="sc">&amp;</span> df<span class="sc">$</span>x <span class="sc">==</span> <span class="dv">1</span>,] <span class="co">#show only data where y equals 5 AND x equals 1</span></span>
-<span id="cb17-11"><a href="#cb17-11"></a><span class="do">##   x y</span></span>
-<span id="cb17-12"><a href="#cb17-12"></a><span class="do">## 7 1 5</span></span>
-<span id="cb17-13"><a href="#cb17-13"></a>df[df<span class="sc">$</span>y <span class="sc">==</span> <span class="dv">5</span> <span class="sc">|</span> df<span class="sc">$</span>x <span class="sc">==</span> <span class="dv">3</span>,] <span class="co">#show data where y equals 5 OR x equals 3</span></span>
-<span id="cb17-14"><a href="#cb17-14"></a><span class="do">##   x y</span></span>
-<span id="cb17-15"><a href="#cb17-15"></a><span class="do">## 2 2 5</span></span>
-<span id="cb17-16"><a href="#cb17-16"></a><span class="do">## 3 2 5</span></span>
-<span id="cb17-17"><a href="#cb17-17"></a><span class="do">## 4 3 4</span></span>
-<span id="cb17-18"><a href="#cb17-18"></a><span class="do">## 5 2 5</span></span>
-<span id="cb17-19"><a href="#cb17-19"></a><span class="do">## 7 1 5</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">df</span><span class="op">[</span><span class="va">df</span><span class="op">$</span><span class="va">x</span> <span class="op">&gt;</span> <span class="fl">2</span>,<span class="op">]</span> <span class="co"># show only data where x is larger than 2</span>
+<span class="co">##   x y</span>
+<span class="co">## 4 3 4</span>
+<span class="va">df</span><span class="op">[</span><span class="va">df</span><span class="op">$</span><span class="va">y</span> <span class="op">==</span> <span class="fl">5</span>,<span class="op">]</span> <span class="co">#show only data where y equals 5</span>
+<span class="co">##   x y</span>
+<span class="co">## 2 2 5</span>
+<span class="co">## 3 2 5</span>
+<span class="co">## 5 2 5</span>
+<span class="co">## 7 1 5</span>
+<span class="va">df</span><span class="op">[</span><span class="va">df</span><span class="op">$</span><span class="va">y</span> <span class="op">==</span> <span class="fl">5</span> <span class="op">&amp;</span> <span class="va">df</span><span class="op">$</span><span class="va">x</span> <span class="op">==</span> <span class="fl">1</span>,<span class="op">]</span> <span class="co">#show only data where y equals 5 AND x equals 1</span>
+<span class="co">##   x y</span>
+<span class="co">## 7 1 5</span>
+<span class="va">df</span><span class="op">[</span><span class="va">df</span><span class="op">$</span><span class="va">y</span> <span class="op">==</span> <span class="fl">5</span> <span class="op">|</span> <span class="va">df</span><span class="op">$</span><span class="va">x</span> <span class="op">==</span> <span class="fl">3</span>,<span class="op">]</span> <span class="co">#show data where y equals 5 OR x equals 3</span>
+<span class="co">##   x y</span>
+<span class="co">## 2 2 5</span>
+<span class="co">## 3 2 5</span>
+<span class="co">## 4 3 4</span>
+<span class="co">## 5 2 5</span>
+<span class="co">## 7 1 5</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="callout-tip callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
@@ -604,16 +604,16 @@ Logical operators
 </div>
 <p>Add an additional column with NA values:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a>df<span class="sc">$</span>NAs <span class="ot">=</span> <span class="cn">NA</span> <span class="co">#fills up a new column named NAs with all NA values</span></span>
-<span id="cb18-2"><a href="#cb18-2"></a>df</span>
-<span id="cb18-3"><a href="#cb18-3"></a><span class="do">##   x y NAs</span></span>
-<span id="cb18-4"><a href="#cb18-4"></a><span class="do">## 1 2 4  NA</span></span>
-<span id="cb18-5"><a href="#cb18-5"></a><span class="do">## 2 2 5  NA</span></span>
-<span id="cb18-6"><a href="#cb18-6"></a><span class="do">## 3 2 5  NA</span></span>
-<span id="cb18-7"><a href="#cb18-7"></a><span class="do">## 4 3 4  NA</span></span>
-<span id="cb18-8"><a href="#cb18-8"></a><span class="do">## 5 2 5  NA</span></span>
-<span id="cb18-9"><a href="#cb18-9"></a><span class="do">## 6 2 3  NA</span></span>
-<span id="cb18-10"><a href="#cb18-10"></a><span class="do">## 7 1 5  NA</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">df</span><span class="op">$</span><span class="va">NAs</span> <span class="op">=</span> <span class="cn">NA</span> <span class="co">#fills up a new column named NAs with all NA values</span>
+<span class="va">df</span>
+<span class="co">##   x y NAs</span>
+<span class="co">## 1 2 4  NA</span>
+<span class="co">## 2 2 5  NA</span>
+<span class="co">## 3 2 5  NA</span>
+<span class="co">## 4 3 4  NA</span>
+<span class="co">## 5 2 5  NA</span>
+<span class="co">## 6 2 3  NA</span>
+<span class="co">## 7 1 5  NA</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section><section id="data-analysis-workflow" class="level3" data-number="1.4.3"><h3 data-number="1.4.3" class="anchored" data-anchor-id="data-analysis-workflow">
 <span class="header-section-number">1.4.3</span> Data analysis workflow</h3>
@@ -622,22 +622,22 @@ Logical operators
 <li>
 <p>Let’s say we measured the size of individuals in two different treatment groups</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a>group1 <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="fl">1.1</span>)</span>
-<span id="cb19-2"><a href="#cb19-2"></a>group2 <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">3</span>,<span class="fl">5.1</span>) </span>
-<span id="cb19-3"><a href="#cb19-3"></a></span>
-<span id="cb19-4"><a href="#cb19-4"></a><span class="fu">class</span>(group2)</span>
-<span id="cb19-5"><a href="#cb19-5"></a><span class="do">## [1] "numeric"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">group1</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span>,<span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">2</span>,<span class="fl">2</span>,<span class="fl">1.1</span><span class="op">)</span>
+<span class="va">group2</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span>,<span class="fl">5</span>,<span class="fl">5</span>,<span class="fl">4</span>,<span class="fl">5</span>,<span class="fl">3</span>,<span class="fl">5.1</span><span class="op">)</span> 
+
+<span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">group2</span><span class="op">)</span>
+<span class="co">## [1] "numeric"</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </li>
 <li>
 <p>Descriptive statistics and visualization</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="fu">mean</span>(group1)</span>
-<span id="cb20-2"><a href="#cb20-2"></a><span class="do">## [1] 2.014286</span></span>
-<span id="cb20-3"><a href="#cb20-3"></a><span class="fu">mean</span>(group2)</span>
-<span id="cb20-4"><a href="#cb20-4"></a><span class="do">## [1] 4.442857</span></span>
-<span id="cb20-5"><a href="#cb20-5"></a></span>
-<span id="cb20-6"><a href="#cb20-6"></a><span class="fu">boxplot</span>(group1, group2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">group1</span><span class="op">)</span>
+<span class="co">## [1] 2.014286</span>
+<span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">group2</span><span class="op">)</span>
+<span class="co">## [1] 4.442857</span>
+
+<span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span><span class="va">group1</span>, <span class="va">group2</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="1-GettingStarted_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -646,33 +646,33 @@ Logical operators
 <li>
 <p>Testing for differences. Question: Is there a difference between group1 and group2?</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="fu">t.test</span>(group1, group2)</span>
-<span id="cb21-2"><a href="#cb21-2"></a><span class="do">## </span></span>
-<span id="cb21-3"><a href="#cb21-3"></a><span class="do">##  Welch Two Sample t-test</span></span>
-<span id="cb21-4"><a href="#cb21-4"></a><span class="do">## </span></span>
-<span id="cb21-5"><a href="#cb21-5"></a><span class="do">## data:  group1 and group2</span></span>
-<span id="cb21-6"><a href="#cb21-6"></a><span class="do">## t = -6.6239, df = 10.628, p-value = 4.413e-05</span></span>
-<span id="cb21-7"><a href="#cb21-7"></a><span class="do">## alternative hypothesis: true difference in means is not equal to 0</span></span>
-<span id="cb21-8"><a href="#cb21-8"></a><span class="do">## 95 percent confidence interval:</span></span>
-<span id="cb21-9"><a href="#cb21-9"></a><span class="do">##  -3.238992 -1.618151</span></span>
-<span id="cb21-10"><a href="#cb21-10"></a><span class="do">## sample estimates:</span></span>
-<span id="cb21-11"><a href="#cb21-11"></a><span class="do">## mean of x mean of y </span></span>
-<span id="cb21-12"><a href="#cb21-12"></a><span class="do">##  2.014286  4.442857</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">group1</span>, <span class="va">group2</span><span class="op">)</span>
+<span class="co">## </span>
+<span class="co">##  Welch Two Sample t-test</span>
+<span class="co">## </span>
+<span class="co">## data:  group1 and group2</span>
+<span class="co">## t = -6.6239, df = 10.628, p-value = 4.413e-05</span>
+<span class="co">## alternative hypothesis: true difference in means is not equal to 0</span>
+<span class="co">## 95 percent confidence interval:</span>
+<span class="co">##  -3.238992 -1.618151</span>
+<span class="co">## sample estimates:</span>
+<span class="co">## mean of x mean of y </span>
+<span class="co">##  2.014286  4.442857</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </li>
 <li><p>Interpretation of the results. Individuals in Group 2 were larger than those in group 1 (t test, t = -6.62, p &lt; 0.0001)</p></li>
 </ol>
 <p>In the course we will work a lot with datasets implemented in R or in R packages which can be accessed via their name:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a>dat <span class="ot">=</span> airquality</span>
-<span id="cb22-2"><a href="#cb22-2"></a><span class="fu">head</span>(dat)</span>
-<span id="cb22-3"><a href="#cb22-3"></a><span class="do">##   Ozone Solar.R Wind Temp Month Day</span></span>
-<span id="cb22-4"><a href="#cb22-4"></a><span class="do">## 1    41     190  7.4   67     5   1</span></span>
-<span id="cb22-5"><a href="#cb22-5"></a><span class="do">## 2    36     118  8.0   72     5   2</span></span>
-<span id="cb22-6"><a href="#cb22-6"></a><span class="do">## 3    12     149 12.6   74     5   3</span></span>
-<span id="cb22-7"><a href="#cb22-7"></a><span class="do">## 4    18     313 11.5   62     5   4</span></span>
-<span id="cb22-8"><a href="#cb22-8"></a><span class="do">## 5    NA      NA 14.3   56     5   5</span></span>
-<span id="cb22-9"><a href="#cb22-9"></a><span class="do">## 6    28      NA 14.9   66     5   6</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">dat</span> <span class="op">=</span> <span class="va">airquality</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">dat</span><span class="op">)</span>
+<span class="co">##   Ozone Solar.R Wind Temp Month Day</span>
+<span class="co">## 1    41     190  7.4   67     5   1</span>
+<span class="co">## 2    36     118  8.0   72     5   2</span>
+<span class="co">## 3    12     149 12.6   74     5   3</span>
+<span class="co">## 4    18     313 11.5   62     5   4</span>
+<span class="co">## 5    NA      NA 14.3   56     5   5</span>
+<span class="co">## 6    28      NA 14.9   66     5   6</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section></section><section id="exercises" class="level2" data-number="1.5"><h2 data-number="1.5" class="anchored" data-anchor-id="exercises">
 <span class="header-section-number">1.5</span> Exercises</h2>
@@ -747,7 +747,7 @@ Logical operators
 <span class="header-section-number">1.5.3</span> Getting an overview of a dataset</h3>
 <p>We work with the airquality dataset:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a>dat <span class="ot">=</span> airquality</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">dat</span> <span class="op">=</span> <span class="va">airquality</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Copy the code into your code editor and execute it.</p>
 <p>Before working with a dataset, you should always get an overview of it. Helpful functions for this are:</p>
@@ -809,11 +809,11 @@ Solution
 </ul>
 <p>To see all this, run</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a>dat <span class="ot">=</span> airquality</span>
-<span id="cb24-2"><a href="#cb24-2"></a><span class="fu">View</span>(dat)</span>
-<span id="cb24-3"><a href="#cb24-3"></a><span class="fu">str</span>(dat)</span>
-<span id="cb24-4"><a href="#cb24-4"></a><span class="fu">head</span>(dat)</span>
-<span id="cb24-5"><a href="#cb24-5"></a><span class="fu">tail</span>(dat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">dat</span> <span class="op">=</span> <span class="va">airquality</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/View.html">View</a></span><span class="op">(</span><span class="va">dat</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">dat</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">dat</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">tail</a></span><span class="op">(</span><span class="va">dat</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -840,14 +840,14 @@ Question
 <div class="callout-body-container callout-body">
 <p>Which of the following commands</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a>dat[<span class="dv">2</span>, ]</span>
-<span id="cb25-2"><a href="#cb25-2"></a>dat[, <span class="dv">2</span>]</span>
-<span id="cb25-3"><a href="#cb25-3"></a>dat[, <span class="dv">1</span>]</span>
-<span id="cb25-4"><a href="#cb25-4"></a>dat<span class="sc">$</span>Ozone</span>
-<span id="cb25-5"><a href="#cb25-5"></a>new <span class="ot">=</span> dat[, <span class="dv">3</span>] <span class="sc">+</span> dat[, <span class="dv">4</span>]</span>
-<span id="cb25-6"><a href="#cb25-6"></a>dat<span class="sc">$</span>new <span class="ot">=</span> dat[, <span class="dv">3</span>] <span class="sc">+</span> dat[, <span class="dv">4</span>]</span>
-<span id="cb25-7"><a href="#cb25-7"></a>dat<span class="sc">$</span>NAs <span class="ot">=</span> <span class="cn">NA</span></span>
-<span id="cb25-8"><a href="#cb25-8"></a><span class="cn">NA</span> <span class="ot">-&gt;</span> dat<span class="sc">$</span>NAs </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">dat</span><span class="op">[</span><span class="fl">2</span>, <span class="op">]</span>
+<span class="va">dat</span><span class="op">[</span>, <span class="fl">2</span><span class="op">]</span>
+<span class="va">dat</span><span class="op">[</span>, <span class="fl">1</span><span class="op">]</span>
+<span class="va">dat</span><span class="op">$</span><span class="va">Ozone</span>
+<span class="va">new</span> <span class="op">=</span> <span class="va">dat</span><span class="op">[</span>, <span class="fl">3</span><span class="op">]</span> <span class="op">+</span> <span class="va">dat</span><span class="op">[</span>, <span class="fl">4</span><span class="op">]</span>
+<span class="va">dat</span><span class="op">$</span><span class="va">new</span> <span class="op">=</span> <span class="va">dat</span><span class="op">[</span>, <span class="fl">3</span><span class="op">]</span> <span class="op">+</span> <span class="va">dat</span><span class="op">[</span>, <span class="fl">4</span><span class="op">]</span>
+<span class="va">dat</span><span class="op">$</span><span class="va">NAs</span> <span class="op">=</span> <span class="cn">NA</span>
+<span class="cn">NA</span> <span class="op">-&gt;</span> <span class="va">dat</span><span class="op">$</span><span class="va">NAs</span> </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>will get you</p>
 <ul>
@@ -897,17 +897,17 @@ Solution
 <span class="header-section-number">1.5.5</span> Filtering data</h3>
 <p>To use the data, you must also be able to filter it. For example, we may be interested in hot days in July and August only. Hot days are typically defined as days with a temperature equal or &gt; 30°C (or 86°F as in the dataset here). Imagine, your colleague tried to query the data accordingly. She/he also found a mistake in each of the first 4 rows and wants to exclude these, but she/he is very new to R and made a few common errors in the following code:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="co"># Return only rows where the temperature is exactly is 86</span></span>
-<span id="cb26-2"><a href="#cb26-2"></a>dat[dat<span class="sc">$</span>Temp <span class="ot">=</span> <span class="dv">86</span>, ]</span>
-<span id="cb26-3"><a href="#cb26-3"></a></span>
-<span id="cb26-4"><a href="#cb26-4"></a><span class="co"># Return only rows where the temperature is equal or larger than 86</span></span>
-<span id="cb26-5"><a href="#cb26-5"></a>dat[dat<span class="sc">$</span>Temp <span class="sc">&gt;=</span> <span class="dv">86</span>]</span>
-<span id="cb26-6"><a href="#cb26-6"></a></span>
-<span id="cb26-7"><a href="#cb26-7"></a><span class="co"># Exclude rows 1 through 4</span></span>
-<span id="cb26-8"><a href="#cb26-8"></a>dat[<span class="sc">-</span><span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, ]</span>
-<span id="cb26-9"><a href="#cb26-9"></a></span>
-<span id="cb26-10"><a href="#cb26-10"></a><span class="co"># Return only rows for the months 7 or 8</span></span>
-<span id="cb26-11"><a href="#cb26-11"></a>dat[dat<span class="sc">$</span>Month <span class="sc">==</span> <span class="dv">7</span> <span class="sc">|</span> <span class="dv">8</span>, ]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Return only rows where the temperature is exactly is 86</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>dat[dat<span class="sc">$</span>Temp <span class="ot">=</span> <span class="dv">86</span>, ]</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Return only rows where the temperature is equal or larger than 86</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>dat[dat<span class="sc">$</span>Temp <span class="sc">&gt;=</span> <span class="dv">86</span>]</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Exclude rows 1 through 4</span></span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>dat[<span class="sc">-</span><span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, ]</span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Return only rows for the months 7 or 8</span></span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>dat[dat<span class="sc">$</span>Month <span class="sc">==</span> <span class="dv">7</span> <span class="sc">|</span> <span class="dv">8</span>, ]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="callout-caution callout callout-style-default no-icon callout-captioned">
 <div class="callout-header d-flex align-content-center">
@@ -945,30 +945,30 @@ Solution
 <div class="callout-body-container callout-body">
 <p>This is the corrected code:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="co"># Return only rows where the temperature is exactly is 86</span></span>
-<span id="cb27-2"><a href="#cb27-2"></a>dat[dat<span class="sc">$</span>Temp <span class="sc">==</span> <span class="dv">86</span>, ]</span>
-<span id="cb27-3"><a href="#cb27-3"></a></span>
-<span id="cb27-4"><a href="#cb27-4"></a><span class="co"># Return only rows where the temperature is equal or larger than 86</span></span>
-<span id="cb27-5"><a href="#cb27-5"></a>dat[dat<span class="sc">$</span>Temp <span class="sc">&gt;=</span> <span class="dv">86</span>, ]</span>
-<span id="cb27-6"><a href="#cb27-6"></a></span>
-<span id="cb27-7"><a href="#cb27-7"></a><span class="co"># Exclude rows 1 through 4</span></span>
-<span id="cb27-8"><a href="#cb27-8"></a>dat[<span class="sc">-</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>), ]</span>
-<span id="cb27-9"><a href="#cb27-9"></a></span>
-<span id="cb27-10"><a href="#cb27-10"></a><span class="co"># Return only rows for the months 7 or 8</span></span>
-<span id="cb27-11"><a href="#cb27-11"></a>dat[dat<span class="sc">$</span>Month <span class="sc">==</span> <span class="dv">7</span> <span class="sc">|</span> dat<span class="sc">$</span>Month <span class="sc">==</span> <span class="dv">8</span>, ]</span>
-<span id="cb27-12"><a href="#cb27-12"></a>dat[dat<span class="sc">$</span>Month <span class="sc">%in%</span> <span class="dv">7</span><span class="sc">:</span><span class="dv">8</span>, ] <span class="co"># alternative expression</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="co"># Return only rows where the temperature is exactly is 86</span>
+<span class="va">dat</span><span class="op">[</span><span class="va">dat</span><span class="op">$</span><span class="va">Temp</span> <span class="op">==</span> <span class="fl">86</span>, <span class="op">]</span>
+
+<span class="co"># Return only rows where the temperature is equal or larger than 86</span>
+<span class="va">dat</span><span class="op">[</span><span class="va">dat</span><span class="op">$</span><span class="va">Temp</span> <span class="op">&gt;=</span> <span class="fl">86</span>, <span class="op">]</span>
+
+<span class="co"># Exclude rows 1 through 4</span>
+<span class="va">dat</span><span class="op">[</span><span class="op">-</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">)</span>, <span class="op">]</span>
+
+<span class="co"># Return only rows for the months 7 or 8</span>
+<span class="va">dat</span><span class="op">[</span><span class="va">dat</span><span class="op">$</span><span class="va">Month</span> <span class="op">==</span> <span class="fl">7</span> <span class="op">|</span> <span class="va">dat</span><span class="op">$</span><span class="va">Month</span> <span class="op">==</span> <span class="fl">8</span>, <span class="op">]</span>
+<span class="va">dat</span><span class="op">[</span><span class="va">dat</span><span class="op">$</span><span class="va">Month</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fl">7</span><span class="op">:</span><span class="fl">8</span>, <span class="op">]</span> <span class="co"># alternative expression</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
 </div>
-</section><section id="last-task---check-if-the-ecodata-packages-works-for-you" class="level3" data-number="1.5.6"><h3 data-number="1.5.6" class="anchored" data-anchor-id="last-task---check-if-the-ecodata-packages-works-for-you">
-<span class="header-section-number">1.5.6</span> Last task - check if the EcoData packages works for you</h3>
+</section><section id="last-task---check-if-the-ecodata-package-works-for-you" class="level3" data-number="1.5.6"><h3 data-number="1.5.6" class="anchored" data-anchor-id="last-task---check-if-the-ecodata-package-works-for-you">
+<span class="header-section-number">1.5.6</span> Last task - check if the EcoData package works for you</h3>
 <p>During the course, we will use some datasets that we compiled in the <span class="math inline">\(EcoData\)</span> package. You should have installed this package already(see instructions above). To check if this works, run</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a><span class="fu">library</span>(EcoData)</span>
-<span id="cb28-2"><a href="#cb28-2"></a>soep</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/TheoreticalEcology/">EcoData</a></span><span class="op">)</span>
+<span class="va">soep</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>If you see some data being displayed in your console, everything is fine</p>
+<p>If you see some data being displayed in your console, everything is fine.</p>
 
 
 </section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">

@@ -17,7 +17,6 @@ In this section you will:
 -   practice these tests in R
 -   practice the simulation of data and error rates
 
-
 ## A recipe for hypothesis testing
 
 **Aim:** We want to know if there is a difference between the control and the treatment
@@ -254,8 +253,6 @@ p.adjust(c(test1$p.value, test2$p.value, test3$p.value), method = "BH") # least 
 
 If multiple testing is a problem and if we want to avoid false positives (type I errors), why don't we use a smaller alpha level? Because if would increase the type II error rate
 
-
-
 ## Type II error rate
 
 It can also happen the other way around:
@@ -329,7 +326,6 @@ plot(seq(0.5,1.5,0.05), sapply(seq(0.5,1.5,0.05), pow),
      xlab = "Standard deviation", ylab = "Power", pch = 20)
 ```
 
-
 ## False discovery rate
 
 You may have realized that if we do an experiment with a (weak) effect, we can get a significant result because of the effect but also significant results because of the Type I error rate. How to distinguish between those two? How can we decide whether a significant result is a false positive? This error rate is called the false discovery rate and to lower it we need to increase the power:
@@ -340,7 +336,6 @@ $$
 
 $p(H_0)$ = probability of H~0~ (no effect); $p(!H_0)$ = probability of not H~0~ (effect exists). Both are unknown and the only parameters we can influence is $\alpha$ and $\beta$ . But decreasing $\alpha$ leads to too high false negatives, so $\beta$ is left.
 
-
 ## Statistical tests
 
 The following three sections provide an overview over the most important hypothesis tests, a guideline to select an appropriate test (see decision tree) and the necessary code to apply these tests in R. It is not necessary to read and understand every detail. These explanations are also meant as an advice if you want to select an appropriate hypothesis test after the course. Note that some of the examples use simulated data instead of real observation (all functions that start with r=random, e.g. rnorm() or runif()). Simulated data is useful, because then we know the true distribution and its true mean.
@@ -349,7 +344,7 @@ In the last section at the end of this file, you find exercises that you should 
 
 ## Comparison of mean of two or more groups
 
-Many tests aim at showing that variables are significantly different between groups, i.e. have different means/medians. In all these tests, H0 is that there is no difference between the groups. The following decision tree helps to select the appropriate test.
+Many tests aim at showing that variables are significantly different between groups, i.e. have different means/medians. In all these tests, H~0~ is that there is no difference between the groups. The following decision tree helps to select the appropriate test.
 
 <!-- ![Fig. 1. Decision tree for the comparison of two groups](Decision%20tree.jpg) -->
 
@@ -412,24 +407,28 @@ The Null-hypothesis here is that the two observed groups have the same mean and 
 ```{r}
 x1 = rnorm(20, mean = 2, sd = 1)
 x2 = rnorm(20, mean = 3, sd = 2)
-t.test(x1,x2)
+t.test(x1,x2, var.equal = FALSE)
 ```
 
-##### t-test, H0: two groups, equal means, variance can be different (can also set to equal)
+Which is actually a Welch t-test and which is the default in R! (The smaller the samples, the more likely it is that the variances differ! So it is an conservative assumption to assume that the variances are unequal)
 
-The Null-hypothesis here is that the two groups are paired observations (e.g. group 1 before treatment and group 2 after treatment) have the same mean and variable variance (specified by the argument *var.equal = F*, which is also the default setting).
+##### t-test, H0: two groups, paired, equal means, variance can be different 
+
+The Null-hypothesis here is that the two groups are paired observations (e.g. group 1 before treatment and group 2 after treatment) have the same mean. Variances doesn't matter here (but the variables must be still normally distributed). We can ignore the `var.equal`\`argument here:
 
 ```{r}
 x1 = rnorm(20, mean = 2)
 x2 = rnorm(20, mean = 3)
-t.test(x1,x2, paired = T, var.equal = F)
+t.test(x1,x2, paired = TRUE)
 ```
+
+If the variables are not normally distributed we have to use non-parametric tests which don't assume a certain assumption regarding the distribution of the variables (=nonparametric). But the test statistic still follows a certain distribution!
 
 #### Wilcoxon Rank Sum and Mann-Whitney U Test
 
 In R, there is only one function for both tests together: wilcox.test(). The Wilcoxon rank sum test with (paired = F) is classically called Mann-Whitney U test.
 
-##### Mann-Whitney U Test
+##### Unpaired: Mann-Whitney U Test
 
 ```{r}
 x1 = rnorm(20, mean = 2)
@@ -439,7 +438,7 @@ wilcox.test(x1, x2)
 
 ```
 
-##### Wilcoxon signed rank test
+##### Paired: Wilcoxon signed rank test
 
 ```{r}
 x1 = rnorm(20, mean = 2)
@@ -453,7 +452,7 @@ wilcox.test(x1, x2, paired = T)
 
 #### Anova, unpaired
 
-H0 \>2 groups, normal distribution, equal variance, equal means, unpaired
+**H0 \>2 groups, normal distribution, equal variance, equal means, unpaired**
 
 ```{r}
 x = aov(weight ~ group, data = PlantGrowth)
@@ -485,7 +484,7 @@ par(old.par)
 
 aov is not good in doing repeated = paired ANOVA. In simple cases, you can just subtract the paired groups. In general, you should use so-called mixed models!
 
-#### Kruskal-Wallis
+#### Kruskal-Wallis, unpaired non-parametric
 
 Non-parametric test for differences in the mean of \>2 groups, unpaired
 
@@ -494,7 +493,7 @@ boxplot(Ozone ~ Month, data = airquality)
 kruskal.test(Ozone ~ Month, data = airquality)
 ```
 
-#### Friedmann Test
+#### Friedmann Test, paired non-parametric
 
 Non-parametric test for differences in the mean of \>2 groups, paired.
 
@@ -511,7 +510,7 @@ friedman.test(wb$x, wb$w, wb$t)
 
 ## Comparison of variances
 
-H0 in variance tests is always that the variances are equal.
+H~0~ in variance tests is always that the variances are equal.
 
 ### F-Test for two normally-distributed samples
 
@@ -570,7 +569,7 @@ prop.test(smokers, patients)
 
 ### Contingency tables
 
-Chi-squared-test for count data, H0 is that the joint distribution of the cell counts in a 2-dimensional contingency table is the product of the row and column marginals
+Chi-squared-test for count data, H\~0\~ is that the joint distribution of the cell counts in a 2-dimensional contingency table is the product of the row and column marginals
 
 ```{r}
 ## From Agresti(2007) p.39
@@ -582,7 +581,7 @@ chisq.test(M)
 
 ## Distribution tests
 
-Often we are interested in the distribution of a variable. This can be tested with distribution tests. All these tests are defined as follows: H0 is that the data follow a specific distribution. So in case H0 is rejected, the data significantly deviates from the specified distribution.
+Often we are interested in the distribution of a variable. This can be tested with distribution tests. All these tests are defined as follows: H~0~ is that the data follow a specific distribution. So in case H~0~ is rejected, the data significantly deviates from the specified distribution.
 
 Often, we want to know whether a variable is normally distributed because this is an important assumption for parametric hypothesis tests. But data can follow many other distributions:
 

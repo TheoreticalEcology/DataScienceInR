@@ -474,7 +474,7 @@ dplyr and tidyverse
 <p>Which is easier to write, read, and to understand!</p>
 </li>
 <li>
-<p><code>tibble</code> objects are just an extension of data.frames. In the course we will use mostly data.frames, so it is better to transform the tibbles back do data.frames:</p>
+<p><code>tibble</code> objects are just an extension of data.frames. In the course we will use mostly data.frames, so it is better to transform the tibbles back to data.frames:</p>
 <div class="cell">
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">air_grouped</span><span class="op">)</span>
 <span class="co">## [1] "tbl_df"     "tbl"        "data.frame"</span>
@@ -653,7 +653,7 @@ r = cor(x_1, x_2) = \frac{ \frac{1}{N} \sum_{i=1}^n (x_{1i} - \overline{x_{1}}) 
 </div>
 <p>The correlation factor for the untransformed data is 0.9 but they have a perfect relationship.</p>
 <p><strong>Rank correlation factors</strong></p>
-<p>Idea: arranging the data following their order and using their rank 1..n for x und y, respectively and there two different rank correlation factors:</p>
+<p>Idea: Arranging the data following their order and using their rank 1...n for x und y, respectively. There two different rank correlation factors:</p>
 <ul>
 <li><p>Spearman: calculate Pearson based on ranks</p></li>
 <li><p>Kendall: counts the number of data pairs that point in the same direction</p></li>
@@ -763,7 +763,7 @@ Warning
 </div>
 <p><strong>Hints for plot 2</strong></p>
 <p>What kind of plot can you see here? How many variables does it show? To plot this you need to create a contingency table with the variables of interest (check “demonstration.R”, if you have problems doing this). Changing plot elements: You can name the variables in your contingency table (e.g.&nbsp;name = variable, othername = othervariable). The name you assign to your table will be used as the title in the plot.</p>
-<p>What do you think of the study now? Could you already draw conclusions from this plot? Provide your answer to the last question on <strong>elearning-extern</strong>.</p>
+<p>What do you think of the study now? Could you already draw conclusions from this plot? Provide your answer to the last question on <strong>elearning-extern</strong> <a href="https://elearning.uni-regensburg.de/mod/quiz/view.php?id=2046676">(“02_Test for Exercise in R”)</a>.</p>
 <div class="callout-tip callout callout-style-simple no-icon callout-captioned">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -834,7 +834,7 @@ No, because this is only a descriptive plot. You can say that a large proportion
 <li>
 <em>abline()</em> to add (vertical) lines to your histogram</li>
 </ul>
-<p>Think about what the histogram tells you about the distances between each forest fragement and the next forest fragment. What do the red and purple lines represent? Give your answer on <strong>elearning-extern</strong>.</p>
+<p>Think about what the histogram tells you about the distances between each forest fragment and the next forest fragment. What do the red and purple lines represent? Which site was the furthest away from forest fragments? Give your answer on <strong>elearning-extern</strong>.</p>
 <div class="cell">
 <div class="cell-output-display">
 <p><img src="2-DescriptiveStatistics_files/figure-html/histogram-1.png" class="img-fluid" width="672"></p>
@@ -864,34 +864,30 @@ Solution
 </div>
 <div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>You can either create a scatterplot of two numerical variables like this:</p>
+<p>You can plot the histogram like this:</p>
 <div class="cell">
-<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="co">#Create a function to generate a continuous color palette from red to blue</span>
-<span class="va">rbPal</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/grDevices/colorRamp.html">colorRampPalette</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'red'</span>,<span class="st">'blue'</span><span class="op">)</span><span class="op">)</span> <span class="co"># rpPal for red to blue palette</span>
-
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">birdabundance</span><span class="op">$</span><span class="va">DIST</span>, <span class="va">birdabundance</span><span class="op">$</span><span class="va">ABUND</span>,  <span class="co"># create a plot of the variables DIST against ABUND from the data set birdabundance</span>
-     ylab <span class="op">=</span> <span class="st">"Distance (m)"</span>,  <span class="co"># add the label "Distance" to the y axis</span>
-     xlab <span class="op">=</span> <span class="st">"Bird abundance"</span>,  <span class="co"># add the label "Bird abundance" to the x axis</span>
-     col <span class="op">=</span> <span class="fu">rbPal</span><span class="op">(</span><span class="fl">5</span><span class="op">)</span><span class="op">[</span><span class="va">birdabundance</span><span class="op">$</span><span class="va">GRAZE</span><span class="op">]</span>,  <span class="co"># color the data points according to their category in the variable GRAZE from the data set birdabundance</span>
-     pch <span class="op">=</span> <span class="fl">17</span><span class="op">)</span> <span class="co"># change the point shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">birdabundance</span><span class="op">$</span><span class="va">DIST</span>,  <span class="co"># plot a histogram of the varriable distance from the data set birdabundance</span>
+     breaks <span class="op">=</span> <span class="fl">20</span>,  <span class="co"># change bar widths, here we make them smaller</span>
+     col <span class="op">=</span> <span class="st">"blue"</span>,  <span class="co"># change color to blue</span>
+     ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">20</span><span class="op">)</span>,  <span class="co"># change the range of the y axis to from 0 to 20</span>
+     main <span class="op">=</span> <span class="st">"Distance distribution"</span>,  <span class="co"># change title of the plot</span>
+     xlab <span class="op">=</span> <span class="st">"Distance to the next forest fragment"</span><span class="op">)</span>  <span class="co"># change x axis name</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span>v <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">birdabundance</span><span class="op">$</span><span class="va">DIST</span><span class="op">)</span>, col <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span>  <span class="co"># add a vertical line with an x value equal to the mean of the variable distance</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span>v <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/median.html">median</a></span><span class="op">(</span><span class="va">birdabundance</span><span class="op">$</span><span class="va">DIST</span><span class="op">)</span>, col <span class="op">=</span> <span class="st">"purple"</span><span class="op">)</span>  <span class="co"># add a vertical line with an x value equal to the median of the variable distance</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="2-DescriptiveStatistics_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>Or like this:</p>
+<p><em>What do the red and purple lines represent?</em></p>
+<p>The red line represents the mean distance between forest fragments, while the purple line represents the median.</p>
+<p><em>Which site was the furthest away from forest fragments?</em></p>
 <div class="cell">
-<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">ABUND</span> <span class="op">~</span> <span class="va">DIST</span>, data <span class="op">=</span> <span class="va">birdabundance</span>,  <span class="co"># create a plot of the variables DIST against ABUND from the data set birdabundance</span>
-     xlab <span class="op">=</span> <span class="st">"Distance (m)"</span>,  <span class="co"># add the label "Distance" to the x axis</span>
-     ylab <span class="op">=</span> <span class="st">"Bird abundance"</span>,  <span class="co"># add the label "Bird abundance" to the y axis</span>
-     col <span class="op">=</span> <span class="fu">rbPal</span><span class="op">(</span><span class="fl">5</span><span class="op">)</span><span class="op">[</span><span class="va">GRAZE</span><span class="op">]</span>,  <span class="co"># color the data points according to their category in the variable GRAZE as a gradient</span>
-     pch <span class="op">=</span> <span class="fl">17</span><span class="op">)</span> <span class="co"># change the point shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="2-DescriptiveStatistics_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid" width="672"></p>
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="co"># Extract the line in which the variable DIST takes its maximum</span>
+<span class="va">birdabundance</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/which.min.html">which.max</a></span><span class="op">(</span><span class="va">birdabundance</span><span class="op">$</span><span class="va">DIST</span><span class="op">)</span>,<span class="op">]</span>
+<span class="co">##    Site ABUND AREA DIST LDIST YR.ISOL GRAZE ALT</span>
+<span class="co">## 48   48  39.6   49 1427  1557    1972     1 180</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</div>
-<p>The advantage of the second version is that it uses the structure of “response variable (y) explained by (~) explanatory variable (x)”. Also, you tell the plot function which data set to use once and it will automatically draw the variables from there, while in the first version you name the data set and the respective variable each time (even for the color).</p>
-<p><em>What do you notice about the distribution of the colors along bird abundance?</em></p>
-<p>You can see that the blue data points are only at the low abundances, whereas the red data points are rather at the higher abundances. Purple data points are throughout all abundances. There thus seems to be a correlation between the grazing classes and bird abundances.</p>
+<p>The site number 48 was the furthest away.</p>
 </div>
 </div>
 </div>
@@ -901,11 +897,11 @@ Solution
 <p>Again, your task is to reconstruct the following plot using the following functions:</p>
 <ul>
 <li><em>plot()</em></li>
-<li>(<em>str()</em>)<br>
-</li>
+<li>(<em>str()</em>)</li>
 <li>(<em>summary()</em>)</li>
 </ul>
 <p>What do you notice about the distribution of the colors along bird abundance?</p>
+<p>What is the mean bird abundance per color?</p>
 <div class="cell">
 <div class="cell-output-display">
 <p><img src="2-DescriptiveStatistics_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid" width="672"></p>
@@ -914,7 +910,7 @@ Solution
 <p><strong>Hints for plotting:</strong></p>
 <p>What is plotted on the x-axis, what on the y-axis?<br>
 There are two different ways to write the plot function. One is to stick with the “Usage” in the help of the plot function (giving coordinates along the x-axis as the first attribute and those along the y-axis as the second attribute). The other way is to write the relationship between x and y as a formula that is: “y~x, data = dataset” Use google to find out how you can change the point shapes in your plot.</p>
-<p>Look at the dataset to find out which variable is indicated by the color of the points in the plot. Hint: It is a variable indicating 5 intensity levels. To change the color, include the attribute “color”” in your plot function and set it equal to the variable.<br>
+<p>Look at the dataset to find out which variable is indicated by the color of the points in the plot. Hint: It is a variable indicating 5 intensity levels. To change the color, include the attribute “col” in your plot function and set it equal to the variable.<br>
 To get a color gradient you can create a function with the following code. Apply it before producing your plot and use the created function <em>rbPal()</em> as the color in the plot.</p>
 <div class="cell">
 <div class="sourceCode" id="cb35"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="co"># Palettes can be created with a function for the grDevices package</span>
@@ -968,6 +964,21 @@ Solution
 <p>The advantage of the second version is that it uses the structure of “response variable (y) explained by (~) explanatory variable (x)”. Also, you tell the plot function which data set to use once and it will automatically draw the variables from there, while in the first version you name the data set and the respective variable each time (even for the color).</p>
 <p><em>What do you notice about the distribution of the colors along bird abundance?</em></p>
 <p>You can see that the blue data points are only at the low abundances, whereas the red data points are rather at the higher abundances. Purple data points are throughout all abundances. There thus seems to be a correlation between the grazing classes and bird abundances.</p>
+<p>What is the mean bird abundance per color / level of grazing intensity?</p>
+<div class="cell">
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">bird_grouped</span> <span class="op">&lt;-</span> <span class="va">birdabundance</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="co"># define dataset to be summarised</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">GRAZE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="co"># define grouping factor</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>mean.abund <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">ABUND</span><span class="op">)</span><span class="op">)</span> <span class="co"># summarise by taking the mean of abundance</span>
+<span class="va">bird_grouped</span>
+<span class="co">## # A tibble: 5 × 2</span>
+<span class="co">##   GRAZE mean.abund</span>
+<span class="co">##   &lt;int&gt;      &lt;dbl&gt;</span>
+<span class="co">## 1     1      28.6 </span>
+<span class="co">## 2     2      22.0 </span>
+<span class="co">## 3     3      21.3 </span>
+<span class="co">## 4     4      20.6 </span>
+<span class="co">## 5     5       6.29</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </div>
 </div>
 </div>
@@ -993,7 +1004,7 @@ Solution
 <div id="callout-7" class="callout-7-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
-<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cor</a></span><span class="op">(</span><span class="va">birdabundance</span><span class="op">$</span><span class="va">ABUND</span>, <span class="va">birdabundance</span><span class="op">$</span><span class="va">DIST</span><span class="op">)</span>
+<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cor</a></span><span class="op">(</span><span class="va">birdabundance</span><span class="op">$</span><span class="va">ABUND</span>, <span class="va">birdabundance</span><span class="op">$</span><span class="va">DIST</span><span class="op">)</span>
 <span class="co">## [1] 0.2361125</span>
 <span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cor</a></span><span class="op">(</span><span class="va">birdabundance</span><span class="op">$</span><span class="va">ABUND</span>, <span class="va">birdabundance</span><span class="op">$</span><span class="va">GRAZE</span><span class="op">)</span>
 <span class="co">## [1] -0.6825114</span>

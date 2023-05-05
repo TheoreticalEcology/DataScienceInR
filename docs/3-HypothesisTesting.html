@@ -232,8 +232,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#section" id="toc-section" class="nav-link active" data-scroll-target="#section"><span class="toc-section-number">3.0.1</span>  </a></li>
-  <li><a href="#a-recipe-for-hypothesis-testing" id="toc-a-recipe-for-hypothesis-testing" class="nav-link" data-scroll-target="#a-recipe-for-hypothesis-testing"><span class="toc-section-number">3.1</span>  A recipe for hypothesis testing</a></li>
+<li><a href="#a-recipe-for-hypothesis-testing" id="toc-a-recipe-for-hypothesis-testing" class="nav-link active" data-scroll-target="#a-recipe-for-hypothesis-testing"><span class="toc-section-number">3.1</span>  A recipe for hypothesis testing</a></li>
   <li><a href="#t-test" id="toc-t-test" class="nav-link" data-scroll-target="#t-test"><span class="toc-section-number">3.2</span>  T-test</a></li>
   <li><a href="#type-i-error-rate" id="toc-type-i-error-rate" class="nav-link" data-scroll-target="#type-i-error-rate"><span class="toc-section-number">3.3</span>  Type I error rate</a></li>
   <li><a href="#type-ii-error-rate" id="toc-type-ii-error-rate" class="nav-link" data-scroll-target="#type-ii-error-rate"><span class="toc-section-number">3.4</span>  Type II error rate</a></li>
@@ -311,9 +310,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>practice these tests in R</li>
 <li>practice the simulation of data and error rates</li>
 </ul>
-<section id="section" class="level3" data-number="3.0.1"><h3 data-number="3.0.1" class="anchored" data-anchor-id="section">
-<span class="header-section-number">3.0.1</span> </h3>
-</section><section id="a-recipe-for-hypothesis-testing" class="level2" data-number="3.1"><h2 data-number="3.1" class="anchored" data-anchor-id="a-recipe-for-hypothesis-testing">
+<section id="a-recipe-for-hypothesis-testing" class="level2" data-number="3.1"><h2 data-number="3.1" class="anchored" data-anchor-id="a-recipe-for-hypothesis-testing">
 <span class="header-section-number">3.1</span> A recipe for hypothesis testing</h2>
 <p><strong>Aim:</strong> We want to know if there is a difference between the control and the treatment</p>
 <ol type="1">
@@ -341,11 +338,12 @@ Interpretation of the p-value
 </div>
 </div>
 <p><strong>Example:</strong></p>
-<p>Imagine we do an experiment with two groups, one treatment and one control group Test outcomes are binary (e.g.&nbsp;whether individuals are cured)</p>
+<p>Imagine we do an experiment with two groups, one treatment and one control group. Test outcomes are binary, e.g.&nbsp;whether individuals are cured.</p>
 <ol type="1">
-<li><p>We need a test statistic for example: number cured of total patients: treat/(treat+control)</p></li>
-<li><p>We need the distribution of this test statistic under the null Let’s create a true world without effect:</p></li>
+<li><p>We need a test statistic. For example: number cured of total patients: treat/(treat+control)</p></li>
+<li><p>We need the distribution of this test statistic under the null.</p></li>
 </ol>
+<p>Let’s create a true world without effect:</p>
 <div class="cell">
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span>
 <span class="co"># Let's create a true world without effect:</span>
@@ -382,7 +380,7 @@ Interpretation of the p-value
 </div>
 </div>
 <ol start="4" type="1">
-<li>We have now our test statistic + the frequency distribution of our statistic if the H<sub>0</sub> = true now we make an experiment: Assume that we observed the following data: C = 30 T = 23</li>
+<li>We now have our test statistic + the frequency distribution of our statistic if the H<sub>0</sub> = true. Now we make an experiment: Assume that we observed the following data: C = 30, T = 23.</li>
 </ol>
 <div class="cell">
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">testStatistic</span>, breaks <span class="op">=</span> <span class="fl">50</span><span class="op">)</span>
@@ -394,9 +392,9 @@ Interpretation of the p-value
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R">
 <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">testStatistic</span> <span class="op">&gt;</span> <span class="va">testStatisticData</span><span class="op">)</span>
 <span class="co">## [1] 0.09317</span>
-<span class="co">#compare each value in our testStatistic </span>
-<span class="co">#distribution with the observed value and calculate proportion of TRUE values </span>
-<span class="co">#(where testStatistic &gt; testStatisticData)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span class="co"># compare each value in our testStatistic distribution with</span>
+<span class="co"># the observed value and calculate proportion of TRUE values </span>
+<span class="co"># (where testStatistic &gt; testStatisticData)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>But we know actually that the test statistic follows a Chi<sup>2</sup> distribution. So to get correct p-values we can use the <code>prop.test</code> for this test statistic:</p>
 <div class="cell">
@@ -449,7 +447,7 @@ T-test assumptions
 <p><img src="3-HypothesisTesting_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>And our goals is know to test if the difference between the two means of the variables is statistically significant or not.</p>
+<p>And our goals is now to test if the difference between the two means of the variables is statistically significant or not.</p>
 <p><strong>Procedure:</strong></p>
 <ul>
 <li>
@@ -747,7 +745,7 @@ FDR = \frac{p(H_0)\cdot\alpha}{p(H_0)\cdot\alpha + p(!H_0)\cdot(1-\beta)}
 <p>In the last section at the end of this file, you find exercises that you should solve using the explanations above. It may be helpful to use the table of content and/or the search option to find the respective example in the explanations.</p>
 </section><section id="comparison-of-mean-of-two-or-more-groups" class="level2" data-number="3.8"><h2 data-number="3.8" class="anchored" data-anchor-id="comparison-of-mean-of-two-or-more-groups">
 <span class="header-section-number">3.8</span> Comparison of mean of two or more groups</h2>
-<p>Many tests aim at showing that variables are significantly different between groups, i.e.&nbsp;have different means/medians. In all these tests, H0 is that there is no difference between the groups. The following decision tree helps to select the appropriate test.</p>
+<p>Many tests aim at showing that variables are significantly different between groups, i.e.&nbsp;have different means/medians. In all these tests, H<sub>0</sub> is that there is no difference between the groups. The following decision tree helps to select the appropriate test.</p>
 <!-- ![Fig. 1. Decision tree for the comparison of two groups](Decision%20tree.jpg) -->
 <p><strong>Remark 1</strong>: Tests for 2 groups also work for one group only. Then they test whether the mean is equal to 0.</p>
 <p><strong>Remark 2</strong>: Paired / unpaired: this means that observations in the groups are linked to each other. An example for unpaired data is a typical experiment with 10 observations in the control group and 10 observations in the treatment group. An example for paired data is when the same individuals were exposed to the treatment and to the control. The observations of each individual would belong together (pairs).</p>
@@ -828,7 +826,7 @@ The underlying Null-hypothesis is that the true difference in means is equal to 
 <div class="cell">
 <div class="sourceCode" id="cb26"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">x1</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">20</span>, mean <span class="op">=</span> <span class="fl">2</span>, sd <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
 <span class="va">x2</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">20</span>, mean <span class="op">=</span> <span class="fl">3</span>, sd <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">x1</span>,<span class="va">x2</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">x1</span>,<span class="va">x2</span>, var.equal <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
 <span class="co">## </span>
 <span class="co">##  Welch Two Sample t-test</span>
 <span class="co">## </span>
@@ -841,13 +839,14 @@ The underlying Null-hypothesis is that the true difference in means is equal to 
 <span class="co">## mean of x mean of y </span>
 <span class="co">##  1.930744  2.915646</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section><section id="t-test-h0-two-groups-equal-means-variance-can-be-different-can-also-set-to-equal" class="level5" data-number="3.8.1.1.4"><h5 data-number="3.8.1.1.4" class="anchored" data-anchor-id="t-test-h0-two-groups-equal-means-variance-can-be-different-can-also-set-to-equal">
-<span class="header-section-number">3.8.1.1.4</span> t-test, H0: two groups, equal means, variance can be different (can also set to equal)</h5>
-<p>The Null-hypothesis here is that the two groups are paired observations (e.g.&nbsp;group 1 before treatment and group 2 after treatment) have the same mean and variable variance (specified by the argument <em>var.equal = F</em>, which is also the default setting).</p>
+<p>Which is actually a Welch t-test and which is the default in R! (The smaller the samples, the more likely it is that the variances differ! So it is an conservative assumption to assume that the variances are unequal)</p>
+</section><section id="t-test-h0-two-groups-paired-equal-means-variance-can-be-different" class="level5" data-number="3.8.1.1.4"><h5 data-number="3.8.1.1.4" class="anchored" data-anchor-id="t-test-h0-two-groups-paired-equal-means-variance-can-be-different">
+<span class="header-section-number">3.8.1.1.4</span> t-test, H0: two groups, paired, equal means, variance can be different</h5>
+<p>The Null-hypothesis here is that the two groups are paired observations (e.g.&nbsp;group 1 before treatment and group 2 after treatment) have the same mean. Variances doesn’t matter here (but the variables must be still normally distributed). We can ignore the <code>var.equal</code>`argument here:</p>
 <div class="cell">
 <div class="sourceCode" id="cb27"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">x1</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">20</span>, mean <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>
 <span class="va">x2</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">20</span>, mean <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">x1</span>,<span class="va">x2</span>, paired <span class="op">=</span> <span class="cn">T</span>, var.equal <span class="op">=</span> <span class="cn">F</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">x1</span>,<span class="va">x2</span>, paired <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 <span class="co">## </span>
 <span class="co">##  Paired t-test</span>
 <span class="co">## </span>
@@ -860,11 +859,12 @@ The underlying Null-hypothesis is that the true difference in means is equal to 
 <span class="co">## mean difference </span>
 <span class="co">##       -1.616686</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>If the variables are not normally distributed we have to use non-parametric tests which don’t assume a certain assumption regarding the distribution of the variables (=nonparametric). But the test statistic still follows a certain distribution!</p>
 </section></section><section id="wilcoxon-rank-sum-and-mann-whitney-u-test" class="level4" data-number="3.8.1.2"><h4 data-number="3.8.1.2" class="anchored" data-anchor-id="wilcoxon-rank-sum-and-mann-whitney-u-test">
 <span class="header-section-number">3.8.1.2</span> Wilcoxon Rank Sum and Mann-Whitney U Test</h4>
 <p>In R, there is only one function for both tests together: wilcox.test(). The Wilcoxon rank sum test with (paired = F) is classically called Mann-Whitney U test.</p>
-<section id="mann-whitney-u-test" class="level5" data-number="3.8.1.2.1"><h5 data-number="3.8.1.2.1" class="anchored" data-anchor-id="mann-whitney-u-test">
-<span class="header-section-number">3.8.1.2.1</span> Mann-Whitney U Test</h5>
+<section id="unpaired-mann-whitney-u-test" class="level5" data-number="3.8.1.2.1"><h5 data-number="3.8.1.2.1" class="anchored" data-anchor-id="unpaired-mann-whitney-u-test">
+<span class="header-section-number">3.8.1.2.1</span> Unpaired: Mann-Whitney U Test</h5>
 <div class="cell">
 <div class="sourceCode" id="cb28"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">x1</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">20</span>, mean <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>
 <span class="va">x2</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Lognormal.html">rlnorm</a></span><span class="op">(</span><span class="fl">20</span>, mean <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>
@@ -877,8 +877,8 @@ The underlying Null-hypothesis is that the true difference in means is equal to 
 <span class="co">## W = 18, p-value = 2.317e-08</span>
 <span class="co">## alternative hypothesis: true location shift is not equal to 0</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section><section id="wilcoxon-signed-rank-test" class="level5" data-number="3.8.1.2.2"><h5 data-number="3.8.1.2.2" class="anchored" data-anchor-id="wilcoxon-signed-rank-test">
-<span class="header-section-number">3.8.1.2.2</span> Wilcoxon signed rank test</h5>
+</section><section id="paired-wilcoxon-signed-rank-test" class="level5" data-number="3.8.1.2.2"><h5 data-number="3.8.1.2.2" class="anchored" data-anchor-id="paired-wilcoxon-signed-rank-test">
+<span class="header-section-number">3.8.1.2.2</span> Paired: Wilcoxon signed rank test</h5>
 <div class="cell">
 <div class="sourceCode" id="cb29"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">x1</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">20</span>, mean <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>
 <span class="va">x2</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Lognormal.html">rlnorm</a></span><span class="op">(</span><span class="fl">20</span>, mean <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>
@@ -895,7 +895,7 @@ The underlying Null-hypothesis is that the true difference in means is equal to 
 <span class="header-section-number">3.8.2</span> Tests for &gt; 2 groups</h3>
 <section id="anova-unpaired" class="level4" data-number="3.8.2.1"><h4 data-number="3.8.2.1" class="anchored" data-anchor-id="anova-unpaired">
 <span class="header-section-number">3.8.2.1</span> Anova, unpaired</h4>
-<p>H0 &gt;2 groups, normal distribution, equal variance, equal means, unpaired</p>
+<p><strong>H0 &gt;2 groups, normal distribution, equal variance, equal means, unpaired</strong></p>
 <div class="cell">
 <div class="sourceCode" id="cb30"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">x</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/aov.html">aov</a></span><span class="op">(</span><span class="va">weight</span> <span class="op">~</span> <span class="va">group</span>, data <span class="op">=</span> <span class="va">PlantGrowth</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
@@ -937,8 +937,8 @@ The underlying Null-hypothesis is that the true difference in means is equal to 
 </section><section id="anova-paired" class="level4" data-number="3.8.2.2"><h4 data-number="3.8.2.2" class="anchored" data-anchor-id="anova-paired">
 <span class="header-section-number">3.8.2.2</span> Anova, paired</h4>
 <p>aov is not good in doing repeated = paired ANOVA. In simple cases, you can just subtract the paired groups. In general, you should use so-called mixed models!</p>
-</section><section id="kruskal-wallis" class="level4" data-number="3.8.2.3"><h4 data-number="3.8.2.3" class="anchored" data-anchor-id="kruskal-wallis">
-<span class="header-section-number">3.8.2.3</span> Kruskal-Wallis</h4>
+</section><section id="kruskal-wallis-unpaired-non-parametric" class="level4" data-number="3.8.2.3"><h4 data-number="3.8.2.3" class="anchored" data-anchor-id="kruskal-wallis-unpaired-non-parametric">
+<span class="header-section-number">3.8.2.3</span> Kruskal-Wallis, unpaired non-parametric</h4>
 <p>Non-parametric test for differences in the mean of &gt;2 groups, unpaired</p>
 <div class="cell">
 <div class="sourceCode" id="cb34"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span><span class="va">Ozone</span> <span class="op">~</span> <span class="va">Month</span>, data <span class="op">=</span> <span class="va">airquality</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -952,8 +952,8 @@ The underlying Null-hypothesis is that the true difference in means is equal to 
 <span class="co">## data:  Ozone by Month</span>
 <span class="co">## Kruskal-Wallis chi-squared = 29.267, df = 4, p-value = 6.901e-06</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section><section id="friedmann-test" class="level4" data-number="3.8.2.4"><h4 data-number="3.8.2.4" class="anchored" data-anchor-id="friedmann-test">
-<span class="header-section-number">3.8.2.4</span> Friedmann Test</h4>
+</section><section id="friedmann-test-paired-non-parametric" class="level4" data-number="3.8.2.4"><h4 data-number="3.8.2.4" class="anchored" data-anchor-id="friedmann-test-paired-non-parametric">
+<span class="header-section-number">3.8.2.4</span> Friedmann Test, paired non-parametric</h4>
 <p>Non-parametric test for differences in the mean of &gt;2 groups, paired.</p>
 <div class="cell">
 <div class="sourceCode" id="cb36"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">wb</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/aggregate.html">aggregate</a></span><span class="op">(</span><span class="va">warpbreaks</span><span class="op">$</span><span class="va">breaks</span>,
@@ -972,7 +972,7 @@ The underlying Null-hypothesis is that the true difference in means is equal to 
 </div>
 </section></section></section><section id="comparison-of-variances" class="level2" data-number="3.9"><h2 data-number="3.9" class="anchored" data-anchor-id="comparison-of-variances">
 <span class="header-section-number">3.9</span> Comparison of variances</h2>
-<p>H0 in variance tests is always that the variances are equal.</p>
+<p>H<sub>0</sub> in variance tests is always that the variances are equal.</p>
 <section id="f-test-for-two-normally-distributed-samples" class="level3" data-number="3.9.1"><h3 data-number="3.9.1" class="anchored" data-anchor-id="f-test-for-two-normally-distributed-samples">
 <span class="header-section-number">3.9.1</span> F-Test for two normally-distributed samples</h3>
 <div class="cell">
@@ -1070,7 +1070,7 @@ The underlying Null-hypothesis is that the true difference in means is equal to 
 </div>
 </section><section id="contingency-tables" class="level3" data-number="3.10.3"><h3 data-number="3.10.3" class="anchored" data-anchor-id="contingency-tables">
 <span class="header-section-number">3.10.3</span> Contingency tables</h3>
-<p>Chi-squared-test for count data, H0 is that the joint distribution of the cell counts in a 2-dimensional contingency table is the product of the row and column marginals</p>
+<p>Chi-squared-test for count data, H~0~ is that the joint distribution of the cell counts in a 2-dimensional contingency table is the product of the row and column marginals</p>
 <div class="cell">
 <div class="sourceCode" id="cb41"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="co">## From Agresti(2007) p.39</span>
 <span class="va">M</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/table.html">as.table</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html">rbind</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">762</span>, <span class="fl">327</span>, <span class="fl">468</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">484</span>, <span class="fl">239</span>, <span class="fl">477</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
@@ -1085,7 +1085,7 @@ The underlying Null-hypothesis is that the true difference in means is equal to 
 </div>
 </section></section><section id="distribution-tests" class="level2" data-number="3.11"><h2 data-number="3.11" class="anchored" data-anchor-id="distribution-tests">
 <span class="header-section-number">3.11</span> Distribution tests</h2>
-<p>Often we are interested in the distribution of a variable. This can be tested with distribution tests. All these tests are defined as follows: H0 is that the data follow a specific distribution. So in case H0 is rejected, the data significantly deviates from the specified distribution.</p>
+<p>Often we are interested in the distribution of a variable. This can be tested with distribution tests. All these tests are defined as follows: H<sub>0</sub> is that the data follow a specific distribution. So in case H<sub>0</sub> is rejected, the data significantly deviates from the specified distribution.</p>
 <p>Often, we want to know whether a variable is normally distributed because this is an important assumption for parametric hypothesis tests. But data can follow many other distributions:</p>
 <!-- ![Fig. 2. Decision tree for distributions](distributions.png) -->
 <section id="shapiro-wilk-normality-test" class="level3" data-number="3.11.1"><h3 data-number="3.11.1" class="anchored" data-anchor-id="shapiro-wilk-normality-test">
@@ -1203,7 +1203,7 @@ The underlying Null-hypothesis is that the true difference in means is equal to 
 <span class="header-section-number">3.13</span> Exercises</h2>
 <section id="streams" class="level3" data-number="3.13.1"><h3 data-number="3.13.1" class="anchored" data-anchor-id="streams">
 <span class="header-section-number">3.13.1</span> Streams</h3>
-<p>The dataset ‘streams’ contains water measurements taken at different location along 16 rivers: ‘up’ and ‘down’ are water quality measurements of the same river taken before and after a water treatment filter, respectively. We want to find out if this water filter is effective. Use the decision tree to identify the appropriate test for this situation.</p>
+<p>The dataset ‘streams’ contains water measurements taken at different locations along 16 rivers: ‘up’ and ‘down’ are water quality measurements of the same river taken before and after a water treatment filter, respectively. We want to find out if this water filter is effective. Use the decision tree to identify the appropriate test for this situation.</p>
 <div class="cell">
 <div class="sourceCode" id="cb46"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">dat</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.table</a></span><span class="op">(</span><span class="st">"https://raw.githubusercontent.com/biometry/APES/master/Data/Simone/streams.txt"</span>, header <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
