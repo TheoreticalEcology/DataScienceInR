@@ -262,22 +262,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </header><section id="classroom-demo" class="level2" data-number="7.1"><h2 data-number="7.1" class="anchored" data-anchor-id="classroom-demo">
 <span class="header-section-number">7.1</span> Classroom demo</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># Part 3</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="co"># Multivariate statistics</span></span>
-<span id="cb1-3"><a href="#cb1-3"></a></span>
-<span id="cb1-4"><a href="#cb1-4"></a></span>
-<span id="cb1-5"><a href="#cb1-5"></a></span>
-<span id="cb1-6"><a href="#cb1-6"></a><span class="co"># Method 1: unconstrained ------------------------------------------------</span></span>
-<span id="cb1-7"><a href="#cb1-7"></a></span>
-<span id="cb1-8"><a href="#cb1-8"></a></span>
-<span id="cb1-9"><a href="#cb1-9"></a></span>
-<span id="cb1-10"><a href="#cb1-10"></a><span class="do">## PCA</span></span>
-<span id="cb1-11"><a href="#cb1-11"></a><span class="co"># we use the same dataset of flower characteristics of three species of iris</span></span>
-<span id="cb1-12"><a href="#cb1-12"></a><span class="fu">pairs</span>(iris, <span class="at">col =</span> iris<span class="sc">$</span>Species)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="co"># Part 3</span>
+<span class="co"># Multivariate statistics</span>
+
+
+
+<span class="co"># Method 1: unconstrained ------------------------------------------------</span>
+
+
+
+<span class="co">## PCA</span>
+<span class="co"># we use the same dataset of flower characteristics of three species of iris</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/pairs.html">pairs</a></span><span class="op">(</span><span class="va">iris</span>, col <span class="op">=</span> <span class="va">iris</span><span class="op">$</span><span class="va">Species</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="7-Multivariate_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="fu">head</span>(iris)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  Sepal.Length Sepal.Width Petal.Length Petal.Width Species
 1          5.1         3.5          1.4         0.2  setosa
@@ -287,10 +287,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 5          5.0         3.6          1.4         0.2  setosa
 6          5.4         3.9          1.7         0.4  setosa</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>pca <span class="ot">=</span> <span class="fu">prcomp</span>(iris[, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>], <span class="at">scale =</span> T) <span class="co"># always set scale = T</span></span>
-<span id="cb4-2"><a href="#cb4-2"></a><span class="co"># when data is very skewed --&gt; better transform e.g. log</span></span>
-<span id="cb4-3"><a href="#cb4-3"></a></span>
-<span id="cb4-4"><a href="#cb4-4"></a><span class="fu">summary</span>(pca)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">pca</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/prcomp.html">prcomp</a></span><span class="op">(</span><span class="va">iris</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span>, scale <span class="op">=</span> <span class="cn">T</span><span class="op">)</span> <span class="co"># always set scale = T</span>
+<span class="co"># when data is very skewed --&gt; better transform e.g. log</span>
+
+<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">pca</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Importance of components:
                           PC1    PC2     PC3     PC4
@@ -298,31 +298,31 @@ Standard deviation     1.7084 0.9560 0.38309 0.14393
 Proportion of Variance 0.7296 0.2285 0.03669 0.00518
 Cumulative Proportion  0.7296 0.9581 0.99482 1.00000</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="co"># standard deviation^2 is variance!!!</span></span>
-<span id="cb6-2"><a href="#cb6-2"></a><span class="co"># cum prop of PC2 is the variance that is visualized in a biplot</span></span>
-<span id="cb6-3"><a href="#cb6-3"></a></span>
-<span id="cb6-4"><a href="#cb6-4"></a></span>
-<span id="cb6-5"><a href="#cb6-5"></a><span class="co"># plot the result</span></span>
-<span id="cb6-6"><a href="#cb6-6"></a><span class="co"># absolute variance of each component</span></span>
-<span id="cb6-7"><a href="#cb6-7"></a><span class="fu">plot</span>(pca) <span class="co"># see row1 of the summary(pca): (sd)^2 = variance</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="co"># standard deviation^2 is variance!!!</span>
+<span class="co"># cum prop of PC2 is the variance that is visualized in a biplot</span>
+
+
+<span class="co"># plot the result</span>
+<span class="co"># absolute variance of each component</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">pca</span><span class="op">)</span> <span class="co"># see row1 of the summary(pca): (sd)^2 = variance</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="7-Multivariate_files/figure-html/unnamed-chunk-2-2.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="co"># rel variance of each component</span></span>
-<span id="cb7-2"><a href="#cb7-2"></a><span class="fu">barplot</span>(<span class="fu">summary</span>(pca)<span class="sc">$</span>importance[<span class="dv">2</span>, ], </span>
-<span id="cb7-3"><a href="#cb7-3"></a>        <span class="at">ylab=</span><span class="st">"proportion of variance explained"</span>) <span class="co"># displays % of variance explained by PCs</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="co"># rel variance of each component</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html">barplot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">pca</span><span class="op">)</span><span class="op">$</span><span class="va">importance</span><span class="op">[</span><span class="fl">2</span>, <span class="op">]</span>, 
+        ylab<span class="op">=</span><span class="st">"proportion of variance explained"</span><span class="op">)</span> <span class="co"># displays % of variance explained by PCs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="7-Multivariate_files/figure-html/unnamed-chunk-2-3.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="co"># Biplot</span></span>
-<span id="cb8-2"><a href="#cb8-2"></a><span class="fu">biplot</span>(pca) <span class="co"># displays PC1 and PC2 AND rotation (vectors) of the different variables AND observations</span></span>
-<span id="cb8-3"><a href="#cb8-3"></a></span>
-<span id="cb8-4"><a href="#cb8-4"></a></span>
-<span id="cb8-5"><a href="#cb8-5"></a></span>
-<span id="cb8-6"><a href="#cb8-6"></a></span>
-<span id="cb8-7"><a href="#cb8-7"></a><span class="do">## distance-based approach: NMDS</span></span>
-<span id="cb8-8"><a href="#cb8-8"></a></span>
-<span id="cb8-9"><a href="#cb8-9"></a><span class="fu">library</span>(vegan)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="co"># Biplot</span>
+<span class="fu"><a href="https://rdrr.io/r/stats/biplot.html">biplot</a></span><span class="op">(</span><span class="va">pca</span><span class="op">)</span> <span class="co"># displays PC1 and PC2 AND rotation (vectors) of the different variables AND observations</span>
+
+
+
+
+<span class="co">## distance-based approach: NMDS</span>
+
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/vegandevs/vegan">vegan</a></span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Loading required package: permute</code></pre>
 </div>
@@ -335,12 +335,12 @@ Cumulative Proportion  0.7296 0.9581 0.99482 1.00000</code></pre>
 <div class="cell-output-display">
 <p><img src="7-Multivariate_files/figure-html/unnamed-chunk-2-4.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>?vegan</span>
-<span id="cb12-2"><a href="#cb12-2"></a></span>
-<span id="cb12-3"><a href="#cb12-3"></a><span class="co"># community dataset for plants in dunes (included in vegan package):</span></span>
-<span id="cb12-4"><a href="#cb12-4"></a></span>
-<span id="cb12-5"><a href="#cb12-5"></a><span class="fu">data</span>(<span class="st">"dune"</span>)</span>
-<span id="cb12-6"><a href="#cb12-6"></a><span class="fu">str</span>(dune) <span class="co"># display structure of the dataset</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="op">?</span><span class="va">vegan</span>
+
+<span class="co"># community dataset for plants in dunes (included in vegan package):</span>
+
+<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"dune"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">dune</span><span class="op">)</span> <span class="co"># display structure of the dataset</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>'data.frame':   20 obs. of  30 variables:
  $ Achimill: num  1 3 0 0 2 2 2 0 0 4 ...
@@ -374,8 +374,8 @@ Cumulative Proportion  0.7296 0.9581 0.99482 1.00000</code></pre>
  $ Bracruta: num  0 0 2 2 2 6 2 2 2 2 ...
  $ Callcusp: num  0 0 0 0 0 0 0 0 0 0 ...</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>?dune</span>
-<span id="cb14-2"><a href="#cb14-2"></a><span class="fu">summary</span>(dune) <span class="co"># display summary of the dataset (summary statistics for each variable)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="op">?</span><span class="va">dune</span>
+<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">dune</span><span class="op">)</span> <span class="co"># display summary of the dataset (summary statistics for each variable)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>    Achimill      Agrostol      Airaprae       Alopgeni       Anthodor   
  Min.   :0.0   Min.   :0.0   Min.   :0.00   Min.   :0.00   Min.   :0.00  
@@ -420,7 +420,7 @@ Cumulative Proportion  0.7296 0.9581 0.99482 1.00000</code></pre>
  3rd Qu.:0.00   3rd Qu.:3.00   3rd Qu.:0.0   3rd Qu.:4.00   3rd Qu.:0.0  
  Max.   :5.00   Max.   :6.00   Max.   :2.0   Max.   :6.00   Max.   :4.0  </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>NMDS <span class="ot">=</span> <span class="fu">metaMDS</span>(dune)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">NMDS</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/vegan/man/metaMDS.html">metaMDS</a></span><span class="op">(</span><span class="va">dune</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Run 0 stress 0.1192678 
 Run 1 stress 0.1886532 
@@ -457,9 +457,9 @@ Run 19 stress 0.1808911
 Run 20 stress 0.1808911 
 *** Best solution repeated 4 times</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="co"># algorithm is iterative</span></span>
-<span id="cb18-2"><a href="#cb18-2"></a></span>
-<span id="cb18-3"><a href="#cb18-3"></a>NMDS <span class="co"># gives information on NMDS: distance measure, stress (should be low)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="co"># algorithm is iterative</span>
+
+<span class="va">NMDS</span> <span class="co"># gives information on NMDS: distance measure, stress (should be low)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -478,16 +478,16 @@ The best solution was from try 3 (random start)
 Scaling: centring, PC rotation, halfchange scaling 
 Species: expanded scores based on 'dune' </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="co"># stress of &gt;= 0.2 = be suspicious, stress &gt;=0.3 indicates that ordination is arbitrary</span></span>
-<span id="cb20-2"><a href="#cb20-2"></a><span class="co"># in crease Dimensions if k is too high</span></span>
-<span id="cb20-3"><a href="#cb20-3"></a><span class="fu">ordiplot</span>(NMDS, <span class="at">type =</span> <span class="st">"t"</span>) <span class="co">#"t" = text</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="co"># stress of &gt;= 0.2 = be suspicious, stress &gt;=0.3 indicates that ordination is arbitrary</span>
+<span class="co"># in crease Dimensions if k is too high</span>
+<span class="fu"><a href="https://rdrr.io/pkg/vegan/man/ordiplot.html">ordiplot</a></span><span class="op">(</span><span class="va">NMDS</span>, type <span class="op">=</span> <span class="st">"t"</span><span class="op">)</span> <span class="co">#"t" = text</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="7-Multivariate_files/figure-html/unnamed-chunk-2-5.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="co"># if we have time:</span></span>
-<span id="cb21-2"><a href="#cb21-2"></a><span class="co"># distance measure can be changed (default is Bray-Curtis): see </span></span>
-<span id="cb21-3"><a href="#cb21-3"></a>?vegdist <span class="co"># some recommendations there</span></span>
-<span id="cb21-4"><a href="#cb21-4"></a>NMDS2 <span class="ot">=</span> <span class="fu">metaMDS</span>(dune, <span class="at">distance=</span><span class="st">"euclidean"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="co"># if we have time:</span>
+<span class="co"># distance measure can be changed (default is Bray-Curtis): see </span>
+<span class="op">?</span><span class="va">vegdist</span> <span class="co"># some recommendations there</span>
+<span class="va">NMDS2</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/vegan/man/metaMDS.html">metaMDS</a></span><span class="op">(</span><span class="va">dune</span>, distance<span class="op">=</span><span class="st">"euclidean"</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Run 0 stress 0.1174523 
 Run 1 stress 0.1174523 
@@ -546,7 +546,7 @@ Run 20 stress 0.1174523
 ... Similar to previous best
 *** Best solution repeated 8 times</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a>NMDS2 </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">NMDS2</span> </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -565,18 +565,18 @@ The best solution was from try 7 (random start)
 Scaling: centring, PC rotation 
 Species: expanded scores based on 'dune' </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a><span class="fu">ordiplot</span>(NMDS2, <span class="at">type =</span> <span class="st">"t"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/vegan/man/ordiplot.html">ordiplot</a></span><span class="op">(</span><span class="va">NMDS2</span>, type <span class="op">=</span> <span class="st">"t"</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="7-Multivariate_files/figure-html/unnamed-chunk-2-6.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="co"># Method 2: constrained  ------------------------------------------------</span></span>
-<span id="cb26-2"><a href="#cb26-2"></a></span>
-<span id="cb26-3"><a href="#cb26-3"></a></span>
-<span id="cb26-4"><a href="#cb26-4"></a><span class="co"># 2 multivariate datasets (abundances + environment)</span></span>
-<span id="cb26-5"><a href="#cb26-5"></a></span>
-<span id="cb26-6"><a href="#cb26-6"></a></span>
-<span id="cb26-7"><a href="#cb26-7"></a><span class="do">## RDA</span></span>
-<span id="cb26-8"><a href="#cb26-8"></a><span class="fu">str</span>(dune) <span class="co"># species composition</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="co"># Method 2: constrained  ------------------------------------------------</span>
+
+
+<span class="co"># 2 multivariate datasets (abundances + environment)</span>
+
+
+<span class="co">## RDA</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">dune</span><span class="op">)</span> <span class="co"># species composition</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>'data.frame':   20 obs. of  30 variables:
  $ Achimill: num  1 3 0 0 2 2 2 0 0 4 ...
@@ -610,8 +610,8 @@ Species: expanded scores based on 'dune' </code></pre>
  $ Bracruta: num  0 0 2 2 2 6 2 2 2 2 ...
  $ Callcusp: num  0 0 0 0 0 0 0 0 0 0 ...</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a><span class="fu">data</span>(<span class="st">"dune.env"</span>)</span>
-<span id="cb28-2"><a href="#cb28-2"></a><span class="fu">str</span>(dune.env) <span class="co"># environmental variables</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"dune.env"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">dune.env</span><span class="op">)</span> <span class="co"># environmental variables</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>'data.frame':   20 obs. of  5 variables:
  $ A1        : num  2.8 3.5 4.3 4.2 6.3 4.3 2.8 4.2 3.7 3.3 ...
@@ -620,13 +620,13 @@ Species: expanded scores based on 'dune' </code></pre>
  $ Use       : Ord.factor w/ 3 levels "Hayfield"&lt;"Haypastu"&lt;..: 2 2 2 2 1 2 3 3 1 1 ...
  $ Manure    : Ord.factor w/ 5 levels "0"&lt;"1"&lt;"2"&lt;"3"&lt;..: 5 3 5 5 3 3 4 4 2 2 ...</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a>RDA <span class="ot">=</span> <span class="fu">rda</span>(dune <span class="sc">~</span> <span class="fu">as.numeric</span>(Manure) <span class="sc">+</span> <span class="fu">as.numeric</span>(Moisture), </span>
-<span id="cb30-2"><a href="#cb30-2"></a>         <span class="at">data =</span> dune.env)</span>
-<span id="cb30-3"><a href="#cb30-3"></a><span class="fu">plot</span>(RDA)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">RDA</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/vegan/man/cca.html">rda</a></span><span class="op">(</span><span class="va">dune</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">Manure</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">Moisture</span><span class="op">)</span>, 
+         data <span class="op">=</span> <span class="va">dune.env</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">RDA</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="7-Multivariate_files/figure-html/unnamed-chunk-2-7.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a><span class="fu">summary</span>(RDA)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">RDA</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -758,58 +758,58 @@ Biplot scores for constraining variables
 as.numeric(Manure)   -0.1928 -0.98124   0   0   0   0
 as.numeric(Moisture)  0.9990  0.04412   0   0   0   0</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a><span class="co"># important part at the top</span></span>
-<span id="cb33-2"><a href="#cb33-2"></a><span class="co"># variance explained by the two variables = prop constrained = 37.09%</span></span>
-<span id="cb33-3"><a href="#cb33-3"></a><span class="co"># how much is explained by each RDA = see importance of components prop explained</span></span>
-<span id="cb33-4"><a href="#cb33-4"></a><span class="co"># PCs are the unconstrained axes</span></span>
-<span id="cb33-5"><a href="#cb33-5"></a></span>
-<span id="cb33-6"><a href="#cb33-6"></a><span class="co"># species scores = coordinates of species in the plot</span></span>
-<span id="cb33-7"><a href="#cb33-7"></a><span class="co"># site scores = coordinates of sites in the plot</span></span>
-<span id="cb33-8"><a href="#cb33-8"></a><span class="co"># biplot scores = coordinates of environmental variable vectors</span></span>
-<span id="cb33-9"><a href="#cb33-9"></a></span>
-<span id="cb33-10"><a href="#cb33-10"></a></span>
-<span id="cb33-11"><a href="#cb33-11"></a><span class="fu">barplot</span>(<span class="fu">summary</span>(RDA)<span class="sc">$</span>cont<span class="sc">$</span>importance[<span class="dv">2</span>, ],  <span class="at">las =</span> <span class="dv">2</span>,</span>
-<span id="cb33-12"><a href="#cb33-12"></a>        <span class="at">col =</span> <span class="fu">c</span>(<span class="fu">rep</span> (<span class="st">'red'</span>, <span class="dv">2</span>), </span>
-<span id="cb33-13"><a href="#cb33-13"></a>                <span class="fu">rep</span> (<span class="st">'black'</span>, <span class="fu">length</span>(<span class="fu">summary</span>(RDA)<span class="sc">$</span>cont<span class="sc">$</span>importance[<span class="dv">2</span>, ])<span class="sc">-</span><span class="dv">2</span>)),</span>
-<span id="cb33-14"><a href="#cb33-14"></a>        <span class="at">ylab=</span><span class="st">"proportion of variance explained"</span>) <span class="co"># displays % of variance explained by PCs</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="co"># important part at the top</span>
+<span class="co"># variance explained by the two variables = prop constrained = 37.09%</span>
+<span class="co"># how much is explained by each RDA = see importance of components prop explained</span>
+<span class="co"># PCs are the unconstrained axes</span>
+
+<span class="co"># species scores = coordinates of species in the plot</span>
+<span class="co"># site scores = coordinates of sites in the plot</span>
+<span class="co"># biplot scores = coordinates of environmental variable vectors</span>
+
+
+<span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html">barplot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">RDA</span><span class="op">)</span><span class="op">$</span><span class="va">cont</span><span class="op">$</span><span class="va">importance</span><span class="op">[</span><span class="fl">2</span>, <span class="op">]</span>,  las <span class="op">=</span> <span class="fl">2</span>,
+        col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span> <span class="op">(</span><span class="st">'red'</span>, <span class="fl">2</span><span class="op">)</span>, 
+                <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span> <span class="op">(</span><span class="st">'black'</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">RDA</span><span class="op">)</span><span class="op">$</span><span class="va">cont</span><span class="op">$</span><span class="va">importance</span><span class="op">[</span><span class="fl">2</span>, <span class="op">]</span><span class="op">)</span><span class="op">-</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span>,
+        ylab<span class="op">=</span><span class="st">"proportion of variance explained"</span><span class="op">)</span> <span class="co"># displays % of variance explained by PCs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="7-Multivariate_files/figure-html/unnamed-chunk-2-8.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a><span class="co"># Method 3: Clustering ---------------------------------------------------</span></span>
-<span id="cb34-2"><a href="#cb34-2"></a></span>
-<span id="cb34-3"><a href="#cb34-3"></a><span class="co"># hierarchical clustering: </span></span>
-<span id="cb34-4"><a href="#cb34-4"></a></span>
-<span id="cb34-5"><a href="#cb34-5"></a><span class="fu">library</span>(cluster) <span class="co"># clustering</span></span>
-<span id="cb34-6"><a href="#cb34-6"></a><span class="fu">library</span>(ape) <span class="co"># phylogenetic analyses, here to get pretty dendrogram</span></span>
-<span id="cb34-7"><a href="#cb34-7"></a></span>
-<span id="cb34-8"><a href="#cb34-8"></a><span class="co"># example for distance matrix</span></span>
-<span id="cb34-9"><a href="#cb34-9"></a><span class="fu">dist</span>(iris[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>]) <span class="co"># creates a distance matrix (comparison of all possible sample pairs), </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="co"># Method 3: Clustering ---------------------------------------------------</span>
+
+<span class="co"># hierarchical clustering: </span>
+
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://svn.r-project.org/R-packages/trunk/cluster/">cluster</a></span><span class="op">)</span> <span class="co"># clustering</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://ape-package.ird.fr/">ape</a></span><span class="op">)</span> <span class="co"># phylogenetic analyses, here to get pretty dendrogram</span>
+
+<span class="co"># example for distance matrix</span>
+<span class="fu"><a href="https://rdrr.io/r/stats/dist.html">dist</a></span><span class="op">(</span><span class="va">iris</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span><span class="op">)</span> <span class="co"># creates a distance matrix (comparison of all possible sample pairs), </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>          1         2
 2 0.5385165          
 3 0.5099020 0.3000000</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a><span class="co"># default method ="euclidean", but can be changed</span></span>
-<span id="cb36-2"><a href="#cb36-2"></a></span>
-<span id="cb36-3"><a href="#cb36-3"></a><span class="co"># get Hierarchical Clustering</span></span>
-<span id="cb36-4"><a href="#cb36-4"></a>hc <span class="ot">=</span> <span class="fu">hclust</span>(<span class="fu">dist</span>(iris[, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>]))</span>
-<span id="cb36-5"><a href="#cb36-5"></a><span class="fu">plot</span>(hc)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="co"># default method ="euclidean", but can be changed</span>
+
+<span class="co"># get Hierarchical Clustering</span>
+<span class="va">hc</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/hclust.html">hclust</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/dist.html">dist</a></span><span class="op">(</span><span class="va">iris</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">hc</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="7-Multivariate_files/figure-html/unnamed-chunk-2-9.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1"></a><span class="co"># for colors use package ape</span></span>
-<span id="cb37-2"><a href="#cb37-2"></a><span class="fu">plot</span>(<span class="fu">as.phylo</span>(hc), <span class="at">tip.color =</span> <span class="fu">as.numeric</span>(iris<span class="sc">$</span>Species)) <span class="co"># as.phylo converts object type "hcclust" into object type "phylo"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="co"># for colors use package ape</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/ape/man/as.phylo.html">as.phylo</a></span><span class="op">(</span><span class="va">hc</span><span class="op">)</span>, tip.color <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Species</span><span class="op">)</span><span class="op">)</span> <span class="co"># as.phylo converts object type "hcclust" into object type "phylo"</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="7-Multivariate_files/figure-html/unnamed-chunk-2-10.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1"></a><span class="co"># change plotting type:</span></span>
-<span id="cb38-2"><a href="#cb38-2"></a><span class="fu">plot</span>(<span class="fu">as.phylo</span>(hc), <span class="at">tip.color =</span> <span class="fu">as.numeric</span>(iris<span class="sc">$</span>Species), <span class="at">type =</span> <span class="st">"fan"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="co"># change plotting type:</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/ape/man/as.phylo.html">as.phylo</a></span><span class="op">(</span><span class="va">hc</span><span class="op">)</span>, tip.color <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Species</span><span class="op">)</span>, type <span class="op">=</span> <span class="st">"fan"</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="7-Multivariate_files/figure-html/unnamed-chunk-2-11.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1"></a><span class="co"># lets try another clustering algorithm</span></span>
-<span id="cb39-2"><a href="#cb39-2"></a><span class="fu">data</span>(animals)</span>
-<span id="cb39-3"><a href="#cb39-3"></a><span class="fu">str</span>(animals)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="co"># lets try another clustering algorithm</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">animals</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">animals</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>'data.frame':   20 obs. of  6 variables:
  $ war: int  1 1 2 1 2 2 2 2 2 1 ...
@@ -819,23 +819,23 @@ as.numeric(Moisture)  0.9990  0.04412   0   0   0   0</code></pre>
  $ gro: int  2 2 1 1 2 2 2 1 2 1 ...
  $ hai: int  1 2 2 2 2 2 1 1 1 1 ...</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1"></a><span class="co"># Agglomerative Nesting </span></span>
-<span id="cb41-2"><a href="#cb41-2"></a>aa <span class="ot">&lt;-</span> <span class="fu">agnes</span>(animals)</span>
-<span id="cb41-3"><a href="#cb41-3"></a><span class="fu">plot</span>(aa, <span class="at">which.plots =</span> <span class="dv">2</span>) <span class="co">#which.plots: plots only plot 2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="co"># Agglomerative Nesting </span>
+<span class="va">aa</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/cluster/man/agnes.html">agnes</a></span><span class="op">(</span><span class="va">animals</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">aa</span>, which.plots <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="co">#which.plots: plots only plot 2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="7-Multivariate_files/figure-html/unnamed-chunk-2-12.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1"></a><span class="co"># first is banner plot...</span></span>
-<span id="cb42-2"><a href="#cb42-2"></a></span>
-<span id="cb42-3"><a href="#cb42-3"></a></span>
-<span id="cb42-4"><a href="#cb42-4"></a></span>
-<span id="cb42-5"><a href="#cb42-5"></a><span class="do">### non-hierarchical</span></span>
-<span id="cb42-6"><a href="#cb42-6"></a><span class="co"># kmeans </span></span>
-<span id="cb42-7"><a href="#cb42-7"></a></span>
-<span id="cb42-8"><a href="#cb42-8"></a><span class="fu">set.seed</span>(<span class="dv">123</span>) <span class="co"># choice of first k centers is random and depends on (random) seed</span></span>
-<span id="cb42-9"><a href="#cb42-9"></a>cl <span class="ot">=</span> <span class="fu">kmeans</span>(iris[, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>], <span class="at">centers =</span> <span class="dv">3</span>) <span class="co"># centers = number of clusters to be generated</span></span>
-<span id="cb42-10"><a href="#cb42-10"></a></span>
-<span id="cb42-11"><a href="#cb42-11"></a>cl<span class="sc">$</span>cluster</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="co"># first is banner plot...</span>
+
+
+
+<span class="co">### non-hierarchical</span>
+<span class="co"># kmeans </span>
+
+<span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span> <span class="co"># choice of first k centers is random and depends on (random) seed</span>
+<span class="va">cl</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/kmeans.html">kmeans</a></span><span class="op">(</span><span class="va">iris</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span>, centers <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="co"># centers = number of clusters to be generated</span>
+
+<span class="va">cl</span><span class="op">$</span><span class="va">cluster</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  [1] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
  [38] 1 1 1 1 1 1 1 1 1 1 1 1 1 2 2 3 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
@@ -843,7 +843,7 @@ as.numeric(Moisture)  0.9990  0.04412   0   0   0   0</code></pre>
 [112] 3 3 2 2 3 3 3 3 2 3 2 3 2 3 3 2 2 3 3 3 3 3 2 3 3 3 3 2 3 3 3 2 3 3 3 2 3
 [149] 3 2</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1"></a><span class="fu">as.numeric</span>(iris<span class="sc">$</span>Species)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Species</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  [1] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
  [38] 1 1 1 1 1 1 1 1 1 1 1 1 1 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
@@ -851,12 +851,12 @@ as.numeric(Moisture)  0.9990  0.04412   0   0   0   0</code></pre>
 [112] 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
 [149] 3 3</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1"></a><span class="co"># without the same seed you may have to exchange cluster 2 and 3 to be able to compare assignment to species with real species in the plot</span></span>
-<span id="cb46-2"><a href="#cb46-2"></a>temp <span class="ot">=</span> cl<span class="sc">$</span>cluster</span>
-<span id="cb46-3"><a href="#cb46-3"></a><span class="co"># temp[cl$cluster==2] = 3</span></span>
-<span id="cb46-4"><a href="#cb46-4"></a><span class="co"># temp[cl$cluster==3] = 2</span></span>
-<span id="cb46-5"><a href="#cb46-5"></a></span>
-<span id="cb46-6"><a href="#cb46-6"></a>temp</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="co"># without the same seed you may have to exchange cluster 2 and 3 to be able to compare assignment to species with real species in the plot</span>
+<span class="va">temp</span> <span class="op">=</span> <span class="va">cl</span><span class="op">$</span><span class="va">cluster</span>
+<span class="co"># temp[cl$cluster==2] = 3</span>
+<span class="co"># temp[cl$cluster==3] = 2</span>
+
+<span class="va">temp</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  [1] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
  [38] 1 1 1 1 1 1 1 1 1 1 1 1 1 2 2 3 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
@@ -864,7 +864,7 @@ as.numeric(Moisture)  0.9990  0.04412   0   0   0   0</code></pre>
 [112] 3 3 2 2 3 3 3 3 2 3 2 3 2 3 3 2 2 3 3 3 3 3 2 3 3 3 3 2 3 3 3 2 3 3 3 2 3
 [149] 3 2</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1"></a><span class="fu">as.numeric</span>(iris<span class="sc">$</span>Species)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Species</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  [1] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
  [38] 1 1 1 1 1 1 1 1 1 1 1 1 1 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
@@ -872,48 +872,48 @@ as.numeric(Moisture)  0.9990  0.04412   0   0   0   0</code></pre>
 [112] 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
 [149] 3 3</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1"></a><span class="co"># original species</span></span>
-<span id="cb50-2"><a href="#cb50-2"></a><span class="fu">pairs</span>(iris[, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>], <span class="at">col =</span> <span class="fu">as.numeric</span>(iris<span class="sc">$</span>Species)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="co"># original species</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/pairs.html">pairs</a></span><span class="op">(</span><span class="va">iris</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span>, col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Species</span><span class="op">)</span><span class="op">)</span> </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="7-Multivariate_files/figure-html/unnamed-chunk-2-13.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1"></a><span class="co"># species found by cluster</span></span>
-<span id="cb51-2"><a href="#cb51-2"></a><span class="fu">pairs</span>(iris[, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>], <span class="at">col =</span> temp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb51"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="co"># species found by cluster</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/pairs.html">pairs</a></span><span class="op">(</span><span class="va">iris</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span>, col <span class="op">=</span> <span class="va">temp</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="7-Multivariate_files/figure-html/unnamed-chunk-2-14.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1"></a><span class="co"># display samples that have been assigned to the wrong species</span></span>
-<span id="cb52-2"><a href="#cb52-2"></a>same <span class="ot">=</span> <span class="fu">as.numeric</span>(iris<span class="sc">$</span>Species) <span class="sc">==</span> temp</span>
-<span id="cb52-3"><a href="#cb52-3"></a><span class="fu">pairs</span>(iris[, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>], <span class="at">col =</span> <span class="fu">as.numeric</span>(same) <span class="sc">+</span> <span class="dv">1</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="co"># display samples that have been assigned to the wrong species</span>
+<span class="va">same</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Species</span><span class="op">)</span> <span class="op">==</span> <span class="va">temp</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/pairs.html">pairs</a></span><span class="op">(</span><span class="va">iris</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span>, col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">same</span><span class="op">)</span> <span class="op">+</span> <span class="fl">1</span><span class="op">)</span> </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="7-Multivariate_files/figure-html/unnamed-chunk-2-15.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1"></a><span class="fu">palette</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/grDevices/palette.html">palette</a></span><span class="op">(</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "black"   "#DF536B" "#61D04F" "#2297E6" "#28E2E5" "#CD0BBC" "#F5C710"
 [8] "gray62" </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1"></a><span class="co"># HERE EXERCISE WITH BREAKOUT SESSION</span></span>
-<span id="cb55-2"><a href="#cb55-2"></a></span>
-<span id="cb55-3"><a href="#cb55-3"></a></span>
-<span id="cb55-4"><a href="#cb55-4"></a></span>
-<span id="cb55-5"><a href="#cb55-5"></a></span>
-<span id="cb55-6"><a href="#cb55-6"></a><span class="co"># Attention ---------------------------------------------------------------</span></span>
-<span id="cb55-7"><a href="#cb55-7"></a></span>
-<span id="cb55-8"><a href="#cb55-8"></a></span>
-<span id="cb55-9"><a href="#cb55-9"></a></span>
-<span id="cb55-10"><a href="#cb55-10"></a><span class="do">##### type (or copy) the following while students work on their exercise</span></span>
-<span id="cb55-11"><a href="#cb55-11"></a><span class="co"># Why we should be careful when interpreting patterns in ordination plots</span></span>
-<span id="cb55-12"><a href="#cb55-12"></a></span>
-<span id="cb55-13"><a href="#cb55-13"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb55-14"><a href="#cb55-14"></a></span>
-<span id="cb55-15"><a href="#cb55-15"></a>random <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="at">pollution =</span> <span class="fu">rnorm</span>(<span class="dv">30</span>),</span>
-<span id="cb55-16"><a href="#cb55-16"></a>                    <span class="at">temperature =</span> <span class="fu">rnorm</span>(<span class="dv">30</span>),</span>
-<span id="cb55-17"><a href="#cb55-17"></a>                    <span class="at">moisture =</span> <span class="fu">rnorm</span>(<span class="dv">30</span>),</span>
-<span id="cb55-18"><a href="#cb55-18"></a>                    <span class="at">tourists =</span> <span class="fu">rnorm</span>(<span class="dv">30</span>),</span>
-<span id="cb55-19"><a href="#cb55-19"></a>                    <span class="at">wind =</span> <span class="fu">rnorm</span>(<span class="dv">30</span>),</span>
-<span id="cb55-20"><a href="#cb55-20"></a>                    <span class="at">dogs =</span> <span class="fu">rnorm</span>(<span class="dv">30</span>))</span>
-<span id="cb55-21"><a href="#cb55-21"></a><span class="fu">head</span>(random)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb55"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="co"># HERE EXERCISE WITH BREAKOUT SESSION</span>
+
+
+
+
+<span class="co"># Attention ---------------------------------------------------------------</span>
+
+
+
+<span class="co">##### type (or copy) the following while students work on their exercise</span>
+<span class="co"># Why we should be careful when interpreting patterns in ordination plots</span>
+
+<span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span>
+
+<span class="va">random</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>pollution <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">30</span><span class="op">)</span>,
+                    temperature <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">30</span><span class="op">)</span>,
+                    moisture <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">30</span><span class="op">)</span>,
+                    tourists <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">30</span><span class="op">)</span>,
+                    wind <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">30</span><span class="op">)</span>,
+                    dogs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">30</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">random</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>    pollution temperature   moisture   tourists       wind       dogs
 1 -0.56047565   0.4264642  0.3796395  0.9935039  0.1176466  0.7877388
@@ -923,8 +923,8 @@ as.numeric(Moisture)  0.9990  0.04412   0   0   0   0</code></pre>
 5  0.12928774   0.8215811 -1.0717912  1.3606524  1.8438620 -0.1194526
 6  1.71506499   0.6886403  0.3035286 -0.6002596 -0.6519499 -0.2803953</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1"></a>pca <span class="ot">=</span> <span class="fu">prcomp</span>(random, <span class="at">scale =</span> T)</span>
-<span id="cb57-2"><a href="#cb57-2"></a><span class="fu">biplot</span>(pca)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb57"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">pca</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/prcomp.html">prcomp</a></span><span class="op">(</span><span class="va">random</span>, scale <span class="op">=</span> <span class="cn">T</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/stats/biplot.html">biplot</a></span><span class="op">(</span><span class="va">pca</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="7-Multivariate_files/figure-html/unnamed-chunk-2-16.png" class="img-fluid" width="672"></p>
 </div>
@@ -955,8 +955,8 @@ We now want to use ordination methods to explore</p>
 <p><strong>Dataset</strong></p>
 <p>Read in the dataset as follows:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1"></a>dat <span class="ot">=</span> <span class="fu">read.table</span>(<span class="at">file =</span> <span class="st">"http://evol.bio.lmu.de/_statgen/Multivariate/11SS/RIKZGroups.txt"</span>, <span class="at">header =</span> T)</span>
-<span id="cb58-2"><a href="#cb58-2"></a><span class="fu">head</span>(dat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb58"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">dat</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.table</a></span><span class="op">(</span>file <span class="op">=</span> <span class="st">"http://evol.bio.lmu.de/_statgen/Multivariate/11SS/RIKZGroups.txt"</span>, header <span class="op">=</span> <span class="cn">T</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">dat</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>You already know the functions <em>str()</em> and <em>summary()</em> to get an overview of a dataset and to see which variables the dataset contains.</p>
 <ul>
@@ -996,7 +996,7 @@ We now want to use ordination methods to explore</p>
 <li><em>summary()</em></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1"></a><span class="fu">library</span>(vegan)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb59"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/vegandevs/vegan">vegan</a></span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><strong>Hints</strong></p>
 <ul>
@@ -1022,14 +1022,14 @@ We now want to use ordination methods to explore</p>
 <span class="header-section-number">7.2.2.1</span> K-means</h4>
 <p>We want to use clustering methods to define 3 environmental types. Use the function <em>kmeans()</em> with <em>centers = 3</em> (number of clusters to be generated). Remember to set a seed; the choice of the first k centers is random.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>) </span>
-<span id="cb60-2"><a href="#cb60-2"></a>cl <span class="ot">=</span> <span class="do">####</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>) </span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>cl <span class="ot">=</span> <span class="do">####</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Compare the three clusters with the result of the PCA using the following code that uses another plotting framework called ggplot2:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1"></a><span class="fu">library</span>(ggfortify)</span>
-<span id="cb61-2"><a href="#cb61-2"></a><span class="fu">autoplot</span>(pca_environment, <span class="at">colour =</span> cl<span class="sc">$</span>cluster, <span class="at">size =</span> <span class="dv">2</span>, <span class="at">loadings =</span> <span class="cn">TRUE</span>, <span class="at">loadings.colour =</span> <span class="st">'black'</span>,</span>
-<span id="cb61-3"><a href="#cb61-3"></a>         <span class="at">loadings.label =</span> <span class="cn">TRUE</span>, <span class="at">loadings.label.size =</span> <span class="dv">3</span>, <span class="at">loadings.label.colour =</span> <span class="st">"black"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb61"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/sinhrks/ggfortify">ggfortify</a></span><span class="op">)</span>
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html">autoplot</a></span><span class="op">(</span><span class="va">pca_environment</span>, colour <span class="op">=</span> <span class="va">cl</span><span class="op">$</span><span class="va">cluster</span>, size <span class="op">=</span> <span class="fl">2</span>, loadings <span class="op">=</span> <span class="cn">TRUE</span>, loadings.colour <span class="op">=</span> <span class="st">'black'</span>,
+         loadings.label <span class="op">=</span> <span class="cn">TRUE</span>, loadings.label.size <span class="op">=</span> <span class="fl">3</span>, loadings.label.colour <span class="op">=</span> <span class="st">"black"</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The colors of the points represent the three clusters. <strong>Answer the following question on elearning-extern</strong>: How is it possible that four observations in the middle (in black if you have used the same seed) belong to a different cluster than the observations around them?</p>
 </section><section id="hierarchical-clustering" class="level4" data-number="7.2.2.2"><h4 data-number="7.2.2.2" class="anchored" data-anchor-id="hierarchical-clustering">

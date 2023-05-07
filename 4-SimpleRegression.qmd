@@ -11,38 +11,176 @@ set.seed(42)
 # Simple linear regression
 
 In this chapter, you will practice to:
-  
- * formulate a research question
- * perform simple linear regression for numeric and categorial predictors
- * interpret regression outputs
- * check the residuals of regression models
 
-## Classroom demo
+-   formulate a research question
+-   perform simple linear regression for numeric and categorial predictors
+-   interpret regression outputs
+-   check the residuals of regression models
+
+## Maximum Likelihood Estimator
+
+$likelihood = P(D|model, parameter)$
+
+The likelihood is the probability to observe the Data given a certain model (which is described by its parameter).
+
+It is an approach to optimize a model/parameter to find the set of parameters that describes best the observed data.
+
+A simple example, we want to estimate the average of random vectors and we assume that our model is a normal distribution (so we assume that the data originated from a normal distribution). We want to optimize the two parameters that describe a normal distribution: the mean, and the sd:
 
 ```{r}
+Xobs = rnorm(100, sd = 1.0)
+# Now we assume that mean = 0, and sd = 0.2 are unknown but we want to find them, let's write the likelihood function:
+likelihood = function(par) { # we give two parameters, mean and sd
+  lls = dnorm(Xobs, mean = par[1], sd = par[2], log = TRUE) # calculate for each observation to observe the data given our model
+  # we use the logLikilihood because of numerical reasons
+  return(sum(lls))
+}
 
+likelihood(c(0, 0.2))
+# let's try all values of sd:
+likelihood_mean = function(p) likelihood(c(p, 1.0))
+plot(seq(-5, 5.0, length.out = 100), sapply(seq(-5, 5.0, length.out = 100), likelihood_mean), xlab = 'Different mean values', ylab = "negative logLikelihood")
 
-# Part 5
-# Simple linear regression
+# The optimum is at 0, which corresponds to our mean we used to sample Xobs
 
+```
 
+However it is tedious to try all values manually to find the best value, especially if we have to optimize several values. For that we can use an optimizer in R which finds for us the best set of parameters:
 
+```{r}
+opt = optim(c(0.0, 1.0), fn = function(par) -likelihood(par), hessian = TRUE )
+```
 
-# cleaning workspace ------------------------------------------------------
+We can use the shape of the likelihood to calculate standard errors for our estimates:
 
+```{r}
+st_errors = sqrt(diag(solve(opt$hessian)))
+```
 
-# let's clean our workspace:
-ls() # gives a list of objects that are currently stored
-rm(cl) # remove object m1
-rm(list = ls()) #remove all objects
+With that we can calculate the confidence interval for our estimates. When the estimator is repeatedly used, 95% of the calculated confidence intervals will include the true value!
 
+```{r}
+cbind(opt$par-1.96*st_errors, opt$par+1.96*st_errors)
+```
 
+In short, if we would do a t.test for our Xobs (to test whether the mean is stat. significant different from zero), the test would be non significant, and a strong indicator for that is when the 0 is within the confidence interval. Let's compare our CI to the one calculated by the t-test:
 
+```{r}
+t.test(Xobs)
+```
 
+Almost the same! The t-test also calculates the MLE to get the standard error and the confidence interval.
 
-# Simple linear regression ------------------------------------------------
+## The theory of linear regression
 
+If we want to test for an association between two continuous variables, we can calculate the correlation between the two - and with the cor.test function we can test even for significance. But, the correlation doesn't report the magnitude, the strength, of the effect:
 
+```{r}
+X = runif(100)
+par(mfrow = c(1,1))
+plot(X, 0.5*X, ylim = c(0, 1), type = "p", pch = 15, col = "red", xlab = "X", ylab = "Y")
+points(X, 1.0*X, ylim = c(0, 1), type = "p", pch = 15, col = "blue", xlab = "X", ylab = "Y")
+cor(X, 0.5*X)
+cor(X, 1.0*X)
+```
+
+Both have a correlation factor of 1.0! But we see clearly that the blue line has an stronger effect on Y then the red line.
+
+**Solution: Linear regression models**
+
+They describe the relationship between a dependent variable and one or more explanatory variables:
+
+$$
+y = a_0 +a_1*x
+$$
+
+(x = explanatory variable; y = dependent variable; a~0~=intercept; a~1~= slope)
+
+Examples:
+
+```{r}
+plot(X, 0.5*X, ylim = c(0, 1), type = "p", pch = 16, col = "black", xlab = "X", ylab = "Y", lwd = 1.5)
+points(X, 0.5*X, col = "red", type = "l", lwd = 1.5)
+points(X, 1.0*X, ylim = c(0, 1), type = "p", pch = 16, col = "black", xlab = "X", ylab = "Y", lwd = 1.5)
+points(X, 1.0*X, ylim = c(0, 1), type = "l", pch = 16, col = "blue", xlab = "X", ylab = "Y", lwd = 1.5)
+legend("topleft", col = c("red", "blue"), lty = 1,legend = c('Y = 0.5*X+0', 'Y = 1.0**X+0'))
+```
+
+We can get the parameters (slope and intercept) with the MLE. However, we need first to make another assumptions, usually the model line doesn't perfectly the data because there is an observational error on Y, so the points scatter around the line:
+
+```{r}
+plot(X, 0.5*X+rnorm(100, sd = 0.05), ylim = c(0, 1), type = "p", pch = 16, col = "black", xlab = "X", ylab = "Y", lwd = 1.5)
+points(X, 0.5*X, col = "red", type = "l", lwd = 1.5)
+points(X, 1.0*X+rnorm(100, sd = 0.05), ylim = c(0, 1), type = "p", pch = 16, col = "black", xlab = "X", ylab = "Y", lwd = 1.5)
+points(X, 1.0*X, ylim = c(0, 1), type = "l", pch = 16, col = "blue", xlab = "X", ylab = "Y", lwd = 1.5)
+legend("topleft", col = c("red", "blue"), lty = 1,legend = c('Y = 0.5*X+0', 'Y = 1.0**X+0'))
+```
+
+And the model extends to:
+
+$$
+y = a_0 + a_1*x +\epsilon, \epsilon \sim N(0, sd)
+$$
+
+Which we can also rewrite into:
+
+$$
+y = N(a_0 + a_1*x, sd)
+$$
+
+Which is very similar to our previous MLE, right? The only difference is now that the mean depends now on x, let's optimize it again:
+
+```{r}
+Xobs = rnorm(100, sd = 1.0)
+Y = Xobs + rnorm(100,sd = 0.2)
+likelihood = function(par) { # three parameters now
+  lls = dnorm(Y, mean = Xobs*par[2]+par[1], sd = par[3], log = TRUE) # calculate for each observation the probability to observe the data given our model
+  # we use the logLikilihood because of numerical reasons
+  return(sum(lls))
+}
+
+likelihood(c(0, 0, 0.2))
+opt = optim(c(0.0, 0.0, 1.0), fn = function(par) -likelihood(par), hessian = TRUE )
+
+opt$par
+```
+
+Our true parameters are 0.0 for the intercept, 1.0 for the slope, and 0.22 for the sd of the observational error.
+
+Now, we want to test whether the effect (slope) is statistically significant different from 0:
+
+1.  calculate standard error
+2.  calculate t-statistic
+3.  calculate p-value
+
+```{r}
+st_errors = sqrt(diag(solve(opt$hessian)))
+st_errors[2]
+t_statistic = opt$par[2] / st_errors[2]
+pt(t_statistic, df = 100-3, lower.tail = FALSE)*2
+```
+
+The p-value is smaller than alpha, so the effect is significant! However, it would be tedious to do that always by hand, and because it is probably one of the most used analysis, there's a function for it in R:
+
+```{r}
+model = lm(Y~Xobs) # 1. Get estimates, MLE
+model
+summary(model) # 2. Calculate standard errors, CI, and p-values
+```
+
+## Understanding the linear regression
+
+![](resources/lm.png)
+
+Besides the MLE, there are also several tests in a regression. The most important are
+
+-   significance of each parameter. t-test: H~0~ = variable has no effect, that means the estimator for the parameter is 0
+
+-   significance of the model. F-test: H~0~ = none of the explanatory variables has an effect, that means all estimators are 0
+
+**Example:**
+
+```{r}
 pairs(airquality)
 # first think about what is explanatory / predictor 
 # and what is the dependent variable (e.g. in Ozone and Temp)
@@ -60,17 +198,51 @@ summary(fit1)
 fit2 = lm(Ozone ~ Temp - 1, data = airquality)
 summary(fit2)
 
-
 plot(Ozone ~ Temp, data = airquality, xlim = c(0,100), ylim = c(-150, 150))
 abline(fit1, col = "green")
 abline(fit2, col = "red", lty = 2)
 
-
 # there is no need to check normality of Ozone
 hist(airquality$Ozone) # this is not normal, and that's no problem !
+```
 
 
-# instead: the residuals must be normal!!!!!!!!
+### Model diagnostics
+
+The regression optimizes the parameters under the condition that the model is correct (e.g. there is really a linear relationship). If the model is not specified correctly, the parameter values are still estimated - to the best of the model's ability, but the result will be misleading, e.g. p-values and effect sizes
+
+What could be wrong:
+
+-   the distribution (e.g. error not normal)
+-   the shape of the relationship between explanatory variable and dependent variable (e.g., could be non-linear)
+
+The model's assumptions must always be checked!
+
+We can check the model by looking at the residuals (which are predicted - observed values) which should be normally distributed and should show no patterns:
+
+```{r}
+X = runif(50)
+Y = X + rnorm(50, sd = 0.2)
+fit = lm(Y~X)
+par(mfrow = c(1, 3))
+plot(X, Y)
+abline(fit, col = "red")
+plot(X, predict(fit) - Y, ylab = "Residuals")
+abline(h = 0, col = "red")
+hist(predict(fit) - Y, main = "", xlab = "Residuals")
+par(mfrow = c(1,1))
+```
+
+The residuals should match the model assumptions. For linear regression:
+
+-   normal distribution
+-   constant variance
+-   independence of the data points
+
+Example:
+
+```{r}
+fit1 = lm(Ozone~Temp, data = airquality)
 residuals(fit1)
 hist(residuals(fit1))
 # residuals are not normally distributed
@@ -84,10 +256,60 @@ oldpar= par(mfrow = c(2,2))
 plot(fit1)
 par(oldpar)
 #> there's a pattern in the residuals > the model does not fit very well!
+```
 
 
-# Quadratic term ----------------------------------------------------------
+### Linear regression with a categorical variable
 
+We can also use categorical variables as a explanatory variable:
+
+```{r}
+m = lm(weight~group, data = PlantGrowth)
+summary(m)
+```
+
+The lm estimates an effect/intercept for each level in the categorical variable. The first level of the categorical variable is used as a reference, i.e. the true effect for grouptrt1 is Intercept+grouptrt1 = `r 5.0320+(-0.3710)` and grouptrt2 is `r 5.0302+0.4940`. Moreover, the lm tests for a difference of the reference to the other levels. So with this model we know whether the control is significant different from treatment 1 and 2 but we cannot say anything about the difference between trt1 and trt2.
+
+If we are interested in testing trt1 vs trt2 we can, for example, change the reference level of our variable:
+
+```{r}
+tmp = PlantGrowth
+tmp$group= relevel(tmp$group, ref = "trt1")
+m = lm(weight~group, data = tmp)
+summary(m)
+```
+
+Another example:
+
+```{r}
+library(effects)
+library(jtools)
+
+summary(chickwts)
+
+plot(weight ~ feed, chickwts)
+fit4 = lm(weight ~ feed, chickwts)
+
+summary(fit4)
+anova(fit4) #get overall effect of feeding treatment
+
+plot(allEffects(fit4))
+plot(allEffects(fit4, partial.residuals = T))
+effect_plot(fit4, pred = feed, interval = TRUE, plot.points = F)
+
+
+old.par = par(mfrow = c(2, 2))
+plot(fit4)
+par(old.par)
+
+boxplot(residuals(fit4) ~ chickwts$feed)
+```
+
+
+### Linear regression with a quadratic term
+
+
+```{r}
 ## what does simple linear regression mean?
 # simple = one predictor!
 # linear = linear in the parameters
@@ -136,43 +358,15 @@ plot(allEffects(fit3, partial.residuals = T))
 # or jtools package
 library(jtools)
 effect_plot(fit3, pred = Temp, interval = TRUE, plot.points = TRUE)
-
-
-
-# Categorial predictors ---------------------------------------------------
-
-
-summary(chickwts)
-
-plot(weight ~ feed, chickwts)
-fit4 = lm(weight ~ feed, chickwts)
-
-summary(fit4)
-anova(fit4) #get overall effect of feeding treatment
-
-plot(allEffects(fit4))
-plot(allEffects(fit4, partial.residuals = T))
-effect_plot(fit4, pred = feed, interval = TRUE, plot.points = F)
-
-
-old.par = par(mfrow = c(2, 2))
-plot(fit4)
-par(old.par)
-
-boxplot(residuals(fit4) ~ chickwts$feed)
-
 ```
 
+## Exercises
 
+You will work with the following datasets:
 
-## Exercises 
-
-You will work with the following datasets: 
-
- * regrowth {EcoData}
- * birdabundance {EcoData}
- * simulated data
- 
+-   regrowth {EcoData}
+-   birdabundance {EcoData}
+-   simulated data
 
 ### Analyzing the "regrowth" dataset
 
@@ -180,21 +374,20 @@ Imagine you have a garden with some fruit trees and you were thinking of adding 
 
 Carry out the following tasks
 
-  * Perform a simple linear regression for the influence of fruit biomass on root biomass.
-  * Visualize the data and add the regression line to the plot.
-  
-You will need the following functions:  
+-   Perform a simple linear regression for the influence of fruit biomass on root biomass.
+-   Visualize the data and add the regression line to the plot.
 
- * *lm()*
- * *summary()* 
- * *plot()*
- * *abline()*  
+You will need the following functions:
+
+-   *lm()*
+-   *summary()*
+-   *plot()*
+-   *abline()*
 
 ::: {.callout-caution icon="false"}
 #### Question
 
 Use your results to **chose the correct statements on elearning-extern**.
-
 :::
 
 ::: {.callout-tip collapse="true" appearance="minimal" icon="false"}
@@ -221,7 +414,6 @@ abline(h = 4.184256 + 0.050444*70, col = "brown") # add line at y value accordin
 ```
 :::
 
-
 ### Analyzing the "birdabundance" dataset
 
 The dataset provides bird abundances in forest fragments with different characteristics in Australia. We want to look at the relationship of the variables "abundance", "distance" and "grazing".
@@ -231,23 +423,22 @@ The dataset provides bird abundances in forest fragments with different characte
 
 First, **answer the following questions on elearning-extern**:
 
- * What is the most reasonable research question regarding these variables?
- * What is the response variable?
- * What is the predictor variable?
+-   What is the most reasonable research question regarding these variables?
+-   What is the response variable?
+-   What is the predictor variable?
 
 Then, perform the following tasks:
 
- * Fit a simple linear regression relating the response variable to the categorial predictor (that is the one with five levels, make sure that it is indeed a factor using *as.factor()*)
- * Apply an ANOVA to your model.
- 
-You may need the following functions:  
+-   Fit a simple linear regression relating the response variable to the categorial predictor (that is the one with five levels, make sure that it is indeed a factor using *as.factor()*)
+-   Apply an ANOVA to your model.
 
- * *lm()*
- * *summary()* 
- * *anova()* 
- 
+You may need the following functions:
+
+-   *lm()*
+-   *summary()*
+-   *anova()*
+
 Use your results to **chose the correct statements on elearning-extern**.
-
 :::
 
 ::: {.callout-tip collapse="true" appearance="minimal" icon="false"}
@@ -267,13 +458,11 @@ anova(fit)
 # boxplot
 plot(ABUND ~ GRAZE, data = birdabundance)
 ```
-
 :::
-
 
 ### Model validation: Residual checks
 
-Now, we will have a closer look at model diagnostics and residual checks in particular. Of course, we should have done this for all models above as well (we simply didn't do this, because of time restrictions). So remember that you always have to validate your model, if you want to be sure that your conclusions are correct. 
+Now, we will have a closer look at model diagnostics and residual checks in particular. Of course, we should have done this for all models above as well (we simply didn't do this, because of time restrictions). So remember that you always have to validate your model, if you want to be sure that your conclusions are correct.
 
 For this exercise, you can prepare a dataset yourself called "dat" with the variables "x" and "y". Simply copy the following code to generate the data:
 
@@ -287,32 +476,29 @@ head(dat)
 
 Perform the following tasks:
 
- * Fit a simple linear regression.
- * Check the residuals.
- * Perform another simple linear regression with a modified formula, if needed.
- * Create a scatter plot of the data and add a regression line for the first fit in black and one for the second fit in red. The second model cannot be plotted with the *abline()* function. Use the following code instead:
- 
+-   Fit a simple linear regression.
+-   Check the residuals.
+-   Perform another simple linear regression with a modified formula, if needed.
+-   Create a scatter plot of the data and add a regression line for the first fit in black and one for the second fit in red. The second model cannot be plotted with the *abline()* function. Use the following code instead:
+
 ```{r eval = F}
 lines(sort(x), predict(fit2, newdata = data.frame(x = sort(x))), col = "red")
 ```
 
-You may also need the following functions:  
+You may also need the following functions:
 
- * *lm()*
- * *summary()*
- * *par(mfrow = c(2, 2))*
- * *plot()*
- * *abline()*
- 
+-   *lm()*
+-   *summary()*
+-   *par(mfrow = c(2, 2))*
+-   *plot()*
+-   *abline()*
+
 Use your results to **answer the questions on elearning-extern**.
-
 
 ::: {.callout-caution icon="false"}
 #### Question
 
 TODO
-
-
 :::
 
 ::: {.callout-tip collapse="true" appearance="minimal" icon="false"}
@@ -354,8 +540,4 @@ lines(sort(x), predict(fit2, newdata = data.frame(x = sort(x))), col = "red")
 
 summary(fit2) # significantly negatively correlated, trustworthy now, because residuals are sufficiently uniformly distributed (first plot in plot(fit2))
 ```
-
 :::
-
-
-

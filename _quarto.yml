@@ -39,9 +39,7 @@ knitr:
 
 format:
   html:
-    theme: cosmo
-    code-link: true
-    code-copy: hover    
+    code-copy: hover
 editor: visual
 
 
