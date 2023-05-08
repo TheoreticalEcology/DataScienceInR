@@ -285,7 +285,7 @@ After the experiment, the only parameter we could change would be the significan
 
 We can reduce $\alpha$ and we will get fewer type I errors (false positives), but type II errors (false negatives) will increase. So what can we do with this in practice?
 
-1- $\beta$ is the so called statistical power which is the rate at which a test is significant if the effect truly exists. Power increases with stronger effect, smaller variability, (larget $\alpha$ ), and more data (sample size). So, collect more data? How much data do we need?
+1- $\beta$ is the so called statistical power which is the rate at which a test is significant if the effect truly exists. Power increases with stronger effect, smaller variability, (larger $\alpha$ ), and more data (sample size). So, collect more data? How much data do we need?
 
 Before the experiment, you can estimate the effect size and the variability. Together with alpha (known), you can calculate the power depending on the sample size:
 
@@ -334,7 +334,7 @@ $$
 FDR = \frac{p(H_0)\cdot\alpha}{p(H_0)\cdot\alpha + p(!H_0)\cdot(1-\beta)}
 $$
 
-$p(H_0)$ = probability of H~0~ (no effect); $p(!H_0)$ = probability of not H~0~ (effect exists). Both are unknown and the only parameters we can influence is $\alpha$ and $\beta$ . But decreasing $\alpha$ leads to too high false negatives, so $\beta$ is left.
+$p(H_0)$ = probability of H~0~ (no effect); $p(!H_0)$ = probability of not H~0~ (effect exists). Both are unknown and the only parameters we can influence are $\alpha$ and $\beta$. But decreasing $\alpha$ leads to too high false negatives, so $\beta$ is left.
 
 ## Statistical tests
 
@@ -650,7 +650,7 @@ The dataset 'streams' contains water measurements taken at different locations a
 dat = read.table("https://raw.githubusercontent.com/biometry/APES/master/Data/Simone/streams.txt", header = T)
 ```
 
-Visualize and analyze the data and answer the following questions at **elearning-extern**.
+Visualize and analyze the data and answer the following questions at **elearning-extern** [("03_Test for Exercise in R")](https://elearning.uni-regensburg.de/mod/quiz/view.php?id=2046689).
 
 1.  For identifying an appropriate test for the effect of the water treatment filter, what are your first two choices in the decision tree?
 2.  The next decision you have to make is whether you can use a parametric test or not. Apply the Shapiro-Wilk test to check if the data are normally distributed. Are the tests significant and what does that tell you?
@@ -706,7 +706,7 @@ Analyze the data and answer the following questions at **elearning-extern**.
 ::: {.callout-tip collapse="true" appearance="minimal" icon="false"}
 #### Solution
 
-1.  An appropriate visualization for one numeric and one categorial variable is a **boxplot**. Using 'notch = T' in the function boxplot(), adds confidence interval for the median (the warning here indicates that we are not very confident in the estimates of the medians as the number of observations is rather small, you can see at the notches that go beyond the boxes).
+1.  An appropriate visualization for one numeric and one categorical variable is a **boxplot**. Using 'notch = T' in the function boxplot(), adds confidence interval for the median (the warning here indicates that we are not very confident in the estimates of the medians as the number of observations is rather small, you can see at the notches that go beyond the boxes).
 
 ```{r}
 dat = chickwts

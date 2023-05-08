@@ -334,7 +334,7 @@ barplot(Improvedcounts,  # create a barplot of your table
 
 **Hints for plot 1**
 
-What kind of plot is shown here? How many variables are shown in the plot? Approach: First, create a new object consisting of the table of the variable of interest (check "demonstration.R", if you have problems with the table function). Then use this object for plotting. Changing plot elements: Have a look at the help of the plotting-function to find out how to change the y- and x-axis labels. What do you notice on the y-axis? You can change the limits of the y-axis using "ylim = c(from, to)" as an argument in the plotting function.
+What kind of plot is shown here? How many variables are shown in the plot? Approach: First, create a new object consisting of the table of the variable of interest. Then use this object for plotting. Changing plot elements: Have a look at the help of the plotting-function to find out how to change the y- and x-axis labels. What do you notice on the y-axis? You can change the limits of the y-axis using "ylim = c(from, to)" as an argument in the plotting function.
 
 ```{r, echo = FALSE}
 Ratios <- table(Improved = Arthritis$Improved, Treatment = Arthritis$Treatment)
@@ -343,7 +343,7 @@ plot(Ratios)
 
 **Hints for plot 2**
 
-What kind of plot can you see here? How many variables does it show? To plot this you need to create a contingency table with the variables of interest (check "demonstration.R", if you have problems doing this). Changing plot elements: You can name the variables in your contingency table (e.g. name = variable, othername = othervariable). The name you assign to your table will be used as the title in the plot.
+What kind of plot can you see here? How many variables does it show? To plot this you need to create a contingency table with the variables of interest. Changing plot elements: You can name the variables in your contingency table (e.g. name = variable, othername = othervariable). The name you assign to your table will be used as the title in the plot.
 
 What do you think of the study now? Could you already draw conclusions from this plot? Provide your answer to the last question on **elearning-extern** [("02_Test for Exercise in R")](https://elearning.uni-regensburg.de/mod/quiz/view.php?id=2046676).
 
@@ -389,7 +389,7 @@ You can also get more explanations on the data set via the help.
 ```{r, eval=FALSE}
 install.packages("devtools")
 library(devtools)
-devtools::install_github(repo = "TheoreticalEcology/EcoData", subdir = "EcoData", dependencies = T, build_vignettes = T)
+devtools::install_github(repo = "TheoreticalEcology/EcoData", dependencies = T, build_vignettes = T)
 library(EcoData)
 View(birdabundance)
 ```
@@ -538,9 +538,15 @@ You can see that the blue data points are only at the low abundances, whereas th
 What is the mean bird abundance per color / level of grazing intensity?
 
 ```{r}
-bird_grouped <- birdabundance %>% # define dataset to be summarised
+# Option 1: Using tidyverse / dplyr as shown at the end of section 2.0.1 Summary statistics:
+library(dplyr)
+bird_grouped <- birdabundance %>% # define dataset to be summarized
   group_by(GRAZE) %>% # define grouping factor
-  summarise(mean.abund = mean(ABUND)) # summarise by taking the mean of abundance
+  summarise(mean.abund = mean(ABUND)) # summarize by taking the mean of abundance
+
+# Option 2: Using base R and formula notation:
+bird_grouped <- aggregate(ABUND~GRAZE, data = birdabundance, FUN = mean)
+
 bird_grouped
 ```
 :::

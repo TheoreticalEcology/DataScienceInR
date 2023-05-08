@@ -425,7 +425,7 @@ You have seen how you can use squared brackets `[ ]` and the dollar sign `$` to 
 
 -   squared brackets are used as follows: data\[rowNumber, columnNumber\]
 -   the dollar sign helps to extract colums with their name (good for readability): data\$columnName
--   this syntax can also be used to assign new columns, simply use a new column name and the assign operator: `data$newColName <- or data$newColName`)
+-   this syntax can also be used to assign new columns, simply use a new column name and the assign operator: `data$newColName <- `)
 
 The following lines of code assess parts of the data frame. Try out what they do and sort the code lines and their meaning on **elearning-extern**.
 
