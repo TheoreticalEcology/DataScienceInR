@@ -773,14 +773,14 @@ Warning
 </div>
 </div>
 <p><strong>Hints for plot 1</strong></p>
-<p>What kind of plot is shown here? How many variables are shown in the plot? Approach: First, create a new object consisting of the table of the variable of interest (check “demonstration.R”, if you have problems with the table function). Then use this object for plotting. Changing plot elements: Have a look at the help of the plotting-function to find out how to change the y- and x-axis labels. What do you notice on the y-axis? You can change the limits of the y-axis using “ylim = c(from, to)” as an argument in the plotting function.</p>
+<p>What kind of plot is shown here? How many variables are shown in the plot? Approach: First, create a new object consisting of the table of the variable of interest. Then use this object for plotting. Changing plot elements: Have a look at the help of the plotting-function to find out how to change the y- and x-axis labels. What do you notice on the y-axis? You can change the limits of the y-axis using “ylim = c(from, to)” as an argument in the plotting function.</p>
 <div class="cell">
 <div class="cell-output-display">
 <p><img src="2-DescriptiveStatistics_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p><strong>Hints for plot 2</strong></p>
-<p>What kind of plot can you see here? How many variables does it show? To plot this you need to create a contingency table with the variables of interest (check “demonstration.R”, if you have problems doing this). Changing plot elements: You can name the variables in your contingency table (e.g.&nbsp;name = variable, othername = othervariable). The name you assign to your table will be used as the title in the plot.</p>
+<p>What kind of plot can you see here? How many variables does it show? To plot this you need to create a contingency table with the variables of interest. Changing plot elements: You can name the variables in your contingency table (e.g.&nbsp;name = variable, othername = othervariable). The name you assign to your table will be used as the title in the plot.</p>
 <p>What do you think of the study now? Could you already draw conclusions from this plot? Provide your answer to the last question on <strong>elearning-extern</strong> <a href="https://elearning.uni-regensburg.de/mod/quiz/view.php?id=2046676">(“02_Test for Exercise in R”)</a>.</p>
 <div class="callout-tip callout callout-style-simple no-icon callout-captioned">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
@@ -841,7 +841,7 @@ No, because this is only a descriptive plot. You can say that a large proportion
 <div class="cell">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"devtools"</span>)</span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(devtools)</span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="at">repo =</span> <span class="st">"TheoreticalEcology/EcoData"</span>, <span class="at">subdir =</span> <span class="st">"EcoData"</span>, <span class="at">dependencies =</span> T, <span class="at">build_vignettes =</span> T)</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="at">repo =</span> <span class="st">"TheoreticalEcology/EcoData"</span>, <span class="at">dependencies =</span> T, <span class="at">build_vignettes =</span> T)</span>
 <span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(EcoData)</span>
 <span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(birdabundance)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -984,18 +984,22 @@ Solution
 <p>You can see that the blue data points are only at the low abundances, whereas the red data points are rather at the higher abundances. Purple data points are throughout all abundances. There thus seems to be a correlation between the grazing classes and bird abundances.</p>
 <p>What is the mean bird abundance per color / level of grazing intensity?</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>bird_grouped <span class="ot">&lt;-</span> birdabundance <span class="sc">%&gt;%</span> <span class="co"># define dataset to be summarised</span></span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(GRAZE) <span class="sc">%&gt;%</span> <span class="co"># define grouping factor</span></span>
-<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean.abund =</span> <span class="fu">mean</span>(ABUND)) <span class="co"># summarise by taking the mean of abundance</span></span>
-<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>bird_grouped</span>
-<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a><span class="do">## # A tibble: 5 × 2</span></span>
-<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a><span class="do">##   GRAZE mean.abund</span></span>
-<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a><span class="do">##   &lt;int&gt;      &lt;dbl&gt;</span></span>
-<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a><span class="do">## 1     1      28.6 </span></span>
-<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a><span class="do">## 2     2      22.0 </span></span>
-<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a><span class="do">## 3     3      21.3 </span></span>
-<span id="cb38-11"><a href="#cb38-11" aria-hidden="true" tabindex="-1"></a><span class="do">## 4     4      20.6 </span></span>
-<span id="cb38-12"><a href="#cb38-12" aria-hidden="true" tabindex="-1"></a><span class="do">## 5     5       6.29</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Option 1: Using tidyverse / dplyr as shown at the end of section 2.0.1 Summary statistics:</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>bird_grouped <span class="ot">&lt;-</span> birdabundance <span class="sc">%&gt;%</span> <span class="co"># define dataset to be summarized</span></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(GRAZE) <span class="sc">%&gt;%</span> <span class="co"># define grouping factor</span></span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean.abund =</span> <span class="fu">mean</span>(ABUND)) <span class="co"># summarize by taking the mean of abundance</span></span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Option 2: Using base R and formula notation:</span></span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>bird_grouped <span class="ot">&lt;-</span> <span class="fu">aggregate</span>(ABUND<span class="sc">~</span>GRAZE, <span class="at">data =</span> birdabundance, <span class="at">FUN =</span> mean)</span>
+<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a>bird_grouped</span>
+<span id="cb38-11"><a href="#cb38-11" aria-hidden="true" tabindex="-1"></a><span class="do">##   GRAZE     ABUND</span></span>
+<span id="cb38-12"><a href="#cb38-12" aria-hidden="true" tabindex="-1"></a><span class="do">## 1     1 28.623077</span></span>
+<span id="cb38-13"><a href="#cb38-13" aria-hidden="true" tabindex="-1"></a><span class="do">## 2     2 21.950000</span></span>
+<span id="cb38-14"><a href="#cb38-14" aria-hidden="true" tabindex="-1"></a><span class="do">## 3     3 21.286667</span></span>
+<span id="cb38-15"><a href="#cb38-15" aria-hidden="true" tabindex="-1"></a><span class="do">## 4     4 20.571429</span></span>
+<span id="cb38-16"><a href="#cb38-16" aria-hidden="true" tabindex="-1"></a><span class="do">## 5     5  6.292308</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>

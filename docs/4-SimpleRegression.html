@@ -288,7 +288,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>In this chapter, you will practice to:</p>
 <ul>
 <li>formulate a research question</li>
-<li>perform simple linear regression for numeric and categorial predictors</li>
+<li>perform simple linear regression for numeric and categorical predictors</li>
 <li>interpret regression outputs</li>
 <li>check the residuals of regression models</li>
 </ul>
@@ -303,7 +303,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Now we assume that mean = 0, and sd = 0.2 are unknown but we want to find them, let's write the likelihood function:</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>likelihood <span class="ot">=</span> <span class="cf">function</span>(par) { <span class="co"># we give two parameters, mean and sd</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  lls <span class="ot">=</span> <span class="fu">dnorm</span>(Xobs, <span class="at">mean =</span> par[<span class="dv">1</span>], <span class="at">sd =</span> par[<span class="dv">2</span>], <span class="at">log =</span> <span class="cn">TRUE</span>) <span class="co"># calculate for each observation to observe the data given our model</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># we use the logLikilihood because of numerical reasons</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># we use the logLikilihood for numerical reasons</span></span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">sum</span>(lls))</span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
@@ -435,7 +435,7 @@ y = N(a_0 + a_1*x, sd)
 <span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="fu">pt</span>(t_statistic, <span class="at">df =</span> <span class="dv">100-3</span>, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>)<span class="sc">*</span><span class="dv">2</span></span>
 <span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 1.264962e-66</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>The p-value is smaller than alpha, so the effect is significant! However, it would be tedious to do that always by hand, and because it is probably one of the most used analysis, there’s a function for it in R:</p>
+<p>The p-value is smaller than <span class="math inline">\(\alpha\)</span>, so the effect is significant! However, it would be tedious to do that always by hand, and because it is probably one of the most used analysis, there’s a function for it in R:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>model <span class="ot">=</span> <span class="fu">lm</span>(Y<span class="sc">~</span>Xobs) <span class="co"># 1. Get estimates, MLE</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>model</span>
@@ -632,7 +632,7 @@ y = N(a_0 + a_1*x, sd)
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># residuals are not normally distributed</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="co"># we do not use a test for this, but instead look at the residuals visually</span></span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="co"># let's plot resiuals versus predictor</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="co"># let's plot residuals versus predictor</span></span>
 <span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(airquality<span class="sc">$</span>Temp[<span class="sc">!</span><span class="fu">is.na</span>(airquality<span class="sc">$</span>Ozone)], <span class="fu">residuals</span>(fit1))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="4-SimpleRegression_files/figure-html/unnamed-chunk-15-2.png" class="img-fluid" width="672"></p>
@@ -650,7 +650,7 @@ y = N(a_0 + a_1*x, sd)
 </section>
 <section id="linear-regression-with-a-categorical-variable" class="level3" data-number="4.3.2">
 <h3 data-number="4.3.2" class="anchored" data-anchor-id="linear-regression-with-a-categorical-variable"><span class="header-section-number">4.3.2</span> Linear regression with a categorical variable</h3>
-<p>We can also use categorical variables as a explanatory variable:</p>
+<p>We can also use categorical variables as an explanatory variable:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>m <span class="ot">=</span> <span class="fu">lm</span>(weight<span class="sc">~</span>group, <span class="at">data =</span> PlantGrowth)</span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m)</span>
@@ -678,7 +678,7 @@ y = N(a_0 + a_1*x, sd)
 <p>If we are interested in testing trt1 vs trt2 we can, for example, change the reference level of our variable:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">=</span> PlantGrowth</span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>tmp<span class="sc">$</span>group<span class="ot">=</span> <span class="fu">relevel</span>(tmp<span class="sc">$</span>group, <span class="at">ref =</span> <span class="st">"trt1"</span>)</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>tmp<span class="sc">$</span>group <span class="ot">=</span> <span class="fu">relevel</span>(tmp<span class="sc">$</span>group, <span class="at">ref =</span> <span class="st">"trt1"</span>)</span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>m <span class="ot">=</span> <span class="fu">lm</span>(weight<span class="sc">~</span>group, <span class="at">data =</span> tmp)</span>
 <span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m)</span>
 <span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
@@ -770,9 +770,8 @@ y = N(a_0 + a_1*x, sd)
 <p><img src="4-SimpleRegression_files/figure-html/unnamed-chunk-18-4.png" class="img-fluid" width="672"></p>
 </div>
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>old.par <span class="ot">=</span> <span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
-<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fit4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>old.par <span class="ot">=</span> <span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fit4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="4-SimpleRegression_files/figure-html/unnamed-chunk-18-5.png" class="img-fluid" width="672"></p>
 </div>
@@ -906,7 +905,7 @@ Question
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Use your results to <strong>chose the correct statements on elearning-extern</strong>.</p>
+<p>Use your results to chose the correct statement(s) on <strong>elearning-extern</strong> (Q1) <a href="https://elearning.uni-regensburg.de/mod/quiz/view.php?id=2046695">(“04_Test for Exercise in R - simple regression”)</a>.</p>
 </div>
 </div>
 <div class="callout-tip callout callout-style-simple no-icon callout-captioned">
@@ -973,11 +972,11 @@ Solution
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-caption-container flex-fill">
-Question
+Questions
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>First, <strong>answer the following questions on elearning-extern</strong>:</p>
+<p>First, answer the following questions on <strong>elearning-extern</strong> (Q 2-4):</p>
 <ul>
 <li>What is the most reasonable research question regarding these variables?</li>
 <li>What is the response variable?</li>
@@ -985,7 +984,7 @@ Question
 </ul>
 <p>Then, perform the following tasks:</p>
 <ul>
-<li>Fit a simple linear regression relating the response variable to the categorial predictor (that is the one with five levels, make sure that it is indeed a factor using <em>as.factor()</em>)</li>
+<li>Fit a simple linear regression relating the response variable to the categorical predictor (that is the one with five levels, make sure that it is indeed a factor using <em>as.factor()</em>)</li>
 <li>Apply an ANOVA to your model.</li>
 </ul>
 <p>You may need the following functions:</p>
@@ -994,7 +993,7 @@ Question
 <li><em>summary()</em></li>
 <li><em>anova()</em></li>
 </ul>
-<p>Use your results to <strong>chose the correct statements on elearning-extern</strong>.</p>
+<p>Use your results to chose the correct statement(s) on <strong>elearning-extern</strong> (Q5).</p>
 </div>
 </div>
 <div class="callout-tip callout callout-style-simple no-icon callout-captioned">
@@ -1009,6 +1008,7 @@ Solution
 </div>
 <div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
+<p>A reasonable research question is how abundance is influenced by distance and/or grazing. Here, the response variable is abundance, while the predictors are distance and/or grazing.</p>
 <p>This is the code that you need to interpret the results.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># change variable from integer to factor</span></span>
@@ -1060,7 +1060,7 @@ Solution
 </section>
 <section id="model-validation-residual-checks" class="level3" data-number="4.4.3">
 <h3 data-number="4.4.3" class="anchored" data-anchor-id="model-validation-residual-checks"><span class="header-section-number">4.4.3</span> Model validation: Residual checks</h3>
-<p>Now, we will have a closer look at model diagnostics and residual checks in particular. Of course, we should have done this for all models above as well (we simply didn’t do this, because of time restrictions). So remember that you always have to validate your model, if you want to be sure that your conclusions are correct.</p>
+<p>Now, we will have a closer look at model diagnostics and residual checks in particular. Of course, we should have done this for all models above as well (we simply didn’t do this because of time restrictions). So remember that you always have to validate your model, if you want to be sure that your conclusions are correct.</p>
 <p>For this exercise, you can prepare a dataset yourself called “dat” with the variables “x” and “y”. Simply copy the following code to generate the data:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">234</span>)</span>
@@ -1094,7 +1094,7 @@ Solution
 <li><em>plot()</em></li>
 <li><em>abline()</em></li>
 </ul>
-<p>Use your results to <strong>answer the questions on elearning-extern</strong>.</p>
+<p>Use your results to answer the following questions on <strong>elearning-extern</strong> (Q 6-8).</p>
 <div class="callout-caution callout callout-style-default no-icon callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -1105,7 +1105,11 @@ Question
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>TODO</p>
+<ul>
+<li>What pattern do the residuals of the first regression model show when plotted against the fitted values?</li>
+<li>What do you have to do to improve your first regression model?</li>
+<li>Identify the correct statement(s) about the residuals of the modified model.</li>
+</ul>
 </div>
 </div>
 <div class="callout-tip callout callout-style-simple no-icon callout-captioned">
@@ -1131,7 +1135,7 @@ Solution
 <span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a><span class="co"># check residuals</span></span>
 <span id="cb41-10"><a href="#cb41-10" aria-hidden="true" tabindex="-1"></a>op <span class="ot">=</span> <span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
-<span id="cb41-11"><a href="#cb41-11" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fit) <span class="co"># residuals show a parabolic relationship (first plot) -&gt; quadratic relationship</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb41-11"><a href="#cb41-11" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fit) <span class="co"># residuals show a parabolic relationship (see first plot)  -&gt; to improve, fit a quadratic relationship</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="4-SimpleRegression_files/figure-html/resid-check-1.png" class="img-fluid" width="672"></p>
 </div>

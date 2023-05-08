@@ -43,11 +43,17 @@ Confounders can even lead to observed correlations where in reality there is no 
 Conclusion: confounders can cause correlations where no causal relationship exists.
 :::
 
-## Classroom demo
+## Multiple LM
+
+The multiple linear regression can deal with confounders:
+
+-   Univariate (simple) linear regression describes how y depends on x using a polynomial of x1 e.g.: y = a0 + a1 \* x1 + a2 \* x12
+
+-   Multiple linear regression expands simple linear regression to a polynomial of several explanatory variables x1, x2... e.g.: y = a0 + a1 \* x1 + a2 \* x2 + a3 \* x3
+
+-   Idea: when we jointly consider "all" variables in the model formula, the influence of confounding variables is incorporated
 
 ```{r}
-# Multiple linear regression
-
 ## first remove observations with NA values
 newAirquality = airquality[complete.cases(airquality),]
 summary(newAirquality)
@@ -72,32 +78,8 @@ summary(m1)
 library(effects)
 plot(allEffects(m1))
 
-# Include interaction
-m2 = lm(Ozone ~  scale(Wind)* scale(Temp) , data = newAirquality)
-# if including interactions, always scale your predictor variables!
-# scale: subtracts the mean and divides by standard deviation
-summary(m2)
-op <- par(mfrow = c(2,2))
-plot(m2)
-par(op)
-
-plot(allEffects(m2))
-
-# transform response values 
-m3 = lm(sqrt(Ozone) ~ scale(Wind) * scale(Temp) , data = newAirquality)
-summary(m3)
-# Are residuals better now?
-op <- par(mfrow = c(2,2))
-plot(m3)
-par(op) # a little bit better
-
-# now plot and interpret the results
-plot(allEffects(m3))
-summary(m3)
-
 
 ## Omitted variable bias
-
 both = lm(Ozone ~ Wind + Temp, newAirquality)
 wind = lm(Ozone ~ Wind , newAirquality)
 temp = lm(Ozone ~ Temp, newAirquality)
@@ -112,9 +94,44 @@ slopes <- data.frame(
 )
 slopes
 
-## Making everything more complex
-str(newAirquality)
+```
 
+Omitting Wind makes the effect of Temperature larger.
+
+**Problem:** Multiple regression can separate the effect of collinear explanatory variables, but only, if collinearity is not too strong.
+
+**Solution:** If the correlation is really strong, we can omit one variable and interpret the remaining collinear variable as representing both.
+
+## Interactions between variables
+
+If one predictor influences the effect of the other predictor, we can include an interaction term into our model:
+
+$$
+y \sim a + b + a:b
+$$
+
+or:
+
+$$
+y \sim a*b
+$$
+
+```{r}
+# Include interaction
+m2 = lm(Ozone ~  scale(Wind)* scale(Temp) , data = newAirquality)
+# if including interactions, always scale your predictor variables!
+# scale: subtracts the mean and divides by standard deviation
+summary(m2)
+op <- par(mfrow = c(2,2))
+plot(m2)
+par(op)
+```
+
+The influence of temperature on growth depends on the amount of precipitation, or: If there's not enough water, also higher temperatures cannot increase growth.
+
+**Example:**
+
+```{r}
 # How does everything change, if we have factorial predictors?
 newAirquality$MonthFactor = as.factor(newAirquality$Month)
 
@@ -144,10 +161,65 @@ library(car)
 Anova(m5) # Anova with capital A
 #type II ANOVA: all other predictors have already been taken into account
 # Does an additional predictor explain some of the variance on top of that?
+```
 
+## Model selection
 
-# Model selection-----
+We've learned that we should include variables in the model that are collinear, that is they correlate with other predictors, but how many and which factors should we include?
 
+Famous example: [Female hurricanes are deadlier than male hurricanes (Jung et al., 2014)](https://www.pnas.org/doi/abs/10.1073/pnas.1402786111)
+
+They have analyzed the number of fatalities of hurricane and claimed that there is an effect of femininity of the name on the number of deads (while correcting for confounders). They recommend to give hurricans only male names because it would considerably reduce the number of deads.
+
+```{r}
+library(DHARMa)
+library(effects)
+?hurricanes
+str(hurricanes)
+
+library(glmmTMB)
+
+m1 = glmmTMB(alldeaths ~ MasFem*
+                             (Minpressure_Updated_2014 + scale(NDAM)),
+                           data = hurricanes, family = nbinom2)
+summary(m1)
+```
+
+Interactions -\> we need to scale variables:
+
+```{r}
+m2 = glmmTMB(alldeaths ~ scale(MasFem)*
+                             (scale(Minpressure_Updated_2014) + scale(NDAM)+scale(sqrt(NDAM))),
+                           data = hurricanes, family = nbinom2)
+summary(m2)
+```
+
+The effect of femininity is gone! Already with the scaled variables, but also with the transformation with the NDAM variable. The question was raised which of both is more reasonable, whether the relationship between damage and mortality isn't a straight line or that the gender of the hurricane names affect deaths ([Bob O'Hara and GrrlScientist](https://www.theguardian.com/science/grrlscientist/2014/jun/04/hurricane-gender-name-bias-sexism-statistics)). They argue that the model with the transformed variable fits the data better which brings us to the topic of this section, how to choose between different models? Answering this question if the goal of model selection.
+
+Why not include all the variables we can measure in our model? Problem with the full model:
+
+-   If you have more parameters than data points, the model cannot be fitted at all
+
+-   Even with n (samples) \~ k (number of parameters), model properties become very unfavorable (high p-values and uncertainties/standard errors) --\> Overfitting
+
+A "good model" depends on the goal of the analysis, do we want to optimize:
+
+-   Predictive ability -- how well can we predict with the model?
+
+-   Inferential ability -- do we identify the true values for the parameters (true effects), are the p-values correct, can we correctly say that a variable has an effect?
+
+The more complex a model gets, the better it fits to the data, but there's a downside, the bias-variance tradeoff.
+
+[Explanation bias-variance tradeoff](https://theoreticalecology.github.io/AdvancedRegressionModels/3C-ModelSelection.html#the-bias-variance-trade-off)
+
+[Explanation LRT and AIC](https://theoreticalecology.github.io/AdvancedRegressionModels/3C-ModelSelection.html#model-selection-methods)
+
+[Problem of p-hacking](https://theoreticalecology.github.io/AdvancedRegressionModels/3C-ModelSelection.html#pHacking)
+
+**Example:**
+
+```{r}
+#| eval: false
 # Compare different competing models:
 # let's compare models m3 and m5 to decide which one explains our data better:
 # 1. LRT
@@ -183,6 +255,17 @@ mean(sum.sel$coefficients[,4] < 0.05)
 ```
 
 ## Exercises
+
+| Formula      | Meaning                               | Details                                    |
+|--------------------|--------------------------|--------------------------|
+| `y~x_1`      | $y=a_0 +a_1*x_1$                      | Slope+Intercept                            |
+| `y~x_1 - 1`  | $y=a_1*x_1$                           | Slope, no intercept                        |
+| `y~I(x_1^2)` | $y=a_0 + a_1*(x_1^2)$                 | Quadratic effect                           |
+| `y~x_1+x_2`  | $y=a_0+a_1*x_1+a_2*x_2$               | Multiple linear regression (two variables) |
+| `y~x_1:x_2`  | $y=a_0+a_1*(x_1*x_2)$                 | Interaction between x~1~ and x~2~          |
+| `y~x_1*x_2`  | $y=a_0+a_1*(x_1*x_2)+a_2*x_1+a_3*x_2$ | Interaction and main effects               |
+
+: Formula syntax
 
 In this exercise you will:
 
@@ -296,6 +379,10 @@ plot(allEffects(carsfit))
 
 The process of cement hardening involves exogenous chemical reactions and thus produces heat. The amount of heat produced by the cement depends on the mixture of its constituents. The *Cement* dataset includes heat measurements for different types of cement that consist of different relative amounts calcium aluminate (*X1*), tricalcium silicate (*X2*), tetracalcium alumino ferrite (*X3*) and dicalcium silicate (*X4*). A cement producing company wants to optimize the composition of its product and wants to know, which of these compounds are mainly responsible for heat production.
 
+::: callout-warning
+We only do here a model selection because of educational reasons. For your analysis, and if your goal is not a predictive model, think about the model structure before you do the analysis and then stick to it! See here the section about [p-hacking](https://theoreticalecology.github.io/AdvancedRegressionModels/3C-ModelSelection.html#pHacking) (and also consider that AIC selection will/can remove confounders which will violate causality and can lead to spurious correlations!
+:::
+
 ::: {.callout-caution icon="false"}
 #### Questions
 
@@ -316,7 +403,6 @@ You may need the following functions:
 -   anova()
 
 Use your results to **answer the questions on elearning-extern** [("03_Test for Exercise in R - multiple regression")](https://elearning.uni-regensburg.de/mod/quiz/view.php?id=2046701).
-
 :::
 
 ::: {.callout-tip collapse="true" appearance="minimal" icon="false"}
@@ -325,6 +411,8 @@ Use your results to **answer the questions on elearning-extern** [("03_Test for 
 This is the code that you need to obtain the results.
 
 ```{r  Cement}
+#| eval: false
+
 library(MuMIn)
 # full model 
 full = lm(y ~ (X1 + X2 + X3 + X4)^2, data = Cement)
