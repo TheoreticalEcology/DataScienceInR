@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.2.475">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
 <title>Introduction to Data Science with R - 9&nbsp; Data handling</title>
 <style>
 code{white-space: pre-wrap;}
@@ -82,6 +85,7 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/quarto-nav/headroom.min.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
@@ -99,7 +103,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -118,44 +123,51 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     "search-submit-button-title": "Submit"
   }
 }</script>
+
+
 <meta name="citation_title" content="[9]{.chapter-number}&nbsp; [Data handling]{.chapter-title}">
 <meta name="citation_fulltext_html_url" content="https://TheoreticalEcology.github.io/DataScienceInR//9-DataScienceSkills.html">
 <meta name="citation_language" content="en">
 </head>
+
 <body class="nav-sidebar floating">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }"><div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">
-<span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Data handling</span>
-</h1>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Data handling</span></h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
     </div>
-  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Introduction to Data Science with R</a> 
         <div class="sidebar-tools-main">
     <a href="https://github.com/TheoreticalEcology/DataScienceInR" title="Source Code" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
     <a href="" title="Share" id="sidebar-tool-dropdown-0" class="sidebar-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-share"></i></a>
     <ul class="dropdown-menu" aria-labelledby="sidebar-tool-dropdown-0">
-<li>
-          <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=%7Curl%7C">
+        <li>
+          <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=|url|">
             <i class="bi bi-bi-twitter pe-1"></i>
           Twitter
           </a>
         </li>
         <li>
-          <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=%7Curl%7C">
+          <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=|url|">
             <i class="bi bi-bi-facebook pe-1"></i>
           Facebook
           </a>
         </li>
         <li>
-          <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=%7Curl%7C">
+          <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=|url|">
             <i class="bi bi-bi-linkedin pe-1"></i>
           LinkedIn
           </a>
@@ -171,7 +183,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-<li class="sidebar-item">
+        <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">Preface</a>
   </div>
@@ -227,15 +239,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </div>
 </li>
     </ul>
-</div>
-</nav><!-- margin-sidebar --><div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li>
-<a href="#exercise" id="toc-exercise" class="nav-link active" data-scroll-target="#exercise"><span class="toc-section-number">9.1</span>  Exercise</a>
+  <li><a href="#exercise" id="toc-exercise" class="nav-link active" data-scroll-target="#exercise"><span class="toc-section-number">9.1</span>  Exercise</a>
   <ul class="collapse">
-<li><a href="#read-data" id="toc-read-data" class="nav-link" data-scroll-target="#read-data"><span class="toc-section-number">9.1.1</span>  1. Read data</a></li>
+  <li><a href="#read-data" id="toc-read-data" class="nav-link" data-scroll-target="#read-data"><span class="toc-section-number">9.1.1</span>  1. Read data</a></li>
   <li><a href="#dataset-properties" id="toc-dataset-properties" class="nav-link" data-scroll-target="#dataset-properties"><span class="toc-section-number">9.1.2</span>  2. Dataset properties</a></li>
   <li><a href="#turn-character-to-numeric" id="toc-turn-character-to-numeric" class="nav-link" data-scroll-target="#turn-character-to-numeric"><span class="toc-section-number">9.1.3</span>  3. Turn character to numeric</a></li>
   <li><a href="#na--values-in-height" id="toc-na--values-in-height" class="nav-link" data-scroll-target="#na--values-in-height"><span class="toc-section-number">9.1.4</span>  4. <code>NA</code>- values in <code>height</code></a></li>
@@ -245,15 +259,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#select-trees-that-contain-both-dbh-and-height-measurements" id="toc-select-trees-that-contain-both-dbh-and-height-measurements" class="nav-link" data-scroll-target="#select-trees-that-contain-both-dbh-and-height-measurements"><span class="toc-section-number">9.1.8</span>  8. Select trees that contain both dbh and height measurements</a></li>
   <li><a href="#correlations" id="toc-correlations" class="nav-link" data-scroll-target="#correlations"><span class="toc-section-number">9.1.9</span>  9. Correlations?</a></li>
   <li><a href="#calculate-mean-dbh-per-species." id="toc-calculate-mean-dbh-per-species." class="nav-link" data-scroll-target="#calculate-mean-dbh-per-species."><span class="toc-section-number">9.1.10</span>  10. Calculate mean dbh per species.</a></li>
+  </ul></li>
   </ul>
-</li>
-  </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/TheoreticalEcology/DataScienceInR/edit/master/9-DataScienceSkills.qmd" class="toc-action">Edit this page</a></p></div></div></nav>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/TheoreticalEcology/DataScienceInR/edit/master/9-DataScienceSkills.qmd" class="toc-action">Edit this page</a></p></div></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
-<h1 class="title d-none d-lg-block">
-<span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Data handling</span>
-</h1>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Data handling</span></h1>
 </div>
 
 
@@ -266,8 +281,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </div>
   
 
-</header><section id="exercise" class="level2" data-number="9.1"><h2 data-number="9.1" class="anchored" data-anchor-id="exercise">
-<span class="header-section-number">9.1</span> Exercise</h2>
+</header>
+
+<section id="exercise" class="level2" data-number="9.1">
+<h2 data-number="9.1" class="anchored" data-anchor-id="exercise"><span class="header-section-number">9.1</span> Exercise</h2>
 <p>In this exercise you will practice common steps of the data preparation procedure using a dataset that was gathered in a forest in Switzerland.</p>
 <p>The main steps are as follows (<strong>to solve the tasks, please carefully read the detailed instructions and hints below</strong>):</p>
 <ol type="1">
@@ -293,65 +310,48 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <hr>
 <p>To thorougly check the dataset and perform the operations, you will need the following functions:</p>
 <ul>
-<li>
-<code><a href="https://rdrr.io/r/utils/read.table.html">read.csv()</a></code>: Check the different options using <code><a href="https://rdrr.io/r/utils/read.table.html">?read.csv</a></code><br>
+<li><code>read.csv()</code>: Check the different options using <code>?read.csv</code><br>
 </li>
-<li>
-<code><a href="https://rdrr.io/r/utils/str.html">str()</a></code>: Structure of an object<br>
+<li><code>str()</code>: Structure of an object<br>
 </li>
-<li>
-<code><a href="https://rdrr.io/r/base/table.html">table()</a></code>: Check the optional arguments!<br>
+<li><code>table()</code>: Check the optional arguments!<br>
 </li>
-<li>
-<code><a href="https://rdrr.io/r/base/merge.html">merge()</a></code>: Combine to data.frames<br>
+<li><code>merge()</code>: Combine to data.frames<br>
 </li>
-<li>
-<code><a href="https://rdrr.io/r/base/character.html">as.character()</a></code>: Change a vector’s class to character</li>
-<li>
-<code><a href="https://rdrr.io/r/base/numeric.html">as.numeric()</a></code>: Change a vector’s class to numeric.</li>
+<li><code>as.character()</code>: Change a vector’s class to character</li>
+<li><code>as.numeric()</code>: Change a vector’s class to numeric.</li>
 <li><code>%in%</code></li>
-<li>
-<code><a href="https://rdrr.io/r/base/NA.html">is.na()</a></code><br>
+<li><code>is.na()</code><br>
 </li>
-<li><code><a href="https://rdrr.io/r/base/Extremes.html">max()</a></code></li>
-<li>
-<code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code><br>
+<li><code>max()</code></li>
+<li><code>summary()</code><br>
 </li>
-<li>
-<code><a href="https://rdrr.io/r/stats/complete.cases.html">complete.cases()</a></code><br>
+<li><code>complete.cases()</code><br>
 </li>
-<li><code><a href="https://rdrr.io/r/stats/cor.test.html">cor.test()</a></code></li>
-<li>
-<code>%&gt;%</code> and <code><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by()</a></code> and <code><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize()</a></code> from the dlyr package (check demonstration Part 2)</li>
+<li><code>cor.test()</code></li>
+<li><code>%&gt;%</code> and <code>group_by()</code> and <code>summarize()</code> from the dlyr package (check demonstration Part 2)</li>
 </ul>
 <p>Regarding the solutions, note we don’t expect you to come up with exactly this code - there are many ways to solve the problem. The solutions just give you an idea of a possible solution</p>
-<section id="read-data" class="level3" data-number="9.1.1"><h3 data-number="9.1.1" class="anchored" data-anchor-id="read-data">
-<span class="header-section-number">9.1.1</span> 1. Read data</h3>
+<section id="read-data" class="level3" data-number="9.1.1">
+<h3 data-number="9.1.1" class="anchored" data-anchor-id="read-data"><span class="header-section-number">9.1.1</span> 1. Read data</h3>
 <p>Read the provided datasets <em>treedata.csv</em> and <em>species.csv</em> to R. Use the option <strong>stringsAsFactors = FALSE</strong> in the function <code>read.csv</code>.</p>
 <p>Read the dataset <em>treedata.csv</em> and call it treedata. It has the following columns:</p>
 <ul>
-<li>
-<code>species_code</code>: tree species code<br>
+<li><code>species_code</code>: tree species code<br>
 </li>
-<li>
-<code>dbh</code>: diameter at breast height (1.3 m) [cm]<br>
+<li><code>dbh</code>: diameter at breast height (1.3 m) [cm]<br>
 </li>
-<li>
-<code>height</code>: total height of the tree [m]. Measured only on a subset of trees.<br>
+<li><code>height</code>: total height of the tree [m]. Measured only on a subset of trees.<br>
 </li>
-<li>
-<code>rem</code>: coded values, containing remarks</li>
+<li><code>rem</code>: coded values, containing remarks</li>
 </ul>
 <p>Read the dataset <em>species.csv</em> and call it species. The dataset consists of the following columns:</p>
 <ul>
-<li>
-<code>species_code</code>: tree species code (matching the one used in treedata.csv)<br>
+<li><code>species_code</code>: tree species code (matching the one used in treedata.csv)<br>
 </li>
-<li>
-<code>species_scientific</code>: Scientific species name<br>
+<li><code>species_scientific</code>: Scientific species name<br>
 </li>
-<li>
-<code>species_english</code>: English species name</li>
+<li><code>species_english</code>: English species name</li>
 </ul>
 <hr>
 <div class="callout-tip callout callout-style-simple no-icon callout-captioned">
@@ -368,14 +368,15 @@ Solution
 <div class="callout-body-container callout-body">
 <p>First, you read in the file using <code>read.csv</code>. You have to specify the correct separator for your dataset, here this is “;”.</p>
 <div class="cell">
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">treedata</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">'Where/ever/you/put/it/treedata.csv'</span>, sep <span class="op">=</span> <span class="st">";"</span><span class="op">)</span>
-<span class="va">species</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">'Hopefully/in/the/same/folder/species.csv'</span>, sep <span class="op">=</span> <span class="st">";"</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>treedata <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">'Where/ever/you/put/it/treedata.csv'</span>, <span class="at">sep =</span> <span class="st">";"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>species <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">'Hopefully/in/the/same/folder/species.csv'</span>, <span class="at">sep =</span> <span class="st">";"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
 </div>
-</section><section id="dataset-properties" class="level3" data-number="9.1.2"><h3 data-number="9.1.2" class="anchored" data-anchor-id="dataset-properties">
-<span class="header-section-number">9.1.2</span> 2. Dataset properties</h3>
+</section>
+<section id="dataset-properties" class="level3" data-number="9.1.2">
+<h3 data-number="9.1.2" class="anchored" data-anchor-id="dataset-properties"><span class="header-section-number">9.1.2</span> 2. Dataset properties</h3>
 <p>Have a look at the properties of the dataset:</p>
 <ul>
 <li>Which classes do the columns have?<br>
@@ -398,10 +399,12 @@ Solution
 <p>The <code>data.frame</code> <code>dat</code> contains 4 columns: species, dbh (diameter at breast height [cm]), height [m] and bem1, a remark.<br>
 We expect the following formats:</p>
 <table class="table">
-<thead><tr class="header">
+<thead>
+<tr class="header">
 <th>column</th>
 <th>format</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
 <td>species</td>
@@ -423,7 +426,7 @@ We expect the following formats:</p>
 </table>
 <p>Using <code>str</code> we get an overview of the structure of a dataset:</p>
 <div class="cell">
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">treedata</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(treedata)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>'data.frame':   287 obs. of  4 variables:
  $ species_code: int  121 121 411 411 411 431 411 411 411 121 ...
@@ -436,8 +439,9 @@ We expect the following formats:</p>
 </div>
 </div>
 </div>
-</section><section id="turn-character-to-numeric" class="level3" data-number="9.1.3"><h3 data-number="9.1.3" class="anchored" data-anchor-id="turn-character-to-numeric">
-<span class="header-section-number">9.1.3</span> 3. Turn character to numeric</h3>
+</section>
+<section id="turn-character-to-numeric" class="level3" data-number="9.1.3">
+<h3 data-number="9.1.3" class="anchored" data-anchor-id="turn-character-to-numeric"><span class="header-section-number">9.1.3</span> 3. Turn character to numeric</h3>
 <p>One column, which we expect to be numeric, is of class character. Find the value causing this column to be character, set it to <code>NA</code> and turn the column into class numeric.</p>
 <p>Note that using ‘is.numeric()’ is not enough, if the column is a factor. This may be the case if you have used the option <strong>stringAsFactor = T</strong> in <code>read.csv</code> or an older version of R. Use a combination of ‘as.character()’ and ‘as.numeric()’ in that case.</p>
 <hr>
@@ -455,7 +459,7 @@ Solution
 <div class="callout-body-container callout-body">
 <p>We suspect <code>dbh</code> to contain a character and we want to remove this. With the function ‘table()’, we can check all existing values in the column. There seems to be an ‘X’ in the data.</p>
 <div class="cell">
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">treedata</span><span class="op">$</span><span class="va">dbh</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(treedata<span class="sc">$</span>dbh)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 10.1 10.2 10.4 10.6 10.7 10.9 11.2 11.4 11.5 11.9 12.3 12.5   13 13.2 13.3 13.4 
@@ -488,7 +492,7 @@ Solution
 </div>
 <p>To automatically search for characters, we can check if <code>dbh</code> contains a character that is part of <code>LETTERS</code> (capital letters) or <code>letters</code>:</p>
 <div class="cell">
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">treedata</span><span class="op">[</span><span class="va">treedata</span><span class="op">$</span><span class="va">dbh</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="va">LETTERS</span> <span class="op">|</span> <span class="va">treedata</span><span class="op">$</span><span class="va">dbh</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="va">letters</span>,<span class="op">]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>treedata[treedata<span class="sc">$</span>dbh <span class="sc">%in%</span> LETTERS <span class="sc">|</span> treedata<span class="sc">$</span>dbh <span class="sc">%in%</span> letters,]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>    species_code dbh height rem
 159          411   X   27.2  F4</code></pre>
@@ -496,20 +500,20 @@ Solution
 </div>
 <p>A more advanced option would be to use <code>grepl</code>. If we are using the solution above, we will only find the value if it is exactly one character. Things get a bit more complicated, if we have special characters, e.g, a *.</p>
 <div class="cell">
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span>, <span class="fl">5</span>, <span class="st">'*'</span>, <span class="st">'AA'</span>, <span class="st">','</span>, <span class="fl">9</span><span class="op">)</span>, <span class="fl">2</span><span class="op">)</span>
-<span class="va">x</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html">grepl</a></span><span class="op">(</span><span class="st">"^[A-Za-z]+$"</span>, <span class="va">x</span>, perl <span class="op">=</span> <span class="cn">T</span><span class="op">)</span><span class="op">]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="st">'*'</span>, <span class="st">'AA'</span>, <span class="st">','</span>, <span class="dv">9</span>), <span class="dv">2</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>x[<span class="fu">grepl</span>(<span class="st">"^[A-Za-z]+$"</span>, x, <span class="at">perl =</span> T)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "AA" "AA"</code></pre>
 </div>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">x</span><span class="op">[</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html">grepl</a></span><span class="op">(</span><span class="st">'[^[:punct:]]'</span>, <span class="va">x</span>, perl <span class="op">=</span><span class="cn">T</span><span class="op">)</span><span class="op">]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>x[<span class="sc">!</span><span class="fu">grepl</span>(<span class="st">'[^[:punct:]]'</span>, x, <span class="at">perl =</span>T)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "*" "," "*" ","</code></pre>
 </div>
 </div>
 <p>We want to set the X in <code>dbh</code> to <code>NA</code> (probably, this is a transcription error, so one could also have a look at the field forms…).</p>
 <div class="cell">
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">treedata</span><span class="op">$</span><span class="va">dbh</span><span class="op">[</span><span class="va">treedata</span><span class="op">$</span><span class="va">dbh</span> <span class="op">==</span> <span class="st">'X'</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="cn">NA</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">treedata</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>treedata<span class="sc">$</span>dbh[treedata<span class="sc">$</span>dbh <span class="sc">==</span> <span class="st">'X'</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(treedata)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>'data.frame':   287 obs. of  4 variables:
  $ species_code: int  121 121 411 411 411 431 411 411 411 121 ...
@@ -520,8 +524,8 @@ Solution
 </div>
 <p>Just removing the ‘X’ does not turn a character to numeric! R provides the function <code>as.numeric</code>, which might be of use in this case.</p>
 <div class="cell">
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">treedata</span><span class="op">$</span><span class="va">dbh</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">treedata</span><span class="op">$</span><span class="va">dbh</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">treedata</span><span class="op">$</span><span class="va">dbh</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>treedata<span class="sc">$</span>dbh <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(treedata<span class="sc">$</span>dbh)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(treedata<span class="sc">$</span>dbh)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 19.3 21.3 43.0 25.8 38.5 36.8</code></pre>
 </div>
@@ -529,9 +533,9 @@ Solution
 </div>
 </div>
 </div>
-</section><section id="na--values-in-height" class="level3" data-number="9.1.4"><h3 data-number="9.1.4" class="anchored" data-anchor-id="na--values-in-height">
-<span class="header-section-number">9.1.4</span> 4. <code>NA</code>- values in <code>height</code>
-</h3>
+</section>
+<section id="na--values-in-height" class="level3" data-number="9.1.4">
+<h3 data-number="9.1.4" class="anchored" data-anchor-id="na--values-in-height"><span class="header-section-number">9.1.4</span> 4. <code>NA</code>- values in <code>height</code></h3>
 <p>Check for NA’s in the column <code>height</code>:</p>
 <ul>
 <li>How many <code>NA</code>’s do appear in this column?<br>
@@ -552,7 +556,7 @@ Solution
 <div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">treedata</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(treedata)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  species_code        dbh              height           rem           
  Min.   :101.0   Min.   :   4.00   Min.   :  4.60   Length:287        
@@ -563,21 +567,21 @@ Solution
  Max.   :920.0   Max.   :2030.00   Max.   :110.88                     
                  NA's   :1         NA's   :221                        </code></pre>
 </div>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">treedata</span><span class="op">$</span><span class="va">height</span><span class="op">)</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(treedata<span class="sc">$</span>height))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 221</code></pre>
 </div>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">treedata</span><span class="op">$</span><span class="va">height</span><span class="op">)</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(<span class="fu">is.na</span>(treedata<span class="sc">$</span>height))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 FALSE  TRUE 
    66   221 </code></pre>
 </div>
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">treedata</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">treedata</span><span class="op">$</span><span class="va">height</span><span class="op">)</span>,<span class="op">]</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(treedata[<span class="fu">is.na</span>(treedata<span class="sc">$</span>height),])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 221</code></pre>
 </div>
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">treedata</span><span class="op">$</span><span class="va">height</span>, useNA <span class="op">=</span> <span class="st">'ifany'</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(treedata<span class="sc">$</span>height, <span class="at">useNA =</span> <span class="st">'ifany'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
    4.6    4.7    4.8    5.7    5.8    6.1    6.2    6.8    7.3    7.9   10.8 
@@ -602,8 +606,9 @@ FALSE  TRUE
 </div>
 </div>
 </div>
-</section><section id="implausible-values" class="level3" data-number="9.1.5"><h3 data-number="9.1.5" class="anchored" data-anchor-id="implausible-values">
-<span class="header-section-number">9.1.5</span> 5. Implausible values</h3>
+</section>
+<section id="implausible-values" class="level3" data-number="9.1.5">
+<h3 data-number="9.1.5" class="anchored" data-anchor-id="implausible-values"><span class="header-section-number">9.1.5</span> 5. Implausible values</h3>
 <p>The dataset contains some implausible values (completely out of range!). Find and replace these values with <code>NA</code>.</p>
 <hr>
 <div class="callout-tip callout callout-style-simple no-icon callout-captioned">
@@ -621,28 +626,28 @@ Solution
 <p><em>What values are implausible? The dataset contains different species. A value which is plausible for species A might be implausible for species B. However, for now, we will not go into the details here.</em></p>
 <p>Do a visual check of the dataset</p>
 <div class="cell">
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span><span class="va">treedata</span><span class="op">$</span><span class="va">height</span>, main <span class="op">=</span> <span class="st">'Height'</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(treedata<span class="sc">$</span>height, <span class="at">main =</span> <span class="st">'Height'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="9-DataScienceSkills_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span><span class="va">treedata</span><span class="op">$</span><span class="va">dbh</span>, main <span class="op">=</span><span class="st">'DBH'</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(treedata<span class="sc">$</span>dbh, <span class="at">main =</span><span class="st">'DBH'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="9-DataScienceSkills_files/figure-html/unnamed-chunk-10-2.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">treedata</span><span class="op">$</span><span class="va">dbh</span>, na.rm <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">max</span>(treedata<span class="sc">$</span>dbh, <span class="at">na.rm =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 2030</code></pre>
 </div>
-<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">treedata</span><span class="op">$</span><span class="va">height</span>, na.rm <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">max</span>(treedata<span class="sc">$</span>height, <span class="at">na.rm =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 110.88</code></pre>
 </div>
-<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">treedata</span><span class="op">[</span><span class="va">treedata</span><span class="op">$</span><span class="va">dbh</span> <span class="op">&gt;</span> <span class="fl">500</span> <span class="op">&amp;</span> <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">treedata</span><span class="op">$</span><span class="va">dbh</span><span class="op">)</span>,<span class="op">]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>treedata[treedata<span class="sc">$</span>dbh <span class="sc">&gt;</span> <span class="dv">500</span> <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(treedata<span class="sc">$</span>dbh),]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>    species_code  dbh height rem
 114          411 2030     NA  F2</code></pre>
 </div>
-<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">treedata</span><span class="op">[</span><span class="va">treedata</span><span class="op">$</span><span class="va">height</span> <span class="op">&gt;</span> <span class="fl">50</span> <span class="op">&amp;</span> <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">treedata</span><span class="op">$</span><span class="va">height</span><span class="op">)</span>,<span class="op">]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>treedata[treedata<span class="sc">$</span>height <span class="sc">&gt;</span> <span class="dv">50</span> <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(treedata<span class="sc">$</span>height),]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>    species_code  dbh height rem
 234          411 36.6 110.88    </code></pre>
@@ -651,14 +656,14 @@ Solution
 <p>There seems to be one outlier in both datasets which can be seen as implausible: No tree is more than 100 m of height and no tree has a diameter &gt; 20 m (These values can be considered implausible for trees in Switzerland).<br>
 We will now remove these values from our dataset by setting them to <code>NA</code> - this might not always be the best option, there are also statistical models that can account for such errors!</p>
 <div class="cell">
-<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">treedata</span><span class="op">$</span><span class="va">dbh</span><span class="op">[</span><span class="va">treedata</span><span class="op">$</span><span class="va">dbh</span> <span class="op">&gt;</span> <span class="fl">500</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="cn">NA</span>
-<span class="va">treedata</span><span class="op">$</span><span class="va">height</span><span class="op">[</span><span class="va">treedata</span><span class="op">$</span><span class="va">height</span> <span class="op">&gt;</span> <span class="fl">50</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="cn">NA</span>
-
-<span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span><span class="va">treedata</span><span class="op">$</span><span class="va">dbh</span>, main <span class="op">=</span> <span class="st">'DBH'</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>treedata<span class="sc">$</span>dbh[treedata<span class="sc">$</span>dbh <span class="sc">&gt;</span> <span class="dv">500</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>treedata<span class="sc">$</span>height[treedata<span class="sc">$</span>height <span class="sc">&gt;</span> <span class="dv">50</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(treedata<span class="sc">$</span>dbh, <span class="at">main =</span> <span class="st">'DBH'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="9-DataScienceSkills_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span><span class="va">treedata</span><span class="op">$</span><span class="va">height</span>, main <span class="op">=</span> <span class="st">'Height'</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(treedata<span class="sc">$</span>height, <span class="at">main =</span> <span class="st">'Height'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="9-DataScienceSkills_files/figure-html/unnamed-chunk-11-2.png" class="img-fluid" width="672"></p>
 </div>
@@ -666,9 +671,11 @@ We will now remove these values from our dataset by setting them to <code>NA</co
 </div>
 </div>
 </div>
-</section><section id="add-species-names" class="level3" data-number="9.1.6"><h3 data-number="9.1.6" class="anchored" data-anchor-id="add-species-names">
-<span class="header-section-number">9.1.6</span> 6. Add species names</h3>
-<p>Add the species names from the species dataset to the treedata dataset.<br><em>Hint: <code><a href="https://rdrr.io/r/base/merge.html">?merge</a></code></em></p>
+</section>
+<section id="add-species-names" class="level3" data-number="9.1.6">
+<h3 data-number="9.1.6" class="anchored" data-anchor-id="add-species-names"><span class="header-section-number">9.1.6</span> 6. Add species names</h3>
+<p>Add the species names from the species dataset to the treedata dataset.<br>
+<em>Hint: <code>?merge</code></em></p>
 <hr>
 <div class="callout-tip callout callout-style-simple no-icon callout-captioned">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
@@ -684,8 +691,8 @@ Solution
 <div class="callout-body-container callout-body">
 <p>Use <code>merge</code> to add species names to the dataset treedata. For adding only one column, <code>match</code> is a helpful function.</p>
 <div class="cell">
-<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">treedata</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/merge.html">merge</a></span><span class="op">(</span><span class="va">treedata</span>, <span class="va">species</span>, by <span class="op">=</span> <span class="st">"species_code"</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">treedata</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>treedata <span class="ot">=</span> <span class="fu">merge</span>(treedata, species, <span class="at">by =</span> <span class="st">"species_code"</span>)</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(treedata)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  species_code  dbh height rem         species_scientific species_english
 1          101  8.1    5.7     Picea abies (L.) H. Karst.   Norway Spruce
@@ -695,13 +702,14 @@ Solution
 5          101  8.2    6.2     Picea abies (L.) H. Karst.   Norway Spruce
 6          101  7.4    6.1     Picea abies (L.) H. Karst.   Norway Spruce</code></pre>
 </div>
-<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="co"># treedata$species_english &lt;- species$species_english[match(treedata$species_code, species$species_code)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># treedata$species_english &lt;- species$species_english[match(treedata$species_code, species$species_code)]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
 </div>
-</section><section id="remove-f4" class="level3" data-number="9.1.7"><h3 data-number="9.1.7" class="anchored" data-anchor-id="remove-f4">
-<span class="header-section-number">9.1.7</span> 7. Remove F4</h3>
+</section>
+<section id="remove-f4" class="level3" data-number="9.1.7">
+<h3 data-number="9.1.7" class="anchored" data-anchor-id="remove-f4"><span class="header-section-number">9.1.7</span> 7. Remove F4</h3>
 <p>The remark F4 indicates, that the dbh-measurments might be flawed. Remove these trees from treedata.</p>
 <hr>
 <div class="callout-tip callout callout-style-simple no-icon callout-captioned">
@@ -717,13 +725,14 @@ Solution
 <div id="callout-7" class="callout-7-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
-<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">treedata</span> <span class="op">&lt;-</span> <span class="va">treedata</span><span class="op">[</span><span class="op">!</span><span class="va">treedata</span><span class="op">$</span><span class="va">rem</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="st">'F4'</span>,<span class="op">]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>treedata <span class="ot">&lt;-</span> treedata[<span class="sc">!</span>treedata<span class="sc">$</span>rem <span class="sc">%in%</span> <span class="st">'F4'</span>,]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
 </div>
-</section><section id="select-trees-that-contain-both-dbh-and-height-measurements" class="level3" data-number="9.1.8"><h3 data-number="9.1.8" class="anchored" data-anchor-id="select-trees-that-contain-both-dbh-and-height-measurements">
-<span class="header-section-number">9.1.8</span> 8. Select trees that contain both dbh and height measurements</h3>
+</section>
+<section id="select-trees-that-contain-both-dbh-and-height-measurements" class="level3" data-number="9.1.8">
+<h3 data-number="9.1.8" class="anchored" data-anchor-id="select-trees-that-contain-both-dbh-and-height-measurements"><span class="header-section-number">9.1.8</span> 8. Select trees that contain both dbh and height measurements</h3>
 <p>Subset treedata to trees where both height and dbh measurements were carried out. Call the result dbh_height.</p>
 <hr>
 <div class="callout-tip callout callout-style-simple no-icon callout-captioned">
@@ -740,13 +749,14 @@ Solution
 <div class="callout-body-container callout-body">
 <p>This can be done using <code>complete.cases</code> using</p>
 <div class="cell">
-<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">dbh_height</span> <span class="op">&lt;-</span> <span class="va">treedata</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/stats/complete.cases.html">complete.cases</a></span><span class="op">(</span><span class="va">treedata</span><span class="op">$</span><span class="va">dbh</span>, <span class="va">treedata</span><span class="op">$</span><span class="va">height</span><span class="op">)</span>,<span class="op">]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>dbh_height <span class="ot">&lt;-</span> treedata[<span class="fu">complete.cases</span>(treedata<span class="sc">$</span>dbh, treedata<span class="sc">$</span>height),]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
 </div>
-</section><section id="correlations" class="level3" data-number="9.1.9"><h3 data-number="9.1.9" class="anchored" data-anchor-id="correlations">
-<span class="header-section-number">9.1.9</span> 9. Correlations?</h3>
+</section>
+<section id="correlations" class="level3" data-number="9.1.9">
+<h3 data-number="9.1.9" class="anchored" data-anchor-id="correlations"><span class="header-section-number">9.1.9</span> 9. Correlations?</h3>
 <p>Check for correlations in the dataset dbh_height. Use a test and plot dbh vs height.</p>
 <hr>
 <div class="callout-tip callout callout-style-simple no-icon callout-captioned">
@@ -762,8 +772,8 @@ Solution
 <div id="callout-9" class="callout-9-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
-<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/cor.test.html">cor.test</a></span><span class="op">(</span><span class="va">dbh_height</span><span class="op">$</span><span class="va">dbh</span>
-         , <span class="va">dbh_height</span><span class="op">$</span><span class="va">height</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor.test</span>(dbh_height<span class="sc">$</span>dbh</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>         , dbh_height<span class="sc">$</span>height)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Pearson's product-moment correlation
@@ -777,10 +787,10 @@ sample estimates:
       cor 
 0.8866893 </code></pre>
 </div>
-<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">dbh_height</span><span class="op">$</span><span class="va">dbh</span>
-     , <span class="va">dbh_height</span><span class="op">$</span><span class="va">height</span>
-     , ylab <span class="op">=</span> <span class="st">'Height'</span>
-     , xlab <span class="op">=</span> <span class="st">'DBH'</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(dbh_height<span class="sc">$</span>dbh</span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>     , dbh_height<span class="sc">$</span>height</span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>     , <span class="at">ylab =</span> <span class="st">'Height'</span></span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>     , <span class="at">xlab =</span> <span class="st">'DBH'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="9-DataScienceSkills_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -788,8 +798,9 @@ sample estimates:
 </div>
 </div>
 </div>
-</section><section id="calculate-mean-dbh-per-species." class="level3" data-number="9.1.10"><h3 data-number="9.1.10" class="anchored" data-anchor-id="calculate-mean-dbh-per-species.">
-<span class="header-section-number">9.1.10</span> 10. Calculate mean dbh per species.</h3>
+</section>
+<section id="calculate-mean-dbh-per-species." class="level3" data-number="9.1.10">
+<h3 data-number="9.1.10" class="anchored" data-anchor-id="calculate-mean-dbh-per-species."><span class="header-section-number">9.1.10</span> 10. Calculate mean dbh per species.</h3>
 <p>For calculating summary statistics, the dplyr package is really helpful. It is part of the tidyverse environment, which was designed for data science. If you work with large and complex datasets or if you have to derive many new variables, I really recommend that you have a look at this. Also, the syntax for dplyr is quite intuitive.</p>
 <p>For help on this, check the demonstration of Part 2 where we calculated summary statistics for groups using the dplyr package!</p>
 <div class="callout-tip callout callout-style-simple no-icon callout-captioned">
@@ -805,7 +816,7 @@ Solution
 <div id="callout-10" class="callout-10-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
-<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>
 Attaching package: 'dplyr'</code></pre>
@@ -820,11 +831,11 @@ Attaching package: 'dplyr'</code></pre>
 
     intersect, setdiff, setequal, union</code></pre>
 </div>
-<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">treedata</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">species_english</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span><span class="op">(</span>N <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span>,
-            meanDBH <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">dbh</span>, na.rm <span class="op">=</span> <span class="cn">T</span><span class="op">)</span>, 
-            sdDBH <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">dbh</span>, na.rm <span class="op">=</span> <span class="cn">T</span><span class="op">)</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>treedata <span class="sc">%&gt;%</span> </span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(species_english) <span class="sc">%&gt;%</span> </span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">N =</span> <span class="fu">n</span>(),</span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">meanDBH =</span> <span class="fu">mean</span>(dbh, <span class="at">na.rm =</span> T), </span>
+<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">sdDBH =</span> <span class="fu">sd</span>(dbh, <span class="at">na.rm =</span> T))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 10 × 4
    species_english         N meanDBH  sdDBH
@@ -846,7 +857,11 @@ Attaching package: 'dplyr'</code></pre>
 </div>
 
 
-</section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
@@ -978,7 +993,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
 });
-</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
       <a href="./8-MachineLearning.html" class="pagination-link">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Machine Learning</span></span>
       </a>          

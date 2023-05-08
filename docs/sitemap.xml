@@ -2,46 +2,46 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://TheoreticalEcology.github.io/DataScienceInR/index.html</loc>
-    <lastmod>2023-05-05T13:48:39.462Z</lastmod>
+    <lastmod>2023-05-08T19:36:05.457Z</lastmod>
   </url>
   <url>
     <loc>https://TheoreticalEcology.github.io/DataScienceInR/1-GettingStarted.html</loc>
-    <lastmod>2023-05-08T19:30:36.047Z</lastmod>
+    <lastmod>2023-05-08T19:34:43.324Z</lastmod>
   </url>
   <url>
     <loc>https://TheoreticalEcology.github.io/DataScienceInR/2-DescriptiveStatistics.html</loc>
-    <lastmod>2023-05-08T19:30:36.049Z</lastmod>
+    <lastmod>2023-05-08T19:34:43.326Z</lastmod>
   </url>
   <url>
     <loc>https://TheoreticalEcology.github.io/DataScienceInR/3-HypothesisTesting.html</loc>
-    <lastmod>2023-05-08T19:30:36.052Z</lastmod>
+    <lastmod>2023-05-08T19:34:43.330Z</lastmod>
   </url>
   <url>
     <loc>https://TheoreticalEcology.github.io/DataScienceInR/4-SimpleRegression.html</loc>
-    <lastmod>2023-05-08T19:30:36.055Z</lastmod>
+    <lastmod>2023-05-08T19:34:43.334Z</lastmod>
   </url>
   <url>
     <loc>https://TheoreticalEcology.github.io/DataScienceInR/5-MultipleRegression.html</loc>
-    <lastmod>2023-05-08T19:30:11.831Z</lastmod>
+    <lastmod>2023-05-08T19:36:09.119Z</lastmod>
   </url>
   <url>
     <loc>https://TheoreticalEcology.github.io/DataScienceInR/6-GLM.html</loc>
-    <lastmod>2023-05-05T12:51:29.083Z</lastmod>
+    <lastmod>2023-05-08T19:34:43.337Z</lastmod>
   </url>
   <url>
     <loc>https://TheoreticalEcology.github.io/DataScienceInR/7-Multivariate.html</loc>
-    <lastmod>2023-05-05T12:51:29.102Z</lastmod>
+    <lastmod>2023-05-08T19:34:43.338Z</lastmod>
   </url>
   <url>
     <loc>https://TheoreticalEcology.github.io/DataScienceInR/8-MachineLearning.html</loc>
-    <lastmod>2023-05-05T12:51:29.103Z</lastmod>
+    <lastmod>2023-05-08T19:34:43.339Z</lastmod>
   </url>
   <url>
     <loc>https://TheoreticalEcology.github.io/DataScienceInR/9-DataScienceSkills.html</loc>
-    <lastmod>2023-05-05T12:51:29.104Z</lastmod>
+    <lastmod>2023-05-08T19:34:43.340Z</lastmod>
   </url>
   <url>
     <loc>https://TheoreticalEcology.github.io/DataScienceInR/10-Outlook.html</loc>
-    <lastmod>2023-05-05T12:51:29.105Z</lastmod>
+    <lastmod>2023-05-08T19:34:43.340Z</lastmod>
   </url>
 </urlset>

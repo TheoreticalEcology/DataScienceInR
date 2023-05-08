@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.2.475">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
 <title>Introduction to Data Science with R - 8&nbsp; Machine Learning</title>
 <style>
 code{white-space: pre-wrap;}
@@ -82,6 +85,7 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/quarto-nav/headroom.min.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
@@ -99,7 +103,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -118,44 +123,51 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     "search-submit-button-title": "Submit"
   }
 }</script>
+
+
 <meta name="citation_title" content="[8]{.chapter-number}&nbsp; [Machine Learning]{.chapter-title}">
 <meta name="citation_fulltext_html_url" content="https://TheoreticalEcology.github.io/DataScienceInR//8-MachineLearning.html">
 <meta name="citation_language" content="en">
 </head>
+
 <body class="nav-sidebar floating">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }"><div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">
-<span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Machine Learning</span>
-</h1>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Machine Learning</span></h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
     </div>
-  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Introduction to Data Science with R</a> 
         <div class="sidebar-tools-main">
     <a href="https://github.com/TheoreticalEcology/DataScienceInR" title="Source Code" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
     <a href="" title="Share" id="sidebar-tool-dropdown-0" class="sidebar-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-share"></i></a>
     <ul class="dropdown-menu" aria-labelledby="sidebar-tool-dropdown-0">
-<li>
-          <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=%7Curl%7C">
+        <li>
+          <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=|url|">
             <i class="bi bi-bi-twitter pe-1"></i>
           Twitter
           </a>
         </li>
         <li>
-          <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=%7Curl%7C">
+          <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=|url|">
             <i class="bi bi-bi-facebook pe-1"></i>
           Facebook
           </a>
         </li>
         <li>
-          <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=%7Curl%7C">
+          <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=|url|">
             <i class="bi bi-bi-linkedin pe-1"></i>
           LinkedIn
           </a>
@@ -171,7 +183,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-<li class="sidebar-item">
+        <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">Preface</a>
   </div>
@@ -227,19 +239,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </div>
 </li>
     </ul>
-</div>
-</nav><!-- margin-sidebar --><div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#classroom-demo" id="toc-classroom-demo" class="nav-link active" data-scroll-target="#classroom-demo"><span class="toc-section-number">8.1</span>  Classroom demo</a></li>
-  </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/TheoreticalEcology/DataScienceInR/edit/master/8-MachineLearning.qmd" class="toc-action">Edit this page</a></p></div></div></nav>
+  <li><a href="#classroom-demo" id="toc-classroom-demo" class="nav-link active" data-scroll-target="#classroom-demo"><span class="toc-section-number">8.1</span>  Classroom demo</a></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/TheoreticalEcology/DataScienceInR/edit/master/8-MachineLearning.qmd" class="toc-action">Edit this page</a></p></div></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
-<h1 class="title d-none d-lg-block">
-<span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Machine Learning</span>
-</h1>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Machine Learning</span></h1>
 </div>
 
 
@@ -252,172 +269,177 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </div>
   
 
-</header><section id="classroom-demo" class="level2" data-number="8.1"><h2 data-number="8.1" class="anchored" data-anchor-id="classroom-demo">
-<span class="header-section-number">8.1</span> Classroom demo</h2>
+</header>
+
+<section id="classroom-demo" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="classroom-demo"><span class="header-section-number">8.1</span> Classroom demo</h2>
 <div class="cell">
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="co"># Machine Learning --------------------------------------------------------</span>
-
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">tree</span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://www.stat.berkeley.edu/~breiman/RandomForests/">randomForest</a></span><span class="op">)</span>
-<span class="co">## randomForest 4.7-1.1</span>
-<span class="co">## Type rfNews() to see new features/changes/bug fixes.</span>
-<span class="co">#library(forestFloor)</span>
-
-
-<span class="co"># 1. Regression with random forest:------------------------</span>
-<span class="co"># We want to compare performance (%variability explained by the model) of lm </span>
-<span class="co"># with performance of randomforest</span>
-
-<span class="va">ozone.lm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Ozone</span> <span class="op">~</span> <span class="va">.</span>, data<span class="op">=</span><span class="va">airquality</span>, na.action<span class="op">=</span><span class="va">na.omit</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">ozone.lm</span><span class="op">)</span>
-<span class="co">## </span>
-<span class="co">## Call:</span>
-<span class="co">## lm(formula = Ozone ~ ., data = airquality, na.action = na.omit)</span>
-<span class="co">## </span>
-<span class="co">## Residuals:</span>
-<span class="co">##     Min      1Q  Median      3Q     Max </span>
-<span class="co">## -37.014 -12.284  -3.302   8.454  95.348 </span>
-<span class="co">## </span>
-<span class="co">## Coefficients:</span>
-<span class="co">##              Estimate Std. Error t value Pr(&gt;|t|)    </span>
-<span class="co">## (Intercept) -64.11632   23.48249  -2.730  0.00742 ** </span>
-<span class="co">## Solar.R       0.05027    0.02342   2.147  0.03411 *  </span>
-<span class="co">## Wind         -3.31844    0.64451  -5.149 1.23e-06 ***</span>
-<span class="co">## Temp          1.89579    0.27389   6.922 3.66e-10 ***</span>
-<span class="co">## Month        -3.03996    1.51346  -2.009  0.04714 *  </span>
-<span class="co">## Day           0.27388    0.22967   1.192  0.23576    </span>
-<span class="co">## ---</span>
-<span class="co">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span>
-<span class="co">## </span>
-<span class="co">## Residual standard error: 20.86 on 105 degrees of freedom</span>
-<span class="co">##   (42 observations deleted due to missingness)</span>
-<span class="co">## Multiple R-squared:  0.6249, Adjusted R-squared:  0.6071 </span>
-<span class="co">## F-statistic: 34.99 on 5 and 105 DF,  p-value: &lt; 2.2e-16</span>
-<span class="co"># lm explains about 62% of the variance in the data</span>
-
- 
-<span class="co"># Let's look now at how a decision tree looks like:</span>
-
-<span class="co">#install.packages("tree") # not available for R version 3.5.3</span>
-<span class="co">#devtools::install_version('tree', version = '1.0-39')</span>
-<span class="co"># we use this, because newest version of tree does not work with R version</span>
-
-<span class="va">ozone.tree</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/tree/man/tree.html">tree</a></span><span class="op">(</span><span class="va">Ozone</span> <span class="op">~</span> <span class="va">.</span>, data<span class="op">=</span><span class="va">airquality</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/stats/complete.cases.html">complete.cases</a></span><span class="op">(</span><span class="va">airquality</span><span class="op">)</span>,<span class="op">]</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">ozone.tree</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/text.html">text</a></span><span class="op">(</span><span class="va">ozone.tree</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Machine Learning --------------------------------------------------------</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tree)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(randomForest)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="do">## randomForest 4.7-1.1</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="do">## Type rfNews() to see new features/changes/bug fixes.</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">#library(forestFloor)</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Regression with random forest:------------------------</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co"># We want to compare performance (%variability explained by the model) of lm </span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co"># with performance of randomforest</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>ozone.lm <span class="ot">&lt;-</span> <span class="fu">lm</span>(Ozone <span class="sc">~</span> ., <span class="at">data=</span>airquality, <span class="at">na.action=</span>na.omit)</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ozone.lm)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="do">## Call:</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="do">## lm(formula = Ozone ~ ., data = airquality, na.action = na.omit)</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="do">## Residuals:</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="do">##     Min      1Q  Median      3Q     Max </span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="do">## -37.014 -12.284  -3.302   8.454  95.348 </span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="do">## Coefficients:</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="do">##              Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept) -64.11632   23.48249  -2.730  0.00742 ** </span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="do">## Solar.R       0.05027    0.02342   2.147  0.03411 *  </span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="do">## Wind         -3.31844    0.64451  -5.149 1.23e-06 ***</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="do">## Temp          1.89579    0.27389   6.922 3.66e-10 ***</span></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="do">## Month        -3.03996    1.51346  -2.009  0.04714 *  </span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="do">## Day           0.27388    0.22967   1.192  0.23576    </span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="do">## ---</span></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="do">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="do">## Residual standard error: 20.86 on 105 degrees of freedom</span></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a><span class="do">##   (42 observations deleted due to missingness)</span></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a><span class="do">## Multiple R-squared:  0.6249, Adjusted R-squared:  0.6071 </span></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a><span class="do">## F-statistic: 34.99 on 5 and 105 DF,  p-value: &lt; 2.2e-16</span></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a><span class="co"># lm explains about 62% of the variance in the data</span></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a><span class="co"># Let's look now at how a decision tree looks like:</span></span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("tree") # not available for R version 3.5.3</span></span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a><span class="co">#devtools::install_version('tree', version = '1.0-39')</span></span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a><span class="co"># we use this, because newest version of tree does not work with R version</span></span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>ozone.tree <span class="ot">=</span> <span class="fu">tree</span>(Ozone <span class="sc">~</span> ., <span class="at">data=</span>airquality[<span class="fu">complete.cases</span>(airquality),])</span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(ozone.tree)</span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(ozone.tree)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="8-MachineLearning_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="co"># this is based on all variables and all observations</span>
-<span class="co">#### explain how decision trees are produced with 2-variable-example on the blackboard:</span>
-<span class="co">#### correlation of variable A with Ozone &gt; split at a point so that variance left and right of the split is minimized, remember outcome </span>
-<span class="co">#### correlate Ozone with variable B &gt; split &gt; minimze variance &gt;&gt; compare this with performance of variable A &gt;&gt; if A removes more variability, choose splitof A for first node</span>
-<span class="co">#### then split dataset according to the split  and redo the wholethingfor the two groups that wer generated &gt;&gt;&gt; leads to 1 decision tree for the dataset</span>
-
-<span class="co"># plot:</span>
-<span class="co"># split-points are given at nodes of the tree</span>
-<span class="co"># importacne of different variables related to how often they appear at these nodes</span>
-
-
-
-<span class="co"># Now, let's look at the random forest</span>
-<span class="co"># Difference here: for each iteration, only a random subset </span>
-<span class="co"># (about 66%) of observations) and a random subset of the variables is used</span>
-<span class="co"># &gt; we get a large number of different trees whose prediction ability is worse </span>
-<span class="co"># than a tree derived from the whole data</span>
-<span class="co"># &gt; then: average over these trees (similar to model averaging)</span>
-<span class="co"># &gt;&gt; get 1 final tree which predicts better than each single tree </span>
-
-
-<span class="va">ozone.rf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/randomForest/man/randomForest.html">randomForest</a></span><span class="op">(</span><span class="va">Ozone</span> <span class="op">~</span> <span class="va">.</span>, data<span class="op">=</span><span class="va">airquality</span>, mtry<span class="op">=</span><span class="fl">3</span>,
-                         importance<span class="op">=</span><span class="cn">TRUE</span>, na.action<span class="op">=</span><span class="va">na.omit</span>, keep.inbag<span class="op">=</span><span class="cn">T</span><span class="op">)</span>
-<span class="co"># mtry = number of predictors used in each split</span>
-<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">ozone.rf</span><span class="op">)</span> <span class="co"># explains about 72% of the variance &gt;&gt; = better than lm!</span>
-<span class="co">## </span>
-<span class="co">## Call:</span>
-<span class="co">##  randomForest(formula = Ozone ~ ., data = airquality, mtry = 3,      importance = TRUE, keep.inbag = T, na.action = na.omit) </span>
-<span class="co">##                Type of random forest: regression</span>
-<span class="co">##                      Number of trees: 500</span>
-<span class="co">## No. of variables tried at each split: 3</span>
-<span class="co">## </span>
-<span class="co">##           Mean of squared residuals: 308.604</span>
-<span class="co">##                     % Var explained: 71.88</span>
-
-<span class="co"># random forest does not give p-values for explanatory variables, but </span>
-<span class="co"># you can get the variables importance for predictions (no causal assumptions here!):</span>
- 
-<span class="fu"><a href="https://rdrr.io/pkg/randomForest/man/importance.html">importance</a></span><span class="op">(</span><span class="va">ozone.rf</span><span class="op">)</span>
-<span class="co">##           %IncMSE IncNodePurity</span>
-<span class="co">## Solar.R  9.832887     10903.699</span>
-<span class="co">## Wind    22.007222     41648.054</span>
-<span class="co">## Temp    43.631946     56064.801</span>
-<span class="co">## Month    2.044271      1597.533</span>
-<span class="co">## Day      1.022438      6334.784</span>
-<span class="co"># the same as a plot:</span>
-<span class="fu"><a href="https://rdrr.io/pkg/randomForest/man/varImpPlot.html">varImpPlot</a></span><span class="op">(</span><span class="va">ozone.rf</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># this is based on all variables and all observations</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="do">#### explain how decision trees are produced with 2-variable-example on the blackboard:</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="do">#### correlation of variable A with Ozone &gt; split at a point so that variance left and right of the split is minimized, remember outcome </span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="do">#### correlate Ozone with variable B &gt; split &gt; minimze variance &gt;&gt; compare this with performance of variable A &gt;&gt; if A removes more variability, choose splitof A for first node</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="do">#### then split dataset according to the split  and redo the wholethingfor the two groups that wer generated &gt;&gt;&gt; leads to 1 decision tree for the dataset</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># plot:</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co"># split-points are given at nodes of the tree</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co"># importacne of different variables related to how often they appear at these nodes</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Now, let's look at the random forest</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Difference here: for each iteration, only a random subset </span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="co"># (about 66%) of observations) and a random subset of the variables is used</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="co"># &gt; we get a large number of different trees whose prediction ability is worse </span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="co"># than a tree derived from the whole data</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="co"># &gt; then: average over these trees (similar to model averaging)</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="co"># &gt;&gt; get 1 final tree which predicts better than each single tree </span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>ozone.rf <span class="ot">&lt;-</span> <span class="fu">randomForest</span>(Ozone <span class="sc">~</span> ., <span class="at">data=</span>airquality, <span class="at">mtry=</span><span class="dv">3</span>,</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>                         <span class="at">importance=</span><span class="cn">TRUE</span>, <span class="at">na.action=</span>na.omit, <span class="at">keep.inbag=</span>T)</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a><span class="co"># mtry = number of predictors used in each split</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(ozone.rf) <span class="co"># explains about 72% of the variance &gt;&gt; = better than lm!</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a><span class="do">## Call:</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a><span class="do">##  randomForest(formula = Ozone ~ ., data = airquality, mtry = 3,      importance = TRUE, keep.inbag = T, na.action = na.omit) </span></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a><span class="do">##                Type of random forest: regression</span></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a><span class="do">##                      Number of trees: 500</span></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a><span class="do">## No. of variables tried at each split: 3</span></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a><span class="do">##           Mean of squared residuals: 308.604</span></span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a><span class="do">##                     % Var explained: 71.88</span></span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a><span class="co"># random forest does not give p-values for explanatory variables, but </span></span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a><span class="co"># you can get the variables importance for predictions (no causal assumptions here!):</span></span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a><span class="fu">importance</span>(ozone.rf)</span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a><span class="do">##           %IncMSE IncNodePurity</span></span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a><span class="do">## Solar.R  9.832887     10903.699</span></span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a><span class="do">## Wind    22.007222     41648.054</span></span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a><span class="do">## Temp    43.631946     56064.801</span></span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a><span class="do">## Month    2.044271      1597.533</span></span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a><span class="do">## Day      1.022438      6334.784</span></span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a><span class="co"># the same as a plot:</span></span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a><span class="fu">varImpPlot</span>(ozone.rf)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="8-MachineLearning_files/figure-html/unnamed-chunk-2-2.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R">
-
-
-<span class="co"># 2. Classification with random forest:-------------------</span>
-<span class="co">#Let's do a decision tree on the whole data first (all observations, all predictors):</span>
-<span class="va">iris.tree</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/tree/man/tree.html">tree</a></span><span class="op">(</span><span class="va">Species</span> <span class="op">~</span> <span class="va">.</span>, data<span class="op">=</span><span class="va">iris</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">iris.tree</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/text.html">text</a></span><span class="op">(</span><span class="va">iris.tree</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Classification with random forest:-------------------</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co">#Let's do a decision tree on the whole data first (all observations, all predictors):</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>iris.tree <span class="ot">&lt;-</span> <span class="fu">tree</span>(Species <span class="sc">~</span> ., <span class="at">data=</span>iris)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(iris.tree)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(iris.tree)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="8-MachineLearning_files/figure-html/unnamed-chunk-2-3.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R">
-<span class="co"># then try randomforest:</span>
-<span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/randomForest/man/randomForest.html">randomForest</a></span><span class="op">(</span><span class="va">Species</span> <span class="op">~</span> <span class="va">.</span>, data<span class="op">=</span><span class="va">iris</span>, importance<span class="op">=</span><span class="cn">TRUE</span>, ntree<span class="op">=</span><span class="fl">500</span>, mtry <span class="op">=</span> <span class="fl">2</span>, do.trace<span class="op">=</span><span class="fl">100</span>,  keep.inbag<span class="op">=</span><span class="cn">T</span><span class="op">)</span>
-<span class="co">## ntree      OOB      1      2      3</span>
-<span class="co">##   100:   4.00%  0.00%  6.00%  6.00%</span>
-<span class="co">##   200:   4.00%  0.00%  6.00%  6.00%</span>
-<span class="co">##   300:   4.00%  0.00%  6.00%  6.00%</span>
-<span class="co">##   400:   4.00%  0.00%  6.00%  6.00%</span>
-<span class="co">##   500:   4.00%  0.00%  6.00%  6.00%</span>
-<span class="co"># two random steps in RF:</span>
-<span class="co"># 1. bootstrap for each tree</span>
-<span class="co"># 2. mtry: random subset of predictors in each split</span>
-
-<span class="co">#plot importance of predictors:</span>
-<span class="fu"><a href="https://rdrr.io/pkg/randomForest/man/varImpPlot.html">varImpPlot</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co"># then try randomforest:</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">randomForest</span>(Species <span class="sc">~</span> ., <span class="at">data=</span>iris, <span class="at">importance=</span><span class="cn">TRUE</span>, <span class="at">ntree=</span><span class="dv">500</span>, <span class="at">mtry =</span> <span class="dv">2</span>, <span class="at">do.trace=</span><span class="dv">100</span>,  <span class="at">keep.inbag=</span>T)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="do">## ntree      OOB      1      2      3</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="do">##   100:   4.00%  0.00%  6.00%  6.00%</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="do">##   200:   4.00%  0.00%  6.00%  6.00%</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="do">##   300:   4.00%  0.00%  6.00%  6.00%</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="do">##   400:   4.00%  0.00%  6.00%  6.00%</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="do">##   500:   4.00%  0.00%  6.00%  6.00%</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="co"># two random steps in RF:</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. bootstrap for each tree</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. mtry: random subset of predictors in each split</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="co">#plot importance of predictors:</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="fu">varImpPlot</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="8-MachineLearning_files/figure-html/unnamed-chunk-2-4.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/randomForest/man/importance.html">importance</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span>
-<span class="co">##                 setosa  versicolor virginica MeanDecreaseAccuracy</span>
-<span class="co">## Sepal.Length  5.648370  6.80421839  7.960420            10.692420</span>
-<span class="co">## Sepal.Width   4.090753 -0.05394849  4.868079             4.709399</span>
-<span class="co">## Petal.Length 23.149126 34.86959187 29.210133            35.454773</span>
-<span class="co">## Petal.Width  21.444086 33.68284448 30.343499            33.669313</span>
-<span class="co">##              MeanDecreaseGini</span>
-<span class="co">## Sepal.Length         9.267761</span>
-<span class="co">## Sepal.Width          2.080905</span>
-<span class="co">## Petal.Length        44.127351</span>
-<span class="co">## Petal.Width         43.836169</span>
-<span class="co">#how many samples were distributed to the wrong species?</span>
-<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span>
-<span class="co">## </span>
-<span class="co">## Call:</span>
-<span class="co">##  randomForest(formula = Species ~ ., data = iris, importance = TRUE,      ntree = 500, mtry = 2, do.trace = 100, keep.inbag = T) </span>
-<span class="co">##                Type of random forest: classification</span>
-<span class="co">##                      Number of trees: 500</span>
-<span class="co">## No. of variables tried at each split: 2</span>
-<span class="co">## </span>
-<span class="co">##         OOB estimate of  error rate: 4%</span>
-<span class="co">## Confusion matrix:</span>
-<span class="co">##            setosa versicolor virginica class.error</span>
-<span class="co">## setosa         50          0         0        0.00</span>
-<span class="co">## versicolor      0         47         3        0.06</span>
-<span class="co">## virginica       0          3        47        0.06</span>
-<span class="co">#&gt; 4% average error rate</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">importance</span>(model)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="do">##                 setosa  versicolor virginica MeanDecreaseAccuracy</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="do">## Sepal.Length  5.648370  6.80421839  7.960420            10.692420</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Sepal.Width   4.090753 -0.05394849  4.868079             4.709399</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="do">## Petal.Length 23.149126 34.86959187 29.210133            35.454773</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="do">## Petal.Width  21.444086 33.68284448 30.343499            33.669313</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="do">##              MeanDecreaseGini</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="do">## Sepal.Length         9.267761</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="do">## Sepal.Width          2.080905</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="do">## Petal.Length        44.127351</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="do">## Petal.Width         43.836169</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="co">#how many samples were distributed to the wrong species?</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(model)</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="do">## Call:</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="do">##  randomForest(formula = Species ~ ., data = iris, importance = TRUE,      ntree = 500, mtry = 2, do.trace = 100, keep.inbag = T) </span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="do">##                Type of random forest: classification</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="do">##                      Number of trees: 500</span></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="do">## No. of variables tried at each split: 2</span></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a><span class="do">##         OOB estimate of  error rate: 4%</span></span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a><span class="do">## Confusion matrix:</span></span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a><span class="do">##            setosa versicolor virginica class.error</span></span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a><span class="do">## setosa         50          0         0        0.00</span></span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a><span class="do">## versicolor      0         47         3        0.06</span></span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a><span class="do">## virginica       0          3        47        0.06</span></span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4% average error rate</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 
-</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
@@ -549,7 +571,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
 });
-</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
       <a href="./7-Multivariate.html" class="pagination-link">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Multivariate Statistics</span></span>
       </a>          

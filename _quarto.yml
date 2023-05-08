@@ -40,6 +40,7 @@ knitr:
 format:
   html:
     code-copy: hover
+    theme: cosmo
 editor: visual
 
 
