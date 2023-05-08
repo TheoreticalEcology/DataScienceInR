@@ -13,7 +13,7 @@ set.seed(42)
 In this chapter, you will practice to:
 
 -   formulate a research question
--   perform simple linear regression for numeric and categorial predictors
+-   perform simple linear regression for numeric and categorical predictors
 -   interpret regression outputs
 -   check the residuals of regression models
 
@@ -32,7 +32,7 @@ Xobs = rnorm(100, sd = 1.0)
 # Now we assume that mean = 0, and sd = 0.2 are unknown but we want to find them, let's write the likelihood function:
 likelihood = function(par) { # we give two parameters, mean and sd
   lls = dnorm(Xobs, mean = par[1], sd = par[2], log = TRUE) # calculate for each observation to observe the data given our model
-  # we use the logLikilihood because of numerical reasons
+  # we use the logLikilihood for numerical reasons
   return(sum(lls))
 }
 
@@ -160,7 +160,7 @@ t_statistic = opt$par[2] / st_errors[2]
 pt(t_statistic, df = 100-3, lower.tail = FALSE)*2
 ```
 
-The p-value is smaller than alpha, so the effect is significant! However, it would be tedious to do that always by hand, and because it is probably one of the most used analysis, there's a function for it in R:
+The p-value is smaller than $\alpha$, so the effect is significant! However, it would be tedious to do that always by hand, and because it is probably one of the most used analysis, there's a function for it in R:
 
 ```{r}
 model = lm(Y~Xobs) # 1. Get estimates, MLE
@@ -248,7 +248,7 @@ hist(residuals(fit1))
 # residuals are not normally distributed
 # we do not use a test for this, but instead look at the residuals visually
 
-# let's plot resiuals versus predictor
+# let's plot residuals versus predictor
 plot(airquality$Temp[!is.na(airquality$Ozone)], residuals(fit1))
 
 # model checking plots
@@ -261,7 +261,7 @@ par(oldpar)
 
 ### Linear regression with a categorical variable
 
-We can also use categorical variables as a explanatory variable:
+We can also use categorical variables as an explanatory variable:
 
 ```{r}
 m = lm(weight~group, data = PlantGrowth)
@@ -274,7 +274,7 @@ If we are interested in testing trt1 vs trt2 we can, for example, change the ref
 
 ```{r}
 tmp = PlantGrowth
-tmp$group= relevel(tmp$group, ref = "trt1")
+tmp$group = relevel(tmp$group, ref = "trt1")
 m = lm(weight~group, data = tmp)
 summary(m)
 ```
@@ -296,7 +296,6 @@ anova(fit4) #get overall effect of feeding treatment
 plot(allEffects(fit4))
 plot(allEffects(fit4, partial.residuals = T))
 effect_plot(fit4, pred = feed, interval = TRUE, plot.points = F)
-
 
 old.par = par(mfrow = c(2, 2))
 plot(fit4)
@@ -387,7 +386,8 @@ You will need the following functions:
 ::: {.callout-caution icon="false"}
 #### Question
 
-Use your results to **chose the correct statements on elearning-extern**.
+Use your results to chose the correct statement(s) on **elearning-extern** (Q1) [("04_Test for Exercise in R - simple regression")](https://elearning.uni-regensburg.de/mod/quiz/view.php?id=2046695).
+
 :::
 
 ::: {.callout-tip collapse="true" appearance="minimal" icon="false"}
@@ -419,9 +419,9 @@ abline(h = 4.184256 + 0.050444*70, col = "brown") # add line at y value accordin
 The dataset provides bird abundances in forest fragments with different characteristics in Australia. We want to look at the relationship of the variables "abundance", "distance" and "grazing".
 
 ::: {.callout-caution icon="false"}
-#### Question
+#### Questions
 
-First, **answer the following questions on elearning-extern**:
+First, answer the following questions on **elearning-extern** (Q 2-4):
 
 -   What is the most reasonable research question regarding these variables?
 -   What is the response variable?
@@ -429,7 +429,7 @@ First, **answer the following questions on elearning-extern**:
 
 Then, perform the following tasks:
 
--   Fit a simple linear regression relating the response variable to the categorial predictor (that is the one with five levels, make sure that it is indeed a factor using *as.factor()*)
+-   Fit a simple linear regression relating the response variable to the categorical predictor (that is the one with five levels, make sure that it is indeed a factor using *as.factor()*)
 -   Apply an ANOVA to your model.
 
 You may need the following functions:
@@ -438,11 +438,14 @@ You may need the following functions:
 -   *summary()*
 -   *anova()*
 
-Use your results to **chose the correct statements on elearning-extern**.
+Use your results to chose the correct statement(s) on **elearning-extern** (Q5).
 :::
 
 ::: {.callout-tip collapse="true" appearance="minimal" icon="false"}
 #### Solution
+
+A reasonable research question is how abundance is influenced by distance and/or grazing.
+Here, the response variable is abundance, while the predictors are distance and/or grazing.
 
 This is the code that you need to interpret the results.
 
@@ -462,7 +465,7 @@ plot(ABUND ~ GRAZE, data = birdabundance)
 
 ### Model validation: Residual checks
 
-Now, we will have a closer look at model diagnostics and residual checks in particular. Of course, we should have done this for all models above as well (we simply didn't do this, because of time restrictions). So remember that you always have to validate your model, if you want to be sure that your conclusions are correct.
+Now, we will have a closer look at model diagnostics and residual checks in particular. Of course, we should have done this for all models above as well (we simply didn't do this because of time restrictions). So remember that you always have to validate your model, if you want to be sure that your conclusions are correct.
 
 For this exercise, you can prepare a dataset yourself called "dat" with the variables "x" and "y". Simply copy the following code to generate the data:
 
@@ -493,12 +496,15 @@ You may also need the following functions:
 -   *plot()*
 -   *abline()*
 
-Use your results to **answer the questions on elearning-extern**.
+Use your results to answer the following questions on  **elearning-extern** (Q 6-8).
 
 ::: {.callout-caution icon="false"}
 #### Question
 
-TODO
+-   What pattern do the residuals of the first regression model show when plotted against the fitted values?
+-   What do you have to do to improve your first regression model?
+-   Identify the correct statement(s) about the residuals of the modified model.
+
 :::
 
 ::: {.callout-tip collapse="true" appearance="minimal" icon="false"}
@@ -515,7 +521,7 @@ fit <- lm(y ~ x, dat)
 
 # check residuals
 op = par(mfrow=c(2,2))
-plot(fit) # residuals show a parabolic relationship (first plot) -> quadratic relationship
+plot(fit) # residuals show a parabolic relationship (see first plot)  -> to improve, fit a quadratic relationship
 par(op)
 
 # scatter plot

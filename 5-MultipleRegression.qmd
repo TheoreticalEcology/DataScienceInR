@@ -267,7 +267,7 @@ plot(allEffects(carsfit))
 The process of cement hardening involves exogenous chemical reactions and thus produces heat. The amount of heat produced by the cement depends on the mixture of its constituents. The *Cement* dataset includes heat measurements for different types of cement that consist of different relative amounts calcium aluminate (*X1*), tricalcium silicate (*X2*), tetracalcium alumino ferrite (*X3*) and dicalcium silicate (*X4*). A cement producing company wants to optimize the composition of its product and wants to know, which of these compounds are mainly responsible for heat production.
 
 ::: {.callout-caution icon="false"}
-#### Question
+#### Questions
 
 Carry out the following tasks:
 
@@ -286,7 +286,7 @@ You may need the following functions:
 * anova()
 
 
-Use your results to **answer the questions on elearning-extern**.
+Use your results to **answer the questions on elearning-extern** [("03_Test for Exercise in R - multiple regression")](https://elearning.uni-regensburg.de/mod/quiz/view.php?id=2046701).
 
 :::
 
