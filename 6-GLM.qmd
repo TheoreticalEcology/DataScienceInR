@@ -37,17 +37,18 @@ mosaicplot(  ~  survived + sex + pclass, data = titanic)
 # lm will not give you an error, but residuals are clearly not normal
 fit <- lm(survived ~ age, data = titanic)
 summary(fit)
-par(mfrow = c(2,2))
+op <- par(mfrow = c(2,2))
 plot(fit)
+par(op)
 
-# logistic regression with categorial predictor
+# logistic regression with categorical predictor
 m1 = glm(survived ~ sex, data = titanic, family = "binomial")
 summary(m1)
 
 # 2 groups: sexmale = difference of mean for male from mean for female
 # intercept = linear term for female: 
 0.98 
-#but: this has to be transformed back to original scale before being interpreted!!!
+# but: this has to be transformed back to original scale before being interpreted!!!
 # survival probability for females
 plogis(0.98)
 # applies inverse logit function
@@ -172,14 +173,22 @@ You may need the following functions:
 -   plot()
 -   allEffects()
 -   anova(..., test = "Chisq")
+
+Use your results to **answer the questions on elearning-extern** (Q 1-2) [("06 - Test for Exercise in R")](https://elearning.uni-regensburg.de/mod/quiz/view.php?id=2046707).
+
 :::
 
 ::: {.callout-tip collapse="true" appearance="minimal" icon="false"}
 #### Solution
 
 ```{r nitrofen}
+# prepare data
 nitrofen$conc <- as.factor(nitrofen$conc) # change variable conc to a factor
 
+# plot the relation that we want to fit
+plot(total ~ conc, nitrofen)
+
+# Fit a suitable model for the relationship between total amount of offspring (total) and nitrofen concentration (conc):
 fit <- glm(total ~ conc, family = "poisson", data=nitrofen)
 summary(fit)
 
@@ -194,14 +203,14 @@ plot(allEffects(fit))
 exp(3.44681) # or
 exp(coef(fit)[1])
 
-# test the overall effect of *conc* on the total number of offspring
+# Test for the overall effect of *conc* on the total number of offspring
 anova(fit, test = "Chisq")
 ```
 :::
 
 ### Analyzing the *melanoma* dataset
 
-In the following, you will investigate the *melanoma* dataset provided by the University Hospital of Odense, Denmark. The data are of patients with malignant melanomas. You can find a more detailed description in the help of *melanoma*. The question you want to investigate is whether the occurance of ulceration (*ulcer*, yes = 1, no = 0) is related to the thickness of the tumour (*thickness* in mm) and the sex of the patient (*sex*, male = 1, female = 0) and the interaction of the two.
+In the following, you will investigate the *melanoma* dataset provided by the University Hospital of Odense, Denmark. The data are of patients with malignant melanomas. You can find a more detailed description in the help of *melanoma*. The question you want to investigate is whether the occurrence of ulceration (*ulcer*, yes = 1, no = 0) is related to the thickness of the tumor (*thickness* in mm) and the sex of the patient (*sex*, male = 1, female = 0) and the interaction of the two.
 
 ::: {.callout-caution icon="false"}
 #### Question
@@ -222,18 +231,21 @@ You may need the following functions:
 -   plot()
 -   allEffects()
 
-Use your results to **answer the questions on elearning-extern**.
+Use your results to **answer the questions on elearning-extern** (Q 3-5).
 :::
 
 ::: {.callout-tip collapse="true" appearance="minimal" icon="false"}
 #### Solution
 
 ```{r melanoma}
+# get the data
 dat <- melanoma
-dat$sex <- as.factor(dat$sex) # change variable sex to factor, facultative: with 0 1 not necessary
+
+# Fit an appropriate model to answer the research question.
+dat$sex <- as.factor(dat$sex) # change variable sex to factor (this is optional, not necessary with binary values 0/1)
 fit <- glm(ulcer ~ thickness * sex, family = "binomial", data=dat)
 
-# residuals
+# Check residuals
 res <- simulateResiduals(fit, n = 500)
 plot(res)
 
