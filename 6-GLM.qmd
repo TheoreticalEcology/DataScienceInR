@@ -128,16 +128,15 @@ testDispersion(fit)
 # or use negative binomial distribution instead of poisson
 ```
 
-
-## Exercises 
+## Exercises
 
 In this exercise you will practice to:
 
- * choose the correct model for your data
- * interpret the model output of generalized linear models
- * check the residuals using the DHARMa package
+-   choose the correct model for your data
+-   interpret the model output of generalized linear models
+-   check the residuals using the DHARMa package
 
-Before you start, remember to clean your global environment (if you haven't already) using *rm(list=ls())*. 
+Before you start, remember to clean your global environment (if you haven't already) using *rm(list=ls())*.
 
 For your analyses, you will use the datasets *nitrofen* and *melanoma* which are both implemented in the *boot* package. You will also need the packages *DHARMa* and *effects*. Please install and load these packages, if you haven't done this yet:
 
@@ -147,40 +146,36 @@ library(DHARMa)
 library(effects)
 ```
 
-
 ### Analyzing the *nitrofen* dataset
 
-The Ministry of Agriculture has appointed your university to investigate the toxicity of the herbicide nitrofen on the fertility of the waterflea species *Ceriodaphnia dubia* in order to asses the implications of the herbicide for ecosystems.  
-In an experiment conducted by your fellow researchers, the offspring of the waterflea species *Ceriodaphnia dubia* were counted as a function of different concentrations of the herbicide. Your job is to do the analysis. 
-
+The Ministry of Agriculture has appointed your university to investigate the toxicity of the herbicide nitrofen on the fertility of the waterflea species *Ceriodaphnia dubia* in order to asses the implications of the herbicide for ecosystems.\
+In an experiment conducted by your fellow researchers, the offspring of the waterflea species *Ceriodaphnia dubia* were counted as a function of different concentrations of the herbicide. Your job is to do the analysis.
 
 ::: {.callout-caution icon="false"}
 #### Question
 
 Carry out the following tasks:
 
- * Convert the variable *conc* into a factor.
- * Fit a suitable model for the relationship between total amount of offspring (*total*) and nitrofen concentration (*conc*).
- * Test for overdispersion. 
- * Interpret and plot the effect.
- * Test for the overall effect of nitrofen concentration.
+-   Convert the variable *conc* into a factor.
+-   Fit a suitable model for the relationship between total amount of offspring (*total*) and nitrofen concentration (*conc*).
+-   Test for overdispersion.
+-   Interpret and plot the effect.
+-   Test for the overall effect of nitrofen concentration.
 
 You may need the following functions:
 
- * str()
- * as.factor()
- * glm()
- * summary()
- * testDispersion()
- * plot()
- * allEffects()
- * anova(..., test = "Chisq")
- 
+-   str()
+-   as.factor()
+-   glm()
+-   summary()
+-   testDispersion()
+-   plot()
+-   allEffects()
+-   anova(..., test = "Chisq")
 :::
 
 ::: {.callout-tip collapse="true" appearance="minimal" icon="false"}
 #### Solution
-
 
 ```{r nitrofen}
 nitrofen$conc <- as.factor(nitrofen$conc) # change variable conc to a factor
@@ -202,44 +197,36 @@ exp(coef(fit)[1])
 # test the overall effect of *conc* on the total number of offspring
 anova(fit, test = "Chisq")
 ```
-
 :::
-
 
 ### Analyzing the *melanoma* dataset
 
-In the following, you will investigate the *melanoma* dataset provided by the University Hospital of Odense, Denmark. The data are of patients with malignant melanomas. You can find a more detailed description in the help of *melanoma*. The question you want to investigate is whether the occurance of ulceration (*ulcer*, yes = 1, no = 0) is related to the thickness of the tumour (*thickness* in mm) and the sex of the patient (*sex*, male = 1, female = 0) and the interaction of the two. 
-
-
-
+In the following, you will investigate the *melanoma* dataset provided by the University Hospital of Odense, Denmark. The data are of patients with malignant melanomas. You can find a more detailed description in the help of *melanoma*. The question you want to investigate is whether the occurance of ulceration (*ulcer*, yes = 1, no = 0) is related to the thickness of the tumour (*thickness* in mm) and the sex of the patient (*sex*, male = 1, female = 0) and the interaction of the two.
 
 ::: {.callout-caution icon="false"}
 #### Question
 
 Carry out the following tasks:
 
- * Fit an appropriate model to answer the research question.
- * Check the model residuals.
- * Interpret and plot all effects including an analysis of the deviance.
+-   Fit an appropriate model to answer the research question.
+-   Check the model residuals.
+-   Interpret and plot all effects including an analysis of the deviance.
 
-You may need the following functions: 
- 
- * str()
- * glm()
- * summary()
- * anova()
- * simulateResiduals()
- * plot()
- * allEffects()
+You may need the following functions:
+
+-   str()
+-   glm()
+-   summary()
+-   anova()
+-   simulateResiduals()
+-   plot()
+-   allEffects()
 
 Use your results to **answer the questions on elearning-extern**.
 :::
 
 ::: {.callout-tip collapse="true" appearance="minimal" icon="false"}
 #### Solution
-
-
-
 
 ```{r melanoma}
 dat <- melanoma
@@ -273,9 +260,5 @@ plot(res)
 plot(allEffects(fit))
 ```
 
-The quadratic term solves the problem of the residuals. The effects plots look quite different. There seems to be a maximum of ulcer around a thickness of 10 that we would have missed without the quadratic term. 
-
+The quadratic term solves the problem of the residuals. The effects plots look quite different. There seems to be a maximum of ulcer around a thickness of 10 that we would have missed without the quadratic term.
 :::
-
-
-

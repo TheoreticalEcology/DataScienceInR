@@ -30,6 +30,8 @@ In this section you will:
 ## Interpretation of the p-value
 
 p-values make a statement on the probability of the data or more extreme values given H~0~ (no effect exists), **but not on the probability of H~0~ (no effect) and not on the size of the effect or on the probability of an effect!**
+
+If you want to read more about null hypothesis testing and the p-value, take a look at [Daniel Lakens Book](https://lakens.github.io/statistical_inferences/01-pvalue.html)
 :::
 
 **Example:**
@@ -412,7 +414,7 @@ t.test(x1,x2, var.equal = FALSE)
 
 Which is actually a Welch t-test and which is the default in R! (The smaller the samples, the more likely it is that the variances differ! So it is an conservative assumption to assume that the variances are unequal)
 
-##### t-test, H0: two groups, paired, equal means, variance can be different 
+##### t-test, H0: two groups, paired, equal means, variance can be different
 
 The Null-hypothesis here is that the two groups are paired observations (e.g. group 1 before treatment and group 2 after treatment) have the same mean. Variances doesn't matter here (but the variables must be still normally distributed). We can ignore the `var.equal`\`argument here:
 
