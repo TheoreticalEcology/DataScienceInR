@@ -41,12 +41,12 @@ text(ozone.tree)
 # this is based on all variables and all observations
 #### explain how decision trees are produced with 2-variable-example on the blackboard:
 #### correlation of variable A with Ozone > split at a point so that variance left and right of the split is minimized, remember outcome 
-#### correlate Ozone with variable B > split > minimze variance >> compare this with performance of variable A >> if A removes more variability, choose splitof A for first node
-#### then split dataset according to the split  and redo the wholethingfor the two groups that wer generated >>> leads to 1 decision tree for the dataset
+#### correlate Ozone with variable B > split > minimize variance >> compare this with performance of variable A >> if A removes more variability, choose split of A for first node
+#### then split dataset according to the split  and redo the whole thing for the two groups that were generated >>> leads to 1 decision tree for the dataset
 
 # plot:
 # split-points are given at nodes of the tree
-# importacne of different variables related to how often they appear at these nodes
+# importance of different variables related to how often they appear at these nodes
 
 
 

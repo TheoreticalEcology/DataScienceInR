@@ -67,7 +67,7 @@ NMDS = metaMDS(dune)
 
 NMDS # gives information on NMDS: distance measure, stress (should be low)
 # stress of >= 0.2 = be suspicious, stress >=0.3 indicates that ordination is arbitrary
-# in crease Dimensions if k is too high
+# increase Dimensions if k is too high
 ordiplot(NMDS, type = "t") #"t" = text
 
 
@@ -205,6 +205,7 @@ random = data.frame(pollution = rnorm(30),
 head(random)
 pca = prcomp(random, scale = T)
 biplot(pca)
+summary(pca) # similar variance on all axes
 
 ```
 
@@ -284,7 +285,7 @@ Carry out the following analyses:
  * Make two PCAs, one for the environmental and one for the species richness data (see columns above). 
  * Name the results *pca_environment* and *pca_species*. 
  * Create a biplot for each PCA.
- * Create a barplot for the variance explained by each component. 
+ * Create a barplot for the proportion of variance explained by each component. 
 
 For example, the result for species richness should look like this:
 
@@ -314,22 +315,65 @@ library(vegan)
 **Hints**
 
  * Don't forget to scale the variables in the PCA.
- * In order to get the proportion of the explained variance, have a look at the summary of your analysis. *str()* shows you what the summary contains. You want to specifically look at the *importance*, here the second row contains the proportion of variance of all 4 components. So what we want to plot is: *summary(pca_species)$importance[2,1:4]*.
+ * In order to get the proportion of the explained variance, have a look at the summary of your analysis. *str()* shows you what the summary contains. You want to specifically look at the *importance*, here the second row contains the proportion of variance of all components. So what we want to plot is: *summary(pca_species)$importance[2,]*.
  * Don't forget to give your plots a title.
 
-Now, use your results to **answer the questions on elearning-extern**.
-
+Now, use your results to **answer the questions on elearning-extern** (Q 1-3) [("07_Test for Exercise in R")](https://elearning.uni-regensburg.de/mod/quiz/view.php?id=2046682).
 
  1. In which multivariate dataset do the first and second components explain more variance?
- 2. Describe the following correlations: 
+ 2. What are the two samples that have the highest score on the respective third PCA axes?
+ 3. Which environmental variables would you choose, if you have only the resource to measure three variables? 
+    a) NAP, angle 1 and chalk
+    b) salinity, penetrability and grain size
+    c) grain size, chalk and exposure
+ X. Describe the following correlations: 
     a) salinity and humus
     b) angle1 and exposure
     c) Crustacea and NAP
     d) Polychaeta and Mollusca
- 3. Which environmental variables would you choose, if you have only the resource to measure three variables?
 
 
 
+::: {.callout-tip collapse="true" appearance="minimal" icon="false"}
+#### Solution
+
+```{r solution-PCA}
+# Conduct the principle component analyses (PCAs):
+
+# a) PCA of environmental data
+pca_environment = prcomp(dat[,7:16], scale = T)
+summary(pca_environment)
+
+op <- par(mfrow = c(1,2))
+biplot(pca_environment, main = "PCA")            # plot the results of the PCA as a rotation matrix
+barplot(summary(pca_environment)$importance[2,], # get the importance measure
+     main = "Components of environment",
+     ylab = "Proportion of variance explained")
+
+# b) PCA of species richness data
+pca_species = prcomp(dat[,2:5], scale = T)
+summary(pca_species)
+
+biplot(pca_species, main = "PCA")            # plot the results of the PCA as a rotation matrix
+barplot(summary(pca_species)$importance[2,], # get the importance measure
+     main = "Components of species",
+     ylab = "Proportion of variance explained")
+par(op)
+
+# From the *summary()* output we can see that the first and second components explain more variance in the species PCA.
+
+
+# What are the two samples that have the highest score on the third PCA axis?
+# -> order the samples by their PC3 coordinate:
+order(pca_environment$x[,'PC3'], decreasing = T) # -> 24 is highest
+order(pca_species$x[,'PC3'], decreasing = T) # -> 7 is highest
+
+# Find the predictor variables that have the largest contribution in the biplot:
+# -> sum over the absolute values of their PC-1 and PC-2 coordinates, then sort in decreasing order:  
+sort( rowSums( abs( pca_environment$rotation[,1:2] ) ), decreasing = T)
+# we could preferentially measure: temperature, salinity, penetrability
+```
+:::
 
 
 
@@ -344,8 +388,8 @@ Remember to set a seed; the choice of the first k centers is random.
 
 
 ```{r, eval = FALSE}
-set.seed(123) 
-cl = ####
+set.seed(467456)
+cl = #...
 ```
 
 Compare the three clusters with the result of the PCA using the following code that uses another plotting framework called ggplot2: 
@@ -356,9 +400,33 @@ autoplot(pca_environment, colour = cl$cluster, size = 2, loadings = TRUE, loadin
          loadings.label = TRUE, loadings.label.size = 3, loadings.label.colour = "black")
 ```
 
-The colors of the points represent the three clusters. **Answer the following question on elearning-extern**: 
-How is it possible that four observations in the middle (in black if you have used the same seed) belong to a different cluster than the observations around them?
+The colors of the points represent the three clusters. **Answer the following question on elearning-extern** (Q 4-5): 
 
+ * How is it possible that four observations in the middle (in red - if you have used the same seed) belong to a different cluster than the observations around them (in black)?
+ * Which environmental variables are on average high within the black cluster (cluster 1)?
+
+
+
+::: {.callout-tip collapse="true" appearance="minimal" icon="false"}
+#### Solution
+
+```{r solution-Clustering}
+
+# Create clusters using all environmental variables
+set.seed(467456)
+cl <- kmeans(dat[,7:16], centers = 3) # 3 clusters to be generated
+
+# Plot
+library(ggfortify)
+autoplot(pca_environment, colour = cl$cluster, size = 2, loadings = TRUE, loadings.colour = 'black',
+         loadings.label = TRUE, loadings.label.size = 3, loadings.label.colour = "black")
+
+# Environmental variables that are on average high within cluster 1:
+# -> looking at the plot we find that exposure and grain size are high on average within cluster 1
+
+```
+:::
+ 
 
 
 #### Hierarchical clustering
@@ -367,7 +435,7 @@ Now we want to hierarchically cluster the samples with respect to their species 
 
 ```{r clustering, echo = FALSE}
 hc = hclust(dist(dat[, 2:5]))
-plot(as.phylo(hc))
+plot(as.phylo(hc), tip.color = dat$week)
 ```
   
 Create the same plot using the functions:  
@@ -376,10 +444,21 @@ Create the same plot using the functions:
  * *plot()* 
  * *as.phylo()*
  
-Have a look at the help for *hclust()* to read what the function does and look at the examples for further help on how to use the function. Then have a look at what the function *as.phylo()* does.  
+Load the package *ape*. Have a look at the help for *hclust()* to read what the function does and look at the examples for further help on how to use the function. Then have a look at what the function *as.phylo()* does.
+Now, color the labels using the variable *week*. You can do this using the argument "tip.color =". 
 
-Now, color the labels using the variable *week*. You can do this using the argument "tip.color =". Choose the correct statements about the species richness and its sampling on **elearning-extern**.
+Choose the correct statement(s) about the species richness and its sampling on **elearning-extern**(Q6).
+To be able to read the plot more easily, you can click *Zoom* in the top pane of the Plots window in RStudio.
 
 
+::: {.callout-tip collapse="true" appearance="minimal" icon="false"}
+#### Solution
 
+```{r solution-HierarClcust}
+library(ape)
+
+hc = hclust(dist(dat[, 2:5]))
+plot(as.phylo(hc), tip.color = dat$week)
+```
+:::
 
