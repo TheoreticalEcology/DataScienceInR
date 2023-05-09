@@ -282,15 +282,14 @@ Descriptive statistics characterize properties of the data without providing any
 ## Exercises
 
 ```{r libraries, include=FALSE}
-library(vcd)
 library(EcoData)
 library(grDevices)
 ```
 
 In this exercise you will practice:
 
--   creating and plotting contingency tables for categorial variables (mosaicplot)\
--   plotting a numerical variable (histogram)\
+-   creating and plotting contingency tables for categorical variables (mosaicplot)
+-   plotting a numerical variable (histogram)
 -   plotting two numerical variables against each other (scatterplot)
 -   calculating correlations
 
@@ -304,16 +303,27 @@ Let's get started!
 
 ### Contingency tables
 
-Here, we will have a look at the data set "Arthritis" from the "vcd" package. The study was conducted as a double-blind clinical trial investigating a new treatment against arthritis. The improvement was measured as a categorial variable with the possible outcomes "improved", "some" or "none".
+Here, we will have a look at the data set "arthritis" from the "EcoData" package. The study was conducted as a double-blind clinical trial investigating a new treatment against arthritis. The improvement was measured as a categorical variable with the possible outcomes "Improved", "Some" or "None".
 
-Install and then load the package "vcd" and have a look at the data using the *View()* function. This will open a new tab next to your R script. To return to your script, close the new tab or click on your script.
+Install and then load the package "EcoData" and have a look at the data using the *View()* function. This will open a new tab next to your R script. To return to your script, close the new tab or click on your script.
 
 ```{r, eval=FALSE}
-library(vcd)
-View(Arthritis)
+library(EcoData)
+View(arthritis)
+
+# Get the data
+dat <- arthritis
+
+# Coerce columns ’Improved' and 'Treatment' to (ordered) factors
+# (When the factor is ordered, other functions like table() and barplot() will use this order.
+# Otherwise, the levels will be ordered alphabetically.)
+dat$Improved <- factor(dat$Improved, levels = c("None","Some","Marked"), ordered = TRUE)
+dat$Treatment <- as.factor(dat$Treatment)
+str(dat)
+
 ```
 
-An important function for categorial data is *table()*. It produces a contingency table counting the occurences of the different categories of one variable or of each combination of the categories of two (or more) variables.
+An important function for categorical data is *table()*. It produces a contingency table counting the occurrences of the different categories of one variable or of each combination of the categories of two (or more) variables.
 
 We are curious how many patients actually improved in the study and how this is influenced by the treatment. To show this graphically, we produced two plots (see below) using the following functions:
 
@@ -325,9 +335,10 @@ We are curious how many patients actually improved in the study and how this is 
 Your task is now to reconstruct the two plots shown below by using these functions.
 
 ```{r, echo = FALSE}
-Improvedcounts <- table(Arthritis$Improved)  # create a table which gives you counts of the three categories in the "Improved" variable
-barplot(Improvedcounts,  # create a barplot of your table
-        ylim = c(0,50),  # change the limits of your y axis: starting from zero to 50
+counts <- table(dat$Improved)  # create a table which gives you counts of the three categories in the "Improved" variable
+
+barplot(counts,            # create a barplot of your table
+        ylim = c(0,50),    # change the limits of your y axis: starting from zero to 50
         xlab = "Improved",  # add a label to your x axis
         ylab = "Frequency")  # add a label to your y axis
 ```
@@ -337,7 +348,7 @@ barplot(Improvedcounts,  # create a barplot of your table
 What kind of plot is shown here? How many variables are shown in the plot? Approach: First, create a new object consisting of the table of the variable of interest. Then use this object for plotting. Changing plot elements: Have a look at the help of the plotting-function to find out how to change the y- and x-axis labels. What do you notice on the y-axis? You can change the limits of the y-axis using "ylim = c(from, to)" as an argument in the plotting function.
 
 ```{r, echo = FALSE}
-Ratios <- table(Improved = Arthritis$Improved, Treatment = Arthritis$Treatment)
+Ratios <- table(Improved = dat$Improved, Treatment = dat$Treatment)
 plot(Ratios)
 ```
 
@@ -353,30 +364,29 @@ What do you think of the study now? Could you already draw conclusions from this
 Plot 1
 
 ```{r barplot of table, message=FALSE}
-library(vcd)
+counts <- table(dat$Improved)  # create a table which gives you counts of the three categories in the "Improved" variable
 
-Improvedcounts <- table(Arthritis$Improved)  # create a table which counts the occurences of the three categories in the "Improved" variable, the table is assigne to the name "Improvedcounts"
-barplot(Improvedcounts,  # create a barplot of the table "Improvedcounts
-        ylim = c(0,50),  # change the limits of your y axis: starting from zero to 50
-        xlab = "Improved",  # add the label "Improved" to your x axis
-        ylab = "Frequency")  # add the label "Frequency" to your y axis
+barplot(counts,            # create a barplot of your table
+        ylim = c(0,50),    # change the limits of your y axis: starting from zero to 50
+        xlab = "Improved",  # add a label to your x axis
+        ylab = "Frequency")  # add a label to your y axis
 ```
 
 Plot 2
 
 ```{r mosaic plot of table}
-Ratios <- table(Improved = Arthritis$Improved, Treatment = Arthritis$Treatment)  # create a table with the assigned name "ratios", give the name "Improved" to the first variable which is the variable Improved from the data set Arthritis, give the name "Treatment" to the second variable which is the variable Treatment from the data set Arthritis
+Ratios <- table(Improved = dat$Improved, Treatment = dat$Treatment)  # create a table with the assigned name "ratios", give the name "Improved" to the first variable which is the variable Improved from the data set Arthritis, give the name "Treatment" to the second variable which is the variable Treatment from the data set Arthritis
 plot(Ratios)  # create a plot of the table "ratios"
 ```
 
-To view the tables with the names "Improvedcounts" and "ratios" you can simply execute their names:
+To view the tables with the names "counts" and "Ratios" you can simply execute their names:
 
 ```{r}
-Improvedcounts
+counts
 Ratios
 ```
 
-*Could you already draw conclusions from this plot?*\
+*Could you already draw conclusions from this plot?*
 No, because this is only a descriptive plot. You can say that a large proportion of the patients that got a placebo treatment did not improve while a large proportion of the patients that got the new treatment improved markedly. However, this could also be the result of random variation and sampling. We need inferential statistics to make conclusions about the effectiveness of the treatment.
 :::
 
