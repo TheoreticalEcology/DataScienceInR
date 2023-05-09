@@ -735,11 +735,18 @@ var.test(casein, horsebean)
 
 ### Extra: testing the assumptions for all groups:
 
-# Normality test using the dplyr package
+# Normality test for all groups
+
+# Option 1: using the dplyr package
 library(dplyr)
-dat %>% 
+norm_test <- dat %>%
   group_by(feed) %>% 
   summarise(p = shapiro.test(weight)$p)
+
+# Option 2: using base R
+norm_test <- aggregate(weight~feed, data = dat, FUN = function(x){shapiro.test(x)$p})
+
+norm_test # all groups seem normally distributed
 
 # Bartlett test for equal variances
 bartlett.test(weight ~ feed, dat)
@@ -780,7 +787,7 @@ dat = titanic
 Answer the following questions at **elearning-extern**.
 
 1.  We are interested in first and second class differences only. Reduce the dataset to these classes only. How can you do this in R?
-2.  Does the survival rate between the first and second class differ? Hint: you can apply the test to a contigency table of passenger class versus survived, i.e. `table(dat$pclass, dat$survived)`.
+2.  Does the survival rate between the first and second class differ? Hint: you can apply the test to a contingency table of passenger class versus survived, i.e. `table(dat$pclass, dat$survived)`.
 3.  Is the variable passenger age normally distributed?
 4.  Is the variable Body Identification Number (body) uniformly distributed?
 5.  Is the correlation between fare and age significant?

@@ -14,7 +14,7 @@ $$
 y = a_0 + a_1*x_1 + a_2*x_2
 $$
 
-This importance because of the omitted variable bias: If there is a confounder which has an effect on the predictor and the response, and we don't condition the model on it, the effect will be absorbed by the predictor, potentially causing a spurious correlation. Conditioning means that we need to include the variables even, if we are not really interested in it! (those variables are called nuisance parameters)
+This is important because of the omitted variable bias: If there is a confounder which has an effect on the predictor and the response, and we don't condition the model on it, the effect will be absorbed by the predictor, potentially causing a spurious correlation. Conditioning means that we need to include the variables even though we are not really interested in it! (Those variables are called *nuisance parameters*.)
 
 In the worst case it can lead to a Simpson's paradox: An unobserved variable purports the effect of a predictor on the response variable and removes the predictor's effect or even changes its direction in the opposite direction to the true correlation.
 
@@ -33,25 +33,32 @@ summary(lm(Growth~Temp+Climate)) # correct effects!!
 
 Identifying confounders is the most important challenge in observational studies: For example, several studies showed that overweight adults have lower mortality. However, another study shows that these earlier results might have come up due to confounding: smoking!
 
--   smokers: higher mortality and lower BMI people with lower BMI have higher mortality rates
+-   smokers: higher mortality and lower BMI -> people with lower BMI have higher mortality rates
 
--   When we correct for the confounder smoking, the correlation between BMI and mortality goes in the other direction (obese people have higher mortality!)
+-   When we correct for the confounder *smoking*, the correlation between BMI and mortality goes in the other direction, i.e. obese people have higher mortality!
 
-Confounders can even lead to observed correlations where in reality there is no such correlation. This is called spurious correlations.
+Confounders can even lead to observed correlations where in reality there is no such correlation. This is called *spurious correlation*.
 
 ::: callout-warning
-Conclusion: confounders can cause correlations where no causal relationship exists.
+Conclusion: Confounders can cause correlations where no causal relationship exists.
 :::
 
 ## Multiple LM
 
 The multiple linear regression can deal with confounders:
 
--   Univariate (simple) linear regression describes how y depends on x using a polynomial of x1 e.g.: y = a0 + a1 \* x1 + a2 \* x12
+-   Univariate (simple) linear regression describes how y depends on x using a polynomial of x1 e.g.:
+$$
+y = a_0 + a_1*x_1 + a_2*x_1^2
+$$
 
--   Multiple linear regression expands simple linear regression to a polynomial of several explanatory variables x1, x2... e.g.: y = a0 + a1 \* x1 + a2 \* x2 + a3 \* x3
 
--   Idea: when we jointly consider "all" variables in the model formula, the influence of confounding variables is incorporated
+-   Multiple linear regression expands simple linear regression to a polynomial of several explanatory variables x1, x2... e.g.:
+$$
+y = a_0 + a_1*x_1 + a_2*x_2 + a_3*x_3
+$$
+
+-   Idea: if we jointly consider "all" variables in the model formula, the influence of confounding variables is incorporated
 
 ```{r}
 ## first remove observations with NA values
@@ -146,7 +153,7 @@ m5 = lm(sqrt(Ozone) ~ MonthFactor + scale(Wind) + scale(Temp) + scale(Solar.R)
         data = newAirquality)
 summary(m5)
 
-# short form for including only two-wac interactions:
+# short form for including only two-way interactions:
 
 m5 = lm(sqrt(Ozone) ~ MonthFactor + (scale(Wind) + scale(Temp) + scale(Solar.R))^2,
         data = newAirquality)
@@ -345,7 +352,8 @@ You may need the following functions:
 -   plot()
 -   allEffects()
 
-Use your results to **answer the questions on elearning-extern**.
+Use your results to **answer the questions on elearning-extern** (Q 1-2) [("05_Test for Exercise in R - multiple regression")](https://elearning.uni-regensburg.de/mod/quiz/view.php?id=2046701).
+
 :::
 
 ::: {.callout-tip collapse="true" appearance="minimal" icon="false"}
@@ -359,28 +367,33 @@ mtcars$am <- as.factor(mtcars$am)
 mtcars$cyl <- as.factor(mtcars$cyl)
 
 # multiple linear regression and results:
-carsfit <- lm(mpg ~ wt + hp + am + cyl + wt:hp, dat = mtcars) 
-#weight is included as the first predictor in order to have 
-#it as the grouping factor in the allEffects plot 
+# (we need to scale (standardize) the predictors wt and hp, since we include their interaction)
+carsfit <- lm(mpg ~ am + cyl + scale(wt) * scale(hp), dat = mtcars)
+# weight is included as the first predictor in order to have
+# it as the grouping factor in the allEffects plot
+
 summary(carsfit)
-anova(carsfit)
+# The first level of each factor is used as a reference, i.e. in this case a manual gear shift with 4 gears.
+# From the coefficient cyl6 we see that there is no significant difference in fuel consumption (= our response) between 4 gears (the reference) and 6 gears.
+# In contrast, the predictors weight (wt) and horsepower (hp) have a significant negative effect on the range (mpg), so that they both increase fuel consumption.
 
 # check residuals
 old.par = par(mfrow = c(2, 2))
 plot(carsfit)
 par(old.par)
 
-#plot effects
+# plot effects
 plot(allEffects(carsfit))
+# We can see in the wt*hp plot, that for high values of hp wt has no effect on the response mpg. We conclude that Pawl was right.
 ```
 :::
 
 ### Model-selection with the *Cement* dataset
 
-The process of cement hardening involves exogenous chemical reactions and thus produces heat. The amount of heat produced by the cement depends on the mixture of its constituents. The *Cement* dataset includes heat measurements for different types of cement that consist of different relative amounts calcium aluminate (*X1*), tricalcium silicate (*X2*), tetracalcium alumino ferrite (*X3*) and dicalcium silicate (*X4*). A cement producing company wants to optimize the composition of its product and wants to know, which of these compounds are mainly responsible for heat production.
+The process of cement hardening involves exogenous chemical reactions and thus produces heat. The amount of heat produced by the cement depends on the mixture of its constituents. The *Cement* dataset includes heat measurements for different types of cement that consist of different relative amounts of calcium aluminate (*X1*), tricalcium silicate (*X2*), tetracalcium alumino ferrite (*X3*) and dicalcium silicate (*X4*). A cement producing company wants to optimize the composition of its product and wants to know, which of these compounds are mainly responsible for heat production.
 
 ::: callout-warning
-We only do here a model selection because of educational reasons. For your analysis, and if your goal is not a predictive model, think about the model structure before you do the analysis and then stick to it! See here the section about [p-hacking](https://theoreticalecology.github.io/AdvancedRegressionModels/3C-ModelSelection.html#pHacking) (and also consider that AIC selection will/can remove confounders which will violate causality and can lead to spurious correlations!
+We only do a model selection here for educational reasons. For your analysis, and if your goal is not a predictive model, think about the model structure before you do the analysis and then stick to it! See here the section about [p-hacking](https://theoreticalecology.github.io/AdvancedRegressionModels/3C-ModelSelection.html#pHacking) (and also consider that AIC selection will/can remove confounders which will violate causality and can lead to spurious correlations!
 :::
 
 ::: {.callout-caution icon="false"}
@@ -389,7 +402,7 @@ We only do here a model selection because of educational reasons. For your analy
 Carry out the following tasks:
 
 -   Perform a multiple linear regression including all predictor variables and all two-way interactions (remember the notation *(var1 + var2 + var3)\^2*.
--   Perform backward, forward and global model selection and compare the results
+-   Perform forward, backward, and global model selection and compare the results
 -   Fit the model considered optimal by global model selection and compare it with the full model based on AIC (or AICc) and LRT.
 
 You may need the following functions:
@@ -402,7 +415,8 @@ You may need the following functions:
 -   AIC() or AICc() (for small datasets)
 -   anova()
 
-Use your results to **answer the questions on elearning-extern** [("03_Test for Exercise in R - multiple regression")](https://elearning.uni-regensburg.de/mod/quiz/view.php?id=2046701).
+Use your results to **answer the questions on elearning-extern** (Q 3-5) [("05_Test for Exercise in R - multiple regression")](https://elearning.uni-regensburg.de/mod/quiz/view.php?id=2046701).
+
 :::
 
 ::: {.callout-tip collapse="true" appearance="minimal" icon="false"}
@@ -414,37 +428,41 @@ This is the code that you need to obtain the results.
 #| eval: false
 
 library(MuMIn)
-# full model 
+library(MASS)
+
+# full model ->  has 11 coefficients
 full = lm(y ~ (X1 + X2 + X3 + X4)^2, data = Cement)
 summary(full)
 
-# backward model selection
-red1 = stepAIC(full, direction = "backward")
-summary(red1)
-
 # forward model selection
-red2 = stepAIC(full, direction = "forward")
-summary(red2)
+ms_forw = stepAIC(full, direction = "forward")
+summary(ms_forw)
+# lists 11 coefficients (i.e. selects full model)
+
+# backward model selection
+ms_back = stepAIC(full, direction = "backward")
+summary(ms_back)
+# lists 10 coefficients
 
 # global model selection
 options(na.action = "na.fail")
 dd = dredge(full)
 head(dd)
+# The first row lists the best performing model: it includes only the intercept and effects for X1 and X2 (= 3 coefficients).
 
+# Fit the model considered optimal by global model selection and compare it with the full model based on AIC (or AICc) and LRT:
 opt = lm(y ~ X1 + X2, data = Cement)
 summary(opt)
 
-AIC(opt)
-AIC(full) # full model is better
-anova(opt, full) # no difference between the models
+AIC(opt,full) # full model is better according to AIC (lower AIC)
+anova(opt, full) # -> LRT: no significant difference between the models
 
 # sample size in the Cement dataset:
-str(Cement) #or
+str(Cement)  # or
 nrow(Cement)
 
 # If the sample size is low, a corrected version of the AIC is recommended to avoid overfitting:
-AICc(opt)
-AICc(full) # This is inf! opt model is better
+AICc(opt,full) # This is inf! -> optimal model is better according to AICc
 
 ```
 :::
