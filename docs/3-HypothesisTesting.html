@@ -1396,39 +1396,44 @@ Solution
 <span id="cb54-35"><a href="#cb54-35" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb54-36"><a href="#cb54-36" aria-hidden="true" tabindex="-1"></a><span class="do">### Extra: testing the assumptions for all groups:</span></span>
 <span id="cb54-37"><a href="#cb54-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb54-38"><a href="#cb54-38" aria-hidden="true" tabindex="-1"></a><span class="co"># Normality test using the dplyr package</span></span>
-<span id="cb54-39"><a href="#cb54-39" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb54-40"><a href="#cb54-40" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb54-41"><a href="#cb54-41" aria-hidden="true" tabindex="-1"></a><span class="do">## Attaching package: 'dplyr'</span></span>
-<span id="cb54-42"><a href="#cb54-42" aria-hidden="true" tabindex="-1"></a><span class="do">## The following object is masked from 'package:MASS':</span></span>
-<span id="cb54-43"><a href="#cb54-43" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb54-44"><a href="#cb54-44" aria-hidden="true" tabindex="-1"></a><span class="do">##     select</span></span>
-<span id="cb54-45"><a href="#cb54-45" aria-hidden="true" tabindex="-1"></a><span class="do">## The following objects are masked from 'package:stats':</span></span>
-<span id="cb54-46"><a href="#cb54-46" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb54-47"><a href="#cb54-47" aria-hidden="true" tabindex="-1"></a><span class="do">##     filter, lag</span></span>
-<span id="cb54-48"><a href="#cb54-48" aria-hidden="true" tabindex="-1"></a><span class="do">## The following objects are masked from 'package:base':</span></span>
-<span id="cb54-49"><a href="#cb54-49" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb54-50"><a href="#cb54-50" aria-hidden="true" tabindex="-1"></a><span class="do">##     intersect, setdiff, setequal, union</span></span>
-<span id="cb54-51"><a href="#cb54-51" aria-hidden="true" tabindex="-1"></a>dat <span class="sc">%&gt;%</span> </span>
-<span id="cb54-52"><a href="#cb54-52" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(feed) <span class="sc">%&gt;%</span> </span>
-<span id="cb54-53"><a href="#cb54-53" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">p =</span> <span class="fu">shapiro.test</span>(weight)<span class="sc">$</span>p)</span>
-<span id="cb54-54"><a href="#cb54-54" aria-hidden="true" tabindex="-1"></a><span class="do">## # A tibble: 6 × 2</span></span>
-<span id="cb54-55"><a href="#cb54-55" aria-hidden="true" tabindex="-1"></a><span class="do">##   feed          p</span></span>
-<span id="cb54-56"><a href="#cb54-56" aria-hidden="true" tabindex="-1"></a><span class="do">##   &lt;fct&gt;     &lt;dbl&gt;</span></span>
-<span id="cb54-57"><a href="#cb54-57" aria-hidden="true" tabindex="-1"></a><span class="do">## 1 casein    0.259</span></span>
-<span id="cb54-58"><a href="#cb54-58" aria-hidden="true" tabindex="-1"></a><span class="do">## 2 horsebean 0.526</span></span>
-<span id="cb54-59"><a href="#cb54-59" aria-hidden="true" tabindex="-1"></a><span class="do">## 3 linseed   0.903</span></span>
-<span id="cb54-60"><a href="#cb54-60" aria-hidden="true" tabindex="-1"></a><span class="do">## 4 meatmeal  0.961</span></span>
-<span id="cb54-61"><a href="#cb54-61" aria-hidden="true" tabindex="-1"></a><span class="do">## 5 soybean   0.506</span></span>
-<span id="cb54-62"><a href="#cb54-62" aria-hidden="true" tabindex="-1"></a><span class="do">## 6 sunflower 0.360</span></span>
-<span id="cb54-63"><a href="#cb54-63" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb54-64"><a href="#cb54-64" aria-hidden="true" tabindex="-1"></a><span class="co"># Bartlett test for equal variances</span></span>
-<span id="cb54-65"><a href="#cb54-65" aria-hidden="true" tabindex="-1"></a><span class="fu">bartlett.test</span>(weight <span class="sc">~</span> feed, dat)</span>
-<span id="cb54-66"><a href="#cb54-66" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb54-67"><a href="#cb54-67" aria-hidden="true" tabindex="-1"></a><span class="do">##  Bartlett test of homogeneity of variances</span></span>
-<span id="cb54-68"><a href="#cb54-68" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb54-69"><a href="#cb54-69" aria-hidden="true" tabindex="-1"></a><span class="do">## data:  weight by feed</span></span>
-<span id="cb54-70"><a href="#cb54-70" aria-hidden="true" tabindex="-1"></a><span class="do">## Bartlett's K-squared = 3.2597, df = 5, p-value = 0.66</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb54-38"><a href="#cb54-38" aria-hidden="true" tabindex="-1"></a><span class="co"># Normality test for all groups</span></span>
+<span id="cb54-39"><a href="#cb54-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-40"><a href="#cb54-40" aria-hidden="true" tabindex="-1"></a><span class="co"># Option 1: using the dplyr package</span></span>
+<span id="cb54-41"><a href="#cb54-41" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb54-42"><a href="#cb54-42" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb54-43"><a href="#cb54-43" aria-hidden="true" tabindex="-1"></a><span class="do">## Attaching package: 'dplyr'</span></span>
+<span id="cb54-44"><a href="#cb54-44" aria-hidden="true" tabindex="-1"></a><span class="do">## The following object is masked from 'package:MASS':</span></span>
+<span id="cb54-45"><a href="#cb54-45" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb54-46"><a href="#cb54-46" aria-hidden="true" tabindex="-1"></a><span class="do">##     select</span></span>
+<span id="cb54-47"><a href="#cb54-47" aria-hidden="true" tabindex="-1"></a><span class="do">## The following objects are masked from 'package:stats':</span></span>
+<span id="cb54-48"><a href="#cb54-48" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb54-49"><a href="#cb54-49" aria-hidden="true" tabindex="-1"></a><span class="do">##     filter, lag</span></span>
+<span id="cb54-50"><a href="#cb54-50" aria-hidden="true" tabindex="-1"></a><span class="do">## The following objects are masked from 'package:base':</span></span>
+<span id="cb54-51"><a href="#cb54-51" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb54-52"><a href="#cb54-52" aria-hidden="true" tabindex="-1"></a><span class="do">##     intersect, setdiff, setequal, union</span></span>
+<span id="cb54-53"><a href="#cb54-53" aria-hidden="true" tabindex="-1"></a>norm_test <span class="ot">&lt;-</span> dat <span class="sc">%&gt;%</span></span>
+<span id="cb54-54"><a href="#cb54-54" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(feed) <span class="sc">%&gt;%</span> </span>
+<span id="cb54-55"><a href="#cb54-55" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">p =</span> <span class="fu">shapiro.test</span>(weight)<span class="sc">$</span>p)</span>
+<span id="cb54-56"><a href="#cb54-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-57"><a href="#cb54-57" aria-hidden="true" tabindex="-1"></a><span class="co"># Option 2: using base R</span></span>
+<span id="cb54-58"><a href="#cb54-58" aria-hidden="true" tabindex="-1"></a>norm_test <span class="ot">&lt;-</span> <span class="fu">aggregate</span>(weight<span class="sc">~</span>feed, <span class="at">data =</span> dat, <span class="at">FUN =</span> <span class="cf">function</span>(x){<span class="fu">shapiro.test</span>(x)<span class="sc">$</span>p})</span>
+<span id="cb54-59"><a href="#cb54-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-60"><a href="#cb54-60" aria-hidden="true" tabindex="-1"></a>norm_test <span class="co"># all groups seem normally distributed</span></span>
+<span id="cb54-61"><a href="#cb54-61" aria-hidden="true" tabindex="-1"></a><span class="do">##        feed    weight</span></span>
+<span id="cb54-62"><a href="#cb54-62" aria-hidden="true" tabindex="-1"></a><span class="do">## 1    casein 0.2591841</span></span>
+<span id="cb54-63"><a href="#cb54-63" aria-hidden="true" tabindex="-1"></a><span class="do">## 2 horsebean 0.5264499</span></span>
+<span id="cb54-64"><a href="#cb54-64" aria-hidden="true" tabindex="-1"></a><span class="do">## 3   linseed 0.9034734</span></span>
+<span id="cb54-65"><a href="#cb54-65" aria-hidden="true" tabindex="-1"></a><span class="do">## 4  meatmeal 0.9611795</span></span>
+<span id="cb54-66"><a href="#cb54-66" aria-hidden="true" tabindex="-1"></a><span class="do">## 5   soybean 0.5063768</span></span>
+<span id="cb54-67"><a href="#cb54-67" aria-hidden="true" tabindex="-1"></a><span class="do">## 6 sunflower 0.3602904</span></span>
+<span id="cb54-68"><a href="#cb54-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-69"><a href="#cb54-69" aria-hidden="true" tabindex="-1"></a><span class="co"># Bartlett test for equal variances</span></span>
+<span id="cb54-70"><a href="#cb54-70" aria-hidden="true" tabindex="-1"></a><span class="fu">bartlett.test</span>(weight <span class="sc">~</span> feed, dat)</span>
+<span id="cb54-71"><a href="#cb54-71" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb54-72"><a href="#cb54-72" aria-hidden="true" tabindex="-1"></a><span class="do">##  Bartlett test of homogeneity of variances</span></span>
+<span id="cb54-73"><a href="#cb54-73" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb54-74"><a href="#cb54-74" aria-hidden="true" tabindex="-1"></a><span class="do">## data:  weight by feed</span></span>
+<span id="cb54-75"><a href="#cb54-75" aria-hidden="true" tabindex="-1"></a><span class="do">## Bartlett's K-squared = 3.2597, df = 5, p-value = 0.66</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ol start="3" type="1">
 <li>H0 of the ANOVA is that feed has no influence on the chicken weight. As p &lt; 0.05, we reject H0. In the result section, we would write something like: “The feed type significantly influenced the chicken weight (ANOVA, p = 5.94e-10).”</li>
@@ -1498,7 +1503,7 @@ Solution
 <p>Answer the following questions at <strong>elearning-extern</strong>.</p>
 <ol type="1">
 <li>We are interested in first and second class differences only. Reduce the dataset to these classes only. How can you do this in R?</li>
-<li>Does the survival rate between the first and second class differ? Hint: you can apply the test to a contigency table of passenger class versus survived, i.e.&nbsp;<code>table(dat$pclass, dat$survived)</code>.</li>
+<li>Does the survival rate between the first and second class differ? Hint: you can apply the test to a contingency table of passenger class versus survived, i.e.&nbsp;<code>table(dat$pclass, dat$survived)</code>.</li>
 <li>Is the variable passenger age normally distributed?</li>
 <li>Is the variable Body Identification Number (body) uniformly distributed?</li>
 <li>Is the correlation between fare and age significant?</li>

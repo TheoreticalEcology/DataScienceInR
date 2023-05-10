@@ -141,7 +141,7 @@ The `dplyr` package is part of a big software environment called tidyverse. Uniq
 ### Visualizations for two variables
 
 | Scenario                     | Which plot                    | R command                                                                     |
-|------------------------|------------------------|------------------------|
+|-----------------|-----------------|--------------------------------------|
 | Numeric                      | Histogram or boxplot          | `hist()` and`boxplot`                                                         |
 | Numeric with numeric         | Scatterplot                   | `plot`                                                                        |
 | Numeric with categorical     | Boxplot                       | `boxplot(numeric~categorical)`                                                |
@@ -307,9 +307,9 @@ Here, we will have a look at the data set "arthritis" from the "EcoData" package
 
 Install and then load the package "EcoData" and have a look at the data using the *View()* function. This will open a new tab next to your R script. To return to your script, close the new tab or click on your script.
 
-```{r, eval=FALSE}
+```{r, eval=TRUE}
 library(EcoData)
-View(arthritis)
+# View(arthritis)
 
 # Get the data
 dat <- arthritis
@@ -386,8 +386,7 @@ counts
 Ratios
 ```
 
-*Could you already draw conclusions from this plot?*
-No, because this is only a descriptive plot. You can say that a large proportion of the patients that got a placebo treatment did not improve while a large proportion of the patients that got the new treatment improved markedly. However, this could also be the result of random variation and sampling. We need inferential statistics to make conclusions about the effectiveness of the treatment.
+*Could you already draw conclusions from this plot?* No, because this is only a descriptive plot. You can say that a large proportion of the patients that got a placebo treatment did not improve while a large proportion of the patients that got the new treatment improved markedly. However, this could also be the result of random variation and sampling. We need inferential statistics to make conclusions about the effectiveness of the treatment.
 :::
 
 ### Histogram
