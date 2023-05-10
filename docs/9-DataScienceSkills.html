@@ -289,68 +289,48 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The main steps are as follows (<strong>to solve the tasks, please carefully read the detailed instructions and hints below</strong>):</p>
 <ol type="1">
 <li>Read the provided datasets <em>treedata.csv</em> and <em>species.csv</em> to R.</li>
-<li>Have a look at the dataset properties.<br>
-</li>
-<li>Find values that prevent a column you expect to be numeric to do so.<br>
-</li>
-<li>Does the dataset contain NA-values in <code>height</code>? How many?<br>
-</li>
-<li>Have a look at the data: Check for implausible values. For now, remove these values.<br>
-</li>
-<li>Add the species names to the dataset.<br>
-</li>
-<li>Create a new dataset containing only trees with both, height and dbh measurements.<br>
-</li>
-<li>Are there any correlations within the new dataset?<br>
-</li>
-<li>Remove all trees with <code>rem</code> = F4 from the dataset<br>
-</li>
+<li>Have a look at the dataset properties.</li>
+<li>Find values that prevent a column you expect to be numeric to do so.</li>
+<li>Does the dataset contain NA-values in <code>height</code>? How many?</li>
+<li>Have a look at the data: Check for implausible values. For now, remove these values.</li>
+<li>Add the species names to the dataset.</li>
+<li>Create a new dataset containing only trees with both, height and dbh measurements.</li>
+<li>Are there any correlations within the new dataset?</li>
+<li>Remove all trees with <code>rem</code> = F4 from the dataset</li>
 <li>Calculate mean dbh by species.</li>
 </ol>
 <hr>
-<p>To thorougly check the dataset and perform the operations, you will need the following functions:</p>
+<p>To thoroughly check the dataset and perform the operations, you will need the following functions:</p>
 <ul>
-<li><code>read.csv()</code>: Check the different options using <code>?read.csv</code><br>
-</li>
-<li><code>str()</code>: Structure of an object<br>
-</li>
-<li><code>table()</code>: Check the optional arguments!<br>
-</li>
-<li><code>merge()</code>: Combine to data.frames<br>
-</li>
+<li><code>read.csv()</code>: Check the different options using <code>?read.csv</code></li>
+<li><code>str()</code>: Structure of an object</li>
+<li><code>table()</code>: Check the optional arguments!</li>
+<li><code>merge()</code>: Combine to data.frames</li>
 <li><code>as.character()</code>: Change a vector’s class to character</li>
 <li><code>as.numeric()</code>: Change a vector’s class to numeric.</li>
 <li><code>%in%</code></li>
-<li><code>is.na()</code><br>
-</li>
+<li><code>is.na()</code></li>
 <li><code>max()</code></li>
-<li><code>summary()</code><br>
-</li>
-<li><code>complete.cases()</code><br>
-</li>
+<li><code>summary()</code></li>
+<li><code>complete.cases()</code></li>
 <li><code>cor.test()</code></li>
 <li><code>%&gt;%</code> and <code>group_by()</code> and <code>summarize()</code> from the dlyr package (check demonstration Part 2)</li>
 </ul>
-<p>Regarding the solutions, note we don’t expect you to come up with exactly this code - there are many ways to solve the problem. The solutions just give you an idea of a possible solution</p>
+<p>Regarding the solutions, note we don’t expect you to come up with exactly this code - there are many ways to solve the problem. The solutions just give you an idea of a possible solution.</p>
 <section id="read-data" class="level3" data-number="9.1.1">
 <h3 data-number="9.1.1" class="anchored" data-anchor-id="read-data"><span class="header-section-number">9.1.1</span> 1. Read data</h3>
 <p>Read the provided datasets <em>treedata.csv</em> and <em>species.csv</em> to R. Use the option <strong>stringsAsFactors = FALSE</strong> in the function <code>read.csv</code>.</p>
 <p>Read the dataset <em>treedata.csv</em> and call it treedata. It has the following columns:</p>
 <ul>
-<li><code>species_code</code>: tree species code<br>
-</li>
-<li><code>dbh</code>: diameter at breast height (1.3 m) [cm]<br>
-</li>
-<li><code>height</code>: total height of the tree [m]. Measured only on a subset of trees.<br>
-</li>
+<li><code>species_code</code>: tree species code</li>
+<li><code>dbh</code>: diameter at breast height (1.3 m) [cm]</li>
+<li><code>height</code>: total height of the tree [m]. Measured only on a subset of trees.</li>
 <li><code>rem</code>: coded values, containing remarks</li>
 </ul>
 <p>Read the dataset <em>species.csv</em> and call it species. The dataset consists of the following columns:</p>
 <ul>
-<li><code>species_code</code>: tree species code (matching the one used in treedata.csv)<br>
-</li>
-<li><code>species_scientific</code>: Scientific species name<br>
-</li>
+<li><code>species_code</code>: tree species code (matching the one used in treedata.csv)</li>
+<li><code>species_scientific</code>: Scientific species name</li>
 <li><code>species_english</code>: English species name</li>
 </ul>
 <hr>
@@ -379,8 +359,7 @@ Solution
 <h3 data-number="9.1.2" class="anchored" data-anchor-id="dataset-properties"><span class="header-section-number">9.1.2</span> 2. Dataset properties</h3>
 <p>Have a look at the properties of the dataset:</p>
 <ul>
-<li>Which classes do the columns have?<br>
-</li>
+<li>Which classes do the columns have?</li>
 <li>Did you expect these classes?</li>
 </ul>
 <hr>
@@ -396,8 +375,7 @@ Solution
 </div>
 <div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>The <code>data.frame</code> <code>dat</code> contains 4 columns: species, dbh (diameter at breast height [cm]), height [m] and bem1, a remark.<br>
-We expect the following formats:</p>
+<p>The <code>data.frame</code> <code>dat</code> contains 4 columns: species, dbh (diameter at breast height [cm]), height [m] and rem, a remark. We expect the following formats:</p>
 <table class="table">
 <thead>
 <tr class="header">
@@ -426,16 +404,14 @@ We expect the following formats:</p>
 </table>
 <p>Using <code>str</code> we get an overview of the structure of a dataset:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(treedata)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>'data.frame':   287 obs. of  4 variables:
- $ species_code: int  121 121 411 411 411 431 411 411 411 121 ...
- $ dbh         : chr  "19.3" "21.3" "43" "25.8" ...
- $ height      : num  NA NA 37.7 NA 34.4 44.4 NA NA NA NA ...
- $ rem         : chr  "" "" "P7" "F2" ...</code></pre>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(treedata)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="do">## 'data.frame':    287 obs. of  4 variables:</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ species_code: int  121 121 411 411 411 431 411 411 411 121 ...</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ dbh         : chr  "19.3" "21.3" "43" "25.8" ...</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ height      : num  NA NA 37.7 NA 34.4 44.4 NA NA NA NA ...</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ rem         : chr  "" "" "P7" "F2" ...</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</div>
-<p>Column <code>dbh</code> is a <code>character</code>, altough we would have expected this one to be class numeric. This indicates, that a letter or special characters are in that column (we do not want these to be in there at all!).</p>
+<p>Column <code>dbh</code> is a <code>character</code>, although we would have expected this one to be class numeric. This indicates, that a letter or special characters are in that column (we do not want these to be in there at all!).</p>
 </div>
 </div>
 </div>
@@ -459,76 +435,66 @@ Solution
 <div class="callout-body-container callout-body">
 <p>We suspect <code>dbh</code> to contain a character and we want to remove this. With the function ‘table()’, we can check all existing values in the column. There seems to be an ‘X’ in the data.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(treedata<span class="sc">$</span>dbh)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-10.1 10.2 10.4 10.6 10.7 10.9 11.2 11.4 11.5 11.9 12.3 12.5   13 13.2 13.3 13.4 
-   1    2    2    1    1    1    2    1    1    1    1    2    1    1    1    1 
-13.8 13.9   14 14.4 14.8 14.9 15.2 15.4 15.5 15.8   16 16.2 16.4 16.6 16.8 17.1 
-   3    1    1    6    1    1    3    1    1    1    1    1    1    1    4    1 
-17.2 17.4 17.5 17.6 17.8 17.9 18.1 18.2 18.3 18.7 18.8   19 19.1 19.2 19.3 19.4 
-   2    1    1    1    1    2    1    1    1    1    1    1    1    1    1    1 
-19.5 19.8   20 20.2 20.4 20.7 20.8 20.9 2030 21.3 21.6 21.8 21.9   22 22.2 22.3 
-   3    3    1    2    1    1    2    2    1    1    4    1    1    1    2    1 
-22.6 22.7 22.9 23.2 23.3 23.6 23.7 23.8   24 24.2 24.3 24.4 24.9   25 25.2 25.3 
-   2    1    2    1    1    2    1    1    2    2    2    1    2    1    1    1 
-25.4 25.8   26 26.2 26.3 26.4 26.6 27.4 27.5 27.6 27.8 28.2 28.4 28.6 28.8 29.2 
-   4    3    1    2    1    1    1    2    2    1    1    1    2    1    1    1 
-29.4 29.6 29.7 29.8 30.1 30.2 30.4 30.8 31.2 31.3 31.4 31.9   32 32.2 32.3 32.4 
-   2    1    1    2    1    1    1    2    1    1    2    1    1    3    1    1 
-32.9   33 33.2 33.3 33.4 33.8 33.9 34.2 34.4 34.6 34.7 34.8   35 35.8 36.5 36.6 
-   1    1    1    1    1    3    1    5    1    1    1    1    1    1    1    1 
-36.8 37.1 37.2 37.4 37.8 38.1 38.2 38.3 38.5 39.2 39.4 39.7 39.8    4  4.2  4.6 
-   2    1    1    1    2    1    1    1    1    1    1    1    1    3    3    1 
- 4.7   40 40.6 40.8 41.3 41.4 41.5 42.3 42.4   43 43.2 43.4 43.6 44.2 44.5 44.8 
-   1    1    2    1    1    1    1    1    1    1    1    1    1    1    1    1 
-45.2 45.7 47.8   48 48.7 48.8   49 49.7 49.8  5.1  5.2  5.4  5.5  5.6  5.7  5.8 
-   1    1    1    1    1    1    1    1    1    1    3    3    1    1    1    2 
- 5.9 51.2  6.2  6.3  6.4  6.5  6.6  6.8  6.9    7  7.2  7.3  7.4  7.6  7.8  8.1 
-   2    1    4    2    1    1    2    1    2    1    1    1    2    1    2    1 
- 8.2  8.3  8.5  8.8  8.9    9  9.4  9.5  9.6  9.9    X 
-   3    2    1    1    2    1    1    2    2    1    1 </code></pre>
-</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(treedata<span class="sc">$</span>dbh)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="do">## 10.1 10.2 10.4 10.6 10.7 10.9 11.2 11.4 11.5 11.9 12.3 12.5   13 13.2 13.3 13.4 </span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="do">##    1    2    2    1    1    1    2    1    1    1    1    2    1    1    1    1 </span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="do">## 13.8 13.9   14 14.4 14.8 14.9 15.2 15.4 15.5 15.8   16 16.2 16.4 16.6 16.8 17.1 </span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="do">##    3    1    1    6    1    1    3    1    1    1    1    1    1    1    4    1 </span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="do">## 17.2 17.4 17.5 17.6 17.8 17.9 18.1 18.2 18.3 18.7 18.8   19 19.1 19.2 19.3 19.4 </span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="do">##    2    1    1    1    1    2    1    1    1    1    1    1    1    1    1    1 </span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="do">## 19.5 19.8   20 20.2 20.4 20.7 20.8 20.9 2030 21.3 21.6 21.8 21.9   22 22.2 22.3 </span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="do">##    3    3    1    2    1    1    2    2    1    1    4    1    1    1    2    1 </span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="do">## 22.6 22.7 22.9 23.2 23.3 23.6 23.7 23.8   24 24.2 24.3 24.4 24.9   25 25.2 25.3 </span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="do">##    2    1    2    1    1    2    1    1    2    2    2    1    2    1    1    1 </span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="do">## 25.4 25.8   26 26.2 26.3 26.4 26.6 27.4 27.5 27.6 27.8 28.2 28.4 28.6 28.8 29.2 </span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="do">##    4    3    1    2    1    1    1    2    2    1    1    1    2    1    1    1 </span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="do">## 29.4 29.6 29.7 29.8 30.1 30.2 30.4 30.8 31.2 31.3 31.4 31.9   32 32.2 32.3 32.4 </span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="do">##    2    1    1    2    1    1    1    2    1    1    2    1    1    3    1    1 </span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="do">## 32.9   33 33.2 33.3 33.4 33.8 33.9 34.2 34.4 34.6 34.7 34.8   35 35.8 36.5 36.6 </span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="do">##    1    1    1    1    1    3    1    5    1    1    1    1    1    1    1    1 </span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="do">## 36.8 37.1 37.2 37.4 37.8 38.1 38.2 38.3 38.5 39.2 39.4 39.7 39.8    4  4.2  4.6 </span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="do">##    2    1    1    1    2    1    1    1    1    1    1    1    1    3    3    1 </span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="do">##  4.7   40 40.6 40.8 41.3 41.4 41.5 42.3 42.4   43 43.2 43.4 43.6 44.2 44.5 44.8 </span></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="do">##    1    1    2    1    1    1    1    1    1    1    1    1    1    1    1    1 </span></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a><span class="do">## 45.2 45.7 47.8   48 48.7 48.8   49 49.7 49.8  5.1  5.2  5.4  5.5  5.6  5.7  5.8 </span></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="do">##    1    1    1    1    1    1    1    1    1    1    3    3    1    1    1    2 </span></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="do">##  5.9 51.2  6.2  6.3  6.4  6.5  6.6  6.8  6.9    7  7.2  7.3  7.4  7.6  7.8  8.1 </span></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a><span class="do">##    2    1    4    2    1    1    2    1    2    1    1    1    2    1    2    1 </span></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a><span class="do">##  8.2  8.3  8.5  8.8  8.9    9  9.4  9.5  9.6  9.9    X </span></span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a><span class="do">##    3    2    1    1    2    1    1    2    2    1    1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>To automatically search for characters, we can check if <code>dbh</code> contains a character that is part of <code>LETTERS</code> (capital letters) or <code>letters</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>treedata[treedata<span class="sc">$</span>dbh <span class="sc">%in%</span> LETTERS <span class="sc">|</span> treedata<span class="sc">$</span>dbh <span class="sc">%in%</span> letters,]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>    species_code dbh height rem
-159          411   X   27.2  F4</code></pre>
-</div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>treedata[treedata<span class="sc">$</span>dbh <span class="sc">%in%</span> LETTERS <span class="sc">|</span> treedata<span class="sc">$</span>dbh <span class="sc">%in%</span> letters,]</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="do">##     species_code dbh height rem</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="do">## 159          411   X   27.2  F4</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>A more advanced option would be to use <code>grepl</code>. If we are using the solution above, we will only find the value if it is exactly one character. Things get a bit more complicated, if we have special characters, e.g, a *.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="st">'*'</span>, <span class="st">'AA'</span>, <span class="st">','</span>, <span class="dv">9</span>), <span class="dv">2</span>)</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>x[<span class="fu">grepl</span>(<span class="st">"^[A-Za-z]+$"</span>, x, <span class="at">perl =</span> T)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "AA" "AA"</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>x[<span class="sc">!</span><span class="fu">grepl</span>(<span class="st">'[^[:punct:]]'</span>, x, <span class="at">perl =</span>T)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "*" "," "*" ","</code></pre>
-</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="st">'*'</span>, <span class="st">'AA'</span>, <span class="st">','</span>, <span class="dv">9</span>), <span class="dv">2</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>x[<span class="fu">grepl</span>(<span class="st">"^[A-Za-z]+$"</span>, x, <span class="at">perl =</span> T)]</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] "AA" "AA"</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>x[<span class="sc">!</span><span class="fu">grepl</span>(<span class="st">'[^[:punct:]]'</span>, x, <span class="at">perl =</span>T)]</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] "*" "," "*" ","</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We want to set the X in <code>dbh</code> to <code>NA</code> (probably, this is a transcription error, so one could also have a look at the field forms…).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>treedata<span class="sc">$</span>dbh[treedata<span class="sc">$</span>dbh <span class="sc">==</span> <span class="st">'X'</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(treedata)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>'data.frame':   287 obs. of  4 variables:
- $ species_code: int  121 121 411 411 411 431 411 411 411 121 ...
- $ dbh         : chr  "19.3" "21.3" "43" "25.8" ...
- $ height      : num  NA NA 37.7 NA 34.4 44.4 NA NA NA NA ...
- $ rem         : chr  "" "" "P7" "F2" ...</code></pre>
-</div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>treedata<span class="sc">$</span>dbh[treedata<span class="sc">$</span>dbh <span class="sc">==</span> <span class="st">'X'</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(treedata)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="do">## 'data.frame':    287 obs. of  4 variables:</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ species_code: int  121 121 411 411 411 431 411 411 411 121 ...</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ dbh         : chr  "19.3" "21.3" "43" "25.8" ...</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ height      : num  NA NA 37.7 NA 34.4 44.4 NA NA NA NA ...</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ rem         : chr  "" "" "P7" "F2" ...</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Just removing the ‘X’ does not turn a character to numeric! R provides the function <code>as.numeric</code>, which might be of use in this case.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>treedata<span class="sc">$</span>dbh <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(treedata<span class="sc">$</span>dbh)</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(treedata<span class="sc">$</span>dbh)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 19.3 21.3 43.0 25.8 38.5 36.8</code></pre>
-</div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>treedata<span class="sc">$</span>dbh <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(treedata<span class="sc">$</span>dbh)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(treedata<span class="sc">$</span>dbh)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 19.3 21.3 43.0 25.8 38.5 36.8</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -538,8 +504,7 @@ Solution
 <h3 data-number="9.1.4" class="anchored" data-anchor-id="na--values-in-height"><span class="header-section-number">9.1.4</span> 4. <code>NA</code>- values in <code>height</code></h3>
 <p>Check for NA’s in the column <code>height</code>:</p>
 <ul>
-<li>How many <code>NA</code>’s do appear in this column?<br>
-</li>
+<li>How many <code>NA</code>’s do appear in this column?</li>
 <li>Did you expect this column to contain <code>NA</code>’s? Why?</li>
 </ul>
 <hr>
@@ -556,52 +521,43 @@ Solution
 <div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(treedata)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>  species_code        dbh              height           rem           
- Min.   :101.0   Min.   :   4.00   Min.   :  4.60   Length:287        
- 1st Qu.:121.0   1st Qu.:  11.60   1st Qu.: 21.75   Class :character  
- Median :411.0   Median :  21.60   Median : 29.10   Mode  :character  
- Mean   :329.8   Mean   :  29.22   Mean   : 26.30                     
- 3rd Qu.:411.0   3rd Qu.:  31.40   3rd Qu.: 32.62                     
- Max.   :920.0   Max.   :2030.00   Max.   :110.88                     
-                 NA's   :1         NA's   :221                        </code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(treedata<span class="sc">$</span>height))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 221</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(<span class="fu">is.na</span>(treedata<span class="sc">$</span>height))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-FALSE  TRUE 
-   66   221 </code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(treedata[<span class="fu">is.na</span>(treedata<span class="sc">$</span>height),])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 221</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(treedata<span class="sc">$</span>height, <span class="at">useNA =</span> <span class="st">'ifany'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-   4.6    4.7    4.8    5.7    5.8    6.1    6.2    6.8    7.3    7.9   10.8 
-     1      2      1      1      1      1      1      1      1      1      1 
-  11.1   11.3   11.5   14.2   21.7   21.9     22   22.4   23.3   23.8   24.5 
-     1      1      1      1      1      1      1      2      1      2      1 
-  24.8   26.1   27.2   27.5   27.8   28.6     29   29.2   29.4   29.8   29.9 
-     1      1      1      2      1      1      1      1      1      1      1 
-  30.2   30.3   30.4   31.3   31.5   31.9     32   32.1   32.3   32.4   32.7 
-     1      2      1      1      1      1      2      1      1      1      1 
-  32.8   33.2   33.5   33.8   34.2   34.4   35.4   35.8   37.7   38.2   38.6 
-     1      1      1      1      1      1      1      1      2      1      1 
-    39   40.8   44.4 110.88   &lt;NA&gt; 
-     1      1      1      1    221 </code></pre>
-</div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(treedata)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="do">##   species_code        dbh              height           rem           </span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="do">##  Min.   :101.0   Min.   :   4.00   Min.   :  4.60   Length:287        </span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="do">##  1st Qu.:121.0   1st Qu.:  11.60   1st Qu.: 21.75   Class :character  </span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="do">##  Median :411.0   Median :  21.60   Median : 29.10   Mode  :character  </span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="do">##  Mean   :329.8   Mean   :  29.22   Mean   : 26.30                     </span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="do">##  3rd Qu.:411.0   3rd Qu.:  31.40   3rd Qu.: 32.62                     </span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="do">##  Max.   :920.0   Max.   :2030.00   Max.   :110.88                     </span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="do">##                  NA's   :1         NA's   :221</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(treedata<span class="sc">$</span>height))</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 221</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(<span class="fu">is.na</span>(treedata<span class="sc">$</span>height))</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="do">## FALSE  TRUE </span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="do">##    66   221</span></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(treedata[<span class="fu">is.na</span>(treedata<span class="sc">$</span>height),])</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 221</span></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(treedata<span class="sc">$</span>height, <span class="at">useNA =</span> <span class="st">'ifany'</span>)</span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a><span class="do">##    4.6    4.7    4.8    5.7    5.8    6.1    6.2    6.8    7.3    7.9   10.8 </span></span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a><span class="do">##      1      2      1      1      1      1      1      1      1      1      1 </span></span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a><span class="do">##   11.1   11.3   11.5   14.2   21.7   21.9     22   22.4   23.3   23.8   24.5 </span></span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a><span class="do">##      1      1      1      1      1      1      1      2      1      2      1 </span></span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a><span class="do">##   24.8   26.1   27.2   27.5   27.8   28.6     29   29.2   29.4   29.8   29.9 </span></span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a><span class="do">##      1      1      1      2      1      1      1      1      1      1      1 </span></span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a><span class="do">##   30.2   30.3   30.4   31.3   31.5   31.9     32   32.1   32.3   32.4   32.7 </span></span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a><span class="do">##      1      2      1      1      1      1      2      1      1      1      1 </span></span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a><span class="do">##   32.8   33.2   33.5   33.8   34.2   34.4   35.4   35.8   37.7   38.2   38.6 </span></span>
+<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a><span class="do">##      1      1      1      1      1      1      1      1      2      1      1 </span></span>
+<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a><span class="do">##     39   40.8   44.4 110.88   &lt;NA&gt; </span></span>
+<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a><span class="do">##      1      1      1      1    221</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
-<li>As only on a subset of the trees, height has been measured, we expect this column to contain <code>NA</code>-values.<br>
-</li>
 <li>The dataset contains 221 <code>NA</code>.</li>
+<li>Since height has been measured only on a subset of the trees, we expect this column to contain <code>NA</code>-values.</li>
 </ul>
 </div>
 </div>
@@ -626,44 +582,38 @@ Solution
 <p><em>What values are implausible? The dataset contains different species. A value which is plausible for species A might be implausible for species B. However, for now, we will not go into the details here.</em></p>
 <p>Do a visual check of the dataset</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(treedata<span class="sc">$</span>height, <span class="at">main =</span> <span class="st">'Height'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(treedata<span class="sc">$</span>height, <span class="at">main =</span> <span class="st">'Height'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="9-DataScienceSkills_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(treedata<span class="sc">$</span>dbh, <span class="at">main =</span><span class="st">'DBH'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(treedata<span class="sc">$</span>dbh, <span class="at">main =</span><span class="st">'DBH'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="9-DataScienceSkills_files/figure-html/unnamed-chunk-10-2.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">max</span>(treedata<span class="sc">$</span>dbh, <span class="at">na.rm =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 2030</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">max</span>(treedata<span class="sc">$</span>height, <span class="at">na.rm =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 110.88</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>treedata[treedata<span class="sc">$</span>dbh <span class="sc">&gt;</span> <span class="dv">500</span> <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(treedata<span class="sc">$</span>dbh),]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>    species_code  dbh height rem
-114          411 2030     NA  F2</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>treedata[treedata<span class="sc">$</span>height <span class="sc">&gt;</span> <span class="dv">50</span> <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(treedata<span class="sc">$</span>height),]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>    species_code  dbh height rem
-234          411 36.6 110.88    </code></pre>
-</div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">max</span>(treedata<span class="sc">$</span>dbh, <span class="at">na.rm =</span> T)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 2030</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="fu">max</span>(treedata<span class="sc">$</span>height, <span class="at">na.rm =</span> T)</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 110.88</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>treedata[treedata<span class="sc">$</span>dbh <span class="sc">&gt;</span> <span class="dv">500</span> <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(treedata<span class="sc">$</span>dbh),]</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="do">##     species_code  dbh height rem</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="do">## 114          411 2030     NA  F2</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>treedata[treedata<span class="sc">$</span>height <span class="sc">&gt;</span> <span class="dv">50</span> <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(treedata<span class="sc">$</span>height),]</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="do">##     species_code  dbh height rem</span></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="do">## 234          411 36.6 110.88</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>There seems to be one outlier in both datasets which can be seen as implausible: No tree is more than 100 m of height and no tree has a diameter &gt; 20 m (These values can be considered implausible for trees in Switzerland).<br>
 We will now remove these values from our dataset by setting them to <code>NA</code> - this might not always be the best option, there are also statistical models that can account for such errors!</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>treedata<span class="sc">$</span>dbh[treedata<span class="sc">$</span>dbh <span class="sc">&gt;</span> <span class="dv">500</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
-<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>treedata<span class="sc">$</span>height[treedata<span class="sc">$</span>height <span class="sc">&gt;</span> <span class="dv">50</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
-<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(treedata<span class="sc">$</span>dbh, <span class="at">main =</span> <span class="st">'DBH'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>treedata<span class="sc">$</span>dbh[treedata<span class="sc">$</span>dbh <span class="sc">&gt;</span> <span class="dv">500</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>treedata<span class="sc">$</span>height[treedata<span class="sc">$</span>height <span class="sc">&gt;</span> <span class="dv">50</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(treedata<span class="sc">$</span>dbh, <span class="at">main =</span> <span class="st">'DBH'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="9-DataScienceSkills_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(treedata<span class="sc">$</span>height, <span class="at">main =</span> <span class="st">'Height'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(treedata<span class="sc">$</span>height, <span class="at">main =</span> <span class="st">'Height'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="9-DataScienceSkills_files/figure-html/unnamed-chunk-11-2.png" class="img-fluid" width="672"></p>
 </div>
@@ -691,18 +641,18 @@ Solution
 <div class="callout-body-container callout-body">
 <p>Use <code>merge</code> to add species names to the dataset treedata. For adding only one column, <code>match</code> is a helpful function.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>treedata <span class="ot">=</span> <span class="fu">merge</span>(treedata, species, <span class="at">by =</span> <span class="st">"species_code"</span>)</span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(treedata)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>  species_code  dbh height rem         species_scientific species_english
-1          101  8.1    5.7     Picea abies (L.) H. Karst.   Norway Spruce
-2          101 10.4     NA     Picea abies (L.) H. Karst.   Norway Spruce
-3          101  5.2     NA  S0 Picea abies (L.) H. Karst.   Norway Spruce
-4          101  9.6     NA     Picea abies (L.) H. Karst.   Norway Spruce
-5          101  8.2    6.2     Picea abies (L.) H. Karst.   Norway Spruce
-6          101  7.4    6.1     Picea abies (L.) H. Karst.   Norway Spruce</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># treedata$species_english &lt;- species$species_english[match(treedata$species_code, species$species_code)]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>treedata <span class="ot">=</span> <span class="fu">merge</span>(treedata, species, <span class="at">by =</span> <span class="st">"species_code"</span>)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(treedata)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="do">##   species_code  dbh height rem         species_scientific species_english</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="do">## 1          101  8.1    5.7     Picea abies (L.) H. Karst.   Norway Spruce</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="do">## 2          101 10.4     NA     Picea abies (L.) H. Karst.   Norway Spruce</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="do">## 3          101  5.2     NA  S0 Picea abies (L.) H. Karst.   Norway Spruce</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="do">## 4          101  9.6     NA     Picea abies (L.) H. Karst.   Norway Spruce</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="do">## 5          101  8.2    6.2     Picea abies (L.) H. Karst.   Norway Spruce</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="do">## 6          101  7.4    6.1     Picea abies (L.) H. Karst.   Norway Spruce</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Alternative using match():</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="co"># treedata$species_english &lt;- species$species_english[match(treedata$species_code, species$species_code)]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -725,7 +675,7 @@ Solution
 <div id="callout-7" class="callout-7-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>treedata <span class="ot">&lt;-</span> treedata[<span class="sc">!</span>treedata<span class="sc">$</span>rem <span class="sc">%in%</span> <span class="st">'F4'</span>,]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>treedata <span class="ot">&lt;-</span> treedata[<span class="sc">!</span>treedata<span class="sc">$</span>rem <span class="sc">%in%</span> <span class="st">'F4'</span>,]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -749,7 +699,7 @@ Solution
 <div class="callout-body-container callout-body">
 <p>This can be done using <code>complete.cases</code> using</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>dbh_height <span class="ot">&lt;-</span> treedata[<span class="fu">complete.cases</span>(treedata<span class="sc">$</span>dbh, treedata<span class="sc">$</span>height),]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>dbh_height <span class="ot">&lt;-</span> treedata[<span class="fu">complete.cases</span>(treedata<span class="sc">$</span>dbh, treedata<span class="sc">$</span>height),]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -757,7 +707,7 @@ Solution
 </section>
 <section id="correlations" class="level3" data-number="9.1.9">
 <h3 data-number="9.1.9" class="anchored" data-anchor-id="correlations"><span class="header-section-number">9.1.9</span> 9. Correlations?</h3>
-<p>Check for correlations in the dataset dbh_height. Use a test and plot dbh vs height.</p>
+<p>Check for correlations in the dataset dbh_height. Use a test and plot height vs dbh.</p>
 <hr>
 <div class="callout-tip callout callout-style-simple no-icon callout-captioned">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
@@ -772,25 +722,24 @@ Solution
 <div id="callout-9" class="callout-9-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor.test</span>(dbh_height<span class="sc">$</span>dbh</span>
-<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>         , dbh_height<span class="sc">$</span>height)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-    Pearson's product-moment correlation
-
-data:  dbh_height$dbh and dbh_height$height
-t = 13.147, df = 47, p-value &lt; 2.2e-16
-alternative hypothesis: true correlation is not equal to 0
-95 percent confidence interval:
- 0.8066074 0.9348068
-sample estimates:
-      cor 
-0.8866893 </code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(dbh_height<span class="sc">$</span>dbh</span>
-<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>     , dbh_height<span class="sc">$</span>height</span>
-<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>     , <span class="at">ylab =</span> <span class="st">'Height'</span></span>
-<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>     , <span class="at">xlab =</span> <span class="st">'DBH'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor.test</span>(dbh_height<span class="sc">$</span>dbh</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>         , dbh_height<span class="sc">$</span>height)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="do">##  Pearson's product-moment correlation</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="do">## data:  dbh_height$dbh and dbh_height$height</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="do">## t = 13.147, df = 47, p-value &lt; 2.2e-16</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="do">## alternative hypothesis: true correlation is not equal to 0</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a><span class="do">## 95 percent confidence interval:</span></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="do">##  0.8066074 0.9348068</span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a><span class="do">## sample estimates:</span></span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a><span class="do">##       cor </span></span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a><span class="do">## 0.8866893</span></span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(dbh_height<span class="sc">$</span>dbh</span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>     , dbh_height<span class="sc">$</span>height</span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>     , <span class="at">ylab =</span> <span class="st">'Height'</span></span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>     , <span class="at">xlab =</span> <span class="st">'DBH'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="9-DataScienceSkills_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -802,7 +751,7 @@ sample estimates:
 <section id="calculate-mean-dbh-per-species." class="level3" data-number="9.1.10">
 <h3 data-number="9.1.10" class="anchored" data-anchor-id="calculate-mean-dbh-per-species."><span class="header-section-number">9.1.10</span> 10. Calculate mean dbh per species.</h3>
 <p>For calculating summary statistics, the dplyr package is really helpful. It is part of the tidyverse environment, which was designed for data science. If you work with large and complex datasets or if you have to derive many new variables, I really recommend that you have a look at this. Also, the syntax for dplyr is quite intuitive.</p>
-<p>For help on this, check the demonstration of Part 2 where we calculated summary statistics for groups using the dplyr package!</p>
+<p>For this exercise, use the dplyr package to calculate mean dbh per species. If you need help on this, check the demonstration of Part 2 where we calculated summary statistics for groups using the dplyr package!</p>
 <div class="callout-tip callout callout-style-simple no-icon callout-captioned">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -816,41 +765,33 @@ Solution
 <div id="callout-10" class="callout-10-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>
-Attaching package: 'dplyr'</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>The following objects are masked from 'package:stats':
-
-    filter, lag</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>The following objects are masked from 'package:base':
-
-    intersect, setdiff, setequal, union</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>treedata <span class="sc">%&gt;%</span> </span>
-<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(species_english) <span class="sc">%&gt;%</span> </span>
-<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">N =</span> <span class="fu">n</span>(),</span>
-<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">meanDBH =</span> <span class="fu">mean</span>(dbh, <span class="at">na.rm =</span> T), </span>
-<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">sdDBH =</span> <span class="fu">sd</span>(dbh, <span class="at">na.rm =</span> T))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 10 × 4
-   species_english         N meanDBH  sdDBH
-   &lt;chr&gt;               &lt;int&gt;   &lt;dbl&gt;  &lt;dbl&gt;
- 1 Beech                 131   29.6  10.1  
- 2 Commom Yew              2   18.8   0.212
- 3 European Ash           12   30.6   4.14 
- 4 European Silver Fir    75   11.8   5.55 
- 5 Ivy                     6    5.13  0.927
- 6 Little Leaf Linden      4   13.3   9.88 
- 7 Norway Maple            9   28.2  11.1  
- 8 Norway Spruce          15    7.77  1.89 
- 9 Scotch Elm              1   17.9  NA    
-10 Sycamore               12   24.0   3.91 </code></pre>
-</div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="do">## Attaching package: 'dplyr'</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="do">## The following objects are masked from 'package:stats':</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="do">##     filter, lag</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="do">## The following objects are masked from 'package:base':</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a><span class="do">##     intersect, setdiff, setequal, union</span></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>treedata <span class="sc">%&gt;%</span> </span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(species_english) <span class="sc">%&gt;%</span> </span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">N =</span> <span class="fu">n</span>(),</span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>            <span class="at">meanDBH =</span> <span class="fu">mean</span>(dbh, <span class="at">na.rm =</span> T), </span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>            <span class="at">sdDBH =</span> <span class="fu">sd</span>(dbh, <span class="at">na.rm =</span> T))</span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a><span class="do">## # A tibble: 10 × 4</span></span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a><span class="do">##    species_english         N meanDBH  sdDBH</span></span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a><span class="do">##    &lt;chr&gt;               &lt;int&gt;   &lt;dbl&gt;  &lt;dbl&gt;</span></span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a><span class="do">##  1 Beech                 131   29.6  10.1  </span></span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a><span class="do">##  2 Commom Yew              2   18.8   0.212</span></span>
+<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a><span class="do">##  3 European Ash           12   30.6   4.14 </span></span>
+<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a><span class="do">##  4 European Silver Fir    75   11.8   5.55 </span></span>
+<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a><span class="do">##  5 Ivy                     6    5.13  0.927</span></span>
+<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a><span class="do">##  6 Little Leaf Linden      4   13.3   9.88 </span></span>
+<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a><span class="do">##  7 Norway Maple            9   28.2  11.1  </span></span>
+<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a><span class="do">##  8 Norway Spruce          15    7.77  1.89 </span></span>
+<span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a><span class="do">##  9 Scotch Elm              1   17.9  NA    </span></span>
+<span id="cb18-27"><a href="#cb18-27" aria-hidden="true" tabindex="-1"></a><span class="do">## 10 Sycamore               12   24.0   3.91</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>

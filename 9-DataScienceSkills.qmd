@@ -96,8 +96,7 @@ Have a look at the properties of the dataset:
 ::: {.callout-tip collapse="true" appearance="minimal" icon="false"}
 #### Solution
 
-The `data.frame` `dat` contains 4 columns: species, dbh (diameter at breast height \[cm\]), height \[m\] and rem, a remark.
-We expect the following formats:
+The `data.frame` `dat` contains 4 columns: species, dbh (diameter at breast height \[cm\]), height \[m\] and rem, a remark. We expect the following formats:
 
 | column  | format    |
 |---------|-----------|
@@ -304,8 +303,7 @@ plot(dbh_height$dbh
 
 For calculating summary statistics, the dplyr package is really helpful. It is part of the tidyverse environment, which was designed for data science. If you work with large and complex datasets or if you have to derive many new variables, I really recommend that you have a look at this. Also, the syntax for dplyr is quite intuitive.
 
-For this exercise, use the dplyr package to calculate mean dbh per species. 
-If you need help on this, check the demonstration of Part 2 where we calculated summary statistics for groups using the dplyr package!
+For this exercise, use the dplyr package to calculate mean dbh per species. If you need help on this, check the demonstration of Part 2 where we calculated summary statistics for groups using the dplyr package!
 
 ::: {.callout-tip collapse="true" appearance="minimal" icon="false"}
 #### Solution

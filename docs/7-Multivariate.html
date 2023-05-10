@@ -247,11 +247,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#classroom-demo" id="toc-classroom-demo" class="nav-link active" data-scroll-target="#classroom-demo"><span class="toc-section-number">7.1</span>  Classroom demo</a></li>
-  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="toc-section-number">7.2</span>  Exercises</a>
+  <li><a href="#unconstrained" id="toc-unconstrained" class="nav-link active" data-scroll-target="#unconstrained"><span class="toc-section-number">7.1</span>  Unconstrained</a></li>
+  <li><a href="#constrained" id="toc-constrained" class="nav-link" data-scroll-target="#constrained"><span class="toc-section-number">7.2</span>  Constrained</a></li>
+  <li><a href="#clustering" id="toc-clustering" class="nav-link" data-scroll-target="#clustering"><span class="toc-section-number">7.3</span>  Clustering</a></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="toc-section-number">7.4</span>  Exercises</a>
   <ul class="collapse">
-  <li><a href="#unconstrained-ordination-pca" id="toc-unconstrained-ordination-pca" class="nav-link" data-scroll-target="#unconstrained-ordination-pca"><span class="toc-section-number">7.2.1</span>  Unconstrained ordination (PCA)</a></li>
-  <li><a href="#clustering" id="toc-clustering" class="nav-link" data-scroll-target="#clustering"><span class="toc-section-number">7.2.2</span>  Clustering</a></li>
+  <li><a href="#unconstrained-ordination-pca" id="toc-unconstrained-ordination-pca" class="nav-link" data-scroll-target="#unconstrained-ordination-pca"><span class="toc-section-number">7.4.1</span>  Unconstrained ordination (PCA)</a></li>
+  <li><a href="#clustering-1" id="toc-clustering-1" class="nav-link" data-scroll-target="#clustering-1"><span class="toc-section-number">7.4.2</span>  Clustering</a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/TheoreticalEcology/DataScienceInR/edit/master/7-Multivariate.qmd" class="toc-action">Edit this page</a></p></div></div></nav>
@@ -276,22 +278,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header>
 
-<section id="classroom-demo" class="level2" data-number="7.1">
-<h2 data-number="7.1" class="anchored" data-anchor-id="classroom-demo"><span class="header-section-number">7.1</span> Classroom demo</h2>
+<section id="unconstrained" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="unconstrained"><span class="header-section-number">7.1</span> Unconstrained</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Part 3</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Multivariate statistics</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Method 1: unconstrained ------------------------------------------------</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="do">## PCA</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co"># we use the same dataset of flower characteristics of three species of iris</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="fu">pairs</span>(iris, <span class="at">col =</span> iris<span class="sc">$</span>Species)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="do">## PCA</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># we use the same dataset of flower characteristics of three species of iris</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">pairs</span>(iris, <span class="at">col =</span> iris<span class="sc">$</span>Species)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="7-Multivariate_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -571,379 +563,373 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell-output-display">
 <p><img src="7-Multivariate_files/figure-html/unnamed-chunk-2-6.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+</div>
+<div class="callout-caution callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Danger
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Why we should be careful when interpreting patterns in ordination plots</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Method 2: constrained  ------------------------------------------------</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 2 multivariate datasets (abundances + environment)</span></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="do">## RDA</span></span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(dune) <span class="co"># species composition</span></span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="do">## 'data.frame':    20 obs. of  30 variables:</span></span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Achimill: num  1 3 0 0 2 2 2 0 0 4 ...</span></span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Agrostol: num  0 0 4 8 0 0 0 4 3 0 ...</span></span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Airaprae: num  0 0 0 0 0 0 0 0 0 0 ...</span></span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Alopgeni: num  0 2 7 2 0 0 0 5 3 0 ...</span></span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Anthodor: num  0 0 0 0 4 3 2 0 0 4 ...</span></span>
-<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Bellpere: num  0 3 2 2 2 0 0 0 0 2 ...</span></span>
-<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Bromhord: num  0 4 0 3 2 0 2 0 0 4 ...</span></span>
-<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Chenalbu: num  0 0 0 0 0 0 0 0 0 0 ...</span></span>
-<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Cirsarve: num  0 0 0 2 0 0 0 0 0 0 ...</span></span>
-<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Comapalu: num  0 0 0 0 0 0 0 0 0 0 ...</span></span>
-<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Eleopalu: num  0 0 0 0 0 0 0 4 0 0 ...</span></span>
-<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Elymrepe: num  4 4 4 4 4 0 0 0 6 0 ...</span></span>
-<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Empenigr: num  0 0 0 0 0 0 0 0 0 0 ...</span></span>
-<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Hyporadi: num  0 0 0 0 0 0 0 0 0 0 ...</span></span>
-<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Juncarti: num  0 0 0 0 0 0 0 4 4 0 ...</span></span>
-<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Juncbufo: num  0 0 0 0 0 0 2 0 4 0 ...</span></span>
-<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Lolipere: num  7 5 6 5 2 6 6 4 2 6 ...</span></span>
-<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Planlanc: num  0 0 0 0 5 5 5 0 0 3 ...</span></span>
-<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Poaprat : num  4 4 5 4 2 3 4 4 4 4 ...</span></span>
-<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Poatriv : num  2 7 6 5 6 4 5 4 5 4 ...</span></span>
-<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Ranuflam: num  0 0 0 0 0 0 0 2 0 0 ...</span></span>
-<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Rumeacet: num  0 0 0 0 5 6 3 0 2 0 ...</span></span>
-<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Sagiproc: num  0 0 0 5 0 0 0 2 2 0 ...</span></span>
-<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Salirepe: num  0 0 0 0 0 0 0 0 0 0 ...</span></span>
-<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Scorautu: num  0 5 2 2 3 3 3 3 2 3 ...</span></span>
-<span id="cb7-39"><a href="#cb7-39" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Trifprat: num  0 0 0 0 2 5 2 0 0 0 ...</span></span>
-<span id="cb7-40"><a href="#cb7-40" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Trifrepe: num  0 5 2 1 2 5 2 2 3 6 ...</span></span>
-<span id="cb7-41"><a href="#cb7-41" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Vicilath: num  0 0 0 0 0 0 0 0 0 1 ...</span></span>
-<span id="cb7-42"><a href="#cb7-42" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Bracruta: num  0 0 2 2 2 6 2 2 2 2 ...</span></span>
-<span id="cb7-43"><a href="#cb7-43" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Callcusp: num  0 0 0 0 0 0 0 0 0 0 ...</span></span>
-<span id="cb7-44"><a href="#cb7-44" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"dune.env"</span>)</span>
-<span id="cb7-45"><a href="#cb7-45" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(dune.env) <span class="co"># environmental variables</span></span>
-<span id="cb7-46"><a href="#cb7-46" aria-hidden="true" tabindex="-1"></a><span class="do">## 'data.frame':    20 obs. of  5 variables:</span></span>
-<span id="cb7-47"><a href="#cb7-47" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ A1        : num  2.8 3.5 4.3 4.2 6.3 4.3 2.8 4.2 3.7 3.3 ...</span></span>
-<span id="cb7-48"><a href="#cb7-48" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Moisture  : Ord.factor w/ 4 levels "1"&lt;"2"&lt;"4"&lt;"5": 1 1 2 2 1 1 1 4 3 2 ...</span></span>
-<span id="cb7-49"><a href="#cb7-49" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Management: Factor w/ 4 levels "BF","HF","NM",..: 4 1 4 4 2 2 2 2 2 1 ...</span></span>
-<span id="cb7-50"><a href="#cb7-50" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Use       : Ord.factor w/ 3 levels "Hayfield"&lt;"Haypastu"&lt;..: 2 2 2 2 1 2 3 3 1 1 ...</span></span>
-<span id="cb7-51"><a href="#cb7-51" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Manure    : Ord.factor w/ 5 levels "0"&lt;"1"&lt;"2"&lt;"3"&lt;..: 5 3 5 5 3 3 4 4 2 2 ...</span></span>
-<span id="cb7-52"><a href="#cb7-52" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-53"><a href="#cb7-53" aria-hidden="true" tabindex="-1"></a>RDA <span class="ot">=</span> <span class="fu">rda</span>(dune <span class="sc">~</span> <span class="fu">as.numeric</span>(Manure) <span class="sc">+</span> <span class="fu">as.numeric</span>(Moisture), </span>
-<span id="cb7-54"><a href="#cb7-54" aria-hidden="true" tabindex="-1"></a>         <span class="at">data =</span> dune.env)</span>
-<span id="cb7-55"><a href="#cb7-55" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(RDA)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>random <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="at">pollution =</span> <span class="fu">rnorm</span>(<span class="dv">30</span>),</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>                    <span class="at">temperature =</span> <span class="fu">rnorm</span>(<span class="dv">30</span>),</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>                    <span class="at">moisture =</span> <span class="fu">rnorm</span>(<span class="dv">30</span>),</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>                    <span class="at">tourists =</span> <span class="fu">rnorm</span>(<span class="dv">30</span>),</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>                    <span class="at">wind =</span> <span class="fu">rnorm</span>(<span class="dv">30</span>),</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>                    <span class="at">dogs =</span> <span class="fu">rnorm</span>(<span class="dv">30</span>))</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(random)</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="do">##     pollution temperature   moisture   tourists       wind       dogs</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="do">## 1 -0.56047565   0.4264642  0.3796395  0.9935039  0.1176466  0.7877388</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="do">## 2 -0.23017749  -0.2950715 -0.5023235  0.5483970 -0.9474746  0.7690422</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="do">## 3  1.55870831   0.8951257 -0.3332074  0.2387317 -0.4905574  0.3322026</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="do">## 4  0.07050839   0.8781335 -1.0185754 -0.6279061 -0.2560922 -1.0083766</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="do">## 5  0.12928774   0.8215811 -1.0717912  1.3606524  1.8438620 -0.1194526</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="do">## 6  1.71506499   0.6886403  0.3035286 -0.6002596 -0.6519499 -0.2803953</span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>pca <span class="ot">=</span> <span class="fu">prcomp</span>(random, <span class="at">scale =</span> T)</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a><span class="fu">biplot</span>(pca)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="7-Multivariate_files/figure-html/unnamed-chunk-2-7.png" class="img-fluid" width="672"></p>
+<p><img src="7-Multivariate_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(RDA)</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Call:</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="do">## rda(formula = dune ~ as.numeric(Manure) + as.numeric(Moisture),      data = dune.env) </span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="do">## Partitioning of variance:</span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="do">##               Inertia Proportion</span></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="do">## Total           84.12     1.0000</span></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="do">## Constrained     31.20     0.3709</span></span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="do">## Unconstrained   52.92     0.6291</span></span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="do">## Eigenvalues, and their contribution to the variance </span></span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="do">## Importance of components:</span></span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="do">##                          RDA1    RDA2     PC1     PC2     PC3    PC4     PC5</span></span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a><span class="do">## Eigenvalue            19.0185 12.1864 10.7889 7.85393 6.67657 6.2084 5.12380</span></span>
-<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a><span class="do">## Proportion Explained   0.2261  0.1449  0.1283 0.09336 0.07937 0.0738 0.06091</span></span>
-<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a><span class="do">## Cumulative Proportion  0.2261  0.3709  0.4992 0.59255 0.67192 0.7457 0.80663</span></span>
-<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a><span class="do">##                           PC6     PC7     PC8     PC9    PC10    PC11    PC12</span></span>
-<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a><span class="do">## Eigenvalue            3.50320 3.10988 2.47760 1.83130 1.63276 1.03305 0.87265</span></span>
-<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a><span class="do">## Proportion Explained  0.04164 0.03697 0.02945 0.02177 0.01941 0.01228 0.01037</span></span>
-<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a><span class="do">## Cumulative Proportion 0.84827 0.88524 0.91469 0.93646 0.95587 0.96815 0.97852</span></span>
-<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a><span class="do">##                           PC13     PC14     PC15     PC16     PC17</span></span>
-<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a><span class="do">## Eigenvalue            0.642862 0.469072 0.301387 0.215853 0.177610</span></span>
-<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a><span class="do">## Proportion Explained  0.007642 0.005576 0.003583 0.002566 0.002111</span></span>
-<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a><span class="do">## Cumulative Proportion 0.986164 0.991740 0.995323 0.997889 1.000000</span></span>
-<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a><span class="do">## Accumulated constrained eigenvalues</span></span>
-<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a><span class="do">## Importance of components:</span></span>
-<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a><span class="do">##                          RDA1    RDA2</span></span>
-<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a><span class="do">## Eigenvalue            19.0185 12.1864</span></span>
-<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a><span class="do">## Proportion Explained   0.6095  0.3905</span></span>
-<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a><span class="do">## Cumulative Proportion  0.6095  1.0000</span></span>
-<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a><span class="do">## Scaling 2 for species and site scores</span></span>
-<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a><span class="do">## * Species are scaled proportional to eigenvalues</span></span>
-<span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a><span class="do">## * Sites are unscaled: weighted dispersion equal on all dimensions</span></span>
-<span id="cb8-39"><a href="#cb8-39" aria-hidden="true" tabindex="-1"></a><span class="do">## * General scaling constant of scores:  6.322924 </span></span>
-<span id="cb8-40"><a href="#cb8-40" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb8-41"><a href="#cb8-41" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb8-42"><a href="#cb8-42" aria-hidden="true" tabindex="-1"></a><span class="do">## Species scores</span></span>
-<span id="cb8-43"><a href="#cb8-43" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb8-44"><a href="#cb8-44" aria-hidden="true" tabindex="-1"></a><span class="do">##              RDA1     RDA2       PC1        PC2        PC3      PC4</span></span>
-<span id="cb8-45"><a href="#cb8-45" aria-hidden="true" tabindex="-1"></a><span class="do">## Achimill -0.47851  0.09403 -0.235988 -0.3197353  0.3103983 -0.28427</span></span>
-<span id="cb8-46"><a href="#cb8-46" aria-hidden="true" tabindex="-1"></a><span class="do">## Agrostol  1.23296 -0.81601  0.315190  0.4660974 -0.5315336 -0.32248</span></span>
-<span id="cb8-47"><a href="#cb8-47" aria-hidden="true" tabindex="-1"></a><span class="do">## Airaprae  0.09460  0.19968 -0.076754 -0.0507504  0.2022189  0.36738</span></span>
-<span id="cb8-48"><a href="#cb8-48" aria-hidden="true" tabindex="-1"></a><span class="do">## Alopgeni  0.62089 -1.06991 -0.607808  0.4085202 -0.7675817  0.14890</span></span>
-<span id="cb8-49"><a href="#cb8-49" aria-hidden="true" tabindex="-1"></a><span class="do">## Anthodor -0.30489  0.37796 -0.285364 -0.7314654  0.3530155  0.28189</span></span>
-<span id="cb8-50"><a href="#cb8-50" aria-hidden="true" tabindex="-1"></a><span class="do">## Bellpere -0.35166 -0.06186 -0.191560  0.2159228  0.0656089 -0.21926</span></span>
-<span id="cb8-51"><a href="#cb8-51" aria-hidden="true" tabindex="-1"></a><span class="do">## Bromhord -0.40174 -0.11438 -0.328850  0.0020272  0.3311781 -0.38313</span></span>
-<span id="cb8-52"><a href="#cb8-52" aria-hidden="true" tabindex="-1"></a><span class="do">## Chenalbu  0.04451 -0.03993 -0.058797 -0.0133695 -0.0062794  0.01141</span></span>
-<span id="cb8-53"><a href="#cb8-53" aria-hidden="true" tabindex="-1"></a><span class="do">## Cirsarve -0.02004 -0.10831  0.015724  0.0909001  0.0063718  0.02241</span></span>
-<span id="cb8-54"><a href="#cb8-54" aria-hidden="true" tabindex="-1"></a><span class="do">## Comapalu  0.16471  0.14225  0.075038  0.0042984  0.0452944 -0.15780</span></span>
-<span id="cb8-55"><a href="#cb8-55" aria-hidden="true" tabindex="-1"></a><span class="do">## Eleopalu  1.06943 -0.01682  0.956570 -0.1633735 -0.0681172 -0.57630</span></span>
-<span id="cb8-56"><a href="#cb8-56" aria-hidden="true" tabindex="-1"></a><span class="do">## Elymrepe -0.46520 -0.51974 -0.379373  0.6613239 -0.0042671 -0.34204</span></span>
-<span id="cb8-57"><a href="#cb8-57" aria-hidden="true" tabindex="-1"></a><span class="do">## Empenigr  0.08235  0.07112 -0.057452 -0.0408164  0.1097807  0.19686</span></span>
-<span id="cb8-58"><a href="#cb8-58" aria-hidden="true" tabindex="-1"></a><span class="do">## Hyporadi  0.09461  0.32440 -0.082603 -0.0367101  0.3251675  0.62435</span></span>
-<span id="cb8-59"><a href="#cb8-59" aria-hidden="true" tabindex="-1"></a><span class="do">## Juncarti  0.65768  0.03291  0.308049  0.1056579 -0.2072807 -0.34406</span></span>
-<span id="cb8-60"><a href="#cb8-60" aria-hidden="true" tabindex="-1"></a><span class="do">## Juncbufo  0.17582 -0.14056 -0.532656  0.0587424 -0.4920012  0.08088</span></span>
-<span id="cb8-61"><a href="#cb8-61" aria-hidden="true" tabindex="-1"></a><span class="do">## Lolipere -1.37550 -0.76492  0.066647  0.0244836  0.5992907 -0.19415</span></span>
-<span id="cb8-62"><a href="#cb8-62" aria-hidden="true" tabindex="-1"></a><span class="do">## Planlanc -0.91473  0.29200  0.034350 -0.8292224 -0.1507798 -0.02191</span></span>
-<span id="cb8-63"><a href="#cb8-63" aria-hidden="true" tabindex="-1"></a><span class="do">## Poaprat  -0.79237 -0.54275 -0.258875  0.2664459  0.2614175 -0.18998</span></span>
-<span id="cb8-64"><a href="#cb8-64" aria-hidden="true" tabindex="-1"></a><span class="do">## Poatriv  -0.31279 -1.25438 -1.230700 -0.1907205 -0.2493570 -0.49014</span></span>
-<span id="cb8-65"><a href="#cb8-65" aria-hidden="true" tabindex="-1"></a><span class="do">## Ranuflam  0.59648  0.04493  0.299763 -0.0445985 -0.0309806 -0.25792</span></span>
-<span id="cb8-66"><a href="#cb8-66" aria-hidden="true" tabindex="-1"></a><span class="do">## Rumeacet -0.49744 -0.03945 -0.219023 -0.8330211 -0.5462675 -0.10570</span></span>
-<span id="cb8-67"><a href="#cb8-67" aria-hidden="true" tabindex="-1"></a><span class="do">## Sagiproc  0.26038 -0.27567 -0.367494  0.2918690 -0.1864142  0.53458</span></span>
-<span id="cb8-68"><a href="#cb8-68" aria-hidden="true" tabindex="-1"></a><span class="do">## Salirepe  0.20256  0.44038  0.242168  0.1056696 -0.0521776  0.24572</span></span>
-<span id="cb8-69"><a href="#cb8-69" aria-hidden="true" tabindex="-1"></a><span class="do">## Scorautu -0.30711  0.52183 -0.365094 -0.0004242  0.1648603  0.30468</span></span>
-<span id="cb8-70"><a href="#cb8-70" aria-hidden="true" tabindex="-1"></a><span class="do">## Trifprat -0.35833 -0.03560  0.006885 -0.6508879 -0.2073384 -0.06693</span></span>
-<span id="cb8-71"><a href="#cb8-71" aria-hidden="true" tabindex="-1"></a><span class="do">## Trifrepe -0.23813  0.30248 -0.700492 -0.2593107  0.1604908 -0.54832</span></span>
-<span id="cb8-72"><a href="#cb8-72" aria-hidden="true" tabindex="-1"></a><span class="do">## Vicilath -0.13798  0.12689  0.043562  0.0653852  0.0278102  0.03656</span></span>
-<span id="cb8-73"><a href="#cb8-73" aria-hidden="true" tabindex="-1"></a><span class="do">## Bracruta -0.07231  0.35720  0.477998 -0.2964003 -0.7549203  0.23978</span></span>
-<span id="cb8-74"><a href="#cb8-74" aria-hidden="true" tabindex="-1"></a><span class="do">## Callcusp  0.42177  0.12915  0.374847 -0.0305725  0.0002153 -0.33309</span></span>
-<span id="cb8-75"><a href="#cb8-75" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb8-76"><a href="#cb8-76" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb8-77"><a href="#cb8-77" aria-hidden="true" tabindex="-1"></a><span class="do">## Site scores (weighted sums of species scores)</span></span>
-<span id="cb8-78"><a href="#cb8-78" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb8-79"><a href="#cb8-79" aria-hidden="true" tabindex="-1"></a><span class="do">##        RDA1     RDA2     PC1       PC2     PC3     PC4</span></span>
-<span id="cb8-80"><a href="#cb8-80" aria-hidden="true" tabindex="-1"></a><span class="do">## 1  -1.20433 -0.66993  1.9859  1.074660  2.0108  0.8005</span></span>
-<span id="cb8-81"><a href="#cb8-81" aria-hidden="true" tabindex="-1"></a><span class="do">## 2  -1.63761 -1.22512 -1.8071  1.724159  1.1211 -2.1875</span></span>
-<span id="cb8-82"><a href="#cb8-82" aria-hidden="true" tabindex="-1"></a><span class="do">## 3  -0.41325 -2.98426 -0.3938  1.380869 -0.1922  0.1239</span></span>
-<span id="cb8-83"><a href="#cb8-83" aria-hidden="true" tabindex="-1"></a><span class="do">## 4   0.09600 -2.56866  0.3143  1.817064  0.1274  0.4481</span></span>
-<span id="cb8-84"><a href="#cb8-84" aria-hidden="true" tabindex="-1"></a><span class="do">## 5  -1.79219  0.23179 -0.7176 -1.888869 -0.8907 -0.7317</span></span>
-<span id="cb8-85"><a href="#cb8-85" aria-hidden="true" tabindex="-1"></a><span class="do">## 6  -2.29807  0.77565  0.2429 -3.590960 -1.4197 -0.2869</span></span>
-<span id="cb8-86"><a href="#cb8-86" aria-hidden="true" tabindex="-1"></a><span class="do">## 7  -2.04152 -0.05247  0.2480 -2.144774  0.2954  0.1111</span></span>
-<span id="cb8-87"><a href="#cb8-87" aria-hidden="true" tabindex="-1"></a><span class="do">## 8   1.11426 -1.42188  0.1640 -0.499303  0.9258 -0.0638</span></span>
-<span id="cb8-88"><a href="#cb8-88" aria-hidden="true" tabindex="-1"></a><span class="do">## 9   0.17152 -1.55487 -2.1156  1.667963 -1.4793 -1.2478</span></span>
-<span id="cb8-89"><a href="#cb8-89" aria-hidden="true" tabindex="-1"></a><span class="do">## 10 -2.05972  0.47751 -1.4807 -1.049874  2.3911 -1.6675</span></span>
-<span id="cb8-90"><a href="#cb8-90" aria-hidden="true" tabindex="-1"></a><span class="do">## 11 -1.41282  1.17178  1.0315  1.096567  0.2632  1.2017</span></span>
-<span id="cb8-91"><a href="#cb8-91" aria-hidden="true" tabindex="-1"></a><span class="do">## 12  1.40040 -1.21998 -1.5692  0.392422 -3.3976  1.6584</span></span>
-<span id="cb8-92"><a href="#cb8-92" aria-hidden="true" tabindex="-1"></a><span class="do">## 13  1.21063 -2.23426 -2.3507 -0.534503 -0.2510  0.4563</span></span>
-<span id="cb8-93"><a href="#cb8-93" aria-hidden="true" tabindex="-1"></a><span class="do">## 14  1.68764  1.47758  0.1848 -0.008859  1.1639 -2.1575</span></span>
-<span id="cb8-94"><a href="#cb8-94" aria-hidden="true" tabindex="-1"></a><span class="do">## 15  1.93732  1.38809  1.3152  0.094782 -0.2584 -0.9969</span></span>
-<span id="cb8-95"><a href="#cb8-95" aria-hidden="true" tabindex="-1"></a><span class="do">## 16  3.10493 -0.43010  2.8191 -0.847596 -0.8985 -0.7305</span></span>
-<span id="cb8-96"><a href="#cb8-96" aria-hidden="true" tabindex="-1"></a><span class="do">## 17 -0.01732  2.06719  0.1884  0.209376  0.7506  1.4412</span></span>
-<span id="cb8-97"><a href="#cb8-97" aria-hidden="true" tabindex="-1"></a><span class="do">## 18 -0.62775  2.16502  1.1592  1.470799 -1.8057  0.7257</span></span>
-<span id="cb8-98"><a href="#cb8-98" aria-hidden="true" tabindex="-1"></a><span class="do">## 19  0.37978  2.98990 -1.1484 -0.815907  2.1945  3.9351</span></span>
-<span id="cb8-99"><a href="#cb8-99" aria-hidden="true" tabindex="-1"></a><span class="do">## 20  2.40211  1.61704  1.9299  0.451985 -0.6505 -0.8317</span></span>
-<span id="cb8-100"><a href="#cb8-100" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb8-101"><a href="#cb8-101" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb8-102"><a href="#cb8-102" aria-hidden="true" tabindex="-1"></a><span class="do">## Site constraints (linear combinations of constraining variables)</span></span>
-<span id="cb8-103"><a href="#cb8-103" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb8-104"><a href="#cb8-104" aria-hidden="true" tabindex="-1"></a><span class="do">##       RDA1    RDA2     PC1       PC2     PC3     PC4</span></span>
-<span id="cb8-105"><a href="#cb8-105" aria-hidden="true" tabindex="-1"></a><span class="do">## 1  -1.5128 -1.9466  1.9859  1.074660  2.0108  0.8005</span></span>
-<span id="cb8-106"><a href="#cb8-106" aria-hidden="true" tabindex="-1"></a><span class="do">## 2  -1.6016  0.0654 -1.8071  1.724159  1.1211 -2.1875</span></span>
-<span id="cb8-107"><a href="#cb8-107" aria-hidden="true" tabindex="-1"></a><span class="do">## 3  -0.4006 -2.1652 -0.3938  1.380869 -0.1922  0.1239</span></span>
-<span id="cb8-108"><a href="#cb8-108" aria-hidden="true" tabindex="-1"></a><span class="do">## 4  -0.4006 -2.1652  0.3143  1.817064  0.1274  0.4481</span></span>
-<span id="cb8-109"><a href="#cb8-109" aria-hidden="true" tabindex="-1"></a><span class="do">## 5  -1.6016  0.0654 -0.7176 -1.888869 -0.8907 -0.7317</span></span>
-<span id="cb8-110"><a href="#cb8-110" aria-hidden="true" tabindex="-1"></a><span class="do">## 6  -1.6016  0.0654  0.2429 -3.590960 -1.4197 -0.2869</span></span>
-<span id="cb8-111"><a href="#cb8-111" aria-hidden="true" tabindex="-1"></a><span class="do">## 7  -1.5572 -0.9406  0.2480 -2.144774  0.2954  0.1111</span></span>
-<span id="cb8-112"><a href="#cb8-112" aria-hidden="true" tabindex="-1"></a><span class="do">## 8   1.7795 -1.5963  0.1640 -0.499303  0.9258 -0.0638</span></span>
-<span id="cb8-113"><a href="#cb8-113" aria-hidden="true" tabindex="-1"></a><span class="do">## 9   0.5784  0.6343 -2.1156  1.667963 -1.4793 -1.2478</span></span>
-<span id="cb8-114"><a href="#cb8-114" aria-hidden="true" tabindex="-1"></a><span class="do">## 10 -0.5338  0.8529 -1.4807 -1.049874  2.3911 -1.6675</span></span>
-<span id="cb8-115"><a href="#cb8-115" aria-hidden="true" tabindex="-1"></a><span class="do">## 11 -1.6461  1.0714  1.0315  1.096567  0.2632  1.2017</span></span>
-<span id="cb8-116"><a href="#cb8-116" aria-hidden="true" tabindex="-1"></a><span class="do">## 12  0.6228 -0.3717 -1.5692  0.392422 -3.3976  1.6584</span></span>
-<span id="cb8-117"><a href="#cb8-117" aria-hidden="true" tabindex="-1"></a><span class="do">## 13  1.7795 -1.5963 -2.3507 -0.534503 -0.2510  0.4563</span></span>
-<span id="cb8-118"><a href="#cb8-118" aria-hidden="true" tabindex="-1"></a><span class="do">## 14  1.6462  1.4218  0.1848 -0.008859  1.1639 -2.1575</span></span>
-<span id="cb8-119"><a href="#cb8-119" aria-hidden="true" tabindex="-1"></a><span class="do">## 15  1.6462  1.4218  1.3152  0.094782 -0.2584 -0.9969</span></span>
-<span id="cb8-120"><a href="#cb8-120" aria-hidden="true" tabindex="-1"></a><span class="do">## 16  1.7795 -1.5963  2.8191 -0.847596 -0.8985 -0.7305</span></span>
-<span id="cb8-121"><a href="#cb8-121" aria-hidden="true" tabindex="-1"></a><span class="do">## 17 -0.5783  1.8589  0.1884  0.209376  0.7506  1.4412</span></span>
-<span id="cb8-122"><a href="#cb8-122" aria-hidden="true" tabindex="-1"></a><span class="do">## 18 -1.6905  2.0774  1.1592  1.470799 -1.8057  0.7257</span></span>
-<span id="cb8-123"><a href="#cb8-123" aria-hidden="true" tabindex="-1"></a><span class="do">## 19  1.6462  1.4218 -1.1484 -0.815907  2.1945  3.9351</span></span>
-<span id="cb8-124"><a href="#cb8-124" aria-hidden="true" tabindex="-1"></a><span class="do">## 20  1.6462  1.4218  1.9299  0.451985 -0.6505 -0.8317</span></span>
-<span id="cb8-125"><a href="#cb8-125" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb8-126"><a href="#cb8-126" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb8-127"><a href="#cb8-127" aria-hidden="true" tabindex="-1"></a><span class="do">## Biplot scores for constraining variables</span></span>
-<span id="cb8-128"><a href="#cb8-128" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb8-129"><a href="#cb8-129" aria-hidden="true" tabindex="-1"></a><span class="do">##                         RDA1     RDA2 PC1 PC2 PC3 PC4</span></span>
-<span id="cb8-130"><a href="#cb8-130" aria-hidden="true" tabindex="-1"></a><span class="do">## as.numeric(Manure)   -0.1928 -0.98124   0   0   0   0</span></span>
-<span id="cb8-131"><a href="#cb8-131" aria-hidden="true" tabindex="-1"></a><span class="do">## as.numeric(Moisture)  0.9990  0.04412   0   0   0   0</span></span>
-<span id="cb8-132"><a href="#cb8-132" aria-hidden="true" tabindex="-1"></a><span class="co"># important part at the top</span></span>
-<span id="cb8-133"><a href="#cb8-133" aria-hidden="true" tabindex="-1"></a><span class="co"># variance explained by the two variables = prop constrained = 37.09%</span></span>
-<span id="cb8-134"><a href="#cb8-134" aria-hidden="true" tabindex="-1"></a><span class="co"># how much is explained by each RDA = see importance of components prop explained</span></span>
-<span id="cb8-135"><a href="#cb8-135" aria-hidden="true" tabindex="-1"></a><span class="co"># PCs are the unconstrained axes</span></span>
-<span id="cb8-136"><a href="#cb8-136" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-137"><a href="#cb8-137" aria-hidden="true" tabindex="-1"></a><span class="co"># species scores = coordinates of species in the plot</span></span>
-<span id="cb8-138"><a href="#cb8-138" aria-hidden="true" tabindex="-1"></a><span class="co"># site scores = coordinates of sites in the plot</span></span>
-<span id="cb8-139"><a href="#cb8-139" aria-hidden="true" tabindex="-1"></a><span class="co"># biplot scores = coordinates of environmental variable vectors</span></span>
-<span id="cb8-140"><a href="#cb8-140" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-141"><a href="#cb8-141" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-142"><a href="#cb8-142" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(<span class="fu">summary</span>(RDA)<span class="sc">$</span>cont<span class="sc">$</span>importance[<span class="dv">2</span>, ],  <span class="at">las =</span> <span class="dv">2</span>,</span>
-<span id="cb8-143"><a href="#cb8-143" aria-hidden="true" tabindex="-1"></a>        <span class="at">col =</span> <span class="fu">c</span>(<span class="fu">rep</span> (<span class="st">'red'</span>, <span class="dv">2</span>), </span>
-<span id="cb8-144"><a href="#cb8-144" aria-hidden="true" tabindex="-1"></a>                <span class="fu">rep</span> (<span class="st">'black'</span>, <span class="fu">length</span>(<span class="fu">summary</span>(RDA)<span class="sc">$</span>cont<span class="sc">$</span>importance[<span class="dv">2</span>, ])<span class="sc">-</span><span class="dv">2</span>)),</span>
-<span id="cb8-145"><a href="#cb8-145" aria-hidden="true" tabindex="-1"></a>        <span class="at">ylab=</span><span class="st">"proportion of variance explained"</span>) <span class="co"># displays % of variance explained by PCs</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="7-Multivariate_files/figure-html/unnamed-chunk-2-8.png" class="img-fluid" width="672"></p>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(pca) <span class="co"># similar variance on all axes</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="do">## Importance of components:</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="do">##                           PC1    PC2    PC3    PC4    PC5     PC6</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Standard deviation     1.2054 1.1078 1.0649 0.9707 0.8530 0.71817</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="do">## Proportion of Variance 0.2422 0.2046 0.1890 0.1570 0.1213 0.08596</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="do">## Cumulative Proportion  0.2422 0.4467 0.6357 0.7928 0.9140 1.00000</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Method 3: Clustering ---------------------------------------------------</span></span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="co"># hierarchical clustering: </span></span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(cluster) <span class="co"># clustering</span></span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ape) <span class="co"># phylogenetic analyses, here to get pretty dendrogram</span></span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a><span class="co"># example for distance matrix</span></span>
-<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="fu">dist</span>(iris[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>]) <span class="co"># creates a distance matrix (comparison of all possible sample pairs), </span></span>
-<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a><span class="do">##           1         2</span></span>
-<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a><span class="do">## 2 0.5385165          </span></span>
-<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a><span class="do">## 3 0.5099020 0.3000000</span></span>
-<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a><span class="co"># default method ="euclidean", but can be changed</span></span>
-<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a><span class="co"># get Hierarchical Clustering</span></span>
-<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>hc <span class="ot">=</span> <span class="fu">hclust</span>(<span class="fu">dist</span>(iris[, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>]))</span>
-<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(hc)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="7-Multivariate_files/figure-html/unnamed-chunk-2-9.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co"># for colors use package ape</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">as.phylo</span>(hc), <span class="at">tip.color =</span> <span class="fu">as.numeric</span>(iris<span class="sc">$</span>Species)) <span class="co"># as.phylo converts object type "hcclust" into object type "phylo"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="7-Multivariate_files/figure-html/unnamed-chunk-2-10.png" class="img-fluid" width="672"></p>
-</div>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># change plotting type:</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">as.phylo</span>(hc), <span class="at">tip.color =</span> <span class="fu">as.numeric</span>(iris<span class="sc">$</span>Species), <span class="at">type =</span> <span class="st">"fan"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="7-Multivariate_files/figure-html/unnamed-chunk-2-11.png" class="img-fluid" width="672"></p>
-</div>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co"># lets try another clustering algorithm</span></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(animals)</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(animals)</span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="do">## 'data.frame':    20 obs. of  6 variables:</span></span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ war: int  1 1 2 1 2 2 2 2 2 1 ...</span></span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ fly: int  1 2 1 1 1 1 2 2 1 2 ...</span></span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ ver: int  1 1 2 1 2 2 2 2 2 1 ...</span></span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ end: int  1 1 1 1 2 1 1 2 2 1 ...</span></span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ gro: int  2 2 1 1 2 2 2 1 2 1 ...</span></span>
-<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ hai: int  1 2 2 2 2 2 1 1 1 1 ...</span></span>
-<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Agglomerative Nesting </span></span>
-<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>aa <span class="ot">&lt;-</span> <span class="fu">agnes</span>(animals)</span>
-<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(aa, <span class="at">which.plots =</span> <span class="dv">2</span>) <span class="co">#which.plots: plots only plot 2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="7-Multivariate_files/figure-html/unnamed-chunk-2-12.png" class="img-fluid" width="672"></p>
-</div>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># first is banner plot...</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="do">### non-hierarchical</span></span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="co"># kmeans </span></span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>) <span class="co"># choice of first k centers is random and depends on (random) seed</span></span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>cl <span class="ot">=</span> <span class="fu">kmeans</span>(iris[, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>], <span class="at">centers =</span> <span class="dv">3</span>) <span class="co"># centers = number of clusters to be generated</span></span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>cl<span class="sc">$</span>cluster</span>
-<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a><span class="do">##   [1] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1</span></span>
-<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a><span class="do">##  [38] 1 1 1 1 1 1 1 1 1 1 1 1 1 2 2 3 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2</span></span>
-<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a><span class="do">##  [75] 2 2 2 3 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 3 2 3 3 3 3 2 3 3 3 3</span></span>
-<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a><span class="do">## [112] 3 3 2 2 3 3 3 3 2 3 2 3 2 3 3 2 2 3 3 3 3 3 2 3 3 3 3 2 3 3 3 2 3 3 3 2 3</span></span>
-<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a><span class="do">## [149] 3 2</span></span>
-<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a><span class="fu">as.numeric</span>(iris<span class="sc">$</span>Species)</span>
-<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a><span class="do">##   [1] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1</span></span>
-<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a><span class="do">##  [38] 1 1 1 1 1 1 1 1 1 1 1 1 1 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2</span></span>
-<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a><span class="do">##  [75] 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 3 3 3 3 3 3 3 3 3 3 3</span></span>
-<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a><span class="do">## [112] 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3</span></span>
-<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a><span class="do">## [149] 3 3</span></span>
-<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a><span class="co"># without the same seed you may have to exchange cluster 2 and 3 to be able to compare assignment to species with real species in the plot</span></span>
-<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a>temp <span class="ot">=</span> cl<span class="sc">$</span>cluster</span>
-<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a><span class="co"># temp[cl$cluster==2] = 3</span></span>
-<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a><span class="co"># temp[cl$cluster==3] = 2</span></span>
-<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a>temp</span>
-<span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a><span class="do">##   [1] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1</span></span>
-<span id="cb13-32"><a href="#cb13-32" aria-hidden="true" tabindex="-1"></a><span class="do">##  [38] 1 1 1 1 1 1 1 1 1 1 1 1 1 2 2 3 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2</span></span>
-<span id="cb13-33"><a href="#cb13-33" aria-hidden="true" tabindex="-1"></a><span class="do">##  [75] 2 2 2 3 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 3 2 3 3 3 3 2 3 3 3 3</span></span>
-<span id="cb13-34"><a href="#cb13-34" aria-hidden="true" tabindex="-1"></a><span class="do">## [112] 3 3 2 2 3 3 3 3 2 3 2 3 2 3 3 2 2 3 3 3 3 3 2 3 3 3 3 2 3 3 3 2 3 3 3 2 3</span></span>
-<span id="cb13-35"><a href="#cb13-35" aria-hidden="true" tabindex="-1"></a><span class="do">## [149] 3 2</span></span>
-<span id="cb13-36"><a href="#cb13-36" aria-hidden="true" tabindex="-1"></a><span class="fu">as.numeric</span>(iris<span class="sc">$</span>Species)</span>
-<span id="cb13-37"><a href="#cb13-37" aria-hidden="true" tabindex="-1"></a><span class="do">##   [1] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1</span></span>
-<span id="cb13-38"><a href="#cb13-38" aria-hidden="true" tabindex="-1"></a><span class="do">##  [38] 1 1 1 1 1 1 1 1 1 1 1 1 1 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2</span></span>
-<span id="cb13-39"><a href="#cb13-39" aria-hidden="true" tabindex="-1"></a><span class="do">##  [75] 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 3 3 3 3 3 3 3 3 3 3 3</span></span>
-<span id="cb13-40"><a href="#cb13-40" aria-hidden="true" tabindex="-1"></a><span class="do">## [112] 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3</span></span>
-<span id="cb13-41"><a href="#cb13-41" aria-hidden="true" tabindex="-1"></a><span class="do">## [149] 3 3</span></span>
-<span id="cb13-42"><a href="#cb13-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-43"><a href="#cb13-43" aria-hidden="true" tabindex="-1"></a><span class="co"># original species</span></span>
-<span id="cb13-44"><a href="#cb13-44" aria-hidden="true" tabindex="-1"></a><span class="fu">pairs</span>(iris[, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>], <span class="at">col =</span> <span class="fu">as.numeric</span>(iris<span class="sc">$</span>Species)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="7-Multivariate_files/figure-html/unnamed-chunk-2-13.png" class="img-fluid" width="672"></p>
-</div>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co"># species found by cluster</span></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">pairs</span>(iris[, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>], <span class="at">col =</span> temp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="7-Multivariate_files/figure-html/unnamed-chunk-2-14.png" class="img-fluid" width="672"></p>
-</div>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co"># display samples that have been assigned to the wrong species</span></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>same <span class="ot">=</span> <span class="fu">as.numeric</span>(iris<span class="sc">$</span>Species) <span class="sc">==</span> temp</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="fu">pairs</span>(iris[, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>], <span class="at">col =</span> <span class="fu">as.numeric</span>(same) <span class="sc">+</span> <span class="dv">1</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="7-Multivariate_files/figure-html/unnamed-chunk-2-15.png" class="img-fluid" width="672"></p>
-</div>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">palette</span>()</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] "black"   "#DF536B" "#61D04F" "#2297E6" "#28E2E5" "#CD0BBC" "#F5C710"</span></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="do">## [8] "gray62"</span></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="co"># HERE EXERCISE WITH BREAKOUT SESSION</span></span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Attention ---------------------------------------------------------------</span></span>
-<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a><span class="do">##### type (or copy) the following while students work on their exercise</span></span>
-<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Why we should be careful when interpreting patterns in ordination plots</span></span>
-<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>random <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="at">pollution =</span> <span class="fu">rnorm</span>(<span class="dv">30</span>),</span>
-<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>                    <span class="at">temperature =</span> <span class="fu">rnorm</span>(<span class="dv">30</span>),</span>
-<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>                    <span class="at">moisture =</span> <span class="fu">rnorm</span>(<span class="dv">30</span>),</span>
-<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a>                    <span class="at">tourists =</span> <span class="fu">rnorm</span>(<span class="dv">30</span>),</span>
-<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a>                    <span class="at">wind =</span> <span class="fu">rnorm</span>(<span class="dv">30</span>),</span>
-<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a>                    <span class="at">dogs =</span> <span class="fu">rnorm</span>(<span class="dv">30</span>))</span>
-<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(random)</span>
-<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a><span class="do">##     pollution temperature   moisture   tourists       wind       dogs</span></span>
-<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a><span class="do">## 1 -0.56047565   0.4264642  0.3796395  0.9935039  0.1176466  0.7877388</span></span>
-<span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a><span class="do">## 2 -0.23017749  -0.2950715 -0.5023235  0.5483970 -0.9474746  0.7690422</span></span>
-<span id="cb16-30"><a href="#cb16-30" aria-hidden="true" tabindex="-1"></a><span class="do">## 3  1.55870831   0.8951257 -0.3332074  0.2387317 -0.4905574  0.3322026</span></span>
-<span id="cb16-31"><a href="#cb16-31" aria-hidden="true" tabindex="-1"></a><span class="do">## 4  0.07050839   0.8781335 -1.0185754 -0.6279061 -0.2560922 -1.0083766</span></span>
-<span id="cb16-32"><a href="#cb16-32" aria-hidden="true" tabindex="-1"></a><span class="do">## 5  0.12928774   0.8215811 -1.0717912  1.3606524  1.8438620 -0.1194526</span></span>
-<span id="cb16-33"><a href="#cb16-33" aria-hidden="true" tabindex="-1"></a><span class="do">## 6  1.71506499   0.6886403  0.3035286 -0.6002596 -0.6519499 -0.2803953</span></span>
-<span id="cb16-34"><a href="#cb16-34" aria-hidden="true" tabindex="-1"></a>pca <span class="ot">=</span> <span class="fu">prcomp</span>(random, <span class="at">scale =</span> T)</span>
-<span id="cb16-35"><a href="#cb16-35" aria-hidden="true" tabindex="-1"></a><span class="fu">biplot</span>(pca)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="7-Multivariate_files/figure-html/unnamed-chunk-2-16.png" class="img-fluid" width="672"></p>
-</div>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(pca) <span class="co"># similar variance on all axes</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="do">## Importance of components:</span></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="do">##                           PC1    PC2    PC3    PC4    PC5     PC6</span></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Standard deviation     1.2054 1.1078 1.0649 0.9707 0.8530 0.71817</span></span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="do">## Proportion of Variance 0.2422 0.2046 0.1890 0.1570 0.1213 0.08596</span></span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="do">## Cumulative Proportion  0.2422 0.4467 0.6357 0.7928 0.9140 1.00000</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="exercises" class="level2" data-number="7.2">
-<h2 data-number="7.2" class="anchored" data-anchor-id="exercises"><span class="header-section-number">7.2</span> Exercises</h2>
+<section id="constrained" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="constrained"><span class="header-section-number">7.2</span> Constrained</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 2 multivariate datasets (abundances + environment)</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="do">## RDA</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(dune) <span class="co"># species composition</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="do">## 'data.frame':    20 obs. of  30 variables:</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Achimill: num  1 3 0 0 2 2 2 0 0 4 ...</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Agrostol: num  0 0 4 8 0 0 0 4 3 0 ...</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Airaprae: num  0 0 0 0 0 0 0 0 0 0 ...</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Alopgeni: num  0 2 7 2 0 0 0 5 3 0 ...</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Anthodor: num  0 0 0 0 4 3 2 0 0 4 ...</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Bellpere: num  0 3 2 2 2 0 0 0 0 2 ...</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Bromhord: num  0 4 0 3 2 0 2 0 0 4 ...</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Chenalbu: num  0 0 0 0 0 0 0 0 0 0 ...</span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Cirsarve: num  0 0 0 2 0 0 0 0 0 0 ...</span></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Comapalu: num  0 0 0 0 0 0 0 0 0 0 ...</span></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Eleopalu: num  0 0 0 0 0 0 0 4 0 0 ...</span></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Elymrepe: num  4 4 4 4 4 0 0 0 6 0 ...</span></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Empenigr: num  0 0 0 0 0 0 0 0 0 0 ...</span></span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Hyporadi: num  0 0 0 0 0 0 0 0 0 0 ...</span></span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Juncarti: num  0 0 0 0 0 0 0 4 4 0 ...</span></span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Juncbufo: num  0 0 0 0 0 0 2 0 4 0 ...</span></span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Lolipere: num  7 5 6 5 2 6 6 4 2 6 ...</span></span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Planlanc: num  0 0 0 0 5 5 5 0 0 3 ...</span></span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Poaprat : num  4 4 5 4 2 3 4 4 4 4 ...</span></span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Poatriv : num  2 7 6 5 6 4 5 4 5 4 ...</span></span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Ranuflam: num  0 0 0 0 0 0 0 2 0 0 ...</span></span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Rumeacet: num  0 0 0 0 5 6 3 0 2 0 ...</span></span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Sagiproc: num  0 0 0 5 0 0 0 2 2 0 ...</span></span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Salirepe: num  0 0 0 0 0 0 0 0 0 0 ...</span></span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Scorautu: num  0 5 2 2 3 3 3 3 2 3 ...</span></span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Trifprat: num  0 0 0 0 2 5 2 0 0 0 ...</span></span>
+<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Trifrepe: num  0 5 2 1 2 5 2 2 3 6 ...</span></span>
+<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Vicilath: num  0 0 0 0 0 0 0 0 0 1 ...</span></span>
+<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Bracruta: num  0 0 2 2 2 6 2 2 2 2 ...</span></span>
+<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Callcusp: num  0 0 0 0 0 0 0 0 0 0 ...</span></span>
+<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"dune.env"</span>)</span>
+<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(dune.env) <span class="co"># environmental variables</span></span>
+<span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a><span class="do">## 'data.frame':    20 obs. of  5 variables:</span></span>
+<span id="cb9-40"><a href="#cb9-40" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ A1        : num  2.8 3.5 4.3 4.2 6.3 4.3 2.8 4.2 3.7 3.3 ...</span></span>
+<span id="cb9-41"><a href="#cb9-41" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Moisture  : Ord.factor w/ 4 levels "1"&lt;"2"&lt;"4"&lt;"5": 1 1 2 2 1 1 1 4 3 2 ...</span></span>
+<span id="cb9-42"><a href="#cb9-42" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Management: Factor w/ 4 levels "BF","HF","NM",..: 4 1 4 4 2 2 2 2 2 1 ...</span></span>
+<span id="cb9-43"><a href="#cb9-43" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Use       : Ord.factor w/ 3 levels "Hayfield"&lt;"Haypastu"&lt;..: 2 2 2 2 1 2 3 3 1 1 ...</span></span>
+<span id="cb9-44"><a href="#cb9-44" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Manure    : Ord.factor w/ 5 levels "0"&lt;"1"&lt;"2"&lt;"3"&lt;..: 5 3 5 5 3 3 4 4 2 2 ...</span></span>
+<span id="cb9-45"><a href="#cb9-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-46"><a href="#cb9-46" aria-hidden="true" tabindex="-1"></a>RDA <span class="ot">=</span> <span class="fu">rda</span>(dune <span class="sc">~</span> <span class="fu">as.numeric</span>(Manure) <span class="sc">+</span> <span class="fu">as.numeric</span>(Moisture), </span>
+<span id="cb9-47"><a href="#cb9-47" aria-hidden="true" tabindex="-1"></a>         <span class="at">data =</span> dune.env)</span>
+<span id="cb9-48"><a href="#cb9-48" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(RDA)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="7-Multivariate_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(RDA)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Call:</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="do">## rda(formula = dune ~ as.numeric(Manure) + as.numeric(Moisture),      data = dune.env) </span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="do">## Partitioning of variance:</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="do">##               Inertia Proportion</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="do">## Total           84.12     1.0000</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="do">## Constrained     31.20     0.3709</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="do">## Unconstrained   52.92     0.6291</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a><span class="do">## Eigenvalues, and their contribution to the variance </span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a><span class="do">## Importance of components:</span></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a><span class="do">##                          RDA1    RDA2     PC1     PC2     PC3    PC4     PC5</span></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a><span class="do">## Eigenvalue            19.0185 12.1864 10.7889 7.85393 6.67657 6.2084 5.12380</span></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a><span class="do">## Proportion Explained   0.2261  0.1449  0.1283 0.09336 0.07937 0.0738 0.06091</span></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a><span class="do">## Cumulative Proportion  0.2261  0.3709  0.4992 0.59255 0.67192 0.7457 0.80663</span></span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a><span class="do">##                           PC6     PC7     PC8     PC9    PC10    PC11    PC12</span></span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a><span class="do">## Eigenvalue            3.50320 3.10988 2.47760 1.83130 1.63276 1.03305 0.87265</span></span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a><span class="do">## Proportion Explained  0.04164 0.03697 0.02945 0.02177 0.01941 0.01228 0.01037</span></span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a><span class="do">## Cumulative Proportion 0.84827 0.88524 0.91469 0.93646 0.95587 0.96815 0.97852</span></span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a><span class="do">##                           PC13     PC14     PC15     PC16     PC17</span></span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a><span class="do">## Eigenvalue            0.642862 0.469072 0.301387 0.215853 0.177610</span></span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a><span class="do">## Proportion Explained  0.007642 0.005576 0.003583 0.002566 0.002111</span></span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a><span class="do">## Cumulative Proportion 0.986164 0.991740 0.995323 0.997889 1.000000</span></span>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a><span class="do">## Accumulated constrained eigenvalues</span></span>
+<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a><span class="do">## Importance of components:</span></span>
+<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a><span class="do">##                          RDA1    RDA2</span></span>
+<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a><span class="do">## Eigenvalue            19.0185 12.1864</span></span>
+<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a><span class="do">## Proportion Explained   0.6095  0.3905</span></span>
+<span id="cb10-34"><a href="#cb10-34" aria-hidden="true" tabindex="-1"></a><span class="do">## Cumulative Proportion  0.6095  1.0000</span></span>
+<span id="cb10-35"><a href="#cb10-35" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb10-36"><a href="#cb10-36" aria-hidden="true" tabindex="-1"></a><span class="do">## Scaling 2 for species and site scores</span></span>
+<span id="cb10-37"><a href="#cb10-37" aria-hidden="true" tabindex="-1"></a><span class="do">## * Species are scaled proportional to eigenvalues</span></span>
+<span id="cb10-38"><a href="#cb10-38" aria-hidden="true" tabindex="-1"></a><span class="do">## * Sites are unscaled: weighted dispersion equal on all dimensions</span></span>
+<span id="cb10-39"><a href="#cb10-39" aria-hidden="true" tabindex="-1"></a><span class="do">## * General scaling constant of scores:  6.322924 </span></span>
+<span id="cb10-40"><a href="#cb10-40" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb10-41"><a href="#cb10-41" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb10-42"><a href="#cb10-42" aria-hidden="true" tabindex="-1"></a><span class="do">## Species scores</span></span>
+<span id="cb10-43"><a href="#cb10-43" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb10-44"><a href="#cb10-44" aria-hidden="true" tabindex="-1"></a><span class="do">##              RDA1     RDA2       PC1        PC2        PC3      PC4</span></span>
+<span id="cb10-45"><a href="#cb10-45" aria-hidden="true" tabindex="-1"></a><span class="do">## Achimill -0.47851  0.09403 -0.235988 -0.3197353  0.3103983 -0.28427</span></span>
+<span id="cb10-46"><a href="#cb10-46" aria-hidden="true" tabindex="-1"></a><span class="do">## Agrostol  1.23296 -0.81601  0.315190  0.4660974 -0.5315336 -0.32248</span></span>
+<span id="cb10-47"><a href="#cb10-47" aria-hidden="true" tabindex="-1"></a><span class="do">## Airaprae  0.09460  0.19968 -0.076754 -0.0507504  0.2022189  0.36738</span></span>
+<span id="cb10-48"><a href="#cb10-48" aria-hidden="true" tabindex="-1"></a><span class="do">## Alopgeni  0.62089 -1.06991 -0.607808  0.4085202 -0.7675817  0.14890</span></span>
+<span id="cb10-49"><a href="#cb10-49" aria-hidden="true" tabindex="-1"></a><span class="do">## Anthodor -0.30489  0.37796 -0.285364 -0.7314654  0.3530155  0.28189</span></span>
+<span id="cb10-50"><a href="#cb10-50" aria-hidden="true" tabindex="-1"></a><span class="do">## Bellpere -0.35166 -0.06186 -0.191560  0.2159228  0.0656089 -0.21926</span></span>
+<span id="cb10-51"><a href="#cb10-51" aria-hidden="true" tabindex="-1"></a><span class="do">## Bromhord -0.40174 -0.11438 -0.328850  0.0020272  0.3311781 -0.38313</span></span>
+<span id="cb10-52"><a href="#cb10-52" aria-hidden="true" tabindex="-1"></a><span class="do">## Chenalbu  0.04451 -0.03993 -0.058797 -0.0133695 -0.0062794  0.01141</span></span>
+<span id="cb10-53"><a href="#cb10-53" aria-hidden="true" tabindex="-1"></a><span class="do">## Cirsarve -0.02004 -0.10831  0.015724  0.0909001  0.0063718  0.02241</span></span>
+<span id="cb10-54"><a href="#cb10-54" aria-hidden="true" tabindex="-1"></a><span class="do">## Comapalu  0.16471  0.14225  0.075038  0.0042984  0.0452944 -0.15780</span></span>
+<span id="cb10-55"><a href="#cb10-55" aria-hidden="true" tabindex="-1"></a><span class="do">## Eleopalu  1.06943 -0.01682  0.956570 -0.1633735 -0.0681172 -0.57630</span></span>
+<span id="cb10-56"><a href="#cb10-56" aria-hidden="true" tabindex="-1"></a><span class="do">## Elymrepe -0.46520 -0.51974 -0.379373  0.6613239 -0.0042671 -0.34204</span></span>
+<span id="cb10-57"><a href="#cb10-57" aria-hidden="true" tabindex="-1"></a><span class="do">## Empenigr  0.08235  0.07112 -0.057452 -0.0408164  0.1097807  0.19686</span></span>
+<span id="cb10-58"><a href="#cb10-58" aria-hidden="true" tabindex="-1"></a><span class="do">## Hyporadi  0.09461  0.32440 -0.082603 -0.0367101  0.3251675  0.62435</span></span>
+<span id="cb10-59"><a href="#cb10-59" aria-hidden="true" tabindex="-1"></a><span class="do">## Juncarti  0.65768  0.03291  0.308049  0.1056579 -0.2072807 -0.34406</span></span>
+<span id="cb10-60"><a href="#cb10-60" aria-hidden="true" tabindex="-1"></a><span class="do">## Juncbufo  0.17582 -0.14056 -0.532656  0.0587424 -0.4920012  0.08088</span></span>
+<span id="cb10-61"><a href="#cb10-61" aria-hidden="true" tabindex="-1"></a><span class="do">## Lolipere -1.37550 -0.76492  0.066647  0.0244836  0.5992907 -0.19415</span></span>
+<span id="cb10-62"><a href="#cb10-62" aria-hidden="true" tabindex="-1"></a><span class="do">## Planlanc -0.91473  0.29200  0.034350 -0.8292224 -0.1507798 -0.02191</span></span>
+<span id="cb10-63"><a href="#cb10-63" aria-hidden="true" tabindex="-1"></a><span class="do">## Poaprat  -0.79237 -0.54275 -0.258875  0.2664459  0.2614175 -0.18998</span></span>
+<span id="cb10-64"><a href="#cb10-64" aria-hidden="true" tabindex="-1"></a><span class="do">## Poatriv  -0.31279 -1.25438 -1.230700 -0.1907205 -0.2493570 -0.49014</span></span>
+<span id="cb10-65"><a href="#cb10-65" aria-hidden="true" tabindex="-1"></a><span class="do">## Ranuflam  0.59648  0.04493  0.299763 -0.0445985 -0.0309806 -0.25792</span></span>
+<span id="cb10-66"><a href="#cb10-66" aria-hidden="true" tabindex="-1"></a><span class="do">## Rumeacet -0.49744 -0.03945 -0.219023 -0.8330211 -0.5462675 -0.10570</span></span>
+<span id="cb10-67"><a href="#cb10-67" aria-hidden="true" tabindex="-1"></a><span class="do">## Sagiproc  0.26038 -0.27567 -0.367494  0.2918690 -0.1864142  0.53458</span></span>
+<span id="cb10-68"><a href="#cb10-68" aria-hidden="true" tabindex="-1"></a><span class="do">## Salirepe  0.20256  0.44038  0.242168  0.1056696 -0.0521776  0.24572</span></span>
+<span id="cb10-69"><a href="#cb10-69" aria-hidden="true" tabindex="-1"></a><span class="do">## Scorautu -0.30711  0.52183 -0.365094 -0.0004242  0.1648603  0.30468</span></span>
+<span id="cb10-70"><a href="#cb10-70" aria-hidden="true" tabindex="-1"></a><span class="do">## Trifprat -0.35833 -0.03560  0.006885 -0.6508879 -0.2073384 -0.06693</span></span>
+<span id="cb10-71"><a href="#cb10-71" aria-hidden="true" tabindex="-1"></a><span class="do">## Trifrepe -0.23813  0.30248 -0.700492 -0.2593107  0.1604908 -0.54832</span></span>
+<span id="cb10-72"><a href="#cb10-72" aria-hidden="true" tabindex="-1"></a><span class="do">## Vicilath -0.13798  0.12689  0.043562  0.0653852  0.0278102  0.03656</span></span>
+<span id="cb10-73"><a href="#cb10-73" aria-hidden="true" tabindex="-1"></a><span class="do">## Bracruta -0.07231  0.35720  0.477998 -0.2964003 -0.7549203  0.23978</span></span>
+<span id="cb10-74"><a href="#cb10-74" aria-hidden="true" tabindex="-1"></a><span class="do">## Callcusp  0.42177  0.12915  0.374847 -0.0305725  0.0002153 -0.33309</span></span>
+<span id="cb10-75"><a href="#cb10-75" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb10-76"><a href="#cb10-76" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb10-77"><a href="#cb10-77" aria-hidden="true" tabindex="-1"></a><span class="do">## Site scores (weighted sums of species scores)</span></span>
+<span id="cb10-78"><a href="#cb10-78" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb10-79"><a href="#cb10-79" aria-hidden="true" tabindex="-1"></a><span class="do">##        RDA1     RDA2     PC1       PC2     PC3     PC4</span></span>
+<span id="cb10-80"><a href="#cb10-80" aria-hidden="true" tabindex="-1"></a><span class="do">## 1  -1.20433 -0.66993  1.9859  1.074660  2.0108  0.8005</span></span>
+<span id="cb10-81"><a href="#cb10-81" aria-hidden="true" tabindex="-1"></a><span class="do">## 2  -1.63761 -1.22512 -1.8071  1.724159  1.1211 -2.1875</span></span>
+<span id="cb10-82"><a href="#cb10-82" aria-hidden="true" tabindex="-1"></a><span class="do">## 3  -0.41325 -2.98426 -0.3938  1.380869 -0.1922  0.1239</span></span>
+<span id="cb10-83"><a href="#cb10-83" aria-hidden="true" tabindex="-1"></a><span class="do">## 4   0.09600 -2.56866  0.3143  1.817064  0.1274  0.4481</span></span>
+<span id="cb10-84"><a href="#cb10-84" aria-hidden="true" tabindex="-1"></a><span class="do">## 5  -1.79219  0.23179 -0.7176 -1.888869 -0.8907 -0.7317</span></span>
+<span id="cb10-85"><a href="#cb10-85" aria-hidden="true" tabindex="-1"></a><span class="do">## 6  -2.29807  0.77565  0.2429 -3.590960 -1.4197 -0.2869</span></span>
+<span id="cb10-86"><a href="#cb10-86" aria-hidden="true" tabindex="-1"></a><span class="do">## 7  -2.04152 -0.05247  0.2480 -2.144774  0.2954  0.1111</span></span>
+<span id="cb10-87"><a href="#cb10-87" aria-hidden="true" tabindex="-1"></a><span class="do">## 8   1.11426 -1.42188  0.1640 -0.499303  0.9258 -0.0638</span></span>
+<span id="cb10-88"><a href="#cb10-88" aria-hidden="true" tabindex="-1"></a><span class="do">## 9   0.17152 -1.55487 -2.1156  1.667963 -1.4793 -1.2478</span></span>
+<span id="cb10-89"><a href="#cb10-89" aria-hidden="true" tabindex="-1"></a><span class="do">## 10 -2.05972  0.47751 -1.4807 -1.049874  2.3911 -1.6675</span></span>
+<span id="cb10-90"><a href="#cb10-90" aria-hidden="true" tabindex="-1"></a><span class="do">## 11 -1.41282  1.17178  1.0315  1.096567  0.2632  1.2017</span></span>
+<span id="cb10-91"><a href="#cb10-91" aria-hidden="true" tabindex="-1"></a><span class="do">## 12  1.40040 -1.21998 -1.5692  0.392422 -3.3976  1.6584</span></span>
+<span id="cb10-92"><a href="#cb10-92" aria-hidden="true" tabindex="-1"></a><span class="do">## 13  1.21063 -2.23426 -2.3507 -0.534503 -0.2510  0.4563</span></span>
+<span id="cb10-93"><a href="#cb10-93" aria-hidden="true" tabindex="-1"></a><span class="do">## 14  1.68764  1.47758  0.1848 -0.008859  1.1639 -2.1575</span></span>
+<span id="cb10-94"><a href="#cb10-94" aria-hidden="true" tabindex="-1"></a><span class="do">## 15  1.93732  1.38809  1.3152  0.094782 -0.2584 -0.9969</span></span>
+<span id="cb10-95"><a href="#cb10-95" aria-hidden="true" tabindex="-1"></a><span class="do">## 16  3.10493 -0.43010  2.8191 -0.847596 -0.8985 -0.7305</span></span>
+<span id="cb10-96"><a href="#cb10-96" aria-hidden="true" tabindex="-1"></a><span class="do">## 17 -0.01732  2.06719  0.1884  0.209376  0.7506  1.4412</span></span>
+<span id="cb10-97"><a href="#cb10-97" aria-hidden="true" tabindex="-1"></a><span class="do">## 18 -0.62775  2.16502  1.1592  1.470799 -1.8057  0.7257</span></span>
+<span id="cb10-98"><a href="#cb10-98" aria-hidden="true" tabindex="-1"></a><span class="do">## 19  0.37978  2.98990 -1.1484 -0.815907  2.1945  3.9351</span></span>
+<span id="cb10-99"><a href="#cb10-99" aria-hidden="true" tabindex="-1"></a><span class="do">## 20  2.40211  1.61704  1.9299  0.451985 -0.6505 -0.8317</span></span>
+<span id="cb10-100"><a href="#cb10-100" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb10-101"><a href="#cb10-101" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb10-102"><a href="#cb10-102" aria-hidden="true" tabindex="-1"></a><span class="do">## Site constraints (linear combinations of constraining variables)</span></span>
+<span id="cb10-103"><a href="#cb10-103" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb10-104"><a href="#cb10-104" aria-hidden="true" tabindex="-1"></a><span class="do">##       RDA1    RDA2     PC1       PC2     PC3     PC4</span></span>
+<span id="cb10-105"><a href="#cb10-105" aria-hidden="true" tabindex="-1"></a><span class="do">## 1  -1.5128 -1.9466  1.9859  1.074660  2.0108  0.8005</span></span>
+<span id="cb10-106"><a href="#cb10-106" aria-hidden="true" tabindex="-1"></a><span class="do">## 2  -1.6016  0.0654 -1.8071  1.724159  1.1211 -2.1875</span></span>
+<span id="cb10-107"><a href="#cb10-107" aria-hidden="true" tabindex="-1"></a><span class="do">## 3  -0.4006 -2.1652 -0.3938  1.380869 -0.1922  0.1239</span></span>
+<span id="cb10-108"><a href="#cb10-108" aria-hidden="true" tabindex="-1"></a><span class="do">## 4  -0.4006 -2.1652  0.3143  1.817064  0.1274  0.4481</span></span>
+<span id="cb10-109"><a href="#cb10-109" aria-hidden="true" tabindex="-1"></a><span class="do">## 5  -1.6016  0.0654 -0.7176 -1.888869 -0.8907 -0.7317</span></span>
+<span id="cb10-110"><a href="#cb10-110" aria-hidden="true" tabindex="-1"></a><span class="do">## 6  -1.6016  0.0654  0.2429 -3.590960 -1.4197 -0.2869</span></span>
+<span id="cb10-111"><a href="#cb10-111" aria-hidden="true" tabindex="-1"></a><span class="do">## 7  -1.5572 -0.9406  0.2480 -2.144774  0.2954  0.1111</span></span>
+<span id="cb10-112"><a href="#cb10-112" aria-hidden="true" tabindex="-1"></a><span class="do">## 8   1.7795 -1.5963  0.1640 -0.499303  0.9258 -0.0638</span></span>
+<span id="cb10-113"><a href="#cb10-113" aria-hidden="true" tabindex="-1"></a><span class="do">## 9   0.5784  0.6343 -2.1156  1.667963 -1.4793 -1.2478</span></span>
+<span id="cb10-114"><a href="#cb10-114" aria-hidden="true" tabindex="-1"></a><span class="do">## 10 -0.5338  0.8529 -1.4807 -1.049874  2.3911 -1.6675</span></span>
+<span id="cb10-115"><a href="#cb10-115" aria-hidden="true" tabindex="-1"></a><span class="do">## 11 -1.6461  1.0714  1.0315  1.096567  0.2632  1.2017</span></span>
+<span id="cb10-116"><a href="#cb10-116" aria-hidden="true" tabindex="-1"></a><span class="do">## 12  0.6228 -0.3717 -1.5692  0.392422 -3.3976  1.6584</span></span>
+<span id="cb10-117"><a href="#cb10-117" aria-hidden="true" tabindex="-1"></a><span class="do">## 13  1.7795 -1.5963 -2.3507 -0.534503 -0.2510  0.4563</span></span>
+<span id="cb10-118"><a href="#cb10-118" aria-hidden="true" tabindex="-1"></a><span class="do">## 14  1.6462  1.4218  0.1848 -0.008859  1.1639 -2.1575</span></span>
+<span id="cb10-119"><a href="#cb10-119" aria-hidden="true" tabindex="-1"></a><span class="do">## 15  1.6462  1.4218  1.3152  0.094782 -0.2584 -0.9969</span></span>
+<span id="cb10-120"><a href="#cb10-120" aria-hidden="true" tabindex="-1"></a><span class="do">## 16  1.7795 -1.5963  2.8191 -0.847596 -0.8985 -0.7305</span></span>
+<span id="cb10-121"><a href="#cb10-121" aria-hidden="true" tabindex="-1"></a><span class="do">## 17 -0.5783  1.8589  0.1884  0.209376  0.7506  1.4412</span></span>
+<span id="cb10-122"><a href="#cb10-122" aria-hidden="true" tabindex="-1"></a><span class="do">## 18 -1.6905  2.0774  1.1592  1.470799 -1.8057  0.7257</span></span>
+<span id="cb10-123"><a href="#cb10-123" aria-hidden="true" tabindex="-1"></a><span class="do">## 19  1.6462  1.4218 -1.1484 -0.815907  2.1945  3.9351</span></span>
+<span id="cb10-124"><a href="#cb10-124" aria-hidden="true" tabindex="-1"></a><span class="do">## 20  1.6462  1.4218  1.9299  0.451985 -0.6505 -0.8317</span></span>
+<span id="cb10-125"><a href="#cb10-125" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb10-126"><a href="#cb10-126" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb10-127"><a href="#cb10-127" aria-hidden="true" tabindex="-1"></a><span class="do">## Biplot scores for constraining variables</span></span>
+<span id="cb10-128"><a href="#cb10-128" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb10-129"><a href="#cb10-129" aria-hidden="true" tabindex="-1"></a><span class="do">##                         RDA1     RDA2 PC1 PC2 PC3 PC4</span></span>
+<span id="cb10-130"><a href="#cb10-130" aria-hidden="true" tabindex="-1"></a><span class="do">## as.numeric(Manure)   -0.1928 -0.98124   0   0   0   0</span></span>
+<span id="cb10-131"><a href="#cb10-131" aria-hidden="true" tabindex="-1"></a><span class="do">## as.numeric(Moisture)  0.9990  0.04412   0   0   0   0</span></span>
+<span id="cb10-132"><a href="#cb10-132" aria-hidden="true" tabindex="-1"></a><span class="co"># important part at the top</span></span>
+<span id="cb10-133"><a href="#cb10-133" aria-hidden="true" tabindex="-1"></a><span class="co"># variance explained by the two variables = prop constrained = 37.09%</span></span>
+<span id="cb10-134"><a href="#cb10-134" aria-hidden="true" tabindex="-1"></a><span class="co"># how much is explained by each RDA = see importance of components prop explained</span></span>
+<span id="cb10-135"><a href="#cb10-135" aria-hidden="true" tabindex="-1"></a><span class="co"># PCs are the unconstrained axes</span></span>
+<span id="cb10-136"><a href="#cb10-136" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-137"><a href="#cb10-137" aria-hidden="true" tabindex="-1"></a><span class="co"># species scores = coordinates of species in the plot</span></span>
+<span id="cb10-138"><a href="#cb10-138" aria-hidden="true" tabindex="-1"></a><span class="co"># site scores = coordinates of sites in the plot</span></span>
+<span id="cb10-139"><a href="#cb10-139" aria-hidden="true" tabindex="-1"></a><span class="co"># biplot scores = coordinates of environmental variable vectors</span></span>
+<span id="cb10-140"><a href="#cb10-140" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-141"><a href="#cb10-141" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-142"><a href="#cb10-142" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(<span class="fu">summary</span>(RDA)<span class="sc">$</span>cont<span class="sc">$</span>importance[<span class="dv">2</span>, ],  <span class="at">las =</span> <span class="dv">2</span>,</span>
+<span id="cb10-143"><a href="#cb10-143" aria-hidden="true" tabindex="-1"></a>        <span class="at">col =</span> <span class="fu">c</span>(<span class="fu">rep</span> (<span class="st">'red'</span>, <span class="dv">2</span>), </span>
+<span id="cb10-144"><a href="#cb10-144" aria-hidden="true" tabindex="-1"></a>                <span class="fu">rep</span> (<span class="st">'black'</span>, <span class="fu">length</span>(<span class="fu">summary</span>(RDA)<span class="sc">$</span>cont<span class="sc">$</span>importance[<span class="dv">2</span>, ])<span class="sc">-</span><span class="dv">2</span>)),</span>
+<span id="cb10-145"><a href="#cb10-145" aria-hidden="true" tabindex="-1"></a>        <span class="at">ylab=</span><span class="st">"proportion of variance explained"</span>) <span class="co"># displays % of variance explained by PCs</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="7-Multivariate_files/figure-html/unnamed-chunk-4-2.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="clustering" class="level2" data-number="7.3">
+<h2 data-number="7.3" class="anchored" data-anchor-id="clustering"><span class="header-section-number">7.3</span> Clustering</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># hierarchical clustering: </span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(cluster) <span class="co"># clustering</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ape) <span class="co"># phylogenetic analyses, here to get pretty dendrogram</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="co"># example for distance matrix</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="fu">dist</span>(iris[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>]) <span class="co"># creates a distance matrix (comparison of all possible sample pairs), </span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="do">##           1         2</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="do">## 2 0.5385165          </span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="do">## 3 0.5099020 0.3000000</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="co"># default method ="euclidean", but can be changed</span></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a><span class="co"># get Hierarchical Clustering</span></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>hc <span class="ot">=</span> <span class="fu">hclust</span>(<span class="fu">dist</span>(iris[, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>]))</span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(hc)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="7-Multivariate_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co"># for colors use package ape</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">as.phylo</span>(hc), <span class="at">tip.color =</span> <span class="fu">as.numeric</span>(iris<span class="sc">$</span>Species)) <span class="co"># as.phylo converts object type "hcclust" into object type "phylo"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="7-Multivariate_files/figure-html/unnamed-chunk-5-2.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># change plotting type:</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">as.phylo</span>(hc), <span class="at">tip.color =</span> <span class="fu">as.numeric</span>(iris<span class="sc">$</span>Species), <span class="at">type =</span> <span class="st">"fan"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="7-Multivariate_files/figure-html/unnamed-chunk-5-3.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co"># lets try another clustering algorithm</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(animals)</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(animals)</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="do">## 'data.frame':    20 obs. of  6 variables:</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ war: int  1 1 2 1 2 2 2 2 2 1 ...</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ fly: int  1 2 1 1 1 1 2 2 1 2 ...</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ ver: int  1 1 2 1 2 2 2 2 2 1 ...</span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ end: int  1 1 1 1 2 1 1 2 2 1 ...</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ gro: int  2 2 1 1 2 2 2 1 2 1 ...</span></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ hai: int  1 2 2 2 2 2 1 1 1 1 ...</span></span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Agglomerative Nesting </span></span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>aa <span class="ot">&lt;-</span> <span class="fu">agnes</span>(animals)</span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(aa, <span class="at">which.plots =</span> <span class="dv">2</span>) <span class="co">#which.plots: plots only plot 2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="7-Multivariate_files/figure-html/unnamed-chunk-5-4.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># first is banner plot...</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="do">### non-hierarchical</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="co"># kmeans </span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>) <span class="co"># choice of first k centers is random and depends on (random) seed</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>cl <span class="ot">=</span> <span class="fu">kmeans</span>(iris[, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>], <span class="at">centers =</span> <span class="dv">3</span>) <span class="co"># centers = number of clusters to be generated</span></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>cl<span class="sc">$</span>cluster</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a><span class="do">##   [1] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1</span></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a><span class="do">##  [38] 1 1 1 1 1 1 1 1 1 1 1 1 1 2 2 3 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2</span></span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a><span class="do">##  [75] 2 2 2 3 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 3 2 3 3 3 3 2 3 3 3 3</span></span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a><span class="do">## [112] 3 3 2 2 3 3 3 3 2 3 2 3 2 3 3 2 2 3 3 3 3 3 2 3 3 3 3 2 3 3 3 2 3 3 3 2 3</span></span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a><span class="do">## [149] 3 2</span></span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a><span class="fu">as.numeric</span>(iris<span class="sc">$</span>Species)</span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a><span class="do">##   [1] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1</span></span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a><span class="do">##  [38] 1 1 1 1 1 1 1 1 1 1 1 1 1 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2</span></span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a><span class="do">##  [75] 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 3 3 3 3 3 3 3 3 3 3 3</span></span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a><span class="do">## [112] 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3</span></span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a><span class="do">## [149] 3 3</span></span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a><span class="co"># without the same seed you may have to exchange cluster 2 and 3 to be able to compare assignment to species with real species in the plot</span></span>
+<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a>temp <span class="ot">=</span> cl<span class="sc">$</span>cluster</span>
+<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a><span class="co"># temp[cl$cluster==2] = 3</span></span>
+<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a><span class="co"># temp[cl$cluster==3] = 2</span></span>
+<span id="cb15-29"><a href="#cb15-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-30"><a href="#cb15-30" aria-hidden="true" tabindex="-1"></a>temp</span>
+<span id="cb15-31"><a href="#cb15-31" aria-hidden="true" tabindex="-1"></a><span class="do">##   [1] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1</span></span>
+<span id="cb15-32"><a href="#cb15-32" aria-hidden="true" tabindex="-1"></a><span class="do">##  [38] 1 1 1 1 1 1 1 1 1 1 1 1 1 2 2 3 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2</span></span>
+<span id="cb15-33"><a href="#cb15-33" aria-hidden="true" tabindex="-1"></a><span class="do">##  [75] 2 2 2 3 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 3 2 3 3 3 3 2 3 3 3 3</span></span>
+<span id="cb15-34"><a href="#cb15-34" aria-hidden="true" tabindex="-1"></a><span class="do">## [112] 3 3 2 2 3 3 3 3 2 3 2 3 2 3 3 2 2 3 3 3 3 3 2 3 3 3 3 2 3 3 3 2 3 3 3 2 3</span></span>
+<span id="cb15-35"><a href="#cb15-35" aria-hidden="true" tabindex="-1"></a><span class="do">## [149] 3 2</span></span>
+<span id="cb15-36"><a href="#cb15-36" aria-hidden="true" tabindex="-1"></a><span class="fu">as.numeric</span>(iris<span class="sc">$</span>Species)</span>
+<span id="cb15-37"><a href="#cb15-37" aria-hidden="true" tabindex="-1"></a><span class="do">##   [1] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1</span></span>
+<span id="cb15-38"><a href="#cb15-38" aria-hidden="true" tabindex="-1"></a><span class="do">##  [38] 1 1 1 1 1 1 1 1 1 1 1 1 1 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2</span></span>
+<span id="cb15-39"><a href="#cb15-39" aria-hidden="true" tabindex="-1"></a><span class="do">##  [75] 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 3 3 3 3 3 3 3 3 3 3 3</span></span>
+<span id="cb15-40"><a href="#cb15-40" aria-hidden="true" tabindex="-1"></a><span class="do">## [112] 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3</span></span>
+<span id="cb15-41"><a href="#cb15-41" aria-hidden="true" tabindex="-1"></a><span class="do">## [149] 3 3</span></span>
+<span id="cb15-42"><a href="#cb15-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-43"><a href="#cb15-43" aria-hidden="true" tabindex="-1"></a><span class="co"># original species</span></span>
+<span id="cb15-44"><a href="#cb15-44" aria-hidden="true" tabindex="-1"></a><span class="fu">pairs</span>(iris[, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>], <span class="at">col =</span> <span class="fu">as.numeric</span>(iris<span class="sc">$</span>Species)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="7-Multivariate_files/figure-html/unnamed-chunk-5-5.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co"># species found by cluster</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="fu">pairs</span>(iris[, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>], <span class="at">col =</span> temp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="7-Multivariate_files/figure-html/unnamed-chunk-5-6.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co"># display samples that have been assigned to the wrong species</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>same <span class="ot">=</span> <span class="fu">as.numeric</span>(iris<span class="sc">$</span>Species) <span class="sc">==</span> temp</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="fu">pairs</span>(iris[, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>], <span class="at">col =</span> <span class="fu">as.numeric</span>(same) <span class="sc">+</span> <span class="dv">1</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="7-Multivariate_files/figure-html/unnamed-chunk-5-7.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">palette</span>()</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] "black"   "#DF536B" "#61D04F" "#2297E6" "#28E2E5" "#CD0BBC" "#F5C710"</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="do">## [8] "gray62"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="exercises" class="level2" data-number="7.4">
+<h2 data-number="7.4" class="anchored" data-anchor-id="exercises"><span class="header-section-number">7.4</span> Exercises</h2>
 <div class="cell">
 
 </div>
@@ -952,8 +938,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>ordination methods which explore higher-order correlations among variables and similarities between observations</li>
 <li>clustering methods which aggregate individual observations into clusters.</li>
 </ul>
-<section id="useful-functions-for-multivariate-data-analyses" class="level4" data-number="7.2.0.1">
-<h4 data-number="7.2.0.1" class="anchored" data-anchor-id="useful-functions-for-multivariate-data-analyses"><span class="header-section-number">7.2.0.1</span> Useful functions for multivariate data analyses</h4>
+<section id="useful-functions-for-multivariate-data-analyses" class="level4" data-number="7.4.0.1">
+<h4 data-number="7.4.0.1" class="anchored" data-anchor-id="useful-functions-for-multivariate-data-analyses"><span class="header-section-number">7.4.0.1</span> Useful functions for multivariate data analyses</h4>
 <p><em>pairs()</em> - create pairplot (plot all variables against each other)<br>
 <em>prcomp()</em> - calculate PCA<br>
 <em>plot(pca_object)</em> - plot variance explained by PC axes<br>
@@ -968,8 +954,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <em>agnes()</em> - another clustering algorithm<br>
 <em>kmeans()</em> - perform kmeans non-hierarchical clustering; access cluster assignments using <em>kmeans_object$cluster</em></p>
 </section>
-<section id="background-on-the-dataset" class="level4" data-number="7.2.0.2">
-<h4 data-number="7.2.0.2" class="anchored" data-anchor-id="background-on-the-dataset"><span class="header-section-number">7.2.0.2</span> Background on the dataset</h4>
+<section id="background-on-the-dataset" class="level4" data-number="7.4.0.2">
+<h4 data-number="7.4.0.2" class="anchored" data-anchor-id="background-on-the-dataset"><span class="header-section-number">7.4.0.2</span> Background on the dataset</h4>
 <p>Marine coastal ecosystems harbor the most productive and diverse communities on Earth. However, they are extremely vulnerable to climate change and human activities (such as landclaim, pollution, recreation purposes, …) As a consequence, the performance of this ecosystem has decreased considerably. To better understand these ecosystems, the dutch governmental institute (RIKZ: Rijksinstituut voor Kust en Zee) started a research project on sandy beaches to investigate the relationship between environmental factors and how they might affect benthic fauna. <em>(from the LMU and Zuur, Ieno, Smith (2007), Chapter 12.8-12.10 and 27)</em></p>
 <p><strong>Question</strong><br>
 We now want to use ordination methods to explore</p>
@@ -981,8 +967,8 @@ We now want to use ordination methods to explore</p>
 <p><strong>Dataset</strong></p>
 <p>Read in the dataset as follows:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">=</span> <span class="fu">read.table</span>(<span class="at">file =</span> <span class="st">"http://evol.bio.lmu.de/_statgen/Multivariate/11SS/RIKZGroups.txt"</span>, <span class="at">header =</span> T)</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(dat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">=</span> <span class="fu">read.table</span>(<span class="at">file =</span> <span class="st">"http://evol.bio.lmu.de/_statgen/Multivariate/11SS/RIKZGroups.txt"</span>, <span class="at">header =</span> T)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(dat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>You already know the functions <em>str()</em> and <em>summary()</em> to get an overview of a dataset and to see which variables the dataset contains.</p>
 <ul>
@@ -997,8 +983,8 @@ We now want to use ordination methods to explore</p>
 </ul>
 <p>Let’s get into the analysis!</p>
 </section>
-<section id="unconstrained-ordination-pca" class="level3" data-number="7.2.1">
-<h3 data-number="7.2.1" class="anchored" data-anchor-id="unconstrained-ordination-pca"><span class="header-section-number">7.2.1</span> Unconstrained ordination (PCA)</h3>
+<section id="unconstrained-ordination-pca" class="level3" data-number="7.4.1">
+<h3 data-number="7.4.1" class="anchored" data-anchor-id="unconstrained-ordination-pca"><span class="header-section-number">7.4.1</span> Unconstrained ordination (PCA)</h3>
 <p>Carry out the following analyses:</p>
 <ul>
 <li>Make two PCAs, one for the environmental and one for the species richness data (see columns above).</li>
@@ -1009,7 +995,7 @@ We now want to use ordination methods to explore</p>
 <p>For example, the result for species richness should look like this:</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="7-Multivariate_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+<p><img src="7-Multivariate_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>You need the following functions and the package <em>vegan</em>:</p>
@@ -1021,7 +1007,7 @@ We now want to use ordination methods to explore</p>
 <li><em>summary()</em></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(vegan)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(vegan)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><strong>Hints</strong></p>
 <ul>
@@ -1033,117 +1019,19 @@ We now want to use ordination methods to explore</p>
 <ol type="1">
 <li>In which multivariate dataset do the first and second components explain more variance?</li>
 <li>What are the two samples that have the highest score on the respective third PCA axes?</li>
-<li>Which environmental variables would you choose, if you have only the resource to measure three variables?
+<li>From looking at the biplot: Which environmental variables would you choose, if you have only the resource to measure three variables?
 <ol type="a">
 <li>NAP, angle 1 and chalk</li>
 <li>salinity, penetrability and grain size</li>
-<li>grain size, chalk and exposure X. Describe the following correlations:</li>
+<li>grain size, chalk and exposure</li>
+</ol></li>
+<li>Describe the following correlations:
+<ol type="a">
 <li>salinity and humus</li>
 <li>angle1 and exposure</li>
-<li>Crustacea and NAP</li>
 <li>Polychaeta and Mollusca</li>
 </ol></li>
 </ol>
-<div class="callout-tip callout callout-style-simple no-icon callout-captioned">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-caption-container flex-fill">
-Solution
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Conduct the principle component analyses (PCAs):</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co"># a) PCA of environmental data</span></span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>pca_environment <span class="ot">=</span> <span class="fu">prcomp</span>(dat[,<span class="dv">7</span><span class="sc">:</span><span class="dv">16</span>], <span class="at">scale =</span> T)</span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(pca_environment)</span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="do">## Importance of components:</span></span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="do">##                           PC1    PC2    PC3    PC4     PC5    PC6     PC7</span></span>
-<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="do">## Standard deviation     1.8476 1.3300 1.0919 1.0297 0.99521 0.7746 0.72784</span></span>
-<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a><span class="do">## Proportion of Variance 0.3414 0.1769 0.1192 0.1060 0.09904 0.0600 0.05298</span></span>
-<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a><span class="do">## Cumulative Proportion  0.3414 0.5182 0.6375 0.7435 0.84254 0.9025 0.95551</span></span>
-<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a><span class="do">##                            PC8     PC9    PC10</span></span>
-<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a><span class="do">## Standard deviation     0.52299 0.34727 0.22541</span></span>
-<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a><span class="do">## Proportion of Variance 0.02735 0.01206 0.00508</span></span>
-<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a><span class="do">## Cumulative Proportion  0.98286 0.99492 1.00000</span></span>
-<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>op <span class="ot">&lt;-</span> <span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
-<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a><span class="fu">biplot</span>(pca_environment, <span class="at">main =</span> <span class="st">"PCA"</span>)            <span class="co"># plot the results of the PCA as a rotation matrix</span></span>
-<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(<span class="fu">summary</span>(pca_environment)<span class="sc">$</span>importance[<span class="dv">2</span>,], <span class="co"># get the importance measure</span></span>
-<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Components of environment"</span>,</span>
-<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Proportion of variance explained"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="7-Multivariate_files/figure-html/solution-PCA-1.png" class="img-fluid" width="672"></p>
-</div>
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="co"># b) PCA of species richness data</span></span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>pca_species <span class="ot">=</span> <span class="fu">prcomp</span>(dat[,<span class="dv">2</span><span class="sc">:</span><span class="dv">5</span>], <span class="at">scale =</span> T)</span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(pca_species)</span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="do">## Importance of components:</span></span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="do">##                           PC1    PC2    PC3    PC4</span></span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="do">## Standard deviation     1.1177 1.0251 1.0095 0.8251</span></span>
-<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="do">## Proportion of Variance 0.3123 0.2627 0.2548 0.1702</span></span>
-<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a><span class="do">## Cumulative Proportion  0.3123 0.5750 0.8298 1.0000</span></span>
-<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a><span class="fu">biplot</span>(pca_species, <span class="at">main =</span> <span class="st">"PCA"</span>)            <span class="co"># plot the results of the PCA as a rotation matrix</span></span>
-<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(<span class="fu">summary</span>(pca_species)<span class="sc">$</span>importance[<span class="dv">2</span>,], <span class="co"># get the importance measure</span></span>
-<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Components of species"</span>,</span>
-<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Proportion of variance explained"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="7-Multivariate_files/figure-html/solution-PCA-2.png" class="img-fluid" width="672"></p>
-</div>
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(op)</span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="co"># From the *summary()* output we can see that the first and second components explain more variance in the species PCA.</span></span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="co"># What are the two samples that have the highest score on the third PCA axis?</span></span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="co"># -&gt; order the samples by their PC3 coordinate:</span></span>
-<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a><span class="fu">order</span>(pca_environment<span class="sc">$</span>x[,<span class="st">'PC3'</span>], <span class="at">decreasing =</span> T) <span class="co"># -&gt; 24 is highest</span></span>
-<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a><span class="do">##  [1] 24 21 23 28 25 16 22 40 36 19  8 12  6 30  9  7 39 32 44  1 15  4 31 13 14</span></span>
-<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a><span class="do">## [26]  5 10 35 37 45 27 20 18 34 11 17 26 29 38  3 41 33  2 42 43</span></span>
-<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a><span class="fu">order</span>(pca_species<span class="sc">$</span>x[,<span class="st">'PC3'</span>], <span class="at">decreasing =</span> T) <span class="co"># -&gt; 7 is highest</span></span>
-<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a><span class="do">##  [1]  9 10 22 24 40 44 32 25 12 16 33 31 19 21 41 30 23 15 20 18 36 27 17 34 26</span></span>
-<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a><span class="do">## [26] 45  2 43 28 39 29 42 11 38 14  4 35  3 13  5 37  1  6  8  7</span></span>
-<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Find the predictor variables that have the largest contribution in the biplot:</span></span>
-<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a><span class="co"># -&gt; sum over the absolute values of their PC-1 and PC-2 coordinates, then sort in decreasing order:  </span></span>
-<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a><span class="fu">sort</span>( <span class="fu">rowSums</span>( <span class="fu">abs</span>( pca_environment<span class="sc">$</span>rotation[,<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>] ) ), <span class="at">decreasing =</span> T)</span>
-<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a><span class="do">##   temperature      salinity penetrability         humus      exposure </span></span>
-<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a><span class="do">##     0.7538857     0.7452007     0.7045490     0.6245533     0.5140077 </span></span>
-<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a><span class="do">##     grainsize        angle2         chalk           NAP        angle1 </span></span>
-<span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a><span class="do">##     0.4882536     0.4467877     0.4034486     0.3563850     0.2577299</span></span>
-<span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a><span class="co"># we could preferentially measure: temperature, salinity, penetrability</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="clustering" class="level3" data-number="7.2.2">
-<h3 data-number="7.2.2" class="anchored" data-anchor-id="clustering"><span class="header-section-number">7.2.2</span> Clustering</h3>
-<section id="k-means" class="level4" data-number="7.2.2.1">
-<h4 data-number="7.2.2.1" class="anchored" data-anchor-id="k-means"><span class="header-section-number">7.2.2.1</span> K-means</h4>
-<p>We want to use clustering methods to define 3 environmental types. Use the function <em>kmeans()</em> with <em>centers = 3</em> (number of clusters to be generated). Remember to set a seed; the choice of the first k centers is random.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">467456</span>)</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>cl <span class="ot">=</span> <span class="co">#...</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Compare the three clusters with the result of the PCA using the following code that uses another plotting framework called ggplot2:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggfortify)</span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">autoplot</span>(pca_environment, <span class="at">colour =</span> cl<span class="sc">$</span>cluster, <span class="at">size =</span> <span class="dv">2</span>, <span class="at">loadings =</span> <span class="cn">TRUE</span>, <span class="at">loadings.colour =</span> <span class="st">'black'</span>,</span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">loadings.label =</span> <span class="cn">TRUE</span>, <span class="at">loadings.label.size =</span> <span class="dv">3</span>, <span class="at">loadings.label.colour =</span> <span class="st">"black"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>The colors of the points represent the three clusters. <strong>Answer the following question on elearning-extern</strong> (Q 4-5):</p>
-<ul>
-<li>How is it possible that four observations in the middle (in red - if you have used the same seed) belong to a different cluster than the observations around them (in black)?</li>
-<li>Which environmental variables are on average high within the black cluster (cluster 1)?</li>
-</ul>
 <div class="callout-tip callout callout-style-simple no-icon callout-captioned">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -1157,28 +1045,134 @@ Solution
 <div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Create clusters using all environmental variables</span></span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">467456</span>)</span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>cl <span class="ot">&lt;-</span> <span class="fu">kmeans</span>(dat[,<span class="dv">7</span><span class="sc">:</span><span class="dv">16</span>], <span class="at">centers =</span> <span class="dv">3</span>) <span class="co"># 3 clusters to be generated</span></span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot</span></span>
-<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggfortify)</span>
-<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a><span class="fu">autoplot</span>(pca_environment, <span class="at">colour =</span> cl<span class="sc">$</span>cluster, <span class="at">size =</span> <span class="dv">2</span>, <span class="at">loadings =</span> <span class="cn">TRUE</span>, <span class="at">loadings.colour =</span> <span class="st">'black'</span>,</span>
-<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>         <span class="at">loadings.label =</span> <span class="cn">TRUE</span>, <span class="at">loadings.label.size =</span> <span class="dv">3</span>, <span class="at">loadings.label.colour =</span> <span class="st">"black"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="do">## 1.) Conduct the principle component analyses (PCAs):</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="co"># a) PCA of environmental data</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>pca_environment <span class="ot">=</span> <span class="fu">prcomp</span>(dat[,<span class="dv">7</span><span class="sc">:</span><span class="dv">16</span>], <span class="at">scale =</span> T)</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(pca_environment)</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="do">## Importance of components:</span></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="do">##                           PC1    PC2    PC3    PC4     PC5    PC6     PC7</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="do">## Standard deviation     1.8476 1.3300 1.0919 1.0297 0.99521 0.7746 0.72784</span></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a><span class="do">## Proportion of Variance 0.3414 0.1769 0.1192 0.1060 0.09904 0.0600 0.05298</span></span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a><span class="do">## Cumulative Proportion  0.3414 0.5182 0.6375 0.7435 0.84254 0.9025 0.95551</span></span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a><span class="do">##                            PC8     PC9    PC10</span></span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a><span class="do">## Standard deviation     0.52299 0.34727 0.22541</span></span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a><span class="do">## Proportion of Variance 0.02735 0.01206 0.00508</span></span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a><span class="do">## Cumulative Proportion  0.98286 0.99492 1.00000</span></span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>op <span class="ot">&lt;-</span> <span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a><span class="fu">biplot</span>(pca_environment, <span class="at">main =</span> <span class="st">"PCA"</span>)            <span class="co"># plot the results of the PCA as a rotation matrix</span></span>
+<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(<span class="fu">summary</span>(pca_environment)<span class="sc">$</span>importance[<span class="dv">2</span>,], <span class="co"># get the importance measure</span></span>
+<span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Components of environment"</span>,</span>
+<span id="cb21-20"><a href="#cb21-20" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Proportion of variance explained"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="7-Multivariate_files/figure-html/solution-Clustering-1.png" class="img-fluid" width="672"></p>
+<p><img src="7-Multivariate_files/figure-html/solution-PCA-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Environmental variables that are on average high within cluster 1:</span></span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="co"># -&gt; looking at the plot we find that exposure and grain size are high on average within cluster 1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="co"># b) PCA of species richness data</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>pca_species <span class="ot">=</span> <span class="fu">prcomp</span>(dat[,<span class="dv">2</span><span class="sc">:</span><span class="dv">5</span>], <span class="at">scale =</span> T)</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(pca_species)</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="do">## Importance of components:</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="do">##                           PC1    PC2    PC3    PC4</span></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="do">## Standard deviation     1.1177 1.0251 1.0095 0.8251</span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a><span class="do">## Proportion of Variance 0.3123 0.2627 0.2548 0.1702</span></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a><span class="do">## Cumulative Proportion  0.3123 0.5750 0.8298 1.0000</span></span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a><span class="fu">biplot</span>(pca_species, <span class="at">main =</span> <span class="st">"PCA"</span>)            <span class="co"># plot the results of the PCA as a rotation matrix</span></span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(<span class="fu">summary</span>(pca_species)<span class="sc">$</span>importance[<span class="dv">2</span>,], <span class="co"># get the importance measure</span></span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Components of species"</span>,</span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Proportion of variance explained"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="7-Multivariate_files/figure-html/solution-PCA-2.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(op)</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="co"># From the *summary()* output we can see that the first and second components explain more variance in the species PCA.</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="do">##  2.) What are the two samples that have the highest score on the third PCA axis?</span></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a><span class="co"># -&gt; order the samples by their PC3 coordinate:</span></span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a><span class="fu">order</span>(pca_environment<span class="sc">$</span>x[,<span class="st">'PC3'</span>], <span class="at">decreasing =</span> T) <span class="co"># -&gt; 24 is highest</span></span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a><span class="do">##  [1] 24 21 23 28 25 16 22 40 36 19  8 12  6 30  9  7 39 32 44  1 15  4 31 13 14</span></span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a><span class="do">## [26]  5 10 35 37 45 27 20 18 34 11 17 26 29 38  3 41 33  2 42 43</span></span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a><span class="fu">order</span>(pca_species<span class="sc">$</span>x[,<span class="st">'PC3'</span>], <span class="at">decreasing =</span> T) <span class="co"># -&gt; 7 is highest</span></span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a><span class="do">##  [1]  9 10 22 24 40 44 32 25 12 16 33 31 19 21 41 30 23 15 20 18 36 27 17 34 26</span></span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a><span class="do">## [26] 45  2 43 28 39 29 42 11 38 14  4 35  3 13  5 37  1  6  8  7</span></span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a><span class="do">## 3.) Which environmental variables would you choose, if you have only the resource to measure three variables? </span></span>
+<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a><span class="co"># From looking at the biplot, we choose 3 variables that describe a lot of variation (i.e. have a large length in the biplot) and have little collinearity. </span></span>
+<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a><span class="co"># -&gt; For example, an appropriate choice would be salinity, penetrability and grain size.</span></span>
+<span id="cb23-21"><a href="#cb23-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-22"><a href="#cb23-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-23"><a href="#cb23-23" aria-hidden="true" tabindex="-1"></a><span class="do">## 4.) We can get information on the correlations of variables by looking at their representation in the biplot: </span></span>
+<span id="cb23-24"><a href="#cb23-24" aria-hidden="true" tabindex="-1"></a>  <span class="co">#  a) salinity and humus:  same direction  -&gt;  positively correlated</span></span>
+<span id="cb23-25"><a href="#cb23-25" aria-hidden="true" tabindex="-1"></a>  <span class="co">#  b) angle1 and exposure:  opposite directions  -&gt;  negatively correlated</span></span>
+<span id="cb23-26"><a href="#cb23-26" aria-hidden="true" tabindex="-1"></a>  <span class="co">#  c) Polychaeta and Mollusca:  almost perpendicular  -&gt;  uncorrelated</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
 </div>
 </section>
-<section id="hierarchical-clustering" class="level4" data-number="7.2.2.2">
-<h4 data-number="7.2.2.2" class="anchored" data-anchor-id="hierarchical-clustering"><span class="header-section-number">7.2.2.2</span> Hierarchical clustering</h4>
+<section id="clustering-1" class="level3" data-number="7.4.2">
+<h3 data-number="7.4.2" class="anchored" data-anchor-id="clustering-1"><span class="header-section-number">7.4.2</span> Clustering</h3>
+<section id="k-means" class="level4" data-number="7.4.2.1">
+<h4 data-number="7.4.2.1" class="anchored" data-anchor-id="k-means"><span class="header-section-number">7.4.2.1</span> K-means</h4>
+<p>We want to use clustering methods to define 3 environmental types. Use the function <em>kmeans()</em> with <em>centers = 3</em> (number of clusters to be generated). Remember to set a seed; the choice of the first k centers is random.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">467456</span>)</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>cl <span class="ot">=</span> <span class="co">#...</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Compare the three clusters with the result of the PCA using the following code that uses another plotting framework called ggplot2:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggfortify)</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">autoplot</span>(pca_environment, <span class="at">colour =</span> cl<span class="sc">$</span>cluster, <span class="at">size =</span> <span class="dv">2</span>, <span class="at">loadings =</span> <span class="cn">TRUE</span>, <span class="at">loadings.colour =</span> <span class="st">'black'</span>,</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">loadings.label =</span> <span class="cn">TRUE</span>, <span class="at">loadings.label.size =</span> <span class="dv">3</span>, <span class="at">loadings.label.colour =</span> <span class="st">"black"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The colors of the points represent the three clusters. <strong>Answer the following question on elearning-extern</strong> (Q 4-5):</p>
+<ul>
+<li>How is it possible that four observations in the middle (in red - if you have used the same seed) belong to a different cluster than the observations around them (in black)?</li>
+<li>Which environmental variables are on average high within the black cluster (cluster 1)?</li>
+</ul>
+<div class="callout-tip callout callout-style-simple no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Create clusters using all environmental variables</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">467456</span>)</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>cl <span class="ot">&lt;-</span> <span class="fu">kmeans</span>(dat[,<span class="dv">7</span><span class="sc">:</span><span class="dv">16</span>], <span class="at">centers =</span> <span class="dv">3</span>) <span class="co"># 3 clusters to be generated</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot</span></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggfortify)</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a><span class="fu">autoplot</span>(pca_environment, <span class="at">colour =</span> cl<span class="sc">$</span>cluster, <span class="at">size =</span> <span class="dv">2</span>, <span class="at">loadings =</span> <span class="cn">TRUE</span>, <span class="at">loadings.colour =</span> <span class="st">'black'</span>,</span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>         <span class="at">loadings.label =</span> <span class="cn">TRUE</span>, <span class="at">loadings.label.size =</span> <span class="dv">3</span>, <span class="at">loadings.label.colour =</span> <span class="st">"black"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="7-Multivariate_files/figure-html/solution-Clustering-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="co"># To understand why the four observations in the middle belong to a different cluster than the observations around them, we must take into account, that the biplot is only a 2-dimensional representation of a more-than-2 dimensional space. Therefore, the four points in the middle will be dissimilar to the points around them with respect to a variable that is not well represented by the first two PCA axes.</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Environmental variables that are on average high within cluster 1:</span></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="co"># -&gt; looking at the plot we find that exposure and grain size are high on average within cluster 1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="hierarchical-clustering" class="level4" data-number="7.4.2.2">
+<h4 data-number="7.4.2.2" class="anchored" data-anchor-id="hierarchical-clustering"><span class="header-section-number">7.4.2.2</span> Hierarchical clustering</h4>
 <p>Now we want to hierarchically cluster the samples with respect to their species richness, as shown in the following plot:</p>
 <div class="cell">
 <div class="cell-output-display">
@@ -1195,7 +1189,7 @@ Solution
 <p>Load the package <em>ape</em>. Have a look at the help for <em>hclust()</em> to read what the function does and look at the examples for further help on how to use the function. Then have a look at what the function <em>as.phylo()</em> does. Now, color the labels using the variable <em>week</em>. You can do this using the argument “tip.color =”.</p>
 <p>Choose the correct statement(s) about the species richness and its sampling on <strong>elearning-extern</strong>(Q6). To be able to read the plot more easily, you can click <em>Zoom</em> in the top pane of the Plots window in RStudio.</p>
 <div class="callout-tip callout callout-style-simple no-icon callout-captioned">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
@@ -1204,13 +1198,13 @@ Solution
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ape)</span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>hc <span class="ot">=</span> <span class="fu">hclust</span>(<span class="fu">dist</span>(dat[, <span class="dv">2</span><span class="sc">:</span><span class="dv">5</span>]))</span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">as.phylo</span>(hc), <span class="at">tip.color =</span> dat<span class="sc">$</span>week)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ape)</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>hc <span class="ot">=</span> <span class="fu">hclust</span>(<span class="fu">dist</span>(dat[, <span class="dv">2</span><span class="sc">:</span><span class="dv">5</span>]))</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">as.phylo</span>(hc), <span class="at">tip.color =</span> dat<span class="sc">$</span>week)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="7-Multivariate_files/figure-html/solution-HierarClcust-1.png" class="img-fluid" width="672"></p>
 </div>

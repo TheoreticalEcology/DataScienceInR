@@ -10,37 +10,70 @@ set.seed(42)
 
 # Generalized linear models
 
-## Classroom demo
-
 ```{r}
-
-
-# options(na.action = "na.omit") # reset conditions after model selection
 library(EcoData)
 library(effects)
 library(DHARMa)
 
-
-
-# Logistic ----------------------------------------------------------------
-
-
-# save pclass as.factor
 str(titanic) #from EcoData package
 titanic$Fpclass = as.factor(titanic$pclass)
+m = lm(survived~age+sex, data = titanic)
+summary(m)
+par(mfrow = c(2, 2))
+plot(m)
+par(mfrow = c(1,1))
+```
 
+We can see that there is something seriously wrong with the residuals! One assumption for the lm is that the residuals and the response variable are normally distributed:
 
-# another way of getting a mosaic plot (no table required)
-mosaicplot(  ~  survived + sex + pclass, data = titanic)
+```{r}
+hist(titanic$survived)
+table(titanic$survived)
+```
 
+Our response consists of 0s and 1s, so it is a binomial distribution. For binomial data we cannot use a lm because we need to restrict our values to be in the range of \[0,1\] (our 'lm' needs to predict probabilites).
 
-# lm will not give you an error, but residuals are clearly not normal
-fit <- lm(survived ~ age, data = titanic)
-summary(fit)
-op <- par(mfrow = c(2,2))
-plot(fit)
-par(op)
+The idea of generalized linear models is that we can use link (and inverse link functions) to transform the expected values into the range of our response.
 
+-   All GLMs have a linear term to specify the desired dependency on explanatory variables (we already know this) $y = a x + b x_2 + c$
+
+-   a link function to scale the linear term to the correct range of values for the distribution that was chosen(this is new)
+
+-   and a probability distribution that describes the model from which the dependent variable is generated(this is also new -- so far: normal = gaussian)
+
+LM and GLMS -- the three models you should know:
+
+| Type                                         | R call                                         | Properties                                                                  |
+|------------------------|------------------------|------------------------|
+| Linear regression (continuous data)          | `lm(y ~ x)` or `glm(y~x, family = gaussian())` | Identity (no) link, normal distribution (family = gaussian) no inverse link |
+| Logistic regression (1/0 or k out of n data) | `glm(y ~x, family = binomial)`                 | binomial distribution, logit link: $log(p/(1-p))$                           |
+| inverse link: $exp(y)/(1 + exp(y))$          |                                                |                                                                             |
+| Poisson regression (Count data)              | `glm(y ~x, family = poisson)`                  | Poisson distribution, log link: $log(lambda)$                               |
+| inverse link: $exp(y)$                       |                                                |                                                                             |
+
+Model diagnostic (residual checks) cannot be done anymore by plotting the model. This can be only done for a lm! For glms we have to use the DHARMa package!
+
+For more details on glms, see the chapter about glms in the [advanced regression book.](https://theoreticalecology.github.io/AdvancedRegressionModels/4A-GLMs.html)
+
+## Logistic Regression
+
+For the binomial model we can use the logit link:
+
+$$
+logit(y) = a_0 +a_1*x
+$$
+
+And with the inverse link:
+
+$$
+y = \frac{1}{1+e^{-(a_0 + a_1) }}
+$$
+
+You can interpret the glm outputs basically like lm outputs.
+
+**BUT:** To get absolute response values, you have to transform the output with the inverse link function. For the logit, e.g. an intercept of 0 means a predicted value of 0.5. Different overall statistics: no R^2^ instead Pseudo R^2^ = 1 - Residual deviance / Null deviance(deviance is based on the likelihood):
+
+```{r}
 # logistic regression with categorical predictor
 m1 = glm(survived ~ sex, data = titanic, family = "binomial")
 summary(m1)
@@ -80,20 +113,27 @@ anova(m2, test = "Chisq")
 
 
 plot(allEffects(m2))
+```
 
+Residual check:
+
+```{r}
 # Model diagnostics
 # do not use the plot(model) residual checks
 # use DHARMa package
 library(DHARMa)
 res = simulateResiduals(m2)
 plot(res)
+```
 
+## Poisson Regression
 
+Poisson regression is used for count data. Properties of count data are: no negative values,
+only integers, y \~ Poisson(lambda); where lambda = mean = variance, log link function (lambda must be positive).
 
+Example:
 
-
-# Poisson -----------------------------------------------------------------
-
+```{r}
 head(birdfeeding)
 
 plot(feeding ~ attractiveness, birdfeeding)
@@ -111,18 +151,26 @@ exp(1.47 + 0.148 * 3)
 plot(allEffects(fit))
 
 
-
 # checking residuals
 res = simulateResiduals(fit)
 plot(res, quantreg = F)
 # the warning is because of a recent change in DHARMa 
 # qgam requires more data points
+```
 
+Normal versus Poisson distribution:
 
+-   N(mean, sd)This means that fitting a normal distribution estimates a parameter for the variance (sd)
 
+-   Poisson(lambda)lambda = mean = varianceThis means that a Poisson regression does not fit a separate parameter for the variance
+
+So in the glm always assume that the variance is the mean, which is a strong assumption. In reality it can often occur that the variance is greater than expected (Overdispersion) or smaller than expected (Underdispersion). (this cannot happen for the lm because there we estimate a variance parameter (residual variance)). Overdispersion can have a HUGE influence on the MLEs and particularly on the p-values!
+
+We can use the DHARMa package to check for Over or Underdispersion:
+
+```{r}
 # test for overdispersion
 testDispersion(fit)
-
 
 # Dispersion test is necessary for all poisson or binomial models with k/n 
 # if positive, you can chose family = quasi-poisson or quasi-binomial
@@ -175,7 +223,6 @@ You may need the following functions:
 -   anova(..., test = "Chisq")
 
 Use your results to **answer the questions on elearning-extern** (Q 1-2) [("06 - Test for Exercise in R")](https://elearning.uni-regensburg.de/mod/quiz/view.php?id=2046707).
-
 :::
 
 ::: {.callout-tip collapse="true" appearance="minimal" icon="false"}
