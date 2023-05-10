@@ -24,35 +24,35 @@ In this exercise you will practice common steps of the data preparation procedur
 The main steps are as follows (**to solve the tasks, please carefully read the detailed instructions and hints below**):
 
 1.  Read the provided datasets *treedata.csv* and *species.csv* to R.
-2.  Have a look at the dataset properties.\
-3.  Find values that prevent a column you expect to be numeric to do so.\
-4.  Does the dataset contain NA-values in `height`? How many?\
-5.  Have a look at the data: Check for implausible values. For now, remove these values.\
-6.  Add the species names to the dataset.\
-7.  Create a new dataset containing only trees with both, height and dbh measurements.\
-8.  Are there any correlations within the new dataset?\
-9.  Remove all trees with `rem` = F4 from the dataset\
+2.  Have a look at the dataset properties.
+3.  Find values that prevent a column you expect to be numeric to do so.
+4.  Does the dataset contain NA-values in `height`? How many?
+5.  Have a look at the data: Check for implausible values. For now, remove these values.
+6.  Add the species names to the dataset.
+7.  Create a new dataset containing only trees with both, height and dbh measurements.
+8.  Are there any correlations within the new dataset?
+9.  Remove all trees with `rem` = F4 from the dataset
 10. Calculate mean dbh by species.
 
 ------------------------------------------------------------------------
 
-To thorougly check the dataset and perform the operations, you will need the following functions:
+To thoroughly check the dataset and perform the operations, you will need the following functions:
 
--   `read.csv()`: Check the different options using `?read.csv`\
--   `str()`: Structure of an object\
--   `table()`: Check the optional arguments!\
--   `merge()`: Combine to data.frames\
+-   `read.csv()`: Check the different options using `?read.csv`
+-   `str()`: Structure of an object
+-   `table()`: Check the optional arguments!
+-   `merge()`: Combine to data.frames
 -   `as.character()`: Change a vector's class to character
 -   `as.numeric()`: Change a vector's class to numeric.
 -   `%in%`
--   `is.na()`\
+-   `is.na()`
 -   `max()`
--   `summary()`\
--   `complete.cases()`\
+-   `summary()`
+-   `complete.cases()`
 -   `cor.test()`
 -   `%>%` and `group_by()` and `summarize()` from the dlyr package (check demonstration Part 2)
 
-Regarding the solutions, note we don't expect you to come up with exactly this code - there are many ways to solve the problem. The solutions just give you an idea of a possible solution
+Regarding the solutions, note we don't expect you to come up with exactly this code - there are many ways to solve the problem. The solutions just give you an idea of a possible solution.
 
 ### 1. Read data
 
@@ -60,15 +60,15 @@ Read the provided datasets *treedata.csv* and *species.csv* to R. Use the option
 
 Read the dataset *treedata.csv* and call it treedata. It has the following columns:
 
--   `species_code`: tree species code\
--   `dbh`: diameter at breast height (1.3 m) \[cm\]\
--   `height`: total height of the tree \[m\]. Measured only on a subset of trees.\
+-   `species_code`: tree species code
+-   `dbh`: diameter at breast height (1.3 m) \[cm\]
+-   `height`: total height of the tree \[m\]. Measured only on a subset of trees.
 -   `rem`: coded values, containing remarks
 
 Read the dataset *species.csv* and call it species. The dataset consists of the following columns:
 
--   `species_code`: tree species code (matching the one used in treedata.csv)\
--   `species_scientific`: Scientific species name\
+-   `species_code`: tree species code (matching the one used in treedata.csv)
+-   `species_scientific`: Scientific species name
 -   `species_english`: English species name
 
 ------------------------------------------------------------------------
@@ -88,7 +88,7 @@ species <- read.csv('Hopefully/in/the/same/folder/species.csv', sep = ";")
 
 Have a look at the properties of the dataset:
 
--   Which classes do the columns have?\
+-   Which classes do the columns have?
 -   Did you expect these classes?
 
 ------------------------------------------------------------------------
@@ -96,7 +96,7 @@ Have a look at the properties of the dataset:
 ::: {.callout-tip collapse="true" appearance="minimal" icon="false"}
 #### Solution
 
-The `data.frame` `dat` contains 4 columns: species, dbh (diameter at breast height \[cm\]), height \[m\] and bem1, a remark.\
+The `data.frame` `dat` contains 4 columns: species, dbh (diameter at breast height \[cm\]), height \[m\] and rem, a remark.
 We expect the following formats:
 
 | column  | format    |
@@ -112,7 +112,7 @@ Using `str` we get an overview of the structure of a dataset:
 str(treedata)
 ```
 
-Column `dbh` is a `character`, altough we would have expected this one to be class numeric. This indicates, that a letter or special characters are in that column (we do not want these to be in there at all!).
+Column `dbh` is a `character`, although we would have expected this one to be class numeric. This indicates, that a letter or special characters are in that column (we do not want these to be in there at all!).
 :::
 
 ### 3. Turn character to numeric
@@ -169,7 +169,7 @@ head(treedata$dbh)
 
 Check for NA's in the column `height`:
 
--   How many `NA`'s do appear in this column?\
+-   How many `NA`'s do appear in this column?
 -   Did you expect this column to contain `NA`'s? Why?
 
 ------------------------------------------------------------------------
@@ -188,8 +188,8 @@ table(treedata$height, useNA = 'ifany')
 
 ```
 
--   As only on a subset of the trees, height has been measured, we expect this column to contain `NA`-values.\
 -   The dataset contains 221 `NA`.
+-   Since height has been measured only on a subset of the trees, we expect this column to contain `NA`-values.
 :::
 
 ### 5. Implausible values
@@ -244,6 +244,7 @@ Use `merge` to add species names to the dataset treedata. For adding only one co
 treedata = merge(treedata, species, by = "species_code")
 head(treedata)
 
+# Alternative using match():
 # treedata$species_english <- species$species_english[match(treedata$species_code, species$species_code)]
 
 ```
@@ -281,7 +282,7 @@ dbh_height <- treedata[complete.cases(treedata$dbh, treedata$height),]
 
 ### 9. Correlations?
 
-Check for correlations in the dataset dbh_height. Use a test and plot dbh vs height.
+Check for correlations in the dataset dbh_height. Use a test and plot height vs dbh.
 
 ------------------------------------------------------------------------
 
@@ -303,7 +304,8 @@ plot(dbh_height$dbh
 
 For calculating summary statistics, the dplyr package is really helpful. It is part of the tidyverse environment, which was designed for data science. If you work with large and complex datasets or if you have to derive many new variables, I really recommend that you have a look at this. Also, the syntax for dplyr is quite intuitive.
 
-For help on this, check the demonstration of Part 2 where we calculated summary statistics for groups using the dplyr package!
+For this exercise, use the dplyr package to calculate mean dbh per species. 
+If you need help on this, check the demonstration of Part 2 where we calculated summary statistics for groups using the dplyr package!
 
 ::: {.callout-tip collapse="true" appearance="minimal" icon="false"}
 #### Solution

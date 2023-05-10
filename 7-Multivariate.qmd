@@ -322,15 +322,14 @@ Now, use your results to **answer the questions on elearning-extern** (Q 1-3) [(
 
  1. In which multivariate dataset do the first and second components explain more variance?
  2. What are the two samples that have the highest score on the respective third PCA axes?
- 3. Which environmental variables would you choose, if you have only the resource to measure three variables? 
+ 3. From looking at the biplot: Which environmental variables would you choose, if you have only the resource to measure three variables? 
     a) NAP, angle 1 and chalk
     b) salinity, penetrability and grain size
     c) grain size, chalk and exposure
- X. Describe the following correlations: 
+ 4. Describe the following correlations: 
     a) salinity and humus
     b) angle1 and exposure
-    c) Crustacea and NAP
-    d) Polychaeta and Mollusca
+    c) Polychaeta and Mollusca
 
 
 
@@ -338,7 +337,7 @@ Now, use your results to **answer the questions on elearning-extern** (Q 1-3) [(
 #### Solution
 
 ```{r solution-PCA}
-# Conduct the principle component analyses (PCAs):
+## 1.) Conduct the principle component analyses (PCAs):
 
 # a) PCA of environmental data
 pca_environment = prcomp(dat[,7:16], scale = T)
@@ -363,15 +362,23 @@ par(op)
 # From the *summary()* output we can see that the first and second components explain more variance in the species PCA.
 
 
-# What are the two samples that have the highest score on the third PCA axis?
+##  2.) What are the two samples that have the highest score on the third PCA axis?
+
 # -> order the samples by their PC3 coordinate:
 order(pca_environment$x[,'PC3'], decreasing = T) # -> 24 is highest
 order(pca_species$x[,'PC3'], decreasing = T) # -> 7 is highest
 
-# Find the predictor variables that have the largest contribution in the biplot:
-# -> sum over the absolute values of their PC-1 and PC-2 coordinates, then sort in decreasing order:  
-sort( rowSums( abs( pca_environment$rotation[,1:2] ) ), decreasing = T)
-# we could preferentially measure: temperature, salinity, penetrability
+
+## 3.) Which environmental variables would you choose, if you have only the resource to measure three variables? 
+
+# From looking at the biplot, we choose 3 variables that describe a lot of variation (i.e. have a large length in the biplot) and have little collinearity. 
+# -> For example, an appropriate choice would be salinity, penetrability and grain size.
+
+
+## 4.) We can get information on the correlations of variables by looking at their representation in the biplot: 
+  #  a) salinity and humus:  same direction  ->  positively correlated
+  #  b) angle1 and exposure:  opposite directions  ->  negatively correlated
+  #  c) Polychaeta and Mollusca:  almost perpendicular  ->  uncorrelated
 ```
 :::
 
@@ -421,13 +428,13 @@ library(ggfortify)
 autoplot(pca_environment, colour = cl$cluster, size = 2, loadings = TRUE, loadings.colour = 'black',
          loadings.label = TRUE, loadings.label.size = 3, loadings.label.colour = "black")
 
+# To understand why the four observations in the middle belong to a different cluster than the observations around them, we must take into account, that the biplot is only a 2-dimensional representation of a more-than-2 dimensional space. Therefore, the four points in the middle will be dissimilar to the points around them with respect to a variable that is not well represented by the first two PCA axes.
+
 # Environmental variables that are on average high within cluster 1:
 # -> looking at the plot we find that exposure and grain size are high on average within cluster 1
-
 ```
 :::
  
-
 
 #### Hierarchical clustering
 

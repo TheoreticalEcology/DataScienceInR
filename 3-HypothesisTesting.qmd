@@ -790,7 +790,7 @@ Answer the following questions at **elearning-extern**.
 2.  Does the survival rate between the first and second class differ? Hint: you can apply the test to a contingency table of passenger class versus survived, i.e. `table(dat$pclass, dat$survived)`.
 3.  Is the variable passenger age normally distributed?
 4.  Is the variable Body Identification Number (body) uniformly distributed?
-5.  Is the correlation between fare and age significant?
+5.  Is the linear correlation (i.e. Pearson) between fare and age significant?
 
 ::: {.callout-tip collapse="true" appearance="minimal" icon="false"}
 #### Solution
