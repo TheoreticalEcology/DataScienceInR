@@ -33,7 +33,7 @@ summary(lm(Growth~Temp+Climate)) # correct effects!!
 
 Identifying confounders is the most important challenge in observational studies: For example, several studies showed that overweight adults have lower mortality. However, another study shows that these earlier results might have come up due to confounding: smoking!
 
--   smokers: higher mortality and lower BMI -> people with lower BMI have higher mortality rates
+-   smokers: higher mortality and lower BMI -\> people with lower BMI have higher mortality rates
 
 -   When we correct for the confounder *smoking*, the correlation between BMI and mortality goes in the other direction, i.e. obese people have higher mortality!
 
@@ -47,16 +47,13 @@ Conclusion: Confounders can cause correlations where no causal relationship exis
 
 The multiple linear regression can deal with confounders:
 
--   Univariate (simple) linear regression describes how y depends on x using a polynomial of x1 e.g.:
-$$
-y = a_0 + a_1*x_1 + a_2*x_1^2
-$$
+-   Univariate (simple) linear regression describes how y depends on x using a polynomial of x1 e.g.: $$
+    y = a_0 + a_1*x_1 + a_2*x_1^2
+    $$
 
-
--   Multiple linear regression expands simple linear regression to a polynomial of several explanatory variables x1, x2... e.g.:
-$$
-y = a_0 + a_1*x_1 + a_2*x_2 + a_3*x_3
-$$
+-   Multiple linear regression expands simple linear regression to a polynomial of several explanatory variables x1, x2... e.g.: $$
+    y = a_0 + a_1*x_1 + a_2*x_2 + a_3*x_3
+    $$
 
 -   Idea: if we jointly consider "all" variables in the model formula, the influence of confounding variables is incorporated
 
@@ -264,7 +261,7 @@ mean(sum.sel$coefficients[,4] < 0.05)
 ## Exercises
 
 | Formula      | Meaning                               | Details                                    |
-|--------------------|--------------------------|--------------------------|
+|--------------|---------------------------------------|--------------------------------------------|
 | `y~x_1`      | $y=a_0 +a_1*x_1$                      | Slope+Intercept                            |
 | `y~x_1 - 1`  | $y=a_1*x_1$                           | Slope, no intercept                        |
 | `y~I(x_1^2)` | $y=a_0 + a_1*(x_1^2)$                 | Quadratic effect                           |
@@ -353,7 +350,6 @@ You may need the following functions:
 -   allEffects()
 
 Use your results to **answer the questions on elearning-extern** (Q 1-2) [("05_Test for Exercise in R - multiple regression")](https://elearning.uni-regensburg.de/mod/quiz/view.php?id=2046701).
-
 :::
 
 ::: {.callout-tip collapse="true" appearance="minimal" icon="false"}
@@ -416,7 +412,6 @@ You may need the following functions:
 -   anova()
 
 Use your results to **answer the questions on elearning-extern** (Q 3-5) [("05_Test for Exercise in R - multiple regression")](https://elearning.uni-regensburg.de/mod/quiz/view.php?id=2046701).
-
 :::
 
 ::: {.callout-tip collapse="true" appearance="minimal" icon="false"}

@@ -10,86 +10,277 @@ set.seed(42)
 
 # Machine Learning
 
-## Classroom demo
+The idea of machine learning is to maximize the predictive performance, which means to make predictions of y for new observations:
+
+Let's assume that part of the data is unknown (which will be our test data):
 
 ```{r}
-# Machine Learning --------------------------------------------------------
+airquality = airquality[complete.cases(airquality),]
+indices = sample.int(nrow(airquality), 50)
+train = airquality[-indices,]
+test = airquality[indices,]
+```
 
-library(tree)
+We first train a model on the train data and then use the model make predictions for new data (test data):
+
+```{r}
+model = lm(Ozone~., data = train)
+predictions = predict(model, newdata = test)
+plot(predictions, test$Ozone, xlab = "Predicted Ozone", ylab = "Observed Ozone")
+```
+
+We can calculate the predictive performance (or prediction) error, for example, by using the correlation factor:
+
+```{r}
+cor(predictions, test$Ozone)
+#R^2:
+cor(predictions, test$Ozone)**2
+```
+
+So the linear regression model is a great model for inferential statistics because it is interpretable (we exactly know how the variables are connected to the response). Many ML algorithms are not interpretable at all - they trade interpretability for predictive performance.
+
+Random Forest is a famous algorithm which was first described by [Leo Breiman, 2001](https://link.springer.com/article/10.1023/a:1010933404324). The idea of the random forest is to fit hundreds of 'weak' decision trees on bootstrap samples from the original data. Weak means that the decision trees are intentionally 'constrained' in their complexity (by random subsampling the set of features in each split):
+
+```{r}
 library(randomForest)
-#library(forestFloor)
+model = randomForest(Ozone~., data = train)
+predictions = predict(model, newdata = test)
+plot(predictions, test$Ozone, xlab = "Predicted Ozone", ylab = "Observed Ozone")
+cor(predictions, test$Ozone)
+#R^2:
+cor(predictions, test$Ozone)**2
+```
 
+Our Random Forest achieved a higher predictive performance! BUT:
 
-# 1. Regression with random forest:------------------------
-# We want to compare performance (%variability explained by the model) of lm 
-# with performance of randomforest
+```{r}
+summary(model)
+```
 
-ozone.lm <- lm(Ozone ~ ., data=airquality, na.action=na.omit)
-summary(ozone.lm)
-# lm explains about 62% of the variance in the data
+...doesn't tell us anything about effects or p-values. However, compared to other ML algorithms (e.g. artificial neural networks), at least the RF has a variable importance that reports which features were the most important features (similar to an ANOVA):
 
- 
-# Let's look now at how a decision tree looks like:
-
-#install.packages("tree") # not available for R version 3.5.3
-#devtools::install_version('tree', version = '1.0-39')
-# we use this, because newest version of tree does not work with R version
-
-ozone.tree = tree(Ozone ~ ., data=airquality[complete.cases(airquality),])
-plot(ozone.tree)
-text(ozone.tree)
-# this is based on all variables and all observations
-#### explain how decision trees are produced with 2-variable-example on the blackboard:
-#### correlation of variable A with Ozone > split at a point so that variance left and right of the split is minimized, remember outcome 
-#### correlate Ozone with variable B > split > minimize variance >> compare this with performance of variable A >> if A removes more variability, choose split of A for first node
-#### then split dataset according to the split  and redo the whole thing for the two groups that were generated >>> leads to 1 decision tree for the dataset
-
-# plot:
-# split-points are given at nodes of the tree
-# importance of different variables related to how often they appear at these nodes
-
-
-
-# Now, let's look at the random forest
-# Difference here: for each iteration, only a random subset 
-# (about 66%) of observations) and a random subset of the variables is used
-# > we get a large number of different trees whose prediction ability is worse 
-# than a tree derived from the whole data
-# > then: average over these trees (similar to model averaging)
-# >> get 1 final tree which predicts better than each single tree 
-
-
-ozone.rf <- randomForest(Ozone ~ ., data=airquality, mtry=3,
-                         importance=TRUE, na.action=na.omit, keep.inbag=T)
-# mtry = number of predictors used in each split
-print(ozone.rf) # explains about 72% of the variance >> = better than lm!
-
-# random forest does not give p-values for explanatory variables, but 
-# you can get the variables importance for predictions (no causal assumptions here!):
- 
-importance(ozone.rf)
-# the same as a plot:
-varImpPlot(ozone.rf)
-
-
-
-# 2. Classification with random forest:-------------------
-#Let's do a decision tree on the whole data first (all observations, all predictors):
-iris.tree <- tree(Species ~ ., data=iris)
-plot(iris.tree)
-text(iris.tree)
-
-# then try randomforest:
-model <- randomForest(Species ~ ., data=iris, importance=TRUE, ntree=500, mtry = 2, do.trace=100,  keep.inbag=T)
-# two random steps in RF:
-# 1. bootstrap for each tree
-# 2. mtry: random subset of predictors in each split
-
-#plot importance of predictors:
-varImpPlot(model)
+```{r}
 importance(model)
-#how many samples were distributed to the wrong species?
-print(model)
-#> 4% average error rate
+```
+
+For the RF, the Temp was the most important feature, followed by Wind.
+
+::: callout-tip
+In ML a slightly different wording is used. Explanatory variables are called features. Datasets with responses with numerical values (e.g. Normal distribution or even Poisson distribution) are called regression tasks. Datasets with categorical responses (e.g. Binomial) are called classification tasks.
+:::
+
+## Regression
+
+We call task with a numerical response variable a regression task:
+
+```{r}
+indices = sample.int(nrow(airquality), 50)
+train = airquality[-indices,]
+test = airquality[indices,]
+
+# 1. Fit model on train data:
+model = randomForest(Ozone~., data = train)
+
+# 2. Make Predictions
+predictions = predict(model, newdata = test)
+
+# 3. Compare predictions with observed values:
+## the root mean squared error is commonly used as an error statistic:
+sqrt(mean((predictions-test$Ozone)**2))
+# Or use a correlationf actor
+cor(predictions, test$Ozone)
+# Or Rsquared
+cor(predictions, test$Ozone)**2
 
 ```
+
+## Classification
+
+We call a task with a categorical response variable a classification task (see also multi-class and multi-label classification):
+
+```{r}
+indices = sample.int(nrow(iris), 50)
+train = iris[-indices,]
+test = iris[indices,]
+
+# 1. Fit model on train data:
+model = randomForest(Species~., data = train)
+
+# 2. Make Predictions
+predictions = predict(model, newdata = test)
+
+# 3. Compare predictions with observed values:
+mean(predictions == test$Species) # accuracy
+
+```
+
+96% accuracy, which means only 4% of the observations were wrongly classified by our random forest!
+
+Variable importance:
+
+```{r}
+varImpPlot(model)
+```
+
+Petal.Width and Petal.Length were the most important predictors!
+
+## Exercise
+
+### birdabundance dataset
+
+```{r}
+library(EcoData)
+library(randomForest)
+set.seed(42)
+indices = sample.int(nrow(birdabundance), 30)
+train = birdabundance[-indices,]
+test = birdabundance[indices,]
+# ABUND is the response variable
+```
+
+Task:
+
+-   Fit random forest on train data
+
+-   Predict for test data
+
+-   Calculate R2
+
+-   Do the same with a lm and compare the predictive performance of both models
+
+::: {.callout-tip collapse="true" appearance="minimal" icon="false"}
+#### Solution
+
+```{r rf_birdab}
+rf = randomForest(ABUND~., data = train)
+m = lm(ABUND~., data = train)
+
+pred1 = predict(rf, newdata = test)
+pred2 = predict(m, newdata = test)
+
+cor(pred1, test$ABUND)**2
+cor(pred2, test$ABUND)**2
+```
+
+RF clearly outperforms the linear regression model!
+:::
+
+### titantic dataset
+
+```{r}
+library(EcoData)
+library(randomForest)
+library(dplyr)
+set.seed(42)
+titanic_sub = titanic %>% select(survived, age, pclass, sex, fare)
+titanic_sub = titanic_sub[complete.cases(titanic_sub),]
+
+indices = sample.int(nrow(titanic_sub), 200)
+train = titanic_sub[-indices,]
+test = titanic_sub[indices,]
+```
+
+Task:
+
+-   Fit random forest on train data
+
+-   Predict for test data
+
+-   Calculate Accuracy
+
+-   Do the same with a glm (binomial) and compare the predictive performance of both models
+
+-   What is the most important variable?
+
+::: {.callout-tip collapse="true" appearance="minimal" icon="false"}
+#### Solution
+
+```{r rf_titanic}
+rf = randomForest(as.factor(survived)~., data = train)
+m = glm(survived~., data = train, family = binomial)
+
+pred1 = predict(rf, newdata = test)
+pred2 = predict(m, newdata = test, type = "response")
+
+# pred2 are probabilities, we have to change them to levels
+pred2 = ifelse(pred2 < 0.5, 0, 1)
+
+mean(pred1 == test$survived) # RF
+mean(pred2 == test$survived) # glm
+
+```
+
+RF is better than the glm!
+
+```{r}
+varImpPlot(rf)
+```
+
+Sex is the most important variable!
+:::
+
+### Bias-variance tradeoff
+
+An important concept of statistics and, in particular, ML is the concept of the bias-variance tradeoff - or in other words, finding the right complexity of the model. So how flexible should our model be so that it generalizes well to other/new observations. Many ML algorithms have complexity parameters (e.g. nodesize or mtry in RF) that control their complexity. Have a look at the following youtube video about the bias-variance tradeoff:
+
+```         
+{{< "video" "https://www.youtube.com/watch?v=EuBBz3bI-aA" >}}
+```
+
+Let's see how we can control the complexity in the Random Forest algorithm:
+
+```{r}
+library(randomForest)
+set.seed(123)
+
+data = airquality[complete.cases(airquality),]
+
+rf = randomForest(Ozone~., data = data)
+
+pred = predict(rf, data)
+importance(rf)
+#>         IncNodePurity
+#> Solar.R      17969.59
+#> Wind         31978.36
+#> Temp         34176.71
+#> Month        10753.73
+#> Day          15436.47
+cat("RMSE: ", sqrt(mean((data$Ozone - pred)^2)), "\n")
+#> RMSE:  9.507848
+
+plot(data$Temp, data$Ozone)
+lines(data$Temp[order(data$Temp)], pred[order(data$Temp)], col = "red")
+```
+
+Try different values for the nodesize and mtry and describe how the predictions depend on these parameters. (randomForest(..., nodesize = ..., mtry = ...) ([the exercise was taken from the ML course book](https://theoreticalecology.github.io/machinelearning/fundamental.html#exercises-3))
+
+::: {.callout-tip collapse="true" appearance="minimal" icon="false"}
+#### Solution
+
+```{r rf_complexity}
+library(randomForest)
+set.seed(123)
+
+data = airquality[complete.cases(airquality),]
+
+
+for(nodesize in c(1, 5, 15, 50, 100)){
+  for(mtry in c(1, 3, 5)){
+    rf = randomForest(Ozone~., data = data, mtry = mtry, nodesize = nodesize)
+    
+    pred = predict(rf, data)
+    
+    plot(data$Temp, data$Ozone, main = paste0(
+        "mtry: ", mtry, "    nodesize: ", nodesize,
+        "\nRMSE: ", round(sqrt(mean((data$Ozone - pred)^2)), 2)
+      )
+    )
+    lines(data$Temp[order(data$Temp)], pred[order(data$Temp)], col = "red")
+  }
+}
+```
+:::
+
+### ML pipeline
+
+If you want to know more about a typical ML pipeline/workflow, [read this chapter from the ML course!](https://theoreticalecology.github.io/machinelearning/workflow.html)

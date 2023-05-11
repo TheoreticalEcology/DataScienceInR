@@ -303,7 +303,7 @@ plot(dbh_height$dbh
 
 When generating a plot within Rstudio, it is by default shown in the Plots window. However, sometimes we want to export a plot and store it in a file for use elsewhere. There are graphics devices that support different formats, such as PDF (vector-based) or PNG (pixel-based). The basic workflow is to start a graphics device and tell it where to store the output file, then create the plot, and finally close the device again. Only if you close the device properly will a valid file be generated. For example, to create a PNG file:
 
-```{r}
+```{r, eval=FALSE}
 # Open graphics device
 png(filename = "/path/to/store/plot.png",  # where to store the output file
     width = 620,  # width of the plot in pixels
@@ -340,7 +340,6 @@ plot(dbh_height$dbh
 dev.off()
 ```
 :::
-
 
 ### 11. Calculate mean dbh per species.
 

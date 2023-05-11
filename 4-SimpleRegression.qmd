@@ -206,7 +206,6 @@ abline(fit2, col = "red", lty = 2)
 hist(airquality$Ozone) # this is not normal, and that's no problem !
 ```
 
-
 ### Model diagnostics
 
 The regression optimizes the parameters under the condition that the model is correct (e.g. there is really a linear relationship). If the model is not specified correctly, the parameter values are still estimated - to the best of the model's ability, but the result will be misleading, e.g. p-values and effect sizes
@@ -258,7 +257,6 @@ par(oldpar)
 #> there's a pattern in the residuals > the model does not fit very well!
 ```
 
-
 ### Linear regression with a categorical variable
 
 We can also use categorical variables as an explanatory variable:
@@ -304,9 +302,7 @@ par(old.par)
 boxplot(residuals(fit4) ~ chickwts$feed)
 ```
 
-
 ### Linear regression with a quadratic term
-
 
 ```{r}
 ## what does simple linear regression mean?
@@ -387,7 +383,6 @@ You will need the following functions:
 #### Question
 
 Use your results to chose the correct statement(s) on **elearning-extern** (Q1) [("04_Test for Exercise in R - simple regression")](https://elearning.uni-regensburg.de/mod/quiz/view.php?id=2046695).
-
 :::
 
 ::: {.callout-tip collapse="true" appearance="minimal" icon="false"}
@@ -444,8 +439,7 @@ Use your results to chose the correct statement(s) on **elearning-extern** (Q5).
 ::: {.callout-tip collapse="true" appearance="minimal" icon="false"}
 #### Solution
 
-A reasonable research question is how abundance is influenced by distance and/or grazing.
-Here, the response variable is abundance, while the predictors are distance and/or grazing.
+A reasonable research question is how abundance is influenced by distance and/or grazing. Here, the response variable is abundance, while the predictors are distance and/or grazing.
 
 This is the code that you need to interpret the results.
 
@@ -496,7 +490,7 @@ You may also need the following functions:
 -   *plot()*
 -   *abline()*
 
-Use your results to answer the following questions on  **elearning-extern** (Q 6-8).
+Use your results to answer the following questions on **elearning-extern** (Q 6-8).
 
 ::: {.callout-caution icon="false"}
 #### Question
@@ -504,7 +498,6 @@ Use your results to answer the following questions on  **elearning-extern** (Q 6
 -   What pattern do the residuals of the first regression model show when plotted against the fitted values?
 -   What do you have to do to improve your first regression model?
 -   Identify the correct statement(s) about the residuals of the modified model.
-
 :::
 
 ::: {.callout-tip collapse="true" appearance="minimal" icon="false"}

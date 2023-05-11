@@ -258,7 +258,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#remove-f4" id="toc-remove-f4" class="nav-link" data-scroll-target="#remove-f4"><span class="toc-section-number">9.1.7</span>  7. Remove F4</a></li>
   <li><a href="#select-trees-that-contain-both-dbh-and-height-measurements" id="toc-select-trees-that-contain-both-dbh-and-height-measurements" class="nav-link" data-scroll-target="#select-trees-that-contain-both-dbh-and-height-measurements"><span class="toc-section-number">9.1.8</span>  8. Select trees that contain both dbh and height measurements</a></li>
   <li><a href="#correlations" id="toc-correlations" class="nav-link" data-scroll-target="#correlations"><span class="toc-section-number">9.1.9</span>  9. Correlations?</a></li>
-  <li><a href="#calculate-mean-dbh-per-species." id="toc-calculate-mean-dbh-per-species." class="nav-link" data-scroll-target="#calculate-mean-dbh-per-species."><span class="toc-section-number">9.1.10</span>  10. Calculate mean dbh per species.</a></li>
+  <li><a href="#export-a-plot" id="toc-export-a-plot" class="nav-link" data-scroll-target="#export-a-plot"><span class="toc-section-number">9.1.10</span>  10. Export a plot</a></li>
+  <li><a href="#calculate-mean-dbh-per-species." id="toc-calculate-mean-dbh-per-species." class="nav-link" data-scroll-target="#calculate-mean-dbh-per-species."><span class="toc-section-number">9.1.11</span>  11. Calculate mean dbh per species.</a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/TheoreticalEcology/DataScienceInR/edit/master/9-DataScienceSkills.qmd" class="toc-action">Edit this page</a></p></div></div></nav>
@@ -641,7 +642,7 @@ Solution
 <div class="callout-body-container callout-body">
 <p>Use <code>merge</code> to add species names to the dataset treedata. For adding only one column, <code>match</code> is a helpful function.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>treedata <span class="ot">=</span> <span class="fu">merge</span>(treedata, species, <span class="at">by =</span> <span class="st">"species_code"</span>)</span>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>treedata <span class="ot">&lt;-</span> <span class="fu">merge</span>(treedata, species, <span class="at">by =</span> <span class="st">"species_code"</span>)</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(treedata)</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="do">##   species_code  dbh height rem         species_scientific species_english</span></span>
 <span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="do">## 1          101  8.1    5.7     Picea abies (L.) H. Karst.   Norway Spruce</span></span>
@@ -660,7 +661,7 @@ Solution
 </section>
 <section id="remove-f4" class="level3" data-number="9.1.7">
 <h3 data-number="9.1.7" class="anchored" data-anchor-id="remove-f4"><span class="header-section-number">9.1.7</span> 7. Remove F4</h3>
-<p>The remark F4 indicates, that the dbh-measurments might be flawed. Remove these trees from treedata.</p>
+<p>The remark F4 indicates, that the dbh-measurements might be flawed. Remove these trees from treedata.</p>
 <hr>
 <div class="callout-tip callout callout-style-simple no-icon callout-captioned">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
@@ -748,10 +749,23 @@ Solution
 </div>
 </div>
 </section>
-<section id="calculate-mean-dbh-per-species." class="level3" data-number="9.1.10">
-<h3 data-number="9.1.10" class="anchored" data-anchor-id="calculate-mean-dbh-per-species."><span class="header-section-number">9.1.10</span> 10. Calculate mean dbh per species.</h3>
-<p>For calculating summary statistics, the dplyr package is really helpful. It is part of the tidyverse environment, which was designed for data science. If you work with large and complex datasets or if you have to derive many new variables, I really recommend that you have a look at this. Also, the syntax for dplyr is quite intuitive.</p>
-<p>For this exercise, use the dplyr package to calculate mean dbh per species. If you need help on this, check the demonstration of Part 2 where we calculated summary statistics for groups using the dplyr package!</p>
+<section id="export-a-plot" class="level3" data-number="9.1.10">
+<h3 data-number="9.1.10" class="anchored" data-anchor-id="export-a-plot"><span class="header-section-number">9.1.10</span> 10. Export a plot</h3>
+<p>When generating a plot within Rstudio, it is by default shown in the Plots window. However, sometimes we want to export a plot and store it in a file for use elsewhere. There are graphics devices that support different formats, such as PDF (vector-based) or PNG (pixel-based). The basic workflow is to start a graphics device and tell it where to store the output file, then create the plot, and finally close the device again. Only if you close the device properly will a valid file be generated. For example, to create a PNG file:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Open graphics device</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">png</span>(<span class="at">filename =</span> <span class="st">"/path/to/store/plot.png"</span>,  <span class="co"># where to store the output file</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">width =</span> <span class="dv">620</span>,  <span class="co"># width of the plot in pixels</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">height =</span> <span class="dv">480</span>, <span class="co"># height of the plot in pixels</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">bg =</span> <span class="st">"white"</span>) <span class="co"># background color</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot something</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,<span class="fu">rnorm</span>(<span class="dv">5</span>), <span class="at">type =</span><span class="st">'b'</span>, <span class="at">col=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="at">pch =</span> <span class="dv">19</span> )</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Close the device to finish file writing</span></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a><span class="fu">dev.off</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now, export one of the plots that we generated above to a PNG file, using your favorite background color. (You can also try and use another device, e.g.&nbsp;<code>pdf()</code>, just make sure to use the matching file extension in the file name.)</p>
 <div class="callout-tip callout callout-style-simple no-icon callout-captioned">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -765,33 +779,72 @@ Solution
 <div id="callout-10" class="callout-10-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="do">## Attaching package: 'dplyr'</span></span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="do">## The following objects are masked from 'package:stats':</span></span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="do">##     filter, lag</span></span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="do">## The following objects are masked from 'package:base':</span></span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a><span class="do">##     intersect, setdiff, setequal, union</span></span>
-<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>treedata <span class="sc">%&gt;%</span> </span>
-<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(species_english) <span class="sc">%&gt;%</span> </span>
-<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">N =</span> <span class="fu">n</span>(),</span>
-<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>            <span class="at">meanDBH =</span> <span class="fu">mean</span>(dbh, <span class="at">na.rm =</span> T), </span>
-<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>            <span class="at">sdDBH =</span> <span class="fu">sd</span>(dbh, <span class="at">na.rm =</span> T))</span>
-<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a><span class="do">## # A tibble: 10 × 4</span></span>
-<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a><span class="do">##    species_english         N meanDBH  sdDBH</span></span>
-<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a><span class="do">##    &lt;chr&gt;               &lt;int&gt;   &lt;dbl&gt;  &lt;dbl&gt;</span></span>
-<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a><span class="do">##  1 Beech                 131   29.6  10.1  </span></span>
-<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a><span class="do">##  2 Commom Yew              2   18.8   0.212</span></span>
-<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a><span class="do">##  3 European Ash           12   30.6   4.14 </span></span>
-<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a><span class="do">##  4 European Silver Fir    75   11.8   5.55 </span></span>
-<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a><span class="do">##  5 Ivy                     6    5.13  0.927</span></span>
-<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a><span class="do">##  6 Little Leaf Linden      4   13.3   9.88 </span></span>
-<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a><span class="do">##  7 Norway Maple            9   28.2  11.1  </span></span>
-<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a><span class="do">##  8 Norway Spruce          15    7.77  1.89 </span></span>
-<span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a><span class="do">##  9 Scotch Elm              1   17.9  NA    </span></span>
-<span id="cb18-27"><a href="#cb18-27" aria-hidden="true" tabindex="-1"></a><span class="do">## 10 Sycamore               12   24.0   3.91</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Open device</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">png</span>(<span class="at">filename =</span> <span class="st">"plot.png"</span>, <span class="co"># "/path/to/store/plot.png",  # where to store the output file</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">width =</span> <span class="dv">620</span>,  <span class="co"># width of the plot in pixels</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">height =</span> <span class="dv">480</span>, <span class="co"># height of the plot in pixels</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">bg =</span> <span class="st">"lightskyblue2"</span>) <span class="co"># background color</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Scatterplot from section 9:</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(dbh_height<span class="sc">$</span>dbh</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>     , dbh_height<span class="sc">$</span>height</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>     , <span class="at">ylab =</span> <span class="st">'Height'</span></span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>     , <span class="at">xlab =</span> <span class="st">'DBH'</span></span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>     , <span class="at">main =</span> <span class="st">'Trees'</span>)</span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Close the device to finish file writing</span></span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a><span class="fu">dev.off</span>()</span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a><span class="do">## quartz_off_screen </span></span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a><span class="do">##                 2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="calculate-mean-dbh-per-species." class="level3" data-number="9.1.11">
+<h3 data-number="9.1.11" class="anchored" data-anchor-id="calculate-mean-dbh-per-species."><span class="header-section-number">9.1.11</span> 11. Calculate mean dbh per species.</h3>
+<p>For calculating summary statistics, the dplyr package is really helpful. It is part of the tidyverse environment, which was designed for data science. If you work with large and complex datasets or if you have to derive many new variables, I really recommend that you have a look at this. Also, the syntax for dplyr is quite intuitive.</p>
+<p>For this exercise, use the dplyr package to calculate mean dbh per species. If you need help on this, check the demonstration of Part 2 where we calculated summary statistics for groups using the dplyr package!</p>
+<div class="callout-tip callout callout-style-simple no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="do">## Attaching package: 'dplyr'</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="do">## The following objects are masked from 'package:stats':</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="do">##     filter, lag</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="do">## The following objects are masked from 'package:base':</span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a><span class="do">##     intersect, setdiff, setequal, union</span></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>treedata <span class="sc">%&gt;%</span> </span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(species_english) <span class="sc">%&gt;%</span> </span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">N =</span> <span class="fu">n</span>(),</span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>            <span class="at">meanDBH =</span> <span class="fu">mean</span>(dbh, <span class="at">na.rm =</span> T), </span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>            <span class="at">sdDBH =</span> <span class="fu">sd</span>(dbh, <span class="at">na.rm =</span> T))</span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a><span class="do">## # A tibble: 10 × 4</span></span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a><span class="do">##    species_english         N meanDBH  sdDBH</span></span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a><span class="do">##    &lt;chr&gt;               &lt;int&gt;   &lt;dbl&gt;  &lt;dbl&gt;</span></span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a><span class="do">##  1 Beech                 131   29.6  10.1  </span></span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a><span class="do">##  2 Commom Yew              2   18.8   0.212</span></span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a><span class="do">##  3 European Ash           12   30.6   4.14 </span></span>
+<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a><span class="do">##  4 European Silver Fir    75   11.8   5.55 </span></span>
+<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a><span class="do">##  5 Ivy                     6    5.13  0.927</span></span>
+<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a><span class="do">##  6 Little Leaf Linden      4   13.3   9.88 </span></span>
+<span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a><span class="do">##  7 Norway Maple            9   28.2  11.1  </span></span>
+<span id="cb20-25"><a href="#cb20-25" aria-hidden="true" tabindex="-1"></a><span class="do">##  8 Norway Spruce          15    7.77  1.89 </span></span>
+<span id="cb20-26"><a href="#cb20-26" aria-hidden="true" tabindex="-1"></a><span class="do">##  9 Scotch Elm              1   17.9  NA    </span></span>
+<span id="cb20-27"><a href="#cb20-27" aria-hidden="true" tabindex="-1"></a><span class="do">## 10 Sycamore               12   24.0   3.91</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
