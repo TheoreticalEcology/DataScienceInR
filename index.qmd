@@ -20,3 +20,5 @@ Day3: Linear regression (simple, multivariate)
 Day4: Generalised linear models (GLM), Multivariate statistics
 
 Day5: Machine Learning, Data organisation
+
+Link to the UR GRIPS course \[here\](https://elearning.uni-regensburg.de/course/view.php?id=54766) (requires UR account)
