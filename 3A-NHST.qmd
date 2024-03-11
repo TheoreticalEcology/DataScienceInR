@@ -1,0 +1,340 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r, include=FALSE}
+set.seed(42)
+```
+
+
+#  Null Hypothesis Testing
+
+In this section you will:
+
+-   get to know the most common hypothesis tests
+-   learn how to choose an appropriate test and interpret its result
+-   practice these tests in R
+-   practice the simulation of data and error rates
+
+## A recipe for hypothesis testing
+
+**Aim:** We want to know if there is a difference between the control and the treatment
+
+1.  We introduce a **Null hypothesis H~0~** (e.g. no effect, no difference between control and treatment)
+2.  We invent a **test statistic**
+3.  We calculate the **expected distribution** of our test statistic given H~0~ (this is from our data-generating model)
+4.  We calculate the **p-value** = probability of getting observed test statistic or more extreme given that H~0~ is true (there is no effect): $p-value = P(d\ge D_{obs} | H_0)$
+
+::: {.callout-warning collapse="true"}
+## Interpretation of the p-value
+
+p-values make a statement on the probability of the data or more extreme values given H~0~ (no effect exists), **but not on the probability of H~0~ (no effect) and not on the size of the effect or on the probability of an effect!**
+
+If you want to read more about null hypothesis testing and the p-value, take a look at [Daniel Lakens Book](https://lakens.github.io/statistical_inferences/01-pvalue.html)
+:::
+
+**Example:**
+
+Imagine we do an experiment with two groups, one treatment and one control group. Test outcomes are binary, e.g. whether individuals are cured.
+
+1.  We need a test statistic. For example: number cured of total patients: treat/(treat+control)
+
+2.  We need the distribution of this test statistic under the null.
+
+Let's create a true world without effect:
+
+```{r}
+set.seed(123)
+# Let's create a true world without effect:
+PperGroup = 50 # number of replicates (e.g., persons per treatment group)
+pC = 0.5 #probability of being cured in control group
+pT = 0.5 #probability of being cured in treatment group; = same because we want to use these to get the distribution of the test statistic we define below when H0 is true (no effect)
+
+# Let's draw a sample from this world without effect
+control = rbinom(n = 1, size = PperGroup, prob = pC)
+treat = rbinom(n = 1, size = PperGroup, prob = pT)
+#calculate the test statistic: 
+treat/(treat+control)
+#and plot
+barplot(c(control, treat), ylim = c(0, 50))
+```
+
+3.  Now, let's do this very often to get the distribution under H~0~
+
+```{r}
+testStatistic = rep(NA, 100000) 
+for (i in 1:100000) {
+  control = rbinom(n = 1, size = PperGroup, prob = pC)
+  treat = rbinom(n = 1, size = PperGroup, prob = pT)
+  testStatistic[i] = control/(treat+control) # test statistic 
+}
+hist(testStatistic, breaks = 50)
+```
+
+4.  We now have our test statistic + the frequency distribution of our statistic if the H~0~ = true. Now we make an experiment: Assume that we observed the following data: C = 30, T = 23.
+
+```{r}
+hist(testStatistic, breaks = 50)
+testStatisticData = 30/(30+23)
+abline(v = testStatisticData, col = "red")
+
+mean(testStatistic > testStatisticData)
+# compare each value in our testStatistic distribution with
+# the observed value and calculate proportion of TRUE values 
+# (where testStatistic > testStatisticData)
+```
+
+But we know actually that the test statistic follows a Chi^2^ distribution. So to get correct p-values we can use the `prop.test` for this test statistic:
+
+```{r}
+prop.test(c(30, 23), c(PperGroup, PperGroup))
+# other test statistic with known distribution
+# Pearson's chi-squared test statistic
+# no need to simulate
+```
+
+We pass the data to the function which first calculates the test statistic and then calculates the p-value using the Chi^2^ distribution.
+
+## t-test
+
+Originally developed by Wiliam Sealy Gosset (1876-1937) who has worked in the Guinness brewery. He wanted to measure which ingredients result in a better beer. The aim was to compare two beer recipes and decide whether one of the recipes was better (e.g. to test if it results in more alcohol). He published under the pseudonym 'Student' because the company considered his statistical methods as a commercial secret.
+
+::: callout-important
+## t-test assumptions
+
+-   Data in both groups is normally distributed
+
+-   H~0~ : the means of both groups are equal
+:::
+
+The idea is that we have two normal distributions (e.g. alcohol distributions):
+
+```{r}
+#| code-fold: true
+set.seed(1)
+A = rnorm(100, mean = -.3)
+B = rnorm(100, mean = .3)
+plot(density(A), col = "red", xlim = c(-2, 2), ylim = c(0, 0.6))
+lines(density(B))
+abline(v = mean(A), col = "red")
+abline(v = mean(B))
+```
+
+And our goals is now to test if the difference between the two means of the variables is statistically significant or not.
+
+**Procedure:**
+
+-   Calculate variances and means of both variables
+
+    ```{r}
+    A_m = mean(A)
+    B_m = mean(B)
+    A_v = var(A)
+    B_v = var(B)
+    ```
+
+-   Calculate t-statistic (difference between means / (Standard deviation/sample size)
+
+    ```{r}
+    t_statistic = (A_m - B_m) / sqrt( A_v  / length(A) + B_v / length(B))
+    t_statistic
+    ```
+
+-   Compare observed t with t distribution under H~0~ (which we can do by using the CDF function of the t-distribution:
+
+    ```{r}
+    pt( t_statistic,  # test statistic
+       df = length(A)+length(B)-2, # degrees of freedom, roughly = n_obs - n_parameters
+       lower.tail = TRUE
+      )*2
+    ```
+
+::: callout-caution
+## One-sided or two-sided
+
+If we do NOT know if the dataset from one group is larger or smaller than the other, we must use two-sided tests (that's why we multiply the p-values with 2). Only if we are sure that the effect MUST be positive / negative, we can test for greater / less. Decide BEFORE you look at the data!
+:::
+
+Let's compare it to the output of the `t.test` function which does everything for us, we only need to pass the data to the function:
+
+```{r}
+t.test(A, B, var.equal = TRUE)
+```
+
+Usually we also have to test for normality of our data, which we can do with another test.
+
+**Example airquality**
+
+```{r}
+# with real data
+head(PlantGrowth)
+boxplot(weight ~ group, data = PlantGrowth)
+
+ctrl = PlantGrowth$weight[PlantGrowth$group == "ctrl"]
+trt1 = PlantGrowth$weight[PlantGrowth$group == "trt1"]
+
+# attention: t test assumes normal dirstribution of measurements in both groups!
+# test normality before doing the t test:
+shapiro.test(ctrl)
+shapiro.test(trt1)
+
+
+t.test(ctrl, trt1)
+# note that this is a "Welch" t-test
+# we will have a look at the differences among t-tests in the next large exercise
+
+# What is H0? equal means
+# What is the result? test is not significant, H0 is not rejected
+# Explain the different values in the output!
+
+```
+
+::: callout-warning
+## Shapiro - Test for normality
+
+If you have a small sample size, the shapiro.test will always be non-significant (i.e. not significantly different from a normal distribution)! This is because small sample size leads to low power for rejecting H~0~ of normal distribution
+:::
+
+## Type I error rate
+
+Let's start with a small simulation example:
+
+```{r}
+results = replicate(1000, {
+  A = rnorm(100, mean = 0.0)
+  B = rnorm(100, mean = 0.0)
+  t.test(A, B)$p.value
+})
+hist(results)
+```
+
+What's happening here? We have no effect in our simulation but there are many p-values lower than $\alpha = 0.05$:
+
+```{r}
+mean(results < 0.05)
+```
+
+So in `r mean(results < 0.05)` of our experiments we would reject H~0~ even when there is no effect at all! This is called the type I error rate. Those are false positives.
+
+::: {.callout-note collapse="true"}
+## Type I error rate and multiple testing
+
+If there is no effect, the probability of having a positive test result is equal to the significance level $\alpha$. If you test 20 things that don't have an effect, you will have one significant result on average when using a significance level of 0.05. If multiple tests are done, a correction for multiple testing should be used.
+
+This problem is called multiple testing
+
+-   e.g.: if you try 20 different analyses (Null hypotheses), on average one of them will be significant.
+
+-   e.g.: if you test 1000 different genes for their association with cancer, and in reality, none of them is related to cancer, 50 out of the tests will still be significant.
+
+-   If multiple tests are done, a correction for multiple testing should be used
+
+-   increases the p-values for each test in a way that the overall alpha level is 0.05
+
+```{r}
+# conduct a t-test for each of the treatment combinations
+# save each test as a new object (test 1 to 3)
+control = PlantGrowth$weight[PlantGrowth$group == "ctrl"]
+trt1 = PlantGrowth$weight[PlantGrowth$group == "trt1"]
+trt2 = PlantGrowth$weight[PlantGrowth$group == "trt2"]
+
+test1 = t.test(control, trt1)
+test2 = t.test(control, trt2)
+test3 = t.test(trt1, trt2)
+
+c(test1$p.value, test2$p.value, test3$p.value)
+
+# now adjust these values
+p.adjust(c(test1$p.value, test2$p.value, test3$p.value)) # standard is holm, average conservative
+p.adjust(c(test1$p.value, test2$p.value, test3$p.value), method = "bonferroni") # conservative
+p.adjust(c(test1$p.value, test2$p.value, test3$p.value), method = "BH") # least conservative
+# for details on the methods see help
+```
+:::
+
+If multiple testing is a problem and if we want to avoid false positives (type I errors), why don't we use a smaller alpha level? Because if would increase the type II error rate
+
+## Type II error rate
+
+It can also happen the other way around:
+
+```{r}
+results = replicate(1000, {
+  A = rnorm(100, mean = 0.0)
+  B = rnorm(100, mean = 0.2) # effect is there
+  t.test(A, B)$p.value
+})
+hist(results)
+```
+
+```{r}
+mean(results < 0.05)
+```
+
+No we wouldn't reject the H~0~ in `r 1-mean(results < 0.05)`% of our experiments. This is the type II error rate (false negatives).
+
+The type II error rate ($\beta$) is affected by
+
+-   sample size $\uparrow$ , decreases $\beta$
+-   true effect size $\uparrow$, decreases $\beta$
+-   $\alpha$ $\uparrow$, decreases $\beta$
+-   variability (variance) $\uparrow$, increases $\beta$
+
+After the experiment, the only parameter we could change would be the significance level $\alpha$, but increasing it would result in too high Type I error rates.
+
+## Statistical power
+
+We can reduce $\alpha$ and we will get fewer type I errors (false positives), but type II errors (false negatives) will increase. So what can we do with this in practice?
+
+1- $\beta$ is the so called statistical power which is the rate at which a test is significant if the effect truly exists. Power increases with stronger effect, smaller variability, (larger $\alpha$ ), and more data (sample size). So, collect more data? How much data do we need?
+
+Before the experiment, you can estimate the effect size and the variability. Together with alpha (known), you can calculate the power depending on the sample size:
+
+```{r}
+#| code-fold: true
+results = 
+  sapply(seq(10, 500, by = 20), function(n) {
+    results = replicate(100, {
+      A = rnorm(n, mean = 0.0)
+      B = rnorm(n, mean = 0.2) # effect is there
+      t.test(A, B)$p.value
+    })
+    power = 1 - mean(results > 0.05)
+    return(power)
+  })
+plot(seq(10, 500, by = 20), results, xlab = "Sample size", ylab = "Power", main = "")
+```
+
+We call that a power analysis and there's a function in R to do that:
+
+```{r}
+power.t.test(n = 10, delta = 1, sd = 1, type = "one.sample")
+
+# Power increases with sample size (effect size constant, sd constant):
+pow <- function(n) power.t.test(n, delta = 1, sd = 1, type = "one.sample")$power
+plot(1:20, sapply(1:20, pow), xlab = "Sample size", ylab = "Power", pch = 20)
+
+# Power increases with effect size
+pow <- function(d) power.t.test(n = 20, delta = d, sd = 1, 
+                                type = "one.sample")$power
+plot(seq(0,1,0.05), sapply(seq(0,1,0.05), pow), xlab = "Effect size", 
+     ylab = "Power", pch = 20)
+
+# Power decreases with increasing standard deviation (or variance):
+pow <- function(s) power.t.test(n = 20, delta = 1, sd = s, 
+                                type = "one.sample")$power
+plot(seq(0.5,1.5,0.05), sapply(seq(0.5,1.5,0.05), pow), 
+     xlab = "Standard deviation", ylab = "Power", pch = 20)
+```
+
+## False discovery rate
+
+You may have realized that if we do an experiment with a (weak) effect, we can get a significant result because of the effect but also significant results because of the Type I error rate. How to distinguish between those two? How can we decide whether a significant result is a false positive? This error rate is called the false discovery rate and to lower it we need to increase the power:
+
+$$
+FDR = \frac{p(H_0)\cdot\alpha}{p(H_0)\cdot\alpha + p(!H_0)\cdot(1-\beta)}
+$$
+
+$p(H_0)$ = probability of H~0~ (no effect); $p(!H_0)$ = probability of not H~0~ (effect exists). Both are unknown and the only parameters we can influence are $\alpha$ and $\beta$. But decreasing $\alpha$ leads to too high false negatives, so $\beta$ is left.

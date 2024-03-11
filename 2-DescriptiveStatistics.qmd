@@ -235,7 +235,7 @@ The correlation factor for the untransformed data is 0.9 but they have a perfect
 
 **Rank correlation factors**
 
-Idea: Arranging the data following their order and using their rank 1\...n for x und y, respectively. There two different rank correlation factors:
+Idea: Arranging the data following their order and using their rank 1...n for x und y, respectively. There two different rank correlation factors:
 
 -   Spearman: calculate Pearson based on ranks
 

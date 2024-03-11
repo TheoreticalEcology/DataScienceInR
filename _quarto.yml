@@ -5,8 +5,8 @@ project:
 book:
   title: "Introduction to Data Science with R"
   author: 
-     name: "Florian Hartig, Lisa Hülsmann, Alexandra Koch, Magdalena Mair, Maximilian Pichler"
-  date: "April 2023"
+     name: "Florian Hartig, Lisa Hülsmann, Alexandra Koch, Magdalena Mair, and Maximilian Pichler"
+  date: "March 2024"
   site-url: https://TheoreticalEcology.github.io/DataScienceInR/
   repo-url: https://github.com/TheoreticalEcology/DataScienceInR
   repo-branch: master
@@ -14,16 +14,31 @@ book:
   sharing: [twitter, facebook, linkedin]
   chapters:
     - index.qmd
+    - Introduction.qmd
     - 1-GettingStarted.qmd
-    - 2-DescriptiveStatistics.qmd
-    - 3-HypothesisTesting.qmd
-    - 4-SimpleRegression.qmd
-    - 5-MultipleRegression.qmd
-    - 6-GLM.qmd
-    - 7-Multivariate.qmd
-    - 8-MachineLearning.qmd
-    - 9-DataScienceSkills.qmd
-    - 10-Outlook.qmd
+    - part: "Descriptive Statistics"
+      chapters:
+      - 2-DescriptiveStatistics.qmd
+      - 2B-Multivariate.qmd
+    - part: "Hypothesis Testing"
+      chapters:
+      - 3A-NHST.qmd
+      - 3B-HypothesisTests.qmd
+    - part: "Regression Analysis"
+      chapters:
+      - 4-SimpleRegression.qmd
+      - 5-MultipleRegression.qmd
+      - 6-GLM.qmd
+    - part: "Predictive Modeling"
+      chapters:
+      - 8-MachineLearning.qmd
+    - part: "Experimental Design"
+      chapters:
+      - Design.qmd
+      - CheckList.qmd
+    - part: "Data Science Skills"
+      chapters:
+      - 9-DataScienceSkills.qmd
     
 engine: knitr
   

@@ -224,7 +224,7 @@ Sex is the most important variable!
 An important concept of statistics and, in particular, ML is the concept of the bias-variance tradeoff - or in other words, finding the right complexity of the model. So how flexible should our model be so that it generalizes well to other/new observations. Many ML algorithms have complexity parameters (e.g. nodesize or mtry in RF) that control their complexity. Have a look at the following youtube video about the bias-variance tradeoff:
 
 ```         
-{{< "video" "https://www.youtube.com/watch?v=EuBBz3bI-aA" >}}
+{{< video https://www.youtube.com/watch?v=EuBBz3bI-aA >}}
 ```
 
 Let's see how we can control the complexity in the Random Forest algorithm:

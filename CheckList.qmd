@@ -1,0 +1,48 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+# Check List
+
+Checklist experimental design
+
+- Clear, logically consistent question? Write it down. Read chapter about valid / good scientific questions in the lecture notes
+- Make sure you have read and considered all the issues of validity discussed in the main lecture notes. Go through the checklist validity at the end of the section in the main lecture notes.
+- Draft a design
+  + Vary the variables that you need to measure to answer your questions. Decide if you are interested in main linear effects, or also nonlinear effects or interactions. 
+  + Write down potential confounding variables. Decide if they are better controlled, randomized or measured? Are you sure they are confounding (correlated to response AND one or several of the predictors)
+  + Define the statistical hypothesis to be tested, including confounders. Write it down, as in $height  \sim age + soil * precipitation + precipitation^2$. 
+  + Choose how the variables will be varied in the experiment. Consider using software for this, e.g. for fractional factorial designs (in observational studies, you sometimes have limited control, but you can maybe estimate what variable combinations you will observe).
+  + Blocking - try to group different treatments / most different variable combinations together. The aim is that unknown / unmeasured variables are not correlated with your experimental variables (see pseudo-replication)
+  + Decide on the number of replicates. Make a guess for effect size and variability of the data, and either calculate or guess the number of replicates necessary to get sufficient power. What sufficient means depends on the field, but I would say you want to have a good chance to see an effect if it's there, so a power of $>80\%$ would be good. 
+- Check design
+   + Play through the processes of collecting your data: simulate it in your mind or in R, make up some data, write it down. Everything seems OK?
+   + Play through the process of analyzing your data. Which method? Can you answer your question? Do a power analysis!
+- Revise if necessary
+
+
+# Good to knows and further reading
+
+## Reproducibility and good scientific practice
+Reproducibility means that each step of your analysis is repeatable. Experience shows that it is not as trivial as it sounds to ensure reproducibility. Here some hints for making your data analysis reproducible
+
+
+- Once you have your raw data produced, NEVER change it. Store it in a save location, make a backup, and never touch it again
+- Typically you will have to do some cleaning, renaming etc. before the data analysis. If possible at all, make this through a script (e.g. R, python, perl). Store the script with the analysis.
+- Use a version control system for your code, and note for each output the revision number that the output was produced with. 
+
+::: column-margin  
+See our RS lab on this topic [here](https://github.com/florianhartig/ResearchSkills/tree/master/Labs/VersionControl)
+:::
+- When running the analysis, store the random seed and the settings of your computer to ensure reproducibility. In R, the easiest way to do this is to set the random seed by random.seed(123), and store the results of sessionInfo() which provides you with the version numbers of all the packages that you use
+- Think about running your code within an reporting environment such as Rmd or sweave [^1]
+
+::: column-margin 
+See our RS lab on this topic [here](https://github.com/florianhartig/ResearchSkills/tree/master/Labs/Statistics/reporting)
+:::
+
+
+[^1]: See also the R task view on [reproducible research](https://cran.r-project.org/web/views/ReproducibleResearch.html)
+
