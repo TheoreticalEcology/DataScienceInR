@@ -4,6 +4,12 @@ editor_options:
   chunk_output_type: console
 ---
 
+
+```{r, include=FALSE}
+set.seed(42)
+```
+
+
 # Reproducibility and project organization
 
 ## Reproducibility
