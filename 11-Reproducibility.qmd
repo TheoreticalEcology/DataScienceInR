@@ -1,0 +1,27 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+# Reproducibility and project organization
+
+## Reproducibility
+
+Reproducibility means that each step of your analysis is repeatable. Experience shows that it is not as trivial as it sounds to ensure reproducibility. Here some hints for making your data analysis reproducible
+
+-   Once you have your raw data produced, NEVER change it. Store it in a save location, make a backup, and never touch it again
+-   Typically you will have to do some cleaning, renaming etc. before the data analysis. If possible at all, make this through a script (e.g. R, python, perl). Store the script with the analysis.
+-   Use a version control system for your code, and note for each output the revision number that the output was produced with.
+-   When running the analysis, store the random seed and the settings of your computer to ensure reproducibility. In R, the easiest way to do this is to set the random seed by random.seed(123), and store the results of sessionInfo() which provides you with the version numbers of all the packages that you use
+-   Think about running your code within an reporting environment such as Rmd, qmd or sweave
+
+## Project organization
+
+-   All code / data under one main folder, put this folder under version control
+
+-   Create an RStudio project in the main folder
+
+-   Sensible order structure below main folder
+
+-   Use only relative paths so that the project can be moved across computers

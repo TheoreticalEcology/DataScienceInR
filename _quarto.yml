@@ -34,11 +34,11 @@ book:
       - 8-MachineLearning.qmd
     - part: "Experimental Design"
       chapters:
-      - Design.qmd
-      - CheckList.qmd
+      - 9-Design.qmd
     - part: "Data Science Skills"
       chapters:
-      - 9-DataScienceSkills.qmd
+      - 10-DataWrangling.qmd
+      - 11-Reproducibility.qmd
     
 engine: knitr
   
