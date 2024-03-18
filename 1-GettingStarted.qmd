@@ -13,7 +13,20 @@ In this course, we work with the combination of R + RStudio.
 -   R is the calculation engine that performs the computations.
 -   RStudio is the editor that helps you sending inputs to R and collect outputs.
 
-Make sure you have a recent version of R + RStudio installed on your computer. If you have never used RStudio, <a href="https://videocampus.sachsen.de/video/First-steps-with-R-and-RStudio/528e5d164219f2d07e32a51736c3f7d1" target="_blank" rel="noopener">here</a> is a good video introducing the basic system and how R and RStudio interact.
+Make sure you have a recent version of R + RStudio installed on your computer. I think [this page](https://r-coder.com/install-r/) covers all possible questions about how to install this combination on the different OS. 
+
+::: column-margin
+
+Alternatively, you could also use the [Rstudio Cloud](https://rstudio.cloud/), however, we recommend local RStudio setup.
+
+:::
+
+### First steps in R and Rstudio
+
+If you have never used RStudio, <a href="https://videocampus.sachsen.de/video/First-steps-with-R-and-RStudio/528e5d164219f2d07e32a51736c3f7d1" target="_blank" rel="noopener">here</a> is a good video introducing the basic system and how R and RStudio interact. Alternatively, here is a video about R for Ecologists. The two videos give you a first orientation about the principles of working with the two programs:
+
+{{< video https://youtu.be/dPLbyWXEG_E >}}
+
 
 ## Libraries that you will need
 
@@ -60,58 +73,9 @@ devtools::install_github(repo = "TheoreticalEcology/EcoData",
 
 For your convenience, the EcoData installation also forces the installation of most of the packages needed in this book, so this may take a while. If you want to load only the EcoData package, or if you encounter problems during the install, set `dependencies = F, build_vignettes = F`.
 
-## Data
 
-Data typically consist of a table with several observations with one or more variables:
 
-```{r}
-#| echo: false
-head(iris)
-```
-
-One row per observation is the standard format for most programs. There are different types of variables (with respect to the analysis):
-
--   Dependent / response variable variable of interest we want to know what it is influenced by. Typically, there is one variable of particular interest.
-
--   Explanatory or independent variables, aka. predictors / covariates / treatments variables that potentially influence the response variable
-
-::: {.callout-tip appearance="default"}
-Example: We measure plant growth and nitrogen in the soil. Growth is the dependent variable and nitrogen is the explanatory variable
-:::
-
-Variables differ in range and scale:
-
--   Scale of measure: nominal (unordered), ordinal (ordered), metric (differences can be interpreted)
-
--   Numeric or metric variables Examples: Body size, conductivity
-
--   Non-numeric = categorial variables
-
-    -   unordered / nominal (red, green, blue) ordered /
-
-    -   ordinal (tiny, small, large) Attention: categories small = 1m, medium = 1.5m, large = 2m would be interpreted as numeric, because their relative differences are defined
-
-    -   Special case: binary variable (0,1), technically it is also categorial, but with two levels only we call in binary
-
-::: {.callout-note appearance="default" collapse="true"}
-## Remarks on data handling
-
-Typically, data will be recorded electronically with a measurement device, or you have to enter it manually using a spreadsheet program, e.g. MS Excel. The best format for data storage is csv (comma separated values) because it is long-term compatibility with all kinds of programs / systems (Excel can export to csv).
-
-After raw data is entered, it should never be manipulated by hand! If you modify data by hand, make a copy and document all changes (additional text file). **Better:** Make changes using a script
-
-Data handling in R:
-
--   create R script "dataprep.R" or similar and import dataset
-
--   possibly combine different datasets
-
--   clean data (remove NAs, impossible values etc.)
-
--   save as Rdata (derived data)
-:::
-
-## Data manipulation in R
+## Data manipulation in R {#sec-datamanipulation}
 
 R works like a calculator:
 
@@ -128,6 +92,10 @@ sqrt(4)
 sum(c(2,2))
 ```
 
+::: column-margin
+`c(...)` is a function to create a vector of scalar values (single values). Most functions in R can work on scalars, vectors, and even sometimes on matrices (two-dimensional data structures).
+:::
+
 We can assign values/data to variables:
 
 ```{r}
@@ -140,8 +108,7 @@ Note that both operators '\<-' or "=" work. Functions in R (e.g. `sum()`, `mean(
 mean(x = c(2, 2))
 ```
 
-::: {.callout-tip appearance="default"}
-## Help
+::: column-margin
 
 A list and description of all arguments can be found in the help of a function (which can be accessed via `?mean` or if you place the cursor on the function and press F1)
 :::

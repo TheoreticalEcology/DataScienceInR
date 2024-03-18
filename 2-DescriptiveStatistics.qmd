@@ -10,7 +10,224 @@ set.seed(42)
 
 # Plotting and describing data
 
-### Summary statistics
+## Plotting
+
+Before knowing how to plot something, you should know what you want to plot:
+
+
+| Scenario                     | Which plot                    | R command                                                                     |
+|-----------------|-----------------|--------------------------------------|
+| Numeric                      | Histogram or boxplot          | `hist()` and`boxplot`                                                         |
+| Numeric with numeric         | Scatterplot                   | `plot`                                                                        |
+| Numeric with categorical     | Boxplot                       | `boxplot(numeric~categorical)`                                                |
+| Categorical with categorical | mosaicplot or grouped barplot | `mosaicplot(table(categorical, categorical))` or `barplot(data, beside=TRUE)` |
+
+
+::: column-margin
+
+Here is a website with a decision tree about when to choose which plot https://www.data-to-viz.com/ 
+
+:::
+
+
+Once you know what you want to plot, there are lot of websites that will show you the respective R code. One important consideration, however: there are at least two popular ways of doing R graphis: 
+
+* base R {{< video https://youtu.be/maFw5qXyCwg >}}
+* ggplot2 {{< video https://youtu.be/HeqHMM4ziXA >}}
+
+for which the code looks completely different. You should probably get to know both types, but I would recommend to start with base R. I’m just saying this so that you are not confused, because a lot of the examples will also show you ggplot code. Here some useful links: 
+
+* A few simple graphs in base R https://www.statmethods.net/graphs/index.html 
+* R code for the most common graphics (with a ggplot2 tendecy) https://www.r-graph-gallery.com/index.html 
+* R coder graph tutorials https://r-coder.com/r-graphs/ 
+
+::: column-margin
+Thinking about how to do [good figures](https://www.cedricscherer.com/2019/05/17/the-evolution-of-a-ggplot-ep.-1/ )
+:::
+
+
+### One variable 
+
+#### Numerical variable - Histogram and Boxplot
+
+* The histogram plots the frequency of the values of a numerical variable with bins (otherwise each unique value will appear only once, the range will be cut in n elements). The number of bins is automatically inferred by the function but can be also changed by the user 
+* The boxplot plots the distribution of a numerical variable based on summary statistics (the quantiles). The boxplot is particular useful for comparing/contrasting a numerical with a categorical variable (see below)
+
+::: {.panel-tabset}
+
+### Base R
+
+
+```{r}
+par(mfrow = c(1,2)) # number of plots, one row, two columns
+hist(iris$Sepal.Length, 
+     main = "Histogram", # title
+     xlab = "Sepal.Length", 
+     ylab = "Frequency",
+     las = 1) # rotation of x and y values (las = 1, all of them should be horizontal)
+
+boxplot(iris$Sepal.Length,      
+        main = "Boxplot", # title
+        ylab = "Values")
+```
+
+
+### ggplot2
+
+```{r}
+library(ggplot2)
+library(ggpubr)
+
+plt1 = 
+  ggplot(iris, aes(x = Sepal.Length)) +
+    geom_histogram() +
+    ggtitle("Histogram") +
+    xlab("Sepal.Length") +
+    ylab("Frequency") +
+    theme_bw() # scientific theme (white background)
+
+plt2 = 
+  ggplot(iris, aes(y = Sepal.Length)) +
+    geom_boxplot() +
+      ggtitle("Boxplot") +
+      ylab("Values") +
+      theme_bw() 
+
+
+ggarrange(plt1, plt2, ncol = 2L, nrow = 1L)
+
+```
+
+:::
+
+#### Categorical variable - Barplot
+
+
+```{r}
+str(mtcars)
+counts = table(mtcars$cyl)
+counts
+```
+
+
+::: {.panel-tabset}
+
+### Base R
+
+
+```{r}
+barplot(counts, 
+        main = "Barplot of Cyl",
+        ylab = "Number of occurrences",
+        xlab = "Cyl levels",
+        col = "#4488AA")
+
+```
+
+
+### ggplot2
+
+```{r}
+ggplot(mtcars, aes(x = cyl)) +
+  geom_bar(fill = "#4488AA") +
+    ggtitle("Barplot of Cyl") +
+    xlab("Number of occurrences") +
+    ylab("Cyl levels") +
+    theme_bw()
+```
+
+:::
+
+
+### Two variables
+
+The general idea of plotting is to look for correlations / associations between variables, i.e. is there a non-random pattern between the two variables.
+
+
+#### Numerical vs numerical variable - Scatterplot
+
+::: {.panel-tabset}
+
+### Base R
+
+
+```{r}
+# Scatterplot
+par(mfrow = c(1,2))
+plot(airquality$Solar.R, airquality$Ozone)
+
+# plot(Ozone ~ Solar.R, data = airquality) #the same
+
+# different symbol for each month
+plot(Ozone ~ Solar.R, data = airquality, pch = Month)
+
+```
+
+We can also add other objects such as lines to our existing plot:
+
+```{r}
+par(mfrow = c(1,1))
+plot(Ozone ~ Solar.R, data = airquality)
+abline(h = 50)
+
+```
+
+
+### ggplot2
+
+```{r}
+plt1 = ggplot(airquality, aes(x = Solar.R, y = Ozone)) +
+        geom_point() +
+        theme_bw()
+
+plt2 = ggplot(airquality, aes(x = Solar.R, y = Ozone)) +
+        geom_point(shape = airquality$Month) +
+        theme_bw()
+
+ggarrange(plt1, plt2, ncol = 2L, nrow = 1L)
+```
+
+We can also add other objects such as lines to our existing plot:
+
+
+```{r}
+ggplot(airquality, aes(x = Solar.R, y = Ozone)) +
+  geom_point(shape = airquality$Month) +
+  geom_abline(intercept = 50, slope = 0) +
+    theme_bw()
+```
+
+
+:::
+
+#### Categorical vs numerical variable - Boxplot
+
+Often we have a numerical variable (e.g. weight/fitness) and a categorical vairable that tells us the group of the observation (e.g. control or treatment). To compare visually now the distributions of the numerical variable between the levels of the grouping variable, we can use a boxplot
+
+::: {.panel-tabset}
+
+### Base R
+
+
+```{r}
+boxplot(mpg ~ cyl, mtcars) # formula notation
+# boxplot(x = mtcars$cyl, y = mtcars$mpg) # the same
+
+```
+
+
+### ggplot2
+
+```{r}
+ggplot(mtcars, aes(y = mpg, group = cyl)) +
+  geom_boxplot(notch=TRUE) +
+    theme_bw()
+```
+
+:::
+
+
+## Summary statistics
 
 **Numeric values**
 
@@ -64,6 +281,7 @@ mean(airquality$Ozone, na.rm = TRUE) #na.rm: removes NAs
 ```
 
 ::: {.callout-tip appearance="default" collapse="true"}
+
 ## How to look for NAs
 
 How to look for NA values:
@@ -138,77 +356,6 @@ The `dplyr` package is part of a big software environment called tidyverse. Uniq
     ```
 :::
 
-### Visualizations for two variables
-
-| Scenario                     | Which plot                    | R command                                                                     |
-|-----------------|-----------------|--------------------------------------|
-| Numeric                      | Histogram or boxplot          | `hist()` and`boxplot`                                                         |
-| Numeric with numeric         | Scatterplot                   | `plot`                                                                        |
-| Numeric with categorical     | Boxplot                       | `boxplot(numeric~categorical)`                                                |
-| Categorical with categorical | mosaicplot or grouped barplot | `mosaicplot(table(categorical, categorical))` or `barplot(data, beside=TRUE)` |
-
-#### Examples
-
-```{r}
-
-# 1 categorial variable --------------------------------------------------
-
-str(mtcars)
-
-counts = table(mtcars$cyl)
-
-# barplot
-plot(counts)
-barplot(counts)
-barplot(table(mtcars$cyl))
-```
-
-The general idea of plotting is to look for correlations / associations between variables, i.e. is there a non-random pattern between the two variables:
-
-```{r}
-# 2 caterogial variables --------------------------------------------------
-# mosaic plot
-table(cyl = mtcars$cyl, gear = mtcars$gear)
-plot(table(mtcars$cyl, mtcars$gear))
-
-# 1 categorial + 1 numeric variable ---------------------------------------
-# Boxplot
-boxplot(mpg ~ cyl, mtcars) # formula notation
-#or the same:
-plot(mpg ~ as.factor(cyl), mtcars)
-```
-
-```{r}
-# 1 numeric + 1 numeric variable ---------------------------------------
-
-# Scatterplot
-plot(airquality$Solar.R, airquality$Ozone)
-plot(Ozone ~ Solar.R, data = airquality)#the same
-
-# different symbol for each month
-plot(Ozone ~ Solar.R, data = airquality, pch = Month)
-
-# color depends on the month, size on Wind
-plot(Ozone ~ Solar.R, data = airquality, col = Month, cex = Wind/5)
-
-# low-level plotting functions 
-# only add something to an existing plots: points() lines() etc.
-points(200, 150, pch = 16)
-abline(h = 50)
-
-# combining two plots
-oldPar = par(mfrow = c(1,2)) # c(number of rows, number of colums)
-# you can also specify various other plot characteristics, see ?par
-
-hist(airquality$Temp, breaks = 20, col = "#FF0099",
-     main = "Temperaturverteilung",
-     xlab = "Temperatur")
-plot(airquality$Solar.R, airquality$Ozone, col = airquality$Month-4, cex = airquality$Wind/5)
-
-# restore old par settings
-par(oldPar)
-
-```
 
 ### Correlation
 

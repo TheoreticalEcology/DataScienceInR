@@ -16,6 +16,7 @@ book:
     - index.qmd
     - Introduction.qmd
     - 1-GettingStarted.qmd
+    - 1B-PreparingData.qmd
     - part: "Descriptive Statistics"
       chapters:
       - 2-DescriptiveStatistics.qmd
