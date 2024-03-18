@@ -210,7 +210,7 @@ Often we have a numerical variable (e.g. weight/fitness) and a categorical vaira
 
 
 ```{r}
-boxplot(mpg ~ cyl, mtcars) # formula notation
+boxplot(mpg ~ cyl, mtcars, notch=TRUE) # formula notation
 # boxplot(x = mtcars$cyl, y = mtcars$mpg) # the same
 
 ```
