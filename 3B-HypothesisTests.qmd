@@ -8,8 +8,6 @@ editor_options:
 set.seed(42)
 ```
 
-
-
 ## Different Statistical tests
 
 The following three sections provide an overview over the most important hypothesis tests, a guideline to select an appropriate test (see decision tree) and the necessary code to apply these tests in R. It is not necessary to read and understand every detail. These explanations are also meant as an advice if you want to select an appropriate hypothesis test after the course. Note that some of the examples use simulated data instead of real observation (all functions that start with r=random, e.g. rnorm() or runif()). Simulated data is useful, because then we know the true distribution and its true mean.

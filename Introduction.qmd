@@ -89,9 +89,6 @@ Experience shows that there is certain tendency of beginners to use categorical 
 Don't use categorical variables for things that can also be recorded numerically! The justification stated is often that this avoids the measurement uncertainty. In short: it doesn't, it just creates more problems. Don't use categorical variables for things that can also be recorded numerically!
 :::
 
-
-
-
 Let's come back to one of the first point in this script: the data. If we have to collect data ourselves, we have to answer a number of questions. Which variables should we collect? At which values of those variables should we collect data? And how many replicates do we need?
 
 ## Selection of variables
@@ -115,18 +112,13 @@ An extraneous variable is a variable that can influence the response, but is not
 The problem of confounding appears when the extraneous variable C is for some reason correlated with the predictor variable of interest B. In that case, if we only measure B, we see both the effect of B and C. In this case, we may attribute the effect of C on A wrongly to the effect of B on A.
 
 ::: column-margin
-
 A confounding variable is an extraneous variable that correlated to both the response and a predictor variable of interest.
-
 :::
 
-::: column-margin 
-
+::: column-margin
 A spurious correlation is a correlation that is caused by a confounding variable.
-
 :::
 
-A correlation that is caused by an unmeasured confounding variable is called a spurious correlation.  
+A correlation that is caused by an unmeasured confounding variable is called a spurious correlation.
 
-Dealing with confounders is a central part of this course. 
-
+Dealing with confounders is a central part of this course.

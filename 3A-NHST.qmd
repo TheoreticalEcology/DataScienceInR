@@ -8,8 +8,7 @@ editor_options:
 set.seed(42)
 ```
 
-
-#  Null Hypothesis Testing
+# Null Hypothesis Testing
 
 In this section you will:
 
