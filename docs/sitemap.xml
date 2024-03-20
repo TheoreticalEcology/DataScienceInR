@@ -2,62 +2,66 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://TheoreticalEcology.github.io/DataScienceInR/index.html</loc>
-    <lastmod>2024-03-18T09:57:29.464Z</lastmod>
+    <lastmod>2024-03-20T08:31:43.353Z</lastmod>
   </url>
   <url>
     <loc>https://TheoreticalEcology.github.io/DataScienceInR/Introduction.html</loc>
-    <lastmod>2024-03-18T09:57:29.471Z</lastmod>
+    <lastmod>2024-03-20T08:31:43.362Z</lastmod>
   </url>
   <url>
     <loc>https://TheoreticalEcology.github.io/DataScienceInR/1-GettingStarted.html</loc>
-    <lastmod>2024-03-18T09:57:29.496Z</lastmod>
+    <lastmod>2024-03-20T08:31:43.395Z</lastmod>
   </url>
   <url>
     <loc>https://TheoreticalEcology.github.io/DataScienceInR/1B-PreparingData.html</loc>
-    <lastmod>2024-03-18T09:57:29.504Z</lastmod>
+    <lastmod>2024-03-20T08:31:43.404Z</lastmod>
   </url>
   <url>
     <loc>https://TheoreticalEcology.github.io/DataScienceInR/2-DescriptiveStatistics.html</loc>
-    <lastmod>2024-03-18T09:57:29.552Z</lastmod>
+    <lastmod>2024-03-20T08:31:43.470Z</lastmod>
   </url>
   <url>
     <loc>https://TheoreticalEcology.github.io/DataScienceInR/2B-Multivariate.html</loc>
-    <lastmod>2024-03-18T09:57:29.600Z</lastmod>
+    <lastmod>2024-03-20T08:31:43.677Z</lastmod>
   </url>
   <url>
     <loc>https://TheoreticalEcology.github.io/DataScienceInR/3A-NHST.html</loc>
-    <lastmod>2024-03-18T09:57:29.628Z</lastmod>
+    <lastmod>2024-03-20T08:31:43.744Z</lastmod>
   </url>
   <url>
     <loc>https://TheoreticalEcology.github.io/DataScienceInR/3B-HypothesisTests.html</loc>
-    <lastmod>2024-03-18T09:57:29.685Z</lastmod>
+    <lastmod>2024-03-20T08:31:43.872Z</lastmod>
   </url>
   <url>
     <loc>https://TheoreticalEcology.github.io/DataScienceInR/4-SimpleRegression.html</loc>
-    <lastmod>2024-03-18T09:57:29.756Z</lastmod>
+    <lastmod>2024-03-20T08:31:43.964Z</lastmod>
   </url>
   <url>
     <loc>https://TheoreticalEcology.github.io/DataScienceInR/5-MultipleRegression.html</loc>
-    <lastmod>2024-03-18T09:57:29.805Z</lastmod>
+    <lastmod>2024-03-20T08:31:44.024Z</lastmod>
   </url>
   <url>
     <loc>https://TheoreticalEcology.github.io/DataScienceInR/6-GLM.html</loc>
-    <lastmod>2024-03-18T09:57:29.844Z</lastmod>
+    <lastmod>2024-03-20T08:31:44.068Z</lastmod>
   </url>
   <url>
     <loc>https://TheoreticalEcology.github.io/DataScienceInR/8-MachineLearning.html</loc>
-    <lastmod>2024-03-18T09:57:29.868Z</lastmod>
+    <lastmod>2024-03-20T08:31:44.097Z</lastmod>
   </url>
   <url>
     <loc>https://TheoreticalEcology.github.io/DataScienceInR/9-Design.html</loc>
-    <lastmod>2024-03-18T09:57:29.878Z</lastmod>
+    <lastmod>2024-03-20T08:31:44.111Z</lastmod>
   </url>
   <url>
     <loc>https://TheoreticalEcology.github.io/DataScienceInR/10-DataWrangling.html</loc>
-    <lastmod>2024-03-18T09:57:29.909Z</lastmod>
+    <lastmod>2024-03-20T08:31:44.150Z</lastmod>
   </url>
   <url>
     <loc>https://TheoreticalEcology.github.io/DataScienceInR/11-Reproducibility.html</loc>
-    <lastmod>2024-03-18T09:57:29.915Z</lastmod>
+    <lastmod>2024-03-20T08:31:44.158Z</lastmod>
+  </url>
+  <url>
+    <loc>https://TheoreticalEcology.github.io/DataScienceInR/13A-regressions.html</loc>
+    <lastmod>2024-03-20T08:31:44.241Z</lastmod>
   </url>
 </urlset>

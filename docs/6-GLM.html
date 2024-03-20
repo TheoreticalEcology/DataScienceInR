@@ -99,7 +99,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<meta name="citation_title" content="[9]{.chapter-number}&nbsp; [Generalized linear models]{.chapter-title}">
+<meta name="citation_title" content="[[9]{.chapter-number}&nbsp; [Generalized linear models]{.chapter-title}]{#sec-glm .quarto-section-identifier}">
 <meta name="citation_fulltext_html_url" content="https://TheoreticalEcology.github.io/DataScienceInR//6-GLM.html">
 <meta name="citation_language" content="en">
 </head>
@@ -320,6 +320,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
       </ul>
   </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./13A-regressions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Overview regression models</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
     </ul>
     </div>
 </nav>
@@ -330,8 +347,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#logistic-regression" id="toc-logistic-regression" class="nav-link active" data-scroll-target="#logistic-regression"><span class="header-section-number">9.1</span> Logistic Regression</a></li>
-  <li><a href="#poisson-regression" id="toc-poisson-regression" class="nav-link" data-scroll-target="#poisson-regression"><span class="header-section-number">9.2</span> Poisson Regression</a></li>
+  <li><a href="#sec-logistic" id="toc-sec-logistic" class="nav-link active" data-scroll-target="#sec-logistic"><span class="header-section-number">9.1</span> Logistic Regression</a></li>
+  <li><a href="#sec-poisson" id="toc-sec-poisson" class="nav-link" data-scroll-target="#sec-poisson"><span class="header-section-number">9.2</span> Poisson Regression</a></li>
   <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">9.3</span> Exercises</a>
   <ul class="collapse">
   <li><a href="#analyzing-the-nitrofen-dataset" id="toc-analyzing-the-nitrofen-dataset" class="nav-link" data-scroll-target="#analyzing-the-nitrofen-dataset"><span class="header-section-number">9.3.1</span> Analyzing the <em>nitrofen</em> dataset</a></li>
@@ -345,7 +362,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Generalized linear models</span></h1>
+<h1 class="title"><span id="sec-glm" class="quarto-section-identifier"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Generalized linear models</span></span></h1>
 </div>
 
 
@@ -477,8 +494,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </table>
 <p>Model diagnostic (residual checks) cannot be done anymore by plotting the model. This can be only done for a lm! For glms we have to use the DHARMa package!</p>
 <p>For more details on glms, see the chapter about glms in the <a href="https://theoreticalecology.github.io/AdvancedRegressionModels/4A-GLMs.html">advanced regression book.</a></p>
-<section id="logistic-regression" class="level2" data-number="9.1">
-<h2 data-number="9.1" class="anchored" data-anchor-id="logistic-regression"><span class="header-section-number">9.1</span> Logistic Regression</h2>
+<section id="sec-logistic" class="level2" data-number="9.1">
+<h2 data-number="9.1" class="anchored" data-anchor-id="sec-logistic"><span class="header-section-number">9.1</span> Logistic Regression</h2>
 <p>For the binomial model we can use the logit link:</p>
 <p><span class="math display">\[
 logit(y) = a_0 +a_1*x
@@ -613,8 +630,8 @@ y = \frac{1}{1+e^{-(a_0 + a_1) }}
 </div>
 </div>
 </section>
-<section id="poisson-regression" class="level2" data-number="9.2">
-<h2 data-number="9.2" class="anchored" data-anchor-id="poisson-regression"><span class="header-section-number">9.2</span> Poisson Regression</h2>
+<section id="sec-poisson" class="level2" data-number="9.2">
+<h2 data-number="9.2" class="anchored" data-anchor-id="sec-poisson"><span class="header-section-number">9.2</span> Poisson Regression</h2>
 <p>Poisson regression is used for count data. Properties of count data are: no negative values, only integers, y ~ Poisson(lambda); where lambda = mean = variance, log link function (lambda must be positive).</p>
 <p>Example:</p>
 <div class="cell">

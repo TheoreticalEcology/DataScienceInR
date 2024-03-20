@@ -8,7 +8,7 @@ editor_options:
 set.seed(42)
 ```
 
-# Generalized linear models
+# Generalized linear models {#sec-glm}
 
 ```{r}
 library(EcoData)
@@ -55,7 +55,7 @@ Model diagnostic (residual checks) cannot be done anymore by plotting the model.
 
 For more details on glms, see the chapter about glms in the [advanced regression book.](https://theoreticalecology.github.io/AdvancedRegressionModels/4A-GLMs.html)
 
-## Logistic Regression
+## Logistic Regression {#sec-logistic}
 
 For the binomial model we can use the logit link:
 
@@ -126,7 +126,7 @@ res = simulateResiduals(m2)
 plot(res)
 ```
 
-## Poisson Regression
+## Poisson Regression {#sec-poisson}
 
 Poisson regression is used for count data. Properties of count data are: no negative values, only integers, y \~ Poisson(lambda); where lambda = mean = variance, log link function (lambda must be positive).
 

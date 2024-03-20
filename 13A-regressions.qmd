@@ -1,0 +1,185 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r, include=FALSE}
+set.seed(42)
+```
+
+# Overview regression models
+
+General comments:
+
+-   [Introduction to linear regression models](https://theoreticalecology.github.io/AdvancedRegressionModels/2A-LinearRegression.html)
+-   what is the distribution of your response?
+    -   Normally distribution –> linear regression `lm()` @sec-lm and [here](https://theoreticalecology.github.io/AdvancedRegressionModels/2A-LinearRegression.html)
+    -   Binary response (0, 1, 0, ...) -> logistic regression `glm(..., family = binomial())` @sec-logistic and [here](https://theoreticalecology.github.io/AdvancedRegressionModels/4A-GLMs.html#or-kn-data---logistic-regression)
+    -   Count data -> Poisson glm `glm(.., family = poisson())` @sec-poisson and [here](https://theoreticalecology.github.io/AdvancedRegressionModels/4A-GLMs.html#count-data---poisson-regression)
+-   Syntax:
+    -   Addictive effects `y~a+b`
+    -   Interactions `y~a*b`, **scale your variables first!!!** For more details on how to interpret interactions see [here](https://theoreticalecology.github.io/AdvancedRegressionModels/2A-LinearRegression.html#interactions) and [why is it so important so scale/center variabls](https://theoreticalecology.github.io/AdvancedRegressionModels/2A-LinearRegression.html#centering-and-scaling-of-predictor-variables)
+    -   Quadratic effects `y~a+I(b^2)` **scale your variables first!!!**
+-   Visualize effects via the `library(effects)` package
+-   Interpretation: take the link/inverse link function in account when interpreting glms (see @sec-glm for more details)
+-   Check residuals, however:
+    - for `lm`, you can just plot the model afterwards `plot(model)`
+    - for `glm`, you have to use the `DHARMa` package `simulateResiduals(model, plot=TRUE)`
+
+::: column-margin
+
+Variables can be scaled with the `scale(...)` function: `df$height <- scale(df$height)`
+
+:::
+
+::: column-margin
+
+Install the `effects` package via `install.packages("effects")`
+
+:::
+
+
+## Linear regression
+
+Normally distributed response:
+
+```{r}
+data(airquality)
+str(airquality)
+summary(airquality)
+pairs(airquality)
+
+plot(Ozone ~ Temp, data = airquality)
+
+fit <- lm(Ozone ~ Temp, data = airquality)
+abline(fit, col = "red")
+summary(fit)
+```
+
+```{r}
+library(effects)
+plot(allEffects(fit))
+plot(allEffects(fit, partial.residuals = T))
+
+pairs(airquality)
+fit <- lm(Ozone ~ Temp + Wind + Solar.R , data = airquality)
+summary(fit)
+plot(allEffects(fit, partial.residuals = T))
+
+# optional scale to standardize effect sizes 
+# scale command by default divides by standard deviation and 
+# subracts the mean
+fit <- lm(Ozone ~ scale(Temp) + scale(Wind) + scale(Solar.R), data = airquality)
+summary(fit)
+
+# centering is NOT OPTIONAL = you have to centering if using numeric
+# variables with interactions (important thing is to center)
+
+fit <- lm(Ozone ~ Temp * Wind , data = airquality)
+summary(fit)
+plot(allEffects(fit, partial.residuals = T))
+# main effects change when changing * to +
+
+fit <- lm(Ozone ~ scale(Temp) * scale(Wind)  , data = airquality)
+summary(fit)
+# main effects do not change when changing * to +
+# in this case, can interpret main effects as the average 
+# effect (e.g. of Temp, Wind) in the range of the data 
+
+# residual checks
+fit <- lm(Ozone ~ scale(Temp) + scale(Wind)  , data = airquality)
+summary(fit)
+plot(allEffects(fit, partial.residuals = T))
+
+par(mfrow = c(2,2))
+plot(fit)
+
+# doesn't really look optimal, maybe a bit of nonlinearity
+# and residuals don't look normal
+
+fit <- lm(sqrt(Ozone) ~ scale(Temp) * scale(Wind)  , data = airquality)
+summary(fit)
+
+par(mfrow = c(2,2))
+plot(fit)
+
+# summary(aov(fit))
+# too difficult for you to interpret probably, better stay with 
+# effect sizes
+
+# categorical variables 
+par(mfrow = c(1,1))
+
+boxplot(weight ~ group, data = PlantGrowth, notch = T)
+fit <- lm(weight ~ group, data = PlantGrowth)
+summary(fit)
+
+summary(aov(fit))
+summary(aov(weight ~ group, data = PlantGrowth))
+```
+
+## Logistic regression
+
+```{r}
+library(carData)
+data(TitanicSurvival)
+str(TitanicSurvival)
+
+TitanicReduced = TitanicSurvival[complete.cases(TitanicSurvival), ]
+
+fit <- glm(survived ~ age + sex + passengerClass , family = binomial, 
+           data = TitanicReduced)
+
+summary(fit)
+
+plot(allEffects(fit))
+
+library(DHARMa)
+res <- simulateResiduals(fit)
+plot(res)
+
+# not perfect, let's see variables against predictor
+plotResiduals(res, TitanicReduced$age)
+plotResiduals(res, TitanicReduced$passengerClass)
+
+# nothing to find here - maybe play around with this yourself 
+# and see if you find the solution - as a hint: when
+# including interactions between the variables, you will
+# find significant interactions and a nicely fitting model
+
+# if you have k/n data (e.g. k of n people in the same group survived), 
+# you would specify it like this
+
+# fit <- glm(cbind(survived, notSurvived) ~ pred , family = binomial, data = myData)
+# fit <- glm(survived ~ pred , family = binomial, data = myData, weight = totalTrials)
+```
+
+
+## Poisson regression
+
+```{r}
+library(glmmTMB)
+
+data("Owls")
+str(Owls)
+
+fit <- glm(SiblingNegotiation ~ SexParent + offset(log(BroodSize)) , 
+           family= poisson, data = Owls)
+
+summary(fit)
+
+# note: in Poisson GLMs, offset(log(time)) standardizes to observation time / area
+
+library(DHARMa)
+res <- simulateResiduals(fit)
+plot(res)
+
+# Discussion how to improve the fit for this model in https://cran.r-project.org/web/packages/DHARMa/vignettes/DHARMa.html#owl-example-count-data
+```
+
+
+## Multinomial regression
+
+For multinomial regression, see page 69 of our Essential Statistics lecture notes https://www.dropbox.com/s/fxozlnzd5ntfntk/EssentialStatistics.pdf?dl=0
+

@@ -168,7 +168,7 @@ model
 summary(model) # 2. Calculate standard errors, CI, and p-values
 ```
 
-## Understanding the linear regression
+## Understanding the linear regression {#sec-lm}
 
 ![](resources/lm.png)
 

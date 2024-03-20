@@ -40,6 +40,8 @@ book:
       chapters:
       - 10-DataWrangling.qmd
       - 11-Reproducibility.qmd
+  appendices: 
+    - 13A-regressions.qmd
     
 engine: knitr
   
