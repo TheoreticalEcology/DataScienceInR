@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Introduction to Data Science with R - 2&nbsp; Preparing your data</title>
+<title>Introduction to Data Science with R - 3&nbsp; Plotting and describing data</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -64,8 +64,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./2A-DescriptiveStatistics.html" rel="next">
-<link href="./1-GettingStarted.html" rel="prev">
+<link href="./2B-SummaryStatistics.html" rel="next">
+<link href="./1B-PreparingData.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -100,8 +100,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <link rel="stylesheet" href="include/webex.css">
-<meta name="citation_title" content="[2]{.chapter-number}&nbsp; [Preparing your data]{.chapter-title}">
-<meta name="citation_fulltext_html_url" content="https://TheoreticalEcology.github.io/DataScienceInR//1B-PreparingData.html">
+<meta name="citation_title" content="[3]{.chapter-number}&nbsp; [Plotting and describing data]{.chapter-title}">
+<meta name="citation_fulltext_html_url" content="https://TheoreticalEcology.github.io/DataScienceInR//2A-DescriptiveStatistics.html">
 <meta name="citation_language" content="en">
 </head>
 
@@ -114,7 +114,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./1B-PreparingData.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Preparing your data</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./2A-DescriptiveStatistics.html">Descriptive Statistics</a></li><li class="breadcrumb-item"><a href="./2A-DescriptiveStatistics.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Plotting and describing data</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -186,7 +186,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./1B-PreparingData.html" class="sidebar-item-text sidebar-link active">
+  <a href="./1B-PreparingData.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Preparing your data</span></span></a>
   </div>
 </li>
@@ -201,7 +201,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./2A-DescriptiveStatistics.html" class="sidebar-item-text sidebar-link">
+  <a href="./2A-DescriptiveStatistics.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Plotting and describing data</span></span></a>
   </div>
 </li>
@@ -366,18 +366,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#importing-data" id="toc-importing-data" class="nav-link active" data-scroll-target="#importing-data"><span class="header-section-number">2.1</span> Importing data</a></li>
-  <li><a href="#cleaning-the-data" id="toc-cleaning-the-data" class="nav-link" data-scroll-target="#cleaning-the-data"><span class="header-section-number">2.2</span> Cleaning the data</a></li>
-  <li><a href="#subsetting-aggregating-or-re-structuring-your-data" id="toc-subsetting-aggregating-or-re-structuring-your-data" class="nav-link" data-scroll-target="#subsetting-aggregating-or-re-structuring-your-data"><span class="header-section-number">2.3</span> Subsetting, aggregating or re-structuring your data</a></li>
+  <li><a href="#plotting" id="toc-plotting" class="nav-link active" data-scroll-target="#plotting"><span class="header-section-number">3.1</span> Plotting</a>
+  <ul class="collapse">
+  <li><a href="#one-variable" id="toc-one-variable" class="nav-link" data-scroll-target="#one-variable"><span class="header-section-number">3.1.1</span> One variable</a></li>
+  <li><a href="#two-variables" id="toc-two-variables" class="nav-link" data-scroll-target="#two-variables"><span class="header-section-number">3.1.2</span> Two variables</a></li>
+  </ul></li>
   </ul>
-<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/TheoreticalEcology/DataScienceInR/edit/master/1B-PreparingData.qmd" class="toc-action">Edit this page</a></p></div></div></nav>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/TheoreticalEcology/DataScienceInR/edit/master/2A-DescriptiveStatistics.qmd" class="toc-action">Edit this page</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content page-columns page-full" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Preparing your data</span></h1>
+<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Plotting and describing data</span></h1>
 </div>
 
 
@@ -392,108 +394,278 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<p>Before we can start with the analysis, we must prepare our data, but how is our data represented?</p>
-<p>Data typically consist of a table with several observations with one or more variables:</p>
-<div class="cell">
-<pre><code>##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
-## 1          5.1         3.5          1.4         0.2  setosa
-## 2          4.9         3.0          1.4         0.2  setosa
-## 3          4.7         3.2          1.3         0.2  setosa
-## 4          4.6         3.1          1.5         0.2  setosa
-## 5          5.0         3.6          1.4         0.2  setosa
-## 6          5.4         3.9          1.7         0.4  setosa</code></pre>
-</div>
-<p>One row per observation is the standard format for most programs. There are different types of variables (with respect to the analysis):</p>
-<ul>
-<li><p>Dependent / response variable variable of interest we want to know what it is influenced by. Typically, there is one variable of particular interest.</p></li>
-<li><p>Explanatory or independent variables, aka. predictors / covariates / treatments variables that potentially influence the response variable</p></li>
-</ul>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Tip
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Example: We measure plant growth and nitrogen in the soil. Growth is the dependent variable and nitrogen is the explanatory variable</p>
-</div>
-</div>
-<p>Variables differ in range and scale:</p>
-<ul>
-<li><p>Scale of measure: nominal (unordered), ordinal (ordered), metric (differences can be interpreted)</p></li>
-<li><p>Numeric or metric variables Examples: Body size, conductivity</p></li>
-<li><p>Non-numeric = categorial variables</p>
-<ul>
-<li><p>unordered / nominal (red, green, blue) ordered /</p></li>
-<li><p>ordinal (tiny, small, large) Attention: categories small = 1m, medium = 1.5m, large = 2m would be interpreted as numeric, because their relative differences are defined</p></li>
-<li><p>Special case: binary variable (0,1), technically it is also categorial, but with two levels only we call in binary</p></li>
-</ul></li>
-</ul>
-<p>But before we can start with our analysis, we need first to prepare our raw data, which includes:</p>
-<ul>
-<li>Reading in the data</li>
-<li>Cleaning the data</li>
-<li>Subsetting, aggregating or re-structuring your data</li>
-</ul>
-<section id="importing-data" class="level2 page-columns page-full" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="importing-data"><span class="header-section-number">2.1</span> Importing data</h2>
-<p>The recommended data format for your raw data is csv. You can export to csv from excel. If you have a csv file in standard (international) format, the command to import is simply</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">=</span> <span class="fu">read.csv</span>(<span class="at">file =</span> <span class="st">"../data/myData.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>If your csv file departs from standard settings (e.g.&nbsp;you use a , insted of a . as decimal points), you will have to modify the function. Go on the <code>read.csv</code> function and press F1 to get the help, which explains all that. Alternatively, you can use the import menu to the top right in RStudio.</p>
+<p>Before knowing how to plot something, you should know what you want to plot:</p>
+<table class="table">
+<colgroup>
+<col style="width: 23%">
+<col style="width: 23%">
+<col style="width: 52%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Scenario</th>
+<th>Which plot</th>
+<th>R command</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Numeric</td>
+<td>Histogram or boxplot</td>
+<td><code>hist()</code> and<code>boxplot</code></td>
+</tr>
+<tr class="even">
+<td>Numeric with numeric</td>
+<td>Scatterplot</td>
+<td><code>plot</code></td>
+</tr>
+<tr class="odd">
+<td>Numeric with categorical</td>
+<td>Boxplot</td>
+<td><code>boxplot(numeric~categorical)</code></td>
+</tr>
+<tr class="even">
+<td>Categorical with categorical</td>
+<td>mosaicplot or grouped barplot</td>
+<td><code>mosaicplot(table(categorical, categorical))</code> or <code>barplot(data, beside=TRUE)</code></td>
+</tr>
+</tbody>
+</table>
 
 <div class="no-row-height column-margin column-container"><div class="">
-<p>You can open the documentation of a R function by pressing F1 while the cursor is on the function name or by runnin <code>?read.scv</code></p>
-</div></div><p>Here is a video Video of how to read in csv data in R.</p>
-<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/qPk0YEKhqB8?t=306" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Remarks on data handling
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Typically, data will be recorded electronically with a measurement device, or you have to enter it manually using a spreadsheet program, e.g.&nbsp;MS Excel. The best format for data storage is csv (comma separated values) because it is long-term compatibility with all kinds of programs / systems (Excel can export to csv).</p>
-<p>After raw data is entered, it should never be manipulated by hand! If you modify data by hand, make a copy and document all changes (additional text file). <strong>Better:</strong> Make changes using a script</p>
-<p>Data handling in R:</p>
+<p>Here is a website with a decision tree about when to choose which plot https://www.data-to-viz.com/</p>
+</div></div><p>Once you know what you want to plot, there are lot of websites that will show you the respective R code. One important consideration, however: there are at least two popular ways of doing R graphis:</p>
 <ul>
-<li><p>create R script “dataprep.R” or similar and import dataset</p></li>
-<li><p>possibly combine different datasets</p></li>
-<li><p>clean data (remove NAs, impossible values etc.)</p></li>
-<li><p>save as Rdata (derived data)</p></li>
+<li>base R: The <code>graphics</code> package is automatically shipped with the R language and is the default plotting package in R. It prodces basic scientific plots (no unnecessary information)</li>
+<li>ggplot2 is a newer plotting package where the default plots are more visually appealling</li>
 </ul>
-</div>
-</div>
-</div>
+<!--  -->
+<!--  -->
+<p>for which the code looks completely different. You should probably get to know both types, but I would recommend to start with base R. I’m just saying this so that you are not confused, because a lot of the examples will also show you ggplot code. Here some useful links:</p>
+<ul>
+<li>A few simple graphs in base R https://www.statmethods.net/graphs/index.html</li>
+<li>R code for the most common graphics (with a ggplot2 tendecy) https://www.r-graph-gallery.com/index.html</li>
+<li>R coder graph tutorials https://r-coder.com/r-graphs/</li>
+</ul>
 
 <div class="no-row-height column-margin column-container"><div class="">
-<p>R can also import data from nearly any data source, including xls or xlsx files. <a href="https://www.statmethods.net/input/index.html">Here</a> and <a href="https://r-coder.com/r-data-manipulation/">here</a> two websites with import explanations for many different data formats</p>
-</div></div></section>
-<section id="cleaning-the-data" class="level2" data-number="2.2">
-<h2 data-number="2.2" class="anchored" data-anchor-id="cleaning-the-data"><span class="header-section-number">2.2</span> Cleaning the data</h2>
-<p>Checking / cleaning means that you ensure that you have written in your data correctly, and that you resolve issues with the data. Most real data has some problems, e.g.&nbsp;missing values etc. The basic checks that I would recommend is:</p>
-<p>Usually, this will immediately uncover some problems. The exact solution will depend very much on the nature of the data, but common things are typos in the raw data (e.g.&nbsp;letters in a column that should be numeric, etc), but minimally you should</p>
+<p>Thinking about how to do <a href="https://www.cedricscherer.com/2019/05/17/the-evolution-of-a-ggplot-ep.-1/">good figures</a></p>
+</div></div><section id="plotting" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="plotting"><span class="header-section-number">3.1</span> Plotting</h2>
+<section id="one-variable" class="level3" data-number="3.1.1">
+<h3 data-number="3.1.1" class="anchored" data-anchor-id="one-variable"><span class="header-section-number">3.1.1</span> One variable</h3>
+<section id="numerical-variable---histogram-and-boxplot" class="level4" data-number="3.1.1.1">
+<h4 data-number="3.1.1.1" class="anchored" data-anchor-id="numerical-variable---histogram-and-boxplot"><span class="header-section-number">3.1.1.1</span> Numerical variable - Histogram and Boxplot</h4>
 <ul>
-<li>Look at your data (double click in Rstudio, or view() to see if anything is weird)</li>
-<li>Run <code>summary()</code> and <code>str()</code> to check range, NAs, and type of all variables (e.g.&nbsp;categorical variables are often imported as character, change them to factors with the <code>as.factor()</code> function)</li>
+<li>The histogram plots the frequency of the values of a numerical variable with bins (otherwise each unique value will appear only once, the range will be cut in n elements). The number of bins is automatically inferred by the function but can be also changed by the user</li>
+<li>The boxplot plots the distribution of a numerical variable based on summary statistics (the quantiles). The boxplot is particular useful for comparing/contrasting a numerical with a categorical variable (see below)</li>
 </ul>
-<p>Here is a video that shows an example of a cleaning process.</p>
-<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/mGQvJ3FuNa8" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" aria-current="page">Base R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">ggplot2</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)) <span class="co"># number of plots, one row, two columns</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(iris<span class="sc">$</span>Sepal.Length, </span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Histogram"</span>, <span class="co"># title</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Sepal.Length"</span>, </span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Frequency"</span>,</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">las =</span> <span class="dv">1</span>) <span class="co"># rotation of x and y values (las = 1, all of them should be horizontal)</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(iris<span class="sc">$</span>Sepal.Length,      </span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">main =</span> <span class="st">"Boxplot"</span>, <span class="co"># title</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>        <span class="at">ylab =</span> <span class="st">"Values"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="2A-DescriptiveStatistics_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggpubr)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>plt1 <span class="ot">=</span> </span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(iris, <span class="fu">aes</span>(<span class="at">x =</span> Sepal.Length)) <span class="sc">+</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_histogram</span>() <span class="sc">+</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggtitle</span>(<span class="st">"Histogram"</span>) <span class="sc">+</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">xlab</span>(<span class="st">"Sepal.Length"</span>) <span class="sc">+</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ylab</span>(<span class="st">"Frequency"</span>) <span class="sc">+</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_bw</span>() <span class="co"># scientific theme (white background)</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>plt2 <span class="ot">=</span> </span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(iris, <span class="fu">aes</span>(<span class="at">y =</span> Sepal.Length)) <span class="sc">+</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>      <span class="fu">ggtitle</span>(<span class="st">"Boxplot"</span>) <span class="sc">+</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>      <span class="fu">ylab</span>(<span class="st">"Values"</span>) <span class="sc">+</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>      <span class="fu">theme_bw</span>() </span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="fu">ggarrange</span>(plt1, plt2, <span class="at">ncol =</span> 2L, <span class="at">nrow =</span> 1L)</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="do">## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="2A-DescriptiveStatistics_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</div>
+</div>
+</div>
 </section>
-<section id="subsetting-aggregating-or-re-structuring-your-data" class="level2" data-number="2.3">
-<h2 data-number="2.3" class="anchored" data-anchor-id="subsetting-aggregating-or-re-structuring-your-data"><span class="header-section-number">2.3</span> Subsetting, aggregating or re-structuring your data</h2>
-<p>Often, you just want to use a part of your data, or copy, merge or split data. All you need to know is explained here <a href="1-GettingStarted.html#sec-datamanipulation"><span>Section&nbsp;1.3</span></a></p>
+<section id="categorical-variable---barplot" class="level4" data-number="3.1.1.2">
+<h4 data-number="3.1.1.2" class="anchored" data-anchor-id="categorical-variable---barplot"><span class="header-section-number">3.1.1.2</span> Categorical variable - Barplot</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(mtcars)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="do">## 'data.frame':    32 obs. of  11 variables:</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ mpg : num  21 21 22.8 21.4 18.7 18.1 14.3 24.4 22.8 19.2 ...</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ cyl : num  6 6 4 6 8 6 8 4 4 6 ...</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ disp: num  160 160 108 258 360 ...</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ hp  : num  110 110 93 110 175 105 245 62 95 123 ...</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ drat: num  3.9 3.9 3.85 3.08 3.15 2.76 3.21 3.69 3.92 3.92 ...</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ wt  : num  2.62 2.88 2.32 3.21 3.44 ...</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ qsec: num  16.5 17 18.6 19.4 17 ...</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ vs  : num  0 0 1 1 0 1 0 1 1 1 ...</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ am  : num  1 1 1 0 0 0 0 0 0 0 ...</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ gear: num  4 4 4 3 3 3 3 4 4 4 ...</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ carb: num  4 4 1 1 2 1 4 2 2 4 ...</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>counts <span class="ot">=</span> <span class="fu">table</span>(mtcars<span class="sc">$</span>cyl)</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>counts</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="do">##  4  6  8 </span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="do">## 11  7 14</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true">Base R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false">ggplot2</a></li></ul>
+<div class="tab-content">
+<div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(counts, </span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>        <span class="at">main =</span> <span class="st">"Barplot of Cyl"</span>,</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">ylab =</span> <span class="st">"Number of occurrences"</span>,</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">xlab =</span> <span class="st">"Cyl levels"</span>,</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">col =</span> <span class="st">"#4488AA"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="2A-DescriptiveStatistics_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</div>
+<div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mtcars, <span class="fu">aes</span>(<span class="at">x =</span> cyl)) <span class="sc">+</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">fill =</span> <span class="st">"#4488AA"</span>) <span class="sc">+</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggtitle</span>(<span class="st">"Barplot of Cyl"</span>) <span class="sc">+</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">xlab</span>(<span class="st">"Number of occurrences"</span>) <span class="sc">+</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ylab</span>(<span class="st">"Cyl levels"</span>) <span class="sc">+</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="2A-DescriptiveStatistics_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="two-variables" class="level3" data-number="3.1.2">
+<h3 data-number="3.1.2" class="anchored" data-anchor-id="two-variables"><span class="header-section-number">3.1.2</span> Two variables</h3>
+<p>The general idea of plotting is to look for correlations / associations between variables, i.e.&nbsp;is there a non-random pattern between the two variables.</p>
+<section id="numerical-vs-numerical-variable---scatterplot" class="level4" data-number="3.1.2.1">
+<h4 data-number="3.1.2.1" class="anchored" data-anchor-id="numerical-vs-numerical-variable---scatterplot"><span class="header-section-number">3.1.2.1</span> Numerical vs numerical variable - Scatterplot</h4>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-3-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-1" role="tab" aria-controls="tabset-3-1" aria-selected="true">Base R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-2" role="tab" aria-controls="tabset-3-2" aria-selected="false">ggplot2</a></li></ul>
+<div class="tab-content">
+<div id="tabset-3-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-3-1-tab">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Scatterplot</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(airquality<span class="sc">$</span>Solar.R, airquality<span class="sc">$</span>Ozone)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co"># plot(Ozone ~ Solar.R, data = airquality) #the same</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co"># different symbol for each month</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(Ozone <span class="sc">~</span> Solar.R, <span class="at">data =</span> airquality, <span class="at">pch =</span> Month)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="2A-DescriptiveStatistics_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>We can also add other objects such as lines to our existing plot:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(Ozone <span class="sc">~</span> Solar.R, <span class="at">data =</span> airquality)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="dv">50</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="2A-DescriptiveStatistics_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</div>
+<div id="tabset-3-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-3-2-tab">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>plt1 <span class="ot">=</span> <span class="fu">ggplot</span>(airquality, <span class="fu">aes</span>(<span class="at">x =</span> Solar.R, <span class="at">y =</span> Ozone)) <span class="sc">+</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>        <span class="fu">theme_bw</span>()</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>plt2 <span class="ot">=</span> <span class="fu">ggplot</span>(airquality, <span class="fu">aes</span>(<span class="at">x =</span> Solar.R, <span class="at">y =</span> Ozone)) <span class="sc">+</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_point</span>(<span class="at">shape =</span> airquality<span class="sc">$</span>Month) <span class="sc">+</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>        <span class="fu">theme_bw</span>()</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="fu">ggarrange</span>(plt1, plt2, <span class="at">ncol =</span> 2L, <span class="at">nrow =</span> 1L)</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="do">## Warning: Removed 42 rows containing missing values (`geom_point()`).</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="do">## Removed 42 rows containing missing values (`geom_point()`).</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="2A-DescriptiveStatistics_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>We can also add other objects such as lines to our existing plot:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(airquality, <span class="fu">aes</span>(<span class="at">x =</span> Solar.R, <span class="at">y =</span> Ozone)) <span class="sc">+</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">shape =</span> airquality<span class="sc">$</span>Month) <span class="sc">+</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">intercept =</span> <span class="dv">50</span>, <span class="at">slope =</span> <span class="dv">0</span>) <span class="sc">+</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_bw</span>()</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="do">## Warning: Removed 42 rows containing missing values (`geom_point()`).</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="2A-DescriptiveStatistics_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="categorical-vs-numerical-variable---boxplot" class="level4" data-number="3.1.2.2">
+<h4 data-number="3.1.2.2" class="anchored" data-anchor-id="categorical-vs-numerical-variable---boxplot"><span class="header-section-number">3.1.2.2</span> Categorical vs numerical variable - Boxplot</h4>
+<p>Often we have a numerical variable (e.g.&nbsp;weight/fitness) and a categorical vairable that tells us the group of the observation (e.g.&nbsp;control or treatment). To compare visually now the distributions of the numerical variable between the levels of the grouping variable, we can use a boxplot</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-4-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-1" role="tab" aria-controls="tabset-4-1" aria-selected="true">Base R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-4-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-2" role="tab" aria-controls="tabset-4-2" aria-selected="false">ggplot2</a></li></ul>
+<div class="tab-content">
+<div id="tabset-4-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-4-1-tab">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(mpg <span class="sc">~</span> cyl, mtcars, <span class="at">notch=</span><span class="cn">TRUE</span>) <span class="co"># formula notation</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="do">## Warning in (function (z, notch = FALSE, width = NULL, varwidth = FALSE, : some</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="do">## notches went outside hinges ('box'): maybe set notch=FALSE</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="2A-DescriptiveStatistics_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># boxplot(x = mtcars$cyl, y = mtcars$mpg) # the same</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<div id="tabset-4-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-4-2-tab">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mtcars, <span class="fu">aes</span>(<span class="at">y =</span> mpg, <span class="at">group =</span> cyl)) <span class="sc">+</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">notch=</span><span class="cn">TRUE</span>) <span class="sc">+</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_bw</span>()</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Notch went outside hinges</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="do">## ℹ Do you want `notch = FALSE`?</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="do">## Notch went outside hinges</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="do">## ℹ Do you want `notch = FALSE`?</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="2A-DescriptiveStatistics_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</div>
+</div>
+</div>
 
 
+</section>
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -1053,13 +1225,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./1-GettingStarted.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Getting Started with R</span></span>
+      <a href="./1B-PreparingData.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Preparing your data</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./2A-DescriptiveStatistics.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Plotting and describing data</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./2B-SummaryStatistics.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Summary statistics</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

@@ -1,0 +1,10 @@
+bookdown::bs4_book:
+  df_print: kable
+  theme:
+    primary: '#0d6efd'
+  lib_dir: libs
+  split_bib: no
+  css: include/webex.css
+  includes:
+    after_body: include/webex.js
+  md_extensions: -smart

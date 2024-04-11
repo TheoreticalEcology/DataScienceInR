@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Introduction to Data Science with R - 12&nbsp; Data handling</title>
+<title>Introduction to Data Science with R - 13&nbsp; Data handling</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -71,10 +71,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -97,7 +99,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }</script>
 
 
-<meta name="citation_title" content="[12]{.chapter-number}&nbsp; [Data handling]{.chapter-title}">
+<link rel="stylesheet" href="include/webex.css">
+<meta name="citation_title" content="[13]{.chapter-number}&nbsp; [Data handling]{.chapter-title}">
 <meta name="citation_fulltext_html_url" content="https://TheoreticalEcology.github.io/DataScienceInR//10-DataWrangling.html">
 <meta name="citation_language" content="en">
 </head>
@@ -111,7 +114,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./10-DataWrangling.html">Data Science Skills</a></li><li class="breadcrumb-item"><a href="./10-DataWrangling.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Data handling</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./10-DataWrangling.html">Data Science Skills</a></li><li class="breadcrumb-item"><a href="./10-DataWrangling.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Data handling</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -127,7 +130,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Introduction to Data Science with R</a> 
-        <div class="sidebar-tools-main">
+        <div class="sidebar-tools-main tools-wide">
     <a href="https://github.com/TheoreticalEcology/DataScienceInR" rel="" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
     <div class="dropdown">
       <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Share"><i class="bi bi-share"></i></a>
@@ -152,6 +155,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           </li>
       </ul>
     </div>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
     </div>
       </div>
@@ -197,14 +201,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./2-DescriptiveStatistics.html" class="sidebar-item-text sidebar-link">
+  <a href="./2A-DescriptiveStatistics.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Plotting and describing data</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./2B-Multivariate.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Multivariate Statistics</span></span></a>
+  <a href="./2B-SummaryStatistics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Summary statistics</span></span></a>
   </div>
 </li>
       </ul>
@@ -264,7 +268,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
- <span class="menu-text">Predictive Modeling</span></a>
+ <span class="menu-text">Multivariate Statistics</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -272,8 +276,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./8-MachineLearning.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Machine Learning</span></span></a>
+  <a href="./2B-Multivariate.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Multivariate Statistics</span></span></a>
   </div>
 </li>
       </ul>
@@ -281,7 +285,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
- <span class="menu-text">Experimental Design</span></a>
+ <span class="menu-text">Predictive Modeling</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -289,8 +293,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./9-Design.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Design of experiments</span></span></a>
+  <a href="./8-MachineLearning.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Machine Learning</span></span></a>
   </div>
 </li>
       </ul>
@@ -298,7 +302,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
- <span class="menu-text">Data Science Skills</span></a>
+ <span class="menu-text">Experimental Design</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -306,14 +310,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./10-DataWrangling.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Data handling</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./11-Reproducibility.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Reproducibility and project organization</span></span></a>
+  <a href="./9-Design.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Design of experiments</span></span></a>
   </div>
 </li>
       </ul>
@@ -321,12 +319,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true">
- <span class="menu-text">Appendices</span></a>
+ <span class="menu-text">Data Science Skills</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-DataWrangling.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Data handling</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11-Reproducibility.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Reproducibility and project organization</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./13A-regressions.html" class="sidebar-item-text sidebar-link">
@@ -345,19 +366,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#exercise" id="toc-exercise" class="nav-link active" data-scroll-target="#exercise"><span class="header-section-number">12.1</span> Exercise</a>
+  <li><a href="#exercise" id="toc-exercise" class="nav-link active" data-scroll-target="#exercise"><span class="header-section-number">13.1</span> Exercise</a>
   <ul class="collapse">
-  <li><a href="#read-data" id="toc-read-data" class="nav-link" data-scroll-target="#read-data"><span class="header-section-number">12.1.1</span> 1. Read data</a></li>
-  <li><a href="#dataset-properties" id="toc-dataset-properties" class="nav-link" data-scroll-target="#dataset-properties"><span class="header-section-number">12.1.2</span> 2. Dataset properties</a></li>
-  <li><a href="#turn-character-to-numeric" id="toc-turn-character-to-numeric" class="nav-link" data-scroll-target="#turn-character-to-numeric"><span class="header-section-number">12.1.3</span> 3. Turn character to numeric</a></li>
-  <li><a href="#na--values-in-height" id="toc-na--values-in-height" class="nav-link" data-scroll-target="#na--values-in-height"><span class="header-section-number">12.1.4</span> 4. <code>NA</code>- values in <code>height</code></a></li>
-  <li><a href="#implausible-values" id="toc-implausible-values" class="nav-link" data-scroll-target="#implausible-values"><span class="header-section-number">12.1.5</span> 5. Implausible values</a></li>
-  <li><a href="#add-species-names" id="toc-add-species-names" class="nav-link" data-scroll-target="#add-species-names"><span class="header-section-number">12.1.6</span> 6. Add species names</a></li>
-  <li><a href="#remove-f4" id="toc-remove-f4" class="nav-link" data-scroll-target="#remove-f4"><span class="header-section-number">12.1.7</span> 7. Remove F4</a></li>
-  <li><a href="#select-trees-that-contain-both-dbh-and-height-measurements" id="toc-select-trees-that-contain-both-dbh-and-height-measurements" class="nav-link" data-scroll-target="#select-trees-that-contain-both-dbh-and-height-measurements"><span class="header-section-number">12.1.8</span> 8. Select trees that contain both dbh and height measurements</a></li>
-  <li><a href="#correlations" id="toc-correlations" class="nav-link" data-scroll-target="#correlations"><span class="header-section-number">12.1.9</span> 9. Correlations?</a></li>
-  <li><a href="#export-a-plot" id="toc-export-a-plot" class="nav-link" data-scroll-target="#export-a-plot"><span class="header-section-number">12.1.10</span> 10. Export a plot</a></li>
-  <li><a href="#calculate-mean-dbh-per-species." id="toc-calculate-mean-dbh-per-species." class="nav-link" data-scroll-target="#calculate-mean-dbh-per-species."><span class="header-section-number">12.1.11</span> 11. Calculate mean dbh per species.</a></li>
+  <li><a href="#read-data" id="toc-read-data" class="nav-link" data-scroll-target="#read-data"><span class="header-section-number">13.1.1</span> 1. Read data</a></li>
+  <li><a href="#dataset-properties" id="toc-dataset-properties" class="nav-link" data-scroll-target="#dataset-properties"><span class="header-section-number">13.1.2</span> 2. Dataset properties</a></li>
+  <li><a href="#turn-character-to-numeric" id="toc-turn-character-to-numeric" class="nav-link" data-scroll-target="#turn-character-to-numeric"><span class="header-section-number">13.1.3</span> 3. Turn character to numeric</a></li>
+  <li><a href="#na--values-in-height" id="toc-na--values-in-height" class="nav-link" data-scroll-target="#na--values-in-height"><span class="header-section-number">13.1.4</span> 4. <code>NA</code>- values in <code>height</code></a></li>
+  <li><a href="#implausible-values" id="toc-implausible-values" class="nav-link" data-scroll-target="#implausible-values"><span class="header-section-number">13.1.5</span> 5. Implausible values</a></li>
+  <li><a href="#add-species-names" id="toc-add-species-names" class="nav-link" data-scroll-target="#add-species-names"><span class="header-section-number">13.1.6</span> 6. Add species names</a></li>
+  <li><a href="#remove-f4" id="toc-remove-f4" class="nav-link" data-scroll-target="#remove-f4"><span class="header-section-number">13.1.7</span> 7. Remove F4</a></li>
+  <li><a href="#select-trees-that-contain-both-dbh-and-height-measurements" id="toc-select-trees-that-contain-both-dbh-and-height-measurements" class="nav-link" data-scroll-target="#select-trees-that-contain-both-dbh-and-height-measurements"><span class="header-section-number">13.1.8</span> 8. Select trees that contain both dbh and height measurements</a></li>
+  <li><a href="#correlations" id="toc-correlations" class="nav-link" data-scroll-target="#correlations"><span class="header-section-number">13.1.9</span> 9. Correlations?</a></li>
+  <li><a href="#export-a-plot" id="toc-export-a-plot" class="nav-link" data-scroll-target="#export-a-plot"><span class="header-section-number">13.1.10</span> 10. Export a plot</a></li>
+  <li><a href="#calculate-mean-dbh-per-species." id="toc-calculate-mean-dbh-per-species." class="nav-link" data-scroll-target="#calculate-mean-dbh-per-species."><span class="header-section-number">13.1.11</span> 11. Calculate mean dbh per species.</a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/TheoreticalEcology/DataScienceInR/edit/master/10-DataWrangling.qmd" class="toc-action">Edit this page</a></p></div></div></nav>
@@ -367,7 +388,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Data handling</span></h1>
+<h1 class="title"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Data handling</span></h1>
 </div>
 
 
@@ -382,8 +403,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<section id="exercise" class="level2" data-number="12.1">
-<h2 data-number="12.1" class="anchored" data-anchor-id="exercise"><span class="header-section-number">12.1</span> Exercise</h2>
+<section id="exercise" class="level2" data-number="13.1">
+<h2 data-number="13.1" class="anchored" data-anchor-id="exercise"><span class="header-section-number">13.1</span> Exercise</h2>
 <p>In this exercise you will practice common steps of the data preparation procedure using a dataset that was gathered in a forest in Switzerland.</p>
 <p>The main steps are as follows (<strong>to solve the tasks, please carefully read the detailed instructions and hints below</strong>):</p>
 <ol type="1">
@@ -416,8 +437,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><code>%&gt;%</code> and <code>group_by()</code> and <code>summarize()</code> from the dlyr package (check demonstration Part 2)</li>
 </ul>
 <p>Regarding the solutions, note we don’t expect you to come up with exactly this code - there are many ways to solve the problem. The solutions just give you an idea of a possible solution.</p>
-<section id="read-data" class="level3" data-number="12.1.1">
-<h3 data-number="12.1.1" class="anchored" data-anchor-id="read-data"><span class="header-section-number">12.1.1</span> 1. Read data</h3>
+<section id="read-data" class="level3" data-number="13.1.1">
+<h3 data-number="13.1.1" class="anchored" data-anchor-id="read-data"><span class="header-section-number">13.1.1</span> 1. Read data</h3>
 <p>Read the provided datasets <em>treedata.csv</em> and <em>species.csv</em> to R. Use the option <strong>stringsAsFactors = FALSE</strong> in the function <code>read.csv</code>.</p>
 <p>Read the dataset <em>treedata.csv</em> and call it treedata. It has the following columns:</p>
 <ul>
@@ -454,8 +475,8 @@ Solution
 </div>
 </div>
 </section>
-<section id="dataset-properties" class="level3" data-number="12.1.2">
-<h3 data-number="12.1.2" class="anchored" data-anchor-id="dataset-properties"><span class="header-section-number">12.1.2</span> 2. Dataset properties</h3>
+<section id="dataset-properties" class="level3" data-number="13.1.2">
+<h3 data-number="13.1.2" class="anchored" data-anchor-id="dataset-properties"><span class="header-section-number">13.1.2</span> 2. Dataset properties</h3>
 <p>Have a look at the properties of the dataset:</p>
 <ul>
 <li>Which classes do the columns have?</li>
@@ -515,8 +536,8 @@ Solution
 </div>
 </div>
 </section>
-<section id="turn-character-to-numeric" class="level3" data-number="12.1.3">
-<h3 data-number="12.1.3" class="anchored" data-anchor-id="turn-character-to-numeric"><span class="header-section-number">12.1.3</span> 3. Turn character to numeric</h3>
+<section id="turn-character-to-numeric" class="level3" data-number="13.1.3">
+<h3 data-number="13.1.3" class="anchored" data-anchor-id="turn-character-to-numeric"><span class="header-section-number">13.1.3</span> 3. Turn character to numeric</h3>
 <p>One column, which we expect to be numeric, is of class character. Find the value causing this column to be character, set it to <code>NA</code> and turn the column into class numeric.</p>
 <p>Note that using ‘is.numeric()’ is not enough, if the column is a factor. This may be the case if you have used the option <strong>stringAsFactor = T</strong> in <code>read.csv</code> or an older version of R. Use a combination of ‘as.character()’ and ‘as.numeric()’ in that case.</p>
 <hr>
@@ -599,8 +620,8 @@ Solution
 </div>
 </div>
 </section>
-<section id="na--values-in-height" class="level3" data-number="12.1.4">
-<h3 data-number="12.1.4" class="anchored" data-anchor-id="na--values-in-height"><span class="header-section-number">12.1.4</span> 4. <code>NA</code>- values in <code>height</code></h3>
+<section id="na--values-in-height" class="level3" data-number="13.1.4">
+<h3 data-number="13.1.4" class="anchored" data-anchor-id="na--values-in-height"><span class="header-section-number">13.1.4</span> 4. <code>NA</code>- values in <code>height</code></h3>
 <p>Check for NA’s in the column <code>height</code>:</p>
 <ul>
 <li>How many <code>NA</code>’s do appear in this column?</li>
@@ -662,8 +683,8 @@ Solution
 </div>
 </div>
 </section>
-<section id="implausible-values" class="level3" data-number="12.1.5">
-<h3 data-number="12.1.5" class="anchored" data-anchor-id="implausible-values"><span class="header-section-number">12.1.5</span> 5. Implausible values</h3>
+<section id="implausible-values" class="level3" data-number="13.1.5">
+<h3 data-number="13.1.5" class="anchored" data-anchor-id="implausible-values"><span class="header-section-number">13.1.5</span> 5. Implausible values</h3>
 <p>The dataset contains some implausible values (completely out of range!). Find and replace these values with <code>NA</code>.</p>
 <hr>
 <div class="callout callout-style-simple callout-tip no-icon callout-titled">
@@ -721,8 +742,8 @@ We will now remove these values from our dataset by setting them to <code>NA</co
 </div>
 </div>
 </section>
-<section id="add-species-names" class="level3" data-number="12.1.6">
-<h3 data-number="12.1.6" class="anchored" data-anchor-id="add-species-names"><span class="header-section-number">12.1.6</span> 6. Add species names</h3>
+<section id="add-species-names" class="level3" data-number="13.1.6">
+<h3 data-number="13.1.6" class="anchored" data-anchor-id="add-species-names"><span class="header-section-number">13.1.6</span> 6. Add species names</h3>
 <p>Add the species names from the species dataset to the treedata dataset.<br>
 <em>Hint: <code>?merge</code></em></p>
 <hr>
@@ -757,8 +778,8 @@ Solution
 </div>
 </div>
 </section>
-<section id="remove-f4" class="level3" data-number="12.1.7">
-<h3 data-number="12.1.7" class="anchored" data-anchor-id="remove-f4"><span class="header-section-number">12.1.7</span> 7. Remove F4</h3>
+<section id="remove-f4" class="level3" data-number="13.1.7">
+<h3 data-number="13.1.7" class="anchored" data-anchor-id="remove-f4"><span class="header-section-number">13.1.7</span> 7. Remove F4</h3>
 <p>The remark F4 indicates, that the dbh-measurements might be flawed. Remove these trees from treedata.</p>
 <hr>
 <div class="callout callout-style-simple callout-tip no-icon callout-titled">
@@ -780,8 +801,8 @@ Solution
 </div>
 </div>
 </section>
-<section id="select-trees-that-contain-both-dbh-and-height-measurements" class="level3" data-number="12.1.8">
-<h3 data-number="12.1.8" class="anchored" data-anchor-id="select-trees-that-contain-both-dbh-and-height-measurements"><span class="header-section-number">12.1.8</span> 8. Select trees that contain both dbh and height measurements</h3>
+<section id="select-trees-that-contain-both-dbh-and-height-measurements" class="level3" data-number="13.1.8">
+<h3 data-number="13.1.8" class="anchored" data-anchor-id="select-trees-that-contain-both-dbh-and-height-measurements"><span class="header-section-number">13.1.8</span> 8. Select trees that contain both dbh and height measurements</h3>
 <p>Subset treedata to trees where both height and dbh measurements were carried out. Call the result dbh_height.</p>
 <hr>
 <div class="callout callout-style-simple callout-tip no-icon callout-titled">
@@ -804,8 +825,8 @@ Solution
 </div>
 </div>
 </section>
-<section id="correlations" class="level3" data-number="12.1.9">
-<h3 data-number="12.1.9" class="anchored" data-anchor-id="correlations"><span class="header-section-number">12.1.9</span> 9. Correlations?</h3>
+<section id="correlations" class="level3" data-number="13.1.9">
+<h3 data-number="13.1.9" class="anchored" data-anchor-id="correlations"><span class="header-section-number">13.1.9</span> 9. Correlations?</h3>
 <p>Check for correlations in the dataset dbh_height. Use a test and plot height vs dbh.</p>
 <hr>
 <div class="callout callout-style-simple callout-tip no-icon callout-titled">
@@ -847,8 +868,8 @@ Solution
 </div>
 </div>
 </section>
-<section id="export-a-plot" class="level3" data-number="12.1.10">
-<h3 data-number="12.1.10" class="anchored" data-anchor-id="export-a-plot"><span class="header-section-number">12.1.10</span> 10. Export a plot</h3>
+<section id="export-a-plot" class="level3" data-number="13.1.10">
+<h3 data-number="13.1.10" class="anchored" data-anchor-id="export-a-plot"><span class="header-section-number">13.1.10</span> 10. Export a plot</h3>
 <p>When generating a plot within Rstudio, it is by default shown in the Plots window. However, sometimes we want to export a plot and store it in a file for use elsewhere. There are graphics devices that support different formats, such as PDF (vector-based) or PNG (pixel-based). The basic workflow is to start a graphics device and tell it where to store the output file, then create the plot, and finally close the device again. Only if you close the device properly will a valid file be generated. For example, to create a PNG file:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Open graphics device</span></span>
@@ -899,8 +920,8 @@ Solution
 </div>
 </div>
 </section>
-<section id="calculate-mean-dbh-per-species." class="level3" data-number="12.1.11">
-<h3 data-number="12.1.11" class="anchored" data-anchor-id="calculate-mean-dbh-per-species."><span class="header-section-number">12.1.11</span> 11. Calculate mean dbh per species.</h3>
+<section id="calculate-mean-dbh-per-species." class="level3" data-number="13.1.11">
+<h3 data-number="13.1.11" class="anchored" data-anchor-id="calculate-mean-dbh-per-species."><span class="header-section-number">13.1.11</span> 11. Calculate mean dbh per species.</h3>
 <p>For calculating summary statistics, the dplyr package is really helpful. It is part of the tidyverse environment, which was designed for data science. If you work with large and complex datasets or if you have to derive many new variables, I really recommend that you have a look at this. Also, the syntax for dplyr is quite intuitive.</p>
 <p>For this exercise, use the dplyr package to calculate mean dbh per species. If you need help on this, check the demonstration of Part 2 where we calculated summary statistics for groups using the dplyr package!</p>
 <div class="callout callout-style-simple callout-tip no-icon callout-titled">
@@ -953,6 +974,212 @@ Solution
 </section>
 
 </main> <!-- /main -->
+<script>
+
+/* update total correct if #webex-total_correct exists */
+update_total_correct = function() {
+  console.log("webex: update total_correct");
+
+  var t = document.getElementsByClassName("webex-total_correct");
+  for (var i = 0; i < t.length; i++) {
+    p = t[i].parentElement;
+    var correct = p.getElementsByClassName("webex-correct").length;
+    var solvemes = p.getElementsByClassName("webex-solveme").length;
+    var radiogroups = p.getElementsByClassName("webex-radiogroup").length;
+    var selects = p.getElementsByClassName("webex-select").length;
+
+    t[i].innerHTML = correct + " of " + (solvemes + radiogroups + selects) + " correct";
+  }
+}
+
+/* webex-solution button toggling function */
+b_func = function() {
+  console.log("webex: toggle hide");
+
+  var cl = this.parentElement.classList;
+  if (cl.contains('open')) {
+    cl.remove("open");
+  } else {
+    cl.add("open");
+  }
+}
+
+/* check answers */
+check_func = function() {
+  console.log("webex: check answers");
+
+  var cl = this.parentElement.classList;
+  if (cl.contains('unchecked')) {
+    cl.remove("unchecked");
+    this.innerHTML = "Hide Answers";
+  } else {
+    cl.add("unchecked");
+    this.innerHTML = "Show Answers";
+  }
+}
+
+/* function for checking solveme answers */
+solveme_func = function(e) {
+  console.log("webex: check solveme");
+
+  var real_answers = JSON.parse(this.dataset.answer);
+  var my_answer = this.value;
+  var cl = this.classList;
+  if (cl.contains("ignorecase")) {
+    my_answer = my_answer.toLowerCase();
+  }
+  if (cl.contains("nospaces")) {
+    my_answer = my_answer.replace(/ /g, "")
+  }
+
+  if (my_answer == "") {
+    cl.remove("webex-correct");
+    cl.remove("webex-incorrect");
+  } else if (real_answers.includes(my_answer)) {
+    cl.add("webex-correct");
+    cl.remove("webex-incorrect");
+  } else {
+    cl.add("webex-incorrect");
+    cl.remove("webex-correct");
+  }
+
+  // match numeric answers within a specified tolerance
+  if(this.dataset.tol > 0){
+    var tol = JSON.parse(this.dataset.tol);
+    var matches = real_answers.map(x => Math.abs(x - my_answer) < tol)
+    if (matches.reduce((a, b) => a + b, 0) > 0) {
+      cl.add("webex-correct");
+    } else {
+      cl.remove("webex-correct");
+    }
+  }
+
+  // added regex bit
+  if (cl.contains("regex")){
+    answer_regex = RegExp(real_answers.join("|"))
+    if (answer_regex.test(my_answer)) {
+      cl.add("webex-correct");
+    }
+  }
+
+  update_total_correct();
+}
+
+/* function for checking select answers */
+select_func = function(e) {
+  console.log("webex: check select");
+
+  var cl = this.classList
+
+  /* add style */
+  cl.remove("webex-incorrect");
+  cl.remove("webex-correct");
+  if (this.value == "answer") {
+    cl.add("webex-correct");
+  } else if (this.value != "blank") {
+    cl.add("webex-incorrect");
+  }
+
+  update_total_correct();
+}
+
+/* function for checking radiogroups answers */
+radiogroups_func = function(e) {
+  console.log("webex: check radiogroups");
+
+  var checked_button = document.querySelector('input[name=' + this.id + ']:checked');
+  var cl = checked_button.parentElement.classList;
+  var labels = checked_button.parentElement.parentElement.children;
+
+  /* get rid of styles */
+  for (i = 0; i < labels.length; i++) {
+    labels[i].classList.remove("webex-incorrect");
+    labels[i].classList.remove("webex-correct");
+  }
+
+  /* add style */
+  if (checked_button.value == "answer") {
+    cl.add("webex-correct");
+  } else {
+    cl.add("webex-incorrect");
+  }
+
+  update_total_correct();
+}
+
+window.onload = function() {
+  console.log("webex onload");
+  /* set up solution buttons */
+  var buttons = document.getElementsByTagName("button");
+
+  for (var i = 0; i < buttons.length; i++) {
+    if (buttons[i].parentElement.classList.contains('webex-solution')) {
+      buttons[i].onclick = b_func;
+    }
+  }
+
+  var check_sections = document.getElementsByClassName("webex-check");
+  console.log("check:", check_sections.length);
+  for (var i = 0; i < check_sections.length; i++) {
+    check_sections[i].classList.add("unchecked");
+
+    let btn = document.createElement("button");
+    btn.innerHTML = "Show Answers";
+    btn.classList.add("webex-check-button");
+    btn.onclick = check_func;
+    check_sections[i].appendChild(btn);
+
+    let spn = document.createElement("span");
+    spn.classList.add("webex-total_correct");
+    check_sections[i].appendChild(spn);
+  }
+
+  /* set up webex-solveme inputs */
+  var solveme = document.getElementsByClassName("webex-solveme");
+
+  for (var i = 0; i < solveme.length; i++) {
+    /* make sure input boxes don't auto-anything */
+    solveme[i].setAttribute("autocomplete","off");
+    solveme[i].setAttribute("autocorrect", "off");
+    solveme[i].setAttribute("autocapitalize", "off");
+    solveme[i].setAttribute("spellcheck", "false");
+    solveme[i].value = "";
+
+    /* adjust answer for ignorecase or nospaces */
+    var cl = solveme[i].classList;
+    var real_answer = solveme[i].dataset.answer;
+    if (cl.contains("ignorecase")) {
+      real_answer = real_answer.toLowerCase();
+    }
+    if (cl.contains("nospaces")) {
+      real_answer = real_answer.replace(/ /g, "");
+    }
+    solveme[i].dataset.answer = real_answer;
+
+    /* attach checking function */
+    solveme[i].onkeyup = solveme_func;
+    solveme[i].onchange = solveme_func;
+
+    solveme[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
+  }
+
+  /* set up radiogroups */
+  var radiogroups = document.getElementsByClassName("webex-radiogroup");
+  for (var i = 0; i < radiogroups.length; i++) {
+    radiogroups[i].onchange = radiogroups_func;
+  }
+
+  /* set up selects */
+  var selects = document.getElementsByClassName("webex-select");
+  for (var i = 0; i < selects.length; i++) {
+    selects[i].onchange = select_func;
+    selects[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
+  }
+
+  update_total_correct();
+}
+
+</script>
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -973,6 +1200,121 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
   toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
   const icon = "";
   const anchorJS = new window.AnchorJS();
   anchorJS.options = {
@@ -1189,12 +1531,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./9-Design.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Design of experiments</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Design of experiments</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./11-Reproducibility.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Reproducibility and project organization</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Reproducibility and project organization</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
