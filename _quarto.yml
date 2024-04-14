@@ -17,17 +17,21 @@ book:
   - linkedin
   chapters:
   - index.qmd
-  - Introduction.qmd
-  - 1-GettingStarted.qmd
-  - 1B-PreparingData.qmd
+  - part: Introduction.qmd
+    chapters:
+    - 1-GettingStarted.qmd
+    - 1B-PreparingData.qmd
+    - 1A-Exercise.qmd
   - part: Descriptive Statistics
     chapters:
     - 2A-DescriptiveStatistics.qmd
     - 2B-SummaryStatistics.qmd
+    - 2A-Exercise.qmd
   - part: Hypothesis Testing
     chapters:
     - 3A-NHST.qmd
     - 3B-HypothesisTests.qmd
+    - 3A-Exercise.qmd
   - part: Regression Analysis
     chapters:
     - 4-SimpleRegression.qmd

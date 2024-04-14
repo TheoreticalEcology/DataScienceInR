@@ -1,0 +1,1703 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Introduction to Data Science with R - Exercise - Plots and summary statistics</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./3A-NHST.html" rel="next">
+<link href="./2B-SummaryStatistics.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="include/webex.css">
+<meta name="citation_title" content="Exercise - Plots and summary statistics">
+<meta name="citation_fulltext_html_url" content="https://TheoreticalEcology.github.io/DataScienceInR//2A-Exercise.html">
+<meta name="citation_language" content="en">
+</head>
+
+<body class="nav-sidebar floating slimcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./2A-DescriptiveStatistics.html">Descriptive Statistics</a></li><li class="breadcrumb-item"><a href="./2A-Exercise.html">Exercise - Plots and summary statistics</a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Introduction to Data Science with R</a> 
+        <div class="sidebar-tools-main tools-wide">
+    <a href="https://github.com/TheoreticalEcology/DataScienceInR" rel="" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <div class="dropdown">
+      <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Share"><i class="bi bi-share"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=|url|">
+              <i class="bi bi-bi-twitter pe-1"></i>
+            Twitter
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=|url|">
+              <i class="bi bi-bi-facebook pe-1"></i>
+            Facebook
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=|url|">
+              <i class="bi bi-bi-linkedin pe-1"></i>
+            LinkedIn
+            </a>
+          </li>
+      </ul>
+    </div>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./Introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./1-GettingStarted.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Getting Started with R</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./1B-PreparingData.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Preparing your data</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./1A-Exercise.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exercise - R basics</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Descriptive Statistics</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2A-DescriptiveStatistics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Plotting and describing data</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2B-SummaryStatistics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Summary statistics</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2A-Exercise.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Exercise - Plots and summary statistics</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text">Hypothesis Testing</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./3A-NHST.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Null Hypothesis Testing</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./3B-HypothesisTests.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Statistical tests</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./3A-Exercise.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exercise - NHST and statistical tests</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+ <span class="menu-text">Regression Analysis</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4-SimpleRegression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Simple linear regression</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./5-MultipleRegression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Multiple regression</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./6-GLM.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Generalized linear models</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+ <span class="menu-text">Multivariate Statistics</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2B-Multivariate.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Multivariate Statistics</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
+ <span class="menu-text">Predictive Modeling</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./8-MachineLearning.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Machine Learning</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true">
+ <span class="menu-text">Experimental Design</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./9-Design.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Design of experiments</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true">
+ <span class="menu-text">Data Science Skills</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-DataWrangling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Data handling</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11-Reproducibility.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Reproducibility and project organization</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./13A-regressions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Overview regression models</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#contingency-tables" id="toc-contingency-tables" class="nav-link active" data-scroll-target="#contingency-tables">Contingency tables</a></li>
+  <li><a href="#histogram" id="toc-histogram" class="nav-link" data-scroll-target="#histogram">Histogram</a></li>
+  <li><a href="#scatterplot" id="toc-scatterplot" class="nav-link" data-scroll-target="#scatterplot">Scatterplot</a></li>
+  <li><a href="#boxplot" id="toc-boxplot" class="nav-link" data-scroll-target="#boxplot">Boxplot</a></li>
+  <li><a href="#correlation" id="toc-correlation" class="nav-link" data-scroll-target="#correlation">Correlation</a></li>
+  <li><a href="#bonus---advanced-visualization-with-the-base-r-package" id="toc-bonus---advanced-visualization-with-the-base-r-package" class="nav-link" data-scroll-target="#bonus---advanced-visualization-with-the-base-r-package">Bonus - Advanced visualization with the base R package</a></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/TheoreticalEcology/DataScienceInR/edit/master/2A-Exercise.qmd" class="toc-action">Edit this page</a></p></div></div></nav>
+    </div>
+<!-- main -->
+<main class="content page-columns page-full" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Exercise - Plots and summary statistics</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<p>In this exercise you will practice:</p>
+<ul>
+<li>creating and plotting contingency tables for categorical variables (mosaicplot)</li>
+<li>plotting a numerical variable (histogram)</li>
+<li>plotting two numerical variables against each other (scatterplot)</li>
+<li>calculating correlations</li>
+</ul>
+<p>To perform this exercise use the help of the according functions. Also have a look at the examples at the bottom of the help page. You can obtain help for a specific function in several ways:</p>
+<ul>
+<li>select the function in your script (e.g.&nbsp;double click it or simply place the cursor in the word) and press F1</li>
+<li>“?” + function name (e.g.&nbsp;?hist) and execute</li>
+<li>go to the “help” panel (below the environment) and search for the function</li>
+</ul>
+<p>Let’s get started!</p>
+<p>Tasks:</p>
+<ol type="1">
+<li>Read the text below</li>
+<li>Run the examples</li>
+<li>Do the specific R exercises that are in the following pink block:</li>
+</ol>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Example-Questions
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>What is the answer to everything? <input class="webex-solveme nospaces" size="2" data-answer="[&quot;42&quot;]"></p>
+</div>
+</div>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p>Hints:</p>
+<p>The Hitchhiker’s Guide to the Galaxy</p>
+</div></div><section id="contingency-tables" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="contingency-tables">Contingency tables</h2>
+<p>Here, we will have a look at the data set “arthritis” from the “EcoData” package. The study was conducted as a double-blind clinical trial investigating a new treatment against arthritis. The improvement was measured as a categorical variable with the possible outcomes “Improved”, “Some” or “None”.</p>
+<p>Install and then load the package “EcoData” and have a look at the data using the <code>View()</code> function. This will open a new tab next to your R script. To return to your script, close the new tab or click on your script.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(EcoData)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># View(arthritis)</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the data</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> arthritis</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Coerce columns ’Improved' and 'Treatment' to (ordered) factors</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co"># (When the factor is ordered, other functions like table() and barplot() will use this order.</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Otherwise, the levels will be ordered alphabetically.)</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>dat<span class="sc">$</span>Improved <span class="ot">&lt;-</span> <span class="fu">factor</span>(dat<span class="sc">$</span>Improved, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"None"</span>,<span class="st">"Some"</span>,<span class="st">"Marked"</span>), <span class="at">ordered =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>dat<span class="sc">$</span>Treatment <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(dat<span class="sc">$</span>Treatment)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(dat)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="do">## 'data.frame':    84 obs. of  5 variables:</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ ID       : int  57 46 77 17 36 23 75 39 33 55 ...</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Treatment: Factor w/ 2 levels "Placebo","Treated": 2 2 2 2 2 2 2 2 2 2 ...</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Sex      : chr  "Male" "Male" "Male" "Male" ...</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Age      : int  27 29 30 32 46 58 59 59 63 63 ...</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Improved : Ord.factor w/ 3 levels "None"&lt;"Some"&lt;..: 2 1 1 3 3 3 1 3 1 1 ...</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>An important function for categorical data is <code>table()</code>. It produces a contingency table counting the occurrences of the different categories of one variable or of each combination of the categories of two (or more) variables.</p>
+<p>We are curious how many patients actually improved in the study and how this is influenced by the treatment. To show this graphically, we produced two plots (see below) using the following functions:</p>
+<ul>
+<li><code>table()</code></li>
+<li><code>plot()</code> and <code>barplot()</code></li>
+<li>(<code>str()</code>)</li>
+<li>(<code>summary()</code>)</li>
+</ul>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Task
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Your task is now to reconstruct the two plots shown below by using these functions.</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="2A-Exercise_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="2A-Exercise_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>What do you think of the study now? Could you already draw conclusions from this plot?</p>
+</div>
+</div>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p><strong>Hints for plot 1</strong></p>
+<p>What kind of plot is shown here? How many variables are shown in the plot? Approach: First, create a new object consisting of the table of the variable of interest. Then use this object for plotting. Changing plot elements: Have a look at the help of the plotting-function to find out how to change the y- and x-axis labels. What do you notice on the y-axis? You can change the limits of the y-axis using “ylim = c(from, to)” as an argument in the plotting function.</p>
+</div><div class="">
+<p><strong>Hints for plot 2</strong></p>
+<p>What kind of plot can you see here? How many variables does it show? To plot this you need to create a contingency table with the variables of interest. Changing plot elements: You can name the variables in your contingency table (e.g.&nbsp;name = variable, othername = othervariable). The name you assign to your table will be used as the title in the plot.</p>
+</div></div>
+<div class="webex-solution">
+<button>
+Click here to see the solution
+</button>
+<p>Plot 1</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>counts <span class="ot">&lt;-</span> <span class="fu">table</span>(dat<span class="sc">$</span>Improved)  <span class="co"># create a table which gives you counts of the three categories in the "Improved" variable</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(counts,            <span class="co"># create a barplot of your table</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">50</span>),    <span class="co"># change the limits of your y axis: starting from zero to 50</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">xlab =</span> <span class="st">"Improved"</span>,  <span class="co"># add a label to your x axis</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">ylab =</span> <span class="st">"Frequency"</span>)  <span class="co"># add a label to your y axis</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="2A-Exercise_files/figure-html/barplot of table-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Plot 2</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>Ratios <span class="ot">&lt;-</span> <span class="fu">table</span>(<span class="at">Improved =</span> dat<span class="sc">$</span>Improved, <span class="at">Treatment =</span> dat<span class="sc">$</span>Treatment)  <span class="co"># create a table with the assigned name "ratios", give the name "Improved" to the first variable which is the variable Improved from the data set Arthritis, give the name "Treatment" to the second variable which is the variable Treatment from the data set Arthritis</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(Ratios)  <span class="co"># create a plot of the table "ratios"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="2A-Exercise_files/figure-html/mosaic plot of table-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>To view the tables with the names “counts” and “Ratios” you can simply execute their names:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>counts</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="do">##   None   Some Marked </span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="do">##     42     14     28</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>Ratios</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="do">##         Treatment</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="do">## Improved Placebo Treated</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="do">##   None        29      13</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="do">##   Some         7       7</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="do">##   Marked       7      21</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>Could you already draw conclusions from this plot?</strong> No, because this is only a descriptive plot. You can say that a large proportion of the patients that got a placebo treatment did not improve while a large proportion of the patients that got the new treatment improved markedly. However, this could also be the result of random variation and sampling. We need inferential statistics to make conclusions about the effectiveness of the treatment.</p>
+</div>
+</section>
+<section id="histogram" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="histogram">Histogram</h2>
+<p>Now let’s have a look at the “birdabundance” dataset, which is in the “EcoData” package. This is not stored at CRAN (the official platform for R packages, but at github where we host our own code collections). If you haven’t done this yet, use the code below to install the package (note that you also need the “devtools” package to do this. Again, to load it and make the data set accessible, execute the function <code>library(EcoData)</code>. To view the data set you can use the <code>View()</code> function again.</p>
+<p>You can also get more explanations on the data set via the help.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"devtools"</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(devtools)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="at">repo =</span> <span class="st">"TheoreticalEcology/EcoData"</span>, <span class="at">dependencies =</span> T, <span class="at">build_vignettes =</span> T)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(EcoData)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(birdabundance)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The dataset has been assessed by scientists in Australia who counted birds in forest fragments and looked for drivers that influence these bird abundances, e.g.&nbsp;the size of a forest fragment and the distance to the next fragment. We want to see how these distances vary. A histogram is the standard figure to depict one numerical variable, such as for example distance measurements.</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Task
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Your task is now to reconstruct the following histogram including the labels, colors and lines using the functions:</p>
+<ul>
+<li><code>hist()</code> to create a histogram</li>
+<li><code>abline()</code> to add (vertical) lines to your histogram</li>
+</ul>
+<p>Think about what the histogram tells you about the distances between each forest fragment and the next forest fragment. What do the red and purple lines represent? Which site was the furthest away from forest fragments?</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="2A-Exercise_files/figure-html/histogram-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p><strong>Hints for plotting</strong></p>
+<p>Change the color (look at the help to see how). You can also try other colors, e.g.&nbsp;your favorite color (you can find all available colors with the function <code>colors()</code>). Change the bar widths (breaks). Play around to see how they change. When changing the bar widths, what do you notice on the y-axis? You can change the y-axis limits using “ylim” (see examples for <code>hist()</code>, second last line). Change the title and the x-axis name of your histogram using the arguments “main” and “xlab”.</p>
+<p>To add the lines, try the <code>abline()</code> function with the argument “v = 90” and look what happens. To remove the line, you have to execute the code producing your histogram again. Remember that <code>abline()</code> is a low level plotting function, which means it only adds an element to an existing plot! Instead of calculating the depicted values with a function and then pasting the values into your abline function, you can also directly use the function in <code>abline()</code>.<br>
+See an <em>example</em> on the right.</p>
+</div>
+</div>
+<div class="webex-solution">
+<button>
+Click here to see the solution
+</button>
+<p>You can plot the histogram like this:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(birdabundance<span class="sc">$</span>DIST,  <span class="co"># plot a histogram of the varriable distance from the data set birdabundance</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">breaks =</span> <span class="dv">20</span>,  <span class="co"># change bar widths, here we make them smaller</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span> <span class="st">"blue"</span>,  <span class="co"># change color to blue</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">20</span>),  <span class="co"># change the range of the y axis to from 0 to 20</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Distance distribution"</span>,  <span class="co"># change title of the plot</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Distance to the next forest fragment"</span>)  <span class="co"># change x axis name</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> <span class="fu">mean</span>(birdabundance<span class="sc">$</span>DIST), <span class="at">col =</span> <span class="st">"red"</span>)  <span class="co"># add a vertical line with an x value equal to the mean of the variable distance</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> <span class="fu">median</span>(birdabundance<span class="sc">$</span>DIST), <span class="at">col =</span> <span class="st">"purple"</span>)  <span class="co"># add a vertical line with an x value equal to the median of the variable distance</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="2A-Exercise_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p><em>What do the red and purple lines represent?</em></p>
+<p>The red line represents the mean distance between forest fragments, while the purple line represents the median.</p>
+<p><em>Which site was the furthest away from forest fragments?</em></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract the line in which the variable DIST takes its maximum</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>birdabundance[<span class="fu">which.max</span>(birdabundance<span class="sc">$</span>DIST),]</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="do">##    Site ABUND AREA DIST LDIST YR.ISOL GRAZE ALT</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="do">## 48   48  39.6   49 1427  1557    1972     1 180</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The site number 48 was the furthest away.</p>
+</div>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(airquality<span class="sc">$</span>Temp)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> <span class="dv">90</span>, <span class="at">col =</span> <span class="st">"blue"</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> <span class="fu">median</span>(airquality<span class="sc">$</span>Temp), <span class="at">col =</span> <span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="2A-Exercise_files/figure-html/abline example code-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</div></div></section>
+<section id="scatterplot" class="level2">
+<h2 class="anchored" data-anchor-id="scatterplot">Scatterplot</h2>
+<p>As you’ve learned by now, <code>plot()</code> can create different types of plots depending on the type of the input data. It creates a scatterplot when plotting two numerical variables. Now we are interested to see how the abundance of birds is affected by the distance to the next forest fragment, and if there is another variable that is important for this relationship (visualized here by the color of the points).</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Task
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Again, your task is to reconstruct the following plot using the following functions:</p>
+<ul>
+<li><code>plot()</code></li>
+<li>(<code>str()</code>)</li>
+<li>(<code>summary()</code>)</li>
+</ul>
+<p>What do you notice about the distribution of the colors along bird abundance?</p>
+<p>What is the mean bird abundance per color?</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="2A-Exercise_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p><strong>Hints for plotting:</strong></p>
+<p>What is plotted on the x-axis, what on the y-axis?<br>
+There are two different ways to write the plot function. One is to stick with the “Usage” in the help of the plot function (giving coordinates along the x-axis as the first attribute and those along the y-axis as the second attribute). The other way is to write the relationship between x and y as a formula that is: <code>y~x, data = dataset</code> Use google to find out how you can change the point shapes in your plot.</p>
+<p>Look at the dataset to find out which variable is indicated by the color of the points in the plot. Hint: It is a variable indicating 5 intensity levels. To change the color, include the attribute “col” in your plot function and set it equal to the variable.<br>
+To get a color gradient you can create a function with the following code. Apply it before producing your plot and use the created function <code>rbPal()</code> as the color in the plot.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Palettes can be created with a function for the grDevices package</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"grDevices"</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(grDevices)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a function to generate a continuous color palette from red to blue</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>rbPal <span class="ot">&lt;-</span> <span class="fu">colorRampPalette</span>(<span class="fu">c</span>(<span class="st">'red'</span>,<span class="st">'blue'</span>))</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Example for color in a plot</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(Ozone <span class="sc">~</span> Solar.R, <span class="at">data =</span> airquality, </span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span> <span class="fu">rbPal</span>(<span class="dv">12</span>)[Month]) <span class="co"># you can use any number, here it's 12 because we have 12 months</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+<div class="webex-solution">
+<button>
+Click here to see the solution
+</button>
+<p>You can either create a scatterplot of two numerical variables like this:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Create a function to generate a continuous color palette from red to blue</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>rbPal <span class="ot">&lt;-</span> <span class="fu">colorRampPalette</span>(<span class="fu">c</span>(<span class="st">'red'</span>,<span class="st">'blue'</span>)) <span class="co"># rpPal for red to blue palette</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(birdabundance<span class="sc">$</span>DIST, birdabundance<span class="sc">$</span>ABUND,  <span class="co"># create a plot of the variables DIST against ABUND from the data set birdabundance</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Distance (m)"</span>,  <span class="co"># add the label "Distance" to the y axis</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Bird abundance"</span>,  <span class="co"># add the label "Bird abundance" to the x axis</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span> <span class="fu">rbPal</span>(<span class="dv">5</span>)[birdabundance<span class="sc">$</span>GRAZE],  <span class="co"># color the data points according to their category in the variable GRAZE from the data set birdabundance</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">pch =</span> <span class="dv">17</span>) <span class="co"># change the point shape</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="2A-Exercise_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Or like this:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(ABUND <span class="sc">~</span> DIST, <span class="at">data =</span> birdabundance,  <span class="co"># create a plot of the variables DIST against ABUND from the data set birdabundance</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Distance (m)"</span>,  <span class="co"># add the label "Distance" to the x axis</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Bird abundance"</span>,  <span class="co"># add the label "Bird abundance" to the y axis</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span> <span class="fu">rbPal</span>(<span class="dv">5</span>)[GRAZE],  <span class="co"># color the data points according to their category in the variable GRAZE as a gradient</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">pch =</span> <span class="dv">17</span>) <span class="co"># change the point shape</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="2A-Exercise_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>The advantage of the second version is that it uses the structure of “response variable (y) explained by (~) explanatory variable (x)”. Also, you tell the plot function which data set to use once and it will automatically draw the variables from there, while in the first version you name the data set and the respective variable each time (even for the color).</p>
+<p><strong>What do you notice about the distribution of the colors along bird abundance?</strong></p>
+<p>You can see that the blue data points are only at the low abundances, whereas the red data points are rather at the higher abundances. Purple data points are throughout all abundances. There thus seems to be a correlation between the grazing classes and bird abundances.</p>
+<p>What is the mean bird abundance per color / level of grazing intensity?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Option 1: Using tidyverse / dplyr as shown at the end of section 2.0.1 Summary statistics:</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Attaching package: 'dplyr'</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="do">## The following objects are masked from 'package:stats':</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="do">##     filter, lag</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="do">## The following objects are masked from 'package:base':</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="do">##     intersect, setdiff, setequal, union</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>bird_grouped <span class="ot">&lt;-</span> birdabundance <span class="sc">%&gt;%</span> <span class="co"># define dataset to be summarized</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(GRAZE) <span class="sc">%&gt;%</span> <span class="co"># define grouping factor</span></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean.abund =</span> <span class="fu">mean</span>(ABUND)) <span class="co"># summarize by taking the mean of abundance</span></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Option 2: Using base R and formula notation:</span></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>bird_grouped <span class="ot">&lt;-</span> <span class="fu">aggregate</span>(ABUND<span class="sc">~</span>GRAZE, <span class="at">data =</span> birdabundance, <span class="at">FUN =</span> mean)</span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>bird_grouped</span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a><span class="do">##   GRAZE     ABUND</span></span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a><span class="do">## 1     1 28.623077</span></span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a><span class="do">## 2     2 21.950000</span></span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a><span class="do">## 3     3 21.286667</span></span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a><span class="do">## 4     4 20.571429</span></span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a><span class="do">## 5     5  6.292308</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</section>
+<section id="boxplot" class="level2">
+<h2 class="anchored" data-anchor-id="boxplot">Boxplot</h2>
+<p>The <code>boxplot()</code> function can be used to create boxplots - to visualize associations between continuous and categorical variables.</p>
+<p>The function can be used in two ways (similar to the <code>plot()</code> function): a) by specifcing <code>x</code> and <code>y</code> arguments and b) the formula syntax (the preferred way!):</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(Sepal.Length<span class="sc">~</span>Species, <span class="at">data =</span> iris)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="2A-Exercise_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>(Syntax: continuous variable ~ categorical variable )</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Task
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In the <code>MASS</code> package there is a dataset (<code>Melanoma</code>) about patients with malignant melanoma:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MASS)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="do">## Attaching package: 'MASS'</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="do">## The following object is masked from 'package:dplyr':</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="do">##     select</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="do">## The following object is masked from 'package:EcoData':</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="do">##     snails</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>df <span class="ot">=</span> Melanoma</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>sex <span class="ot">=</span> <span class="fu">ifelse</span>(df<span class="sc">$</span>sex <span class="sc">==</span> <span class="dv">0</span>, <span class="st">"female"</span>, <span class="st">"male"</span>)</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>status <span class="ot">=</span> <span class="fu">as.factor</span>(df<span class="sc">$</span>status)</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(df)</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a><span class="do">## 'data.frame':    205 obs. of  7 variables:</span></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ time     : int  10 30 35 99 185 204 210 232 232 279 ...</span></span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ status   : Factor w/ 3 levels "1","2","3": 3 3 2 3 1 1 1 3 1 1 ...</span></span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ sex      : chr  "male" "male" "male" "female" ...</span></span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ age      : int  76 56 41 71 52 28 77 60 49 68 ...</span></span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ year     : int  1972 1968 1977 1968 1965 1971 1972 1974 1968 1971 ...</span></span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ thickness: num  6.76 0.65 1.34 2.9 12.08 ...</span></span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ ulcer    : int  1 0 0 0 1 1 1 1 1 1 ...</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We want to check for associations between the age of the patients and the status of the melanoma, and later, at the same time for their sex:</p>
+<p>Tasks:</p>
+<ul>
+<li>Create boxplot with age against status</li>
+<li>Create boxplot with age against status AND sex (both groups at the same time)</li>
+<li>Add colors (for sex)</li>
+<li>Add Notch</li>
+<li>Increase spacing between the different groups (status)</li>
+<li>Bonus: add the observations/points on top of the boxplot using the <code>library(beeswarm)</code> package</li>
+</ul>
+<p>Can we use boxplots to make inference (are there significant differences)? What is the Notch?</p>
+</div>
+</div>
+<div class="{column-margin}">
+<p><strong>Hints</strong>:</p>
+<ul>
+<li><p>If you need help with the boxplot for age against status AND sex, check google, for example <a href="https://www.google.com/search?q=R+boxplot+two+groups">this query</a></p></li>
+<li><p>Spacing: <code>at</code> argument in the <code>boxplot( )</code> function</p></li>
+<li><p>Install the beeswarm package via <code>install.packages("beeswarm")</code></p></li>
+</ul>
+</div>
+<div class="webex-solution">
+<button>
+Click here to see the solution
+</button>
+<p>If we use colors, we also need a legend!</p>
+<p>Sometimes it is helpful to add the points/observations into the boxplot:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(beeswarm) </span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>b <span class="ot">=</span> <span class="fu">boxplot</span>(age<span class="sc">~</span>sex<span class="sc">+</span>status, </span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">at =</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="dv">4</span><span class="sc">:</span><span class="dv">5</span>, <span class="dv">7</span><span class="sc">:</span><span class="dv">8</span>), <span class="co"># x coordinates</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"#FF002387"</span>, <span class="st">"#5544FF77"</span>),</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">data =</span> df,</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">las =</span> <span class="dv">1</span>, <span class="co"># rotate labels so that all are horizontal </span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">xaxt =</span> <span class="st">"n"</span>, <span class="co"># omit x-axis labels+ticks, we will add them manually</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">xlab =</span> <span class="st">""</span>, <span class="co"># no xlab, unncessary</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>            <span class="at">notch =</span> <span class="cn">TRUE</span></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>            )</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a><span class="fu">beeswarm</span>(age<span class="sc">~</span>sex<span class="sc">+</span>status, </span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>         <span class="at">data =</span> df, </span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>         <span class="at">add =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>         <span class="at">at =</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="dv">4</span><span class="sc">:</span><span class="dv">5</span>, <span class="dv">7</span><span class="sc">:</span><span class="dv">8</span>) <span class="co"># x - coordinates</span></span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>         )</span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a><span class="fu">axis</span>(<span class="dv">1</span>, <span class="co"># which side of the plot, 1 == x-axis</span></span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>     <span class="at">at =</span> <span class="fu">c</span>(<span class="fl">1.5</span>, <span class="fl">4.5</span>, <span class="fl">7.5</span>), <span class="co"># x coordinates</span></span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>     <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Status 1"</span>, <span class="st">"Status 2"</span>, <span class="st">"Status 3"</span>) <span class="co"># labels</span></span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>     )</span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"bottomright"</span>, <span class="co"># position of the legend (x and y coordinates can be also used)</span></span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>       <span class="at">bty =</span> <span class="st">"n"</span>, <span class="co"># omit border line, personal preference</span></span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>       <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">"Female"</span>, <span class="st">"Male"</span>),</span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"#FF002387"</span>, <span class="st">"#5544FF77"</span>),</span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a>       <span class="at">pch =</span> <span class="dv">15</span> <span class="co"># point type (squares)</span></span>
+<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a>       )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="2A-Exercise_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p><strong>Can we use boxplots to make inference (are there significant differences)? What is the Notch?</strong>:</p>
+<p>Box plots by themselves cannot be used to make conclusions about significant differences. Tomorrow we will learn that we have two statistics for hypothesis testing, the effects (e.g., means) and the uncertainties of those effects/estimates. The box plot shows the medians, which we could theoretically use for testing. However, the boxplot doesn’t report the uncertainty of the reports. The uncertainty of the estimate is not the width/height of the box, it is just the distribution of the variable, for example:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2</span>)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>var1 <span class="ot">=</span> <span class="fu">rnorm</span>(<span class="dv">50</span>)</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>var2 <span class="ot">=</span> <span class="fu">rnorm</span>(<span class="dv">10000</span>)</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(var1)<span class="sc">/</span><span class="fu">sqrt</span>(<span class="dv">50</span>)</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 0.1597612</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(var2)<span class="sc">/</span><span class="fu">sqrt</span>(<span class="dv">10000</span>)</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 0.009994205</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>df <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="at">values =</span> <span class="fu">c</span>(var1, var2), <span class="at">group =</span> <span class="fu">as.factor</span>(<span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">"var1"</span>, <span class="dv">50</span>), <span class="fu">rep</span>(<span class="st">"var2"</span>, <span class="dv">10000</span>))))</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(values<span class="sc">~</span>group, <span class="at">data =</span> df, <span class="at">notch =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="dv">1</span>, <span class="fl">4.5</span>,<span class="at">xpd =</span> <span class="cn">NA</span>, <span class="at">labels =</span> <span class="fu">paste0</span>(<span class="st">"N = 50, standard error = "</span>, <span class="fu">round</span>(<span class="fu">sd</span>(var1)<span class="sc">/</span><span class="fu">sqrt</span>(<span class="dv">50</span>), <span class="dv">4</span>)))</span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="dv">2</span>, <span class="fl">4.5</span>,<span class="at">xpd =</span> <span class="cn">NA</span>, <span class="at">labels =</span> <span class="fu">paste0</span>(<span class="st">"N = 10000, standard error = "</span>, <span class="fu">round</span>(<span class="fu">sd</span>(var1)<span class="sc">/</span><span class="fu">sqrt</span>(<span class="dv">10000</span>), <span class="dv">4</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="2A-Exercise_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>The standard error changes with the number of observations (more on this tomorrow), while the distribution (the box) remains relatively stable!</p>
+<p>The notch is the confidence interval of the median, so 2*the standard error of the median. We can roughly say that there is a significant difference when the confidence intervals overlap!</p>
+</div>
+</section>
+<section id="correlation" class="level2">
+<h2 class="anchored" data-anchor-id="correlation">Correlation</h2>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Task
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In the previous plot on bird abundance you’ve seen three variables. Now we want to know, how they are correlated with each other. Remember that we can use the function <code>cor()</code> to calculate correlations. Which of the following correlation coefficients (Pearson) belongs to which variable pair? Can you see these correlations in your previous plot?</p>
+<div class="cell">
+<pre><code>## [1] 0.2361125
+## [1] -0.6825114
+## [1] -0.2558418</code></pre>
+</div>
+<p>Think about the meaning of the correlation values (positive/negative, strength). Is it what you would have expected by looking at the plot?</p>
+</div>
+</div>
+<div class="webex-solution">
+<button>
+Click here to see the solution
+</button>
+<p>#### Solution</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(birdabundance<span class="sc">$</span>ABUND, birdabundance<span class="sc">$</span>DIST)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 0.2361125</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(birdabundance<span class="sc">$</span>ABUND, birdabundance<span class="sc">$</span>GRAZE)</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] -0.6825114</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(birdabundance<span class="sc">$</span>GRAZE, birdabundance<span class="sc">$</span>DIST)</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] -0.2558418</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The first correlation (abundance to distance) tells us that there is a small positive correlation between the two variables, but it does not tell us whether it is significant or not. We will properly test such relationships later in the course. In the scatter plot we have seen this weak positive correlation already. The second correlation (abundance to grazing) tells us that there is a stronger negative correlation between abundance and grazing. We have already seen a pattern of the color of the data points along bird abundances (red towards higher, blue towards lower abundances). The third correlation (grazing to distance) tells us that there is a small negative correlation between the two variables. However, the color pattern along distance is not as obvious as for abundance.</p>
+</div>
+</section>
+<section id="bonus---advanced-visualization-with-the-base-r-package" class="level2">
+<h2 class="anchored" data-anchor-id="bonus---advanced-visualization-with-the-base-r-package">Bonus - Advanced visualization with the base R package</h2>
+<p>You can create any kind of plot or even visualization in R. If you want to plot abstract objects in R, start with an empty plot window (<code>plot(NULL,NULL, xlim = c(0,1), ylim = c(0,1), axes = F</code>) and then fill it however you like, two examples:</p>
+<p>In <a href="https://doi.org/10.1111/2041-210X.13329">Pichler et al.&nbsp;2020</a> we created Figure 5 A (an overview over the data used in the paper) using base R:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>),<span class="at">mar =</span> <span class="fu">c</span>(<span class="fl">0.3</span>,<span class="dv">3</span>,<span class="dv">1</span>,<span class="dv">3</span>)<span class="sc">+</span><span class="fl">0.0</span>,<span class="at">oma =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="fl">0.3</span>,<span class="dv">2</span>,<span class="dv">1</span>))</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Fig5a</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="cn">NULL</span>,<span class="cn">NULL</span>, <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>), <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>), <span class="at">axes =</span> F, <span class="at">xlab =</span> <span class="st">""</span>, <span class="at">ylab =</span> <span class="st">""</span>)</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="co">#text(x = -0.06, y = 1.03, labels = "(a)", cex = 0.9, xpd = NA, font = 2)</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="fu">polygon</span>(<span class="fu">c</span>(<span class="dv">0</span>,<span class="fl">0.125</span>,<span class="fl">0.17</span>,<span class="fl">0.19</span>,<span class="fl">0.35</span>,<span class="fl">0.51</span>,<span class="fl">0.65</span>,<span class="fl">0.85</span>), <span class="fu">c</span>(<span class="dv">0</span>,<span class="fl">0.25</span>,<span class="fl">0.5</span>,<span class="fl">0.42</span>,<span class="dv">1</span>,<span class="fl">0.35</span>,<span class="fl">0.09</span>,<span class="dv">0</span>), <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">col =</span> <span class="st">"lightgrey"</span>, <span class="at">xpd =</span> <span class="cn">NA</span>)</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>baseX <span class="ot">=</span> <span class="fl">0.72</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>baseYv <span class="ot">=</span> <span class="fu">c</span>(<span class="fl">0.1</span>,<span class="fl">0.4</span>,<span class="fl">0.7</span>)</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>cols <span class="ot">=</span> RColorBrewer<span class="sc">::</span><span class="fu">brewer.pal</span>(<span class="dv">3</span>, <span class="st">"Accent"</span>)</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>altitude <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"50 m.a.s.l"</span>, <span class="st">"1000 m.a.s.l"</span>, <span class="st">"2000 m.a.s.l"</span>)</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>lineY <span class="ot">=</span> baseYv<span class="fl">+0.05</span></span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>) {</span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>  baseY <span class="ot">=</span> baseYv[i]</span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rect</span>(<span class="at">xleft =</span> baseX, <span class="at">xright =</span> baseX<span class="fl">+0.025</span>,<span class="at">ybottom =</span> baseY,<span class="at">ytop =</span> baseY<span class="fl">+0.1</span>, <span class="at">col =</span> cols[i], <span class="at">lwd =</span> <span class="fl">0.8</span>)</span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rect</span>(<span class="at">xleft =</span> baseX<span class="fl">+0.035</span>, <span class="at">xright =</span> baseX<span class="fl">+0.135</span>,<span class="at">ybottom =</span> baseY,<span class="at">ytop =</span> baseY<span class="fl">+0.1</span>, <span class="at">col =</span> cols[i], <span class="at">lwd =</span> <span class="fl">0.8</span>)</span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rect</span>(<span class="at">xleft =</span> baseX<span class="fl">+0.035</span>, <span class="at">xright =</span> baseX<span class="fl">+0.135</span>,<span class="at">ybottom =</span> baseY<span class="fl">+0.11</span>,<span class="at">ytop =</span> baseY<span class="fl">+0.135</span>, <span class="at">col =</span> cols[i], <span class="at">lwd =</span> <span class="fl">0.8</span>)</span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>  y <span class="ot">=</span> lineY[i]</span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lines</span>(<span class="at">y =</span> <span class="fu">rep</span>(y,<span class="dv">2</span>), <span class="at">x =</span> <span class="fu">c</span>(<span class="fl">0.0</span>,baseX<span class="fl">-0.05</span>), <span class="at">lty =</span> <span class="dv">3</span>, <span class="at">lwd =</span> <span class="fl">1.2</span>, <span class="at">xpd =</span> <span class="cn">NA</span>)</span>
+<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">text</span>(<span class="at">y =</span> y<span class="fl">+0.03</span>, <span class="at">x =</span> <span class="sc">-</span><span class="fl">0.15</span>, <span class="at">labels =</span> altitude[i], <span class="at">cex =</span> <span class="fl">0.7</span>, <span class="at">pos =</span> <span class="dv">4</span>, <span class="at">xpd =</span> <span class="cn">NA</span>, <span class="at">font =</span> <span class="dv">2</span>)</span>
+<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="at">x =</span> <span class="fl">0.85</span>, <span class="at">y =</span> baseYv[<span class="dv">1</span>]<span class="sc">+</span><span class="fl">0.05</span>,<span class="at">pos =</span> <span class="dv">4</span>, <span class="at">xpd =</span> <span class="cn">NA</span>, <span class="at">cex =</span> <span class="fl">0.9</span>, <span class="at">labels =</span> <span class="st">"Low"</span>, <span class="at">font =</span> <span class="dv">2</span>)</span>
+<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="at">x =</span> <span class="fl">0.85</span>, <span class="at">y =</span> baseYv[<span class="dv">2</span>]<span class="sc">+</span><span class="fl">0.05</span>,<span class="at">pos =</span> <span class="dv">4</span>, <span class="at">xpd =</span> <span class="cn">NA</span>, <span class="at">cex =</span> <span class="fl">0.9</span>, <span class="at">labels =</span> <span class="st">"Mid"</span>, <span class="at">font =</span> <span class="dv">2</span>)</span>
+<span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="at">x =</span> <span class="fl">0.85</span>, <span class="at">y =</span> baseYv[<span class="dv">3</span>]<span class="sc">+</span><span class="fl">0.05</span>,<span class="at">pos =</span> <span class="dv">4</span>, <span class="at">xpd =</span> <span class="cn">NA</span>, <span class="at">cex =</span> <span class="fl">0.9</span>, <span class="at">labels =</span> <span class="st">"High"</span>, <span class="at">font =</span> <span class="dv">2</span>)</span>
+<span id="cb19-23"><a href="#cb19-23" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="at">x =</span> <span class="fl">0.35</span>, <span class="at">y =</span> <span class="dv">0</span>, <span class="at">pos =</span> <span class="dv">3</span>, <span class="at">labels =</span> <span class="st">"Costa Rica"</span>, <span class="at">cex =</span> <span class="fl">0.9</span>, <span class="at">font =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="2A-Exercise_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Go through the code and try to understand which line or function call creates which element in the plot!</p>
+<p>Figure 3 in the same paper is based on the following function (which we have developed just for this paper!):</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>spider <span class="ot">=</span> <span class="cf">function</span>(<span class="at">x1 =</span> <span class="cn">NULL</span>,<span class="at">x2 =</span> <span class="cn">NULL</span>, <span class="at">colRec =</span> <span class="st">"#ff9999"</span>, <span class="at">alphaRec =</span> <span class="fl">0.5</span>,<span class="at">colRecBorder =</span> <span class="cn">NULL</span>, <span class="at">titles =</span> <span class="cn">NULL</span>, <span class="at">stepsText =</span> <span class="cn">NULL</span>,<span class="at">singlePanel =</span> F,</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>                  <span class="at">rectangular =</span> F,</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>                  <span class="at">colSpider =</span> <span class="st">"#e6e6e6"</span> ,<span class="at">alphaSpider =</span> <span class="fl">0.5</span>,</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>                  <span class="at">colBorder =</span> <span class="fu">c</span>(<span class="st">"#cccccc"</span>,<span class="st">"#cccccc"</span>,<span class="st">"#666798"</span>,<span class="st">"#cccccc"</span>,<span class="st">"#cccccc"</span>),</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>                  <span class="at">maxValues =</span> <span class="cn">NULL</span>,<span class="at">minValues =</span> <span class="cn">NULL</span>,</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>                  <span class="at">rad =</span> <span class="dv">5</span>, <span class="at">cexSteps =</span> <span class="fl">1.4</span>, <span class="at">cexProcent =</span> <span class="fl">0.8</span>,</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>                  <span class="at">parValues =</span> <span class="fu">list</span>(<span class="at">pty =</span> <span class="st">"s"</span>), <span class="at">cexPoints =</span> <span class="fl">1.0</span>, <span class="at">circleLines =</span> <span class="dv">5</span>, <span class="at">twistSteps =</span> <span class="dv">90</span>, <span class="at">cexTitles =</span> <span class="fl">0.7</span>){</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="fu">is.null</span>(colRecBorder)) colRecBorder <span class="ot">=</span> colRec</span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="fu">is.null</span>(<span class="fu">dim</span>(x1))) x1 <span class="ot">=</span> <span class="fu">matrix</span>(x1, <span class="at">ncol =</span> <span class="fu">length</span>(x1), <span class="at">nrow =</span> <span class="dv">1</span>)</span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="sc">!</span><span class="fu">is.null</span>(x2)){</span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span>(<span class="fu">is.null</span>(<span class="fu">dim</span>(x2))) x2 <span class="ot">=</span> <span class="fu">matrix</span>(x2, <span class="at">ncol =</span> <span class="fu">length</span>(x2), <span class="at">nrow =</span> <span class="dv">1</span>)</span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="fu">is.null</span>(maxValues)) maxValues <span class="ot">=</span> <span class="fu">rep</span>(<span class="dv">1</span>, <span class="fu">ncol</span>(x1))</span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="fu">is.null</span>(minValues)) minValues <span class="ot">=</span> <span class="fu">rep</span>(<span class="dv">0</span>, <span class="fu">ncol</span>(x1))</span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="sc">!</span><span class="fu">is.null</span>(colRec)) colRec2 <span class="ot">=</span> <span class="fu">addA</span>(colRec, <span class="fl">0.5</span><span class="sc">*</span>alphaRec)</span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="sc">!</span><span class="fu">is.null</span>(colRec)) colRec <span class="ot">=</span> <span class="fu">addA</span>(colRec, alphaRec)</span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="fu">length</span>(colRec) <span class="sc">==</span> <span class="dv">1</span>) {</span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a>    colRec <span class="ot">=</span> <span class="fu">rep</span>(colRec, <span class="fu">nrow</span>(x1))</span>
+<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a>    colRecBorder <span class="ot">=</span> <span class="fu">rep</span>(colRecBorder, <span class="fu">nrow</span>(x1))</span>
+<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a>  <span class="do">## scale:</span></span>
+<span id="cb20-25"><a href="#cb20-25" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(x1)){</span>
+<span id="cb20-26"><a href="#cb20-26" aria-hidden="true" tabindex="-1"></a>    x1[,i] <span class="ot">=</span> (x1[,i] <span class="sc">+</span> <span class="fu">abs</span>(minValues[i]))<span class="sc">/</span>(<span class="fu">abs</span>(minValues[i]) <span class="sc">+</span> maxValues[i])</span>
+<span id="cb20-27"><a href="#cb20-27" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span>(<span class="sc">!</span><span class="fu">is.null</span>(x2)) x2[,i] <span class="ot">=</span> (x2[,i] <span class="sc">+</span> <span class="fu">abs</span>(minValues[i]))<span class="sc">/</span>(<span class="fu">abs</span>(minValues[i]) <span class="sc">+</span> maxValues[i])</span>
+<span id="cb20-28"><a href="#cb20-28" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span>(<span class="fu">any</span>(x1[,i] <span class="sc">&gt;</span> maxValues[i])) <span class="fu">stop</span>(<span class="st">"Max values are lower than actual values"</span>)</span>
+<span id="cb20-29"><a href="#cb20-29" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span>(<span class="fu">any</span>(x1[,i] <span class="sc">&lt;</span> minValues[i])) <span class="fu">stop</span>(<span class="st">"Min values are higher than actual values"</span>)</span>
+<span id="cb20-30"><a href="#cb20-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-31"><a href="#cb20-31" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb20-32"><a href="#cb20-32" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="sc">!</span><span class="fu">is.null</span>(x2)){</span>
+<span id="cb20-33"><a href="#cb20-33" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span>(<span class="fu">nrow</span>(x2) <span class="sc">!=</span> <span class="fu">nrow</span>(x1)) <span class="fu">stop</span>(<span class="st">"x1 and x2 do not have equal number of rows"</span>)</span>
+<span id="cb20-34"><a href="#cb20-34" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb20-35"><a href="#cb20-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-36"><a href="#cb20-36" aria-hidden="true" tabindex="-1"></a>  <span class="do">## init:</span></span>
+<span id="cb20-37"><a href="#cb20-37" aria-hidden="true" tabindex="-1"></a>  lineSeq <span class="ot">=</span> <span class="fu">seq</span>(rad<span class="sc">*</span><span class="fl">0.1</span>,rad, <span class="at">length.out =</span> <span class="dv">5</span>)</span>
+<span id="cb20-38"><a href="#cb20-38" aria-hidden="true" tabindex="-1"></a>  tmpSinglePanel <span class="ot">=</span> T</span>
+<span id="cb20-39"><a href="#cb20-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">do.call</span>(par, parValues)</span>
+<span id="cb20-40"><a href="#cb20-40" aria-hidden="true" tabindex="-1"></a>  nseg<span class="ot">=</span><span class="dv">1440</span></span>
+<span id="cb20-41"><a href="#cb20-41" aria-hidden="true" tabindex="-1"></a>  nSeg <span class="ot">=</span> <span class="fu">ncol</span>(x1)</span>
+<span id="cb20-42"><a href="#cb20-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-43"><a href="#cb20-43" aria-hidden="true" tabindex="-1"></a>  procent <span class="ot">=</span> <span class="fu">matrix</span>(<span class="dv">0</span>,circleLines,<span class="dv">2</span>)</span>
+<span id="cb20-44"><a href="#cb20-44" aria-hidden="true" tabindex="-1"></a>  colSpider <span class="ot">&lt;-</span> <span class="fu">addA</span>(colSpider, alphaSpider)</span>
+<span id="cb20-45"><a href="#cb20-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-46"><a href="#cb20-46" aria-hidden="true" tabindex="-1"></a>  lines <span class="ot">=</span> circleLines</span>
+<span id="cb20-47"><a href="#cb20-47" aria-hidden="true" tabindex="-1"></a>  lineSeq <span class="ot">=</span> <span class="fu">seq</span>(rad<span class="sc">*</span><span class="fl">0.1</span>,rad, <span class="at">length.out =</span> lines)</span>
+<span id="cb20-48"><a href="#cb20-48" aria-hidden="true" tabindex="-1"></a>  angles <span class="ot">=</span> <span class="fu">seq</span>(<span class="dv">0</span><span class="sc">+</span>twistSteps,<span class="dv">360</span><span class="sc">+</span>twistSteps,<span class="at">length.out =</span> nSeg<span class="sc">+</span><span class="dv">1</span>)[<span class="dv">1</span><span class="sc">:</span>(nSeg)]</span>
+<span id="cb20-49"><a href="#cb20-49" aria-hidden="true" tabindex="-1"></a>  baseRadar <span class="ot">=</span> <span class="cf">function</span>() {</span>
+<span id="cb20-50"><a href="#cb20-50" aria-hidden="true" tabindex="-1"></a>    <span class="fu">plot</span>(<span class="cn">NULL</span>, <span class="cn">NULL</span>, <span class="at">xlim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">5</span>,<span class="dv">5</span>), <span class="at">ylim =</span><span class="fu">c</span>(<span class="sc">-</span><span class="dv">5</span>,<span class="dv">5</span>),<span class="at">pty=</span><span class="st">"s"</span>, <span class="at">axes =</span> F, <span class="at">xlab =</span> <span class="st">""</span>, <span class="at">ylab =</span> <span class="st">""</span>)</span>
+<span id="cb20-51"><a href="#cb20-51" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span>(<span class="sc">!</span>rectangular)</span>
+<span id="cb20-52"><a href="#cb20-52" aria-hidden="true" tabindex="-1"></a>      <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(lineSeq)){</span>
+<span id="cb20-53"><a href="#cb20-53" aria-hidden="true" tabindex="-1"></a>        xx <span class="ot">=</span> lineSeq[i]<span class="sc">*</span><span class="fu">cos</span>( <span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">2</span><span class="sc">*</span>pi, <span class="at">length.out=</span>nseg) )</span>
+<span id="cb20-54"><a href="#cb20-54" aria-hidden="true" tabindex="-1"></a>        yy <span class="ot">=</span> lineSeq[i]<span class="sc">*</span><span class="fu">sin</span>( <span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">2</span><span class="sc">*</span>pi, <span class="at">length.out=</span>nseg) )</span>
+<span id="cb20-55"><a href="#cb20-55" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span>(i <span class="sc">==</span> lines) <span class="fu">polygon</span>(xx,yy, <span class="at">col=</span> colSpider, <span class="at">border =</span> colBorder[lines], <span class="at">lty =</span> <span class="dv">2</span>, <span class="at">lwd =</span> <span class="dv">1</span>)</span>
+<span id="cb20-56"><a href="#cb20-56" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span> <span class="cf">if</span>(i <span class="sc">==</span> <span class="fu">ceiling</span>(lines)) <span class="fu">polygon</span>(xx,yy, <span class="at">border =</span> colBorder[<span class="fu">ceiling</span>(lines)], <span class="at">lty =</span> <span class="dv">2</span>)</span>
+<span id="cb20-57"><a href="#cb20-57" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span> <span class="cf">if</span>(i <span class="sc">==</span> <span class="dv">1</span>) <span class="fu">polygon</span>(xx,yy,  <span class="at">border =</span> colBorder[lines], <span class="at">lty =</span> <span class="dv">2</span>)</span>
+<span id="cb20-58"><a href="#cb20-58" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span> <span class="fu">polygon</span>(xx,yy, <span class="at">border =</span> colBorder[i], <span class="at">lty =</span> <span class="dv">2</span>)</span>
+<span id="cb20-59"><a href="#cb20-59" aria-hidden="true" tabindex="-1"></a>      }</span>
+<span id="cb20-60"><a href="#cb20-60" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span></span>
+<span id="cb20-61"><a href="#cb20-61" aria-hidden="true" tabindex="-1"></a>      <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(lineSeq)){</span>
+<span id="cb20-62"><a href="#cb20-62" aria-hidden="true" tabindex="-1"></a>        xx <span class="ot">=</span> <span class="fu">cos</span>(<span class="fu">deg2rad</span>(angles))<span class="sc">*</span>lineSeq[i]</span>
+<span id="cb20-63"><a href="#cb20-63" aria-hidden="true" tabindex="-1"></a>        yy <span class="ot">=</span> <span class="fu">sin</span>(<span class="fu">deg2rad</span>(angles))<span class="sc">*</span>lineSeq[i]</span>
+<span id="cb20-64"><a href="#cb20-64" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span>(i <span class="sc">==</span> lines) <span class="fu">polygon</span>(xx,yy, <span class="at">col=</span> colSpider, <span class="at">border =</span> colBorder[lines], <span class="at">lty =</span> <span class="dv">2</span>, <span class="at">lwd =</span> <span class="dv">1</span>)</span>
+<span id="cb20-65"><a href="#cb20-65" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span> <span class="cf">if</span>(i <span class="sc">==</span> <span class="fu">ceiling</span>(lines)) <span class="fu">polygon</span>(xx,yy, <span class="at">border =</span> colBorder[<span class="fu">ceiling</span>(lines)], <span class="at">lty =</span> <span class="dv">2</span>)</span>
+<span id="cb20-66"><a href="#cb20-66" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span> <span class="cf">if</span>(i <span class="sc">==</span> <span class="dv">1</span>) <span class="fu">polygon</span>(xx,yy,  <span class="at">border =</span> colBorder[lines], <span class="at">lty =</span> <span class="dv">2</span>)</span>
+<span id="cb20-67"><a href="#cb20-67" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span> <span class="fu">polygon</span>(xx,yy, <span class="at">border =</span> colBorder[i], <span class="at">lty =</span> <span class="dv">2</span>)</span>
+<span id="cb20-68"><a href="#cb20-68" aria-hidden="true" tabindex="-1"></a>      }</span>
+<span id="cb20-69"><a href="#cb20-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-70"><a href="#cb20-70" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span>(counter <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(angles)) {</span>
+<span id="cb20-71"><a href="#cb20-71" aria-hidden="true" tabindex="-1"></a>      <span class="fu">segments</span>(<span class="at">x0 =</span> <span class="fu">cos</span>(<span class="fu">deg2rad</span>(angles[counter]))<span class="sc">*</span>lineSeq[<span class="dv">1</span>],</span>
+<span id="cb20-72"><a href="#cb20-72" aria-hidden="true" tabindex="-1"></a>               <span class="at">y0 =</span>  <span class="fu">sin</span>(<span class="fu">deg2rad</span>(angles[counter]))<span class="sc">*</span>lineSeq[<span class="dv">1</span>],</span>
+<span id="cb20-73"><a href="#cb20-73" aria-hidden="true" tabindex="-1"></a>               <span class="at">x1 =</span> <span class="fu">cos</span>(<span class="fu">deg2rad</span>(angles[counter]))<span class="sc">*</span>rad ,</span>
+<span id="cb20-74"><a href="#cb20-74" aria-hidden="true" tabindex="-1"></a>               <span class="at">y1 =</span> <span class="fu">sin</span>(<span class="fu">deg2rad</span>(angles[counter]))<span class="sc">*</span>rad ,</span>
+<span id="cb20-75"><a href="#cb20-75" aria-hidden="true" tabindex="-1"></a>               <span class="at">col =</span> colBorder[<span class="dv">5</span>])</span>
+<span id="cb20-76"><a href="#cb20-76" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb20-77"><a href="#cb20-77" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb20-78"><a href="#cb20-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-79"><a href="#cb20-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-80"><a href="#cb20-80" aria-hidden="true" tabindex="-1"></a>  <span class="do">## plot rect</span></span>
+<span id="cb20-81"><a href="#cb20-81" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(data <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(x1)){</span>
+<span id="cb20-82"><a href="#cb20-82" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span>(data <span class="sc">==</span> <span class="dv">1</span> <span class="sc">||</span> <span class="sc">!</span>singlePanel) <span class="fu">baseRadar</span>()</span>
+<span id="cb20-83"><a href="#cb20-83" aria-hidden="true" tabindex="-1"></a>    valuesP <span class="ot">=</span> <span class="fu">matrix</span>(<span class="dv">0</span>,nSeg,<span class="dv">2</span>)</span>
+<span id="cb20-84"><a href="#cb20-84" aria-hidden="true" tabindex="-1"></a>    textP <span class="ot">=</span> <span class="fu">matrix</span>(<span class="dv">0</span>,nSeg,<span class="dv">2</span>)</span>
+<span id="cb20-85"><a href="#cb20-85" aria-hidden="true" tabindex="-1"></a>    valuesPtrain <span class="ot">=</span> <span class="fu">matrix</span>(<span class="dv">0</span>,nSeg,<span class="dv">2</span>)</span>
+<span id="cb20-86"><a href="#cb20-86" aria-hidden="true" tabindex="-1"></a>    drTest <span class="ot">=</span> x1[data,,drop <span class="ot">=</span> F]</span>
+<span id="cb20-87"><a href="#cb20-87" aria-hidden="true" tabindex="-1"></a>    drTrain <span class="ot">=</span> x2[data,,drop <span class="ot">=</span> F]</span>
+<span id="cb20-88"><a href="#cb20-88" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nSeg){</span>
+<span id="cb20-89"><a href="#cb20-89" aria-hidden="true" tabindex="-1"></a>      valuesP[i,<span class="dv">1</span>] <span class="ot">=</span> <span class="fu">cos</span>(<span class="fu">deg2rad</span>(angles[i]))<span class="sc">*</span>drTest[<span class="dv">1</span>,i]<span class="sc">*</span>(rad<span class="sc">-</span>lineSeq[<span class="dv">1</span>]) <span class="sc">+</span></span>
+<span id="cb20-90"><a href="#cb20-90" aria-hidden="true" tabindex="-1"></a>        <span class="fu">cos</span>(<span class="fu">deg2rad</span>(angles[i]))<span class="sc">*</span>lineSeq[<span class="dv">1</span>]</span>
+<span id="cb20-91"><a href="#cb20-91" aria-hidden="true" tabindex="-1"></a>      valuesP[i,<span class="dv">2</span>] <span class="ot">=</span> <span class="fu">sin</span>(<span class="fu">deg2rad</span>(angles[i]))<span class="sc">*</span>drTest[<span class="dv">1</span>,i]<span class="sc">*</span>(rad<span class="sc">-</span>lineSeq[<span class="dv">1</span>]) <span class="sc">+</span></span>
+<span id="cb20-92"><a href="#cb20-92" aria-hidden="true" tabindex="-1"></a>        <span class="fu">sin</span>(<span class="fu">deg2rad</span>(angles[i]))<span class="sc">*</span>lineSeq[<span class="dv">1</span>]</span>
+<span id="cb20-93"><a href="#cb20-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-94"><a href="#cb20-94" aria-hidden="true" tabindex="-1"></a>      <span class="cf">if</span>(<span class="sc">!</span><span class="fu">is.null</span>(x2)){</span>
+<span id="cb20-95"><a href="#cb20-95" aria-hidden="true" tabindex="-1"></a>        valuesPtrain[i,<span class="dv">1</span>] <span class="ot">=</span> <span class="fu">cos</span>(<span class="fu">deg2rad</span>(angles[i]))<span class="sc">*</span>drTrain[<span class="dv">1</span>,i]<span class="sc">*</span>(rad<span class="sc">-</span>lineSeq[<span class="dv">1</span>]) <span class="sc">+</span></span>
+<span id="cb20-96"><a href="#cb20-96" aria-hidden="true" tabindex="-1"></a>          <span class="fu">cos</span>(<span class="fu">deg2rad</span>(angles[i]))<span class="sc">*</span>lineSeq[<span class="dv">1</span>]</span>
+<span id="cb20-97"><a href="#cb20-97" aria-hidden="true" tabindex="-1"></a>        valuesPtrain[i,<span class="dv">2</span>] <span class="ot">=</span> <span class="fu">sin</span>(<span class="fu">deg2rad</span>(angles[i]))<span class="sc">*</span>drTrain[<span class="dv">1</span>,i]<span class="sc">*</span>(rad<span class="sc">-</span>lineSeq[<span class="dv">1</span>]) <span class="sc">+</span></span>
+<span id="cb20-98"><a href="#cb20-98" aria-hidden="true" tabindex="-1"></a>          <span class="fu">sin</span>(<span class="fu">deg2rad</span>(angles[i]))<span class="sc">*</span>lineSeq[<span class="dv">1</span>]</span>
+<span id="cb20-99"><a href="#cb20-99" aria-hidden="true" tabindex="-1"></a>      }</span>
+<span id="cb20-100"><a href="#cb20-100" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-101"><a href="#cb20-101" aria-hidden="true" tabindex="-1"></a>      textP[i,<span class="dv">1</span>] <span class="ot">=</span> <span class="fu">cos</span>(<span class="fu">deg2rad</span>(angles[i]))<span class="sc">*</span><span class="fl">1.0</span><span class="sc">*</span>rad</span>
+<span id="cb20-102"><a href="#cb20-102" aria-hidden="true" tabindex="-1"></a>      textP[i,<span class="dv">2</span>] <span class="ot">=</span> <span class="fu">sin</span>(<span class="fu">deg2rad</span>(angles[i]))<span class="sc">*</span><span class="fl">1.08</span><span class="sc">*</span>rad</span>
+<span id="cb20-103"><a href="#cb20-103" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb20-104"><a href="#cb20-104" aria-hidden="true" tabindex="-1"></a>    <span class="fu">polygon</span>(<span class="at">y =</span> valuesP[,<span class="dv">2</span>], <span class="at">x =</span> valuesP[,<span class="dv">1</span>], <span class="at">col =</span> colRec[data],<span class="at">border =</span> colRecBorder[data], <span class="at">lwd =</span> <span class="fl">1.5</span>)</span>
+<span id="cb20-105"><a href="#cb20-105" aria-hidden="true" tabindex="-1"></a>    <span class="fu">points</span>(<span class="at">y =</span> valuesP[,<span class="dv">2</span>], <span class="at">x =</span> valuesP[,<span class="dv">1</span>], <span class="at">pch =</span> <span class="dv">16</span>, <span class="at">col =</span> colRecBorder[data], <span class="at">cex =</span> cexPoints)</span>
+<span id="cb20-106"><a href="#cb20-106" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-107"><a href="#cb20-107" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span>(<span class="sc">!</span><span class="fu">is.null</span>(x2)){</span>
+<span id="cb20-108"><a href="#cb20-108" aria-hidden="true" tabindex="-1"></a>      <span class="fu">polygon</span>(<span class="at">y =</span> valuesPtrain[,<span class="dv">2</span>], <span class="at">x =</span> valuesPtrain[,<span class="dv">1</span>], <span class="at">col =</span> colRec2[data],<span class="at">border =</span> colRecBorder[data], <span class="at">lwd =</span> <span class="fl">1.5</span>, <span class="at">lty =</span> <span class="dv">2</span>)</span>
+<span id="cb20-109"><a href="#cb20-109" aria-hidden="true" tabindex="-1"></a>      <span class="fu">points</span>(<span class="at">y =</span> valuesPtrain[,<span class="dv">2</span>], <span class="at">x =</span> valuesPtrain[,<span class="dv">1</span>], <span class="at">pch =</span> <span class="dv">16</span>, <span class="at">col =</span> colRecBorder[data], <span class="at">cex =</span> cexPoints, <span class="at">lty =</span> <span class="dv">2</span>)</span>
+<span id="cb20-110"><a href="#cb20-110" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb20-111"><a href="#cb20-111" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-112"><a href="#cb20-112" aria-hidden="true" tabindex="-1"></a>    <span class="do">## Text</span></span>
+<span id="cb20-113"><a href="#cb20-113" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span>(data <span class="sc">==</span> <span class="dv">1</span> <span class="sc">||</span> <span class="sc">!</span>singlePanel){</span>
+<span id="cb20-114"><a href="#cb20-114" aria-hidden="true" tabindex="-1"></a>      measures <span class="ot">=</span> stepsText</span>
+<span id="cb20-115"><a href="#cb20-115" aria-hidden="true" tabindex="-1"></a>      <span class="cf">if</span>(<span class="sc">!</span><span class="fu">is.null</span>(measures)){</span>
+<span id="cb20-116"><a href="#cb20-116" aria-hidden="true" tabindex="-1"></a>        strl <span class="ot">=</span> <span class="fu">max</span>(<span class="fu">sapply</span>(measures,nchar))</span>
+<span id="cb20-117"><a href="#cb20-117" aria-hidden="true" tabindex="-1"></a>        anglesP <span class="ot">=</span> angles <span class="sc">-</span> <span class="dv">90</span></span>
+<span id="cb20-118"><a href="#cb20-118" aria-hidden="true" tabindex="-1"></a>        pos <span class="ot">=</span> <span class="fu">sapply</span>(angles, <span class="cf">function</span>(x) {</span>
+<span id="cb20-119"><a href="#cb20-119" aria-hidden="true" tabindex="-1"></a>          <span class="cf">if</span>(x <span class="sc">&gt;=</span> <span class="dv">45</span> <span class="sc">&amp;&amp;</span> x <span class="sc">&lt;=</span> <span class="dv">95</span> ) <span class="fu">return</span>(<span class="dv">3</span>)</span>
+<span id="cb20-120"><a href="#cb20-120" aria-hidden="true" tabindex="-1"></a>          <span class="cf">if</span>(x<span class="sc">&gt;</span><span class="dv">95</span> <span class="sc">&amp;&amp;</span> x<span class="sc">&lt;</span><span class="dv">240</span>) <span class="fu">return</span>(<span class="dv">2</span>)</span>
+<span id="cb20-121"><a href="#cb20-121" aria-hidden="true" tabindex="-1"></a>          <span class="cf">if</span>(x<span class="sc">&gt;=</span><span class="dv">240</span> <span class="sc">&amp;&amp;</span> x<span class="sc">&lt;=</span><span class="dv">300</span>) <span class="fu">return</span>(<span class="dv">1</span>)</span>
+<span id="cb20-122"><a href="#cb20-122" aria-hidden="true" tabindex="-1"></a>          <span class="cf">if</span>(x<span class="sc">&gt;</span><span class="dv">300</span> <span class="sc">&amp;&amp;</span>x<span class="sc">&lt;=</span><span class="dv">450</span>) <span class="fu">return</span>(<span class="dv">4</span>)</span>
+<span id="cb20-123"><a href="#cb20-123" aria-hidden="true" tabindex="-1"></a>          <span class="cf">if</span>(x<span class="sc">&lt;</span><span class="dv">45</span>) <span class="fu">return</span>(<span class="dv">4</span>)</span>
+<span id="cb20-124"><a href="#cb20-124" aria-hidden="true" tabindex="-1"></a>        })</span>
+<span id="cb20-125"><a href="#cb20-125" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span>(<span class="sc">!</span><span class="fu">is.na</span>(cexSteps)) <span class="fu">text</span>(<span class="at">x =</span> textP[,<span class="dv">1</span>], <span class="at">y =</span> textP[,<span class="dv">2</span>], <span class="at">labels =</span> measures, <span class="at">xpd =</span> T, <span class="at">font =</span> <span class="dv">2</span>, <span class="at">cex =</span> cexSteps, <span class="at">pos =</span> pos)</span>
+<span id="cb20-126"><a href="#cb20-126" aria-hidden="true" tabindex="-1"></a>      }</span>
+<span id="cb20-127"><a href="#cb20-127" aria-hidden="true" tabindex="-1"></a>      <span class="cf">if</span>(<span class="sc">!</span><span class="fu">is.null</span>(titles)) <span class="fu">title</span>(<span class="at">main =</span> titles, <span class="at">outer =</span> F, <span class="at">cex.main =</span> cexTitles)</span>
+<span id="cb20-128"><a href="#cb20-128" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb20-129"><a href="#cb20-129" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span>(<span class="fu">nrow</span>(procent) <span class="sc">==</span> <span class="dv">3</span>) procentLabels <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"  0%"</span>,  <span class="st">" 50%"</span>,  <span class="st">"100%"</span>)</span>
+<span id="cb20-130"><a href="#cb20-130" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span> procentLabels <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"  0%"</span>, <span class="st">" 25%"</span>, <span class="st">" 50%"</span>, <span class="st">" 75%"</span>, <span class="st">"100%"</span>)</span>
+<span id="cb20-131"><a href="#cb20-131" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span>(<span class="sc">!</span>singlePanel){</span>
+<span id="cb20-132"><a href="#cb20-132" aria-hidden="true" tabindex="-1"></a>      procent[,<span class="dv">1</span>] <span class="ot">=</span> <span class="fl">0.2</span></span>
+<span id="cb20-133"><a href="#cb20-133" aria-hidden="true" tabindex="-1"></a>      procent[,<span class="dv">2</span>] <span class="ot">=</span> lineSeq</span>
+<span id="cb20-134"><a href="#cb20-134" aria-hidden="true" tabindex="-1"></a>      <span class="fu">text</span>(<span class="at">x =</span> procent[,<span class="dv">1</span>], <span class="at">y =</span> procent[,<span class="dv">2</span>], <span class="at">labels =</span> procentLabels,</span>
+<span id="cb20-135"><a href="#cb20-135" aria-hidden="true" tabindex="-1"></a>           <span class="at">adj =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.2</span>,<span class="fl">0.8</span>), <span class="at">font =</span> <span class="dv">2</span>, <span class="at">cex =</span> cexProcent)</span>
+<span id="cb20-136"><a href="#cb20-136" aria-hidden="true" tabindex="-1"></a>    } <span class="cf">else</span> {</span>
+<span id="cb20-137"><a href="#cb20-137" aria-hidden="true" tabindex="-1"></a>      <span class="cf">if</span>(data <span class="sc">==</span> <span class="fu">nrow</span>(x1)){</span>
+<span id="cb20-138"><a href="#cb20-138" aria-hidden="true" tabindex="-1"></a>        procent[,<span class="dv">1</span>] <span class="ot">=</span> <span class="fl">0.2</span></span>
+<span id="cb20-139"><a href="#cb20-139" aria-hidden="true" tabindex="-1"></a>        procent[,<span class="dv">2</span>] <span class="ot">=</span> lineSeq</span>
+<span id="cb20-140"><a href="#cb20-140" aria-hidden="true" tabindex="-1"></a>        <span class="fu">text</span>(<span class="at">x =</span> procent[,<span class="dv">1</span>], <span class="at">y =</span> procent[,<span class="dv">2</span>], <span class="at">labels =</span> procentLabels,</span>
+<span id="cb20-141"><a href="#cb20-141" aria-hidden="true" tabindex="-1"></a>             <span class="at">adj =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.2</span>,<span class="fl">0.8</span>), <span class="at">font =</span> <span class="dv">2</span>, <span class="at">cex =</span> cexProcent)</span>
+<span id="cb20-142"><a href="#cb20-142" aria-hidden="true" tabindex="-1"></a>      }</span>
+<span id="cb20-143"><a href="#cb20-143" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb20-144"><a href="#cb20-144" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb20-145"><a href="#cb20-145" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb20-146"><a href="#cb20-146" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-147"><a href="#cb20-147" aria-hidden="true" tabindex="-1"></a>deg2rad <span class="ot">&lt;-</span> <span class="cf">function</span>(deg) {(deg <span class="sc">*</span> pi) <span class="sc">/</span> (<span class="dv">180</span>)} <span class="co"># degrees to radial</span></span>
+<span id="cb20-148"><a href="#cb20-148" aria-hidden="true" tabindex="-1"></a>addA    <span class="ot">&lt;-</span> <span class="cf">function</span>(col, <span class="at">alpha =</span> <span class="fl">0.25</span>) <span class="fu">apply</span>(<span class="fu">sapply</span>(col, col2rgb)<span class="sc">/</span><span class="dv">255</span>, <span class="dv">2</span>, <span class="cf">function</span>(x) <span class="fu">rgb</span>(x[<span class="dv">1</span>], x[<span class="dv">2</span>], x[<span class="dv">3</span>], <span class="at">alpha=</span>alpha)) <span class="co"># change contrast</span></span>
+<span id="cb20-149"><a href="#cb20-149" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-150"><a href="#cb20-150" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-151"><a href="#cb20-151" aria-hidden="true" tabindex="-1"></a><span class="fu">spider</span>(<span class="fu">runif</span>(<span class="dv">10</span>), <span class="fu">runif</span>(<span class="dv">10</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="2A-Exercise_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Try to roughly understand the different parts of the spider function!</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Task:
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Plot/Draw a donut!</p>
+</div>
+</div>
+<div class="webex-solution">
+<button>
+Click here to see the solution
+</button>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="cn">NULL</span>, <span class="cn">NULL</span>, <span class="at">type =</span> <span class="st">"n"</span>, <span class="at">axes =</span> <span class="cn">FALSE</span>, <span class="at">xlim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>), <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>), <span class="at">xlab =</span> <span class="st">""</span>, <span class="at">ylab =</span> <span class="st">""</span>, <span class="at">pty=</span><span class="st">"s"</span>)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>theta <span class="ot">=</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">2</span> <span class="sc">*</span> pi, <span class="at">length =</span> <span class="dv">500</span>) </span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="fu">polygon</span>(<span class="at">x =</span> <span class="fu">cos</span>(theta), <span class="at">y =</span>  <span class="fu">sin</span>(theta), <span class="at">col =</span> <span class="st">"#A58800"</span>)</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="fu">polygon</span>(<span class="at">x =</span> <span class="fl">0.5</span><span class="sc">*</span><span class="fu">cos</span>(theta), <span class="at">y =</span>  <span class="fl">0.5</span><span class="sc">*</span><span class="fu">sin</span>(theta), <span class="at">col =</span> <span class="st">"#FFFFFF"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="2A-Exercise_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script>
+
+/* update total correct if #webex-total_correct exists */
+update_total_correct = function() {
+  console.log("webex: update total_correct");
+
+  var t = document.getElementsByClassName("webex-total_correct");
+  for (var i = 0; i < t.length; i++) {
+    p = t[i].parentElement;
+    var correct = p.getElementsByClassName("webex-correct").length;
+    var solvemes = p.getElementsByClassName("webex-solveme").length;
+    var radiogroups = p.getElementsByClassName("webex-radiogroup").length;
+    var selects = p.getElementsByClassName("webex-select").length;
+
+    t[i].innerHTML = correct + " of " + (solvemes + radiogroups + selects) + " correct";
+  }
+}
+
+/* webex-solution button toggling function */
+b_func = function() {
+  console.log("webex: toggle hide");
+
+  var cl = this.parentElement.classList;
+  if (cl.contains('open')) {
+    cl.remove("open");
+  } else {
+    cl.add("open");
+  }
+}
+
+/* check answers */
+check_func = function() {
+  console.log("webex: check answers");
+
+  var cl = this.parentElement.classList;
+  if (cl.contains('unchecked')) {
+    cl.remove("unchecked");
+    this.innerHTML = "Hide Answers";
+  } else {
+    cl.add("unchecked");
+    this.innerHTML = "Show Answers";
+  }
+}
+
+/* function for checking solveme answers */
+solveme_func = function(e) {
+  console.log("webex: check solveme");
+
+  var real_answers = JSON.parse(this.dataset.answer);
+  var my_answer = this.value;
+  var cl = this.classList;
+  if (cl.contains("ignorecase")) {
+    my_answer = my_answer.toLowerCase();
+  }
+  if (cl.contains("nospaces")) {
+    my_answer = my_answer.replace(/ /g, "")
+  }
+
+  if (my_answer == "") {
+    cl.remove("webex-correct");
+    cl.remove("webex-incorrect");
+  } else if (real_answers.includes(my_answer)) {
+    cl.add("webex-correct");
+    cl.remove("webex-incorrect");
+  } else {
+    cl.add("webex-incorrect");
+    cl.remove("webex-correct");
+  }
+
+  // match numeric answers within a specified tolerance
+  if(this.dataset.tol > 0){
+    var tol = JSON.parse(this.dataset.tol);
+    var matches = real_answers.map(x => Math.abs(x - my_answer) < tol)
+    if (matches.reduce((a, b) => a + b, 0) > 0) {
+      cl.add("webex-correct");
+    } else {
+      cl.remove("webex-correct");
+    }
+  }
+
+  // added regex bit
+  if (cl.contains("regex")){
+    answer_regex = RegExp(real_answers.join("|"))
+    if (answer_regex.test(my_answer)) {
+      cl.add("webex-correct");
+    }
+  }
+
+  update_total_correct();
+}
+
+/* function for checking select answers */
+select_func = function(e) {
+  console.log("webex: check select");
+
+  var cl = this.classList
+
+  /* add style */
+  cl.remove("webex-incorrect");
+  cl.remove("webex-correct");
+  if (this.value == "answer") {
+    cl.add("webex-correct");
+  } else if (this.value != "blank") {
+    cl.add("webex-incorrect");
+  }
+
+  update_total_correct();
+}
+
+/* function for checking radiogroups answers */
+radiogroups_func = function(e) {
+  console.log("webex: check radiogroups");
+
+  var checked_button = document.querySelector('input[name=' + this.id + ']:checked');
+  var cl = checked_button.parentElement.classList;
+  var labels = checked_button.parentElement.parentElement.children;
+
+  /* get rid of styles */
+  for (i = 0; i < labels.length; i++) {
+    labels[i].classList.remove("webex-incorrect");
+    labels[i].classList.remove("webex-correct");
+  }
+
+  /* add style */
+  if (checked_button.value == "answer") {
+    cl.add("webex-correct");
+  } else {
+    cl.add("webex-incorrect");
+  }
+
+  update_total_correct();
+}
+
+window.onload = function() {
+  console.log("webex onload");
+  /* set up solution buttons */
+  var buttons = document.getElementsByTagName("button");
+
+  for (var i = 0; i < buttons.length; i++) {
+    if (buttons[i].parentElement.classList.contains('webex-solution')) {
+      buttons[i].onclick = b_func;
+    }
+  }
+
+  var check_sections = document.getElementsByClassName("webex-check");
+  console.log("check:", check_sections.length);
+  for (var i = 0; i < check_sections.length; i++) {
+    check_sections[i].classList.add("unchecked");
+
+    let btn = document.createElement("button");
+    btn.innerHTML = "Show Answers";
+    btn.classList.add("webex-check-button");
+    btn.onclick = check_func;
+    check_sections[i].appendChild(btn);
+
+    let spn = document.createElement("span");
+    spn.classList.add("webex-total_correct");
+    check_sections[i].appendChild(spn);
+  }
+
+  /* set up webex-solveme inputs */
+  var solveme = document.getElementsByClassName("webex-solveme");
+
+  for (var i = 0; i < solveme.length; i++) {
+    /* make sure input boxes don't auto-anything */
+    solveme[i].setAttribute("autocomplete","off");
+    solveme[i].setAttribute("autocorrect", "off");
+    solveme[i].setAttribute("autocapitalize", "off");
+    solveme[i].setAttribute("spellcheck", "false");
+    solveme[i].value = "";
+
+    /* adjust answer for ignorecase or nospaces */
+    var cl = solveme[i].classList;
+    var real_answer = solveme[i].dataset.answer;
+    if (cl.contains("ignorecase")) {
+      real_answer = real_answer.toLowerCase();
+    }
+    if (cl.contains("nospaces")) {
+      real_answer = real_answer.replace(/ /g, "");
+    }
+    solveme[i].dataset.answer = real_answer;
+
+    /* attach checking function */
+    solveme[i].onkeyup = solveme_func;
+    solveme[i].onchange = solveme_func;
+
+    solveme[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
+  }
+
+  /* set up radiogroups */
+  var radiogroups = document.getElementsByClassName("webex-radiogroup");
+  for (var i = 0; i < radiogroups.length; i++) {
+    radiogroups[i].onchange = radiogroups_func;
+  }
+
+  /* set up selects */
+  var selects = document.getElementsByClassName("webex-select");
+  for (var i = 0; i < selects.length; i++) {
+    selects[i].onchange = select_func;
+    selects[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
+  }
+
+  update_total_correct();
+}
+
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./2B-SummaryStatistics.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Summary statistics</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./3A-NHST.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Null Hypothesis Testing</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

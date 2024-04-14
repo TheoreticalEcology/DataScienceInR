@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Introduction to Data Science with R - 6&nbsp; Different Statistical tests</title>
+<title>Introduction to Data Science with R - 6&nbsp; Statistical tests</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -64,7 +64,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./4-SimpleRegression.html" rel="next">
+<link href="./3A-Exercise.html" rel="next">
 <link href="./3A-NHST.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -100,7 +100,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <link rel="stylesheet" href="include/webex.css">
-<meta name="citation_title" content="[6]{.chapter-number}&nbsp; [Different Statistical tests]{.chapter-title}">
+<meta name="citation_title" content="[6]{.chapter-number}&nbsp; [Statistical tests]{.chapter-title}">
 <meta name="citation_fulltext_html_url" content="https://TheoreticalEcology.github.io/DataScienceInR//3B-HypothesisTests.html">
 <meta name="citation_language" content="en">
 </head>
@@ -114,7 +114,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./3A-NHST.html">Hypothesis Testing</a></li><li class="breadcrumb-item"><a href="./3B-HypothesisTests.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Different Statistical tests</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./3A-NHST.html">Hypothesis Testing</a></li><li class="breadcrumb-item"><a href="./3B-HypothesisTests.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Statistical tests</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -172,33 +172,44 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">Preface</span></a>
   </div>
 </li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./Introduction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Introduction</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./1-GettingStarted.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Getting Started with R</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./1B-PreparingData.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Preparing your data</span></span></a>
-  </div>
-</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
- <span class="menu-text">Descriptive Statistics</span></a>
+            <a href="./Introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./1-GettingStarted.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Getting Started with R</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./1B-PreparingData.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Preparing your data</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./1A-Exercise.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exercise - R basics</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Descriptive Statistics</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./2A-DescriptiveStatistics.html" class="sidebar-item-text sidebar-link">
@@ -211,17 +222,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Summary statistics</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2A-Exercise.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exercise - Plots and summary statistics</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
  <span class="menu-text">Hypothesis Testing</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./3A-NHST.html" class="sidebar-item-text sidebar-link">
@@ -231,20 +248,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./3B-HypothesisTests.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Different Statistical tests</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Statistical tests</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./3A-Exercise.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exercise - NHST and statistical tests</span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
  <span class="menu-text">Regression Analysis</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./4-SimpleRegression.html" class="sidebar-item-text sidebar-link">
@@ -267,13 +290,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
  <span class="menu-text">Multivariate Statistics</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./2B-Multivariate.html" class="sidebar-item-text sidebar-link">
@@ -284,13 +307,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
  <span class="menu-text">Predictive Modeling</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./8-MachineLearning.html" class="sidebar-item-text sidebar-link">
@@ -301,13 +324,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true">
  <span class="menu-text">Experimental Design</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./9-Design.html" class="sidebar-item-text sidebar-link">
@@ -318,13 +341,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true">
  <span class="menu-text">Data Science Skills</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./10-DataWrangling.html" class="sidebar-item-text sidebar-link">
@@ -341,13 +364,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true">
  <span class="menu-text">Appendices</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./13A-regressions.html" class="sidebar-item-text sidebar-link">
@@ -369,14 +392,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#comparison-of-mean-of-two-or-more-groups" id="toc-comparison-of-mean-of-two-or-more-groups" class="nav-link active" data-scroll-target="#comparison-of-mean-of-two-or-more-groups"><span class="header-section-number">6.1</span> Comparison of mean of two or more groups</a>
   <ul class="collapse">
   <li><a href="#tests-for-2-groups" id="toc-tests-for-2-groups" class="nav-link" data-scroll-target="#tests-for-2-groups"><span class="header-section-number">6.1.1</span> Tests for 2 groups</a></li>
-  <li><a href="#tests-for-2-groups-1" id="toc-tests-for-2-groups-1" class="nav-link" data-scroll-target="#tests-for-2-groups-1"><span class="header-section-number">6.1.2</span> Tests for &gt; 2 groups</a></li>
+  <li><a href="#wilcoxon-rank-sum-and-mann-whitney-u-test" id="toc-wilcoxon-rank-sum-and-mann-whitney-u-test" class="nav-link" data-scroll-target="#wilcoxon-rank-sum-and-mann-whitney-u-test"><span class="header-section-number">6.1.2</span> Wilcoxon Rank Sum and Mann-Whitney U Test</a></li>
+  <li><a href="#tests-for-2-groups-1" id="toc-tests-for-2-groups-1" class="nav-link" data-scroll-target="#tests-for-2-groups-1"><span class="header-section-number">6.1.3</span> Tests for &gt; 2 groups</a></li>
   </ul></li>
   <li><a href="#comparison-of-variances" id="toc-comparison-of-variances" class="nav-link" data-scroll-target="#comparison-of-variances"><span class="header-section-number">6.2</span> Comparison of variances</a>
   <ul class="collapse">
   <li><a href="#f-test-for-two-normally-distributed-samples" id="toc-f-test-for-two-normally-distributed-samples" class="nav-link" data-scroll-target="#f-test-for-two-normally-distributed-samples"><span class="header-section-number">6.2.1</span> F-Test for two normally-distributed samples</a></li>
   <li><a href="#bartlett-test-for-more-than-two-normally-distributed-samples" id="toc-bartlett-test-for-more-than-two-normally-distributed-samples" class="nav-link" data-scroll-target="#bartlett-test-for-more-than-two-normally-distributed-samples"><span class="header-section-number">6.2.2</span> Bartlett test for more than two normally-distributed samples</a></li>
   </ul></li>
-  <li><a href="#comparison-of-discrete-proportions" id="toc-comparison-of-discrete-proportions" class="nav-link" data-scroll-target="#comparison-of-discrete-proportions"><span class="header-section-number">6.3</span> Comparison of discrete proportions</a>
+  <li><a href="#comparison-of-probabilities" id="toc-comparison-of-probabilities" class="nav-link" data-scroll-target="#comparison-of-probabilities"><span class="header-section-number">6.3</span> Comparison of probabilities</a>
   <ul class="collapse">
   <li><a href="#exact-binomial-test" id="toc-exact-binomial-test" class="nav-link" data-scroll-target="#exact-binomial-test"><span class="header-section-number">6.3.1</span> Exact Binomial Test</a></li>
   <li><a href="#test-of-equal-or-given-proportions" id="toc-test-of-equal-or-given-proportions" class="nav-link" data-scroll-target="#test-of-equal-or-given-proportions"><span class="header-section-number">6.3.2</span> Test of Equal or Given Proportions</a></li>
@@ -392,13 +416,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#correlation" id="toc-correlation" class="nav-link" data-scroll-target="#correlation"><span class="header-section-number">6.5.1</span> Correlation</a></li>
   <li><a href="#mantel-test" id="toc-mantel-test" class="nav-link" data-scroll-target="#mantel-test"><span class="header-section-number">6.5.2</span> Mantel test</a></li>
   </ul></li>
-  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">6.6</span> Exercises</a>
-  <ul class="collapse">
-  <li><a href="#streams" id="toc-streams" class="nav-link" data-scroll-target="#streams"><span class="header-section-number">6.6.1</span> Streams</a></li>
-  <li><a href="#chicken" id="toc-chicken" class="nav-link" data-scroll-target="#chicken"><span class="header-section-number">6.6.2</span> Chicken</a></li>
-  <li><a href="#titanic" id="toc-titanic" class="nav-link" data-scroll-target="#titanic"><span class="header-section-number">6.6.3</span> Titanic</a></li>
-  <li><a href="#simulation-of-type-i-and-ii-error" id="toc-simulation-of-type-i-and-ii-error" class="nav-link" data-scroll-target="#simulation-of-type-i-and-ii-error"><span class="header-section-number">6.6.4</span> Simulation of Type I and II error</a></li>
-  </ul></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/TheoreticalEcology/DataScienceInR/edit/master/3B-HypothesisTests.qmd" class="toc-action">Edit this page</a></p></div></div></nav>
     </div>
@@ -407,7 +424,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Different Statistical tests</span></h1>
+<h1 class="title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Statistical tests</span></h1>
 </div>
 
 
@@ -422,12 +439,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<p>The following three sections provide an overview over the most important hypothesis tests, a guideline to select an appropriate test (see decision tree) and the necessary code to apply these tests in R. It is not necessary to read and understand every detail. These explanations are also meant as an advice if you want to select an appropriate hypothesis test after the course. Note that some of the examples use simulated data instead of real observation (all functions that start with r=random, e.g.&nbsp;rnorm() or runif()). Simulated data is useful, because then we know the true distribution and its true mean.</p>
-<p>In the last section at the end of this file, you find exercises that you should solve using the explanations above. It may be helpful to use the table of content and/or the search option to find the respective example in the explanations.</p>
+<p>In this exercise you will:</p>
+<ul>
+<li>get to know the most common hypothesis tests</li>
+<li>learn how to choose an appropriate test and interpret its result</li>
+<li>practice these tests in R</li>
+<li>practice the simulation of data and error rates.</li>
+</ul>
+<p>The first three sections, provide an overview over the most important hypothesis tests, a guideline to select an appropriate test (see decision tree) and the necessary code to apply these tests in R. It is not necessary to read and understand every detail. These explanations are also meant as an advice if you want to select an appropriate hypothesis test after the course. Note that some of the examples use simulated data instead of real observation (all functions that start with r=random, e.g.&nbsp;rnorm() or runif()). Simulated data is useful, because then we know the true distribution and its true mean.</p>
+<p>In the fourth section at the end of this file, you find exercises that you should solve using the explanations above. It may be helpful to use the table of content and/or the search option to find the respective example in the explanations.</p>
 <section id="comparison-of-mean-of-two-or-more-groups" class="level2" data-number="6.1">
 <h2 data-number="6.1" class="anchored" data-anchor-id="comparison-of-mean-of-two-or-more-groups"><span class="header-section-number">6.1</span> Comparison of mean of two or more groups</h2>
-<p>Many tests aim at showing that variables are significantly different between groups, i.e.&nbsp;have different means/medians. In all these tests, H<sub>0</sub> is that there is no difference between the groups. The following decision tree helps to select the appropriate test.</p>
-<!-- ![Fig. 1. Decision tree for the comparison of two groups](Decision%20tree.jpg) -->
+<p>Many tests aim at showing that variables are significantly different between groups, i.e.&nbsp;have different means/medians. In all these tests, H0 is that there is no difference between the groups. The following decision tree helps to select the appropriate test.</p>
+<p><a href="https://elearning.uni-regensburg.de/mod/resource/view.php?id=2421505">Decision tree for the comparison of two groups</a></p>
 <p><strong>Remark 1</strong>: Tests for 2 groups also work for one group only. Then they test whether the mean is equal to 0.</p>
 <p><strong>Remark 2</strong>: Paired / unpaired: this means that observations in the groups are linked to each other. An example for unpaired data is a typical experiment with 10 observations in the control group and 10 observations in the treatment group. An example for paired data is when the same individuals were exposed to the treatment and to the control. The observations of each individual would belong together (pairs).</p>
 <p><strong>Remark 3</strong>: Parametric: assumption of normal distribution. Non-parametric = no assumption for the distribution.</p>
@@ -463,8 +487,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>This output tells us, that the difference in means between the 2 groups is not significant(p-value ≥ 0.05, specifically: p-value = 0.07939), provided that our significance level is 0.05.<br>
 The underlying Null-hypothesis is that the true difference in means is equal to 0. In the last two lines of the output you can see the means of the respective groups. Even though the means seem to be quite different, the difference is not significant, this could be due to the small sample size of only 10 students per group.</p>
 <p>Let’s look at different settings of the t-test:</p>
-<section id="t-test-h0-one-group-mean-0" class="level5" data-number="6.1.1.1.1">
-<h5 data-number="6.1.1.1.1" class="anchored" data-anchor-id="t-test-h0-one-group-mean-0"><span class="header-section-number">6.1.1.1.1</span> t-test, H0: one group, mean = 0</h5>
+</section>
+<section id="t-test-h0-one-group-mean-0" class="level4" data-number="6.1.1.2">
+<h4 data-number="6.1.1.2" class="anchored" data-anchor-id="t-test-h0-one-group-mean-0"><span class="header-section-number">6.1.1.2</span> t-test, H0: one group, mean = 0</h4>
 <p>The Null-hypothesis here is that the mean of the observed group is equal to 0.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="fu">rnorm</span>(<span class="dv">20</span>, <span class="at">mean =</span> <span class="dv">2</span>)</span>
@@ -483,8 +508,8 @@ The underlying Null-hypothesis is that the true difference in means is equal to 
 </div>
 <p>p-value &lt; 0.05 means we can reject the Null-hypothesis, i.e.&nbsp;the mean of the observed group is significantly different from 0.</p>
 </section>
-<section id="t-test-h0-two-groups-equal-means-equal-variances" class="level5" data-number="6.1.1.1.2">
-<h5 data-number="6.1.1.1.2" class="anchored" data-anchor-id="t-test-h0-two-groups-equal-means-equal-variances"><span class="header-section-number">6.1.1.1.2</span> t-test, H0: two groups, equal means, equal variances</h5>
+<section id="t-test-h0-two-groups-equal-means-equal-variances" class="level4" data-number="6.1.1.3">
+<h4 data-number="6.1.1.3" class="anchored" data-anchor-id="t-test-h0-two-groups-equal-means-equal-variances"><span class="header-section-number">6.1.1.3</span> t-test, H0: two groups, equal means, equal variances</h4>
 <p>The Null-hypothesis here is that the two observed groups have the same mean and the same variance (specified by the argument <em>var.equal = T</em>).</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>x1 <span class="ot">=</span> <span class="fu">rnorm</span>(<span class="dv">20</span>, <span class="at">mean =</span> <span class="dv">2</span>)</span>
@@ -503,13 +528,13 @@ The underlying Null-hypothesis is that the true difference in means is equal to 
 <span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="do">##  1.729008  2.999089</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="t-test-h0-two-groups-equal-means-variable-variance" class="level5" data-number="6.1.1.1.3">
-<h5 data-number="6.1.1.1.3" class="anchored" data-anchor-id="t-test-h0-two-groups-equal-means-variable-variance"><span class="header-section-number">6.1.1.1.3</span> t-test, H0: two groups, equal means, variable variance</h5>
+<section id="t-test-h0-two-groups-equal-means-variable-variance" class="level4" data-number="6.1.1.4">
+<h4 data-number="6.1.1.4" class="anchored" data-anchor-id="t-test-h0-two-groups-equal-means-variable-variance"><span class="header-section-number">6.1.1.4</span> t-test, H0: two groups, equal means, variable variance</h4>
 <p>The Null-hypothesis here is that the two observed groups have the same mean and variable variances (the default setting of the argument <em>var.equal = F</em>).</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>x1 <span class="ot">=</span> <span class="fu">rnorm</span>(<span class="dv">20</span>, <span class="at">mean =</span> <span class="dv">2</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>x2 <span class="ot">=</span> <span class="fu">rnorm</span>(<span class="dv">20</span>, <span class="at">mean =</span> <span class="dv">3</span>, <span class="at">sd =</span> <span class="dv">2</span>)</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(x1,x2, <span class="at">var.equal =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(x1,x2)</span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="do">##  Welch Two Sample t-test</span></span>
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
@@ -522,15 +547,14 @@ The underlying Null-hypothesis is that the true difference in means is equal to 
 <span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="do">## mean of x mean of y </span></span>
 <span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="do">##  2.160601  3.163912</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Which is actually a Welch t-test and which is the default in R! (The smaller the samples, the more likely it is that the variances differ! So it is an conservative assumption to assume that the variances are unequal)</p>
 </section>
-<section id="t-test-h0-two-groups-paired-equal-means-variance-can-be-different" class="level5" data-number="6.1.1.1.4">
-<h5 data-number="6.1.1.1.4" class="anchored" data-anchor-id="t-test-h0-two-groups-paired-equal-means-variance-can-be-different"><span class="header-section-number">6.1.1.1.4</span> t-test, H0: two groups, paired, equal means, variance can be different</h5>
-<p>The Null-hypothesis here is that the two groups are paired observations (e.g.&nbsp;group 1 before treatment and group 2 after treatment) have the same mean. Variances doesn’t matter here (but the variables must be still normally distributed). We can ignore the <code>var.equal</code>`argument here:</p>
+<section id="t-test-h0-two-groups-equal-means-variance-can-be-different-can-also-set-to-equal" class="level4" data-number="6.1.1.5">
+<h4 data-number="6.1.1.5" class="anchored" data-anchor-id="t-test-h0-two-groups-equal-means-variance-can-be-different-can-also-set-to-equal"><span class="header-section-number">6.1.1.5</span> t-test, H0: two groups, equal means, variance can be different (can also set to equal)</h4>
+<p>The Null-hypothesis here is that the two groups are paired observations (e.g.&nbsp;group 1 before treatment and group 2 after treatment) have the same mean and variable variance (specified by the argument <em>var.equal = F</em>, which is also the default setting).</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>x1 <span class="ot">=</span> <span class="fu">rnorm</span>(<span class="dv">20</span>, <span class="at">mean =</span> <span class="dv">2</span>)</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>x2 <span class="ot">=</span> <span class="fu">rnorm</span>(<span class="dv">20</span>, <span class="at">mean =</span> <span class="dv">3</span>)</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(x1,x2, <span class="at">paired =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(x1,x2, <span class="at">paired =</span> T, <span class="at">var.equal =</span> F)</span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="do">##  Paired t-test</span></span>
 <span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
@@ -543,14 +567,13 @@ The underlying Null-hypothesis is that the true difference in means is equal to 
 <span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="do">## mean difference </span></span>
 <span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="do">##      -0.6923002</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>If the variables are not normally distributed we have to use non-parametric tests which don’t assume a certain assumption regarding the distribution of the variables (=nonparametric). But the test statistic still follows a certain distribution!</p>
 </section>
 </section>
-<section id="wilcoxon-rank-sum-and-mann-whitney-u-test" class="level4" data-number="6.1.1.2">
-<h4 data-number="6.1.1.2" class="anchored" data-anchor-id="wilcoxon-rank-sum-and-mann-whitney-u-test"><span class="header-section-number">6.1.1.2</span> Wilcoxon Rank Sum and Mann-Whitney U Test</h4>
+<section id="wilcoxon-rank-sum-and-mann-whitney-u-test" class="level3" data-number="6.1.2">
+<h3 data-number="6.1.2" class="anchored" data-anchor-id="wilcoxon-rank-sum-and-mann-whitney-u-test"><span class="header-section-number">6.1.2</span> Wilcoxon Rank Sum and Mann-Whitney U Test</h3>
 <p>In R, there is only one function for both tests together: wilcox.test(). The Wilcoxon rank sum test with (paired = F) is classically called Mann-Whitney U test.</p>
-<section id="unpaired-mann-whitney-u-test" class="level5" data-number="6.1.1.2.1">
-<h5 data-number="6.1.1.2.1" class="anchored" data-anchor-id="unpaired-mann-whitney-u-test"><span class="header-section-number">6.1.1.2.1</span> Unpaired: Mann-Whitney U Test</h5>
+<section id="mann-whitney-u-test" class="level4" data-number="6.1.2.1">
+<h4 data-number="6.1.2.1" class="anchored" data-anchor-id="mann-whitney-u-test"><span class="header-section-number">6.1.2.1</span> Mann-Whitney U Test</h4>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>x1 <span class="ot">=</span> <span class="fu">rnorm</span>(<span class="dv">20</span>, <span class="at">mean =</span> <span class="dv">2</span>)</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>x2 <span class="ot">=</span> <span class="fu">rlnorm</span>(<span class="dv">20</span>, <span class="at">mean =</span> <span class="dv">3</span>)</span>
@@ -564,8 +587,8 @@ The underlying Null-hypothesis is that the true difference in means is equal to 
 <span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="do">## alternative hypothesis: true location shift is not equal to 0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="paired-wilcoxon-signed-rank-test" class="level5" data-number="6.1.1.2.2">
-<h5 data-number="6.1.1.2.2" class="anchored" data-anchor-id="paired-wilcoxon-signed-rank-test"><span class="header-section-number">6.1.1.2.2</span> Paired: Wilcoxon signed rank test</h5>
+<section id="wilcoxon-signed-rank-test" class="level4" data-number="6.1.2.2">
+<h4 data-number="6.1.2.2" class="anchored" data-anchor-id="wilcoxon-signed-rank-test"><span class="header-section-number">6.1.2.2</span> Wilcoxon signed rank test</h4>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>x1 <span class="ot">=</span> <span class="fu">rnorm</span>(<span class="dv">20</span>, <span class="at">mean =</span> <span class="dv">2</span>)</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>x2 <span class="ot">=</span> <span class="fu">rlnorm</span>(<span class="dv">20</span>, <span class="at">mean =</span> <span class="dv">3</span>)</span>
@@ -580,12 +603,11 @@ The underlying Null-hypothesis is that the true difference in means is equal to 
 </div>
 </section>
 </section>
-</section>
-<section id="tests-for-2-groups-1" class="level3" data-number="6.1.2">
-<h3 data-number="6.1.2" class="anchored" data-anchor-id="tests-for-2-groups-1"><span class="header-section-number">6.1.2</span> Tests for &gt; 2 groups</h3>
-<section id="anova-unpaired" class="level4" data-number="6.1.2.1">
-<h4 data-number="6.1.2.1" class="anchored" data-anchor-id="anova-unpaired"><span class="header-section-number">6.1.2.1</span> Anova, unpaired</h4>
-<p><strong>H0 &gt;2 groups, normal distribution, equal variance, equal means, unpaired</strong></p>
+<section id="tests-for-2-groups-1" class="level3" data-number="6.1.3">
+<h3 data-number="6.1.3" class="anchored" data-anchor-id="tests-for-2-groups-1"><span class="header-section-number">6.1.3</span> Tests for &gt; 2 groups</h3>
+<section id="anova-unpaired" class="level4" data-number="6.1.3.1">
+<h4 data-number="6.1.3.1" class="anchored" data-anchor-id="anova-unpaired"><span class="header-section-number">6.1.3.1</span> Anova, unpaired</h4>
+<p>H0 &gt;2 groups, normal distribution, equal variance, equal means, unpaired</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="fu">aov</span>(weight <span class="sc">~</span> group, <span class="at">data =</span> PlantGrowth)</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(x)</span>
@@ -625,12 +647,12 @@ The underlying Null-hypothesis is that the true difference in means is equal to 
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(old.par)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="anova-paired" class="level4" data-number="6.1.2.2">
-<h4 data-number="6.1.2.2" class="anchored" data-anchor-id="anova-paired"><span class="header-section-number">6.1.2.2</span> Anova, paired</h4>
-<p>aov is not good in doing repeated = paired ANOVA. In simple cases, you can just subtract the paired groups. In general, you should use so-called mixed models!</p>
+<section id="anova-paired" class="level4" data-number="6.1.3.2">
+<h4 data-number="6.1.3.2" class="anchored" data-anchor-id="anova-paired"><span class="header-section-number">6.1.3.2</span> Anova, paired</h4>
+<p>aov is not good in doing repeated = paired ANOVA. For this task, you should use so-called mixed models!</p>
 </section>
-<section id="kruskal-wallis-unpaired-non-parametric" class="level4" data-number="6.1.2.3">
-<h4 data-number="6.1.2.3" class="anchored" data-anchor-id="kruskal-wallis-unpaired-non-parametric"><span class="header-section-number">6.1.2.3</span> Kruskal-Wallis, unpaired non-parametric</h4>
+<section id="kruskal-wallis" class="level4" data-number="6.1.3.3">
+<h4 data-number="6.1.3.3" class="anchored" data-anchor-id="kruskal-wallis"><span class="header-section-number">6.1.3.3</span> Kruskal-Wallis</h4>
 <p>Non-parametric test for differences in the mean of &gt;2 groups, unpaired</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(Ozone <span class="sc">~</span> Month, <span class="at">data =</span> airquality)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -645,8 +667,8 @@ The underlying Null-hypothesis is that the true difference in means is equal to 
 <span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="do">## Kruskal-Wallis chi-squared = 29.267, df = 4, p-value = 6.901e-06</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="friedmann-test-paired-non-parametric" class="level4" data-number="6.1.2.4">
-<h4 data-number="6.1.2.4" class="anchored" data-anchor-id="friedmann-test-paired-non-parametric"><span class="header-section-number">6.1.2.4</span> Friedmann Test, paired non-parametric</h4>
+<section id="friedmann-test" class="level4" data-number="6.1.3.4">
+<h4 data-number="6.1.3.4" class="anchored" data-anchor-id="friedmann-test"><span class="header-section-number">6.1.3.4</span> Friedmann Test</h4>
 <p>Non-parametric test for differences in the mean of &gt;2 groups, paired.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>wb <span class="ot">&lt;-</span> <span class="fu">aggregate</span>(warpbreaks<span class="sc">$</span>breaks,</span>
@@ -668,7 +690,7 @@ The underlying Null-hypothesis is that the true difference in means is equal to 
 </section>
 <section id="comparison-of-variances" class="level2" data-number="6.2">
 <h2 data-number="6.2" class="anchored" data-anchor-id="comparison-of-variances"><span class="header-section-number">6.2</span> Comparison of variances</h2>
-<p>H<sub>0</sub> in variance tests is always that the variances are equal.</p>
+<p>H0 in variance tests is always that the variances are equal.</p>
 <section id="f-test-for-two-normally-distributed-samples" class="level3" data-number="6.2.1">
 <h3 data-number="6.2.1" class="anchored" data-anchor-id="f-test-for-two-normally-distributed-samples"><span class="header-section-number">6.2.1</span> F-Test for two normally-distributed samples</h3>
 <div class="cell">
@@ -703,9 +725,9 @@ The underlying Null-hypothesis is that the true difference in means is equal to 
 </div>
 </section>
 </section>
-<section id="comparison-of-discrete-proportions" class="level2" data-number="6.3">
-<h2 data-number="6.3" class="anchored" data-anchor-id="comparison-of-discrete-proportions"><span class="header-section-number">6.3</span> Comparison of discrete proportions</h2>
-<p>Discrete proportions are typically analyzed assuming the binomial model (k/n with probability p)</p>
+<section id="comparison-of-probabilities" class="level2" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="comparison-of-probabilities"><span class="header-section-number">6.3</span> Comparison of probabilities</h2>
+<p>Proportions are typically analyzed assuming the binomial model (k/n with probability p)</p>
 <section id="exact-binomial-test" class="level3" data-number="6.3.1">
 <h3 data-number="6.3.1" class="anchored" data-anchor-id="exact-binomial-test"><span class="header-section-number">6.3.1</span> Exact Binomial Test</h3>
 <p>H0 is that the data are binomially distributed with a fixed probability p.</p>
@@ -771,7 +793,7 @@ The underlying Null-hypothesis is that the true difference in means is equal to 
 </section>
 <section id="contingency-tables" class="level3" data-number="6.3.3">
 <h3 data-number="6.3.3" class="anchored" data-anchor-id="contingency-tables"><span class="header-section-number">6.3.3</span> Contingency tables</h3>
-<p>Chi-squared-test for count data, H~0~ is that the joint distribution of the cell counts in a 2-dimensional contingency table is the product of the row and column marginals</p>
+<p>Chi-squared-test for count data, H0 is that the joint distribution of the cell counts in a 2-dimensional contingency table is the product of the row and column marginals</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="do">## From Agresti(2007) p.39</span></span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>M <span class="ot">&lt;-</span> <span class="fu">as.table</span>(<span class="fu">rbind</span>(<span class="fu">c</span>(<span class="dv">762</span>, <span class="dv">327</span>, <span class="dv">468</span>), <span class="fu">c</span>(<span class="dv">484</span>, <span class="dv">239</span>, <span class="dv">477</span>)))</span>
@@ -788,7 +810,7 @@ The underlying Null-hypothesis is that the true difference in means is equal to 
 </section>
 <section id="distribution-tests" class="level2" data-number="6.4">
 <h2 data-number="6.4" class="anchored" data-anchor-id="distribution-tests"><span class="header-section-number">6.4</span> Distribution tests</h2>
-<p>Often we are interested in the distribution of a variable. This can be tested with distribution tests. All these tests are defined as follows: H<sub>0</sub> is that the data follow a specific distribution. So in case H<sub>0</sub> is rejected, the data significantly deviates from the specified distribution.</p>
+<p>Often we are interested in the distribution of a variable. This can be tested with distribution tests. All these tests are defined as follows: H0 is that the data follow a specific distribution. So in case H0 is rejected, the data significantly deviates from the specified distribution.</p>
 <p>Often, we want to know whether a variable is normally distributed because this is an important assumption for parametric hypothesis tests. But data can follow many other distributions:</p>
 <!-- ![Fig. 2. Decision tree for distributions](distributions.png) -->
 <section id="shapiro-wilk-normality-test" class="level3" data-number="6.4.1">
@@ -905,517 +927,6 @@ The underlying Null-hypothesis is that the true difference in means is equal to 
 <span id="cb24-34"><a href="#cb24-34" aria-hidden="true" tabindex="-1"></a><span class="do">## 0.119 0.156 0.183 0.206 </span></span>
 <span id="cb24-35"><a href="#cb24-35" aria-hidden="true" tabindex="-1"></a><span class="do">## Permutation: free</span></span>
 <span id="cb24-36"><a href="#cb24-36" aria-hidden="true" tabindex="-1"></a><span class="do">## Number of permutations: 999</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-</section>
-<section id="exercises" class="level2" data-number="6.6">
-<h2 data-number="6.6" class="anchored" data-anchor-id="exercises"><span class="header-section-number">6.6</span> Exercises</h2>
-<section id="streams" class="level3" data-number="6.6.1">
-<h3 data-number="6.6.1" class="anchored" data-anchor-id="streams"><span class="header-section-number">6.6.1</span> Streams</h3>
-<p>The dataset ‘streams’ contains water measurements taken at different locations along 16 rivers: ‘up’ and ‘down’ are water quality measurements of the same river taken before and after a water treatment filter, respectively. We want to find out if this water filter is effective. Use the decision tree to identify the appropriate test for this situation.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">=</span> <span class="fu">read.table</span>(<span class="st">"https://raw.githubusercontent.com/biometry/APES/master/Data/Simone/streams.txt"</span>, <span class="at">header =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Visualize and analyze the data and answer the following questions at <strong>elearning-extern</strong> <a href="https://elearning.uni-regensburg.de/mod/quiz/view.php?id=2046689">(“03_Test for Exercise in R”)</a>.</p>
-<ol type="1">
-<li>For identifying an appropriate test for the effect of the water treatment filter, what are your first two choices in the decision tree?</li>
-<li>The next decision you have to make is whether you can use a parametric test or not. Apply the Shapiro-Wilk test to check if the data are normally distributed. Are the tests significant and what does that tell you?</li>
-<li>Which test is appropriate for evaluating the effect of the filter?</li>
-<li>Does the filter influence the water quality? (The warnings are related to identical values, i.e.&nbsp;ties, and zero differences; we ignore these here)</li>
-</ol>
-<div class="callout callout-style-simple callout-tip no-icon callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Solution
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>You can visualize the data as follows:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">=</span> <span class="fu">read.table</span>(<span class="st">"https://raw.githubusercontent.com/biometry/APES/master/Data/Simone/streams.txt"</span>, <span class="at">header =</span> T)</span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(dat)</span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="fu">matplot</span>(<span class="fu">t</span>(dat), <span class="at">type =</span> <span class="st">"l"</span>) <span class="co"># each line is one river, left is down and right is upstream</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="3B-HypothesisTests_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid" width="672"></p>
-</div>
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<ol type="1">
-<li>The number of groups to compare is <strong>two</strong>, up versus down stream. The observations are <strong>paired</strong> because the water tested up and down stream of the filter is not independent from each other, i.e.&nbsp;the “same” water is measured twice!</li>
-<li>The Shapiro-Wilk test is significant (p &lt; 0.05) for down stream data, i.e.&nbsp;we reject H0 (the data is normally distributed). Thus, the data significantly deviate from a normal distribution. The test is not significant for upstream data; the data does not significantly deviate from a normal distribution.</li>
-</ol>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(dat<span class="sc">$</span>down)</span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="do">##  Shapiro-Wilk normality test</span></span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="do">## data:  dat$down</span></span>
-<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a><span class="do">## W = 0.86604, p-value = 0.02367</span></span>
-<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(dat<span class="sc">$</span>up)</span>
-<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a><span class="do">##  Shapiro-Wilk normality test</span></span>
-<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a><span class="do">## data:  dat$up</span></span>
-<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a><span class="do">## W = 0.93609, p-value = 0.3038</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<ol start="3" type="1">
-<li>We select a <strong>Wilcoxon signed rank test</strong> that is appropriate to compare not-normal, paired observations in two groups.</li>
-<li>H0 of the Wilcoxon signed rank test is that the location shift between the two groups equals zero, i.e.&nbsp;the difference between the pairs follows a symmetric distribution around zero. As p &lt; 0.05, we can reject H0. The filter significantly influences water quality. (In case of ties also see the function wilcox.test() in the package coin for exact, asymptotic and Monte Carlo conditional p-values)</li>
-</ol>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wilcox.test</span>(dat<span class="sc">$</span>down, dat<span class="sc">$</span>up, <span class="at">paired =</span> T)</span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="do">## Warning in wilcox.test.default(dat$down, dat$up, paired = T): cannot compute</span></span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="do">## exact p-value with ties</span></span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Warning in wilcox.test.default(dat$down, dat$up, paired = T): cannot compute</span></span>
-<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="do">## exact p-value with zeroes</span></span>
-<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a><span class="do">##  Wilcoxon signed rank test with continuity correction</span></span>
-<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a><span class="do">## data:  dat$down and dat$up</span></span>
-<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a><span class="do">## V = 8, p-value = 0.004971</span></span>
-<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a><span class="do">## alternative hypothesis: true location shift is not equal to 0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="chicken" class="level3" data-number="6.6.2">
-<h3 data-number="6.6.2" class="anchored" data-anchor-id="chicken"><span class="header-section-number">6.6.2</span> Chicken</h3>
-<p>The ‘chickwts’ experiment was carried out to measure and compare the effectiveness of various feed supplements on the growth rate of chickens. We are interested in two questions: Does the feed type influence the chickens weight at all? Which feed types result in significantly different chicken weights?</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">=</span> chickwts</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Analyze the data and answer the following questions at <strong>elearning-extern</strong>.</p>
-<ol type="1">
-<li>Visualize the data. What is an appropriate plot for this kind of data?</li>
-<li>Can you apply an ANOVA to this data? What are the assumptions for an ANOVA? Remember: you have to test two things for the groups (for this exercise it is enough if you test the groups “casein” and “horsebean” only).</li>
-<li>Apply an ANOVA or the non-parametric test. How would you describe the result in a thesis or publication?</li>
-<li>Also apply the alternative test and compare p-values. Which of the tests has a higher power?</li>
-<li>Use the result of the ANOVA to carry out a post-hoc test. How many of the pairwise comparisons indicate significant differences between the groups?</li>
-<li>Which conclusion about the feed types ‘meatmeal’ and ‘casein’ is correct?</li>
-</ol>
-<div class="callout callout-style-simple callout-tip no-icon callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Solution
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<ol type="1">
-<li>An appropriate visualization for one numeric and one categorical variable is a <strong>boxplot</strong>. Using ‘notch = T’ in the function boxplot(), adds confidence interval for the median (the warning here indicates that we are not very confident in the estimates of the medians as the number of observations is rather small, you can see at the notches that go beyond the boxes).</li>
-</ol>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">=</span> chickwts</span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(weight <span class="sc">~</span> feed, <span class="at">data =</span> dat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="3B-HypothesisTests_files/figure-html/unnamed-chunk-29-1.png" class="img-fluid" width="672"></p>
-</div>
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(weight <span class="sc">~</span> feed, <span class="at">data =</span> dat, <span class="at">notch =</span> T)</span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="do">## Warning in (function (z, notch = FALSE, width = NULL, varwidth = FALSE, : some</span></span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="do">## notches went outside hinges ('box'): maybe set notch=FALSE</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="3B-HypothesisTests_files/figure-html/unnamed-chunk-29-2.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-<ol start="2" type="1">
-<li>The two requirements for applying an ANOVA are 1) the data in each group are normally distributed, and 2) the variances of the different groups are equal. For 1) we again use a Shapiro-Wilk test. For 2) we can use the function var.test() or for all feed types the function bartlett.test(). All tests are not significant, and we thus have no indication to assume that the data is not-normally distributed or that the variances are different. We can use an ANOVA.</li>
-</ol>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># get data of each group</span></span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>casein <span class="ot">=</span> dat<span class="sc">$</span>weight[dat<span class="sc">$</span>feed <span class="sc">==</span> <span class="st">"casein"</span>]</span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>horsebean <span class="ot">=</span> dat<span class="sc">$</span>weight[dat<span class="sc">$</span>feed <span class="sc">==</span> <span class="st">"horsebean"</span>]</span>
-<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(casein)</span>
-<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a><span class="do">##  Shapiro-Wilk normality test</span></span>
-<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a><span class="do">## data:  casein</span></span>
-<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a><span class="do">## W = 0.91663, p-value = 0.2592</span></span>
-<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(horsebean)</span>
-<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a><span class="do">##  Shapiro-Wilk normality test</span></span>
-<span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb33-15"><a href="#cb33-15" aria-hidden="true" tabindex="-1"></a><span class="do">## data:  horsebean</span></span>
-<span id="cb33-16"><a href="#cb33-16" aria-hidden="true" tabindex="-1"></a><span class="do">## W = 0.93758, p-value = 0.5264</span></span>
-<span id="cb33-17"><a href="#cb33-17" aria-hidden="true" tabindex="-1"></a><span class="co"># H0 normally distributed</span></span>
-<span id="cb33-18"><a href="#cb33-18" aria-hidden="true" tabindex="-1"></a><span class="co"># not rejected, normality assumption is okay</span></span>
-<span id="cb33-19"><a href="#cb33-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-20"><a href="#cb33-20" aria-hidden="true" tabindex="-1"></a><span class="fu">var.test</span>(casein, horsebean)</span>
-<span id="cb33-21"><a href="#cb33-21" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb33-22"><a href="#cb33-22" aria-hidden="true" tabindex="-1"></a><span class="do">##  F test to compare two variances</span></span>
-<span id="cb33-23"><a href="#cb33-23" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb33-24"><a href="#cb33-24" aria-hidden="true" tabindex="-1"></a><span class="do">## data:  casein and horsebean</span></span>
-<span id="cb33-25"><a href="#cb33-25" aria-hidden="true" tabindex="-1"></a><span class="do">## F = 2.7827, num df = 11, denom df = 9, p-value = 0.1353</span></span>
-<span id="cb33-26"><a href="#cb33-26" aria-hidden="true" tabindex="-1"></a><span class="do">## alternative hypothesis: true ratio of variances is not equal to 1</span></span>
-<span id="cb33-27"><a href="#cb33-27" aria-hidden="true" tabindex="-1"></a><span class="do">## 95 percent confidence interval:</span></span>
-<span id="cb33-28"><a href="#cb33-28" aria-hidden="true" tabindex="-1"></a><span class="do">##  0.711320 9.984178</span></span>
-<span id="cb33-29"><a href="#cb33-29" aria-hidden="true" tabindex="-1"></a><span class="do">## sample estimates:</span></span>
-<span id="cb33-30"><a href="#cb33-30" aria-hidden="true" tabindex="-1"></a><span class="do">## ratio of variances </span></span>
-<span id="cb33-31"><a href="#cb33-31" aria-hidden="true" tabindex="-1"></a><span class="do">##           2.782737</span></span>
-<span id="cb33-32"><a href="#cb33-32" aria-hidden="true" tabindex="-1"></a><span class="co"># H0 ratio of variances is 1 = groups have the same variance</span></span>
-<span id="cb33-33"><a href="#cb33-33" aria-hidden="true" tabindex="-1"></a><span class="co"># not rejected, same variances is okay</span></span>
-<span id="cb33-34"><a href="#cb33-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-35"><a href="#cb33-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-36"><a href="#cb33-36" aria-hidden="true" tabindex="-1"></a><span class="do">### Extra: testing the assumptions for all groups:</span></span>
-<span id="cb33-37"><a href="#cb33-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-38"><a href="#cb33-38" aria-hidden="true" tabindex="-1"></a><span class="co"># Normality test for all groups</span></span>
-<span id="cb33-39"><a href="#cb33-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-40"><a href="#cb33-40" aria-hidden="true" tabindex="-1"></a><span class="co"># Option 1: using the dplyr package</span></span>
-<span id="cb33-41"><a href="#cb33-41" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb33-42"><a href="#cb33-42" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb33-43"><a href="#cb33-43" aria-hidden="true" tabindex="-1"></a><span class="do">## Attaching package: 'dplyr'</span></span>
-<span id="cb33-44"><a href="#cb33-44" aria-hidden="true" tabindex="-1"></a><span class="do">## The following object is masked from 'package:MASS':</span></span>
-<span id="cb33-45"><a href="#cb33-45" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb33-46"><a href="#cb33-46" aria-hidden="true" tabindex="-1"></a><span class="do">##     select</span></span>
-<span id="cb33-47"><a href="#cb33-47" aria-hidden="true" tabindex="-1"></a><span class="do">## The following objects are masked from 'package:stats':</span></span>
-<span id="cb33-48"><a href="#cb33-48" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb33-49"><a href="#cb33-49" aria-hidden="true" tabindex="-1"></a><span class="do">##     filter, lag</span></span>
-<span id="cb33-50"><a href="#cb33-50" aria-hidden="true" tabindex="-1"></a><span class="do">## The following objects are masked from 'package:base':</span></span>
-<span id="cb33-51"><a href="#cb33-51" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb33-52"><a href="#cb33-52" aria-hidden="true" tabindex="-1"></a><span class="do">##     intersect, setdiff, setequal, union</span></span>
-<span id="cb33-53"><a href="#cb33-53" aria-hidden="true" tabindex="-1"></a>norm_test <span class="ot">&lt;-</span> dat <span class="sc">%&gt;%</span></span>
-<span id="cb33-54"><a href="#cb33-54" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(feed) <span class="sc">%&gt;%</span> </span>
-<span id="cb33-55"><a href="#cb33-55" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">p =</span> <span class="fu">shapiro.test</span>(weight)<span class="sc">$</span>p)</span>
-<span id="cb33-56"><a href="#cb33-56" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-57"><a href="#cb33-57" aria-hidden="true" tabindex="-1"></a><span class="co"># Option 2: using base R</span></span>
-<span id="cb33-58"><a href="#cb33-58" aria-hidden="true" tabindex="-1"></a>norm_test <span class="ot">&lt;-</span> <span class="fu">aggregate</span>(weight<span class="sc">~</span>feed, <span class="at">data =</span> dat, <span class="at">FUN =</span> <span class="cf">function</span>(x){<span class="fu">shapiro.test</span>(x)<span class="sc">$</span>p})</span>
-<span id="cb33-59"><a href="#cb33-59" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-60"><a href="#cb33-60" aria-hidden="true" tabindex="-1"></a>norm_test <span class="co"># all groups seem normally distributed</span></span>
-<span id="cb33-61"><a href="#cb33-61" aria-hidden="true" tabindex="-1"></a><span class="do">##        feed    weight</span></span>
-<span id="cb33-62"><a href="#cb33-62" aria-hidden="true" tabindex="-1"></a><span class="do">## 1    casein 0.2591841</span></span>
-<span id="cb33-63"><a href="#cb33-63" aria-hidden="true" tabindex="-1"></a><span class="do">## 2 horsebean 0.5264499</span></span>
-<span id="cb33-64"><a href="#cb33-64" aria-hidden="true" tabindex="-1"></a><span class="do">## 3   linseed 0.9034734</span></span>
-<span id="cb33-65"><a href="#cb33-65" aria-hidden="true" tabindex="-1"></a><span class="do">## 4  meatmeal 0.9611795</span></span>
-<span id="cb33-66"><a href="#cb33-66" aria-hidden="true" tabindex="-1"></a><span class="do">## 5   soybean 0.5063768</span></span>
-<span id="cb33-67"><a href="#cb33-67" aria-hidden="true" tabindex="-1"></a><span class="do">## 6 sunflower 0.3602904</span></span>
-<span id="cb33-68"><a href="#cb33-68" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-69"><a href="#cb33-69" aria-hidden="true" tabindex="-1"></a><span class="co"># Bartlett test for equal variances</span></span>
-<span id="cb33-70"><a href="#cb33-70" aria-hidden="true" tabindex="-1"></a><span class="fu">bartlett.test</span>(weight <span class="sc">~</span> feed, dat)</span>
-<span id="cb33-71"><a href="#cb33-71" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb33-72"><a href="#cb33-72" aria-hidden="true" tabindex="-1"></a><span class="do">##  Bartlett test of homogeneity of variances</span></span>
-<span id="cb33-73"><a href="#cb33-73" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb33-74"><a href="#cb33-74" aria-hidden="true" tabindex="-1"></a><span class="do">## data:  weight by feed</span></span>
-<span id="cb33-75"><a href="#cb33-75" aria-hidden="true" tabindex="-1"></a><span class="do">## Bartlett's K-squared = 3.2597, df = 5, p-value = 0.66</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<ol start="3" type="1">
-<li>H0 of the ANOVA is that feed has no influence on the chicken weight. As p &lt; 0.05, we reject H0. In the result section, we would write something like: “The feed type significantly influenced the chicken weight (ANOVA, p = 5.94e-10).”</li>
-</ol>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">=</span> <span class="fu">aov</span>(weight <span class="sc">~</span> feed, <span class="at">data =</span> dat)</span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit)</span>
-<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="do">##             Df Sum Sq Mean Sq F value   Pr(&gt;F)    </span></span>
-<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a><span class="do">## feed         5 231129   46226   15.37 5.94e-10 ***</span></span>
-<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a><span class="do">## Residuals   65 195556    3009                     </span></span>
-<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a><span class="do">## ---</span></span>
-<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a><span class="do">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<ol start="4" type="1">
-<li>The non-parametric alternative of an ANOVA is the Kruskal-Wallis test, which should be applied if the data is not normally distributed. In this example, the test comes to the same conclusion: H0 is rejected, the feed type has a significant effect on the chicken weight. The p-value, however, is not as small as in the ANOVA. The reason for this is that non-parametric tests have a lower power than parametric ones as they only use the ranks of the data. Therefore, the ANOVA is preferred over the non-parametric alternative in case its assumptions are fulfilled.</li>
-</ol>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">kruskal.test</span>(chickwts<span class="sc">$</span>weight, chickwts<span class="sc">$</span>feed)</span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="do">##  Kruskal-Wallis rank sum test</span></span>
-<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a><span class="do">## data:  chickwts$weight and chickwts$feed</span></span>
-<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a><span class="do">## Kruskal-Wallis chi-squared = 37.343, df = 5, p-value = 5.113e-07</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<ol start="5" type="1">
-<li>From the 15 comparisons among feed types, 8 are significantly different.</li>
-</ol>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">TukeyHSD</span>(fit)</span>
-<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="do">##   Tukey multiple comparisons of means</span></span>
-<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="do">##     95% family-wise confidence level</span></span>
-<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a><span class="do">## Fit: aov(formula = weight ~ feed, data = dat)</span></span>
-<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a><span class="do">## $feed</span></span>
-<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a><span class="do">##                            diff         lwr       upr     p adj</span></span>
-<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a><span class="do">## horsebean-casein    -163.383333 -232.346876 -94.41979 0.0000000</span></span>
-<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a><span class="do">## linseed-casein      -104.833333 -170.587491 -39.07918 0.0002100</span></span>
-<span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a><span class="do">## meatmeal-casein      -46.674242 -113.906207  20.55772 0.3324584</span></span>
-<span id="cb36-12"><a href="#cb36-12" aria-hidden="true" tabindex="-1"></a><span class="do">## soybean-casein       -77.154762 -140.517054 -13.79247 0.0083653</span></span>
-<span id="cb36-13"><a href="#cb36-13" aria-hidden="true" tabindex="-1"></a><span class="do">## sunflower-casein       5.333333  -60.420825  71.08749 0.9998902</span></span>
-<span id="cb36-14"><a href="#cb36-14" aria-hidden="true" tabindex="-1"></a><span class="do">## linseed-horsebean     58.550000  -10.413543 127.51354 0.1413329</span></span>
-<span id="cb36-15"><a href="#cb36-15" aria-hidden="true" tabindex="-1"></a><span class="do">## meatmeal-horsebean   116.709091   46.335105 187.08308 0.0001062</span></span>
-<span id="cb36-16"><a href="#cb36-16" aria-hidden="true" tabindex="-1"></a><span class="do">## soybean-horsebean     86.228571   19.541684 152.91546 0.0042167</span></span>
-<span id="cb36-17"><a href="#cb36-17" aria-hidden="true" tabindex="-1"></a><span class="do">## sunflower-horsebean  168.716667   99.753124 237.68021 0.0000000</span></span>
-<span id="cb36-18"><a href="#cb36-18" aria-hidden="true" tabindex="-1"></a><span class="do">## meatmeal-linseed      58.159091   -9.072873 125.39106 0.1276965</span></span>
-<span id="cb36-19"><a href="#cb36-19" aria-hidden="true" tabindex="-1"></a><span class="do">## soybean-linseed       27.678571  -35.683721  91.04086 0.7932853</span></span>
-<span id="cb36-20"><a href="#cb36-20" aria-hidden="true" tabindex="-1"></a><span class="do">## sunflower-linseed    110.166667   44.412509 175.92082 0.0000884</span></span>
-<span id="cb36-21"><a href="#cb36-21" aria-hidden="true" tabindex="-1"></a><span class="do">## soybean-meatmeal     -30.480519  -95.375109  34.41407 0.7391356</span></span>
-<span id="cb36-22"><a href="#cb36-22" aria-hidden="true" tabindex="-1"></a><span class="do">## sunflower-meatmeal    52.007576  -15.224388 119.23954 0.2206962</span></span>
-<span id="cb36-23"><a href="#cb36-23" aria-hidden="true" tabindex="-1"></a><span class="do">## sunflower-soybean     82.488095   19.125803 145.85039 0.0038845</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<ol start="6" type="1">
-<li>The experiment did not reveal a significant weight difference between the feed types ‘meatmeal’ and ‘casein’. Remember that we cannot prove or accept H0; we can only reject it.</li>
-</ol>
-</div>
-</div>
-</div>
-</section>
-<section id="titanic" class="level3" data-number="6.6.3">
-<h3 data-number="6.6.3" class="anchored" data-anchor-id="titanic"><span class="header-section-number">6.6.3</span> Titanic</h3>
-<p>The dataset ‘titanic’ from the EcoData package (not to confuse with the dataset ‘Titanic’) provides information on individual passengers of the Titanic.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(EcoData) <span class="co">#or: load("EcoData.Rdata"), if you had problems with installing the package</span></span>
-<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">=</span> titanic</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Answer the following questions at <strong>elearning-extern</strong>.</p>
-<ol type="1">
-<li>We are interested in first and second class differences only. Reduce the dataset to these classes only. How can you do this in R?</li>
-<li>Does the survival rate between the first and second class differ? Hint: you can apply the test to a contingency table of passenger class versus survived, i.e.&nbsp;<code>table(dat$pclass, dat$survived)</code>.</li>
-<li>Is the variable passenger age normally distributed?</li>
-<li>Is the variable Body Identification Number (body) uniformly distributed?</li>
-<li>Is the linear correlation (i.e.&nbsp;Pearson) between fare and age significant?</li>
-</ol>
-<div class="callout callout-style-simple callout-tip no-icon callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Solution
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-3" class="callout-3-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<ol type="1">
-<li>The dataset can be reduced in different ways. All three options result in a dataset with class 1 and 2 only.</li>
-</ol>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(EcoData)</span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">=</span> titanic</span>
-<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">=</span> dat[dat<span class="sc">$</span>pclass <span class="sc">==</span> <span class="dv">1</span> <span class="sc">|</span> dat<span class="sc">$</span>pclass <span class="sc">==</span> <span class="dv">2</span>, ]</span>
-<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">=</span> dat[dat<span class="sc">$</span>pclass <span class="sc">%in%</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, ] <span class="co"># the same</span></span>
-<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">=</span> dat[dat<span class="sc">$</span>pclass <span class="sc">!=</span> <span class="dv">3</span>, ] <span class="co"># the same</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<ol start="2" type="1">
-<li>We use the test of equal proportions here. H0, proportions in the two groups are equal, is rejected. The survival probability in class 1 and class 2 is significantly different. Note that the estimated proportions are for mortality not for survival because 0=died is in the first column of the table. Thus it is considered the “success” in the prop.test().</li>
-</ol>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(dat<span class="sc">$</span>pclass, dat<span class="sc">$</span>survived)</span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="do">##    </span></span>
-<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a><span class="do">##       0   1</span></span>
-<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a><span class="do">##   1 123 200</span></span>
-<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a><span class="do">##   2 158 119</span></span>
-<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a><span class="fu">prop.test</span>(<span class="fu">table</span>(dat<span class="sc">$</span>pclass, dat<span class="sc">$</span>survived))</span>
-<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a><span class="do">##  2-sample test for equality of proportions with continuity correction</span></span>
-<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a><span class="do">## data:  table(dat$pclass, dat$survived)</span></span>
-<span id="cb39-11"><a href="#cb39-11" aria-hidden="true" tabindex="-1"></a><span class="do">## X-squared = 20.772, df = 1, p-value = 5.173e-06</span></span>
-<span id="cb39-12"><a href="#cb39-12" aria-hidden="true" tabindex="-1"></a><span class="do">## alternative hypothesis: two.sided</span></span>
-<span id="cb39-13"><a href="#cb39-13" aria-hidden="true" tabindex="-1"></a><span class="do">## 95 percent confidence interval:</span></span>
-<span id="cb39-14"><a href="#cb39-14" aria-hidden="true" tabindex="-1"></a><span class="do">##  -0.2717017 -0.1074826</span></span>
-<span id="cb39-15"><a href="#cb39-15" aria-hidden="true" tabindex="-1"></a><span class="do">## sample estimates:</span></span>
-<span id="cb39-16"><a href="#cb39-16" aria-hidden="true" tabindex="-1"></a><span class="do">##    prop 1    prop 2 </span></span>
-<span id="cb39-17"><a href="#cb39-17" aria-hidden="true" tabindex="-1"></a><span class="do">## 0.3808050 0.5703971</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<ol start="3" type="1">
-<li>The distribution of passenger age significantly differs from normal.</li>
-</ol>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(dat<span class="sc">$</span>age, <span class="at">breaks =</span> <span class="dv">20</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="3B-HypothesisTests_files/figure-html/unnamed-chunk-37-1.png" class="img-fluid" width="672"></p>
-</div>
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(dat<span class="sc">$</span>age)</span>
-<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a><span class="do">##  Shapiro-Wilk normality test</span></span>
-<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a><span class="do">## data:  dat$age</span></span>
-<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a><span class="do">## W = 0.9876, p-value = 0.00014</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<ol start="4" type="1">
-<li>The distribution of body significantly differs from uniform.</li>
-</ol>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(dat<span class="sc">$</span>body, <span class="at">breaks =</span> <span class="dv">20</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="3B-HypothesisTests_files/figure-html/unnamed-chunk-38-1.png" class="img-fluid" width="672"></p>
-</div>
-<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ks.test</span>(dat<span class="sc">$</span>body, <span class="st">"punif"</span>)</span>
-<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a><span class="do">##  Exact one-sample Kolmogorov-Smirnov test</span></span>
-<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a><span class="do">## data:  dat$body</span></span>
-<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a><span class="do">## D = 1, p-value = 2.22e-16</span></span>
-<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a><span class="do">## alternative hypothesis: two-sided</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<ol start="5" type="1">
-<li>The correlation between fare and age is non-significant. You can also plot the data using the scatter.smooth function.</li>
-</ol>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor.test</span>(dat<span class="sc">$</span>fare, dat<span class="sc">$</span>age)</span>
-<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="do">##  Pearson's product-moment correlation</span></span>
-<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a><span class="do">## data:  dat$fare and dat$age</span></span>
-<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a><span class="do">## t = 1.9326, df = 543, p-value = 0.0538</span></span>
-<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a><span class="do">## alternative hypothesis: true correlation is not equal to 0</span></span>
-<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a><span class="do">## 95 percent confidence interval:</span></span>
-<span id="cb44-9"><a href="#cb44-9" aria-hidden="true" tabindex="-1"></a><span class="do">##  -0.001346105  0.165493055</span></span>
-<span id="cb44-10"><a href="#cb44-10" aria-hidden="true" tabindex="-1"></a><span class="do">## sample estimates:</span></span>
-<span id="cb44-11"><a href="#cb44-11" aria-hidden="true" tabindex="-1"></a><span class="do">##        cor </span></span>
-<span id="cb44-12"><a href="#cb44-12" aria-hidden="true" tabindex="-1"></a><span class="do">## 0.08265257</span></span>
-<span id="cb44-13"><a href="#cb44-13" aria-hidden="true" tabindex="-1"></a><span class="fu">scatter.smooth</span>(dat<span class="sc">$</span>fare, dat<span class="sc">$</span>age)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="3B-HypothesisTests_files/figure-html/unnamed-chunk-39-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="simulation-of-type-i-and-ii-error" class="level3" data-number="6.6.4">
-<h3 data-number="6.6.4" class="anchored" data-anchor-id="simulation-of-type-i-and-ii-error"><span class="header-section-number">6.6.4</span> Simulation of Type I and II error</h3>
-<p><em>This is an additional task for those who are fast! Please finish the other parts first and submit your solution in elearning-extern before you continue here!</em></p>
-<p>Analogously to the previous example of simulating the test statistic, we can also simulate error rates. Complete the code …</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>PperGroup <span class="ot">=</span> <span class="dv">50</span></span>
-<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>pC <span class="ot">=</span> <span class="fl">0.5</span></span>
-<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>pT <span class="ot">=</span> <span class="fl">0.5</span></span>
-<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a>pvalues <span class="ot">=</span> <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="dv">1000</span>)</span>
-<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">1000</span>){</span>
-<span id="cb45-8"><a href="#cb45-8" aria-hidden="true" tabindex="-1"></a>  control <span class="ot">=</span> <span class="fu">rbinom</span>(<span class="at">n =</span> <span class="dv">1</span>, <span class="at">size =</span> PperGroup, <span class="at">prob =</span> pC)</span>
-<span id="cb45-9"><a href="#cb45-9" aria-hidden="true" tabindex="-1"></a>  treat <span class="ot">=</span> <span class="fu">rbinom</span>(<span class="at">n =</span> <span class="dv">1</span>, <span class="at">size =</span> PperGroup, <span class="at">prob =</span> pT)</span>
-<span id="cb45-10"><a href="#cb45-10" aria-hidden="true" tabindex="-1"></a>  <span class="co">#XXXX</span></span>
-<span id="cb45-11"><a href="#cb45-11" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>… and answer the following questions for the prop.test in R:</p>
-<ol type="1">
-<li><p>How does the distribution of p-values and the number of false positive (Type I error) look like if pC = pT</p></li>
-<li><p>How does the distribution of p-values and the number of true positive (Power) look like if pC != pT, e.g.&nbsp;0.5, 0.6</p></li>
-<li><p>How does the distribution of p-values and the number of false positive (Type I error) look like if you modify the for loop in a way that you first look at the data, and then decide if you test for greater or less?</p></li>
-</ol>
-<div class="callout callout-style-simple callout-tip no-icon callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Solution
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-4" class="callout-4-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Analogously to our previous example with simulating the test statistic, we can also simulate the error rates. This is the completed code the different examples:</p>
-<ol type="1">
-<li>pC = pT</li>
-</ol>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>PperGroup <span class="ot">=</span> <span class="dv">50</span></span>
-<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>pC <span class="ot">=</span> <span class="fl">0.5</span></span>
-<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>pT <span class="ot">=</span> <span class="fl">0.5</span></span>
-<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a>pvalues <span class="ot">=</span> <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="dv">1000</span>)</span>
-<span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a>positives <span class="ot">=</span> <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="dv">1000</span>)</span>
-<span id="cb46-7"><a href="#cb46-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-8"><a href="#cb46-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">1000</span>){</span>
-<span id="cb46-9"><a href="#cb46-9" aria-hidden="true" tabindex="-1"></a>  control <span class="ot">=</span> <span class="fu">rbinom</span>(<span class="dv">1</span>, PperGroup, <span class="at">prob =</span> pC )</span>
-<span id="cb46-10"><a href="#cb46-10" aria-hidden="true" tabindex="-1"></a>  treatment <span class="ot">=</span> <span class="fu">rbinom</span>(<span class="dv">1</span>, PperGroup, <span class="at">prob =</span> pT )</span>
-<span id="cb46-11"><a href="#cb46-11" aria-hidden="true" tabindex="-1"></a>  pvalues[i] <span class="ot">=</span> <span class="fu">prop.test</span>(<span class="fu">c</span>(control, treatment), <span class="fu">rep</span>(PperGroup, <span class="dv">2</span>))<span class="sc">$</span>p.value</span>
-<span id="cb46-12"><a href="#cb46-12" aria-hidden="true" tabindex="-1"></a>  positives[i] <span class="ot">=</span> pvalues[i] <span class="sc">&lt;=</span> <span class="fl">0.05</span></span>
-<span id="cb46-13"><a href="#cb46-13" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb46-14"><a href="#cb46-14" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(pvalues)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="3B-HypothesisTests_files/figure-html/unnamed-chunk-41-1.png" class="img-fluid" width="672"></p>
-</div>
-<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(positives)</span>
-<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a><span class="do">## positives</span></span>
-<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a><span class="do">## FALSE  TRUE </span></span>
-<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a><span class="do">##   965    35</span></span>
-<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(positives) </span>
-<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 0.035</span></span>
-<span id="cb47-7"><a href="#cb47-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb47-8"><a href="#cb47-8" aria-hidden="true" tabindex="-1"></a><span class="co"># type I error rate = false positives (if data simulation etc. is performed several times, this should be on average 0.05 (alpha))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<ol start="2" type="1">
-<li>pC != pT with difference 0.1</li>
-</ol>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>PperGroup <span class="ot">=</span> <span class="dv">50</span></span>
-<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>pC <span class="ot">=</span> <span class="fl">0.5</span></span>
-<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>pT <span class="ot">=</span> <span class="fl">0.6</span></span>
-<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a>pvalues <span class="ot">=</span> <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="dv">1000</span>)</span>
-<span id="cb48-6"><a href="#cb48-6" aria-hidden="true" tabindex="-1"></a>positives <span class="ot">=</span> <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="dv">1000</span>)</span>
-<span id="cb48-7"><a href="#cb48-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-8"><a href="#cb48-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">1000</span>){</span>
-<span id="cb48-9"><a href="#cb48-9" aria-hidden="true" tabindex="-1"></a>  control <span class="ot">=</span> <span class="fu">rbinom</span>(<span class="dv">1</span>, PperGroup, <span class="at">prob =</span> pC )</span>
-<span id="cb48-10"><a href="#cb48-10" aria-hidden="true" tabindex="-1"></a>  treatment <span class="ot">=</span> <span class="fu">rbinom</span>(<span class="dv">1</span>, PperGroup, <span class="at">prob =</span> pT )</span>
-<span id="cb48-11"><a href="#cb48-11" aria-hidden="true" tabindex="-1"></a>  pvalues[i] <span class="ot">=</span> <span class="fu">prop.test</span>(<span class="fu">c</span>(control, treatment), <span class="fu">rep</span>(PperGroup, <span class="dv">2</span>))<span class="sc">$</span>p.value</span>
-<span id="cb48-12"><a href="#cb48-12" aria-hidden="true" tabindex="-1"></a>  positives[i] <span class="ot">=</span> <span class="fu">prop.test</span>(<span class="fu">c</span>(control, treatment), <span class="fu">rep</span>(PperGroup, <span class="dv">2</span>))<span class="sc">$</span>p.value <span class="sc">&lt;</span> <span class="fl">0.05</span></span>
-<span id="cb48-13"><a href="#cb48-13" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb48-14"><a href="#cb48-14" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(pvalues)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="3B-HypothesisTests_files/figure-html/unnamed-chunk-42-1.png" class="img-fluid" width="672"></p>
-</div>
-<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(positives)</span>
-<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a><span class="do">## positives</span></span>
-<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a><span class="do">## FALSE  TRUE </span></span>
-<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a><span class="do">##   862   138</span></span>
-<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(pvalues <span class="sc">&lt;</span> <span class="fl">0.05</span>) <span class="co"># = power (rate at which effect is detected by the test)</span></span>
-<span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 0.138</span></span>
-<span id="cb49-7"><a href="#cb49-7" aria-hidden="true" tabindex="-1"></a><span class="co"># power = 1- beta &gt; beta = 1-power = typeII error rate</span></span>
-<span id="cb49-8"><a href="#cb49-8" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">-</span><span class="fu">mean</span>(pvalues <span class="sc">&lt;</span> <span class="fl">0.05</span>)</span>
-<span id="cb49-9"><a href="#cb49-9" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 0.862</span></span>
-<span id="cb49-10"><a href="#cb49-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-11"><a href="#cb49-11" aria-hidden="true" tabindex="-1"></a><span class="do">## Factors increasing power and reducing type II errors:</span></span>
-<span id="cb49-12"><a href="#cb49-12" aria-hidden="true" tabindex="-1"></a><span class="co"># - increase sample size</span></span>
-<span id="cb49-13"><a href="#cb49-13" aria-hidden="true" tabindex="-1"></a><span class="co"># - larger real effect size (but this is usually fixed by the system)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<ol start="3" type="1">
-<li>You first look at the data, and then decide if you test for greater or less:</li>
-</ol>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ifelse(test,yes,no)</span></span>
-<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>PperGroup <span class="ot">=</span> <span class="dv">50</span></span>
-<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>pC <span class="ot">=</span> <span class="fl">0.5</span></span>
-<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a>pT <span class="ot">=</span> <span class="fl">0.5</span></span>
-<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-6"><a href="#cb50-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">1000</span>){</span>
-<span id="cb50-7"><a href="#cb50-7" aria-hidden="true" tabindex="-1"></a>  control <span class="ot">=</span> <span class="fu">rbinom</span>(<span class="dv">1</span>, PperGroup, <span class="at">prob =</span> pC )</span>
-<span id="cb50-8"><a href="#cb50-8" aria-hidden="true" tabindex="-1"></a>  treatment <span class="ot">=</span> <span class="fu">rbinom</span>(<span class="dv">1</span>, PperGroup, <span class="at">prob =</span> pT )</span>
-<span id="cb50-9"><a href="#cb50-9" aria-hidden="true" tabindex="-1"></a>  pvalues[i] <span class="ot">=</span> <span class="fu">prop.test</span>(<span class="fu">c</span>(control, treatment), <span class="fu">rep</span>(PperGroup, <span class="dv">2</span>), </span>
-<span id="cb50-10"><a href="#cb50-10" aria-hidden="true" tabindex="-1"></a>                        <span class="at">alternative=</span> <span class="fu">ifelse</span>(<span class="fu">mean</span>(control)<span class="sc">&gt;</span><span class="fu">mean</span>(treatment),</span>
-<span id="cb50-11"><a href="#cb50-11" aria-hidden="true" tabindex="-1"></a>                                            <span class="st">"greater"</span>,<span class="st">"less"</span>))<span class="sc">$</span>p.value</span>
-<span id="cb50-12"><a href="#cb50-12" aria-hidden="true" tabindex="-1"></a>  positives[i] <span class="ot">=</span> <span class="fu">prop.test</span>(<span class="fu">c</span>(control, treatment), <span class="fu">rep</span>(PperGroup, <span class="dv">2</span>),</span>
-<span id="cb50-13"><a href="#cb50-13" aria-hidden="true" tabindex="-1"></a>                     <span class="at">alternative=</span> <span class="fu">ifelse</span>(<span class="fu">mean</span>(control)<span class="sc">&gt;</span><span class="fu">mean</span>(treatment),</span>
-<span id="cb50-14"><a href="#cb50-14" aria-hidden="true" tabindex="-1"></a>                                         <span class="st">"greater"</span>,<span class="st">"less"</span>))<span class="sc">$</span>p.value <span class="sc">&lt;</span> <span class="fl">0.05</span></span>
-<span id="cb50-15"><a href="#cb50-15" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb50-16"><a href="#cb50-16" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(pvalues)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="3B-HypothesisTests_files/figure-html/unnamed-chunk-43-1.png" class="img-fluid" width="672"></p>
-</div>
-<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(positives)</span>
-<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a><span class="do">## positives</span></span>
-<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a><span class="do">## FALSE  TRUE </span></span>
-<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a><span class="do">##   945    55</span></span>
-<span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(pvalues <span class="sc">&lt;</span> <span class="fl">0.05</span>) </span>
-<span id="cb51-6"><a href="#cb51-6" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 0.055</span></span>
-<span id="cb51-7"><a href="#cb51-7" aria-hidden="true" tabindex="-1"></a><span class="co"># higher false discovery rate</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</div>
-</div>
 </div>
 
 
@@ -1984,8 +1495,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./4-SimpleRegression.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Simple linear regression</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./3A-Exercise.html" class="pagination-link">
+        <span class="nav-page-text">Exercise - NHST and statistical tests</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
