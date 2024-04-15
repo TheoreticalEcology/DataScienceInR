@@ -4,8 +4,7 @@ editor_options:
   chunk_output_type: console
 ---
 
-
-# Exercise - R basics {-}
+# Exercise - R basics {.unnumbered}
 
 In this exercise you will practice:
 
@@ -255,7 +254,6 @@ Before working with a dataset, you should always get an overview of it. Helpful 
 
 Try out these functions and **provide answers to the following questions**:
 
-
 ::: callout-warning
 ### Questions
 
@@ -286,20 +284,20 @@ tail(dat)
 `r hide("Click here to see the solution")`
 
 What is the most common atomic class in the airquality dataset?
- 
- * integer
- * function `str()` helps to find this out
- 
+
+-   integer
+-   function `str()` helps to find this out
+
 How many rows does the dataset have?
 
- * 153
- * this is easiest to see when using the function `str(dat)`
- * `dim(dat)` or `nrow(dat)` give the same information
+-   153
+-   this is easiest to see when using the function `str(dat)`
+-   `dim(dat)` or `nrow(dat)` give the same information
 
 What is the last value in the column "Temp"?
 
- * 68
- * `tail(dat)` helps to find this out very fast
+-   68
+-   `tail(dat)` helps to find this out very fast
 
 `r unhide()`
 
@@ -479,11 +477,11 @@ Until now we have only learned how to use functions and indexing of data structu
 
 A functions are self contained blocks of code that do something, for example, the average of a vector is given by:
 
-\$\$
+$$
+Average = \frac{1}{N} \sum_{i=1}^N x_i
+$$
 
-Average = \frac{1}{N} \sum\_{i=1}\^N x_i
-
-\$\$ In R we can easily calculate the sum over a vector by using the function `sum()`:
+In R we can easily calculate the sum over a vector by using the function `sum()`:
 
 ```{r}
 values = 1:10
