@@ -438,7 +438,7 @@ Try the following code to install the two packages:
 install.packages("devtools")
 library(devtools)
 devtools::install_github(repo = "TheoreticalEcology/EcoData", 
-                         subdir = "EcoData", dependencies = F, build_vignettes = T)
+                         dependencies = F, build_vignettes = F)
 library(EcoData)
 ```
 
@@ -448,12 +448,12 @@ Remember that you have to install a package only once. If you open R Studio the 
 
 If the installation didn't work, download the package file manually from
 
-https://github.com/florianhartig/ecodata/releases/download/v0.0.0.3/EcoData_0.0.0.3.tar.gz
+<https://github.com/TheoreticalEcology/ecodata/releases/download/v0.2.1/EcoData_0.2.1.tar.gz>
 
 Store the file on your computer in the same folder where you created your R project. Then run the following code:
 
 ```{r eval = F}
-install.packages("EcoData_0.0.0.3.tar.gz", 
+install.packages("EcoData_0.2.1.tar.gz", 
                  repos = NULL, type = "source")
 library(EcoData)
 

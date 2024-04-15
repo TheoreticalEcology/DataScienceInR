@@ -1,0 +1,202 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r, include=FALSE}
+set.seed(42)
+```
+
+# Exercises
+
+You will work with the following datasets:
+
+-   regrowth {EcoData}
+-   birdabundance {EcoData}
+-   simulated data
+
+## Analyzing the "regrowth" dataset
+
+::: {.callout-warning}
+
+Imagine you have a garden with some fruit trees and you were thinking of adding some berry bushes between them. However, you don't want them to suffer from malnutrition so you want to estimate the volume of root biomass as a function of the fruit biomass.
+
+Carry out the following tasks
+
+-   Perform a simple linear regression for the influence of fruit biomass on root biomass.
+-   Visualize the data and add the regression line to the plot.
+
+You will need the following functions:
+
+-   `lm()`
+-   `summary()`
+-   `plot()`
+-   `abline()`
+
+### Question
+
+You have performed a simple linear regression for the influence of fruit biomass on root biomass.
+
+Which of the following statements are correct?
+
+
+
+:::
+
+`r hide("Click here to see the solution")`
+### Solution
+
+This is the code that you need to interpret the results.
+
+```{r regrowth}
+library(EcoData)
+# simple linear regression
+fit <- lm(Root ~ Fruit, data = regrowth)
+
+# check summary for regression coefficient and p-value
+summary(fit)
+
+# plot root explained by fruit biomass
+plot(Root ~ Fruit, data = regrowth, 
+     ylab = "Root biomass in cubic meters",
+     xlab = "Fruit biomass in g")
+
+abline(fit) # add regression line
+abline(v = 70, col = "purple") # add line at x value (here fruit biomass of 70g)
+abline(h = 4.184256 + 0.050444*70, col = "brown") # add line at y value according to x = 70 using the intercept and regression coefficient of x
+```
+
+
+`r unhide()`
+
+## Analyzing the "birdabundance" dataset
+
+The dataset provides bird abundances in forest fragments with different characteristics in Australia. We want to look at the relationship of the variables "abundance", "distance" and "grazing".
+
+::: {.callout-caution icon="false"}
+### Questions
+
+First, answer the following questions on **elearning-extern** (Q 2-4):
+
+-   What is the most reasonable research question regarding these variables?
+-   What is the response variable?
+-   What is the predictor variable?
+
+Then, perform the following tasks:
+
+-   Fit a simple linear regression relating the response variable to the categorical predictor (that is the one with five levels, make sure that it is indeed a factor using *as.factor()*)
+-   Apply an ANOVA to your model.
+
+You may need the following functions:
+
+-   *lm()*
+-   *summary()*
+-   *anova()*
+
+Use your results to chose the correct statement(s) on **elearning-extern** (Q5).
+:::
+
+::: {.callout-tip collapse="true" appearance="minimal" icon="false"}
+### Solution
+
+A reasonable research question is how abundance is influenced by distance and/or grazing. Here, the response variable is abundance, while the predictors are distance and/or grazing.
+
+This is the code that you need to interpret the results.
+
+```{r  abund~graze}
+# change variable from integer to factor
+birdabundance$GRAZE <- as.factor(birdabundance$GRAZE) 
+fit <- lm(ABUND ~ GRAZE, data = birdabundance)
+summary(fit)
+
+# anova to check global effect of the factor grazing intensity
+anova(fit)
+
+# boxplot
+plot(ABUND ~ GRAZE, data = birdabundance)
+```
+:::
+
+## Model validation: Residual checks
+
+Now, we will have a closer look at model diagnostics and residual checks in particular. Of course, we should have done this for all models above as well (we simply didn't do this because of time restrictions). So remember that you always have to validate your model, if you want to be sure that your conclusions are correct.
+
+For this exercise, you can prepare a dataset yourself called "dat" with the variables "x" and "y". Simply copy the following code to generate the data:
+
+```{r}
+set.seed(234)
+x = rnorm(40, mean = 10, sd = 5)
+y = 10 - 2*x + 0.9 * x^2 + rnorm(40, mean=5, sd = 20)
+dat <- data.frame(x, y)
+head(dat)
+```
+
+Perform the following tasks:
+
+:::{.callout-warning}
+
+-   Fit a simple linear regression.
+-   Check the residuals.
+-   Perform another simple linear regression with a modified formula, if needed.
+-   Create a scatter plot of the data and add a regression line for the first fit in black and one for the second fit in red. The second model cannot be plotted with the *abline()* function. Use the following code instead:
+
+```{r eval = F}
+lines(sort(x), predict(fit2, newdata = data.frame(x = sort(x))), col = "red")
+```
+
+You may also need the following functions:
+
+-   `lm()`
+-   `summary()`
+-   `par(mfrow = c(2, 2))`
+-   `plot()`
+-   `abline()`
+
+Use your results to answer the following questions:
+
+-   What pattern do the residuals of the first regression model show when plotted against the fitted values?
+-   What do you have to do to improve your first regression model?
+-   Identify the correct statement(s) about the residuals of the modified model.
+:::
+
+`r hide("Click here to see the solution")`
+
+```{r resid-check}
+set.seed(234)
+x = rnorm(40, mean = 10, sd = 5)
+y = 10 - 2*x + 0.9 * x^2 + rnorm(40, mean=5, sd = 20)
+dat <- data.frame(x, y)
+
+# simple linear regression
+fit <- lm(y ~ x, dat)
+
+# check residuals
+op = par(mfrow=c(2,2))
+plot(fit) # residuals show a parabolic relationship (see first plot)  -> to improve, fit a quadratic relationship
+par(op)
+
+# scatter plot
+plot(y ~ x, data = dat)
+abline(fit)
+
+summary(fit) # significantly positively correlated, but this doesn't tell the full story because the residuals are not okay
+
+# improved regression model
+fit2 = lm(y ~ x + I(x^2), dat)
+
+# check residuals
+op = par(mfrow=c(2,2))
+plot(fit2) # no pattern in residuals anymore (first plot) -> fit is fine
+par(op)
+
+# scatter plot
+plot(y ~ x, data = dat)
+abline(fit)
+lines(sort(x), predict(fit2, newdata = data.frame(x = sort(x))), col = "red")
+
+
+summary(fit2) # significantly negatively correlated, trustworthy now, because residuals are sufficiently uniformly distributed (first plot in plot(fit2))
+```
+
+`r unhide()`
