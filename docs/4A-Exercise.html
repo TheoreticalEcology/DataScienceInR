@@ -98,6 +98,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <link rel="stylesheet" href="include/webex.css">
 <meta name="citation_title" content="[10]{.chapter-number}&nbsp; [Exercises]{.chapter-title}">
@@ -455,7 +457,10 @@ Warning
 <section id="question" class="level3" data-number="10.1.1">
 <h3 data-number="10.1.1" class="anchored" data-anchor-id="question"><span class="header-section-number">10.1.1</span> Question</h3>
 <p>You have performed a simple linear regression for the influence of fruit biomass on root biomass.</p>
-<p>Which of the following statements are correct?</p>
+<p>Which of the following statements are correct? (More than one are correct)</p>
+<div id="radio_QEAYJDRZQO" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_QEAYJDRZQO" value=""> <span>Root biomass is not significantly affected by fruit biomass.</span></label><label><input type="radio" autocomplete="off" name="radio_QEAYJDRZQO" value="answer"> <span>Fruit biomass explains most of the variance (&gt;50%) in the root biomass.</span></label><label><input type="radio" autocomplete="off" name="radio_QEAYJDRZQO" value="answer"> <span>At a fruit biomass of 70, the model would predict root biomass of about 4.18 + 0.05*70.</span></label><label><input type="radio" autocomplete="off" name="radio_QEAYJDRZQO" value="answer"> <span>At a fruit biomass of 0, the model predicts a root biomass of about 4.18.</span></label>
+</div>
 </section>
 </div>
 </div>
@@ -463,8 +468,13 @@ Warning
 <button>
 Click here to see the solution
 </button>
-<section id="solution" class="level3" data-number="10.1.2">
-<h3 data-number="10.1.2" class="anchored" data-anchor-id="solution"><span class="header-section-number">10.1.2</span> Solution</h3>
+<p>### Solution</p>
+<ul>
+<li>Root biomass is not significantly affected by fruit biomass. WRONG: Look at the p-value for the slope (2nd row in the regression table below Pr(&gt;|t|))</li>
+<li>Fruit biomass explains most of the variance (&gt;50%) in the root biomass. CORRECT: The proportion of variance explained by the model is given by R2.</li>
+<li>At a fruit biomass of 70, the model would predict root biomass of about <span class="math inline">\(4.18 + 0.05*70\)</span>. CORRECT: The linear equation for the model is: <span class="math inline">\(y = a*x + b\)</span> that is <span class="math inline">\(Root = slope*Fruit + intercept\)</span></li>
+<li>At a fruit biomass of 0, the model predicts a root biomass of about 4.18. CORRECT: This is the intercept (1st row in the regression table below Estimate)</li>
+</ul>
 <p>This is the code that you need to interpret the results.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(EcoData)</span>
@@ -504,7 +514,6 @@ Click here to see the solution
 <p><img src="4A-Exercise_files/figure-html/regrowth-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-</section>
 </div>
 </section>
 <section id="analyzing-the-birdabundance-dataset" class="level2" data-number="10.2">
@@ -520,24 +529,41 @@ Questions
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>First, answer the following questions on <strong>elearning-extern</strong> (Q 2-4):</p>
+<p>First, answer the following questions?:</p>
 <ul>
 <li>What is the most reasonable research question regarding these variables?</li>
+</ul>
+<div id="radio_XGDYENTZRO" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_XGDYENTZRO" value=""> <span>How is grazing influenced by distance / abundance?</span></label><label><input type="radio" autocomplete="off" name="radio_XGDYENTZRO" value=""> <span>How is distance influenced by grazing / abundance?</span></label><label><input type="radio" autocomplete="off" name="radio_XGDYENTZRO" value="answer"> <span>How is abundance influenced by distance / grazing?</span></label>
+</div>
+<ul>
 <li>What is the response variable?</li>
+</ul>
+<div id="radio_CIYDEMETBH" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_CIYDEMETBH" value="answer"> <span>abundance</span></label><label><input type="radio" autocomplete="off" name="radio_CIYDEMETBH" value=""> <span>distance</span></label><label><input type="radio" autocomplete="off" name="radio_CIYDEMETBH" value=""> <span>grazing</span></label>
+</div>
+<ul>
 <li>What is the predictor variable?</li>
 </ul>
+<div id="radio_CZAJXKOVZH" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_CZAJXKOVZH" value="answer"> <span>either grazing or distance</span></label><label><input type="radio" autocomplete="off" name="radio_CZAJXKOVZH" value=""> <span>either abundance or distance</span></label><label><input type="radio" autocomplete="off" name="radio_CZAJXKOVZH" value=""> <span>either abundance or grazing</span></label>
+</div>
 <p>Then, perform the following tasks:</p>
 <ul>
-<li>Fit a simple linear regression relating the response variable to the categorical predictor (that is the one with five levels, make sure that it is indeed a factor using <em>as.factor()</em>)</li>
+<li>Fit a simple linear regression relating the response variable to the categorical predictor (that is the one with five levels, make sure that it is indeed a factor using <code>as.factor()</code>)</li>
 <li>Apply an ANOVA to your model.</li>
 </ul>
 <p>You may need the following functions:</p>
 <ul>
-<li><em>lm()</em></li>
-<li><em>summary()</em></li>
-<li><em>anova()</em></li>
+<li><code>lm()</code></li>
+<li><code>summary()</code></li>
+<li><code>anova()</code></li>
 </ul>
-<p>Use your results to chose the correct statement(s) on <strong>elearning-extern</strong> (Q5).</p>
+<p>Use your results to chose the correct statement(s):</p>
+<p>You have now fitted a simple linear regression with a categorical predictor and analyzed it. Which of the following statements are correct? (several statements are correct)</p>
+<div id="radio_DDVRMEDBXR" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_DDVRMEDBXR" value="answer"> <span>The maximum likelihood estimate of bird abundance for grazing intensity 1 is 28.623.</span></label><label><input type="radio" autocomplete="off" name="radio_DDVRMEDBXR" value=""> <span>We can see in the regression table that the difference between grazing intensity 3 and 4 is significant.</span></label><label><input type="radio" autocomplete="off" name="radio_DDVRMEDBXR" value=""> <span>The non-significant p-value for grazing intensity 2 indicates that the data are compatible with the null hypothesis “H0: the bird abundance at grazing intensity 2 is on average 0.”</span></label><label><input type="radio" autocomplete="off" name="radio_DDVRMEDBXR" value="answer"> <span>The confidence interval for the estimate of the intercept is the smallest.</span></label><label><input type="radio" autocomplete="off" name="radio_DDVRMEDBXR" value="answer"> <span>The difference between grazing intensity 1 and 3 is significant.</span></label><label><input type="radio" autocomplete="off" name="radio_DDVRMEDBXR" value="answer"> <span>Grazing intensity in general has a highly significant effect (&lt; 0.001) on bird abundance.</span></label>
+</div>
 </div>
 </div>
 <div class="callout callout-style-simple callout-tip no-icon callout-titled">
@@ -552,6 +578,11 @@ Solution
 </div>
 <div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
+<ul>
+<li>The maximum likelihood estimate of bird abundance for grazing intensity 1 is 28.623. CORRECT: When the predictor is a factor, the intercept equals the first factor level (by default, this follows an alphabetical order).</li>
+<li>We can see in the regression table that the difference between grazing intensity 3 and 4 is significant. WRONG: Comparisons are always related to the intercept, i.e.&nbsp;to the first factor level. For comparisons among other factor levels we need post-hoc tests.</li>
+<li>The non-significant p-value for grazing intensity 2 indicates that the data are compatible with the null hypothesis “H0: the bird abundance at grazing intensity 2 is on average 0.” WRONG: Comparisons are always related to the intercept, i.e.&nbsp;to the first factor level. Only the test for the intercept has H0: mean = 0.</li>
+</ul>
 <p>A reasonable research question is how abundance is influenced by distance and/or grazing. Here, the response variable is abundance, while the predictors are distance and/or grazing.</p>
 <p>This is the code that you need to interpret the results.</p>
 <div class="cell">

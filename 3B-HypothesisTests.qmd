@@ -28,7 +28,7 @@ In the fourth section at the end of this file, you find exercises that you shoul
 Many tests aim at showing that variables are significantly different between groups, i.e. have different means/medians. In all these tests, H0 is that there is no difference between the groups. The following decision tree helps to select the appropriate test.
 
 
-[Decision tree for the comparison of two groups](https://elearning.uni-regensburg.de/mod/resource/view.php?id=2421505)
+[Decision tree for statistical tests](https://elearning.uni-regensburg.de/course/view.php?id=54766#coursecontentcollapse3)
 
 
 **Remark 1**: Tests for 2 groups also work for one group only. Then they test whether the mean is equal to 0.

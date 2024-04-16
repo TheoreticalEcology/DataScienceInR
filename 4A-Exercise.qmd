@@ -18,8 +18,7 @@ You will work with the following datasets:
 
 ## Analyzing the "regrowth" dataset
 
-::: {.callout-warning}
-
+::: callout-warning
 Imagine you have a garden with some fruit trees and you were thinking of adding some berry bushes between them. However, you don't want them to suffer from malnutrition so you want to estimate the volume of root biomass as a function of the fruit biomass.
 
 Carry out the following tasks
@@ -38,14 +37,28 @@ You will need the following functions:
 
 You have performed a simple linear regression for the influence of fruit biomass on root biomass.
 
-Which of the following statements are correct?
+Which of the following statements are correct? (More than one are correct)
 
+```{r}
+#| include: false
+opts_p <- c(
+   "Root biomass is not significantly affected by fruit biomass.",
+   answer = "Fruit biomass explains most of the variance (>50%) in the root biomass.",
+   answer = "At a fruit biomass of 70, the model would predict root biomass of about 4.18 + 0.05*70.",
+   answer = "At a fruit biomass of 0, the model predicts a root biomass of about 4.18."
+   
+)
+```
 
-
+`r longmcq(opts_p)`
 :::
 
-`r hide("Click here to see the solution")`
-### Solution
+`r hide("Click here to see the solution")` \### Solution
+
+-   Root biomass is not significantly affected by fruit biomass. WRONG: Look at the p-value for the slope (2nd row in the regression table below Pr(\>\|t\|))
+-   Fruit biomass explains most of the variance (\>50%) in the root biomass. CORRECT: The proportion of variance explained by the model is given by R2.
+-   At a fruit biomass of 70, the model would predict root biomass of about $4.18 + 0.05*70$. CORRECT: The linear equation for the model is: $y = a*x + b$ that is $Root = slope*Fruit + intercept$
+-   At a fruit biomass of 0, the model predicts a root biomass of about 4.18. CORRECT: This is the intercept (1st row in the regression table below Estimate)
 
 This is the code that you need to interpret the results.
 
@@ -67,7 +80,6 @@ abline(v = 70, col = "purple") # add line at x value (here fruit biomass of 70g)
 abline(h = 4.184256 + 0.050444*70, col = "brown") # add line at y value according to x = 70 using the intercept and regression coefficient of x
 ```
 
-
 `r unhide()`
 
 ## Analyzing the "birdabundance" dataset
@@ -77,28 +89,84 @@ The dataset provides bird abundances in forest fragments with different characte
 ::: {.callout-caution icon="false"}
 ### Questions
 
-First, answer the following questions on **elearning-extern** (Q 2-4):
+First, answer the following questions?:
 
 -   What is the most reasonable research question regarding these variables?
+```{r}
+#| include: false
+opts_p <- c(
+   "How is grazing influenced by distance / abundance?",
+   "How is distance influenced by grazing / abundance?",
+   answer = "How is abundance influenced by distance / grazing?"
+   
+)
+```
+
+`r longmcq(opts_p)`
+
 -   What is the response variable?
+```{r}
+#| include: false
+opts_p <- c(
+   answer = "abundance",
+   "distance",
+   "grazing"
+)
+```
+
+`r longmcq(opts_p)`
+
 -   What is the predictor variable?
+```{r}
+#| include: false
+opts_p <- c(
+   answer = "either grazing or distance",
+   "either abundance or distance",
+   "either abundance or grazing"
+)
+```
+
+`r longmcq(opts_p)`
 
 Then, perform the following tasks:
 
--   Fit a simple linear regression relating the response variable to the categorical predictor (that is the one with five levels, make sure that it is indeed a factor using *as.factor()*)
+-   Fit a simple linear regression relating the response variable to the categorical predictor (that is the one with five levels, make sure that it is indeed a factor using `as.factor()`)
 -   Apply an ANOVA to your model.
 
 You may need the following functions:
 
--   *lm()*
--   *summary()*
--   *anova()*
+-   `lm()`
+-   `summary()`
+-   `anova()`
 
-Use your results to chose the correct statement(s) on **elearning-extern** (Q5).
+Use your results to chose the correct statement(s):
+
+You have now fitted a simple linear regression with a categorical predictor and analyzed it. Which of the following statements are correct? (several statements are correct)
+
+```{r}
+#| include: false
+opts_p <- c(
+   answer = "The maximum likelihood estimate of bird abundance for grazing intensity 1 is 28.623.",
+   "We can see in the regression table that the difference between grazing intensity 3 and 4 is significant.",
+   'The non-significant p-value for grazing intensity 2 indicates that the data are compatible with the null hypothesis "H0: the bird abundance at grazing intensity 2 is on average 0."',
+   answer = "The confidence interval for the estimate of the intercept is the smallest.",
+   answer = "The difference between grazing intensity 1 and 3 is significant.",
+   answer = "Grazing intensity in general has a highly significant effect (< 0.001) on bird abundance."
+)
+```
+
+`r longmcq(opts_p)`
+
 :::
 
 ::: {.callout-tip collapse="true" appearance="minimal" icon="false"}
 ### Solution
+
+- The maximum likelihood estimate of bird abundance for grazing intensity 1 is 28.623. CORRECT: When the predictor is a factor, the intercept equals the first factor level (by default, this follows an alphabetical order).
+- We can see in the regression table that the difference between grazing intensity 3 and 4 is significant. WRONG: Comparisons are always related to the intercept, i.e. to the first factor level. For comparisons among other factor levels we need post-hoc tests.
+- The non-significant p-value for grazing intensity 2 indicates that the data are compatible with the null hypothesis "H0: the bird abundance at grazing intensity 2 is on average 0." WRONG: Comparisons are always related to the intercept, i.e. to the first factor level. Only the test for the intercept has H0: mean = 0.
+
+
 
 A reasonable research question is how abundance is influenced by distance and/or grazing. Here, the response variable is abundance, while the predictors are distance and/or grazing.
 
@@ -134,8 +202,7 @@ head(dat)
 
 Perform the following tasks:
 
-:::{.callout-warning}
-
+::: callout-warning
 -   Fit a simple linear regression.
 -   Check the residuals.
 -   Perform another simple linear regression with a modified formula, if needed.

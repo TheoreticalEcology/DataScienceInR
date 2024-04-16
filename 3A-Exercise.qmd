@@ -10,12 +10,20 @@ set.seed(42)
 
 # Exercise - NHST and statistical tests {-}
 
+[Decision tree for statistical tests](https://elearning.uni-regensburg.de/course/view.php?id=54766#coursecontentcollapse3)
+
 ## Streams
 
 The dataset 'streams' contains water measurements taken at different location along 16 rivers: 'up' and 'down' are water quality measurements of the same river taken before and after a water treatment filter, respectively. We want to find out if this water filter is effective. Use the decision tree to identify the appropriate test for this situation.
 
 The filters were installed between upstream ('up') and downstream ('down').
 
+::: {.column-margin}
+
+**Hint:**
+Are the up and down observations independent? (paired or unpaired)
+
+:::
 
 ```{r}
 dat = read.table("https://raw.githubusercontent.com/biometry/APES/master/Data/Simone/streams.txt", header = T)
@@ -26,6 +34,9 @@ dat = read.table("https://raw.githubusercontent.com/biometry/APES/master/Data/Si
 
 
 **1. Visualize the data**
+
+Hints: categorical and numerical..(two column == two levels)
+
 `r hide("Click here to see the solution")`
 
 `matplot()` can be used to plot several lines at once
