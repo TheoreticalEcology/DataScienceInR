@@ -473,6 +473,16 @@ shapiro.test(dat$age)
 
 4.  Is the variable Body Identification Number (body) uniformly distributed?
 
+Uniform distribution == all values within a range are equally distributed:
+
+```{r}
+hist(runif(10000))
+```
+
+**Hint**:
+`ks.test()` (check documentation, see examples)
+
+
 ```{r}
 #| include: false
 opts_p <- c(
