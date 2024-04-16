@@ -220,8 +220,7 @@ boxplot(weight ~ feed, data = dat, notch = T)
 opts_p <- c(
   "We have no indication to assume that the data is not-normally distributed or that the variances are different. We should use a Kruskal-Wallis test.",
   "The Shapiro-Wilk test of normality and the test for equal variances are not signficant. We cannot use an ANOVA.",
-  answer = "We have no indication to assume that the data is not-normally distributed or that the variances are different. We can use an ANOVA.",
-  "Boxplot"
+  answer = "We have no indication to assume that the data is not-normally distributed or that the variances are different. We can use an ANOVA."
 )
 ```
 `r longmcq(opts_p)`
@@ -270,8 +269,7 @@ bartlett.test(weight ~ feed, dat)
 opts_p <- c(
   "We have proven that the feed type influences the chicken weight (ANOVA, p = 5.94e-10).",
   "The chicken weights differ significantly between the six feed types (ANOVA, p = 5.94e-10).",
-  answer = "The feed type significantly influences the chicken weight (ANOVA, p = 5.94e-10).",
-  "Boxplot"
+  answer = "The feed type significantly influences the chicken weight (ANOVA, p = 5.94e-10)."
 )
 ```
 `r longmcq(opts_p)`

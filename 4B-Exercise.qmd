@@ -47,46 +47,46 @@ The second dataset is from the MuMIn package (as shown by the curly brackets).
 
 for multiple linear regression
 
-*lm()* - fit linear model\
-*summary(fit)* - apply to fitted model object to display regression table\
-*plot(fit)* - plot residuals for model validation\
-*anova(fit)* - apply type I ANOVA (variables included sequentially) to model to test for effects all levels of a factor\
-*Anova(fit)* - *car* package; use type II ANOVA (effects for predictors when all other predictors are already included) for overall effects\
-*scale()* - scale variable\
-*sqrt()* - square-root\
-*log()* - calculates natural logarithm\
-*plot(allEffects(fit))* - apply to fitted model object to plot marginal effect; *effects* package\
-*par()* - change graphical parameters\
-use *oldpar \<- par(mfrow = c(number_rows, number_cols))* to change figure layout including more than 1 plot per figure\
-use *par(oldpar)* to reset graphic parameter
+`lm()` - fit linear model\
+`summary(fit)` - apply to fitted model object to display regression table\
+`plot(fit)` - plot residuals for model validation\
+`anova(fit)` - apply type I ANOVA (variables included sequentially) to model to test for effects all levels of a factor\
+`Anova(fit)` - `car` package; use type II ANOVA (effects for predictors when all other predictors are already included) for overall effects\
+`scale()` - scale variable\
+`sqrt()` - square-root\
+`log()` - calculates natural logarithm\
+`plot(allEffects(fit))` - apply to fitted model object to plot marginal effect; `effects` package\
+`par()` - change graphical parameters\
+use `oldpar \<- par(mfrow = c(number_rows, number_cols))` to change figure layout including more than 1 plot per figure\
+use `par(oldpar)` to reset graphic parameter
 
 for model selection
 
-*stepAIC(fullModel)* - perform stepwise AIC model selection; apply to full model object, *MASS* package\
-*dredge(fullModel)* - perform global model selection, *MuMIn* package\
-*model.avg()* - perform model averaging\
-*AIC(fit)* - get AIC for a fitted model\
-*anova(fit1, fit2)* - compare two fitted models via Likelihood Ratio Test (LRT)
+`stepAIC(fullModel)` - perform stepwise AIC model selection; apply to full model object, `MASS` package\
+`dredge(fullModel)` - perform global model selection, `MuMIn` package\
+`model.avg()` - perform model averaging\
+`AIC(fit)` - get AIC for a fitted model\
+`anova(fit1, fit2)` - compare two fitted models via Likelihood Ratio Test (LRT)
 
-## Analyzing the *mtcars* dataset
+## Analyzing the `mtcars` dataset
 
-Imagine a start up company wants to rebuild a car with a nice retro look from the 70ies. The car should be modern though, meaning the fuel consumption should be as low as possible. They've discovered the *mtcars* dataset with all the necessary measurements and they've somehow heard about you and your R skills and asked you for help. And of course you promised to help, kind as you are.
+Imagine a start up company wants to rebuild a car with a nice retro look from the 70ies. The car should be modern though, meaning the fuel consumption should be as low as possible. They've discovered the `mtcars` dataset with all the necessary measurements and they've somehow heard about you and your R skills and asked you for help. And of course you promised to help, kind as you are.
 
-The company wants you to find out which of the following characteristics affects the fuel consumption measured in miles per gallon (*mpg*). Lower values for *mpg* thus reflect a higher fuel consumption. The company wants you to include the following variables into your analysis:
+The company wants you to find out which of the following characteristics affects the fuel consumption measured in miles per gallon (`mpg`). Lower values for `mpg` thus reflect a higher fuel consumption. The company wants you to include the following variables into your analysis:
 
--   number of cylinders (*cyl*)
--   weight (*wt*)
--   horsepower (*hp*)
--   whether the car is driven manually or with automatic (*am*)
+-   number of cylinders (`cyl`)
+-   weight (`wt`)
+-   horsepower (`hp`)
+-   whether the car is driven manually or with automatic (`am`)
 
-In addition, Pawl, one of the founders of the company suggested that the effect of weight (*wt*) might be irrelevant for powerful cars (high *hp* values). You are thus asked to test for this interaction in your analysis as well.
+In addition, Pawl, one of the founders of the company suggested that the effect of weight (`wt`) might be irrelevant for powerful cars (high `hp` values). You are thus asked to test for this interaction in your analysis as well.
 
 ::: {.callout-caution icon="false"}
 ### Question
 
 Carry out the following tasks:
 
--   Perform a multiple linear regression (change class for *cyl* and *am* to factor)
+-   Perform a multiple linear regression (change class for `cyl` and `am` to factor)
 -   Check the model residuals
 -   Interpret and plot all effects
 
@@ -134,9 +134,9 @@ plot(allEffects(carsfit))
 ```
 :::
 
-## Model-selection with the *Cement* dataset
+## Model-selection with the `Cement` dataset
 
-The process of cement hardening involves exogenous chemical reactions and thus produces heat. The amount of heat produced by the cement depends on the mixture of its constituents. The *Cement* dataset includes heat measurements for different types of cement that consist of different relative amounts of calcium aluminate (*X1*), tricalcium silicate (*X2*), tetracalcium alumino ferrite (*X3*) and dicalcium silicate (*X4*). A cement producing company wants to optimize the composition of its product and wants to know, which of these compounds are mainly responsible for heat production.
+The process of cement hardening involves exogenous chemical reactions and thus produces heat. The amount of heat produced by the cement depends on the mixture of its constituents. The `Cement` dataset includes heat measurements for different types of cement that consist of different relative amounts of calcium aluminate (`X1`), tricalcium silicate (`X2`), tetracalcium alumino ferrite (`X3`) and dicalcium silicate (`X4`). A cement producing company wants to optimize the composition of its product and wants to know, which of these compounds are mainly responsible for heat production.
 
 ::: callout-warning
 We only do a model selection here for educational reasons. For your analysis, and if your goal is not a predictive model, think about the model structure before you do the analysis and then stick to it! See here the section about [p-hacking](https://theoreticalecology.github.io/AdvancedRegressionModels/3C-ModelSelection.html#pHacking) (and also consider that AIC selection will/can remove confounders which will violate causality and can lead to spurious correlations!
@@ -147,7 +147,7 @@ We only do a model selection here for educational reasons. For your analysis, an
 
 Carry out the following tasks:
 
--   Perform a multiple linear regression including all predictor variables and all two-way interactions (remember the notation *(var1 + var2 + var3)\^2*.
+-   Perform a multiple linear regression including all predictor variables and all two-way interactions (remember the notation `(var1 + var2 + var3)\^2`.
 -   Perform forward, backward, and global model selection and compare the results
 -   Fit the model considered optimal by global model selection and compare it with the full model based on AIC (or AICc) and LRT.
 

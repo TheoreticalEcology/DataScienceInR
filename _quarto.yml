@@ -38,6 +38,7 @@ book:
     - 5-MultipleRegression.qmd
     - 6-GLM.qmd
     - 4A-Exercise.qmd
+    - 4B-Exercise.qmd
   - part: Multivariate Statistics
     chapters:
     - 2B-Multivariate.qmd
