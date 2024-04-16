@@ -31,7 +31,7 @@ Before you start, remember to clean your global environment (if you haven't alre
 
 To conduct the exercise, please load the following packages:
 
-```{r, eval=FALSE}
+```{r, eval=TRUE}
 library(effects)
 library(MuMIn)
 ```
