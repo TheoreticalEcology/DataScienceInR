@@ -6,7 +6,7 @@ knitr::write_bib(c(.packages(), 'bookdown', 'knitr', 'rmarkdown'),
                  'packages.bib')
 
 knitr::opts_chunk$set(cache = TRUE)
-set.seed(123)
+set.seed(123) 
 ```
 
 Material for a first 1-week course in Data Science, taught at the University of Regensburg.
