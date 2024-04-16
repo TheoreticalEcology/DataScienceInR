@@ -288,6 +288,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Generalized linear models</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4A-Exercise.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Exercise - Univariate linear regression</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -302,7 +308,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./2B-Multivariate.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Multivariate Statistics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Multivariate Statistics</span></span></a>
   </div>
 </li>
       </ul>
@@ -319,7 +325,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./8-MachineLearning.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Machine Learning</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Machine Learning</span></span></a>
   </div>
 </li>
       </ul>
@@ -336,7 +342,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./9-Design.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Design of experiments</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Design of experiments</span></span></a>
   </div>
 </li>
       </ul>
@@ -353,13 +359,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./10-DataWrangling.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Data handling</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Exercise - Data handling</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./11-Reproducibility.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Reproducibility and project organization</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Reproducibility and project organization</span></span></a>
   </div>
 </li>
       </ul>
@@ -395,11 +401,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#multiple-lm" id="toc-multiple-lm" class="nav-link" data-scroll-target="#multiple-lm"><span class="header-section-number">8.2</span> Multiple LM</a></li>
   <li><a href="#interactions-between-variables" id="toc-interactions-between-variables" class="nav-link" data-scroll-target="#interactions-between-variables"><span class="header-section-number">8.3</span> Interactions between variables</a></li>
   <li><a href="#model-selection" id="toc-model-selection" class="nav-link" data-scroll-target="#model-selection"><span class="header-section-number">8.4</span> Model selection</a></li>
-  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">8.5</span> Exercises</a>
-  <ul class="collapse">
-  <li><a href="#analyzing-the-mtcars-dataset" id="toc-analyzing-the-mtcars-dataset" class="nav-link" data-scroll-target="#analyzing-the-mtcars-dataset"><span class="header-section-number">8.5.1</span> Analyzing the <em>mtcars</em> dataset</a></li>
-  <li><a href="#model-selection-with-the-cement-dataset" id="toc-model-selection-with-the-cement-dataset" class="nav-link" data-scroll-target="#model-selection-with-the-cement-dataset"><span class="header-section-number">8.5.2</span> Model-selection with the <em>Cement</em> dataset</a></li>
-  </ul></li>
+  <li><a href="#formula-syntax" id="toc-formula-syntax" class="nav-link" data-scroll-target="#formula-syntax"><span class="header-section-number">8.5</span> Formula syntax</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/TheoreticalEcology/DataScienceInR/edit/master/5-MultipleRegression.qmd" class="toc-action">Edit this page</a></p></div></div></nav>
     </div>
@@ -1014,14 +1016,14 @@ y \sim a*b
 <span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a><span class="co"># 0.48: Now almost 50 % of our results are false positives!!!</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="exercises" class="level2" data-number="8.5">
-<h2 data-number="8.5" class="anchored" data-anchor-id="exercises"><span class="header-section-number">8.5</span> Exercises</h2>
+<section id="formula-syntax" class="level2" data-number="8.5">
+<h2 data-number="8.5" class="anchored" data-anchor-id="formula-syntax"><span class="header-section-number">8.5</span> Formula syntax</h2>
 <table class="table">
 <caption>Formula syntax</caption>
 <colgroup>
-<col style="width: 14%">
-<col style="width: 40%">
-<col style="width: 45%">
+<col style="width: 22%">
+<col style="width: 36%">
+<col style="width: 41%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -1063,269 +1065,8 @@ y \sim a*b
 </tr>
 </tbody>
 </table>
-<p>In this exercise you will:</p>
-<ul>
-<li>perform multiple linear regressions</li>
-<li>interpret regression output and check the residuals</li>
-<li>plot model predictions including interactions</li>
-</ul>
-<p>Before you start, remember to clean your global environment (if you haven’t already) using <em>rm(list=ls())</em>.</p>
-<p>To conduct the exercise, please load the following packages:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(effects)</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MuMIn)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>You will work with the following datasets:</p>
-<ul>
-<li>mtcars</li>
-<li>Cement{MuMIn}</li>
-</ul>
-<p>The second dataset is from the MuMIn package (as shown by the curly brackets).</p>
-<section id="useful-functions" class="level4" data-number="8.5.0.1">
-<h4 data-number="8.5.0.1" class="anchored" data-anchor-id="useful-functions"><span class="header-section-number">8.5.0.1</span> Useful functions</h4>
-<p>for multiple linear regression</p>
-<p><em>lm()</em> - fit linear model<br>
-<em>summary(fit)</em> - apply to fitted model object to display regression table<br>
-<em>plot(fit)</em> - plot residuals for model validation<br>
-<em>anova(fit)</em> - apply type I ANOVA (variables included sequentially) to model to test for effects all levels of a factor<br>
-<em>Anova(fit)</em> - <em>car</em> package; use type II ANOVA (effects for predictors when all other predictors are already included) for overall effects<br>
-<em>scale()</em> - scale variable<br>
-<em>sqrt()</em> - square-root<br>
-<em>log()</em> - calculates natural logarithm<br>
-<em>plot(allEffects(fit))</em> - apply to fitted model object to plot marginal effect; <em>effects</em> package<br>
-<em>par()</em> - change graphical parameters<br>
-use <em>oldpar &lt;- par(mfrow = c(number_rows, number_cols))</em> to change figure layout including more than 1 plot per figure<br>
-use <em>par(oldpar)</em> to reset graphic parameter</p>
-<p>for model selection</p>
-<p><em>stepAIC(fullModel)</em> - perform stepwise AIC model selection; apply to full model object, <em>MASS</em> package<br>
-<em>dredge(fullModel)</em> - perform global model selection, <em>MuMIn</em> package<br>
-<em>model.avg()</em> - perform model averaging<br>
-<em>AIC(fit)</em> - get AIC for a fitted model<br>
-<em>anova(fit1, fit2)</em> - compare two fitted models via Likelihood Ratio Test (LRT)</p>
-</section>
-<section id="analyzing-the-mtcars-dataset" class="level3" data-number="8.5.1">
-<h3 data-number="8.5.1" class="anchored" data-anchor-id="analyzing-the-mtcars-dataset"><span class="header-section-number">8.5.1</span> Analyzing the <em>mtcars</em> dataset</h3>
-<p>Imagine a start up company wants to rebuild a car with a nice retro look from the 70ies. The car should be modern though, meaning the fuel consumption should be as low as possible. They’ve discovered the <em>mtcars</em> dataset with all the necessary measurements and they’ve somehow heard about you and your R skills and asked you for help. And of course you promised to help, kind as you are.</p>
-<p>The company wants you to find out which of the following characteristics affects the fuel consumption measured in miles per gallon (<em>mpg</em>). Lower values for <em>mpg</em> thus reflect a higher fuel consumption. The company wants you to include the following variables into your analysis:</p>
-<ul>
-<li>number of cylinders (<em>cyl</em>)</li>
-<li>weight (<em>wt</em>)</li>
-<li>horsepower (<em>hp</em>)</li>
-<li>whether the car is driven manually or with automatic (<em>am</em>)</li>
-</ul>
-<p>In addition, Pawl, one of the founders of the company suggested that the effect of weight (<em>wt</em>) might be irrelevant for powerful cars (high <em>hp</em> values). You are thus asked to test for this interaction in your analysis as well.</p>
-<div class="callout callout-style-default callout-caution no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Question
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Carry out the following tasks:</p>
-<ul>
-<li>Perform a multiple linear regression (change class for <em>cyl</em> and <em>am</em> to factor)</li>
-<li>Check the model residuals</li>
-<li>Interpret and plot all effects</li>
-</ul>
-<p>You may need the following functions:</p>
-<ul>
-<li>as.factor()</li>
-<li>lm()</li>
-<li>summary()</li>
-<li>anova()</li>
-<li>plot()</li>
-<li>allEffects()</li>
-</ul>
-<p>Use your results to <strong>answer the questions on elearning-extern</strong> (Q 1-2) <a href="https://elearning.uni-regensburg.de/mod/quiz/view.php?id=2046701">(“05_Test for Exercise in R - multiple regression”)</a>.</p>
-</div>
-</div>
-<div class="callout callout-style-simple callout-tip no-icon callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Solution
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-3" class="callout-3-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>This is the code that you need to interpret the results.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># change am and cyl from numeric to factor</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>mtcars<span class="sc">$</span>am <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(mtcars<span class="sc">$</span>am)</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>mtcars<span class="sc">$</span>cyl <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(mtcars<span class="sc">$</span>cyl)</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co"># multiple linear regression and results:</span></span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="co"># (we need to scale (standardize) the predictors wt and hp, since we include their interaction)</span></span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>carsfit <span class="ot">&lt;-</span> <span class="fu">lm</span>(mpg <span class="sc">~</span> am <span class="sc">+</span> cyl <span class="sc">+</span> <span class="fu">scale</span>(wt) <span class="sc">*</span> <span class="fu">scale</span>(hp), <span class="at">dat =</span> mtcars)</span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="co"># weight is included as the first predictor in order to have</span></span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="co"># it as the grouping factor in the allEffects plot</span></span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(carsfit)</span>
-<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="do">## Call:</span></span>
-<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a><span class="do">## lm(formula = mpg ~ am + cyl + scale(wt) * scale(hp), data = mtcars)</span></span>
-<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a><span class="do">## Residuals:</span></span>
-<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a><span class="do">##     Min      1Q  Median      3Q     Max </span></span>
-<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a><span class="do">## -3.4121 -1.6789 -0.4446  1.3752  4.4338 </span></span>
-<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a><span class="do">## Coefficients:</span></span>
-<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a><span class="do">##                     Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
-<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept)          19.9064     1.5362  12.958 1.36e-12 ***</span></span>
-<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a><span class="do">## am1                   0.1898     1.4909   0.127 0.899740    </span></span>
-<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a><span class="do">## cyl6                 -1.2818     1.5291  -0.838 0.409813    </span></span>
-<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a><span class="do">## cyl8                 -1.3942     2.1563  -0.647 0.523803    </span></span>
-<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a><span class="do">## scale(wt)            -3.6248     0.9665  -3.750 0.000938 ***</span></span>
-<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a><span class="do">## scale(hp)            -1.8602     0.8881  -2.095 0.046503 *  </span></span>
-<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a><span class="do">## scale(wt):scale(hp)   1.5631     0.7027   2.224 0.035383 *  </span></span>
-<span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a><span class="do">## ---</span></span>
-<span id="cb14-30"><a href="#cb14-30" aria-hidden="true" tabindex="-1"></a><span class="do">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
-<span id="cb14-31"><a href="#cb14-31" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb14-32"><a href="#cb14-32" aria-hidden="true" tabindex="-1"></a><span class="do">## Residual standard error: 2.246 on 25 degrees of freedom</span></span>
-<span id="cb14-33"><a href="#cb14-33" aria-hidden="true" tabindex="-1"></a><span class="do">## Multiple R-squared:  0.888,  Adjusted R-squared:  0.8612 </span></span>
-<span id="cb14-34"><a href="#cb14-34" aria-hidden="true" tabindex="-1"></a><span class="do">## F-statistic: 33.05 on 6 and 25 DF,  p-value: 1.021e-10</span></span>
-<span id="cb14-35"><a href="#cb14-35" aria-hidden="true" tabindex="-1"></a><span class="co"># The first level of each factor is used as a reference, i.e. in this case a manual gear shift with 4 gears.</span></span>
-<span id="cb14-36"><a href="#cb14-36" aria-hidden="true" tabindex="-1"></a><span class="co"># From the coefficient cyl6 we see that there is no significant difference in fuel consumption (= our response) between 4 gears (the reference) and 6 gears.</span></span>
-<span id="cb14-37"><a href="#cb14-37" aria-hidden="true" tabindex="-1"></a><span class="co"># In contrast, the predictors weight (wt) and horsepower (hp) have a significant negative effect on the range (mpg), so that they both increase fuel consumption.</span></span>
-<span id="cb14-38"><a href="#cb14-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-39"><a href="#cb14-39" aria-hidden="true" tabindex="-1"></a><span class="co"># check residuals</span></span>
-<span id="cb14-40"><a href="#cb14-40" aria-hidden="true" tabindex="-1"></a>old.par <span class="ot">=</span> <span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
-<span id="cb14-41"><a href="#cb14-41" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(carsfit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="5-MultipleRegression_files/figure-html/mtcars-1.png" class="img-fluid" width="672"></p>
-</div>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(old.par)</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co"># plot effects</span></span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">allEffects</span>(carsfit))</span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="do">## Warning in Analyze.model(focal.predictors, mod, xlevels, default.levels, : the</span></span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="do">## predictors scale(wt), scale(hp) are one-column matrices that were converted to</span></span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="do">## vectors</span></span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="do">## Warning in Analyze.model(focal.predictors, mod, xlevels, default.levels, : the</span></span>
-<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="do">## predictors scale(wt), scale(hp) are one-column matrices that were converted to</span></span>
-<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a><span class="do">## vectors</span></span>
-<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a><span class="do">## Warning in Analyze.model(focal.predictors, mod, xlevels, default.levels, : the</span></span>
-<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a><span class="do">## predictors scale(wt), scale(hp) are one-column matrices that were converted to</span></span>
-<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a><span class="do">## vectors</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="5-MultipleRegression_files/figure-html/mtcars-2.png" class="img-fluid" width="672"></p>
-</div>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># We can see in the wt*hp plot, that for high values of hp wt has no effect on the response mpg. We conclude that Pawl was right.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="model-selection-with-the-cement-dataset" class="level3" data-number="8.5.2">
-<h3 data-number="8.5.2" class="anchored" data-anchor-id="model-selection-with-the-cement-dataset"><span class="header-section-number">8.5.2</span> Model-selection with the <em>Cement</em> dataset</h3>
-<p>The process of cement hardening involves exogenous chemical reactions and thus produces heat. The amount of heat produced by the cement depends on the mixture of its constituents. The <em>Cement</em> dataset includes heat measurements for different types of cement that consist of different relative amounts of calcium aluminate (<em>X1</em>), tricalcium silicate (<em>X2</em>), tetracalcium alumino ferrite (<em>X3</em>) and dicalcium silicate (<em>X4</em>). A cement producing company wants to optimize the composition of its product and wants to know, which of these compounds are mainly responsible for heat production.</p>
-<div class="callout callout-style-default callout-warning callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Warning
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>We only do a model selection here for educational reasons. For your analysis, and if your goal is not a predictive model, think about the model structure before you do the analysis and then stick to it! See here the section about <a href="https://theoreticalecology.github.io/AdvancedRegressionModels/3C-ModelSelection.html#pHacking">p-hacking</a> (and also consider that AIC selection will/can remove confounders which will violate causality and can lead to spurious correlations!</p>
-</div>
-</div>
-<div class="callout callout-style-default callout-caution no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Questions
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Carry out the following tasks:</p>
-<ul>
-<li>Perform a multiple linear regression including all predictor variables and all two-way interactions (remember the notation <em>(var1 + var2 + var3)^2</em>.</li>
-<li>Perform forward, backward, and global model selection and compare the results</li>
-<li>Fit the model considered optimal by global model selection and compare it with the full model based on AIC (or AICc) and LRT.</li>
-</ul>
-<p>You may need the following functions:</p>
-<ul>
-<li>lm()</li>
-<li>summary()</li>
-<li>stepAIC()</li>
-<li>options()</li>
-<li>dredge()</li>
-<li>AIC() or AICc() (for small datasets)</li>
-<li>anova()</li>
-</ul>
-<p>Use your results to <strong>answer the questions on elearning-extern</strong> (Q 3-5) <a href="https://elearning.uni-regensburg.de/mod/quiz/view.php?id=2046701">(“05_Test for Exercise in R - multiple regression”)</a>.</p>
-</div>
-</div>
-<div class="callout callout-style-simple callout-tip no-icon callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Solution
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-6" class="callout-6-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>This is the code that you need to obtain the results.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MuMIn)</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MASS)</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="co"># full model -&gt;  has 11 coefficients</span></span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>full <span class="ot">=</span> <span class="fu">lm</span>(y <span class="sc">~</span> (X1 <span class="sc">+</span> X2 <span class="sc">+</span> X3 <span class="sc">+</span> X4)<span class="sc">^</span><span class="dv">2</span>, <span class="at">data =</span> Cement)</span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(full)</span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="co"># forward model selection</span></span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>ms_forw <span class="ot">=</span> <span class="fu">stepAIC</span>(full, <span class="at">direction =</span> <span class="st">"forward"</span>)</span>
-<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ms_forw)</span>
-<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a><span class="co"># lists 11 coefficients (i.e. selects full model)</span></span>
-<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a><span class="co"># backward model selection</span></span>
-<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>ms_back <span class="ot">=</span> <span class="fu">stepAIC</span>(full, <span class="at">direction =</span> <span class="st">"backward"</span>)</span>
-<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ms_back)</span>
-<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a><span class="co"># lists 10 coefficients</span></span>
-<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a><span class="co"># global model selection</span></span>
-<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">na.action =</span> <span class="st">"na.fail"</span>)</span>
-<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a>dd <span class="ot">=</span> <span class="fu">dredge</span>(full)</span>
-<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(dd)</span>
-<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a><span class="co"># The first row lists the best performing model: it includes only the intercept and effects for X1 and X2 (= 3 coefficients).</span></span>
-<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit the model considered optimal by global model selection and compare it with the full model based on AIC (or AICc) and LRT:</span></span>
-<span id="cb17-25"><a href="#cb17-25" aria-hidden="true" tabindex="-1"></a>opt <span class="ot">=</span> <span class="fu">lm</span>(y <span class="sc">~</span> X1 <span class="sc">+</span> X2, <span class="at">data =</span> Cement)</span>
-<span id="cb17-26"><a href="#cb17-26" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(opt)</span>
-<span id="cb17-27"><a href="#cb17-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-28"><a href="#cb17-28" aria-hidden="true" tabindex="-1"></a><span class="fu">AIC</span>(opt,full) <span class="co"># full model is better according to AIC (lower AIC)</span></span>
-<span id="cb17-29"><a href="#cb17-29" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(opt, full) <span class="co"># -&gt; LRT: no significant difference between the models</span></span>
-<span id="cb17-30"><a href="#cb17-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-31"><a href="#cb17-31" aria-hidden="true" tabindex="-1"></a><span class="co"># sample size in the Cement dataset:</span></span>
-<span id="cb17-32"><a href="#cb17-32" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(Cement)  <span class="co"># or</span></span>
-<span id="cb17-33"><a href="#cb17-33" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(Cement)</span>
-<span id="cb17-34"><a href="#cb17-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-35"><a href="#cb17-35" aria-hidden="true" tabindex="-1"></a><span class="co"># If the sample size is low, a corrected version of the AIC is recommended to avoid overfitting:</span></span>
-<span id="cb17-36"><a href="#cb17-36" aria-hidden="true" tabindex="-1"></a><span class="fu">AICc</span>(opt,full) <span class="co"># This is inf! -&gt; optimal model is better according to AICc</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</div>
-</div>
-</div>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->

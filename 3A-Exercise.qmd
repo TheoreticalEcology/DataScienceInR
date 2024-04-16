@@ -268,7 +268,7 @@ bartlett.test(weight ~ feed, dat)
 ```{r}
 #| include: false
 opts_p <- c(
-  "The feed type significantly influences the chicken weight (ANOVA, p = 5.94e-10).",
+  "We have proven that the feed type influences the chicken weight (ANOVA, p = 5.94e-10).",
   "The chicken weights differ significantly between the six feed types (ANOVA, p = 5.94e-10).",
   answer = "The feed type significantly influences the chicken weight (ANOVA, p = 5.94e-10).",
   "Boxplot"

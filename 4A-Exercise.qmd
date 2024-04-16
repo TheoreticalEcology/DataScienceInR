@@ -8,7 +8,7 @@ editor_options:
 set.seed(42)
 ```
 
-# Exercises
+# Exercise - Univariate linear regression
 
 You will work with the following datasets:
 
@@ -86,7 +86,7 @@ abline(h = 4.184256 + 0.050444*70, col = "brown") # add line at y value accordin
 
 The dataset provides bird abundances in forest fragments with different characteristics in Australia. We want to look at the relationship of the variables "abundance", "distance" and "grazing".
 
-::: {.callout-caution icon="false"}
+::: {.callout-warning}
 ### Questions
 
 First, answer the following questions?:
@@ -159,7 +159,7 @@ opts_p <- c(
 
 :::
 
-::: {.callout-tip collapse="true" appearance="minimal" icon="false"}
+`r hide("Click here to see the solution")`
 ### Solution
 
 - The maximum likelihood estimate of bird abundance for grazing intensity 1 is 28.623. CORRECT: When the predictor is a factor, the intercept equals the first factor level (by default, this follows an alphabetical order).
@@ -184,7 +184,8 @@ anova(fit)
 # boxplot
 plot(ABUND ~ GRAZE, data = birdabundance)
 ```
-:::
+
+`r unhide()`
 
 ## Model validation: Residual checks
 
