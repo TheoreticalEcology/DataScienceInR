@@ -39,9 +39,11 @@ book:
     - 6-GLM.qmd
     - 4A-Exercise.qmd
     - 4B-Exercise.qmd
+    - 4C-Exercise.qmd
   - part: Multivariate Statistics
     chapters:
     - 2B-Multivariate.qmd
+    - 5A-Exercise.qmd
   - part: Predictive Modeling
     chapters: 
     - 8-MachineLearning.qmd

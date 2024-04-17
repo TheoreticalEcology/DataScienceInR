@@ -43,7 +43,7 @@ You will work with the following datasets:
 
 The second dataset is from the MuMIn package (as shown by the curly brackets).
 
-### Useful functions
+## Useful functions
 
 for multiple linear regression
 
@@ -237,7 +237,6 @@ opts_p <- c(
 :::
 
 `r hide("Click here to see the solution")`
-### Solution
 
 This is the code that you need to obtain the results.
 

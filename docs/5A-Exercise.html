@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Introduction to Data Science with R - Exercise - Multiple Linear Regression</title>
+<title>Introduction to Data Science with R - Exercise - Multivariate statistics</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -64,8 +64,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./4C-Exercise.html" rel="next">
-<link href="./4A-Exercise.html" rel="prev">
+<link href="./8-MachineLearning.html" rel="next">
+<link href="./2B-Multivariate.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -98,12 +98,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <link rel="stylesheet" href="include/webex.css">
-<meta name="citation_title" content="Exercise - Multiple Linear Regression">
-<meta name="citation_fulltext_html_url" content="https://TheoreticalEcology.github.io/DataScienceInR//4B-Exercise.html">
+<meta name="citation_title" content="Exercise - Multivariate statistics">
+<meta name="citation_fulltext_html_url" content="https://TheoreticalEcology.github.io/DataScienceInR//5A-Exercise.html">
 <meta name="citation_language" content="en">
 </head>
 
@@ -116,7 +114,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./4-SimpleRegression.html">Regression Analysis</a></li><li class="breadcrumb-item"><a href="./4B-Exercise.html">Exercise - Multiple Linear Regression</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./2B-Multivariate.html">Multivariate Statistics</a></li><li class="breadcrumb-item"><a href="./5A-Exercise.html">Exercise - Multivariate statistics</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -296,7 +294,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./4B-Exercise.html" class="sidebar-item-text sidebar-link active">
+  <a href="./4B-Exercise.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Exercise - Multiple Linear Regression</span></a>
   </div>
 </li>
@@ -325,7 +323,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./5A-Exercise.html" class="sidebar-item-text sidebar-link">
+  <a href="./5A-Exercise.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Exercise - Multivariate statistics</span></a>
   </div>
 </li>
@@ -415,18 +413,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#useful-functions" id="toc-useful-functions" class="nav-link active" data-scroll-target="#useful-functions">Useful functions</a></li>
-  <li><a href="#analyzing-the-mtcars-dataset" id="toc-analyzing-the-mtcars-dataset" class="nav-link" data-scroll-target="#analyzing-the-mtcars-dataset">Analyzing the <code>mtcars</code> dataset</a></li>
-  <li><a href="#model-selection-with-the-cement-dataset" id="toc-model-selection-with-the-cement-dataset" class="nav-link" data-scroll-target="#model-selection-with-the-cement-dataset">Model-selection with the <code>Cement</code> dataset</a></li>
+  <li><a href="#useful-functions-for-multivariate-data-analyses" id="toc-useful-functions-for-multivariate-data-analyses" class="nav-link active" data-scroll-target="#useful-functions-for-multivariate-data-analyses">Useful functions for multivariate data analyses</a></li>
+  <li><a href="#background-on-the-dataset" id="toc-background-on-the-dataset" class="nav-link" data-scroll-target="#background-on-the-dataset">Background on the dataset</a></li>
+  <li><a href="#unconstrained-ordination-pca" id="toc-unconstrained-ordination-pca" class="nav-link" data-scroll-target="#unconstrained-ordination-pca">Unconstrained ordination (PCA)</a></li>
+  <li><a href="#clustering" id="toc-clustering" class="nav-link" data-scroll-target="#clustering">Clustering</a>
+  <ul class="collapse">
+  <li><a href="#k-means" id="toc-k-means" class="nav-link" data-scroll-target="#k-means">K-means</a></li>
+  <li><a href="#hierarchical-clustering" id="toc-hierarchical-clustering" class="nav-link" data-scroll-target="#hierarchical-clustering">Hierarchical clustering</a></li>
+  </ul></li>
   </ul>
-<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/TheoreticalEcology/DataScienceInR/edit/master/4B-Exercise.qmd" class="toc-action">Edit this page</a></p></div></div></nav>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/TheoreticalEcology/DataScienceInR/edit/master/5A-Exercise.qmd" class="toc-action">Edit this page</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Exercise - Multiple Linear Regression</h1>
+<h1 class="title">Exercise - Multivariate statistics</h1>
 </div>
 
 
@@ -441,347 +444,288 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<table class="table">
-<caption>Formula syntax</caption>
-<colgroup>
-<col style="width: 22%">
-<col style="width: 36%">
-<col style="width: 41%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Formula</th>
-<th>Meaning</th>
-<th>Details</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code>y~x_1</code></td>
-<td><span class="math inline">\(y=a_0 +a_1*x_1\)</span></td>
-<td>Slope+Intercept</td>
-</tr>
-<tr class="even">
-<td><code>y~x_1 - 1</code></td>
-<td><span class="math inline">\(y=a_1*x_1\)</span></td>
-<td>Slope, no intercept</td>
-</tr>
-<tr class="odd">
-<td><code>y~I(x_1^2)</code></td>
-<td><span class="math inline">\(y=a_0 + a_1*(x_1^2)\)</span></td>
-<td>Quadratic effect</td>
-</tr>
-<tr class="even">
-<td><code>y~x_1+x_2</code></td>
-<td><span class="math inline">\(y=a_0+a_1*x_1+a_2*x_2\)</span></td>
-<td>Multiple linear regression (two variables)</td>
-</tr>
-<tr class="odd">
-<td><code>y~x_1:x_2</code></td>
-<td><span class="math inline">\(y=a_0+a_1*(x_1*x_2)\)</span></td>
-<td>Interaction between x<sub>1</sub> and x<sub>2</sub></td>
-</tr>
-<tr class="even">
-<td><code>y~x_1*x_2</code></td>
-<td><span class="math inline">\(y=a_0+a_1*(x_1*x_2)+a_2*x_1+a_3*x_2\)</span></td>
-<td>Interaction and main effects</td>
-</tr>
-</tbody>
-</table>
-<p>In this exercise you will:</p>
+<p>In this exercise you will practice analyzing multivariate datasets using:</p>
 <ul>
-<li>perform multiple linear regressions</li>
-<li>interpret regression output and check the residuals</li>
-<li>plot model predictions including interactions</li>
+<li>ordination methods which explore higher-order correlations among variables and similarities between observations</li>
+<li>clustering methods which aggregate individual observations into clusters.</li>
 </ul>
-<p>Before you start, remember to clean your global environment (if you haven’t already) using <code>rm(list=ls())</code>.</p>
-<p>To conduct the exercise, please load the following packages:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(effects)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="do">## Loading required package: carData</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="do">## lattice theme set by effectsTheme()</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="do">## See ?effectsTheme for details.</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MuMIn)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>You will work with the following datasets:</p>
-<ul>
-<li>mtcars</li>
-<li>Cement{MuMIn}</li>
-</ul>
-<p>The second dataset is from the MuMIn package (as shown by the curly brackets).</p>
-<section id="useful-functions" class="level2">
-<h2 class="anchored" data-anchor-id="useful-functions">Useful functions</h2>
-<p>for multiple linear regression</p>
-<p><code>lm()</code> - fit linear model<br>
-<code>summary(fit)</code> - apply to fitted model object to display regression table<br>
-<code>plot(fit)</code> - plot residuals for model validation<br>
-<code>anova(fit)</code> - apply type I ANOVA (variables included sequentially) to model to test for effects all levels of a factor<br>
-<code>Anova(fit)</code> - <code>car</code> package; use type II ANOVA (effects for predictors when all other predictors are already included) for overall effects<br>
-<code>scale()</code> - scale variable<br>
-<code>sqrt()</code> - square-root<br>
-<code>log()</code> - calculates natural logarithm<br>
-<code>plot(allEffects(fit))</code> - apply to fitted model object to plot marginal effect; <code>effects</code> package<br>
-<code>par()</code> - change graphical parameters<br>
-use <code>oldpar \&lt;- par(mfrow = c(number_rows, number_cols))</code> to change figure layout including more than 1 plot per figure<br>
-use <code>par(oldpar)</code> to reset graphic parameter</p>
-<p>for model selection</p>
-<p><code>stepAIC(fullModel)</code> - perform stepwise AIC model selection; apply to full model object, <code>MASS</code> package<br>
-<code>dredge(fullModel)</code> - perform global model selection, <code>MuMIn</code> package<br>
-<code>model.avg()</code> - perform model averaging<br>
-<code>AIC(fit)</code> - get AIC for a fitted model<br>
-<code>anova(fit1, fit2)</code> - compare two fitted models via Likelihood Ratio Test (LRT)</p>
+<section id="useful-functions-for-multivariate-data-analyses" class="level3">
+<h3 class="anchored" data-anchor-id="useful-functions-for-multivariate-data-analyses">Useful functions for multivariate data analyses</h3>
+<p><code>pairs()</code> - create pairplot (plot all variables against each other)<br>
+<code>prcomp()</code> - calculate PCA<br>
+<code>plot(pca_object)</code> - plot variance explained by PC axes<br>
+<code>biplot()</code> - plot PCA<br>
+<code>metaMDS()</code> - calculate NMDS<br>
+<code>ordiplot(nmds_object)</code> - plot NMDS<br>
+<code>rda()</code> - calculate RDA<br>
+<code>plot(rda_object)</code> - plot RDA<br>
+<code>dist()</code> - create distance matrix<br>
+<code>hclust()</code> - perform hierarchical clustering; apply to distance matrix<br>
+<code>plot(as.phylo(hc_object))</code> - plot dendrogram from hclust output<br>
+<code>agnes()</code> - another clustering algorithm<br>
+<code>kmeans()</code> - perform kmeans non-hierarchical clustering; access cluster assignments using <code>kmeans_object\$cluster</code></p>
 </section>
-<section id="analyzing-the-mtcars-dataset" class="level2">
-<h2 class="anchored" data-anchor-id="analyzing-the-mtcars-dataset">Analyzing the <code>mtcars</code> dataset</h2>
-<p>Imagine a start up company wants to rebuild a car with a nice retro look from the 70ies. The car should be modern though, meaning the fuel consumption should be as low as possible. They’ve discovered the <code>mtcars</code> dataset with all the necessary measurements and they’ve somehow heard about you and your R skills and asked you for help. And of course you promised to help, kind as you are.</p>
-<p>The company wants you to find out which of the following characteristics affects the fuel consumption measured in miles per gallon (<code>mpg</code>). Lower values for <code>mpg</code> thus reflect a higher fuel consumption. The company wants you to include the following variables into your analysis:</p>
+<section id="background-on-the-dataset" class="level3">
+<h3 class="anchored" data-anchor-id="background-on-the-dataset">Background on the dataset</h3>
+<p>Marine coastal ecosystems harbor the most productive and diverse communities on Earth. However, they are extremely vulnerable to climate change and human activities (such as landclaim, pollution, recreation purposes, …) As a consequence, the performance of this ecosystem has decreased considerably. To better understand these ecosystems, the dutch governmental institute (RIKZ: Rijksinstituut voor Kust en Zee) started a research project on sandy beaches to investigate the relationship between environmental factors and how they might affect benthic fauna. <em>(from the LMU and Zuur, Ieno, Smith (2007), Chapter 12.8-12.10 and 27)</em></p>
+<p><strong>Question</strong><br>
+We now want to use ordination methods to explore</p>
 <ul>
-<li>number of cylinders (<code>cyl</code>)</li>
-<li>weight (<code>wt</code>)</li>
-<li>horsepower (<code>hp</code>)</li>
-<li>whether the car is driven manually or with automatic (<code>am</code>)</li>
+<li>the variability in environmental conditions</li>
+<li>the variability in species richness</li>
 </ul>
-<p>In addition, Pawl, one of the founders of the company suggested that the effect of weight (<code>wt</code>) might be irrelevant for powerful cars (high <code>hp</code> values). You are thus asked to test for this interaction in your analysis as well.</p>
-<div class="callout callout-style-default callout-warning callout-titled">
-<div class="callout-header d-flex align-content-center">
+<p>We also want to use clustering methods to define 3 environmental types and hierarchically cluster the samples with respect to their species richness.</p>
+<p><strong>Dataset</strong></p>
+<p>Read in the dataset as follows:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">=</span> <span class="fu">read.table</span>(<span class="at">file =</span> <span class="st">"http://evol.bio.lmu.de/_statgen/Multivariate/11SS/RIKZGroups.txt"</span>, <span class="at">header =</span> T)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(dat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>You already know the functions <code>str()</code> and <code>summary()</code> to get an overview of a dataset and to see which variables the dataset contains.</p>
+<ul>
+<li>columns 2:5 is <strong>species richness</strong> within four larger faunal groups</li>
+<li>columns 7:16 are different <strong>environmental variables</strong></li>
+</ul>
+<p>Not important for us are:</p>
+<ul>
+<li>column 6 (week), a time stamp<br>
+</li>
+<li>column 17 (sorting1), variable from the observational design</li>
+</ul>
+<p>Let’s get into the analysis!</p>
+</section>
+<section id="unconstrained-ordination-pca" class="level2">
+<h2 class="anchored" data-anchor-id="unconstrained-ordination-pca">Unconstrained ordination (PCA)</h2>
+<p>Carry out the following analyses:</p>
+<ul>
+<li>Make two PCAs, one for the environmental and one for the species richness data (see columns above).</li>
+<li>Name the results <code>pca_environment</code> and <code>pca_species</code>.</li>
+<li>Create a biplot for each PCA.</li>
+<li>Create a barplot for the proportion of variance explained by each component.</li>
+</ul>
+<p>For example, the result for species richness should look like this:</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="5A-Exercise_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>You need the following functions and the package <code>vegan</code>:</p>
+<ul>
+<li><code>prcomp()</code></li>
+<li><code>biplot()</code><br>
+</li>
+<li><code>barplot()</code></li>
+<li><code>summary()</code></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(vegan)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>Hints</strong></p>
+<ul>
+<li>Don’t forget to scale the variables in the PCA.</li>
+<li>In order to get the proportion of the explained variance, have a look at the summary of your analysis. <code>str()</code> shows you what the summary contains. You want to specifically look at the <code>importance</code>, here the second row contains the proportion of variance of all components. So what we want to plot is: <code>summary(pca_species)$importance[2,]</code>.</li>
+<li>Don’t forget to give your plots a title.</li>
+</ul>
+<p>Now, use your results to <strong>answer the questions on elearning-extern</strong> (Q 1-3) <a href="https://elearning.uni-regensburg.de/mod/quiz/view.php?id=2046682">(“07_Test for Exercise in R”)</a>.</p>
+<ol type="1">
+<li>In which multivariate dataset do the first and second components explain more variance?</li>
+<li>What are the two samples that have the highest score on the respective third PCA axes?</li>
+<li>From looking at the biplot: Which environmental variables would you choose, if you have only the resource to measure three variables?
+<ol type="a">
+<li>NAP, angle 1 and chalk</li>
+<li>salinity, penetrability and grain size</li>
+<li>grain size, chalk and exposure</li>
+</ol></li>
+<li>Describe the following correlations:
+<ol type="a">
+<li>salinity and humus</li>
+<li>angle1 and exposure</li>
+<li>Polychaeta and Mollusca</li>
+</ol></li>
+</ol>
+<div class="callout callout-style-simple callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
-<i class="callout-icon"></i>
+<i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Question
+Solution
 </div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Carry out the following tasks:</p>
-<ul>
-<li>Perform a multiple linear regression (change class for <code>cyl</code> and <code>am</code> to factor)</li>
-<li>Check the model residuals</li>
-<li>Interpret and plot all effects</li>
-</ul>
-<p>You may need the following functions:</p>
-<ul>
-<li><code>as.factor()</code></li>
-<li><code>lm()</code></li>
-<li><code>summary()</code></li>
-<li><code>anova()</code></li>
-<li><code>plot()</code></li>
-<li><code>allEffects()</code></li>
-</ul>
-<p>Use your results to answer the questions:</p>
-<p><strong>Which of the following statements are correct? (Several are correct).</strong></p>
-<div id="radio_QEAYJDRZQO" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_QEAYJDRZQO" value="answer"> <span>Cars with 6 cylinders do not differ significantly in their fuel consumption as compared to cars with 4 cylinders.</span></label><label><input type="radio" autocomplete="off" name="radio_QEAYJDRZQO" value=""> <span>Stronger cars (hp) use less fuel (mpg).</span></label><label><input type="radio" autocomplete="off" name="radio_QEAYJDRZQO" value="answer"> <span>Overall, heavier cars (wt) use significantly more fuel (their range is smaller; mpg)</span></label>
-</div>
-<p><strong>Concerning the interaction between weight (wt) and horsepower (hp), which of the following statements is correct?</strong></p>
-<div id="radio_XGDYENTZRO" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_XGDYENTZRO" value=""> <span>Pawl was wrong. There is a significant interaction between weight and horsepower, but the direction is opposite to what Pawl thought: The effect of weight is stronger for stronger cars.</span></label><label><input type="radio" autocomplete="off" name="radio_XGDYENTZRO" value=""> <span>Pawl was wrong, the effect of weight is independent of horsepower.</span></label><label><input type="radio" autocomplete="off" name="radio_XGDYENTZRO" value="answer"> <span>Pawl was right. The effect of weight is strong for weaker cars, but becomes indeed irrelevant for stronger cars.</span></label>
-</div>
-</div>
-</div>
-<div class="webex-solution">
-<button>
-Click here to see the solution
-</button>
-<p>This is the code that you need to interpret the results.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># change am and cyl from numeric to factor</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>mtcars<span class="sc">$</span>am <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(mtcars<span class="sc">$</span>am)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>mtcars<span class="sc">$</span>cyl <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(mtcars<span class="sc">$</span>cyl)</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># multiple linear regression and results:</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># (we need to scale (standardize) the predictors wt and hp, since we include their interaction)</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>carsfit <span class="ot">&lt;-</span> <span class="fu">lm</span>(mpg <span class="sc">~</span> am <span class="sc">+</span> cyl <span class="sc">+</span> <span class="fu">scale</span>(wt) <span class="sc">*</span> <span class="fu">scale</span>(hp), <span class="at">dat =</span> mtcars)</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co"># weight is included as the first predictor in order to have</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co"># it as the grouping factor in the allEffects plot</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(carsfit)</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="do">## Call:</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="do">## lm(formula = mpg ~ am + cyl + scale(wt) * scale(hp), data = mtcars)</span></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="do">## Residuals:</span></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="do">##     Min      1Q  Median      3Q     Max </span></span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="do">## -3.4121 -1.6789 -0.4446  1.3752  4.4338 </span></span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="do">## Coefficients:</span></span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="do">##                     Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept)          19.9064     1.5362  12.958 1.36e-12 ***</span></span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="do">## am1                   0.1898     1.4909   0.127 0.899740    </span></span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a><span class="do">## cyl6                 -1.2818     1.5291  -0.838 0.409813    </span></span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="do">## cyl8                 -1.3942     2.1563  -0.647 0.523803    </span></span>
-<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a><span class="do">## scale(wt)            -3.6248     0.9665  -3.750 0.000938 ***</span></span>
-<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a><span class="do">## scale(hp)            -1.8602     0.8881  -2.095 0.046503 *  </span></span>
-<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a><span class="do">## scale(wt):scale(hp)   1.5631     0.7027   2.224 0.035383 *  </span></span>
-<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a><span class="do">## ---</span></span>
-<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a><span class="do">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
-<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a><span class="do">## Residual standard error: 2.246 on 25 degrees of freedom</span></span>
-<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a><span class="do">## Multiple R-squared:  0.888,  Adjusted R-squared:  0.8612 </span></span>
-<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a><span class="do">## F-statistic: 33.05 on 6 and 25 DF,  p-value: 1.021e-10</span></span>
-<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a><span class="co"># The first level of each factor is used as a reference, i.e. in this case a manual gear shift with 4 gears.</span></span>
-<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a><span class="co"># From the coefficient cyl6 we see that there is no significant difference in fuel consumption (= our response) between 4 gears (the reference) and 6 gears.</span></span>
-<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a><span class="co"># In contrast, the predictors weight (wt) and horsepower (hp) have a significant negative effect on the range (mpg), so that they both increase fuel consumption.</span></span>
-<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a><span class="co"># check residuals</span></span>
-<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>old.par <span class="ot">=</span> <span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
-<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(carsfit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="4B-Exercise_files/figure-html/mtcars-1.png" class="img-fluid" width="672"></p>
-</div>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(old.par)</span>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="do">## 1.) Conduct the principle component analyses (PCAs):</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># plot effects</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">allEffects</span>(carsfit))</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="do">## Warning in Analyze.model(focal.predictors, mod, xlevels, default.levels, : the</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="do">## predictors scale(wt), scale(hp) are one-column matrices that were converted to</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="do">## vectors</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="do">## Warning in Analyze.model(focal.predictors, mod, xlevels, default.levels, : the</span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="do">## predictors scale(wt), scale(hp) are one-column matrices that were converted to</span></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="do">## vectors</span></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="do">## Warning in Analyze.model(focal.predictors, mod, xlevels, default.levels, : the</span></span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="do">## predictors scale(wt), scale(hp) are one-column matrices that were converted to</span></span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="do">## vectors</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># a) PCA of environmental data</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>pca_environment <span class="ot">=</span> <span class="fu">prcomp</span>(dat[,<span class="dv">7</span><span class="sc">:</span><span class="dv">16</span>], <span class="at">scale =</span> T)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(pca_environment)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="do">## Importance of components:</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="do">##                           PC1    PC2    PC3    PC4     PC5    PC6     PC7</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="do">## Standard deviation     1.8476 1.3300 1.0919 1.0297 0.99521 0.7746 0.72784</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="do">## Proportion of Variance 0.3414 0.1769 0.1192 0.1060 0.09904 0.0600 0.05298</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="do">## Cumulative Proportion  0.3414 0.5182 0.6375 0.7435 0.84254 0.9025 0.95551</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="do">##                            PC8     PC9    PC10</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="do">## Standard deviation     0.52299 0.34727 0.22541</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="do">## Proportion of Variance 0.02735 0.01206 0.00508</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="do">## Cumulative Proportion  0.98286 0.99492 1.00000</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>op <span class="ot">&lt;-</span> <span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="fu">biplot</span>(pca_environment, <span class="at">main =</span> <span class="st">"PCA"</span>)            <span class="co"># plot the results of the PCA as a rotation matrix</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(<span class="fu">summary</span>(pca_environment)<span class="sc">$</span>importance[<span class="dv">2</span>,], <span class="co"># get the importance measure</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Components of environment"</span>,</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Proportion of variance explained"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="4B-Exercise_files/figure-html/mtcars-2.png" class="img-fluid" width="672"></p>
+<p><img src="5A-Exercise_files/figure-html/solution-PCA-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># We can see in the wt*hp plot, that for high values of hp wt has no effect on the response mpg. We conclude that Pawl was right.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co"># b) PCA of species richness data</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>pca_species <span class="ot">=</span> <span class="fu">prcomp</span>(dat[,<span class="dv">2</span><span class="sc">:</span><span class="dv">5</span>], <span class="at">scale =</span> T)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(pca_species)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="do">## Importance of components:</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="do">##                           PC1    PC2    PC3    PC4</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="do">## Standard deviation     1.1177 1.0251 1.0095 0.8251</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="do">## Proportion of Variance 0.3123 0.2627 0.2548 0.1702</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="do">## Cumulative Proportion  0.3123 0.5750 0.8298 1.0000</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="fu">biplot</span>(pca_species, <span class="at">main =</span> <span class="st">"PCA"</span>)            <span class="co"># plot the results of the PCA as a rotation matrix</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(<span class="fu">summary</span>(pca_species)<span class="sc">$</span>importance[<span class="dv">2</span>,], <span class="co"># get the importance measure</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Components of species"</span>,</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Proportion of variance explained"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="5A-Exercise_files/figure-html/solution-PCA-2.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(op)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># From the *summary()* output we can see that the first and second components explain more variance in the species PCA.</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="do">##  2.) What are the two samples that have the highest score on the third PCA axis?</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co"># -&gt; order the samples by their PC3 coordinate:</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="fu">order</span>(pca_environment<span class="sc">$</span>x[,<span class="st">'PC3'</span>], <span class="at">decreasing =</span> T) <span class="co"># -&gt; 24 is highest</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="do">##  [1] 24 21 23 28 25 16 22 40 36 19  8 12  6 30  9  7 39 32 44  1 15  4 31 13 14</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="do">## [26]  5 10 35 37 45 27 20 18 34 11 17 26 29 38  3 41 33  2 42 43</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="fu">order</span>(pca_species<span class="sc">$</span>x[,<span class="st">'PC3'</span>], <span class="at">decreasing =</span> T) <span class="co"># -&gt; 7 is highest</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="do">##  [1]  7  8  6  1 37  5 13  3 35  4 14 38 11 42 29 39 28 43  2 45 26 34 17 27 36</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="do">## [26] 18 20 15 23 30 41 21 19 31 12 16 33 25 32 24 40 44 22 10  9</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="do">## 3.) Which environmental variables would you choose, if you have only the resource to measure three variables? </span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="co"># From looking at the biplot, we choose 3 variables that describe a lot of variation (i.e. have a large length in the biplot) and have little collinearity. </span></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a><span class="co"># -&gt; For example, an appropriate choice would be salinity, penetrability and grain size.</span></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a><span class="do">## 4.) We can get information on the correlations of variables by looking at their representation in the biplot: </span></span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>  <span class="co">#  a) salinity and humus:  same direction  -&gt;  positively correlated</span></span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>  <span class="co">#  b) angle1 and exposure:  opposite directions  -&gt;  negatively correlated</span></span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>  <span class="co">#  c) Polychaeta and Mollusca:  almost perpendicular  -&gt;  uncorrelated</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
-<!-- Take from https://theoreticalecology.github.io/DataScienceInR/4A-Exercise.html -->
-<div class="callout callout-style-default callout-warning callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
 </div>
-<div class="callout-title-container flex-fill">
-Question
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<ol type="1">
-<li>What is the meaning of “An effect is not significant”?</li>
-<li>Is an effect with three *** more significant / certain than an effect with one *?</li>
-</ol>
-</div>
-</div>
-<div class="webex-solution">
-<button>
-Click here to see the solution
-</button>
-<ol type="1">
-<li><p>You should NOT say that the effect is zero, or that the null hypothesis has been accepted. Official language is “there is no significant evidence for an effect(p = XXX)”. If we would like to assess what that means, some people do a post-hoc power analysis (which effect size could have been estimated), but better is typically just to discuss the confidence interval, i.e.&nbsp;look at the confidence interval and say: if there is an effect, we are relatively certain that it is smaller than X, given the confidence interval of XYZ.</p></li>
-<li><p>Many people view it that way, and some even write “highly significant” for *** . It is probably true that we should have a slightly higher confidence in a very small p-value, but strictly speaking, however, there is only <em>significant</em>, or <em>not significant</em>. Interpreting the p-value as a measure of certainty is a slight misinterpretation. Again, if we want to say how certain we are about the effect, it is better to look again at the confidence interval, i.e.&nbsp;the standard error and use this to discuss the precision of the estimate (small confidence interval / standard error = high precision / certainty).</p></li>
-</ol>
 </div>
 </section>
-<section id="model-selection-with-the-cement-dataset" class="level2">
-<h2 class="anchored" data-anchor-id="model-selection-with-the-cement-dataset">Model-selection with the <code>Cement</code> dataset</h2>
-<p>The process of cement hardening involves exogenous chemical reactions and thus produces heat. The amount of heat produced by the cement depends on the mixture of its constituents. The <code>Cement</code> dataset includes heat measurements for different types of cement that consist of different relative amounts of calcium aluminate (<code>X1</code>), tricalcium silicate (<code>X2</code>), tetracalcium alumino ferrite (<code>X3</code>) and dicalcium silicate (<code>X4</code>). A cement producing company wants to optimize the composition of its product and wants to know, which of these compounds are mainly responsible for heat production.</p>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Note
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>We only do a model selection here for educational reasons. For your analysis, and if your goal is not a predictive model, think about the model structure before you do the analysis and then stick to it! See here the section about <a href="https://theoreticalecology.github.io/AdvancedRegressionModels/3C-ModelSelection.html#pHacking">p-hacking</a> (and also consider that AIC selection will/can remove confounders which will violate causality and can lead to spurious correlations!</p>
-</div>
-</div>
-<div class="callout callout-style-default callout-warning callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Questions
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Carry out the following tasks:</p>
-<ul>
-<li>Perform a multiple linear regression including all predictor variables and all two-way interactions (remember the notation <code>(var1 + var2 + var3)\^2</code>.</li>
-<li>Perform forward, backward, and global model selection and compare the results</li>
-<li>Fit the model considered optimal by global model selection and compare it with the full model based on AIC (or AICc) and LRT.</li>
-</ul>
-<p>You may need the following functions:</p>
-<ul>
-<li><code>lm()</code></li>
-<li><code>summary()</code></li>
-<li><code>stepAIC()</code></li>
-<li><code>options()</code></li>
-<li><code>dredge()</code></li>
-<li><code>AIC()</code> or <code>AICc()</code> (for small datasets)</li>
-<li><code>anova()</code></li>
-</ul>
-<p>Use your results to answer the following questions:</p>
-<p><strong>1. You tested 3 different model selection methods: forward stepwise AIC selection, backward stepwise AIC selection and global model selection. How many terms ( = intercept + predictor effects + interactions) did each of the reduced models include?</strong></p>
-<ul>
-<li>Forward selection <input class="webex-solveme nospaces" size="1" data-answer="[&quot;3&quot;]"></li>
-<li>Backward selection <input class="webex-solveme nospaces" size="2" data-answer="[&quot;10&quot;]"></li>
-<li>global model selection <input class="webex-solveme nospaces" size="1" data-answer="[&quot;3&quot;]"></li>
-</ul>
-<p><strong>2. You compared the full model with the reduced model from global model selection based on AIC and LRT (using the <code>anova()</code> function). Which of the two models would you choose based on their AIC? And which would you choose based on the LRT?</strong></p>
-<ul>
-<li>AIC <select class="webex-select"><option value="blank"></option><option value="answer">The full model</option><option value="">I don’t know. Both models fit equally well.</option><option value="">Also the full model</option><option value="">The reduced model</option></select></li>
-<li>LRT <select class="webex-select"><option value="blank"></option><option value="">The full model</option><option value="answer">I don’t know. Both models fit equally well.</option><option value="">Also the full model</option><option value="">The reduced model</option></select></li>
-</ul>
-<p><strong>3. Here’s a quote from Wikipedia on the AIC: <a href="https://en.wikipedia.org/wiki/Akaike_information_criterion">“When the sample size is small, there is a substantial probability that AIC will select models that have too many parameters, i.e.&nbsp;that AIC will overfit.”</a> Check the sample size of the Cement dataset. How do you now interpret the AIC values for the full model as compared to the reduced model from global model selection? (Several are correct)</strong></p>
-<div id="radio_CIYDEMETBH" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_CIYDEMETBH" value=""> <span>The AIC for the full model is smaller. The full model thus fits better.</span></label><label><input type="radio" autocomplete="off" name="radio_CIYDEMETBH" value="answer"> <span>I would not trust AIC model selection in this case, because the sample size is too small to fit the number of parameters necessary for the full model.</span></label><label><input type="radio" autocomplete="off" name="radio_CIYDEMETBH" value="answer"> <span>Instead of using the AIC for model comparison, I would now prefer the AICc, which corrects for small sample sizes.</span></label>
-</div>
-</div>
-</div>
-<div class="webex-solution">
-<button>
-Click here to see the solution
-</button>
-<p>This is the code that you need to obtain the results.</p>
+<section id="clustering" class="level2">
+<h2 class="anchored" data-anchor-id="clustering">Clustering</h2>
+<section id="k-means" class="level3">
+<h3 class="anchored" data-anchor-id="k-means">K-means</h3>
+<p>We want to use clustering methods to define 3 environmental types. Use the function <code>kmeans()</code> with <code>centers = 3</code> (number of clusters to be generated). Remember to set a seed; the choice of the first k centers is random.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MuMIn)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MASS)</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># full model -&gt;  has 11 coefficients</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>full <span class="ot">=</span> <span class="fu">lm</span>(y <span class="sc">~</span> (X1 <span class="sc">+</span> X2 <span class="sc">+</span> X3 <span class="sc">+</span> X4)<span class="sc">^</span><span class="dv">2</span>, <span class="at">data =</span> Cement)</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(full)</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co"># forward model selection</span></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>ms_forw <span class="ot">=</span> <span class="fu">stepAIC</span>(full, <span class="at">direction =</span> <span class="st">"forward"</span>)</span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ms_forw)</span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="co"># lists 11 coefficients (i.e. selects full model)</span></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="co"># backward model selection</span></span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>ms_back <span class="ot">=</span> <span class="fu">stepAIC</span>(full, <span class="at">direction =</span> <span class="st">"backward"</span>)</span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ms_back)</span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="co"># lists 10 coefficients</span></span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="co"># global model selection</span></span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">na.action =</span> <span class="st">"na.fail"</span>)</span>
-<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>dd <span class="ot">=</span> <span class="fu">dredge</span>(full)</span>
-<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(dd)</span>
-<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a><span class="co"># The first row lists the best performing model: it includes only the intercept and effects for X1 and X2 (= 3 coefficients).</span></span>
-<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit the model considered optimal by global model selection and compare it with the full model based on AIC (or AICc) and LRT:</span></span>
-<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>opt <span class="ot">=</span> <span class="fu">lm</span>(y <span class="sc">~</span> X1 <span class="sc">+</span> X2, <span class="at">data =</span> Cement)</span>
-<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(opt)</span>
-<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a><span class="fu">AIC</span>(opt,full) <span class="co"># full model is better according to AIC (lower AIC)</span></span>
-<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(opt, full) <span class="co"># -&gt; LRT: no significant difference between the models</span></span>
-<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a><span class="co"># sample size in the Cement dataset:</span></span>
-<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(Cement)  <span class="co"># or</span></span>
-<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(Cement)</span>
-<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a><span class="co"># If the sample size is low, a corrected version of the AIC is recommended to avoid overfitting:</span></span>
-<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a><span class="fu">AICc</span>(opt,full) <span class="co"># This is inf! -&gt; optimal model is better according to AICc</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">467456</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>cl <span class="ot">=</span> <span class="co">#...</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Compare the three clusters with the result of the PCA using the following code that uses another plotting framework called ggplot2:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggfortify)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">autoplot</span>(pca_environment, <span class="at">colour =</span> cl<span class="sc">$</span>cluster, <span class="at">size =</span> <span class="dv">2</span>, <span class="at">loadings =</span> <span class="cn">TRUE</span>, <span class="at">loadings.colour =</span> <span class="st">'black'</span>,</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">loadings.label =</span> <span class="cn">TRUE</span>, <span class="at">loadings.label.size =</span> <span class="dv">3</span>, <span class="at">loadings.label.colour =</span> <span class="st">"black"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The colors of the points represent the three clusters. <strong>Answer the following question on elearning-extern</strong> (Q 4-5):</p>
+<ul>
+<li>How is it possible that four observations in the middle (in red - if you have used the same seed) belong to a different cluster than the observations around them (in black)?</li>
+<li>Which environmental variables are on average high within the black cluster (cluster 1)?</li>
+</ul>
+<div class="callout callout-style-simple callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Create clusters using all environmental variables</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">467456</span>)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>cl <span class="ot">&lt;-</span> <span class="fu">kmeans</span>(dat[,<span class="dv">7</span><span class="sc">:</span><span class="dv">16</span>], <span class="at">centers =</span> <span class="dv">3</span>) <span class="co"># 3 clusters to be generated</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggfortify)</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="fu">autoplot</span>(pca_environment, <span class="at">colour =</span> cl<span class="sc">$</span>cluster, <span class="at">size =</span> <span class="dv">2</span>, <span class="at">loadings =</span> <span class="cn">TRUE</span>, <span class="at">loadings.colour =</span> <span class="st">'black'</span>,</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>         <span class="at">loadings.label =</span> <span class="cn">TRUE</span>, <span class="at">loadings.label.size =</span> <span class="dv">3</span>, <span class="at">loadings.label.colour =</span> <span class="st">"black"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="5A-Exercise_files/figure-html/solution-Clustering-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co"># To understand why the four observations in the middle belong to a different cluster than the observations around them, we must take into account, that the biplot is only a 2-dimensional representation of a more-than-2 dimensional space. Therefore, the four points in the middle will be dissimilar to the points around them with respect to a variable that is not well represented by the first two PCA axes.</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Environmental variables that are on average high within cluster 1:</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co"># -&gt; looking at the plot we find that exposure and grain size are high on average within cluster 1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="hierarchical-clustering" class="level3">
+<h3 class="anchored" data-anchor-id="hierarchical-clustering">Hierarchical clustering</h3>
+<p>Now we want to hierarchically cluster the samples with respect to their species richness, as shown in the following plot:</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="5A-Exercise_files/figure-html/clustering-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Create the same plot using the functions:</p>
+<ul>
+<li><code>hclust()</code><br>
+</li>
+<li><code>plot()</code></li>
+<li><code>as.phylo()</code></li>
+</ul>
+<p>Load the package <code>ape</code>. Have a look at the help for <code>hclust()</code> to read what the function does and look at the examples for further help on how to use the function. Then have a look at what the function <code>as.phylo()</code> does. Now, color the labels using the variable <code>week</code>. You can do this using the argument “tip.color =”.</p>
+<p>Choose the correct statement(s) about the species richness and its sampling on <strong>elearning-extern</strong>(Q6). To be able to read the plot more easily, you can click <em>Zoom</em> in the top pane of the Plots window in RStudio.</p>
+<div class="callout callout-style-simple callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ape)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>hc <span class="ot">=</span> <span class="fu">hclust</span>(<span class="fu">dist</span>(dat[, <span class="dv">2</span><span class="sc">:</span><span class="dv">5</span>]))</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">as.phylo</span>(hc), <span class="at">tip.color =</span> dat<span class="sc">$</span>week)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="5A-Exercise_files/figure-html/solution-HierarClcust-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</div>
 </div>
 </div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -1341,13 +1285,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./4A-Exercise.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Exercise - Simple linear regression</span>
+      <a href="./2B-Multivariate.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Multivariate Statistics</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./4C-Exercise.html" class="pagination-link">
-        <span class="nav-page-text">Exercise - GLM</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./8-MachineLearning.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Machine Learning</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
