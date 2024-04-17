@@ -8,7 +8,7 @@ editor_options:
 set.seed(42)
 ```
 
-# Exercise - Multiple Linear Regression
+# Exercise - Multiple Linear Regression {-}
 
 | Formula      | Meaning                               | Details                                    |
 |----------------|--------------------------|------------------------------|
@@ -27,7 +27,7 @@ In this exercise you will:
 -   interpret regression output and check the residuals
 -   plot model predictions including interactions
 
-Before you start, remember to clean your global environment (if you haven't already) using *rm(list=ls())*.
+Before you start, remember to clean your global environment (if you haven't already) using `rm(list=ls())`.
 
 To conduct the exercise, please load the following packages:
 
@@ -81,7 +81,7 @@ The company wants you to find out which of the following characteristics affects
 
 In addition, Pawl, one of the founders of the company suggested that the effect of weight (`wt`) might be irrelevant for powerful cars (high `hp` values). You are thus asked to test for this interaction in your analysis as well.
 
-::: {.callout-caution icon="false"}
+::: {.callout-warning}
 ### Question
 
 Carry out the following tasks:
@@ -92,18 +92,43 @@ Carry out the following tasks:
 
 You may need the following functions:
 
--   as.factor()
--   lm()
--   summary()
--   anova()
--   plot()
--   allEffects()
+-   `as.factor()`
+-   `lm()`
+-   `summary()`
+-   `anova()`
+-   `plot()`
+-   `allEffects()`
 
-Use your results to **answer the questions on elearning-extern** (Q 1-2) [("05_Test for Exercise in R - multiple regression")](https://elearning.uni-regensburg.de/mod/quiz/view.php?id=2046701).
+Use your results to answer the questions:
+
+**Which of the following statements are correct? (Several are correct).**
+
+```{r}
+#| include: false
+opts_p <- c(
+  answer = "Cars with 6 cylinders do not differ significantly in their fuel consumption as compared to cars with 4 cylinders.",
+  "Stronger cars (hp) use less fuel (mpg).",
+  answer = "Overall, heavier cars (wt) use significantly more fuel (their range is smaller; mpg)"
+)
+```
+`r longmcq(opts_p)`
+
+**Concerning the interaction between weight (wt) and horsepower (hp), which of the following statements is correct?**
+
+```{r}
+#| include: false
+opts_p <- c(
+  "Pawl was wrong. There is a significant interaction between weight and horsepower, but the direction is opposite to what Pawl thought: The effect of weight is stronger for stronger cars.",
+  "Pawl was wrong, the effect of weight is independent of horsepower.",
+  answer = "Pawl was right. The effect of weight is strong for weaker cars, but becomes indeed irrelevant for stronger cars."
+)
+```
+`r longmcq(opts_p)`
+
+
 :::
 
-::: {.callout-tip collapse="true" appearance="minimal" icon="false"}
-### Solution
+`r hide("Click here to see the solution")`
 
 This is the code that you need to interpret the results.
 
@@ -132,17 +157,35 @@ par(old.par)
 plot(allEffects(carsfit))
 # We can see in the wt*hp plot, that for high values of hp wt has no effect on the response mpg. We conclude that Pawl was right.
 ```
+
+`r unhide()`
+
+<!-- Take from https://theoreticalecology.github.io/DataScienceInR/4A-Exercise.html -->
+
+::: {.callout-warning}
+#### Question
+
+1.  What is the meaning of "An effect is not significant"?
+2.  Is an effect with three \*\*\* more significant / certain than an effect with one \*?
 :::
+
+`r hide("Click here to see the solution")`
+
+1.  You should NOT say that the effect is zero, or that the null hypothesis has been accepted. Official language is "there is no significant evidence for an effect(p = XXX)". If we would like to assess what that means, some people do a post-hoc power analysis (which effect size could have been estimated), but better is typically just to discuss the confidence interval, i.e. look at the confidence interval and say: if there is an effect, we are relatively certain that it is smaller than X, given the confidence interval of XYZ.
+
+2.  Many people view it that way, and some even write "highly significant" for \*\*\* . It is probably true that we should have a slightly higher confidence in a very small p-value, but strictly speaking, however, there is only *significant*, or *not significant*. Interpreting the p-value as a measure of certainty is a slight misinterpretation. Again, if we want to say how certain we are about the effect, it is better to look again at the confidence interval, i.e. the standard error and use this to discuss the precision of the estimate (small confidence interval / standard error = high precision / certainty).
+`r unhide()`
+
 
 ## Model-selection with the `Cement` dataset
 
 The process of cement hardening involves exogenous chemical reactions and thus produces heat. The amount of heat produced by the cement depends on the mixture of its constituents. The `Cement` dataset includes heat measurements for different types of cement that consist of different relative amounts of calcium aluminate (`X1`), tricalcium silicate (`X2`), tetracalcium alumino ferrite (`X3`) and dicalcium silicate (`X4`). A cement producing company wants to optimize the composition of its product and wants to know, which of these compounds are mainly responsible for heat production.
 
-::: callout-warning
+::: callout-note
 We only do a model selection here for educational reasons. For your analysis, and if your goal is not a predictive model, think about the model structure before you do the analysis and then stick to it! See here the section about [p-hacking](https://theoreticalecology.github.io/AdvancedRegressionModels/3C-ModelSelection.html#pHacking) (and also consider that AIC selection will/can remove confounders which will violate causality and can lead to spurious correlations!
 :::
 
-::: {.callout-caution icon="false"}
+::: {.callout-warning}
 ### Questions
 
 Carry out the following tasks:
@@ -153,18 +196,47 @@ Carry out the following tasks:
 
 You may need the following functions:
 
--   lm()
--   summary()
--   stepAIC()
--   options()
--   dredge()
--   AIC() or AICc() (for small datasets)
--   anova()
+-   `lm()`
+-   `summary()`
+-   `stepAIC()`
+-   `options()`
+-   `dredge()`
+-   `AIC()` or `AICc()` (for small datasets)
+-   `anova()`
 
-Use your results to **answer the questions on elearning-extern** (Q 3-5) [("05_Test for Exercise in R - multiple regression")](https://elearning.uni-regensburg.de/mod/quiz/view.php?id=2046701).
+Use your results to answer the following questions:
+
+**1. You tested 3 different model selection methods: forward stepwise AIC selection, backward stepwise AIC selection and global model selection. How many terms ( = intercept + predictor effects + interactions) did each of the reduced models include?**
+
+- Forward selection `r fitb(3)`
+- Backward selection `r fitb(10)`
+- global model selection `r fitb(3)`
+
+
+**2. You compared the full model with the reduced model from global model selection based on AIC and LRT (using the `anova()` function).
+Which of the two models would you choose based on their AIC? And which would you choose based on the LRT?**
+
+- AIC `r mcq(c(answer = "The full model", "I don't know. Both models fit equally well.", "Also the full model", "The reduced model"))`
+- LRT `r mcq(c("The full model", answer = "I don't know. Both models fit equally well.", "Also the full model", "The reduced model"))`
+
+
+**3. Here's a quote from Wikipedia on the AIC: ["When the sample size is small, there is a substantial probability that AIC will select models that have too many parameters, i.e. that AIC will overfit."](https://en.wikipedia.org/wiki/Akaike_information_criterion)
+Check the sample size of the Cement dataset.
+How do you now interpret the AIC values for the full model as compared to the reduced model from global model selection? (Several are correct)** 
+
+```{r}
+#| include: false
+opts_p <- c(
+  "The AIC for the full model is smaller. The full model thus fits better.",
+  answer = "I would not trust AIC model selection in this case, because the sample size is too small to fit the number of parameters necessary for the full model.",
+  answer = "Instead of using the AIC for model comparison, I would now prefer the AICc, which corrects for small sample sizes."
+)
+```
+`r longmcq(opts_p)`
+ 
 :::
 
-::: {.callout-tip collapse="true" appearance="minimal" icon="false"}
+`r hide("Click here to see the solution")`
 ### Solution
 
 This is the code that you need to obtain the results.
@@ -210,4 +282,5 @@ nrow(Cement)
 AICc(opt,full) # This is inf! -> optimal model is better according to AICc
 
 ```
-:::
+
+`r unhide()`

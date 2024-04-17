@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Introduction to Data Science with R - 10&nbsp; Exercise - Univariate linear regression</title>
+<title>Introduction to Data Science with R - Exercise - Simple linear regression</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -64,7 +64,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./2B-Multivariate.html" rel="next">
+<link href="./4B-Exercise.html" rel="next">
 <link href="./6-GLM.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -102,7 +102,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <link rel="stylesheet" href="include/webex.css">
-<meta name="citation_title" content="[10]{.chapter-number}&nbsp; [Exercise - Univariate linear regression]{.chapter-title}">
+<meta name="citation_title" content="Exercise - Simple linear regression">
 <meta name="citation_fulltext_html_url" content="https://TheoreticalEcology.github.io/DataScienceInR//4A-Exercise.html">
 <meta name="citation_language" content="en">
 </head>
@@ -116,7 +116,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./4-SimpleRegression.html">Regression Analysis</a></li><li class="breadcrumb-item"><a href="./4A-Exercise.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Exercise - Univariate linear regression</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./4-SimpleRegression.html">Regression Analysis</a></li><li class="breadcrumb-item"><a href="./4A-Exercise.html">Exercise - Simple linear regression</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -291,7 +291,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./4A-Exercise.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Exercise - Univariate linear regression</span></span></a>
+ <span class="menu-text">Exercise - Simple linear regression</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4B-Exercise.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exercise - Multiple Linear Regression</span></a>
   </div>
 </li>
       </ul>
@@ -308,7 +314,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./2B-Multivariate.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Multivariate Statistics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Multivariate Statistics</span></span></a>
   </div>
 </li>
       </ul>
@@ -325,7 +331,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./8-MachineLearning.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Machine Learning</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Machine Learning</span></span></a>
   </div>
 </li>
       </ul>
@@ -342,7 +348,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./9-Design.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Design of experiments</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Design of experiments</span></span></a>
   </div>
 </li>
       </ul>
@@ -359,13 +365,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./10-DataWrangling.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Exercise - Data handling</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Exercise - Data handling</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./11-Reproducibility.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Reproducibility and project organization</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Reproducibility and project organization</span></span></a>
   </div>
 </li>
       </ul>
@@ -397,9 +403,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#analyzing-the-regrowth-dataset" id="toc-analyzing-the-regrowth-dataset" class="nav-link active" data-scroll-target="#analyzing-the-regrowth-dataset"><span class="header-section-number">10.1</span> Analyzing the “regrowth” dataset</a></li>
-  <li><a href="#analyzing-the-birdabundance-dataset" id="toc-analyzing-the-birdabundance-dataset" class="nav-link" data-scroll-target="#analyzing-the-birdabundance-dataset"><span class="header-section-number">10.2</span> Analyzing the “birdabundance” dataset</a></li>
-  <li><a href="#model-validation-residual-checks" id="toc-model-validation-residual-checks" class="nav-link" data-scroll-target="#model-validation-residual-checks"><span class="header-section-number">10.3</span> Model validation: Residual checks</a></li>
+  <li><a href="#analyzing-the-regrowth-dataset" id="toc-analyzing-the-regrowth-dataset" class="nav-link active" data-scroll-target="#analyzing-the-regrowth-dataset">Analyzing the “regrowth” dataset</a></li>
+  <li><a href="#analyzing-the-birdabundance-dataset" id="toc-analyzing-the-birdabundance-dataset" class="nav-link" data-scroll-target="#analyzing-the-birdabundance-dataset">Analyzing the “birdabundance” dataset</a></li>
+  <li><a href="#model-validation-residual-checks" id="toc-model-validation-residual-checks" class="nav-link" data-scroll-target="#model-validation-residual-checks">Model validation: Residual checks</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/TheoreticalEcology/DataScienceInR/edit/master/4A-Exercise.qmd" class="toc-action">Edit this page</a></p></div></div></nav>
     </div>
@@ -408,7 +414,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Exercise - Univariate linear regression</span></h1>
+<h1 class="title">Exercise - Simple linear regression</h1>
 </div>
 
 
@@ -429,8 +435,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>birdabundance {EcoData}</li>
 <li>simulated data</li>
 </ul>
-<section id="analyzing-the-regrowth-dataset" class="level2" data-number="10.1">
-<h2 data-number="10.1" class="anchored" data-anchor-id="analyzing-the-regrowth-dataset"><span class="header-section-number">10.1</span> Analyzing the “regrowth” dataset</h2>
+<section id="analyzing-the-regrowth-dataset" class="level2">
+<h2 class="anchored" data-anchor-id="analyzing-the-regrowth-dataset">Analyzing the “regrowth” dataset</h2>
 <div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -454,8 +460,8 @@ Warning
 <li><code>plot()</code></li>
 <li><code>abline()</code></li>
 </ul>
-<section id="question" class="level3" data-number="10.1.1">
-<h3 data-number="10.1.1" class="anchored" data-anchor-id="question"><span class="header-section-number">10.1.1</span> Question</h3>
+<section id="question" class="level3">
+<h3 class="anchored" data-anchor-id="question">Question</h3>
 <p>You have performed a simple linear regression for the influence of fruit biomass on root biomass.</p>
 <p>Which of the following statements are correct? (More than one are correct)</p>
 <div id="radio_QEAYJDRZQO" class="webex-radiogroup">
@@ -516,8 +522,8 @@ Click here to see the solution
 </div>
 </div>
 </section>
-<section id="analyzing-the-birdabundance-dataset" class="level2" data-number="10.2">
-<h2 data-number="10.2" class="anchored" data-anchor-id="analyzing-the-birdabundance-dataset"><span class="header-section-number">10.2</span> Analyzing the “birdabundance” dataset</h2>
+<section id="analyzing-the-birdabundance-dataset" class="level2">
+<h2 class="anchored" data-anchor-id="analyzing-the-birdabundance-dataset">Analyzing the “birdabundance” dataset</h2>
 <p>The dataset provides bird abundances in forest fragments with different characteristics in Australia. We want to look at the relationship of the variables “abundance”, “distance” and “grazing”.</p>
 <div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -570,8 +576,8 @@ Questions
 <button>
 Click here to see the solution
 </button>
-<section id="solution" class="level3" data-number="10.2.1">
-<h3 data-number="10.2.1" class="anchored" data-anchor-id="solution"><span class="header-section-number">10.2.1</span> Solution</h3>
+<section id="solution" class="level3">
+<h3 class="anchored" data-anchor-id="solution">Solution</h3>
 <ul>
 <li>The maximum likelihood estimate of bird abundance for grazing intensity 1 is 28.623. CORRECT: When the predictor is a factor, the intercept equals the first factor level (by default, this follows an alphabetical order).</li>
 <li>We can see in the regression table that the difference between grazing intensity 3 and 4 is significant. WRONG: Comparisons are always related to the intercept, i.e.&nbsp;to the first factor level. For comparisons among other factor levels we need post-hoc tests.</li>
@@ -626,8 +632,8 @@ Click here to see the solution
 </section>
 </div>
 </section>
-<section id="model-validation-residual-checks" class="level2" data-number="10.3">
-<h2 data-number="10.3" class="anchored" data-anchor-id="model-validation-residual-checks"><span class="header-section-number">10.3</span> Model validation: Residual checks</h2>
+<section id="model-validation-residual-checks" class="level2">
+<h2 class="anchored" data-anchor-id="model-validation-residual-checks">Model validation: Residual checks</h2>
 <p>Now, we will have a closer look at model diagnostics and residual checks in particular. Of course, we should have done this for all models above as well (we simply didn’t do this because of time restrictions). So remember that you always have to validate your model, if you want to be sure that your conclusions are correct.</p>
 <p>For this exercise, you can prepare a dataset yourself called “dat” with the variables “x” and “y”. Simply copy the following code to generate the data:</p>
 <div class="cell">
@@ -1336,8 +1342,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./2B-Multivariate.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Multivariate Statistics</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./4B-Exercise.html" class="pagination-link">
+        <span class="nav-page-text">Exercise - Multiple Linear Regression</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

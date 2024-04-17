@@ -8,7 +8,7 @@ editor_options:
 set.seed(42)
 ```
 
-# Exercise - Univariate linear regression
+# Exercise - Simple linear regression {-}
 
 You will work with the following datasets:
 
