@@ -281,7 +281,7 @@ We only do a model selection here for educational reasons. For your analysis, an
 
 Carry out the following tasks:
 
--   Perform a multiple linear regression including all predictor variables and all two-way interactions (remember the notation `(var1 + var2 + var3)\^2`.
+-   Perform a multiple linear regression including all predictor variables and all two-way interactions (remember the notation `(var1 + var2 + var3)^2`.
 -   Perform forward, backward, and global model selection and compare the results
 -   Fit the model considered optimal by global model selection and compare it with the full model based on AIC (or AICc) and LRT.
 
@@ -289,7 +289,7 @@ You may need the following functions:
 
 -   `lm()`
 -   `summary()`
--   `stepAIC()`
+-   `stepAIC()` from the `MuMIn` package (`library(MuMIn)`)
 -   `options()`
 -   `dredge()`
 -   `AIC()` or `AICc()` (for small datasets)
