@@ -9,3 +9,5 @@ data/species.csv
 data/treedata.csv
 MachineLearning_files/execute-results/html.json
 stats.Rnw
+elk_data.RDS
+elk_data.RData

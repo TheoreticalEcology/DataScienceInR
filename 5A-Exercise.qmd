@@ -8,7 +8,7 @@ editor_options:
 set.seed(42)
 ```
 
-# Exercise - Multivariate statistics {-}
+# Exercise - Multivariate statistics {.unnumbered}
 
 ```{r load data and libraries, echo=FALSE, message=FALSE, warning=FALSE}
 dat = read.table(file = "http://evol.bio.lmu.de/_statgen/Multivariate/11SS/RIKZGroups.txt", header = T)

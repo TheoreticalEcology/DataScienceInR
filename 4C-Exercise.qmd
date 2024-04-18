@@ -214,3 +214,109 @@ plot(allEffects(fit))
 
 The quadratic term solves the problem of the residuals. The effects plots look quite different. There seems to be a maximum of ulcer around a thickness of 10 that we would have missed without the quadratic term.
 `r unhide()`
+
+
+## Analyzing Elk data
+
+Download the elk_data from GRIPS and import the file using the `load( )` function.
+
+:::{.column-margin}
+RData is a R specific data type. You can save any R object by running `save(object, file "filename.RData")`
+:::
+
+::: {.callout-warning}
+#### Example - Elk Data
+
+You will be given a data set of habitat use of Elks in Canada. Measured is the presence of Elks (0/1), and a number of other predictors. Description of variables:
+
+-   `dist_roads` - distance of the location to the next road
+
+-   `NDVI` - normalized difference vegetation index, essentially greeness of vegetation on the site
+
+-   `ruggedness` of the terrain
+
+-   `dem` - digital eleveation model = elevation above sea level
+
+-   `presence` - presence of the elk
+
+-   `habitat` - open or forest
+
+Perform either:
+
+a)  A predictive analysis, i.e. a model to predict where Elks can be found.
+b)  A causal analysis, trying to understand the effect of roads on Elk presence.
+
+**Hints**:
+
+- Hypothesis: presence ~ dist_roads
+- What are potential confounders? How can you see if a variable is a confounder?
+
+:::
+
+`r hide("Click here to see the solution")`
+A. Predictive analysis
+
+```{r}
+load(file = "elk_data.RData")
+
+library(MASS)
+fit <- glm(presence ~ dist_roads  + dem + ruggedness, data = elk_data, family = "binomial")
+predictive_model = MASS::stepAIC(fit, direction = "both")
+summary(predictive_model)
+
+```
+
+B. Causal analysis
+
+The predictive model has actually dropped the variable of interest (distance to roads) which shows the risks of tools that select for the best predictive model such as AIC selection: Collinear variables that we need to adjust our effects, are often dropped.
+
+For the causal model, we really need to think about the causal relationships between the variables:
+
+We are interested in the effect of dist_roads on presence:
+
+```{r}
+summary(glm(presence ~ dist_roads, data = elk_data, family = "binomial"))
+```
+
+Positive effect of dist_roads on elk, or in other words, more elks closer to the roads? Does that make sense? No, we expect a negative effect!
+
+Altitude (dem) and the `ruggedness` probably affect both variables, `presence` and `dist_roads`, and thus they should be considered as confounders:
+
+```{r}
+fit = glm(presence ~ dist_roads+ dem + ruggedness, data = elk_data, family = "binomial")
+```
+
+The effect of `dist_roads` is now negative!
+
+Let's check the residuals:
+
+```{r}
+library(DHARMa)
+res <- simulateResiduals(fit, plot = TRUE)
+plot(res, quantreg = TRUE)
+plotResiduals(res, form = elk_data$dem, quantreg = TRUE)
+plotResiduals(res, form = elk_data$ruggedness, quantreg = TRUE)
+```
+
+The functional forms of our confounders are not perfect.
+
+Since we are not really interested in them, a cool trick is to use a GAM (generalized addictive model) which automatically adjusts the functional for of the fitted curve to flexibly take care of the confounders. Our main predictor `dist_roads` is still modelled as a linear effect.
+
+```{r}
+library(mgcv)
+fit2 <- gam(presence ~ dist_roads + s(dem) + s(ruggedness), data = elk_data, family = "binomial")
+summary(fit2)
+plot(fit2)
+```
+
+Let's take another look at the residual plots, in particular for the confounders.
+
+```{r}
+res <- simulateResiduals(fit2, plot = TRUE)
+plot(res, quantreg = TRUE)
+plotResiduals(res, form = elk_data$dem, quantreg = TRUE)
+plotResiduals(res, form = elk_data$ruggedness, quantreg = TRUE)
+```
+
+Now, everything looks perfect
+`r unhide()`

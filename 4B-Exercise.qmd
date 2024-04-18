@@ -177,6 +177,97 @@ plot(allEffects(carsfit))
 `r unhide()`
 
 
+## Interactions with the `plantHeight` dataset
+
+::: {.callout-warning}
+#### Plant Height revisited
+
+Revisit exercise our previous analysis of EcoData::plantHeight
+
+```{r}
+library(EcoData)
+model = lm(loght ~ temp, data = plantHeight)
+
+```
+
+Use (separate) multiple regressions to test if:
+
+1.  If temp or NPP (net primary productivity) is a more important predictor (importance == absolute effect size).
+2.  If growth forms (variable growthform) differ in their temperature effects. (use an interaction)
+3.  If the effect of temp remains significant if we include latitude and an interaction of latitude with temp. If not, why? Tip: plot temp \~ lat.
+
+
+:::
+
+`r hide("Click here to see the solution")`
+
+```{r}
+plantHeight$sTemp = scale(plantHeight$temp)
+plantHeight$sLat = scale(plantHeight$lat)
+plantHeight$sNPP = scale(plantHeight$NPP)
+
+# relevel 
+plantHeight$growthform2 = relevel(as.factor(plantHeight$growthform), "Herb")
+```
+
+1)  **NPP or Temp?**
+
+```{r}
+fit = lm(loght ~ sTemp + sNPP, data = plantHeight)
+summary(fit)
+```
+
+NPP is slightly more important
+
+2)  **Interaction with growth form**
+
+```{r}
+fit = lm(loght ~ growthform2 *  sTemp , data = plantHeight)
+summary(fit)
+
+```
+
+Yes, because (some) interactions are significant.
+
+Note that the n.s. effect of sTemp is the first growth form (Ferns), for which we had only one observation. In a standard multiple regression, you don't have p-values for the significance of the temperature effect against 0 for the other growth forms, because you test against the reference. What one usually does is to run an ANOVA (see chapter on ANOVA) to see if temp is overall significant.
+
+```{r}
+anova(lm(loght ~ growthform *  sTemp , data = plantHeight))
+```
+
+Alternatively, if you want to test if a specific growth form has a significant temperature effect, you could either extract the p-value from a multiple regression (a bit complicated) or just run a univariate regression for this growth form
+
+```{r}
+fit = lm(loght ~ sTemp + 0, data = plantHeight[plantHeight$growthform == "Tree",])
+summary(fit)
+```
+
+Or you could fit the interaction but turn-off the intercept (by saying +0 or -1) and remove the plantHeight intercepts:
+
+```{r}
+fit = lm(loght ~ sTemp:growthform + 0, data = plantHeight[,])
+summary(fit)
+```
+
+
+3)  **Interaction with lat**
+
+```{r}
+fit = lm(loght ~ sTemp * sLat, data = plantHeight)
+summary(fit)
+```
+
+All is n.s. ... how did this happen? If we check the correlation between temp and lat, we see that the two predictors are highly collinear.
+
+```{r}
+cor(plantHeight$temp, plantHeight$lat)
+```
+
+In principle, the regression model should be able to still separate them, but the higher the collinearity, the more difficult it becomes for the regression to infer if the effect is caused by one or the other predictor.
+`r unhide()`
+
+
+
 ## Model-selection with the `Cement` dataset
 
 The process of cement hardening involves exogenous chemical reactions and thus produces heat. The amount of heat produced by the cement depends on the mixture of its constituents. The `Cement` dataset includes heat measurements for different types of cement that consist of different relative amounts of calcium aluminate (`X1`), tricalcium silicate (`X2`), tetracalcium alumino ferrite (`X3`) and dicalcium silicate (`X4`). A cement producing company wants to optimize the composition of its product and wants to know, which of these compounds are mainly responsible for heat production.
