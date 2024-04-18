@@ -244,5 +244,33 @@
     "title": "8  Multiple regression",
     "section": "8.5 Formula syntax",
     "text": "8.5 Formula syntax\n\nFormula syntax\n\n\n\n\n\n\n\nFormula\nMeaning\nDetails\n\n\n\n\ny~x_1\n\\(y=a_0 +a_1*x_1\\)\nSlope+Intercept\n\n\ny~x_1 - 1\n\\(y=a_1*x_1\\)\nSlope, no intercept\n\n\ny~I(x_1^2)\n\\(y=a_0 + a_1*(x_1^2)\\)\nQuadratic effect\n\n\ny~x_1+x_2\n\\(y=a_0+a_1*x_1+a_2*x_2\\)\nMultiple linear regression (two variables)\n\n\ny~x_1:x_2\n\\(y=a_0+a_1*(x_1*x_2)\\)\nInteraction between x1 and x2\n\n\ny~x_1*x_2\n\\(y=a_0+a_1*(x_1*x_2)+a_2*x_1+a_3*x_2\\)\nInteraction and main effects"
+  },
+  {
+    "objectID": "6A-Exercise.html#birdabundance-dataset",
+    "href": "6A-Exercise.html#birdabundance-dataset",
+    "title": "12  Exercise",
+    "section": "12.1 birdabundance dataset",
+    "text": "12.1 birdabundance dataset\n\nlibrary(EcoData)\nlibrary(randomForest)\n## randomForest 4.7-1.1\n## Type rfNews() to see new features/changes/bug fixes.\nset.seed(42)\nindices = sample.int(nrow(birdabundance), 30)\ntrain = birdabundance[-indices,]\ntest = birdabundance[indices,]\n# ABUND is the response variable\n\n\n\n\n\n\n\nWarning\n\n\n\nTask:\n\nFit random forest on train data\nPredict for test data\nCalculate R2\nDo the same with a lm and compare the predictive performance of both models\n\n\n\n\n\nClick here to see the solution\n\n\nrf = randomForest(ABUND~., data = train)\nm = lm(ABUND~., data = train)\n\npred1 = predict(rf, newdata = test)\npred2 = predict(m, newdata = test)\n\ncor(pred1, test$ABUND)**2\n## [1] 0.6596678\ncor(pred2, test$ABUND)**2\n## [1] 0.1983452\n\nRF clearly outperforms the linear regression model!"
+  },
+  {
+    "objectID": "6A-Exercise.html#titantic-dataset",
+    "href": "6A-Exercise.html#titantic-dataset",
+    "title": "12  Exercise",
+    "section": "12.2 titantic dataset",
+    "text": "12.2 titantic dataset\n\nlibrary(EcoData)\nlibrary(randomForest)\nlibrary(dplyr)\n## \n## Attaching package: 'dplyr'\n## The following object is masked from 'package:randomForest':\n## \n##     combine\n## The following objects are masked from 'package:stats':\n## \n##     filter, lag\n## The following objects are masked from 'package:base':\n## \n##     intersect, setdiff, setequal, union\nset.seed(42)\ntitanic_sub = titanic %&gt;% select(survived, age, pclass, sex, fare)\ntitanic_sub = titanic_sub[complete.cases(titanic_sub),]\n\nindices = sample.int(nrow(titanic_sub), 200)\ntrain = titanic_sub[-indices,]\ntest = titanic_sub[indices,]\n\n\n\n\n\n\n\nWarning\n\n\n\nTask:\n\nFit random forest on train data\nPredict for test data\nCalculate Accuracy\nDo the same with a glm (binomial) and compare the predictive performance of both models\nWhat is the most important variable?\n\n\n\n\n\nClick here to see the solution\n\n\nrf = randomForest(as.factor(survived)~., data = train)\nm = glm(survived~., data = train, family = binomial)\n\npred1 = predict(rf, newdata = test)\npred2 = predict(m, newdata = test, type = \"response\")\n\n# pred2 are probabilities, we have to change them to levels\npred2 = ifelse(pred2 &lt; 0.5, 0, 1)\n\nmean(pred1 == test$survived) # RF\n## [1] 0.82\nmean(pred2 == test$survived) # glm\n## [1] 0.765\n\nRF is better than the glm!\n\nvarImpPlot(rf)\n\n\n\n\nSex is the most important variable!"
+  },
+  {
+    "objectID": "6A-Exercise.html#bias-variance-tradeoff",
+    "href": "6A-Exercise.html#bias-variance-tradeoff",
+    "title": "12  Exercise",
+    "section": "12.3 Bias-variance tradeoff",
+    "text": "12.3 Bias-variance tradeoff\nAn important concept of statistics and, in particular, ML is the concept of the bias-variance tradeoff - or in other words, finding the right complexity of the model. So how flexible should our model be so that it generalizes well to other/new observations. Many ML algorithms have complexity parameters (e.g. nodesize or mtry in RF) that control their complexity. Have a look at the following youtube video about the bias-variance tradeoff:\n\nLet’s see how we can control the complexity in the Random Forest algorithm:\n\nlibrary(randomForest)\nset.seed(123)\n\ndata = airquality[complete.cases(airquality),]\n\nrf = randomForest(Ozone~., data = data)\n\npred = predict(rf, data)\nimportance(rf)\n##         IncNodePurity\n## Solar.R      17969.59\n## Wind         31978.36\n## Temp         34176.71\n## Month        10753.73\n## Day          15436.47\n#&gt;         IncNodePurity\n#&gt; Solar.R      17969.59\n#&gt; Wind         31978.36\n#&gt; Temp         34176.71\n#&gt; Month        10753.73\n#&gt; Day          15436.47\ncat(\"RMSE: \", sqrt(mean((data$Ozone - pred)^2)), \"\\n\")\n## RMSE:  9.507848\n#&gt; RMSE:  9.507848\n\nplot(data$Temp, data$Ozone)\nlines(data$Temp[order(data$Temp)], pred[order(data$Temp)], col = \"red\")\n\n\n\n\n\n\n\n\n\n\nWarning\n\n\n\nTry different values for the nodesize and mtry and describe how the predictions depend on these parameters. (randomForest(…, nodesize = …, mtry = …) (the exercise was taken from the ML course book)\n\n\n\n\nClick here to see the solution\n\n\nlibrary(randomForest)\nset.seed(123)\n\ndata = airquality[complete.cases(airquality),]\n\n\nfor(nodesize in c(1, 5, 15, 50, 100)){\n  for(mtry in c(1, 3, 5)){\n    rf = randomForest(Ozone~., data = data, mtry = mtry, nodesize = nodesize)\n    \n    pred = predict(rf, data)\n    \n    plot(data$Temp, data$Ozone, main = paste0(\n        \"mtry: \", mtry, \"    nodesize: \", nodesize,\n        \"\\nRMSE: \", round(sqrt(mean((data$Ozone - pred)^2)), 2)\n      )\n    )\n    lines(data$Temp[order(data$Temp)], pred[order(data$Temp)], col = \"red\")\n  }\n}"
+  },
+  {
+    "objectID": "6A-Exercise.html#ml-pipeline",
+    "href": "6A-Exercise.html#ml-pipeline",
+    "title": "12  Exercise",
+    "section": "12.4 ML pipeline",
+    "text": "12.4 ML pipeline\nIf you want to know more about a typical ML pipeline/workflow, read this chapter from the ML course!"
   }
 ]

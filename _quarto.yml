@@ -47,6 +47,7 @@ book:
   - part: Predictive Modeling
     chapters: 
     - 8-MachineLearning.qmd
+    - 6A-Exercise.qmd
   - part: Experimental Design
     chapters: 
     - 9-Design.qmd
