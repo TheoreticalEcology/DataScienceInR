@@ -141,6 +141,7 @@ lines(data$Temp[order(data$Temp)], pred[order(data$Temp)], col = "red")
 ```
 
 :::{.callout-warning}
+## Task
 
 Try different values for the nodesize and mtry and describe how the predictions depend on these parameters. (`randomForest(..., nodesize = ..., mtry = ...)` ([the exercise was taken from the ML course book](https://theoreticalecology.github.io/machinelearning/fundamental.html#exercises-3))
 
@@ -221,10 +222,10 @@ auc(df$Presence[-train_indices],
     predict(model, newdata = df[-train_indices,],type = "response"))
 ```
 
-The AUC is a common measure of goodness of fit for binary classification. 
-:::{.callout-warning}
+The AUC is a common measure of goodness of fit for binary classification.
 
-Tasks:
+:::{.callout-warning}
+### Tasks
 
 -   Drop some of the highly correlated variables (don't use all of them).
 

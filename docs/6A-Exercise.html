@@ -615,7 +615,7 @@ Click here to see the solution
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Warning
+Task
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -741,10 +741,19 @@ Click here to see the solution
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Warning in roc.default(response, predictor, auc = TRUE, ...): Deprecated use a</span></span>
 <span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="do">## matrix as predictor. Unexpected results may be produced, please pass a numeric</span></span>
 <span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="do">## vector.</span></span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="do">## Area under the curve: 0.7331</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="do">## Area under the curve: 0.7117</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>The AUC is a common measure of goodness of fit for binary classification. :::{.callout-warning}</p>
-<p>Tasks:</p>
+<p>The AUC is a common measure of goodness of fit for binary classification.</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tasks
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <ul>
 <li><p>Drop some of the highly correlated variables (don’t use all of them).</p></li>
 <li><p>Change architecture of the dnn (using the <code>hidden=c(...)</code>argument)</p></li>
@@ -765,12 +774,12 @@ Click here to see the solution
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>predictions <span class="ot">=</span>  <span class="fu">predict</span>(elephant<span class="sc">$</span>predictionData, <span class="at">model =</span> model, <span class="at">type =</span> <span class="st">"response"</span>)</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">as.data.frame</span>(predictions))</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="do">##        layer</span></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="do">## 1 0.04023731</span></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="do">## 2 0.03726866</span></span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="do">## 3 0.03453494</span></span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="do">## 4 0.03324739</span></span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="do">## 5 0.03082072</span></span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="do">## 6 0.02967771</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="do">## 1 0.04989933</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="do">## 2 0.04631172</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="do">## 3 0.04300154</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="do">## 4 0.04146853</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="do">## 5 0.03866339</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="do">## 6 0.03732348</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The advantage of the raster object is that we can directly use it to create a map (the raster object has coordinates for each observation):</p>
 <div class="cell">
@@ -780,7 +789,8 @@ Click here to see the solution
 </div>
 </div>
 <p><strong>Task:</strong> play around with the DNN to improve predictive accuracy. You can check predictive accuracy by looking the AUC of the test data. When improving the predictive power of the model, does the map change?</p>
-<p>:::</p>
+</div>
+</div>
 </section>
 <section id="ml-pipeline" class="level2" data-number="12.5">
 <h2 data-number="12.5" class="anchored" data-anchor-id="ml-pipeline"><span class="header-section-number">12.5</span> ML pipeline</h2>
