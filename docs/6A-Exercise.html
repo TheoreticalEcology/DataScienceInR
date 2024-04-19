@@ -422,7 +422,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#birdabundance-dataset" id="toc-birdabundance-dataset" class="nav-link active" data-scroll-target="#birdabundance-dataset"><span class="header-section-number">12.1</span> birdabundance dataset</a></li>
   <li><a href="#titantic-dataset" id="toc-titantic-dataset" class="nav-link" data-scroll-target="#titantic-dataset"><span class="header-section-number">12.2</span> titantic dataset</a></li>
   <li><a href="#bias-variance-tradeoff" id="toc-bias-variance-tradeoff" class="nav-link" data-scroll-target="#bias-variance-tradeoff"><span class="header-section-number">12.3</span> Bias-variance tradeoff</a></li>
-  <li><a href="#ml-pipeline" id="toc-ml-pipeline" class="nav-link" data-scroll-target="#ml-pipeline"><span class="header-section-number">12.4</span> ML pipeline</a></li>
+  <li><a href="#deep-neural-networks" id="toc-deep-neural-networks" class="nav-link" data-scroll-target="#deep-neural-networks"><span class="header-section-number">12.4</span> Deep Neural Networks</a></li>
+  <li><a href="#ml-pipeline" id="toc-ml-pipeline" class="nav-link" data-scroll-target="#ml-pipeline"><span class="header-section-number">12.5</span> ML pipeline</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/TheoreticalEcology/DataScienceInR/edit/master/6A-Exercise.qmd" class="toc-action">Edit this page</a></p></div></div></nav>
     </div>
@@ -618,7 +619,7 @@ Warning
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Try different values for the nodesize and mtry and describe how the predictions depend on these parameters. (randomForest(…, nodesize = …, mtry = …) (<a href="https://theoreticalecology.github.io/machinelearning/fundamental.html#exercises-3">the exercise was taken from the ML course book</a>)</p>
+<p>Try different values for the nodesize and mtry and describe how the predictions depend on these parameters. (<code>randomForest(..., nodesize = ..., mtry = ...)</code> (<a href="https://theoreticalecology.github.io/machinelearning/fundamental.html#exercises-3">the exercise was taken from the ML course book</a>)</p>
 </div>
 </div>
 <div class="webex-solution">
@@ -694,8 +695,95 @@ Click here to see the solution
 </div>
 </div>
 </section>
-<section id="ml-pipeline" class="level2" data-number="12.4">
-<h2 data-number="12.4" class="anchored" data-anchor-id="ml-pipeline"><span class="header-section-number">12.4</span> ML pipeline</h2>
+<section id="deep-neural-networks" class="level2" data-number="12.4">
+<h2 data-number="12.4" class="anchored" data-anchor-id="deep-neural-networks"><span class="header-section-number">12.4</span> Deep Neural Networks</h2>
+<p>Task description: Predict the spatial distribution of the African elephant. In Ecology we call such model a species distribution model.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(EcoData)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>?elephant</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The object elephant contains two subdatasets</p>
+<ol type="1">
+<li><p>elephant$occurenceData contains presence / absence data as well as bioclim variables (environmental predictors) for the African elephant</p></li>
+<li><p>elephant$predictionData data with environmental predictors for spatial predictions</p></li>
+</ol>
+<p>The environmental data consists of 19 environmental variables, called bio1 through bio19, which are public and globally available bioclimatic variables (see <a href="https://www.worldclim.org/data/bioclim.html" class="uri">https://www.worldclim.org/data/bioclim.html</a> for a description of the variables). For example, bio1 is the mean annual temperature. No understanding of these variables is required for the task, the only difficulty is that many of them are highly correlated because they encode similar information (e.g.&nbsp;there are several temperature variables).</p>
+<p>The goal of this exercise is to fit a deep neural network based on the observed presence / absences, and then make new predictions of habitat suitability in space across Africa based on the fitted model. Thus, our workflow consists of two steps:</p>
+<ol type="1">
+<li>building and optimizing the predictive model, and</li>
+<li>using the predictive model to make predictions on new data and visualizing the results.</li>
+</ol>
+<p>Here an example of how you could do this</p>
+<p><strong>Build predictive model:</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Use subsample of data because too many observations and use the rest of data to validate our model</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>train_indices <span class="ot">=</span> <span class="fu">sample.int</span>(<span class="fu">nrow</span>(elephant<span class="sc">$</span>occurenceData), <span class="dv">500</span>)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>df <span class="ot">=</span> elephant<span class="sc">$</span>occurenceData[train_indices, ]</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(cito)</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>model <span class="ot">=</span> <span class="fu">dnn</span>(Presence<span class="sc">~</span>bio1, </span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">data =</span> df, </span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">loss =</span> <span class="st">'binomial'</span>, </span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>            <span class="at">verbose =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="6A-Exercise_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="6A-Exercise_files/figure-html/unnamed-chunk-7-2.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>To check the predictive power of the model for the observations we have not used to train the model (<code>[-train_indices,]</code>)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pROC)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">auc</span>(df<span class="sc">$</span>Presence[<span class="sc">-</span>train_indices], </span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">predict</span>(model, <span class="at">newdata =</span> df[<span class="sc">-</span>train_indices,],<span class="at">type =</span> <span class="st">"response"</span>))</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Warning in roc.default(response, predictor, auc = TRUE, ...): Deprecated use a</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="do">## matrix as predictor. Unexpected results may be produced, please pass a numeric</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="do">## vector.</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="do">## Area under the curve: 0.7331</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The AUC is a common measure of goodness of fit for binary classification. :::{.callout-warning}</p>
+<p>Tasks:</p>
+<ul>
+<li><p>Drop some of the highly correlated variables (don’t use all of them).</p></li>
+<li><p>Change architecture of the dnn (using the <code>hidden=c(...)</code>argument)</p></li>
+<li><p>Change the number of epochs and the learning rate (see documentation of <code>dnn</code>)</p></li>
+</ul>
+<p><strong>Make new predictions</strong></p>
+<p>The data for making spatial predictions is in elephant$predictionData. This new dataset is not a data.frame but a raster object, which is a special data class for spatial data. You can plot one of the predictors in the following way.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sp)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(raster)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(elephant<span class="sc">$</span>predictionData<span class="sc">$</span>bio1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="6A-Exercise_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>As our new_data object is not a typical data.frame, we are not using the standard predict function for a dnn, which is <code>?predict.citodnn</code>, but the predict function from the raster object (which internally transforms the new_data into a classical data.frame, pass then the data.frame to our model, and then transforms the output back to a raster object). Therefore, the syntax is slightly different to how we previously used <code>predict()</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>predictions <span class="ot">=</span>  <span class="fu">predict</span>(elephant<span class="sc">$</span>predictionData, <span class="at">model =</span> model, <span class="at">type =</span> <span class="st">"response"</span>)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">as.data.frame</span>(predictions))</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="do">##        layer</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="do">## 1 0.04023731</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="do">## 2 0.03726866</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="do">## 3 0.03453494</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="do">## 4 0.03324739</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="do">## 5 0.03082072</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="do">## 6 0.02967771</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The advantage of the raster object is that we can directly use it to create a map (the raster object has coordinates for each observation):</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">spplot</span>(predictions, <span class="at">colorkey =</span> <span class="fu">list</span>(<span class="at">space =</span> <span class="st">"left"</span>) )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="6A-Exercise_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p><strong>Task:</strong> play around with the DNN to improve predictive accuracy. You can check predictive accuracy by looking the AUC of the test data. When improving the predictive power of the model, does the map change?</p>
+<p>:::</p>
+</section>
+<section id="ml-pipeline" class="level2" data-number="12.5">
+<h2 data-number="12.5" class="anchored" data-anchor-id="ml-pipeline"><span class="header-section-number">12.5</span> ML pipeline</h2>
 <p>If you want to know more about a typical ML pipeline/workflow, <a href="https://theoreticalecology.github.io/machinelearning/workflow.html">read this chapter from the ML course!</a></p>
 
 
