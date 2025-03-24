@@ -35,14 +35,14 @@ However, not all randomness comes from sampling from a population.
 A more modern and general concept to describe how data is created is the concept of the "data-generating process", which is pretty self-explanatory: the data-generating process describes how the observations from a random sample arise, including systematic and stochastic processes. It therefore includes the properties of what would classically be called "sampling from a population", but it is broader and includes all other processes that would create systematic and random patterns in our data. In this picture, instead of inferring properties of the population from a sample, we would say we want to infer the properties of the data-generating process from a sample of observations created by this process.
 
 ::: column-margin
-A more modern concept that replaces the "population" is the "data-generating process" The data-generating process describes how the observations from a random sample arise, including systematic and stochastic processes.
+A more modern concept that replaces the "population" is the "data-generating process". The data-generating process describes how the observations from a random sample arise, including systematic and stochastic processes.
 :::
 
 Whether you think in populations or data-generating processes: the important point to remember from this section is that there are two objects that we have to distinguish well: on the one hand, there is our sample. We may describe it in terms of it's properties (mean, minimum, maximum), but the sample is not the final goal. Ultimately, we want to infer the properties of the population / data-generating process from the sample. We will explain how to do this in the next sections, in particular in the section on inferential statistics. Before we come to that, however, let us talk in a bit more detail about the representation of the sample, i.e. the data that we observe.
 
 ## Representation and classes of data
 
-A typical dataset consists of multiple observations of a number of variables (e.g. temperature, precipitation, growth). You can think of this situation as a spreadsheet where the columns are the variables and the rows are the observations. Of course, there are other data structures, but this is the most common one.
+A typical dataset consists of multiple observations of a number of variables (e.g. temperature, precipitation, growth). You can think of this situation as a spreadsheet where the columns are the variables and the rows are the observations. Of course, there are other data structures, but this is the most common one (also known as Tabular Data).
 
 Usually, this data will contain one variable that is our focus, meaning that we want to understand how this variable is influenced by other variables.
 

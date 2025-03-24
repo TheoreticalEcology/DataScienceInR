@@ -11,3 +11,4 @@ MachineLearning_files/execute-results/html.json
 stats.Rnw
 elk_data.RDS
 elk_data.RData
+*.DS_Store

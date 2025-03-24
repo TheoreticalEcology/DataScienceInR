@@ -9,16 +9,16 @@ knitr::opts_chunk$set(cache = TRUE)
 set.seed(123) 
 ```
 
-Material for a first 1-week course in Data Science, taught at the University of Regensburg.
+Material for a introductory 1-week course in Data Science, taught at the University of Regensburg.
 
-Day 1: Getting started, descriptive statistics
+Day 1: Getting started, descriptive statistics, and graphics
 
 Day 2: Hypothesis tests
 
-Day 3: Linear regression (simple, multivariate)
+Day 3: Linear regression (simple, multiple)
 
 Day 4: Generalised linear models (GLM), Multivariate statistics
 
-Day 5: Machine Learning, Data organisation
+Day 5: Machine Learning, Data and project organisation
 
 Link to the UR GRIPS course [here](https://elearning.uni-regensburg.de/course/view.php?id=54766) (requires UR account)
