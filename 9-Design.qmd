@@ -35,6 +35,12 @@ The first item may seem a bit odd, because one would think that we know what we 
 
 The second questions relates to considering how much two measurements would differ if we do them repeatedly (stochastic), and how much measurements could be off systematically (e.g. because a method or instrument is systematically wrong, or because humans show particular biases). The values can often be read of instruments etc.
 
+::: callout-caution
+## Do not categorize continuous variables
+
+A common problem in measuring variables is the inappropriate categorization of continuous variables. The motivation for this is often measurement error. As an example, imagine we have to means to exactly estimate the weight of subjects, and therefore want to write down an estimate. Experimentators then often note down weight as low, middle, high, with the idea that a more exact assessment is not possible. This is almost always bad practice. The reason is the following: even if you have a high measurement error on the variable, the error is NEVER reduced by working with categories. Rather, we increase the error and reduce signal by the categorization. If we want to put people in weight categories, we can still do this later.
+:::
+
 When designing your experiments, try to find the best solution to minimize both problems before going on in the process.
 
 ## Selection of treatments levels for the independent (predictor) variables
