@@ -17,9 +17,10 @@ book:
   - linkedin
   chapters:
   - index.qmd
-  - part: Introduction.qmd
+  - 0-GettingStarted.qmd
+  - part: Data input and manimulation
     chapters:
-    - 1-GettingStarted.qmd
+    - 1A-SettingUpTheRStudionEnvironment.qmd    
     - 1B-PreparingData.qmd
     - 1A-Exercise.qmd
   - part: Descriptive Statistics

@@ -10,26 +10,22 @@ set.seed(42)
 
 # Statistical tests
 
-In this exercise you will:  
-  
- * get to know the most common hypothesis tests 
- * learn how to choose an appropriate test and interpret its result
- * practice these tests in R
- * practice the simulation of data and error rates.
- 
+In this exercise you will:
+
+-   get to know the most common hypothesis tests
+-   learn how to choose an appropriate test and interpret its result
+-   practice these tests in R
+-   practice the simulation of data and error rates.
+
 The first three sections, provide an overview over the most important hypothesis tests, a guideline to select an appropriate test (see decision tree) and the necessary code to apply these tests in R. It is not necessary to read and understand every detail. These explanations are also meant as an advice if you want to select an appropriate hypothesis test after the course. Note that some of the examples use simulated data instead of real observation (all functions that start with r=random, e.g. `rnorm()` or `runif()`). Simulated data is useful, because then we know the true distribution and its true mean.
 
 In the fourth section at the end of this file, you find exercises that you should solve using the explanations above. It may be helpful to use the table of content and/or the search option to find the respective example in the explanations.
-
-
 
 ## Comparison of mean of two or more groups
 
 Many tests aim at showing that variables are significantly different between groups, i.e. have different means/medians. In all these tests, H0 is that there is no difference between the groups. The following decision tree helps to select the appropriate test.
 
-
 [Decision tree for statistical tests](https://elearning.uni-regensburg.de/course/view.php?id=54766#coursecontentcollapse3)
-
 
 **Remark 1**: Tests for 2 groups also work for one group only. Then they test whether the mean is equal to 0.
 
@@ -37,13 +33,11 @@ Many tests aim at showing that variables are significantly different between gro
 
 **Remark 3**: Parametric: assumption of normal distribution. Non-parametric = no assumption for the distribution.
 
-**Remark 4**: Blue text: If a test for more than two groups is significant, post-hoc tests are carried out in a second step. These check all possible comparisons of groups for significant differences by adjusting p-values for multiple testing. 
-
-
+**Remark 4**: Blue text: If a test for more than two groups is significant, post-hoc tests are carried out in a second step. These check all possible comparisons of groups for significant differences by adjusting p-values for multiple testing.
 
 ### Tests for 2 groups
 
-#### t-Test 
+#### t-Test
 
 The t-test can draw conclusions about the mean(s) of 1 or 2 normally-distributed groups.
 
@@ -58,30 +52,37 @@ plot(extra ~ group, data = sleep)
 ## Formula interface
 t.test(extra ~ group, data = sleep)
 ```
-This output tells us, that the difference in means between the 2 groups is not significant(p-value ≥ 0.05, specifically: p-value = 0.07939), provided that our significance level is 0.05.  
-The underlying Null-hypothesis is that the true difference in means is equal to 0. In the last two lines of the output you can see the means of the respective groups. Even though the means seem to be quite different, the difference is not significant, this could be due to the small sample size of only 10 students per group.  
+
+This output tells us, that the difference in means between the 2 groups is not significant(p-value ≥ 0.05, specifically: p-value = 0.07939), provided that our significance level is 0.05.\
+The underlying Null-hypothesis is that the true difference in means is equal to 0. In the last two lines of the output you can see the means of the respective groups. Even though the means seem to be quite different, the difference is not significant, this could be due to the small sample size of only 10 students per group.
 
 Let's look at different settings of the t-test:
 
-
 #### t-test, H0: one group, mean = 0
+
 The Null-hypothesis here is that the mean of the observed group is equal to 0.
+
 ```{r}
 x = rnorm(20, mean = 2)
 t.test(x)
 ```
-p-value < 0.05 means we can reject the Null-hypothesis, i.e. the mean of the observed group is significantly different from 0.
+
+p-value \< 0.05 means we can reject the Null-hypothesis, i.e. the mean of the observed group is significantly different from 0.
 
 #### t-test, H0: two groups, equal means, equal variances
+
 The Null-hypothesis here is that the two observed groups have the same mean and the same variance (specified by the argument *var.equal = T*).
+
 ```{r}
 x1 = rnorm(20, mean = 2)
 x2 = rnorm(20, mean = 3)
 t.test(x1,x2, var.equal = T)
 ```
 
-#### t-test, H0: two groups, equal means, variable variance 
+#### t-test, H0: two groups, equal means, variable variance
+
 The Null-hypothesis here is that the two observed groups have the same mean and variable variances (the default setting of the argument *var.equal = F*).
+
 ```{r}
 x1 = rnorm(20, mean = 2, sd = 1)
 x2 = rnorm(20, mean = 3, sd = 2)
@@ -89,19 +90,18 @@ t.test(x1,x2)
 ```
 
 #### t-test, H0: two groups, equal means, variance can be different (can also set to equal)
+
 The Null-hypothesis here is that the two groups are paired observations (e.g. group 1 before treatment and group 2 after treatment) have the same mean and variable variance (specified by the argument *var.equal = F*, which is also the default setting).
+
 ```{r}
 x1 = rnorm(20, mean = 2)
 x2 = rnorm(20, mean = 3)
 t.test(x1,x2, paired = T, var.equal = F)
 ```
 
-
-
 ### Wilcoxon Rank Sum and Mann-Whitney U Test
 
 In R, there is only one function for both tests together: wilcox.test(). The Wilcoxon rank sum test with (paired = F) is classically called Mann-Whitney U test.
-
 
 #### Mann-Whitney U Test
 
@@ -123,14 +123,11 @@ wilcox.test(x1, x2, paired = T)
 
 ```
 
-
-
-
-### Tests for > 2 groups
+### Tests for \> 2 groups
 
 #### Anova, unpaired
 
-H0 >2 groups, normal distribution, equal variance, equal means, unpaired
+H0 \>2 groups, normal distribution, equal variance, equal means, unpaired
 
 ```{r}
 x = aov(weight ~ group, data = PlantGrowth)
@@ -145,7 +142,7 @@ TukeyHSD(x)
 
 Alternatively, you can also perform several tests each comparing two groups and then correct for multiple testing. This is what we did before.
 
-Pairwise comparisons are often visualized using different letters to significantly different groups: 
+Pairwise comparisons are often visualized using different letters to significantly different groups:
 
 ```{r, message=FALSE}
 # install.packages("multcomp")
@@ -158,16 +155,13 @@ plot(tuc.cld) # draws boxplot + letters from cld function
 par(old.par)
 ```
 
-
-
-
 #### Anova, paired
 
-aov is not good in doing repeated = paired ANOVA. For this task, you should use so-called mixed models! 
+aov is not good in doing repeated = paired ANOVA. For this task, you should use so-called mixed models!
 
 #### Kruskal-Wallis
 
-Non-parametric test for differences in the mean of  >2 groups, unpaired
+Non-parametric test for differences in the mean of \>2 groups, unpaired
 
 ```{r}
 boxplot(Ozone ~ Month, data = airquality)
@@ -176,8 +170,7 @@ kruskal.test(Ozone ~ Month, data = airquality)
 
 #### Friedmann Test
 
-Non-parametric test for differences in the mean of  >2 groups, paired.
-
+Non-parametric test for differences in the mean of \>2 groups, paired.
 
 ```{r}
 wb <- aggregate(warpbreaks$breaks,
@@ -190,11 +183,9 @@ friedman.test(wb$x, wb$w, wb$t)
 # Note that x is the response, w is the group, and t are the blocks that are paired
 ```
 
-
 ## Comparison of variances
 
 H0 in variance tests is always that the variances are equal.
-
 
 ### F-Test for two normally-distributed samples
 
@@ -203,7 +194,6 @@ x <- rnorm(50, mean = 0, sd = 2)
 y <- rnorm(30, mean = 1, sd = 1)
 var.test(x, y)                  # Do x and y have the same variance? - Significantly different
 ```
-
 
 ### Bartlett test for more than two normally-distributed samples
 
@@ -214,15 +204,11 @@ z <- rnorm(30, mean = 1, sd = 1)
 bartlett.test(list(x, y, z))                # Do x, y and z have the same variance? - Not sigificantly different
 ```
 
-
-
-
-## Comparison of probabilities 
+## Comparison of probabilities
 
 Proportions are typically analyzed assuming the binomial model (k/n with probability p)
 
-
-### Exact Binomial Test 
+### Exact Binomial Test
 
 H0 is that the data are binomially distributed with a fixed probability p.
 
@@ -240,7 +226,7 @@ binom.test(682, 682 + 243, p = 3/4)   # The same.
 ## => Data are in agreement with H0
 ```
 
-### Test of Equal or Given Proportions 
+### Test of Equal or Given Proportions
 
 based on Chi-squared-test, H0 is that the data in two groups are binomially distributed with the same probability p.
 
@@ -256,12 +242,9 @@ prop.test(smokers, patients)
 ##  => Data are not in agreement with H0
 ```
 
-
-
 ### Contingency tables
 
 Chi-squared-test for count data, H0 is that the joint distribution of the cell counts in a 2-dimensional contingency table is the product of the row and column marginals
-
 
 ```{r}
 ## From Agresti(2007) p.39
@@ -270,9 +253,6 @@ dimnames(M) <- list(gender = c("F", "M"),
                     party = c("Democrat","Independent", "Republican"))
 chisq.test(M)
 ```
-
-
-
 
 ## Distribution tests
 
@@ -290,12 +270,9 @@ Because many tests require normal distribution, this is the test needed most oft
 shapiro.test(rnorm(100, mean = 5, sd = 3))
 ```
 
+### Kolmogorov-Smirnov Test
 
-
-###  Kolmogorov-Smirnov Test 
-
-For everything else, the KS test can be used. It compares two different distributions, or a distribution against a reference. 
-
+For everything else, the KS test can be used. It compares two different distributions, or a distribution against a reference.
 
 ```{r}
 x <- rnorm(50)
@@ -311,12 +288,7 @@ ks.test(x+2, "pgamma", 3, 2, alternative = "gr")
 
 For an overview on distribution see here: http://www.stat.umn.edu/geyer/old/5101/rlook.html
 
-
-
 ## Other tests
-
-
-
 
 ### Correlation
 
@@ -325,10 +297,10 @@ A test for the significance of a correlation:
 ```{r}
 cor.test(airquality$Ozone, airquality$Wind)
 ```
-Interpretation: Ozone and Wind are significantly negatively correlated with a p-value < 0.05 and a correlation coefficient of -0.6015465.
 
+Interpretation: Ozone and Wind are significantly negatively correlated with a p-value \< 0.05 and a correlation coefficient of -0.6015465.
 
-### Mantel test 
+### Mantel test
 
 The Mantel test compares two distance matrices
 
@@ -342,4 +314,3 @@ env.dist <- vegdist(scale(varechem), "euclid")
 mantel(veg.dist, env.dist)
 mantel(veg.dist, env.dist, method="spear")
 ```
-
