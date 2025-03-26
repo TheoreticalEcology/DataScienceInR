@@ -19,9 +19,9 @@ book:
   - 0-GettingStarted.qmd
   - part: Data input and manimulation
     chapters:
-    - 1A-SettingUpTheRStudionEnvironment.qmd    
+    - 1A-basicOperations.qmd    
     - 1B-PreparingData.qmd
-    - 1A-Exercise.qmd
+    - 1C-Exercise.qmd
   - part: Descriptive Statistics
     chapters:
     - 2A-DescriptiveStatistics.qmd

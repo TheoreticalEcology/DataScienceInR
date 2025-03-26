@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://TheoreticalEcology.github.io/DataScienceInR/index.html</loc>
-    <lastmod>2025-03-25T18:49:44.971Z</lastmod>
+    <lastmod>2025-03-24T16:48:33.334Z</lastmod>
   </url>
   <url>
     <loc>https://TheoreticalEcology.github.io/DataScienceInR/Introduction.html</loc>
@@ -14,11 +14,11 @@
   </url>
   <url>
     <loc>https://TheoreticalEcology.github.io/DataScienceInR/1B-PreparingData.html</loc>
-    <lastmod>2024-04-15T06:01:56.856Z</lastmod>
+    <lastmod>2025-03-26T13:56:03.367Z</lastmod>
   </url>
   <url>
     <loc>https://TheoreticalEcology.github.io/DataScienceInR/1A-Exercise.html</loc>
-    <lastmod>2025-03-25T19:03:47.927Z</lastmod>
+    <lastmod>2025-03-26T13:51:24.653Z</lastmod>
   </url>
   <url>
     <loc>https://TheoreticalEcology.github.io/DataScienceInR/2A-DescriptiveStatistics.html</loc>
@@ -102,10 +102,18 @@
   </url>
   <url>
     <loc>https://TheoreticalEcology.github.io/DataScienceInR/1A-SettingUpTheRStudionEnvironment.html</loc>
-    <lastmod>2025-03-25T18:36:01.804Z</lastmod>
+    <lastmod>2025-03-26T13:54:19.599Z</lastmod>
   </url>
   <url>
     <loc>https://TheoreticalEcology.github.io/DataScienceInR/0-GettingStarted.html</loc>
-    <lastmod>2025-03-25T18:36:01.803Z</lastmod>
+    <lastmod>2025-03-26T13:55:46.161Z</lastmod>
+  </url>
+  <url>
+    <loc>https://TheoreticalEcology.github.io/DataScienceInR/1A-basicOperations.html</loc>
+    <lastmod>2025-03-26T13:55:57.874Z</lastmod>
+  </url>
+  <url>
+    <loc>https://TheoreticalEcology.github.io/DataScienceInR/1C-Exercise.html</loc>
+    <lastmod>2025-03-26T13:56:17.696Z</lastmod>
   </url>
 </urlset>

@@ -1,0 +1,185 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+# Basic data operations with R
+
+## Data manipulation in R
+
+R works like a calculator:
+
+```{r}
+2+2
+5*4
+2^2
+```
+
+We can also use functions that perform specific calculations:
+
+```{r}
+sqrt(4)
+sum(c(2,2))
+```
+
+We can assign values/data to variables:
+
+```{r}
+object.name <- 1
+```
+
+Note that both operators '\<-' or "=" work. Functions in R (e.g. `sum()`, `mean()`, etc.) have arguments that control/change their behavior and are also used to pass the data to the function:
+
+```{r}
+mean(x = c(2, 2))
+```
+
+::: {.callout-tip appearance="default"}
+## Help
+
+A list and description of all arguments can be found in the help of a function (which can be accessed via `?mean` or if you place the cursor on the function and press F1)
+:::
+
+### Data types and data structures
+
+There are four important data types in R (there are more but we focus on these 5):
+
+-   Numeric: 1, 2, 3, 4
+
+-   Logical: TRUE or FALSE
+
+-   Characters: "A", "B",...
+
+-   Factors which are characters but we have to tell R explicitly that they are factors
+
+-   Not a number: NA, NaN (empty value)
+
+Based on the data types we can build data structures which contain either only specific data types or a mixture of data types:
+
+-   Vector: Several values of **one** data type, can be created with the `c` function:
+
+    ```{r}
+    #| eval: false
+    c(5, 3, 5, 6) # numeric vector
+    c(TRUE, TRUE, FALSE, TRUE) # logical vector
+    c("A", "B", "C") # character vector
+    as.factor(c("A", "B", "C")) # factor vector
+    ```
+
+-   Matrix: two-dimensional data structure of **one** data type, can be created with the `matrix` function (we can pass a vector to the matrix function and tell it via arguments how the matrix should be constructed):
+
+    ```{r}
+    matrix(c(1, 2, 3, 4, 5, 6), nrow = 3, ncol = 2)
+    ```
+
+-   Data.frame: Often our data has variables of different types which makes a matrix unsuitable data structure. Data.frames can handle different data types and is organized in columns (one column = one variables) and can be created with the `data.frame` function:
+
+    ```{r}
+    data.frame(A = c(1, 2, 3), B = c("A", "B", "C"), C = c(TRUE, FALSE, FALSE))
+    ```
+
+### Data manipulation
+
+A vector is a one dimensional data structure and we can access the values by using `[ ]`:
+
+```{r}
+vec = c(1, 2, 3, 4, 5)
+vec[1] # access first element
+vec[5] # access last element
+```
+
+A data.frame is a two dimensional data structure. Let's define a data.frame from two vectors:
+
+```{r}
+df = data.frame(
+  x = c(2,2,2,3,2,2,1), #add column named x with 2 elements
+  y = c(4,5,5,4,5,3,5) #add a second column named y
+)
+#Let's see how this looks like:
+df
+```
+
+Access parts of the data.frame:
+
+```{r}
+df[1,2] #get element in row 1, column 1
+df[7,1] #get element in row 7, column 1
+df[2,] #get row 2
+df[,2] #get column 2
+#or use the $ sign to access columns:
+df$y
+df[2:4,1:2] #get rows 2 to 4 and only columns 1 and 2
+```
+
+We can also set filters:
+
+```{r}
+df[df$x > 2,] # show only data where x is larger than 2
+df[df$y == 5,] #show only data where y equals 5
+df[df$y == 5 & df$x == 1,] #show only data where y equals 5 AND x equals 1
+df[df$y == 5 | df$x == 3,] #show data where y equals 5 OR x equals 3
+```
+
+::: {.callout-tip appearance="default" collapse="true"}
+## Logical operators
+
+| Operators | Meaning               |
+|-----------|-----------------------|
+| \<        | Less than             |
+| \<=       | Less than or equal to |
+| \>        | More than             |
+| \>=       | More than or equal to |
+| ==        | Equal to              |
+| !=        | Not equal to          |
+| !a        | Not a                 |
+| a\|b      | a or b                |
+| a & b     | a and b               |
+| isTRUE(a) | Test if a is true     |
+
+: Logical operators in R
+:::
+
+Add an additional column with NA values:
+
+```{r}
+df$NAs = NA #fills up a new column named NAs with all NA values
+df
+```
+
+### Data analysis workflow
+
+This is a simple version of what you're going to learn during this course:
+
+1.  Let's say we measured the size of individuals in two different treatment groups
+
+    ```{r}
+    group1 = c(2,2,2,3,2,2,1.1)
+    group2 = c(4,5,5,4,5,3,5.1) 
+
+    class(group2)
+    ```
+
+2.  Descriptive statistics and visualization
+
+    ```{r}
+    mean(group1)
+    mean(group2)
+
+    boxplot(group1, group2)
+    ```
+
+3.  Testing for differences. Question: Is there a difference between group1 and group2?
+
+    ```{r}
+    t.test(group1, group2)
+    ```
+
+4.  Interpretation of the results. Individuals in Group 2 were larger than those in group 1 (t test, t = -6.62, p \< 0.0001)
+
+In the course we will work a lot with datasets implemented in R or in R packages which can be accessed via their name:
+
+```{r}
+dat = airquality
+head(dat)
+```

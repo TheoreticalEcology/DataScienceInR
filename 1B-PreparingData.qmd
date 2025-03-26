@@ -39,32 +39,45 @@ Variables differ in range and scale:
 
     -   Special case: binary variable (0,1), technically it is also categorial, but with two levels only we call in binary
 
-
 But before we can start with our analysis, we need first to prepare our raw data, which includes:
 
-* Reading in the data
-* Cleaning the data 
-* Subsetting, aggregating or re-structuring your data
+-   Reading in the data
+-   Cleaning the data
+-   Subsetting, aggregating or re-structuring your data
 
+::: {.callout-note appearance="default" collapse="true"}
+## Remarks on data handling
 
+Typically, data will be recorded electronically with a measurement device, or you have to enter it manually using a spreadsheet program, e.g. MS Excel. The best format for data storage is csv (comma separated values) because it is long-term compatibility with all kinds of programs / systems (Excel can export to csv).
+
+After raw data is entered, it should never be manipulated by hand! If you modify data by hand, make a copy and document all changes (additional text file). **Better:** Make changes using a script
+
+Data handling in R:
+
+-   create R script "dataprep.R" or similar and import dataset
+
+-   possibly combine different datasets
+
+-   clean data (remove NAs, impossible values etc.)
+
+-   save as Rdata (derived data)
+:::
 
 ## Importing data
 
-The recommended data format for your raw data is csv. You can export to csv from excel. If you have a csv file in standard (international) format, the command to import is simply 
+The recommended data format for your raw data is csv. You can export to csv from excel. If you have a csv file in standard (international) format, the command to import is simply
 
 ```{r,eval=FALSE}
 dat = read.csv(file = "../data/myData.csv")
 ```
 
-If your csv file departs from standard settings (e.g. you use a , insted of a . as decimal points), you will have to modify the function. Go on the `read.csv` function and press F1 to get the help, which explains all that. Alternatively, you can use the import menu to the top right in RStudio.  
+If your csv file departs from standard settings (e.g. you use a , insted of a . as decimal points), you will have to modify the function. Go on the `read.csv` function and press F1 to get the help, which explains all that. Alternatively, you can use the import menu to the top right in RStudio.
 
 ::: column-margin
-
 You can open the documentation of a R function by pressing F1 while the cursor is on the function name or by runnin `?read.scv`
-
 :::
 
-Here is a video Video of how to read in csv data in R. 
+Here is a video Video of how to read in csv data in R.
 
 {{< video https://youtu.be/qPk0YEKhqB8?t=306 >}}
 
@@ -87,27 +100,22 @@ Data handling in R:
 :::
 
 ::: column-margin
-
-R can also import data from nearly any data source, including xls or xlsx files. [Here](https://www.statmethods.net/input/index.html) and [here](https://r-coder.com/r-data-manipulation/) two websites with import explanations for many different data formats 
-
+R can also import data from nearly any data source, including xls or xlsx files. [Here](https://www.statmethods.net/input/index.html) and [here](https://r-coder.com/r-data-manipulation/) two websites with import explanations for many different data formats
 :::
 
 ## Cleaning the data
 
-Checking / cleaning means that you ensure that you have written in your data correctly, and that you resolve issues with the data. Most real data has some problems, e.g. missing values etc. The basic checks that I would recommend is: 
+Checking / cleaning means that you ensure that you have written in your data correctly, and that you resolve issues with the data. Most real data has some problems, e.g. missing values etc. The basic checks that I would recommend is:
 
-Usually, this will immediately uncover some problems. The exact solution will depend very much on the nature of the data, but common things are typos in the raw data (e.g. letters in a column that should be numeric, etc), but minimally you should 
+Usually, this will immediately uncover some problems. The exact solution will depend very much on the nature of the data, but common things are typos in the raw data (e.g. letters in a column that should be numeric, etc), but minimally you should
 
-* Look at your data (double click in Rstudio, or view() to see if anything is weird)
-* Run `summary()` and `str()` to check range, NAs, and type of all variables (e.g. categorical variables are often imported as character, change them to factors with the `as.factor()` function)
+-   Look at your data (double click in Rstudio, or view() to see if anything is weird)
+-   Run `summary()` and `str()` to check range, NAs, and type of all variables (e.g. categorical variables are often imported as character, change them to factors with the `as.factor()` function)
 
 Here is a video that shows an example of a cleaning process.
 
 {{< video https://youtu.be/mGQvJ3FuNa8 >}}
 
-
 ## Subsetting, aggregating or re-structuring your data
 
 Often, you just want to use a part of your data, or copy, merge or split data. All you need to know is explained here @sec-datamanipulation
-
-
