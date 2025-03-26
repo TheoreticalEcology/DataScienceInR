@@ -4,9 +4,8 @@ project:
 book:
   title: Introduction to Data Science with R
   author:
-    name: Florian Hartig, Lisa Hülsmann, Alexandra Koch, Magdalena Mair, and Maximilian
-      Pichler
-  date: March 2024
+    name: Florian Hartig, Melina de Souza Leite, Lisa Hülsmann, Alexandra Koch, Magdalena Mair, and Maximilian Pichler
+  date: March 2025
   site-url: https://TheoreticalEcology.github.io/DataScienceInR/
   repo-url: https://github.com/TheoreticalEcology/DataScienceInR
   repo-branch: master

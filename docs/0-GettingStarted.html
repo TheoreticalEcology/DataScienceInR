@@ -6,10 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Florian Hartig, Melina de Souza Leite, Lisa Hülsmann, Alexandra Koch, Magdalena Mair, and Maximilian Pichler">
-<meta name="dcterms.date" content="2025-03-01">
 
-<title>Introduction to Data Science with R</title>
+<title>1&nbsp; Getting Started with R – Introduction to Data Science with R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -22,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -32,7 +64,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./0-GettingStarted.html" rel="next">
+<link href="./1A-SettingUpTheRStudionEnvironment.html" rel="next">
+<link href="./index.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -74,13 +107,8 @@ ul.task-list li input[type="checkbox"] {
 
 
 <link rel="stylesheet" href="include/webex.css">
-<meta name="citation_title" content="Introduction to Data Science with R">
-<meta name="citation_author" content="Florian Hartig, Melina de Souza Leite, Lisa Hülsmann, Alexandra Koch, Magdalena Mair, and Maximilian Pichler">
-<meta name="citation_publication_date" content="2025-03-01">
-<meta name="citation_cover_date" content="2025-03-01">
-<meta name="citation_year" content="2025">
-<meta name="citation_online_date" content="2025-03-01">
-<meta name="citation_fulltext_html_url" content="https://TheoreticalEcology.github.io/DataScienceInR/">
+<meta name="citation_title" content="[1]{.chapter-number}&nbsp; [Getting Started with R]{.chapter-title}">
+<meta name="citation_fulltext_html_url" content="https://TheoreticalEcology.github.io/DataScienceInR/0-GettingStarted.html">
 <meta name="citation_language" content="en">
 </head>
 
@@ -93,7 +121,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Preface</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./0-GettingStarted.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Getting Started with R</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -147,13 +175,13 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Preface</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./0-GettingStarted.html" class="sidebar-item-text sidebar-link">
+  <a href="./0-GettingStarted.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Getting Started with R</span></span></a>
   </div>
 </li>
@@ -404,35 +432,24 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#preface" id="toc-preface" class="nav-link active" data-scroll-target="#preface">Preface</a></li>
+  <li><a href="#your-r-system" id="toc-your-r-system" class="nav-link active" data-scroll-target="#your-r-system"><span class="header-section-number">1.1</span> Your R System</a></li>
+  <li><a href="#libraries-that-you-will-need" id="toc-libraries-that-you-will-need" class="nav-link" data-scroll-target="#libraries-that-you-will-need"><span class="header-section-number">1.2</span> Libraries that you will need</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/TheoreticalEcology/DataScienceInR/edit/master/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/TheoreticalEcology/DataScienceInR/edit/master/0-GettingStarted.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Introduction to Data Science with R</h1>
+<h1 class="title"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Getting Started with R</span></h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Florian Hartig, Melina de Souza Leite, Lisa Hülsmann, Alexandra Koch, Magdalena Mair, and Maximilian Pichler </p>
-          </div>
-  </div>
     
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">March 1, 2025</p>
-    </div>
-  </div>
   
     
   </div>
@@ -442,15 +459,55 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="preface" class="level1 unnumbered">
-<h1 class="unnumbered">Preface</h1>
-<p>Material for a introductory 1-week course in Data Science, taught at the University of Regensburg.</p>
-<p>Day 1: Getting started, descriptive statistics, and graphics</p>
-<p>Day 2: Hypothesis tests</p>
-<p>Day 3: Linear regression (simple, multiple)</p>
-<p>Day 4: Generalised linear models (GLM), Multivariate statistics</p>
-<p>Day 5: Machine Learning, Data and project organisation</p>
-<p>Link to the UR GRIPS course <a href="https://elearning.uni-regensburg.de/course/view.php?id=54766">here</a> (requires UR account)</p>
+<section id="your-r-system" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="your-r-system"><span class="header-section-number">1.1</span> Your R System</h2>
+<p>In this course, we work with the combination of R + RStudio.</p>
+<ul>
+<li>R is the calculation engine that performs the computations.</li>
+<li>RStudio is the editor that helps you sending inputs to R and collect outputs.</li>
+</ul>
+<p>Make sure you have a recent version of R + RStudio installed on your computer. If you have never used RStudio, <a href="https://videocampus.sachsen.de/video/First-steps-with-R-and-RStudio/528e5d164219f2d07e32a51736c3f7d1" target="_blank" rel="noopener">here</a> is a good video introducing the basic system and how R and RStudio interact.</p>
+</section>
+<section id="libraries-that-you-will-need" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="libraries-that-you-will-need"><span class="header-section-number">1.2</span> Libraries that you will need</h2>
+<p>The R engine comes with a number of base functions, but one of the great things about R is that you can extend these base functions by libraries that can be programmed by anyone. In principle, you can install libraries from any website or file. In practice, however, most commonly used libraries are distributed via two major repositories. For statistical methods, this is <strong>CRAN</strong>, and for bioinformatics, this is <strong>Bioconductor</strong>.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click to see more on installing libraries in R
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>To install a package from a library, use the command</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(LIBRARY)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Exchange “LIBRARY” with the name of the library you want to install. The default is to search the package in CRAN, but you can specify other repositories or file locations in the function. For Windows / Mac, R should work out of the box. For other UNIX based systems, may also need to install</p>
+<pre><code>build-essential
+gfortran
+libmagick++-dev
+r-base-dev
+cmake</code></pre>
+<p>If you are new to installing packages on Debian / Ubuntu, etc., type the following:</p>
+<pre><code>sudo apt update &amp;&amp; sudo apt install -y --install-recommends build-essential gfortran libmagick++-dev r-base-dev cmake</code></pre>
+</div>
+</div>
+</div>
+<p>In this book, we will often use data sets from the <code class="sourceCode r">EcoData</code> package, which is not on CRAN, but on a GitHub page. To install the package, if you don’t have the devtools package installed already, first install devtools from CRAN by running</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"devtools"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Then install the EcoData package via</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="at">repo =</span> <span class="st">"TheoreticalEcology/EcoData"</span>,</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>                         <span class="at">dependencies =</span> T, <span class="at">build_vignettes =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>For your convenience, the EcoData installation also forces the installation of most of the packages needed in this book, so this may take a while. If you want to load only the EcoData package, or if you encounter problems during the install, set <code>dependencies = F, build_vignettes = F</code>.</p>
 
 
 </section>
@@ -1228,10 +1285,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="./index.html" class="pagination-link" aria-label="Preface">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Preface</span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./0-GettingStarted.html" class="pagination-link" aria-label="Getting Started with R">
-        <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Getting Started with R</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./1A-SettingUpTheRStudionEnvironment.html" class="pagination-link" aria-label="Setting up your R Environment">
+        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Setting up your R Environment</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -1240,4 +1300,4 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/TheoreticalEcology/DataScienceInR/edit/master/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></div></div></footer></body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/TheoreticalEcology/DataScienceInR/edit/master/0-GettingStarted.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></div></div></footer></body></html>

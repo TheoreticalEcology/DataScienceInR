@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://TheoreticalEcology.github.io/DataScienceInR/index.html</loc>
-    <lastmod>2025-03-24T16:12:53.926Z</lastmod>
+    <lastmod>2025-03-25T18:49:44.971Z</lastmod>
   </url>
   <url>
     <loc>https://TheoreticalEcology.github.io/DataScienceInR/Introduction.html</loc>
@@ -18,7 +18,7 @@
   </url>
   <url>
     <loc>https://TheoreticalEcology.github.io/DataScienceInR/1A-Exercise.html</loc>
-    <lastmod>2024-04-15T10:01:14.495Z</lastmod>
+    <lastmod>2025-03-25T19:03:47.927Z</lastmod>
   </url>
   <url>
     <loc>https://TheoreticalEcology.github.io/DataScienceInR/2A-DescriptiveStatistics.html</loc>
@@ -66,7 +66,7 @@
   </url>
   <url>
     <loc>https://TheoreticalEcology.github.io/DataScienceInR/9-Design.html</loc>
-    <lastmod>2024-04-15T06:01:57.300Z</lastmod>
+    <lastmod>2025-03-25T18:36:01.804Z</lastmod>
   </url>
   <url>
     <loc>https://TheoreticalEcology.github.io/DataScienceInR/10-DataWrangling.html</loc>
@@ -99,5 +99,13 @@
   <url>
     <loc>https://TheoreticalEcology.github.io/DataScienceInR/6A-Exercise.html</loc>
     <lastmod>2024-04-19T10:49:43.056Z</lastmod>
+  </url>
+  <url>
+    <loc>https://TheoreticalEcology.github.io/DataScienceInR/1A-SettingUpTheRStudionEnvironment.html</loc>
+    <lastmod>2025-03-25T18:36:01.804Z</lastmod>
+  </url>
+  <url>
+    <loc>https://TheoreticalEcology.github.io/DataScienceInR/0-GettingStarted.html</loc>
+    <lastmod>2025-03-25T18:36:01.803Z</lastmod>
   </url>
 </urlset>

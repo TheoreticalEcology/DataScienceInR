@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.450">
+<meta name="generator" content="quarto-1.5.57">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Introduction to Data Science with R - 6&nbsp; Statistical tests</title>
+<title>7&nbsp; Statistical tests – Introduction to Data Science with R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -22,7 +22,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -33,7 +33,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -83,7 +83,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   "collapse-after": 3,
   "panel-placement": "start",
   "type": "textbox",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -92,6 +98,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
@@ -100,8 +107,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <link rel="stylesheet" href="include/webex.css">
-<meta name="citation_title" content="[6]{.chapter-number}&nbsp; [Statistical tests]{.chapter-title}">
-<meta name="citation_fulltext_html_url" content="https://TheoreticalEcology.github.io/DataScienceInR//3B-HypothesisTests.html">
+<meta name="citation_title" content="[7]{.chapter-number}&nbsp; [Statistical tests]{.chapter-title}">
+<meta name="citation_fulltext_html_url" content="https://TheoreticalEcology.github.io/DataScienceInR/3B-HypothesisTests.html">
 <meta name="citation_language" content="en">
 </head>
 
@@ -111,13 +118,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./3A-NHST.html">Hypothesis Testing</a></li><li class="breadcrumb-item"><a href="./3B-HypothesisTests.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Statistical tests</span></a></li></ol></nav>
-      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-      </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./3A-NHST.html">Hypothesis Testing</a></li><li class="breadcrumb-item"><a href="./3B-HypothesisTests.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Statistical tests</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -126,30 +133,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Introduction to Data Science with R</a> 
         <div class="sidebar-tools-main tools-wide">
-    <a href="https://github.com/TheoreticalEcology/DataScienceInR" rel="" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <a href="https://github.com/TheoreticalEcology/DataScienceInR" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
     <div class="dropdown">
-      <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Share"><i class="bi bi-share"></i></a>
+      <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Share"><i class="bi bi-share"></i></a>
       <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
           <li>
             <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=|url|">
-              <i class="bi bi-bi-twitter pe-1"></i>
+              <i class="bi bi-twitter pe-1"></i>
             Twitter
             </a>
           </li>
           <li>
             <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=|url|">
-              <i class="bi bi-bi-facebook pe-1"></i>
+              <i class="bi bi-facebook pe-1"></i>
             Facebook
             </a>
           </li>
           <li>
             <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=|url|">
-              <i class="bi bi-bi-linkedin pe-1"></i>
+              <i class="bi bi-linkedin pe-1"></i>
             LinkedIn
             </a>
           </li>
@@ -172,25 +179,31 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">Preface</span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./0-GettingStarted.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Getting Started with R</span></span></a>
+  </div>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./Introduction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Introduction</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Data input and manimulation</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./1-GettingStarted.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Getting Started with R</span></span></a>
+  <a href="./1A-SettingUpTheRStudionEnvironment.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Setting up your R Environment</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./1B-PreparingData.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Preparing your data</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Preparing your data</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -203,9 +216,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
  <span class="menu-text">Descriptive Statistics</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -213,13 +226,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./2A-DescriptiveStatistics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Plotting and describing data</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Plotting and describing data</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./2B-SummaryStatistics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Summary statistics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Summary statistics</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -232,9 +245,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
  <span class="menu-text">Hypothesis Testing</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -242,13 +255,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./3A-NHST.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Null Hypothesis Testing</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Null Hypothesis Testing</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./3B-HypothesisTests.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Statistical tests</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Statistical tests</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -261,9 +274,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
  <span class="menu-text">Regression Analysis</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -271,34 +284,46 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./4-SimpleRegression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Simple linear regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Simple linear regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./5-MultipleRegression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Multiple regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Multiple regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./6-GLM.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Generalized linear models</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Generalized linear models</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./4A-Exercise.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Exercises</span></span></a>
+ <span class="menu-text">Exercise - Simple linear regression</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4B-Exercise.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exercise - Multiple Linear Regression</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4C-Exercise.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exercise - GLM</span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
  <span class="menu-text">Multivariate Statistics</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -309,13 +334,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Multivariate Statistics</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./5A-Exercise.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exercise - Multivariate statistics</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
  <span class="menu-text">Predictive Modeling</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -326,13 +357,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Machine Learning</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./6A-Exercise.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Exercise</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
  <span class="menu-text">Experimental Design</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -340,16 +377,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./9-Design.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Design of experiments</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Design of experiments</span></span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true">
  <span class="menu-text">Data Science Skills</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -357,22 +394,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./10-DataWrangling.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Exercise - Data handling</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Exercise - Data handling</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./11-Reproducibility.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Reproducibility and project organization</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Reproducibility and project organization</span></span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="true">
  <span class="menu-text">Appendices</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -388,49 +425,49 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </ul>
     </div>
 </nav>
-<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#comparison-of-mean-of-two-or-more-groups" id="toc-comparison-of-mean-of-two-or-more-groups" class="nav-link active" data-scroll-target="#comparison-of-mean-of-two-or-more-groups"><span class="header-section-number">6.1</span> Comparison of mean of two or more groups</a>
+  <li><a href="#comparison-of-mean-of-two-or-more-groups" id="toc-comparison-of-mean-of-two-or-more-groups" class="nav-link active" data-scroll-target="#comparison-of-mean-of-two-or-more-groups"><span class="header-section-number">7.1</span> Comparison of mean of two or more groups</a>
   <ul class="collapse">
-  <li><a href="#tests-for-2-groups" id="toc-tests-for-2-groups" class="nav-link" data-scroll-target="#tests-for-2-groups"><span class="header-section-number">6.1.1</span> Tests for 2 groups</a></li>
-  <li><a href="#wilcoxon-rank-sum-and-mann-whitney-u-test" id="toc-wilcoxon-rank-sum-and-mann-whitney-u-test" class="nav-link" data-scroll-target="#wilcoxon-rank-sum-and-mann-whitney-u-test"><span class="header-section-number">6.1.2</span> Wilcoxon Rank Sum and Mann-Whitney U Test</a></li>
-  <li><a href="#tests-for-2-groups-1" id="toc-tests-for-2-groups-1" class="nav-link" data-scroll-target="#tests-for-2-groups-1"><span class="header-section-number">6.1.3</span> Tests for &gt; 2 groups</a></li>
+  <li><a href="#tests-for-2-groups" id="toc-tests-for-2-groups" class="nav-link" data-scroll-target="#tests-for-2-groups"><span class="header-section-number">7.1.1</span> Tests for 2 groups</a></li>
+  <li><a href="#wilcoxon-rank-sum-and-mann-whitney-u-test" id="toc-wilcoxon-rank-sum-and-mann-whitney-u-test" class="nav-link" data-scroll-target="#wilcoxon-rank-sum-and-mann-whitney-u-test"><span class="header-section-number">7.1.2</span> Wilcoxon Rank Sum and Mann-Whitney U Test</a></li>
+  <li><a href="#tests-for-2-groups-1" id="toc-tests-for-2-groups-1" class="nav-link" data-scroll-target="#tests-for-2-groups-1"><span class="header-section-number">7.1.3</span> Tests for &gt; 2 groups</a></li>
   </ul></li>
-  <li><a href="#comparison-of-variances" id="toc-comparison-of-variances" class="nav-link" data-scroll-target="#comparison-of-variances"><span class="header-section-number">6.2</span> Comparison of variances</a>
+  <li><a href="#comparison-of-variances" id="toc-comparison-of-variances" class="nav-link" data-scroll-target="#comparison-of-variances"><span class="header-section-number">7.2</span> Comparison of variances</a>
   <ul class="collapse">
-  <li><a href="#f-test-for-two-normally-distributed-samples" id="toc-f-test-for-two-normally-distributed-samples" class="nav-link" data-scroll-target="#f-test-for-two-normally-distributed-samples"><span class="header-section-number">6.2.1</span> F-Test for two normally-distributed samples</a></li>
-  <li><a href="#bartlett-test-for-more-than-two-normally-distributed-samples" id="toc-bartlett-test-for-more-than-two-normally-distributed-samples" class="nav-link" data-scroll-target="#bartlett-test-for-more-than-two-normally-distributed-samples"><span class="header-section-number">6.2.2</span> Bartlett test for more than two normally-distributed samples</a></li>
+  <li><a href="#f-test-for-two-normally-distributed-samples" id="toc-f-test-for-two-normally-distributed-samples" class="nav-link" data-scroll-target="#f-test-for-two-normally-distributed-samples"><span class="header-section-number">7.2.1</span> F-Test for two normally-distributed samples</a></li>
+  <li><a href="#bartlett-test-for-more-than-two-normally-distributed-samples" id="toc-bartlett-test-for-more-than-two-normally-distributed-samples" class="nav-link" data-scroll-target="#bartlett-test-for-more-than-two-normally-distributed-samples"><span class="header-section-number">7.2.2</span> Bartlett test for more than two normally-distributed samples</a></li>
   </ul></li>
-  <li><a href="#comparison-of-probabilities" id="toc-comparison-of-probabilities" class="nav-link" data-scroll-target="#comparison-of-probabilities"><span class="header-section-number">6.3</span> Comparison of probabilities</a>
+  <li><a href="#comparison-of-probabilities" id="toc-comparison-of-probabilities" class="nav-link" data-scroll-target="#comparison-of-probabilities"><span class="header-section-number">7.3</span> Comparison of probabilities</a>
   <ul class="collapse">
-  <li><a href="#exact-binomial-test" id="toc-exact-binomial-test" class="nav-link" data-scroll-target="#exact-binomial-test"><span class="header-section-number">6.3.1</span> Exact Binomial Test</a></li>
-  <li><a href="#test-of-equal-or-given-proportions" id="toc-test-of-equal-or-given-proportions" class="nav-link" data-scroll-target="#test-of-equal-or-given-proportions"><span class="header-section-number">6.3.2</span> Test of Equal or Given Proportions</a></li>
-  <li><a href="#contingency-tables" id="toc-contingency-tables" class="nav-link" data-scroll-target="#contingency-tables"><span class="header-section-number">6.3.3</span> Contingency tables</a></li>
+  <li><a href="#exact-binomial-test" id="toc-exact-binomial-test" class="nav-link" data-scroll-target="#exact-binomial-test"><span class="header-section-number">7.3.1</span> Exact Binomial Test</a></li>
+  <li><a href="#test-of-equal-or-given-proportions" id="toc-test-of-equal-or-given-proportions" class="nav-link" data-scroll-target="#test-of-equal-or-given-proportions"><span class="header-section-number">7.3.2</span> Test of Equal or Given Proportions</a></li>
+  <li><a href="#contingency-tables" id="toc-contingency-tables" class="nav-link" data-scroll-target="#contingency-tables"><span class="header-section-number">7.3.3</span> Contingency tables</a></li>
   </ul></li>
-  <li><a href="#distribution-tests" id="toc-distribution-tests" class="nav-link" data-scroll-target="#distribution-tests"><span class="header-section-number">6.4</span> Distribution tests</a>
+  <li><a href="#distribution-tests" id="toc-distribution-tests" class="nav-link" data-scroll-target="#distribution-tests"><span class="header-section-number">7.4</span> Distribution tests</a>
   <ul class="collapse">
-  <li><a href="#shapiro-wilk-normality-test" id="toc-shapiro-wilk-normality-test" class="nav-link" data-scroll-target="#shapiro-wilk-normality-test"><span class="header-section-number">6.4.1</span> Shapiro-Wilk Normality Test</a></li>
-  <li><a href="#kolmogorov-smirnov-test" id="toc-kolmogorov-smirnov-test" class="nav-link" data-scroll-target="#kolmogorov-smirnov-test"><span class="header-section-number">6.4.2</span> Kolmogorov-Smirnov Test</a></li>
+  <li><a href="#shapiro-wilk-normality-test" id="toc-shapiro-wilk-normality-test" class="nav-link" data-scroll-target="#shapiro-wilk-normality-test"><span class="header-section-number">7.4.1</span> Shapiro-Wilk Normality Test</a></li>
+  <li><a href="#kolmogorov-smirnov-test" id="toc-kolmogorov-smirnov-test" class="nav-link" data-scroll-target="#kolmogorov-smirnov-test"><span class="header-section-number">7.4.2</span> Kolmogorov-Smirnov Test</a></li>
   </ul></li>
-  <li><a href="#other-tests" id="toc-other-tests" class="nav-link" data-scroll-target="#other-tests"><span class="header-section-number">6.5</span> Other tests</a>
+  <li><a href="#other-tests" id="toc-other-tests" class="nav-link" data-scroll-target="#other-tests"><span class="header-section-number">7.5</span> Other tests</a>
   <ul class="collapse">
-  <li><a href="#correlation" id="toc-correlation" class="nav-link" data-scroll-target="#correlation"><span class="header-section-number">6.5.1</span> Correlation</a></li>
-  <li><a href="#mantel-test" id="toc-mantel-test" class="nav-link" data-scroll-target="#mantel-test"><span class="header-section-number">6.5.2</span> Mantel test</a></li>
+  <li><a href="#correlation" id="toc-correlation" class="nav-link" data-scroll-target="#correlation"><span class="header-section-number">7.5.1</span> Correlation</a></li>
+  <li><a href="#mantel-test" id="toc-mantel-test" class="nav-link" data-scroll-target="#mantel-test"><span class="header-section-number">7.5.2</span> Mantel test</a></li>
   </ul></li>
   </ul>
-<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/TheoreticalEcology/DataScienceInR/edit/master/3B-HypothesisTests.qmd" class="toc-action">Edit this page</a></p></div></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/TheoreticalEcology/DataScienceInR/edit/master/3B-HypothesisTests.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./3A-NHST.html">Hypothesis Testing</a></li><li class="breadcrumb-item"><a href="./3B-HypothesisTests.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Statistical tests</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Statistical tests</span></h1>
+<h1 class="title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Statistical tests</span></h1>
 </div>
 
 
@@ -443,7 +480,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
   
 
+
 </header>
+
 
 <p>In this exercise you will:</p>
 <ul>
@@ -454,24 +493,28 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 <p>The first three sections, provide an overview over the most important hypothesis tests, a guideline to select an appropriate test (see decision tree) and the necessary code to apply these tests in R. It is not necessary to read and understand every detail. These explanations are also meant as an advice if you want to select an appropriate hypothesis test after the course. Note that some of the examples use simulated data instead of real observation (all functions that start with r=random, e.g.&nbsp;<code>rnorm()</code> or <code>runif()</code>). Simulated data is useful, because then we know the true distribution and its true mean.</p>
 <p>In the fourth section at the end of this file, you find exercises that you should solve using the explanations above. It may be helpful to use the table of content and/or the search option to find the respective example in the explanations.</p>
-<section id="comparison-of-mean-of-two-or-more-groups" class="level2" data-number="6.1">
-<h2 data-number="6.1" class="anchored" data-anchor-id="comparison-of-mean-of-two-or-more-groups"><span class="header-section-number">6.1</span> Comparison of mean of two or more groups</h2>
+<section id="comparison-of-mean-of-two-or-more-groups" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="comparison-of-mean-of-two-or-more-groups"><span class="header-section-number">7.1</span> Comparison of mean of two or more groups</h2>
 <p>Many tests aim at showing that variables are significantly different between groups, i.e.&nbsp;have different means/medians. In all these tests, H0 is that there is no difference between the groups. The following decision tree helps to select the appropriate test.</p>
 <p><a href="https://elearning.uni-regensburg.de/course/view.php?id=54766#coursecontentcollapse3">Decision tree for statistical tests</a></p>
 <p><strong>Remark 1</strong>: Tests for 2 groups also work for one group only. Then they test whether the mean is equal to 0.</p>
 <p><strong>Remark 2</strong>: Paired / unpaired: this means that observations in the groups are linked to each other. An example for unpaired data is a typical experiment with 10 observations in the control group and 10 observations in the treatment group. An example for paired data is when the same individuals were exposed to the treatment and to the control. The observations of each individual would belong together (pairs).</p>
 <p><strong>Remark 3</strong>: Parametric: assumption of normal distribution. Non-parametric = no assumption for the distribution.</p>
 <p><strong>Remark 4</strong>: Blue text: If a test for more than two groups is significant, post-hoc tests are carried out in a second step. These check all possible comparisons of groups for significant differences by adjusting p-values for multiple testing.</p>
-<section id="tests-for-2-groups" class="level3" data-number="6.1.1">
-<h3 data-number="6.1.1" class="anchored" data-anchor-id="tests-for-2-groups"><span class="header-section-number">6.1.1</span> Tests for 2 groups</h3>
-<section id="t-test" class="level4" data-number="6.1.1.1">
-<h4 data-number="6.1.1.1" class="anchored" data-anchor-id="t-test"><span class="header-section-number">6.1.1.1</span> t-Test</h4>
+<section id="tests-for-2-groups" class="level3" data-number="7.1.1">
+<h3 data-number="7.1.1" class="anchored" data-anchor-id="tests-for-2-groups"><span class="header-section-number">7.1.1</span> Tests for 2 groups</h3>
+<section id="t-test" class="level4" data-number="7.1.1.1">
+<h4 data-number="7.1.1.1" class="anchored" data-anchor-id="t-test"><span class="header-section-number">7.1.1.1</span> t-Test</h4>
 <p>The t-test can draw conclusions about the mean(s) of 1 or 2 normally-distributed groups.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Classical example: Student's sleep data</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(extra <span class="sc">~</span> group, <span class="at">data =</span> sleep)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="3B-HypothesisTests_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="3B-HypothesisTests_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p><strong>Be aware</strong>: The line in the box plot does not show the mean but the median.</p>
@@ -494,8 +537,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 The underlying Null-hypothesis is that the true difference in means is equal to 0. In the last two lines of the output you can see the means of the respective groups. Even though the means seem to be quite different, the difference is not significant, this could be due to the small sample size of only 10 students per group.</p>
 <p>Let’s look at different settings of the t-test:</p>
 </section>
-<section id="t-test-h0-one-group-mean-0" class="level4" data-number="6.1.1.2">
-<h4 data-number="6.1.1.2" class="anchored" data-anchor-id="t-test-h0-one-group-mean-0"><span class="header-section-number">6.1.1.2</span> t-test, H0: one group, mean = 0</h4>
+<section id="t-test-h0-one-group-mean-0" class="level4" data-number="7.1.1.2">
+<h4 data-number="7.1.1.2" class="anchored" data-anchor-id="t-test-h0-one-group-mean-0"><span class="header-section-number">7.1.1.2</span> t-test, H0: one group, mean = 0</h4>
 <p>The Null-hypothesis here is that the mean of the observed group is equal to 0.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="fu">rnorm</span>(<span class="dv">20</span>, <span class="at">mean =</span> <span class="dv">2</span>)</span>
@@ -514,8 +557,8 @@ The underlying Null-hypothesis is that the true difference in means is equal to 
 </div>
 <p>p-value &lt; 0.05 means we can reject the Null-hypothesis, i.e.&nbsp;the mean of the observed group is significantly different from 0.</p>
 </section>
-<section id="t-test-h0-two-groups-equal-means-equal-variances" class="level4" data-number="6.1.1.3">
-<h4 data-number="6.1.1.3" class="anchored" data-anchor-id="t-test-h0-two-groups-equal-means-equal-variances"><span class="header-section-number">6.1.1.3</span> t-test, H0: two groups, equal means, equal variances</h4>
+<section id="t-test-h0-two-groups-equal-means-equal-variances" class="level4" data-number="7.1.1.3">
+<h4 data-number="7.1.1.3" class="anchored" data-anchor-id="t-test-h0-two-groups-equal-means-equal-variances"><span class="header-section-number">7.1.1.3</span> t-test, H0: two groups, equal means, equal variances</h4>
 <p>The Null-hypothesis here is that the two observed groups have the same mean and the same variance (specified by the argument <em>var.equal = T</em>).</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>x1 <span class="ot">=</span> <span class="fu">rnorm</span>(<span class="dv">20</span>, <span class="at">mean =</span> <span class="dv">2</span>)</span>
@@ -534,8 +577,8 @@ The underlying Null-hypothesis is that the true difference in means is equal to 
 <span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="do">##  1.729008  2.999089</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="t-test-h0-two-groups-equal-means-variable-variance" class="level4" data-number="6.1.1.4">
-<h4 data-number="6.1.1.4" class="anchored" data-anchor-id="t-test-h0-two-groups-equal-means-variable-variance"><span class="header-section-number">6.1.1.4</span> t-test, H0: two groups, equal means, variable variance</h4>
+<section id="t-test-h0-two-groups-equal-means-variable-variance" class="level4" data-number="7.1.1.4">
+<h4 data-number="7.1.1.4" class="anchored" data-anchor-id="t-test-h0-two-groups-equal-means-variable-variance"><span class="header-section-number">7.1.1.4</span> t-test, H0: two groups, equal means, variable variance</h4>
 <p>The Null-hypothesis here is that the two observed groups have the same mean and variable variances (the default setting of the argument <em>var.equal = F</em>).</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>x1 <span class="ot">=</span> <span class="fu">rnorm</span>(<span class="dv">20</span>, <span class="at">mean =</span> <span class="dv">2</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
@@ -554,8 +597,8 @@ The underlying Null-hypothesis is that the true difference in means is equal to 
 <span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="do">##  2.160601  3.163912</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="t-test-h0-two-groups-equal-means-variance-can-be-different-can-also-set-to-equal" class="level4" data-number="6.1.1.5">
-<h4 data-number="6.1.1.5" class="anchored" data-anchor-id="t-test-h0-two-groups-equal-means-variance-can-be-different-can-also-set-to-equal"><span class="header-section-number">6.1.1.5</span> t-test, H0: two groups, equal means, variance can be different (can also set to equal)</h4>
+<section id="t-test-h0-two-groups-equal-means-variance-can-be-different-can-also-set-to-equal" class="level4" data-number="7.1.1.5">
+<h4 data-number="7.1.1.5" class="anchored" data-anchor-id="t-test-h0-two-groups-equal-means-variance-can-be-different-can-also-set-to-equal"><span class="header-section-number">7.1.1.5</span> t-test, H0: two groups, equal means, variance can be different (can also set to equal)</h4>
 <p>The Null-hypothesis here is that the two groups are paired observations (e.g.&nbsp;group 1 before treatment and group 2 after treatment) have the same mean and variable variance (specified by the argument <em>var.equal = F</em>, which is also the default setting).</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>x1 <span class="ot">=</span> <span class="fu">rnorm</span>(<span class="dv">20</span>, <span class="at">mean =</span> <span class="dv">2</span>)</span>
@@ -575,11 +618,11 @@ The underlying Null-hypothesis is that the true difference in means is equal to 
 </div>
 </section>
 </section>
-<section id="wilcoxon-rank-sum-and-mann-whitney-u-test" class="level3" data-number="6.1.2">
-<h3 data-number="6.1.2" class="anchored" data-anchor-id="wilcoxon-rank-sum-and-mann-whitney-u-test"><span class="header-section-number">6.1.2</span> Wilcoxon Rank Sum and Mann-Whitney U Test</h3>
+<section id="wilcoxon-rank-sum-and-mann-whitney-u-test" class="level3" data-number="7.1.2">
+<h3 data-number="7.1.2" class="anchored" data-anchor-id="wilcoxon-rank-sum-and-mann-whitney-u-test"><span class="header-section-number">7.1.2</span> Wilcoxon Rank Sum and Mann-Whitney U Test</h3>
 <p>In R, there is only one function for both tests together: wilcox.test(). The Wilcoxon rank sum test with (paired = F) is classically called Mann-Whitney U test.</p>
-<section id="mann-whitney-u-test" class="level4" data-number="6.1.2.1">
-<h4 data-number="6.1.2.1" class="anchored" data-anchor-id="mann-whitney-u-test"><span class="header-section-number">6.1.2.1</span> Mann-Whitney U Test</h4>
+<section id="mann-whitney-u-test" class="level4" data-number="7.1.2.1">
+<h4 data-number="7.1.2.1" class="anchored" data-anchor-id="mann-whitney-u-test"><span class="header-section-number">7.1.2.1</span> Mann-Whitney U Test</h4>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>x1 <span class="ot">=</span> <span class="fu">rnorm</span>(<span class="dv">20</span>, <span class="at">mean =</span> <span class="dv">2</span>)</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>x2 <span class="ot">=</span> <span class="fu">rlnorm</span>(<span class="dv">20</span>, <span class="at">mean =</span> <span class="dv">3</span>)</span>
@@ -593,8 +636,8 @@ The underlying Null-hypothesis is that the true difference in means is equal to 
 <span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="do">## alternative hypothesis: true location shift is not equal to 0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="wilcoxon-signed-rank-test" class="level4" data-number="6.1.2.2">
-<h4 data-number="6.1.2.2" class="anchored" data-anchor-id="wilcoxon-signed-rank-test"><span class="header-section-number">6.1.2.2</span> Wilcoxon signed rank test</h4>
+<section id="wilcoxon-signed-rank-test" class="level4" data-number="7.1.2.2">
+<h4 data-number="7.1.2.2" class="anchored" data-anchor-id="wilcoxon-signed-rank-test"><span class="header-section-number">7.1.2.2</span> Wilcoxon signed rank test</h4>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>x1 <span class="ot">=</span> <span class="fu">rnorm</span>(<span class="dv">20</span>, <span class="at">mean =</span> <span class="dv">2</span>)</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>x2 <span class="ot">=</span> <span class="fu">rlnorm</span>(<span class="dv">20</span>, <span class="at">mean =</span> <span class="dv">3</span>)</span>
@@ -609,10 +652,10 @@ The underlying Null-hypothesis is that the true difference in means is equal to 
 </div>
 </section>
 </section>
-<section id="tests-for-2-groups-1" class="level3" data-number="6.1.3">
-<h3 data-number="6.1.3" class="anchored" data-anchor-id="tests-for-2-groups-1"><span class="header-section-number">6.1.3</span> Tests for &gt; 2 groups</h3>
-<section id="anova-unpaired" class="level4" data-number="6.1.3.1">
-<h4 data-number="6.1.3.1" class="anchored" data-anchor-id="anova-unpaired"><span class="header-section-number">6.1.3.1</span> Anova, unpaired</h4>
+<section id="tests-for-2-groups-1" class="level3" data-number="7.1.3">
+<h3 data-number="7.1.3" class="anchored" data-anchor-id="tests-for-2-groups-1"><span class="header-section-number">7.1.3</span> Tests for &gt; 2 groups</h3>
+<section id="anova-unpaired" class="level4" data-number="7.1.3.1">
+<h4 data-number="7.1.3.1" class="anchored" data-anchor-id="anova-unpaired"><span class="header-section-number">7.1.3.1</span> Anova, unpaired</h4>
 <p>H0 &gt;2 groups, normal distribution, equal variance, equal means, unpaired</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="fu">aov</span>(weight <span class="sc">~</span> group, <span class="at">data =</span> PlantGrowth)</span>
@@ -648,22 +691,30 @@ The underlying Null-hypothesis is that the true difference in means is equal to 
 <span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>old.par <span class="ot">=</span> <span class="fu">par</span>(<span class="at">mai =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="fl">1.25</span>, <span class="dv">1</span>), <span class="at">no.readonly =</span> T)</span>
 <span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(tuc.cld) <span class="co"># draws boxplot + letters from cld function</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="3B-HypothesisTests_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="3B-HypothesisTests_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(old.par)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="anova-paired" class="level4" data-number="6.1.3.2">
-<h4 data-number="6.1.3.2" class="anchored" data-anchor-id="anova-paired"><span class="header-section-number">6.1.3.2</span> Anova, paired</h4>
+<section id="anova-paired" class="level4" data-number="7.1.3.2">
+<h4 data-number="7.1.3.2" class="anchored" data-anchor-id="anova-paired"><span class="header-section-number">7.1.3.2</span> Anova, paired</h4>
 <p>aov is not good in doing repeated = paired ANOVA. For this task, you should use so-called mixed models!</p>
 </section>
-<section id="kruskal-wallis" class="level4" data-number="6.1.3.3">
-<h4 data-number="6.1.3.3" class="anchored" data-anchor-id="kruskal-wallis"><span class="header-section-number">6.1.3.3</span> Kruskal-Wallis</h4>
+<section id="kruskal-wallis" class="level4" data-number="7.1.3.3">
+<h4 data-number="7.1.3.3" class="anchored" data-anchor-id="kruskal-wallis"><span class="header-section-number">7.1.3.3</span> Kruskal-Wallis</h4>
 <p>Non-parametric test for differences in the mean of &gt;2 groups, unpaired</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(Ozone <span class="sc">~</span> Month, <span class="at">data =</span> airquality)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="3B-HypothesisTests_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="3B-HypothesisTests_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">kruskal.test</span>(Ozone <span class="sc">~</span> Month, <span class="at">data =</span> airquality)</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
@@ -673,8 +724,8 @@ The underlying Null-hypothesis is that the true difference in means is equal to 
 <span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="do">## Kruskal-Wallis chi-squared = 29.267, df = 4, p-value = 6.901e-06</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="friedmann-test" class="level4" data-number="6.1.3.4">
-<h4 data-number="6.1.3.4" class="anchored" data-anchor-id="friedmann-test"><span class="header-section-number">6.1.3.4</span> Friedmann Test</h4>
+<section id="friedmann-test" class="level4" data-number="7.1.3.4">
+<h4 data-number="7.1.3.4" class="anchored" data-anchor-id="friedmann-test"><span class="header-section-number">7.1.3.4</span> Friedmann Test</h4>
 <p>Non-parametric test for differences in the mean of &gt;2 groups, paired.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>wb <span class="ot">&lt;-</span> <span class="fu">aggregate</span>(warpbreaks<span class="sc">$</span>breaks,</span>
@@ -694,11 +745,11 @@ The underlying Null-hypothesis is that the true difference in means is equal to 
 </section>
 </section>
 </section>
-<section id="comparison-of-variances" class="level2" data-number="6.2">
-<h2 data-number="6.2" class="anchored" data-anchor-id="comparison-of-variances"><span class="header-section-number">6.2</span> Comparison of variances</h2>
+<section id="comparison-of-variances" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="comparison-of-variances"><span class="header-section-number">7.2</span> Comparison of variances</h2>
 <p>H0 in variance tests is always that the variances are equal.</p>
-<section id="f-test-for-two-normally-distributed-samples" class="level3" data-number="6.2.1">
-<h3 data-number="6.2.1" class="anchored" data-anchor-id="f-test-for-two-normally-distributed-samples"><span class="header-section-number">6.2.1</span> F-Test for two normally-distributed samples</h3>
+<section id="f-test-for-two-normally-distributed-samples" class="level3" data-number="7.2.1">
+<h3 data-number="7.2.1" class="anchored" data-anchor-id="f-test-for-two-normally-distributed-samples"><span class="header-section-number">7.2.1</span> F-Test for two normally-distributed samples</h3>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">50</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">2</span>)</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">30</span>, <span class="at">mean =</span> <span class="dv">1</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
@@ -716,8 +767,8 @@ The underlying Null-hypothesis is that the true difference in means is equal to 
 <span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a><span class="do">##           6.937749</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="bartlett-test-for-more-than-two-normally-distributed-samples" class="level3" data-number="6.2.2">
-<h3 data-number="6.2.2" class="anchored" data-anchor-id="bartlett-test-for-more-than-two-normally-distributed-samples"><span class="header-section-number">6.2.2</span> Bartlett test for more than two normally-distributed samples</h3>
+<section id="bartlett-test-for-more-than-two-normally-distributed-samples" class="level3" data-number="7.2.2">
+<h3 data-number="7.2.2" class="anchored" data-anchor-id="bartlett-test-for-more-than-two-normally-distributed-samples"><span class="header-section-number">7.2.2</span> Bartlett test for more than two normally-distributed samples</h3>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">50</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">30</span>, <span class="at">mean =</span> <span class="dv">1</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
@@ -731,11 +782,11 @@ The underlying Null-hypothesis is that the true difference in means is equal to 
 </div>
 </section>
 </section>
-<section id="comparison-of-probabilities" class="level2" data-number="6.3">
-<h2 data-number="6.3" class="anchored" data-anchor-id="comparison-of-probabilities"><span class="header-section-number">6.3</span> Comparison of probabilities</h2>
+<section id="comparison-of-probabilities" class="level2" data-number="7.3">
+<h2 data-number="7.3" class="anchored" data-anchor-id="comparison-of-probabilities"><span class="header-section-number">7.3</span> Comparison of probabilities</h2>
 <p>Proportions are typically analyzed assuming the binomial model (k/n with probability p)</p>
-<section id="exact-binomial-test" class="level3" data-number="6.3.1">
-<h3 data-number="6.3.1" class="anchored" data-anchor-id="exact-binomial-test"><span class="header-section-number">6.3.1</span> Exact Binomial Test</h3>
+<section id="exact-binomial-test" class="level3" data-number="7.3.1">
+<h3 data-number="7.3.1" class="anchored" data-anchor-id="exact-binomial-test"><span class="header-section-number">7.3.1</span> Exact Binomial Test</h3>
 <p>H0 is that the data are binomially distributed with a fixed probability p.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Conover (1971), p. 97f.</span></span>
@@ -773,8 +824,8 @@ The underlying Null-hypothesis is that the true difference in means is equal to 
 <span id="cb18-33"><a href="#cb18-33" aria-hidden="true" tabindex="-1"></a><span class="do">## =&gt; Data are in agreement with H0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="test-of-equal-or-given-proportions" class="level3" data-number="6.3.2">
-<h3 data-number="6.3.2" class="anchored" data-anchor-id="test-of-equal-or-given-proportions"><span class="header-section-number">6.3.2</span> Test of Equal or Given Proportions</h3>
+<section id="test-of-equal-or-given-proportions" class="level3" data-number="7.3.2">
+<h3 data-number="7.3.2" class="anchored" data-anchor-id="test-of-equal-or-given-proportions"><span class="header-section-number">7.3.2</span> Test of Equal or Given Proportions</h3>
 <p>based on Chi-squared-test, H0 is that the data in two groups are binomially distributed with the same probability p.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Data from Fleiss (1981), p. 139.</span></span>
@@ -797,8 +848,8 @@ The underlying Null-hypothesis is that the true difference in means is equal to 
 <span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a><span class="do">##  =&gt; Data are not in agreement with H0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="contingency-tables" class="level3" data-number="6.3.3">
-<h3 data-number="6.3.3" class="anchored" data-anchor-id="contingency-tables"><span class="header-section-number">6.3.3</span> Contingency tables</h3>
+<section id="contingency-tables" class="level3" data-number="7.3.3">
+<h3 data-number="7.3.3" class="anchored" data-anchor-id="contingency-tables"><span class="header-section-number">7.3.3</span> Contingency tables</h3>
 <p>Chi-squared-test for count data, H0 is that the joint distribution of the cell counts in a 2-dimensional contingency table is the product of the row and column marginals</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="do">## From Agresti(2007) p.39</span></span>
@@ -814,13 +865,13 @@ The underlying Null-hypothesis is that the true difference in means is equal to 
 </div>
 </section>
 </section>
-<section id="distribution-tests" class="level2" data-number="6.4">
-<h2 data-number="6.4" class="anchored" data-anchor-id="distribution-tests"><span class="header-section-number">6.4</span> Distribution tests</h2>
+<section id="distribution-tests" class="level2" data-number="7.4">
+<h2 data-number="7.4" class="anchored" data-anchor-id="distribution-tests"><span class="header-section-number">7.4</span> Distribution tests</h2>
 <p>Often we are interested in the distribution of a variable. This can be tested with distribution tests. All these tests are defined as follows: H0 is that the data follow a specific distribution. So in case H0 is rejected, the data significantly deviates from the specified distribution.</p>
 <p>Often, we want to know whether a variable is normally distributed because this is an important assumption for parametric hypothesis tests. But data can follow many other distributions:</p>
 <!-- ![Fig. 2. Decision tree for distributions](distributions.png) -->
-<section id="shapiro-wilk-normality-test" class="level3" data-number="6.4.1">
-<h3 data-number="6.4.1" class="anchored" data-anchor-id="shapiro-wilk-normality-test"><span class="header-section-number">6.4.1</span> Shapiro-Wilk Normality Test</h3>
+<section id="shapiro-wilk-normality-test" class="level3" data-number="7.4.1">
+<h3 data-number="7.4.1" class="anchored" data-anchor-id="shapiro-wilk-normality-test"><span class="header-section-number">7.4.1</span> Shapiro-Wilk Normality Test</h3>
 <p>Because many tests require normal distribution, this is the test needed most often.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(<span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="at">mean =</span> <span class="dv">5</span>, <span class="at">sd =</span> <span class="dv">3</span>))</span>
@@ -831,8 +882,8 @@ The underlying Null-hypothesis is that the true difference in means is equal to 
 <span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="do">## W = 0.9874, p-value = 0.4649</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="kolmogorov-smirnov-test" class="level3" data-number="6.4.2">
-<h3 data-number="6.4.2" class="anchored" data-anchor-id="kolmogorov-smirnov-test"><span class="header-section-number">6.4.2</span> Kolmogorov-Smirnov Test</h3>
+<section id="kolmogorov-smirnov-test" class="level3" data-number="7.4.2">
+<h3 data-number="7.4.2" class="anchored" data-anchor-id="kolmogorov-smirnov-test"><span class="header-section-number">7.4.2</span> Kolmogorov-Smirnov Test</h3>
 <p>For everything else, the KS test can be used. It compares two different distributions, or a distribution against a reference.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">50</span>)</span>
@@ -872,10 +923,10 @@ The underlying Null-hypothesis is that the true difference in means is equal to 
 <p>For an overview on distribution see here: http://www.stat.umn.edu/geyer/old/5101/rlook.html</p>
 </section>
 </section>
-<section id="other-tests" class="level2" data-number="6.5">
-<h2 data-number="6.5" class="anchored" data-anchor-id="other-tests"><span class="header-section-number">6.5</span> Other tests</h2>
-<section id="correlation" class="level3" data-number="6.5.1">
-<h3 data-number="6.5.1" class="anchored" data-anchor-id="correlation"><span class="header-section-number">6.5.1</span> Correlation</h3>
+<section id="other-tests" class="level2" data-number="7.5">
+<h2 data-number="7.5" class="anchored" data-anchor-id="other-tests"><span class="header-section-number">7.5</span> Other tests</h2>
+<section id="correlation" class="level3" data-number="7.5.1">
+<h3 data-number="7.5.1" class="anchored" data-anchor-id="correlation"><span class="header-section-number">7.5.1</span> Correlation</h3>
 <p>A test for the significance of a correlation:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor.test</span>(airquality<span class="sc">$</span>Ozone, airquality<span class="sc">$</span>Wind)</span>
@@ -893,8 +944,8 @@ The underlying Null-hypothesis is that the true difference in means is equal to 
 </div>
 <p>Interpretation: Ozone and Wind are significantly negatively correlated with a p-value &lt; 0.05 and a correlation coefficient of -0.6015465.</p>
 </section>
-<section id="mantel-test" class="level3" data-number="6.5.2">
-<h3 data-number="6.5.2" class="anchored" data-anchor-id="mantel-test"><span class="header-section-number">6.5.2</span> Mantel test</h3>
+<section id="mantel-test" class="level3" data-number="7.5.2">
+<h3 data-number="7.5.2" class="anchored" data-anchor-id="mantel-test"><span class="header-section-number">7.5.2</span> Mantel test</h3>
 <p>The Mantel test compares two distance matrices</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(vegan)</span>
@@ -1189,6 +1240,33 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       }
     }
   }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
   const toggleColorMode = (alternate) => {
     // Switch the stylesheets
     const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
@@ -1255,13 +1333,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return localAlternateSentinel;
     }
   }
-  let localAlternateSentinel = 'default';
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
   // Dark / light mode switch
   window.quartoToggleColorScheme = () => {
     // Read the current dark / light value 
     let toAlternate = !hasAlternateSentinel();
     toggleColorMode(toAlternate);
     setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
   };
   // Ensure there is a toggle, if there isn't float one in the top right
   if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
@@ -1296,18 +1376,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -1339,11 +1408,50 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
-  function tippyHover(el, contentFn) {
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/TheoreticalEcology\.github\.io\/DataScienceInR\/");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -1353,8 +1461,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -1366,7 +1483,130 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -1410,6 +1650,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -1435,6 +1676,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -1496,12 +1763,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./3A-NHST.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Null Hypothesis Testing</span></span>
+      <a href="./3A-NHST.html" class="pagination-link" aria-label="Null Hypothesis Testing">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Null Hypothesis Testing</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./3A-Exercise.html" class="pagination-link">
+      <a href="./3A-Exercise.html" class="pagination-link" aria-label="Exercise - NHST and statistical tests">
         <span class="nav-page-text">Exercise - NHST and statistical tests</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
@@ -1510,4 +1777,5 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-</body></html>
+
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/TheoreticalEcology/DataScienceInR/edit/master/3B-HypothesisTests.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></div></div></footer></body></html>
