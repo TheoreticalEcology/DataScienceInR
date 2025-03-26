@@ -2,4 +2,4 @@ book_filename: _main
 new_session: 'yes'
 output_dir: docs
 delete_merged_file: 'yes'
-before_chapter_script: R/webex.R
+before_chapter_script: R/webexercise.R
