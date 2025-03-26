@@ -254,7 +254,7 @@ Before working with a dataset, you should always get an overview of it. Helpful 
 
 Try out these functions and **provide answers to the following questions**:
 
-::: callout-warning
+:::: callout-warning
 ### Questions
 
 1.  What is the most common atomic class in the airquality dataset? `r mcq(c(answer = "integer", "numeric", "character", "factor"))`
@@ -279,7 +279,7 @@ str(dat)
 head(dat)
 tail(dat)
 ```
-:::
+::::
 
 `r hide("Click here to see the solution")`
 
