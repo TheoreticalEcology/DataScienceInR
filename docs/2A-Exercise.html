@@ -505,8 +505,11 @@ Example-Questions
 <p>The Hitchhiker’s Guide to the Galaxy</p>
 </div></div><section id="contingency-tables" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="contingency-tables">Contingency tables</h2>
-<p>Here, we will have a look at the data set “arthritis” from the “EcoData” package. The study was conducted as a double-blind clinical trial investigating a new treatment against arthritis. The improvement was measured as a categorical variable with the possible outcomes “Improved”, “Some” or “None”.</p>
-<p>Install and then load the package “EcoData” and have a look at the data using the <code>View()</code> function. This will open a new tab next to your R script. To return to your script, close the new tab or click on your script.</p>
+<p>Here, we will have a look at the data set <code>arthritis</code> from the <code>EcoData</code> package. The study was conducted as a double-blind clinical trial investigating a new treatment against arthritis. The improvement was measured as a categorical variable with the possible outcomes “Improved”, “Some” or “None”.</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p>If you haven’t installed <code>EcoData</code> yet, follow the instructions <a href="1-GettingStarted.html#libraries-that-you-will-need">here</a></p>
+</div></div><p>Install and then load the package “EcoData” and have a look at the data using the <code>View()</code> function. This will open a new tab next to your R script. To return to your script, close the new tab or click on your script.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(EcoData)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># View(arthritis)</span></span>
@@ -514,21 +517,24 @@ Example-Questions
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the data</span></span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> arthritis</span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Coerce columns ’Improved' and 'Treatment' to (ordered) factors</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Coerce column ’Improved' to (ordered) factors</span></span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co"># (When the factor is ordered, other functions like table() and</span></span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># barplot() will use this order.</span></span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Otherwise, the levels will be ordered alphabetically.)</span></span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>dat<span class="sc">$</span>Improved <span class="ot">&lt;-</span> <span class="fu">factor</span>(dat<span class="sc">$</span>Improved, </span>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>                       <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"None"</span>,<span class="st">"Some"</span>,<span class="st">"Marked"</span>),</span>
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>                       <span class="at">ordered =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>dat<span class="sc">$</span>Treatment <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(dat<span class="sc">$</span>Treatment)</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(dat)</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="do">## 'data.frame':    84 obs. of  5 variables:</span></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ ID       : int  57 46 77 17 36 23 75 39 33 55 ...</span></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Treatment: Factor w/ 2 levels "Placebo","Treated": 2 2 2 2 2 2 2 2 2 2 ...</span></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Sex      : chr  "Male" "Male" "Male" "Male" ...</span></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Age      : int  27 29 30 32 46 58 59 59 63 63 ...</span></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Improved : Ord.factor w/ 3 levels "None"&lt;"Some"&lt;..: 2 1 1 3 3 3 1 3 1 1 ...</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Coerce column `Treatment` to a factor.</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co"># because Placebo comes alphabetically first than Treated</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co"># we don't need to correct the order of the factors</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>dat<span class="sc">$</span>Treatment <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(dat<span class="sc">$</span>Treatment)</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(dat)</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="do">## 'data.frame':    84 obs. of  5 variables:</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ ID       : int  57 46 77 17 36 23 75 39 33 55 ...</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Treatment: Factor w/ 2 levels "Placebo","Treated": 2 2 2 2 2 2 2 2 2 2 ...</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Sex      : chr  "Male" "Male" "Male" "Male" ...</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Age      : int  27 29 30 32 46 58 59 59 63 63 ...</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Improved : Ord.factor w/ 3 levels "None"&lt;"Some"&lt;..: 2 1 1 3 3 3 1 3 1 1 ...</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>An important function for categorical data is <code>table()</code>. It produces a contingency table counting the occurrences of the different categories of one variable or of each combination of the categories of two (or more) variables.</p>
 <p>We are curious how many patients actually improved in the study and how this is influenced by the treatment. To show this graphically, we produced two plots (see below) using the following functions:</p>
@@ -628,16 +634,12 @@ Click here to see the solution
 </section>
 <section id="histogram" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="histogram">Histogram</h2>
-<p>Now let’s have a look at the “birdabundance” dataset, which is in the “EcoData” package. This is not stored at CRAN (the official platform for R packages, but at github where we host our own code collections). If you haven’t done this yet, use the code below to install the package (note that you also need the “devtools” package to do this. Again, to load it and make the data set accessible, execute the function <code>library(EcoData)</code>. To view the data set you can use the <code>View()</code> function again.</p>
-<p>You can also get more explanations on the data set via the help.</p>
+<p>Now let’s have a look at the <code>birdabundance</code> dataset, also from the <code>EcoData</code> package. You can also get more explanations on the data set via the help.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"devtools"</span>)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(devtools)</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="at">repo =</span> <span class="st">"TheoreticalEcology/EcoData"</span>, <span class="at">dependencies =</span> T, <span class="at">build_vignettes =</span> T)</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(EcoData)</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(birdabundance)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(birdabundance)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">help</span>(birdabundance)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>The dataset has been assessed by scientists in Australia who counted birds in forest fragments and looked for drivers that influence these bird abundances, e.g.&nbsp;the size of a forest fragment and the distance to the next fragment. We want to see how these distances vary. A histogram is the standard figure to depict one numerical variable, such as for example distance measurements.</p>
+<p>The dataset has been assessed by scientists in Australia who counted birds in forest fragments and looked for drivers that influence these bird abundances, e.g., the size of a forest fragment and the distance to the next fragment. We want to see how these distances vary. A histogram is the standard figure to depict one numerical variable, such as for example distance measurements.</p>
 <div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -663,26 +665,38 @@ Task
 </div>
 </div>
 </div>
-<p><strong>Hints for plotting</strong></p>
-<p>Change the color (look at the help to see how). You can also try other colors, e.g.&nbsp;your favorite color (you can find all available colors with the function <code>colors()</code>). Change the bar widths (breaks). Play around to see how they change. When changing the bar widths, what do you notice on the y-axis? You can change the y-axis limits using “ylim” (see examples for <code>hist()</code>, second last line). Change the title and the x-axis name of your histogram using the arguments “main” and “xlab”.</p>
-<p>To add the lines, try the <code>abline()</code> function with the argument “v = 90” and look what happens. To remove the line, you have to execute the code producing your histogram again. Remember that <code>abline()</code> is a low level plotting function, which means it only adds an element to an existing plot! Instead of calculating the depicted values with a function and then pasting the values into your abline function, you can also directly use the function in <code>abline()</code>.<br>
-See an <em>example</em> on the right.</p>
 </div>
 </div>
-<div class="webex-solution">
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p><strong>Hints for plotting</strong> Change the color (look at the help to see how): You can all available colors with the function <code>colors()</code>. Change the bar widths (breaks). Play around to see how they change. When changing the bar widths, what do you notice on the y-axis? You can change the y-axis limits using <code>ylim</code>. Change the title and the x-axis name of your histogram using the arguments <code>main</code> and <code>xlab</code>.</p>
+<p>To add lines, try the <code>abline()</code> function. Remember that <code>abline()</code> is a low level plotting function, which means it only adds an element to an existing plot! Instead of calculating the depicted values with a function and then pasting the values into <code>abline()</code>, you can also directly use the function in <code>abline()</code>. See an <em>example</em> below:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(airquality<span class="sc">$</span>Temp)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> <span class="dv">90</span>, <span class="at">col =</span> <span class="st">"blue"</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> <span class="fu">median</span>(airquality<span class="sc">$</span>Temp), <span class="at">col =</span> <span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="2A-Exercise_files/figure-html/abline example code-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div><div class="webex-solution">
 <button>
 Click here to see the solution
 </button>
 <p>You can plot the histogram like this:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(birdabundance<span class="sc">$</span>DIST,  <span class="co"># plot a histogram of the varriable distance from the data set birdabundance</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">breaks =</span> <span class="dv">20</span>,  <span class="co"># change bar widths, here we make them smaller</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span> <span class="st">"blue"</span>,  <span class="co"># change color to blue</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">20</span>),  <span class="co"># change the range of the y axis to from 0 to 20</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Distance distribution"</span>,  <span class="co"># change title of the plot</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Distance to the next forest fragment"</span>)  <span class="co"># change x axis name</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> <span class="fu">mean</span>(birdabundance<span class="sc">$</span>DIST), <span class="at">col =</span> <span class="st">"red"</span>)  <span class="co"># add a vertical line with an x value equal to the mean of the variable distance</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> <span class="fu">median</span>(birdabundance<span class="sc">$</span>DIST), <span class="at">col =</span> <span class="st">"purple"</span>)  <span class="co"># add a vertical line with an x value equal to the median of the variable distance</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(birdabundance<span class="sc">$</span>DIST,  <span class="co"># plot a histogram of the varriable distance from the data set birdabundance</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">breaks =</span> <span class="dv">20</span>,  <span class="co"># change bar widths, here we make them smaller</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span> <span class="st">"blue"</span>,  <span class="co"># change color to blue</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">20</span>),  <span class="co"># change the range of the y axis to from 0 to 20</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Distance distribution"</span>,  <span class="co"># change title of the plot</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Distance to the next forest fragment"</span>)  <span class="co"># change x axis name</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> <span class="fu">mean</span>(birdabundance<span class="sc">$</span>DIST), <span class="at">col =</span> <span class="st">"red"</span>)  <span class="co"># add a vertical line with an x value equal to the mean of the variable distance</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> <span class="fu">median</span>(birdabundance<span class="sc">$</span>DIST), <span class="at">col =</span> <span class="st">"purple"</span>)  <span class="co"># add a vertical line with an x value equal to the median of the variable distance</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -695,28 +709,14 @@ Click here to see the solution
 <p>The red line represents the mean distance between forest fragments, while the purple line represents the median.</p>
 <p><em>Which site was the furthest away from forest fragments?</em></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract the line in which the variable DIST takes its maximum</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>birdabundance[<span class="fu">which.max</span>(birdabundance<span class="sc">$</span>DIST),]</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="do">##    Site ABUND AREA DIST LDIST YR.ISOL GRAZE ALT</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="do">## 48   48  39.6   49 1427  1557    1972     1 180</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract the line in which the variable DIST takes its maximum</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>birdabundance[<span class="fu">which.max</span>(birdabundance<span class="sc">$</span>DIST),]</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="do">##    Site ABUND AREA DIST LDIST YR.ISOL GRAZE ALT</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="do">## 48   48  39.6   49 1427  1557    1972     1 180</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The site number 48 was the furthest away.</p>
 </div>
-
-<div class="no-row-height column-margin column-container"><div class="">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(airquality<span class="sc">$</span>Temp)</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> <span class="dv">90</span>, <span class="at">col =</span> <span class="st">"blue"</span>)</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> <span class="fu">median</span>(airquality<span class="sc">$</span>Temp), <span class="at">col =</span> <span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="2A-Exercise_files/figure-html/abline example code-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-</div></div></section>
+</section>
 <section id="scatterplot" class="level2">
 <h2 class="anchored" data-anchor-id="scatterplot">Scatterplot</h2>
 <p>As you’ve learned by now, <code>plot()</code> can create different types of plots depending on the type of the input data. It creates a scatterplot when plotting two numerical variables. Now we are interested to see how the abundance of birds is affected by the distance to the next forest fragment, and if there is another variable that is important for this relationship (visualized here by the color of the points).</p>
@@ -730,7 +730,7 @@ Task
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Again, your task is to reconstruct the following plot using the following functions:</p>
+<p>Your task now is to reconstruct the following plot using the following functions:</p>
 <ul>
 <li><code>plot()</code></li>
 <li>(<code>str()</code>)</li>
@@ -749,8 +749,8 @@ Task
 </div>
 <p><strong>Hints for plotting:</strong></p>
 <p>What is plotted on the x-axis, what on the y-axis?<br>
-There are two different ways to write the plot function. One is to stick with the “Usage” in the help of the plot function (giving coordinates along the x-axis as the first attribute and those along the y-axis as the second attribute). The other way is to write the relationship between x and y as a formula that is: <code>y~x, data = dataset</code> Use google to find out how you can change the point shapes in your plot.</p>
-<p>Look at the dataset to find out which variable is indicated by the color of the points in the plot. Hint: It is a variable indicating 5 intensity levels. To change the color, include the attribute “col” in your plot function and set it equal to the variable.<br>
+There are two different ways to write the plot function. One is to stick with the “Usage” in the help of the plot function (giving coordinates along the x-axis as the first attribute and those along the y-axis as the second attribute). The other way is to write the relationship between x and y as a formula that is: <code>y~x, data = dataset</code>. Find out how you can change the point shapes with the help function of <code>plot()</code>.</p>
+<p>Look at the dataset to find out which variable is indicated by the color of the points in the plot. <strong>Hint</strong>: It is a variable indicating 5 intensity levels. To change the color, include the attribute <code>col</code> in your plot function and set it equal to the variable.<br>
 To get a color gradient you can create a function with the following code. Apply it before producing your plot and use the created function <code>rbPal()</code> as the color in the plot.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Palettes can be created with a function for the grDevices package</span></span>
@@ -808,39 +808,51 @@ Click here to see the solution
 <p>You can see that the blue data points are only at the low abundances, whereas the red data points are rather at the higher abundances. Purple data points are throughout all abundances. There thus seems to be a correlation between the grazing classes and bird abundances.</p>
 <p>What is the mean bird abundance per color / level of grazing intensity?</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Option 1: Using tidyverse / dplyr as shown at the end of section 2.0.1 Summary statistics:</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Anexando pacote: 'dplyr'</span></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="do">## Os seguintes objetos são mascarados por 'package:stats':</span></span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="do">##     filter, lag</span></span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="do">## Os seguintes objetos são mascarados por 'package:base':</span></span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="do">##     intersect, setdiff, setequal, union</span></span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>bird_grouped <span class="ot">&lt;-</span> birdabundance <span class="sc">%&gt;%</span> <span class="co"># define dataset to be summarized</span></span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(GRAZE) <span class="sc">%&gt;%</span> <span class="co"># define grouping factor</span></span>
-<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean.abund =</span> <span class="fu">mean</span>(ABUND)) <span class="co"># summarize by taking the mean of abundance</span></span>
-<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Option 2: Using base R and formula notation:</span></span>
-<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>bird_grouped <span class="ot">&lt;-</span> <span class="fu">aggregate</span>(ABUND<span class="sc">~</span>GRAZE, <span class="at">data =</span> birdabundance, <span class="at">FUN =</span> mean)</span>
-<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>bird_grouped</span>
-<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a><span class="do">##   GRAZE     ABUND</span></span>
-<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a><span class="do">## 1     1 28.623077</span></span>
-<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a><span class="do">## 2     2 21.950000</span></span>
-<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a><span class="do">## 3     3 21.286667</span></span>
-<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a><span class="do">## 4     4 20.571429</span></span>
-<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a><span class="do">## 5     5  6.292308</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Option 1: Using base R</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>bird_grouped1 <span class="ot">&lt;-</span> <span class="fu">aggregate</span>(ABUND<span class="sc">~</span>GRAZE, <span class="at">data =</span> birdabundance, </span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>                          <span class="at">FUN =</span> mean)</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>bird_grouped1</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="do">##   GRAZE     ABUND</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="do">## 1     1 28.623077</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="do">## 2     2 21.950000</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="do">## 3     3 21.286667</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="do">## 4     4 20.571429</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="do">## 5     5  6.292308</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Option 2: Using tidyverse/dplyr as shown at the end of section Summary statistics:</span></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr, <span class="at">quietly =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a><span class="do">## Anexando pacote: 'dplyr'</span></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a><span class="do">## Os seguintes objetos são mascarados por 'package:stats':</span></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a><span class="do">##     filter, lag</span></span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a><span class="do">## Os seguintes objetos são mascarados por 'package:base':</span></span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a><span class="do">##     intersect, setdiff, setequal, union</span></span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>bird_grouped2 <span class="ot">&lt;-</span> birdabundance <span class="sc">%&gt;%</span> <span class="co"># define dataset to be summarized</span></span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(GRAZE) <span class="sc">%&gt;%</span> <span class="co"># define grouping factor</span></span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean.abund =</span> <span class="fu">mean</span>(ABUND)) <span class="co"># summarize by taking the mean of abundance</span></span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a>bird_grouped2</span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a><span class="do">## # A tibble: 5 × 2</span></span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a><span class="do">##   GRAZE mean.abund</span></span>
+<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a><span class="do">##   &lt;int&gt;      &lt;dbl&gt;</span></span>
+<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a><span class="do">## 1     1      28.6 </span></span>
+<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a><span class="do">## 2     2      22.0 </span></span>
+<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a><span class="do">## 3     3      21.3 </span></span>
+<span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a><span class="do">## 4     4      20.6 </span></span>
+<span id="cb12-33"><a href="#cb12-33" aria-hidden="true" tabindex="-1"></a><span class="do">## 5     5       6.29</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </section>
-<section id="boxplot" class="level2">
+<section id="boxplot" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="boxplot">Boxplot</h2>
 <p>The <code>boxplot()</code> function can be used to create boxplots - to visualize associations between continuous and categorical variables.</p>
 <p>The function can be used in two ways (similar to the <code>plot()</code> function): a) by specifcing <code>x</code> and <code>y</code> arguments and b) the formula syntax (the preferred way!):</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(Sepal.Length<span class="sc">~</span>Species, <span class="at">data =</span> iris)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p>Syntax: continuous variable ~ categorical variable</p>
+</div></div><div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(Sepal.Length <span class="sc">~</span> Species, <span class="at">data =</span> iris)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -849,7 +861,6 @@ Click here to see the solution
 </div>
 </div>
 </div>
-<p>(Syntax: continuous variable ~ categorical variable )</p>
 <div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -862,7 +873,7 @@ Task
 <div class="callout-body-container callout-body">
 <p>In the <code>MASS</code> package there is a dataset (<code>Melanoma</code>) about patients with malignant melanoma:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MASS)</span>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MASS, <span class="at">quietly =</span> T)</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="do">## Anexando pacote: 'MASS'</span></span>
 <span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="do">## O seguinte objeto é mascarado por 'package:dplyr':</span></span>
@@ -897,15 +908,15 @@ Task
 <p>Can we use boxplots to make inference (are there significant differences)? What is the Notch?</p>
 </div>
 </div>
-<div class="{column-margin}">
+
+<div class="no-row-height column-margin column-container"><div class="">
 <p><strong>Hints</strong>:</p>
 <ul>
-<li><p>If you need help with the boxplot for age against status AND sex, check google, for example <a href="https://www.google.com/search?q=R+boxplot+two+groups">this query</a></p></li>
-<li><p>Spacing: <code>at</code> argument in the <code>boxplot( )</code> function</p></li>
+<li><p>If you need help with the boxplot for age against status AND sex, use the syntax formula with <code>+</code>.</p></li>
+<li><p>Spacing: <code>at</code> argument in the <code>boxplot( )</code> function.</p></li>
 <li><p>Install the beeswarm package via <code>install.packages("beeswarm")</code></p></li>
 </ul>
-</div>
-<div class="webex-solution">
+</div></div><div class="webex-solution">
 <button>
 Click here to see the solution
 </button>
@@ -913,7 +924,7 @@ Click here to see the solution
 <p>Sometimes it is helpful to add the points/observations into the boxplot:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(beeswarm) </span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>b <span class="ot">=</span> <span class="fu">boxplot</span>(age<span class="sc">~</span>sex<span class="sc">+</span>status, </span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(age<span class="sc">~</span>sex<span class="sc">+</span>status, </span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">at =</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="dv">4</span><span class="sc">:</span><span class="dv">5</span>, <span class="dv">7</span><span class="sc">:</span><span class="dv">8</span>), <span class="co"># x coordinates</span></span>
 <span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"#FF002387"</span>, <span class="st">"#5544FF77"</span>),</span>
 <span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">data =</span> df,</span>
@@ -946,11 +957,11 @@ Click here to see the solution
 </div>
 </div>
 <p><strong>Can we use boxplots to make inference (are there significant differences)? What is the Notch?</strong>:</p>
-<p>Box plots by themselves cannot be used to make conclusions about significant differences. Tomorrow we will learn that we have two statistics for hypothesis testing, the effects (e.g., means) and the uncertainties of those effects/estimates. The box plot shows the medians, which we could theoretically use for testing. However, the boxplot doesn’t report the uncertainty of the reports. The uncertainty of the estimate is not the width/height of the box, it is just the distribution of the variable, for example:</p>
+<p>Box plots by themselves cannot be used to make conclusions about significant differences. Soon we will learn that we have two statistics for hypothesis testing, the effects (e.g., means) and the uncertainties of those effects/estimates. The box plot shows the medians, which we could theoretically use for testing. However, the boxplot doesn’t report the uncertainty of the reports. The uncertainty of the estimate is not the width/height of the box, it is just the distribution of the variable, for example:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2</span>)</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>var1 <span class="ot">=</span> <span class="fu">rnorm</span>(<span class="dv">50</span>)</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>var2 <span class="ot">=</span> <span class="fu">rnorm</span>(<span class="dv">10000</span>)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>var1 <span class="ot">=</span> <span class="fu">rnorm</span>(<span class="dv">50</span>) <span class="co"># creating a variable from a gaussian distribution</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>var2 <span class="ot">=</span> <span class="fu">rnorm</span>(<span class="dv">10000</span>) <span class="co"># the same but bigger sample size</span></span>
 <span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(var1)<span class="sc">/</span><span class="fu">sqrt</span>(<span class="dv">50</span>)</span>
 <span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 0.1597612</span></span>
 <span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(var2)<span class="sc">/</span><span class="fu">sqrt</span>(<span class="dv">10000</span>)</span>
@@ -969,12 +980,13 @@ Click here to see the solution
 </div>
 </div>
 </div>
-<p>The standard error changes with the number of observations (more on this tomorrow), while the distribution (the box) remains relatively stable!</p>
+<p>The standard error changes with the number of observations, while the distribution (the box) remains relatively stable!</p>
 <p>The notch is the confidence interval of the median, so 2*the standard error of the median. We can roughly say that there is a significant difference when the confidence intervals overlap!</p>
 </div>
 </section>
 <section id="correlation" class="level2">
 <h2 class="anchored" data-anchor-id="correlation">Correlation</h2>
+<p>In the previous plot on bird abundance you’ve seen three variables. Now we want to know, how they are correlated with each other. Remember that we can use the function <code>cor()</code> to calculate correlations.</p>
 <div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -985,7 +997,7 @@ Task
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>In the previous plot on bird abundance you’ve seen three variables. Now we want to know, how they are correlated with each other. Remember that we can use the function <code>cor()</code> to calculate correlations. Which of the following correlation coefficients (Pearson) belongs to which variable pair? Can you see these correlations in your previous plot?</p>
+<p>Which of the following correlation coefficients (Pearson) belongs to which variable pair? Can you see these correlations in your previous plot?</p>
 <div class="cell">
 <pre><code>## [1] 0.2361125
 ## [1] -0.6825114
@@ -998,7 +1010,8 @@ Task
 <button>
 Click here to see the solution
 </button>
-<p>#### Solution</p>
+<section id="solution" class="level4">
+<h4 class="anchored" data-anchor-id="solution">Solution</h4>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(birdabundance<span class="sc">$</span>ABUND, birdabundance<span class="sc">$</span>DIST)</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 0.2361125</span></span>
@@ -1007,7 +1020,12 @@ Click here to see the solution
 <span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(birdabundance<span class="sc">$</span>GRAZE, birdabundance<span class="sc">$</span>DIST)</span>
 <span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] -0.2558418</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>The first correlation (abundance to distance) tells us that there is a small positive correlation between the two variables, but it does not tell us whether it is significant or not. We will properly test such relationships later in the course. In the scatter plot we have seen this weak positive correlation already. The second correlation (abundance to grazing) tells us that there is a stronger negative correlation between abundance and grazing. We have already seen a pattern of the color of the data points along bird abundances (red towards higher, blue towards lower abundances). The third correlation (grazing to distance) tells us that there is a small negative correlation between the two variables. However, the color pattern along distance is not as obvious as for abundance.</p>
+<ul>
+<li><p>The first correlation (abundance to distance) tells us that there is a small positive correlation between the two variables, but it does not tell us whether it is significant or not. We will properly test such relationships later in the course. In the scatter plot we have seen this weak positive correlation already.</p></li>
+<li><p>The second correlation (abundance to grazing) tells us that there is a stronger negative correlation between abundance and grazing. We have already seen a pattern of the color of the data points along bird abundances (red towards higher, blue towards lower abundances).</p></li>
+<li><p>The third correlation (grazing to distance) tells us that there is a small negative correlation between the two variables. However, the color pattern along distance is not as obvious as for abundance.</p></li>
+</ul>
+</section>
 </div>
 </section>
 <section id="bonus---advanced-visualization-with-the-base-r-package" class="level2">
