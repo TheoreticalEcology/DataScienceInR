@@ -8,7 +8,7 @@ editor_options:
 set.seed(42)
 ```
 
-# Exercise - Plots and summary statistics {-}
+# Exercise - Plots and summary statistics {.unnumbered}
 
 ```{r libraries, include=FALSE}
 library(EcoData)
@@ -22,7 +22,11 @@ In this exercise you will practice:
 -   plotting two numerical variables against each other (scatterplot)
 -   calculating correlations
 
-To perform this exercise use the help of the according functions. Also have a look at the examples at the bottom of the help page. You can obtain help for a specific function in several ways:
+To perform this exercise use the help of the according functions. Also have a look at the examples at the bottom of the help page of the function. You can obtain help for a specific function in several ways:
+
+::: column-margin
+**ALWAYS** check the help of the functions you are using!
+:::
 
 -   select the function in your script (e.g. double click it or simply place the cursor in the word) and press F1
 -   "?" + function name (e.g. ?hist) and execute
@@ -62,12 +66,14 @@ library(EcoData)
 dat <- arthritis
 
 # Coerce columns ’Improved' and 'Treatment' to (ordered) factors
-# (When the factor is ordered, other functions like table() and barplot() will use this order.
+# (When the factor is ordered, other functions like table() and
+# barplot() will use this order.
 # Otherwise, the levels will be ordered alphabetically.)
-dat$Improved <- factor(dat$Improved, levels = c("None","Some","Marked"), ordered = TRUE)
+dat$Improved <- factor(dat$Improved, 
+                       levels = c("None","Some","Marked"),
+                       ordered = TRUE)
 dat$Treatment <- as.factor(dat$Treatment)
 str(dat)
-
 ```
 
 An important function for categorical data is `table()`. It produces a contingency table counting the occurrences of the different categories of one variable or of each combination of the categories of two (or more) variables.
