@@ -11,9 +11,9 @@ set.seed(123)
 
 Material for a introductory 1-week course in Data Science, taught at the University of Regensburg.
 
-Day 1: Getting started, descriptive statistics, and graphics
+Day 1: Getting started, descriptive statistics
 
-Day 2: Hypothesis tests
+Day 2: Graphics, Hypothesis tests
 
 Day 3: Linear regression (simple, multiple)
 
