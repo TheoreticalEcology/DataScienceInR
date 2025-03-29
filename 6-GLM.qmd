@@ -43,13 +43,13 @@ The idea of generalized linear models is that we can use link (and inverse link 
 
 LM and GLMS -- the three models you should know:
 
-| Type                                         | R call                                         | Properties                                                                  |
-|------------------------|------------------------|------------------------|
-| Linear regression (continuous data)          | `lm(y ~ x)` or `glm(y~x, family = gaussian())` | Identity (no) link, normal distribution (family = gaussian) no inverse link |
-| Logistic regression (1/0 or k out of n data) | `glm(y ~x, family = binomial)`                 | binomial distribution, logit link: $log(p/(1-p))$                           |
-| inverse link: $exp(y)/(1 + exp(y))$          |                                                |                                                                             |
-| Poisson regression (Count data)              | `glm(y ~x, family = poisson)`                  | Poisson distribution, log link: $log(lambda)$                               |
-| inverse link: $exp(y)$                       |                                                |                                                                             |
+| Type | R call | Properties |
+|----|----|----|
+| Linear regression (continuous data) | `lm(y ~ x)` or `glm(y~x, family = gaussian())` | Identity (no) link, normal distribution (family = gaussian) no inverse link |
+| Logistic regression (1/0 or k out of n data) | `glm(y ~x, family = binomial)` | binomial distribution, logit link: $log(p/(1-p))$ |
+| inverse link: $exp(y)/(1 + exp(y))$ |  |  |
+| Poisson regression (Count data) | `glm(y ~x, family = poisson)` | Poisson distribution, log link: $log(lambda)$ |
+| inverse link: $exp(y)$ |  |  |
 
 Model diagnostic (residual checks) cannot be done anymore by plotting the model. This can be only done for a lm! For glms we have to use the DHARMa package!
 

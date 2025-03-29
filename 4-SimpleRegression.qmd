@@ -354,4 +354,3 @@ plot(allEffects(fit3, partial.residuals = T))
 library(jtools)
 effect_plot(fit3, pred = Temp, interval = TRUE, plot.points = TRUE)
 ```
-

@@ -17,7 +17,7 @@ Make sure you have a recent version of R + RStudio installed on your computer. I
 
 ## Libraries that you will need
 
-The R engine comes with a number of base functions, but one of the great things about R is that you can extend these base functions by libraries that can be programmed by anyone. In principle, you can install libraries from any website or file. In practice, however, most commonly used libraries are distributed via two major repositories. For statistical methods, this is [CRAN](<https://cran.r-project.org/>), and for bioinformatics, this is ioconductor](<https://www.bioconductor.org/>).
+The R engine comes with a number of base functions, but one of the great things about R is that you can extend these base functions by libraries that can be programmed by anyone. In principle, you can install libraries from any website or file. In practice, however, most commonly used libraries are distributed via two major repositories. For statistical methods, this is [CRAN](https://cran.r-project.org/), and for bioinformatics, this is ioconductor\](<https://www.bioconductor.org/>).
 
 ::: {.callout-tip collapse="true"}
 #### Click to see more on installing libraries in R
@@ -60,8 +60,6 @@ devtools::install_github(repo = "TheoreticalEcology/EcoData",
 
 For your convenience, the EcoData installation also forces the installation of most of the packages needed in this book, so this may take a while. If you want to load only the EcoData package, or if you encounter problems during the install, set `dependencies = F, build_vignettes = F`.
 
-
 ## Extra resources
 
 To get to know Rstudio better, [here](https://www.uvm.edu/~tdonovan/RforFledglings/BriefTour2.html) is the link for a brief tour from another "bookdown" page with simple and good explanations for each panel and the many resources.
-

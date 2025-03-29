@@ -8,7 +8,7 @@ editor_options:
 set.seed(42)
 ```
 
-# Exercise - Plots and summary statistics {-}
+# Exercise - Plots and summary statistics {.unnumbered}
 
 ```{r libraries, include=FALSE}
 library(EcoData)
@@ -22,7 +22,11 @@ In this exercise you will practice:
 -   plotting two numerical variables against each other (scatterplot)
 -   calculating correlations
 
-To perform this exercise use the help of the according functions. Also have a look at the examples at the bottom of the help page. You can obtain help for a specific function in several ways:
+To perform this exercise use the help of the according functions. Also have a look at the examples at the bottom of the help page of the function. You can obtain help for a specific function in several ways:
+
+::: column-margin
+**ALWAYS** check the help of the functions you are using!
+:::
 
 -   select the function in your script (e.g. double click it or simply place the cursor in the word) and press F1
 -   "?" + function name (e.g. ?hist) and execute
@@ -50,7 +54,12 @@ The Hitchhiker's Guide to the Galaxy
 
 ## Contingency tables
 
-Here, we will have a look at the data set "arthritis" from the "EcoData" package. The study was conducted as a double-blind clinical trial investigating a new treatment against arthritis. The improvement was measured as a categorical variable with the possible outcomes "Improved", "Some" or "None".
+Here, we will have a look at the data set `arthritis` from the `EcoData` package. The study was conducted as a double-blind clinical trial investigating a new treatment against arthritis. The improvement was measured as a categorical variable with the possible outcomes "Improved", "Some" or "None".
+
+::: column-margin
+If you haven't installed `EcoData` yet, follow the instructions [here](1-GettingStarted.html#libraries-that-you-will-need)
+:::
+
 
 Install and then load the package "EcoData" and have a look at the data using the `View()` function. This will open a new tab next to your R script. To return to your script, close the new tab or click on your script.
 
@@ -61,13 +70,18 @@ library(EcoData)
 # Get the data
 dat <- arthritis
 
-# Coerce columns ’Improved' and 'Treatment' to (ordered) factors
-# (When the factor is ordered, other functions like table() and barplot() will use this order.
+# Coerce column ’Improved' to (ordered) factors
+# (When the factor is ordered, other functions like table() and
+# barplot() will use this order.
 # Otherwise, the levels will be ordered alphabetically.)
-dat$Improved <- factor(dat$Improved, levels = c("None","Some","Marked"), ordered = TRUE)
+dat$Improved <- factor(dat$Improved, 
+                       levels = c("None","Some","Marked"),
+                       ordered = TRUE)
+# Coerce column `Treatment` to a factor.
+# because Placebo comes alphabetically first than Treated
+# we don't need to correct the order of the factors
 dat$Treatment <- as.factor(dat$Treatment)
 str(dat)
-
 ```
 
 An important function for categorical data is `table()`. It produces a contingency table counting the occurrences of the different categories of one variable or of each combination of the categories of two (or more) variables.
@@ -146,19 +160,14 @@ Ratios
 
 ## Histogram
 
-Now let's have a look at the "birdabundance" dataset, which is in the "EcoData" package. This is not stored at CRAN (the official platform for R packages, but at github where we host our own code collections). If you haven't done this yet, use the code below to install the package (note that you also need the "devtools" package to do this. Again, to load it and make the data set accessible, execute the function `library(EcoData)`. To view the data set you can use the `View()` function again.
-
-You can also get more explanations on the data set via the help.
+Now let's have a look at the `birdabundance` dataset, also from the `EcoData` package. You can also get more explanations on the data set via the help.
 
 ```{r, eval=FALSE}
-install.packages("devtools")
-library(devtools)
-devtools::install_github(repo = "TheoreticalEcology/EcoData", dependencies = T, build_vignettes = T)
-library(EcoData)
 View(birdabundance)
+help(birdabundance)
 ```
 
-The dataset has been assessed by scientists in Australia who counted birds in forest fragments and looked for drivers that influence these bird abundances, e.g. the size of a forest fragment and the distance to the next fragment. We want to see how these distances vary. A histogram is the standard figure to depict one numerical variable, such as for example distance measurements.
+The dataset has been assessed by scientists in Australia who counted birds in forest fragments and looked for drivers that influence these bird abundances, e.g., the size of a forest fragment and the distance to the next fragment. We want to see how these distances vary. A histogram is the standard figure to depict one numerical variable, such as for example distance measurements.
 
 ::: callout-warning
 ### Task
@@ -180,13 +189,19 @@ hist(birdabundance$DIST,  # plot a histogram of the varriable distance from the 
 abline(v = mean(birdabundance$DIST), col = "red")  # add a vertical line with an x value equal to the mean of the variable distance
 abline(v = median(birdabundance$DIST), col = "purple")  # add a vertical line with an x value equal to the median of the variable distance
 ```
+:::
 
+::: column-margin
 **Hints for plotting**
+Change the color (look at the help to see how): You can all available colors with the function `colors()`. Change the bar widths (breaks). Play around to see how they change. When changing the bar widths, what do you notice on the y-axis? You can change the y-axis limits using `ylim`. Change the title and the x-axis name of your histogram using the arguments `main` and `xlab`.
 
-Change the color (look at the help to see how). You can also try other colors, e.g. your favorite color (you can find all available colors with the function `colors()`). Change the bar widths (breaks). Play around to see how they change. When changing the bar widths, what do you notice on the y-axis? You can change the y-axis limits using "ylim" (see examples for `hist()`, second last line). Change the title and the x-axis name of your histogram using the arguments "main" and "xlab".
-
-To add the lines, try the `abline()` function with the argument "v = 90" and look what happens. To remove the line, you have to execute the code producing your histogram again. Remember that `abline()` is a low level plotting function, which means it only adds an element to an existing plot! Instead of calculating the depicted values with a function and then pasting the values into your abline function, you can also directly use the function in `abline()`.\
-See an *example* on the right.
+To add lines, try the `abline()` function. Remember that `abline()` is a low level plotting function, which means it only adds an element to an existing plot! Instead of calculating the depicted values with a function and then pasting the values into `abline()`, you can also directly use the function in `abline()`.
+See an *example* below:
+```{r abline example code}
+hist(airquality$Temp)
+abline(v = 90, col = "blue")
+abline(v = median(airquality$Temp), col = "red")
+```
 :::
 
 `r hide("Click here to see the solution")`
@@ -219,13 +234,6 @@ The site number 48 was the furthest away.
 
 `r unhide()`
 
-::: column-margin
-```{r abline example code}
-hist(airquality$Temp)
-abline(v = 90, col = "blue")
-abline(v = median(airquality$Temp), col = "red")
-```
-:::
 
 ## Scatterplot
 
@@ -234,7 +242,7 @@ As you've learned by now, `plot()` can create different types of plots depending
 ::: callout-warning
 ### Task
 
-Again, your task is to reconstruct the following plot using the following functions:
+Your task now is to reconstruct the following plot using the following functions:
 
 -   `plot()`
 -   (`str()`)
@@ -258,9 +266,9 @@ plot(ABUND ~ DIST, data = birdabundance,  # create a plot of the variables DIST 
 **Hints for plotting:**
 
 What is plotted on the x-axis, what on the y-axis?\
-There are two different ways to write the plot function. One is to stick with the "Usage" in the help of the plot function (giving coordinates along the x-axis as the first attribute and those along the y-axis as the second attribute). The other way is to write the relationship between x and y as a formula that is: `y~x, data = dataset` Use google to find out how you can change the point shapes in your plot.
+There are two different ways to write the plot function. One is to stick with the "Usage" in the help of the plot function (giving coordinates along the x-axis as the first attribute and those along the y-axis as the second attribute). The other way is to write the relationship between x and y as a formula that is: `y~x, data = dataset`. Find out how you can change the point shapes with the help function of `plot()`.
 
-Look at the dataset to find out which variable is indicated by the color of the points in the plot. Hint: It is a variable indicating 5 intensity levels. To change the color, include the attribute "col" in your plot function and set it equal to the variable.\
+Look at the dataset to find out which variable is indicated by the color of the points in the plot. **Hint**: It is a variable indicating 5 intensity levels. To change the color, include the attribute `col` in your plot function and set it equal to the variable.\
 To get a color gradient you can create a function with the following code. Apply it before producing your plot and use the created function `rbPal()` as the color in the plot.
 
 ```{r, eval = F}
@@ -311,16 +319,17 @@ You can see that the blue data points are only at the low abundances, whereas th
 What is the mean bird abundance per color / level of grazing intensity?
 
 ```{r}
-# Option 1: Using tidyverse / dplyr as shown at the end of section 2.0.1 Summary statistics:
-library(dplyr)
-bird_grouped <- birdabundance %>% # define dataset to be summarized
+# Option 1: Using base R
+bird_grouped1 <- aggregate(ABUND~GRAZE, data = birdabundance, 
+                          FUN = mean)
+bird_grouped1
+
+# Option 2: Using tidyverse/dplyr as shown at the end of section Summary statistics:
+library(dplyr, quietly = TRUE)
+bird_grouped2 <- birdabundance %>% # define dataset to be summarized
   group_by(GRAZE) %>% # define grouping factor
   summarise(mean.abund = mean(ABUND)) # summarize by taking the mean of abundance
-
-# Option 2: Using base R and formula notation:
-bird_grouped <- aggregate(ABUND~GRAZE, data = birdabundance, FUN = mean)
-
-bird_grouped
+bird_grouped2
 ```
 
 `r unhide()`
@@ -331,11 +340,14 @@ The `boxplot()` function can be used to create boxplots - to visualize associati
 
 The function can be used in two ways (similar to the `plot()` function): a) by specifcing `x` and `y` arguments and b) the formula syntax (the preferred way!):
 
+::: column-margin
+Syntax: continuous variable \~ categorical variable
+:::
+
 ```{r}
-boxplot(Sepal.Length~Species, data = iris)
+boxplot(Sepal.Length ~ Species, data = iris)
 ```
 
-(Syntax: continuous variable \~ categorical variable )
 
 ::: callout-warning
 ### Task
@@ -343,7 +355,7 @@ boxplot(Sepal.Length~Species, data = iris)
 In the `MASS` package there is a dataset (`Melanoma`) about patients with malignant melanoma:
 
 ```{r}
-library(MASS)
+library(MASS, quietly = T)
 df = Melanoma
 df$sex = ifelse(df$sex == 0, "female", "male")
 df$status = as.factor(df$status)
@@ -364,12 +376,12 @@ Tasks:
 Can we use boxplots to make inference (are there significant differences)? What is the Notch?
 :::
 
-::: {column-margin}
+::: column-margin
 **Hints**:
 
--   If you need help with the boxplot for age against status AND sex, check google, for example [this query](https://www.google.com/search?q=R+boxplot+two+groups)
+-   If you need help with the boxplot for age against status AND sex, use the syntax formula with `+`.
 
--   Spacing: `at` argument in the `boxplot( )` function
+-   Spacing: `at` argument in the `boxplot( )` function.
 
 -   Install the beeswarm package via `install.packages("beeswarm")`
 :::
@@ -383,7 +395,7 @@ Sometimes it is helpful to add the points/observations into the boxplot:
 ```{r}
 #| warning: false
 library(beeswarm) 
-b = boxplot(age~sex+status, 
+boxplot(age~sex+status, 
             at = c(1:2, 4:5, 7:8), # x coordinates
             col = c("#FF002387", "#5544FF77"),
             data = df,
@@ -407,17 +419,16 @@ legend("bottomright", # position of the legend (x and y coordinates can be also 
        col = c("#FF002387", "#5544FF77"),
        pch = 15 # point type (squares)
        )
-
 ```
 
 **Can we use boxplots to make inference (are there significant differences)? What is the Notch?**:
 
-Box plots by themselves cannot be used to make conclusions about significant differences. Tomorrow we will learn that we have two statistics for hypothesis testing, the effects (e.g., means) and the uncertainties of those effects/estimates. The box plot shows the medians, which we could theoretically use for testing. However, the boxplot doesn't report the uncertainty of the reports. The uncertainty of the estimate is not the width/height of the box, it is just the distribution of the variable, for example:
+Box plots by themselves cannot be used to make conclusions about significant differences. Soon we will learn that we have two statistics for hypothesis testing, the effects (e.g., means) and the uncertainties of those effects/estimates. The box plot shows the medians, which we could theoretically use for testing. However, the boxplot doesn't report the uncertainty of the reports. The uncertainty of the estimate is not the width/height of the box, it is just the distribution of the variable, for example:
 
 ```{r}
 set.seed(2)
-var1 = rnorm(50)
-var2 = rnorm(10000)
+var1 = rnorm(50) # creating a variable from a gaussian distribution
+var2 = rnorm(10000) # the same but bigger sample size
 sd(var1)/sqrt(50)
 sd(var2)/sqrt(10000)
 df = data.frame(values = c(var1, var2), group = as.factor(c(rep("var1", 50), rep("var2", 10000))))
@@ -428,7 +439,7 @@ text(1, 4.5,xpd = NA, labels = paste0("N = 50, standard error = ", round(sd(var1
 text(2, 4.5,xpd = NA, labels = paste0("N = 10000, standard error = ", round(sd(var1)/sqrt(10000), 4)))
 ```
 
-The standard error changes with the number of observations (more on this tomorrow), while the distribution (the box) remains relatively stable!
+The standard error changes with the number of observations, while the distribution (the box) remains relatively stable!
 
 The notch is the confidence interval of the median, so 2\*the standard error of the median. We can roughly say that there is a significant difference when the confidence intervals overlap!
 
@@ -436,10 +447,12 @@ The notch is the confidence interval of the median, so 2\*the standard error of 
 
 ## Correlation
 
+In the previous plot on bird abundance you've seen three variables. Now we want to know, how they are correlated with each other. Remember that we can use the function `cor()` to calculate correlations.
+
 ::: callout-warning
 ### Task
 
-In the previous plot on bird abundance you've seen three variables. Now we want to know, how they are correlated with each other. Remember that we can use the function `cor()` to calculate correlations. Which of the following correlation coefficients (Pearson) belongs to which variable pair? Can you see these correlations in your previous plot?
+ Which of the following correlation coefficients (Pearson) belongs to which variable pair? Can you see these correlations in your previous plot?
 
 ```{r, echo = FALSE}
 cor(birdabundance$ABUND, birdabundance$DIST); cor(birdabundance$ABUND, birdabundance$GRAZE); cor(birdabundance$GRAZE, birdabundance$DIST)
@@ -448,7 +461,9 @@ cor(birdabundance$ABUND, birdabundance$DIST); cor(birdabundance$ABUND, birdabund
 Think about the meaning of the correlation values (positive/negative, strength). Is it what you would have expected by looking at the plot?
 :::
 
-`r hide("Click here to see the solution")` \#### Solution
+`r hide("Click here to see the solution")` 
+
+#### Solution
 
 ```{r}
 cor(birdabundance$ABUND, birdabundance$DIST)
@@ -456,7 +471,13 @@ cor(birdabundance$ABUND, birdabundance$GRAZE)
 cor(birdabundance$GRAZE, birdabundance$DIST)
 ```
 
-The first correlation (abundance to distance) tells us that there is a small positive correlation between the two variables, but it does not tell us whether it is significant or not. We will properly test such relationships later in the course. In the scatter plot we have seen this weak positive correlation already. The second correlation (abundance to grazing) tells us that there is a stronger negative correlation between abundance and grazing. We have already seen a pattern of the color of the data points along bird abundances (red towards higher, blue towards lower abundances). The third correlation (grazing to distance) tells us that there is a small negative correlation between the two variables. However, the color pattern along distance is not as obvious as for abundance. `r unhide()`
+- The first correlation (abundance to distance) tells us that there is a small positive correlation between the two variables, but it does not tell us whether it is significant or not. We will properly test such relationships later in the course. In the scatter plot we have seen this weak positive correlation already. 
+
+- The second correlation (abundance to grazing) tells us that there is a stronger negative correlation between abundance and grazing. We have already seen a pattern of the color of the data points along bird abundances (red towards higher, blue towards lower abundances). 
+
+- The third correlation (grazing to distance) tells us that there is a small negative correlation between the two variables. However, the color pattern along distance is not as obvious as for abundance. 
+
+`r unhide()`
 
 ## Bonus - Advanced visualization with the base R package
 

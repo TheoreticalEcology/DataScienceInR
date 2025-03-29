@@ -8,7 +8,7 @@ editor_options:
 set.seed(42)
 ```
 
-# Exercise - GLM {-}
+# Exercise - GLM {.unnumbered}
 
 In this exercise you will practice to:
 
@@ -31,7 +31,7 @@ library(effects)
 The Ministry of Agriculture has appointed your university to investigate the toxicity of the herbicide nitrofen on the fertility of the waterflea species `Ceriodaphnia dubia` in order to asses the implications of the herbicide for ecosystems.\
 In an experiment conducted by your fellow researchers, the offspring of the waterflea species `Ceriodaphnia dubia` were counted as a function of different concentrations of the herbicide. Your job is to do the analysis.
 
-::: {.callout-warning}
+::: callout-warning
 ### Question
 
 Carry out the following tasks:
@@ -66,6 +66,7 @@ opts_p <- c(
   answer = "The residuals show significantly less variance than would be expected from a Poisson distribution (underdispersion)."
 )
 ```
+
 `r longmcq(opts_p)`
 
 **2. How do you test for the overall significance of concentration on the total amount of offspring? Perform the respective test to check whether the variable conc as a whole has an effect on the total amount of offspring. How many asteriks are displayed for significance?**
@@ -79,9 +80,8 @@ opts_p <- c(
   answer = "*** =  p < 0.001"
 )
 ```
+
 `r longmcq(opts_p)`
-
-
 :::
 
 `r hide("Click here to see the solution")`
@@ -118,7 +118,7 @@ anova(fit, test = "Chisq")
 
 In the following, you will investigate the `melanoma` dataset provided by the University Hospital of Odense, Denmark. The data are of patients with malignant melanomas. You can find a more detailed description in the help of `melanoma`. The question you want to investigate is whether the occurrence of ulceration (`ulcer`, yes = 1, no = 0) is related to the thickness of the tumor (`thickness` in mm) and the sex of the patient (`sex`, male = 1, female = 0) and the interaction of the two.
 
-::: {.callout-warning}
+::: callout-warning
 ### Question
 
 Carry out the following tasks:
@@ -141,7 +141,6 @@ Use your results to answer the following questions:
 
 **1. Let's move to the melanoma dataset: Assuming you chose the correct distribution, which type of regression did you use for the analysis?**
 
-
 ```{r}
 #| include: false
 opts_p <- c(
@@ -150,6 +149,7 @@ opts_p <- c(
   "Poisson regression"
 )
 ```
+
 `r longmcq(opts_p)`
 
 **3. You have checked the residuals of your model. Which of the following patterns and conclusions apply? (Several answers are correct)**
@@ -164,20 +164,18 @@ opts_p <- c(
   answer = "The model assumptions are not met yet, and I don't trust this model without further improvements."
 )
 ```
+
 `r longmcq(opts_p)`
-
-
 :::
 
 `r hide("Click here to see the solution")`
 
-- *There remains a significant pattern between the residuals and the fitted values.* --> You can see this in the right part of the DHARMa residual plot.
-- *An additional quadratic term for thickness could help to improve the model.* --> Try it out!
-- *The residuals deviate from the expected distribution.* --> You can see this in the left part of the DHARMa residual plot.
-- *The model is overdispersed.* --> Only poisson or binomial k/n models can be overdispersed!
+-   *There remains a significant pattern between the residuals and the fitted values.* --\> You can see this in the right part of the DHARMa residual plot.
+-   *An additional quadratic term for thickness could help to improve the model.* --\> Try it out!
+-   *The residuals deviate from the expected distribution.* --\> You can see this in the left part of the DHARMa residual plot.
+-   *The model is overdispersed.* --\> Only poisson or binomial k/n models can be overdispersed!
 
-
-```{r melanoma}
+```{r}
 # get the data
 dat <- melanoma
 
@@ -212,19 +210,17 @@ plot(res)
 plot(allEffects(fit))
 ```
 
-The quadratic term solves the problem of the residuals. The effects plots look quite different. There seems to be a maximum of ulcer around a thickness of 10 that we would have missed without the quadratic term.
-`r unhide()`
-
+The quadratic term solves the problem of the residuals. The effects plots look quite different. There seems to be a maximum of ulcer around a thickness of 10 that we would have missed without the quadratic term. `r unhide()`
 
 ## Analyzing Elk data
 
 Download the elk_data from GRIPS and import the file using the `load( )` function.
 
-:::{.column-margin}
+::: column-margin
 RData is a R specific data type. You can save any R object by running `save(object, file "filename.RData")`
 :::
 
-::: {.callout-warning}
+::: callout-warning
 #### Example - Elk Data
 
 You will be given a data set of habitat use of Elks in Canada. Measured is the presence of Elks (0/1), and a number of other predictors. Description of variables:
@@ -248,13 +244,11 @@ b)  A causal analysis, trying to understand the effect of roads on Elk presence.
 
 **Hints**:
 
-- Hypothesis: presence ~ dist_roads
-- What are potential confounders? How can you see if a variable is a confounder?
-
+-   Hypothesis: presence \~ dist_roads
+-   What are potential confounders? How can you see if a variable is a confounder?
 :::
 
-`r hide("Click here to see the solution")`
-A. Predictive analysis
+`r hide("Click here to see the solution")` A. Predictive analysis
 
 ```{r}
 load(file = "elk_data.RData")
@@ -318,5 +312,4 @@ plotResiduals(res, form = elk_data$dem, quantreg = TRUE)
 plotResiduals(res, form = elk_data$ruggedness, quantreg = TRUE)
 ```
 
-Now, everything looks perfect
-`r unhide()`
+Now, everything looks perfect `r unhide()`

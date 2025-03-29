@@ -14,9 +14,9 @@ General comments:
 
 -   [Introduction to linear regression models](https://theoreticalecology.github.io/AdvancedRegressionModels/2A-LinearRegression.html)
 -   what is the distribution of your response?
-    -   Normally distribution –> linear regression `lm()` @sec-lm and [here](https://theoreticalecology.github.io/AdvancedRegressionModels/2A-LinearRegression.html)
-    -   Binary response (0, 1, 0, ...) -> logistic regression `glm(..., family = binomial())` @sec-logistic and [here](https://theoreticalecology.github.io/AdvancedRegressionModels/4A-GLMs.html#or-kn-data---logistic-regression)
-    -   Count data -> Poisson glm `glm(.., family = poisson())` @sec-poisson and [here](https://theoreticalecology.github.io/AdvancedRegressionModels/4A-GLMs.html#count-data---poisson-regression)
+    -   Normally distribution –\> linear regression `lm()` @sec-lm and [here](https://theoreticalecology.github.io/AdvancedRegressionModels/2A-LinearRegression.html)
+    -   Binary response (0, 1, 0, ...) -\> logistic regression `glm(..., family = binomial())` @sec-logistic and [here](https://theoreticalecology.github.io/AdvancedRegressionModels/4A-GLMs.html#or-kn-data---logistic-regression)
+    -   Count data -\> Poisson glm `glm(.., family = poisson())` @sec-poisson and [here](https://theoreticalecology.github.io/AdvancedRegressionModels/4A-GLMs.html#count-data---poisson-regression)
 -   Syntax:
     -   Addictive effects `y~a+b`
     -   Interactions `y~a*b`, **scale your variables first!!!** For more details on how to interpret interactions see [here](https://theoreticalecology.github.io/AdvancedRegressionModels/2A-LinearRegression.html#interactions) and [why is it so important so scale/center variabls](https://theoreticalecology.github.io/AdvancedRegressionModels/2A-LinearRegression.html#centering-and-scaling-of-predictor-variables)
@@ -24,21 +24,16 @@ General comments:
 -   Visualize effects via the `library(effects)` package
 -   Interpretation: take the link/inverse link function in account when interpreting glms (see @sec-glm for more details)
 -   Check residuals, however:
-    - for `lm`, you can just plot the model afterwards `plot(model)`
-    - for `glm`, you have to use the `DHARMa` package `simulateResiduals(model, plot=TRUE)`
+    -   for `lm`, you can just plot the model afterwards `plot(model)`
+    -   for `glm`, you have to use the `DHARMa` package `simulateResiduals(model, plot=TRUE)`
 
 ::: column-margin
-
 Variables can be scaled with the `scale(...)` function: `df$height <- scale(df$height)`
-
 :::
 
 ::: column-margin
-
 Install the `effects` package via `install.packages("effects")`
-
 :::
-
 
 ## Linear regression
 
@@ -155,7 +150,6 @@ plotResiduals(res, TitanicReduced$passengerClass)
 # fit <- glm(survived ~ pred , family = binomial, data = myData, weight = totalTrials)
 ```
 
-
 ## Poisson regression
 
 ```{r}
@@ -178,8 +172,6 @@ plot(res)
 # Discussion how to improve the fit for this model in https://cran.r-project.org/web/packages/DHARMa/vignettes/DHARMa.html#owl-example-count-data
 ```
 
-
 ## Multinomial regression
 
 For multinomial regression, see page 69 of our Essential Statistics lecture notes https://www.dropbox.com/s/fxozlnzd5ntfntk/EssentialStatistics.pdf?dl=0
-

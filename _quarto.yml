@@ -16,6 +16,7 @@ book:
   - linkedin
   chapters:
   - index.qmd
+  - 0-Introduction.qmd
   - 0-GettingStarted.qmd
   - part: Data input and manimulation
     chapters:

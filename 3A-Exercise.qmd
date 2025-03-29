@@ -8,7 +8,7 @@ editor_options:
 set.seed(42)
 ```
 
-# Exercise - NHST and statistical tests {-}
+# Exercise - NHST and statistical tests {.unnumbered}
 
 [Decision tree for statistical tests](https://elearning.uni-regensburg.de/course/view.php?id=54766#coursecontentcollapse3)
 
@@ -18,20 +18,16 @@ The dataset 'streams' contains water measurements taken at different location al
 
 The filters were installed between upstream ('up') and downstream ('down').
 
-::: {.column-margin}
-
-**Hint:**
-Are the up and down observations independent? (paired or unpaired)
-
+::: column-margin
+**Hint:** Are the up and down observations independent? (paired or unpaired)
 :::
 
 ```{r}
 dat = read.table("https://raw.githubusercontent.com/biometry/APES/master/Data/Simone/streams.txt", header = T)
 ```
 
-::: {.callout-warning}
+::: callout-warning
 ### 1. Task
-
 
 **1. Visualize the data**
 
@@ -58,13 +54,12 @@ par(mfrow = c(1,1))
 ```
 
 `r unhide()`
-
 :::
 
-::: {.callout-warning}
+::: callout-warning
 ### 2. Task
 
-**2.  For identifying an appropriate test for the effect of the water treatment filter, what are your first two choices in the decision tree?**
+**2. For identifying an appropriate test for the effect of the water treatment filter, what are your first two choices in the decision tree?**
 
 ```{r}
 #| include: false
@@ -75,18 +70,17 @@ opts_p <- c(
    "Three or more groups, paired observations"
 )
 ```
-  `r longmcq(opts_p)`
-  
-`r hide("Feedback")`
-The number of groups to compare is **two**, up versus down stream. The observations are **paired** because the water tested up and down stream of the filter is not independent from each other, i.e. the "same" water is measured twice!
-`r unhide()`
 
+`r longmcq(opts_p)`
+
+`r hide("Feedback")` The number of groups to compare is **two**, up versus down stream. The observations are **paired** because the water tested up and down stream of the filter is not independent from each other, i.e. the "same" water is measured twice! `r unhide()`
 :::
 
-::: {.callout-warning}
+::: callout-warning
 ### 3. Task
 
-**3.  The next decision you have to make is whether you can use a parametric test or not. Apply the Shapiro-Wilk test to check if the data are normally distributed. Are the tests significant and what does that tell you?**
+**3. The next decision you have to make is whether you can use a parametric test or not. Apply the Shapiro-Wilk test to check if the data are normally distributed. Are the tests significant and what does that tell you?**
+
 ```{r}
 #| include: false
 opts_p <- c(
@@ -95,11 +89,12 @@ opts_p <- c(
    "One test is significant. The downstream data significantly deviate from a normal distribution. The upstream data does not significantly deviate from a normal distribution."
 )
 ```
+
 `r longmcq(opts_p)`
 
 `r hide("Click here to see the solution")`
 
-The Shapiro-Wilk test is significant (p < 0.05) for down stream data, i.e. we reject H0 (the data is normally distributed). Thus, the data significantly deviate from a normal distribution. The test is not significant for upstream data; the data does not significantly deviate from a normal distribution.
+The Shapiro-Wilk test is significant (p \< 0.05) for down stream data, i.e. we reject H0 (the data is normally distributed). Thus, the data significantly deviate from a normal distribution. The test is not significant for upstream data; the data does not significantly deviate from a normal distribution.
 
 ```{r}
 shapiro.test(dat$down)
@@ -107,13 +102,12 @@ shapiro.test(dat$up)
 ```
 
 `r unhide()`
-
 :::
 
-::: {.callout-warning}
+::: callout-warning
 ### 4. Task
 
-**4.  Which test is appropriate for evaluating the effect of the filter?**
+**4. Which test is appropriate for evaluating the effect of the filter?**
 
 ```{r}
 #| include: false
@@ -125,18 +119,16 @@ opts_p <- c(
   "Paired t-test"
 )
 ```
+
 `r longmcq(opts_p)`
 
-`r hide("Feedback")`
-We select a **Wilcoxon signed rank test** that is appropriate to compare not-normal, paired observations in two groups.
-`r unhide()`
-
+`r hide("Feedback")` We select a **Wilcoxon signed rank test** that is appropriate to compare not-normal, paired observations in two groups. `r unhide()`
 :::
 
-::: {.callout-warning}
+::: callout-warning
 ### 5. Task
 
-**5.  Does the filter influence the water quality? (The warnings are related to identical values, i.e. ties, and zero differences; we ignore these here) Use to appropriate test to answer this question!**
+**5. Does the filter influence the water quality? (The warnings are related to identical values, i.e. ties, and zero differences; we ignore these here) Use to appropriate test to answer this question!**
 
 ```{r}
 #| include: false
@@ -147,29 +139,27 @@ opts_p <- c(
   "The filter has no significant influence on the water quality (Wilcoxon signed rank test, p = 0.00497)."
 )
 ```
+
 `r longmcq(opts_p)`
 
 `r hide("Click here to see the solution")`
 
-H0 of the Wilcoxon signed rank test is that the location shift between the two groups equals zero, i.e. the difference between the pairs follows a symmetric distribution around zero. As p < 0.05, we can reject H0. The filter significantly influences water quality. (In case of ties also see the function `wilcox.test()` in the package coin for exact, asymptotic and Monte Carlo conditional p-values)
+H0 of the Wilcoxon signed rank test is that the location shift between the two groups equals zero, i.e. the difference between the pairs follows a symmetric distribution around zero. As p \< 0.05, we can reject H0. The filter significantly influences water quality. (In case of ties also see the function `wilcox.test()` in the package coin for exact, asymptotic and Monte Carlo conditional p-values)
 
 ```{r}
 #| warning: false
 wilcox.test(dat$down, dat$up, paired = TRUE)
 ```
 
-
 `r unhide()`
-
 :::
 
 ::: {column-margin}
-H_0_ Hypothesis:
+H_0\_ Hypothesis:
 
-- Shapiro: Data is normal distributed
-- Wilcoxon: No differences in their ranks
+-   Shapiro: Data is normal distributed
+-   Wilcoxon: No differences in their ranks
 :::
-
 
 ## Chicken
 
@@ -179,12 +169,13 @@ The 'chickwts' experiment was carried out to measure and compare the effectivene
 dat = chickwts
 ```
 
-::: {.callout-warning}
+::: callout-warning
 ### 1. Task
 
 Analyze the data and answer the following questions.
 
-**1.  Visualize the data. What is an appropriate plot for this kind of data?**
+**1. Visualize the data. What is an appropriate plot for this kind of data?**
+
 ```{r}
 #| include: false
 opts_p <- c(
@@ -194,6 +185,7 @@ opts_p <- c(
   answer = "Boxplot"
 )
 ```
+
 `r longmcq(opts_p)`
 
 `r hide("Click here to see the solution")`
@@ -207,13 +199,12 @@ boxplot(weight ~ feed, data = dat, notch = T)
 ```
 
 `r unhide()`
-
 :::
 
-::: {.callout-warning}
+::: callout-warning
 ### 2. Task
 
-**2.  Can you apply an ANOVA to this data? What are the assumptions for an ANOVA? Remember: you have to test two things for the groups (for this exercise it is enough if you test the groups "casein" and "horsebean" only).**
+**2. Can you apply an ANOVA to this data? What are the assumptions for an ANOVA? Remember: you have to test two things for the groups (for this exercise it is enough if you test the groups "casein" and "horsebean" only).**
 
 ```{r}
 #| include: false
@@ -223,10 +214,10 @@ opts_p <- c(
   answer = "We have no indication to assume that the data is not-normally distributed or that the variances are different. We can use an ANOVA."
 )
 ```
+
 `r longmcq(opts_p)`
 
-`r hide("Click here to see the solution")`
-The two requirements for applying an ANOVA are 1) the data in each group are normally distributed, and 2) the variances of the different groups are equal. For 1) we again use a Shapiro-Wilk test. For 2) we can use the function var.test() or for all feed types the function bartlett.test(). All tests are not significant, and we thus have no indication to assume that the data is not-normally distributed or that the variances are different. We can use an ANOVA.
+`r hide("Click here to see the solution")` The two requirements for applying an ANOVA are 1) the data in each group are normally distributed, and 2) the variances of the different groups are equal. For 1) we again use a Shapiro-Wilk test. For 2) we can use the function var.test() or for all feed types the function bartlett.test(). All tests are not significant, and we thus have no indication to assume that the data is not-normally distributed or that the variances are different. We can use an ANOVA.
 
 ```{r}
 # get data of each group
@@ -255,14 +246,14 @@ dat %>%
 bartlett.test(weight ~ feed, dat)
 
 ```
-`r unhide()`
 
+`r unhide()`
 :::
 
-::: {.callout-warning}
+::: callout-warning
 ### 3. Task
 
-**3.  Apply an ANOVA or the non-parametric test. How would you describe the result in a thesis or publication?**
+**3. Apply an ANOVA or the non-parametric test. How would you describe the result in a thesis or publication?**
 
 ```{r}
 #| include: false
@@ -272,12 +263,12 @@ opts_p <- c(
   answer = "The feed type significantly influences the chicken weight (ANOVA, p = 5.94e-10)."
 )
 ```
-`r longmcq(opts_p)`
 
+`r longmcq(opts_p)`
 
 `r hide("Click here to see the solution")`
 
-H0 of the ANOVA is that feed has no influence on the chicken weight. As p < 0.05, we reject H0. In the result section, we would write something like: "The feed type significantly influenced the chicken weight (ANOVA, p = 5.94e-10)."
+H0 of the ANOVA is that feed has no influence on the chicken weight. As p \< 0.05, we reject H0. In the result section, we would write something like: "The feed type significantly influenced the chicken weight (ANOVA, p = 5.94e-10)."
 
 ```{r}
 fit = aov(weight ~ feed, data = dat)
@@ -287,13 +278,12 @@ summary(fit)
 The answer "The chicken weights differ significantly between the six feed types (ANOVA, p = 5.94e-10)." is not precise enough - there are significant differences, but an ANOVA doesn't test if this is true for all comparisons. ANOVA only tests globally.
 
 `r unhide()`
-
 :::
 
-::: {.callout-warning}
+::: callout-warning
 ### 4. Task
 
-**4.  Also apply the alternative test and compare p-values. Which of the tests has a higher power?**
+**4. Also apply the alternative test and compare p-values. Which of the tests has a higher power?**
 
 ```{r}
 #| include: false
@@ -304,11 +294,12 @@ opts_p <- c(
   "The p-value doesn't help us to identify the power."
 )
 ```
+
 `r longmcq(opts_p)`
 
 `r hide("Click here to see the solution")`
 
-The non-parametric alternative of an ANOVA is the Kruskal-Wallis test, which should be applied if the data is not normally distributed. In this example, the test comes to the same conclusion: H0 is rejected, the feed type has a significant effect on the chicken weight. The p-value, however, is not as small as in the ANOVA. The reason for this is that non-parametric tests have a lower power than parametric ones as they only use the ranks of the data. Therefore, the ANOVA is preferred over the non-parametric alternative in case its assumptions are fulfilled. 
+The non-parametric alternative of an ANOVA is the Kruskal-Wallis test, which should be applied if the data is not normally distributed. In this example, the test comes to the same conclusion: H0 is rejected, the feed type has a significant effect on the chicken weight. The p-value, however, is not as small as in the ANOVA. The reason for this is that non-parametric tests have a lower power than parametric ones as they only use the ranks of the data. Therefore, the ANOVA is preferred over the non-parametric alternative in case its assumptions are fulfilled.
 
 ```{r}
 kruskal.test(chickwts$weight, chickwts$feed)
@@ -316,16 +307,13 @@ kruskal.test(chickwts$weight, chickwts$feed)
 
 The p-value in the Kruskal-Wallis test is not as small as in the ANOVA. The reason for this is that non-parametric tests have a lower power than parametric ones as they only use the ranks of the data. Therefore, the ANOVA is preferred over the non-parametric alternative in case its assumptions are fulfilled.
 
-
 `r unhide()`
-
 :::
 
-::: {.callout-warning}
+::: callout-warning
 ### 5. Task
 
-**5.  Use the result of the ANOVA to carry out a post-hoc test. How many of the pairwise comparisons indicate** **significant differences between the groups?** `r fitb(8)`
-
+**5. Use the result of the ANOVA to carry out a post-hoc test. How many of the pairwise comparisons indicate** **significant differences between the groups?** `r fitb(8)`
 
 `r hide("Click here to see the solution")`
 
@@ -341,13 +329,12 @@ sum(aov_post$feed[,4] < 0.05)
 ```
 
 `r unhide()`
-
 :::
 
-::: {.callout-warning}
+::: callout-warning
 ### 6. Task
 
-**6.  Which conclusion about the feed types 'meatmeal' and 'casein' is correct?**
+**6. Which conclusion about the feed types 'meatmeal' and 'casein' is correct?**
 
 ```{r}
 #| include: false
@@ -357,12 +344,10 @@ opts_p <- c(
   answer = "The experiment did not reveal a significant weight difference between the feed types 'meatmeal' and 'casein'."
 )
 ```
+
 `r longmcq(opts_p)`
 
-`r hide("Feedback")`
-The experiment did not reveal a significant weight difference between the feed types 'meatmeal' and 'casein'. Remember that we cannot prove or accept H0; we can only reject it. 
-
-
+`r hide("Feedback")` The experiment did not reveal a significant weight difference between the feed types 'meatmeal' and 'casein'. Remember that we cannot prove or accept H0; we can only reject it.
 
 You can also visualize the comparisons using the function `glht()` from the multcomp package.
 
@@ -382,7 +367,6 @@ par(old.par)
 ```
 
 `r unhide()`
-
 :::
 
 ## Titanic
@@ -396,14 +380,14 @@ dat = titanic
 
 Answer the following questions.
 
-:::{.callout-warning}
+::: callout-warning
 ### 1. Task
 
 1.  We are interested in first and second class differences only. Reduce the dataset to these classes only. How can you do this in R?
 
 `r hide("Click here to see the solution")`
 
-The dataset can be reduced in different ways. All three options result in a dataset with class 1 and 2 only. 
+The dataset can be reduced in different ways. All three options result in a dataset with class 1 and 2 only.
 
 ```{r echo=TRUE,message=FALSE, warning=FALSE,results='hide'}
 library(EcoData)
@@ -415,14 +399,12 @@ dat = dat[dat$pclass != 3, ] # the same
 ```
 
 `r unhide()`
-
 :::
 
-:::{.callout-warning}
+::: callout-warning
 ### 2. Task
 
 2.  Does the survival rate between the first and second class differ? Hint: you can apply the test to a contigency table of passenger class versus survived, i.e. `table(dat$pclass, dat$survived)`. `r torf(TRUE)`
-
 
 `r hide("Click here to see the solution")`
 
@@ -434,12 +416,9 @@ prop.test(table(dat$pclass, dat$survived))
 ```
 
 `r unhide()`
-
-
 :::
 
-
-:::{.callout-warning}
+::: callout-warning
 ### 3. Task
 
 3.  Is the variable passenger age normally distributed?
@@ -451,6 +430,7 @@ opts_p <- c(
   answer = "The distribution significantly differs from normal."
 )
 ```
+
 `r longmcq(opts_p)`
 
 `r hide("Click here to see the solution")`
@@ -463,10 +443,9 @@ shapiro.test(dat$age)
 ```
 
 `r unhide()`
-
 :::
 
-:::{.callout-warning}
+::: callout-warning
 ### 4. Task
 
 4.  Is the variable Body Identification Number (body) uniformly distributed?
@@ -477,9 +456,7 @@ Uniform distribution == all values within a range are equally distributed:
 hist(runif(10000))
 ```
 
-**Hint**:
-`ks.test()` (check documentation, see examples)
-
+**Hint**: `ks.test()` (check documentation, see examples)
 
 ```{r}
 #| include: false
@@ -488,6 +465,7 @@ opts_p <- c(
   "The distribution looks uniform."
 )
 ```
+
 `r longmcq(opts_p)`
 
 `r hide("Click here to see the solution")`
@@ -500,10 +478,9 @@ ks.test(dat$body, "punif")
 ```
 
 `r unhide()`
-
 :::
 
-:::{.callout-warning}
+::: callout-warning
 ### 5. Task
 
 5.  Is the correlation between fare and age significant? `r torf(FALSE)`
@@ -519,7 +496,6 @@ scatter.smooth(dat$fare, dat$age)
 
 `r unhide()`
 :::
-
 
 ## Simulation of Type I and II error
 
@@ -544,14 +520,12 @@ for(i in 1:1000){
 
 ... and answer the following questions for the `prop.test` in R:
 
-:::{.callout-warning}
+::: callout-warning
 ### 1. Task
-
 
 1.  How does the distribution of p-values and the number of false positive (Type I error) look like if pC = pT
 
 `r hide("Click here to see the solution")`
-
 
 ```{r}
 PperGroup = 50
@@ -576,10 +550,9 @@ mean(positives)
 ```
 
 `r unhide()`
-
 :::
 
-:::{.callout-warning}
+::: callout-warning
 ### 2. Task
 
 2.  How does the distribution of p-values and the number of true positive (Power) look like if pC != pT, e.g. 0.5, 0.6
@@ -615,10 +588,9 @@ mean(pvalues < 0.05) # = power (rate at which effect is detected by the test)
 ```
 
 `r unhide()`
-
 :::
 
-:::{.callout-warning}
+::: callout-warning
 ### 3. Task
 
 3.  How does the distribution of p-values and the number of false positive (Type I error) look like if you modify the for loop in a way that you first look at the data, and then decide if you test for greater or less?
@@ -649,7 +621,5 @@ mean(pvalues < 0.05)
 # higher false discovery rate
 ```
 
-
 `r unhide()`
-
 :::

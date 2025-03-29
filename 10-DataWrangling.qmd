@@ -73,8 +73,7 @@ Read the dataset `species.csv` and call it species. The dataset consists of the 
 
 ------------------------------------------------------------------------
 
-`r hide("Click here to see the solution")`
-#### Solution
+`r hide("Click here to see the solution")` \#### Solution
 
 First, you read in the file using `read.csv`. You have to specify the correct separator for your dataset, here this is ";".
 
@@ -82,6 +81,7 @@ First, you read in the file using `read.csv`. You have to specify the correct se
 treedata <- read.csv('Where/ever/you/put/it/treedata.csv', sep = ";")
 species <- read.csv('Hopefully/in/the/same/folder/species.csv', sep = ";")
 ```
+
 `r unhide()`
 
 ### 2. Dataset properties
@@ -93,8 +93,7 @@ Have a look at the properties of the dataset:
 
 ------------------------------------------------------------------------
 
-`r hide("Click here to see the solution")`
-#### Solution
+`r hide("Click here to see the solution")` \#### Solution
 
 The `data.frame` `dat` contains 4 columns: species, dbh (diameter at breast height \[cm\]), height \[m\] and rem, a remark. We expect the following formats:
 
@@ -111,8 +110,7 @@ Using `str` we get an overview of the structure of a dataset:
 str(treedata)
 ```
 
-Column `dbh` is a `character`, although we would have expected this one to be class numeric. This indicates, that a letter or special characters are in that column (we do not want these to be in there at all!).
-`r unhide()`
+Column `dbh` is a `character`, although we would have expected this one to be class numeric. This indicates, that a letter or special characters are in that column (we do not want these to be in there at all!). `r unhide()`
 
 ### 3. Turn character to numeric
 
@@ -122,8 +120,7 @@ Note that using 'is.numeric()' is not enough, if the column is a factor. This ma
 
 ------------------------------------------------------------------------
 
-`r hide("Click here to see the solution")`
-#### Solution
+`r hide("Click here to see the solution")` \#### Solution
 
 We suspect `dbh` to contain a character and we want to remove this. With the function 'table()', we can check all existing values in the column. There seems to be an 'X' in the data.
 
@@ -162,6 +159,7 @@ Just removing the 'X' does not turn a character to numeric! R provides the funct
 treedata$dbh <- as.numeric(treedata$dbh)
 head(treedata$dbh)
 ```
+
 `r unhide()`
 
 ### 4. `NA`- values in `height`
@@ -173,8 +171,7 @@ Check for NA's in the column `height`:
 
 ------------------------------------------------------------------------
 
-`r hide("Click here to see the solution")`
-#### Solution
+`r hide("Click here to see the solution")` \#### Solution
 
 ```{r}
 summary(treedata)
@@ -188,8 +185,7 @@ table(treedata$height, useNA = 'ifany')
 ```
 
 -   The dataset contains 221 `NA`.
--   Since height has been measured only on a subset of the trees, we expect this column to contain `NA`-values.
-`r unhide()`
+-   Since height has been measured only on a subset of the trees, we expect this column to contain `NA`-values. `r unhide()`
 
 ### 5. Implausible values
 
@@ -197,8 +193,7 @@ The dataset contains some implausible values (completely out of range!). Find an
 
 ------------------------------------------------------------------------
 
-`r hide("Click here to see the solution")`
-#### Solution
+`r hide("Click here to see the solution")` \#### Solution
 
 *What values are implausible? The dataset contains different species. A value which is plausible for species A might be implausible for species B. However, for now, we will not go into the details here.*
 
@@ -225,6 +220,7 @@ treedata$height[treedata$height > 50] <- NA
 boxplot(treedata$dbh, main = 'DBH')
 boxplot(treedata$height, main = 'Height')
 ```
+
 `r unhide()`
 
 ### 6. Add species names
@@ -234,8 +230,7 @@ Add the species names from the species dataset to the treedata dataset.\
 
 ------------------------------------------------------------------------
 
-`r hide("Click here to see the solution")`
-#### Solution
+`r hide("Click here to see the solution")` \#### Solution
 
 Use `merge` to add species names to the dataset treedata. For adding only one column, `match` is a helpful function.
 
@@ -247,6 +242,7 @@ head(treedata)
 # treedata$species_english <- species$species_english[match(treedata$species_code, species$species_code)]
 
 ```
+
 `r unhide()`
 
 ### 7. Remove F4
@@ -255,12 +251,12 @@ The remark F4 indicates, that the dbh-measurements might be flawed. Remove these
 
 ------------------------------------------------------------------------
 
-`r hide("Click here to see the solution")`
-#### Solution
+`r hide("Click here to see the solution")` \#### Solution
 
 ```{r}
 treedata <- treedata[!treedata$rem %in% 'F4',]
 ```
+
 `r unhide()`
 
 ### 8. Select trees that contain both dbh and height measurements
@@ -269,14 +265,14 @@ Subset treedata to trees where both height and dbh measurements were carried out
 
 ------------------------------------------------------------------------
 
-`r hide("Click here to see the solution")`
-#### Solution
+`r hide("Click here to see the solution")` \#### Solution
 
 This can be done using `complete.cases` using
 
 ```{r}
 dbh_height <- treedata[complete.cases(treedata$dbh, treedata$height),]
 ```
+
 `r unhide()`
 
 ### 9. Correlations?
@@ -285,8 +281,7 @@ Check for correlations in the dataset dbh_height. Use a test and plot height vs 
 
 ------------------------------------------------------------------------
 
-`r hide("Click here to see the solution")`
-#### Solution
+`r hide("Click here to see the solution")` \#### Solution
 
 ```{r}
 cor.test(dbh_height$dbh
@@ -297,6 +292,7 @@ plot(dbh_height$dbh
      , ylab = 'Height'
      , xlab = 'DBH')
 ```
+
 `r unhide()`
 
 ### 10. Export a plot
@@ -319,8 +315,7 @@ dev.off()
 
 Now, export one of the plots that we generated above to a PNG file, using your favorite background color. (You can also try and use another device, e.g. `pdf()`, just make sure to use the matching file extension in the file name.)
 
-`r hide("Click here to see the solution")`
-#### Solution
+`r hide("Click here to see the solution")` \#### Solution
 
 ```{r}
 # Open device
@@ -339,6 +334,7 @@ plot(dbh_height$dbh
 # Close the device to finish file writing
 dev.off()
 ```
+
 `r unhide()`
 
 ### 11. Calculate mean dbh per species.
@@ -347,8 +343,7 @@ For calculating summary statistics, the dplyr package is really helpful. It is p
 
 For this exercise, use the dplyr package to calculate mean dbh per species. If you need help on this, check the demonstration of Part 2 where we calculated summary statistics for groups using the dplyr package!
 
-`r hide("Click here to see the solution")`
-#### Solution
+`r hide("Click here to see the solution")` \#### Solution
 
 ```{r}
 library(dplyr)
@@ -358,4 +353,5 @@ treedata %>%
             meanDBH = mean(dbh, na.rm = T), 
             sdDBH = sd(dbh, na.rm = T))
 ```
+
 `r unhide()`
