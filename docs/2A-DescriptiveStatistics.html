@@ -181,12 +181,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./0-Introduction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Introduction</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./0-GettingStarted.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Getting Started with R</span></span></a>
   </div>
@@ -438,10 +432,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#plotting" id="toc-plotting" class="nav-link active" data-scroll-target="#plotting"><span class="header-section-number">4.1</span> Plotting</a>
+  <li><a href="#plotting-one-variable" id="toc-plotting-one-variable" class="nav-link active" data-scroll-target="#plotting-one-variable"><span class="header-section-number">4.1</span> Plotting ONE variable</a>
   <ul class="collapse">
-  <li><a href="#one-variable" id="toc-one-variable" class="nav-link" data-scroll-target="#one-variable"><span class="header-section-number">4.1.1</span> One variable</a></li>
-  <li><a href="#two-variables" id="toc-two-variables" class="nav-link" data-scroll-target="#two-variables"><span class="header-section-number">4.1.2</span> Two variables</a></li>
+  <li><a href="#numerical-variable---histogram-and-boxplot" id="toc-numerical-variable---histogram-and-boxplot" class="nav-link" data-scroll-target="#numerical-variable---histogram-and-boxplot"><span class="header-section-number">4.1.1</span> Numerical variable - Histogram and Boxplot</a></li>
+  <li><a href="#categorical-variable---barplot" id="toc-categorical-variable---barplot" class="nav-link" data-scroll-target="#categorical-variable---barplot"><span class="header-section-number">4.1.2</span> Categorical variable - Barplot</a></li>
+  </ul></li>
+  <li><a href="#plotting-two-variables" id="toc-plotting-two-variables" class="nav-link" data-scroll-target="#plotting-two-variables"><span class="header-section-number">4.2</span> Plotting TWO variables</a>
+  <ul class="collapse">
+  <li><a href="#numerical-vs-numerical-variable---scatterplot" id="toc-numerical-vs-numerical-variable---scatterplot" class="nav-link" data-scroll-target="#numerical-vs-numerical-variable---scatterplot"><span class="header-section-number">4.2.1</span> Numerical vs numerical variable - Scatterplot</a></li>
+  <li><a href="#categorical-vs-numerical-variable---boxplot" id="toc-categorical-vs-numerical-variable---boxplot" class="nav-link" data-scroll-target="#categorical-vs-numerical-variable---boxplot"><span class="header-section-number">4.2.2</span> Categorical vs numerical variable - Boxplot</a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/TheoreticalEcology/DataScienceInR/edit/master/2A-DescriptiveStatistics.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
@@ -507,34 +506,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </table>
 
 <div class="no-row-height column-margin column-container"><div class="">
-<p>Here is a website with a decision tree about when to choose which plot https://www.data-to-viz.com/</p>
+<p>Here is a <a href="https://www.data-to-viz.com/">website</a> with a decision tree about when to choose which plot.</p>
 </div></div><p>Once you know what you want to plot, there are lot of websites that will show you the respective R code. One important consideration, however: there are at least two popular ways of doing R graphis:</p>
 <ul>
-<li>base R: The <code>graphics</code> package is automatically shipped with the R language and is the default plotting package in R. It prodces basic scientific plots (no unnecessary information)</li>
-<li>ggplot2 is a newer plotting package where the default plots are more visually appealling</li>
+<li>base R: The <code>graphics</code> package is automatically shipped with the R language and is the default plotting package in R. It produces basic scientific plots (no unnecessary information)</li>
+<li>`ggplot2` is a newer plotting package where the default plots are more visually appealling, it belongs to the “tidyverse”, which is a group of packages with a different grammar for coding in R.</li>
 </ul>
 <!--  -->
 <!--  -->
-<p>for which the code looks completely different. You should probably get to know both types, but I would recommend to start with base R. I’m just saying this so that you are not confused, because a lot of the examples will also show you ggplot code. Here some useful links:</p>
+<p>You should probably get to know both types, but we recommend to start with base R. We are just saying this so that you are not confused, because a lot of the examples will also show you ggplot code. Here some useful links:</p>
 <ul>
-<li>A few simple graphs in base R https://www.statmethods.net/graphs/index.html</li>
-<li>R code for the most common graphics (with a ggplot2 tendecy) https://www.r-graph-gallery.com/index.html</li>
-<li>R coder graph tutorials https://r-coder.com/r-graphs/</li>
+<li>A few <a href="https://www.statmethods.net/graphs/index.html">simple graphs in base R</a>.</li>
+<li>R code for the <a href="https://www.r-graph-gallery.com/index.html">most common graphics</a> (with a ggplot2 tendecy).</li>
+<li>R code <a href="https://r-coder.com/r-graphs/">graph tutorials</a>.</li>
 </ul>
 
 <div class="no-row-height column-margin column-container"><div class="">
 <p>Thinking about how to do <a href="https://www.cedricscherer.com/2019/05/17/the-evolution-of-a-ggplot-ep.-1/">good figures</a></p>
-</div></div><section id="plotting" class="level2" data-number="4.1">
-<h2 data-number="4.1" class="anchored" data-anchor-id="plotting"><span class="header-section-number">4.1</span> Plotting</h2>
-<section id="one-variable" class="level3" data-number="4.1.1">
-<h3 data-number="4.1.1" class="anchored" data-anchor-id="one-variable"><span class="header-section-number">4.1.1</span> One variable</h3>
-<section id="numerical-variable---histogram-and-boxplot" class="level4" data-number="4.1.1.1">
-<h4 data-number="4.1.1.1" class="anchored" data-anchor-id="numerical-variable---histogram-and-boxplot"><span class="header-section-number">4.1.1.1</span> Numerical variable - Histogram and Boxplot</h4>
+</div></div><section id="plotting-one-variable" class="level2 page-columns page-full" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="plotting-one-variable"><span class="header-section-number">4.1</span> Plotting ONE variable</h2>
+<section id="numerical-variable---histogram-and-boxplot" class="level3 page-columns page-full" data-number="4.1.1">
+<h3 data-number="4.1.1" class="anchored" data-anchor-id="numerical-variable---histogram-and-boxplot"><span class="header-section-number">4.1.1</span> Numerical variable - Histogram and Boxplot</h3>
 <ul>
 <li>The histogram plots the frequency of the values of a numerical variable with bins (otherwise each unique value will appear only once, the range will be cut in n elements). The number of bins is automatically inferred by the function but can be also changed by the user</li>
 <li>The boxplot plots the distribution of a numerical variable based on summary statistics (the quantiles). The boxplot is particular useful for comparing/contrasting a numerical with a categorical variable (see below)</li>
 </ul>
-<div class="tabset-margin-container"></div><div class="panel-tabset">
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p>In the base R code we introduced <code>par()</code> before plotting to create a panel with the plots side by side. In ggplot2 this is done with the package <code>ggpubr</code>.</p>
+</div></div><div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" aria-current="page">Base R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">ggplot2</a></li></ul>
 <div class="tab-content">
 <div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
@@ -593,8 +593,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="categorical-variable---barplot" class="level4" data-number="4.1.1.2">
-<h4 data-number="4.1.1.2" class="anchored" data-anchor-id="categorical-variable---barplot"><span class="header-section-number">4.1.1.2</span> Categorical variable - Barplot</h4>
+<section id="categorical-variable---barplot" class="level3" data-number="4.1.2">
+<h3 data-number="4.1.2" class="anchored" data-anchor-id="categorical-variable---barplot"><span class="header-section-number">4.1.2</span> Categorical variable - Barplot</h3>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(mtcars)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="do">## 'data.frame':    32 obs. of  11 variables:</span></span>
@@ -655,11 +655,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </section>
 </section>
-<section id="two-variables" class="level3" data-number="4.1.2">
-<h3 data-number="4.1.2" class="anchored" data-anchor-id="two-variables"><span class="header-section-number">4.1.2</span> Two variables</h3>
+<section id="plotting-two-variables" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="plotting-two-variables"><span class="header-section-number">4.2</span> Plotting TWO variables</h2>
 <p>The general idea of plotting is to look for correlations / associations between variables, i.e.&nbsp;is there a non-random pattern between the two variables.</p>
-<section id="numerical-vs-numerical-variable---scatterplot" class="level4" data-number="4.1.2.1">
-<h4 data-number="4.1.2.1" class="anchored" data-anchor-id="numerical-vs-numerical-variable---scatterplot"><span class="header-section-number">4.1.2.1</span> Numerical vs numerical variable - Scatterplot</h4>
+<section id="numerical-vs-numerical-variable---scatterplot" class="level3" data-number="4.2.1">
+<h3 data-number="4.2.1" class="anchored" data-anchor-id="numerical-vs-numerical-variable---scatterplot"><span class="header-section-number">4.2.1</span> Numerical vs numerical variable - Scatterplot</h3>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-3-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-1" role="tab" aria-controls="tabset-3-1" aria-selected="true">Base R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-2" role="tab" aria-controls="tabset-3-2" aria-selected="false">ggplot2</a></li></ul>
 <div class="tab-content">
@@ -738,8 +738,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="categorical-vs-numerical-variable---boxplot" class="level4" data-number="4.1.2.2">
-<h4 data-number="4.1.2.2" class="anchored" data-anchor-id="categorical-vs-numerical-variable---boxplot"><span class="header-section-number">4.1.2.2</span> Categorical vs numerical variable - Boxplot</h4>
+<section id="categorical-vs-numerical-variable---boxplot" class="level3" data-number="4.2.2">
+<h3 data-number="4.2.2" class="anchored" data-anchor-id="categorical-vs-numerical-variable---boxplot"><span class="header-section-number">4.2.2</span> Categorical vs numerical variable - Boxplot</h3>
 <p>Often we have a numerical variable (e.g.&nbsp;weight/fitness) and a categorical vairable that tells us the group of the observation (e.g.&nbsp;control or treatment). To compare visually now the distributions of the numerical variable between the levels of the grouping variable, we can use a boxplot</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-4-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-1" role="tab" aria-controls="tabset-4-1" aria-selected="true">Base R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-4-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-2" role="tab" aria-controls="tabset-4-2" aria-selected="false">ggplot2</a></li></ul>
@@ -782,7 +782,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 
 
-</section>
 </section>
 </section>
 
