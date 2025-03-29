@@ -8,7 +8,7 @@ editor_options:
 set.seed(42)
 ```
 
-# Exercise - Plots and summary statistics {-}
+# Exercise - Plots and summary statistics {.unnumbered}
 
 ```{r libraries, include=FALSE}
 library(EcoData)

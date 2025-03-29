@@ -9,4 +9,3 @@ set.seed(42)
 ```
 
 # Outlook
-

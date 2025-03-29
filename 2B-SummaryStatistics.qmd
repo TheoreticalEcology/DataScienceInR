@@ -8,7 +8,6 @@ editor_options:
 set.seed(42)
 ```
 
-
 # Summary statistics
 
 **Numeric values**

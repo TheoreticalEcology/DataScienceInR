@@ -10,56 +10,49 @@ set.seed(42)
 
 # Plotting and describing data
 
-
 Before knowing how to plot something, you should know what you want to plot:
 
-
-| Scenario                     | Which plot                    | R command                                                                     |
-|-----------------|-----------------|--------------------------------------|
-| Numeric                      | Histogram or boxplot          | `hist()` and`boxplot`                                                         |
-| Numeric with numeric         | Scatterplot                   | `plot`                                                                        |
-| Numeric with categorical     | Boxplot                       | `boxplot(numeric~categorical)`                                                |
+| Scenario | Which plot | R command |
+|----|----|----|
+| Numeric | Histogram or boxplot | `hist()` and`boxplot` |
+| Numeric with numeric | Scatterplot | `plot` |
+| Numeric with categorical | Boxplot | `boxplot(numeric~categorical)` |
 | Categorical with categorical | mosaicplot or grouped barplot | `mosaicplot(table(categorical, categorical))` or `barplot(data, beside=TRUE)` |
 
-
 ::: column-margin
-
-Here is a website with a decision tree about when to choose which plot https://www.data-to-viz.com/ 
-
+Here is a website with a decision tree about when to choose which plot https://www.data-to-viz.com/
 :::
 
+Once you know what you want to plot, there are lot of websites that will show you the respective R code. One important consideration, however: there are at least two popular ways of doing R graphis:
 
-Once you know what you want to plot, there are lot of websites that will show you the respective R code. One important consideration, however: there are at least two popular ways of doing R graphis: 
-
-* base R: The `graphics` package is automatically shipped with the R language and is the default plotting package in R. It prodces basic scientific plots (no unnecessary information)
-* ggplot2 is a newer plotting package where the default plots are more visually appealling
+-   base R: The `graphics` package is automatically shipped with the R language and is the default plotting package in R. It prodces basic scientific plots (no unnecessary information)
+-   ggplot2 is a newer plotting package where the default plots are more visually appealling
 
 <!-- {{< video https://youtu.be/maFw5qXyCwg >}} -->
+
 <!-- {{< video https://youtu.be/HeqHMM4ziXA >}} -->
 
-for which the code looks completely different. You should probably get to know both types, but I would recommend to start with base R. I’m just saying this so that you are not confused, because a lot of the examples will also show you ggplot code. Here some useful links: 
+for which the code looks completely different. You should probably get to know both types, but I would recommend to start with base R. I’m just saying this so that you are not confused, because a lot of the examples will also show you ggplot code. Here some useful links:
 
-* A few simple graphs in base R https://www.statmethods.net/graphs/index.html 
-* R code for the most common graphics (with a ggplot2 tendecy) https://www.r-graph-gallery.com/index.html 
-* R coder graph tutorials https://r-coder.com/r-graphs/ 
+-   A few simple graphs in base R https://www.statmethods.net/graphs/index.html
+-   R code for the most common graphics (with a ggplot2 tendecy) https://www.r-graph-gallery.com/index.html
+-   R coder graph tutorials https://r-coder.com/r-graphs/
 
 ::: column-margin
-Thinking about how to do [good figures](https://www.cedricscherer.com/2019/05/17/the-evolution-of-a-ggplot-ep.-1/ )
+Thinking about how to do [good figures](https://www.cedricscherer.com/2019/05/17/the-evolution-of-a-ggplot-ep.-1/)
 :::
 
 ## Plotting
 
-### One variable 
+### One variable
 
 #### Numerical variable - Histogram and Boxplot
 
-* The histogram plots the frequency of the values of a numerical variable with bins (otherwise each unique value will appear only once, the range will be cut in n elements). The number of bins is automatically inferred by the function but can be also changed by the user 
-* The boxplot plots the distribution of a numerical variable based on summary statistics (the quantiles). The boxplot is particular useful for comparing/contrasting a numerical with a categorical variable (see below)
+-   The histogram plots the frequency of the values of a numerical variable with bins (otherwise each unique value will appear only once, the range will be cut in n elements). The number of bins is automatically inferred by the function but can be also changed by the user
+-   The boxplot plots the distribution of a numerical variable based on summary statistics (the quantiles). The boxplot is particular useful for comparing/contrasting a numerical with a categorical variable (see below)
 
-::: {.panel-tabset}
-
+::: panel-tabset
 ### Base R
-
 
 ```{r}
 par(mfrow = c(1,2)) # number of plots, one row, two columns
@@ -73,7 +66,6 @@ boxplot(iris$Sepal.Length,
         main = "Boxplot", # title
         ylab = "Values")
 ```
-
 
 ### ggplot2
 
@@ -100,11 +92,9 @@ plt2 =
 ggarrange(plt1, plt2, ncol = 2L, nrow = 1L)
 
 ```
-
 :::
 
 #### Categorical variable - Barplot
-
 
 ```{r}
 str(mtcars)
@@ -112,11 +102,8 @@ counts = table(mtcars$cyl)
 counts
 ```
 
-
-::: {.panel-tabset}
-
+::: panel-tabset
 ### Base R
-
 
 ```{r}
 barplot(counts, 
@@ -126,7 +113,6 @@ barplot(counts,
         col = "#4488AA")
 
 ```
-
 
 ### ggplot2
 
@@ -138,21 +124,16 @@ ggplot(mtcars, aes(x = cyl)) +
     ylab("Cyl levels") +
     theme_bw()
 ```
-
 :::
-
 
 ### Two variables
 
 The general idea of plotting is to look for correlations / associations between variables, i.e. is there a non-random pattern between the two variables.
 
-
 #### Numerical vs numerical variable - Scatterplot
 
-::: {.panel-tabset}
-
+::: panel-tabset
 ### Base R
-
 
 ```{r}
 # Scatterplot
@@ -175,7 +156,6 @@ abline(h = 50)
 
 ```
 
-
 ### ggplot2
 
 ```{r}
@@ -192,32 +172,26 @@ ggarrange(plt1, plt2, ncol = 2L, nrow = 1L)
 
 We can also add other objects such as lines to our existing plot:
 
-
 ```{r}
 ggplot(airquality, aes(x = Solar.R, y = Ozone)) +
   geom_point(shape = airquality$Month) +
   geom_abline(intercept = 50, slope = 0) +
     theme_bw()
 ```
-
-
 :::
 
 #### Categorical vs numerical variable - Boxplot
 
 Often we have a numerical variable (e.g. weight/fitness) and a categorical vairable that tells us the group of the observation (e.g. control or treatment). To compare visually now the distributions of the numerical variable between the levels of the grouping variable, we can use a boxplot
 
-::: {.panel-tabset}
-
+::: panel-tabset
 ### Base R
-
 
 ```{r}
 boxplot(mpg ~ cyl, mtcars, notch=TRUE) # formula notation
 # boxplot(x = mtcars$cyl, y = mtcars$mpg) # the same
 
 ```
-
 
 ### ggplot2
 
@@ -226,7 +200,4 @@ ggplot(mtcars, aes(y = mpg, group = cyl)) +
   geom_boxplot(notch=TRUE) +
     theme_bw()
 ```
-
 :::
-
-

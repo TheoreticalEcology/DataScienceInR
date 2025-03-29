@@ -8,7 +8,7 @@ editor_options:
 set.seed(42)
 ```
 
-# Exercise - Simple linear regression {-}
+# Exercise - Simple linear regression {.unnumbered}
 
 You will work with the following datasets:
 
@@ -86,12 +86,13 @@ abline(h = 4.184256 + 0.050444*70, col = "brown") # add line at y value accordin
 
 The dataset provides bird abundances in forest fragments with different characteristics in Australia. We want to look at the relationship of the variables "abundance", "distance" and "grazing".
 
-::: {.callout-warning}
+::: callout-warning
 ### Questions
 
 First, answer the following questions?:
 
 -   What is the most reasonable research question regarding these variables?
+
 ```{r}
 #| include: false
 opts_p <- c(
@@ -105,6 +106,7 @@ opts_p <- c(
 `r longmcq(opts_p)`
 
 -   What is the response variable?
+
 ```{r}
 #| include: false
 opts_p <- c(
@@ -117,6 +119,7 @@ opts_p <- c(
 `r longmcq(opts_p)`
 
 -   What is the predictor variable?
+
 ```{r}
 #| include: false
 opts_p <- c(
@@ -156,17 +159,13 @@ opts_p <- c(
 ```
 
 `r longmcq(opts_p)`
-
 :::
 
-`r hide("Click here to see the solution")`
-### Solution
+`r hide("Click here to see the solution")` \### Solution
 
-- The maximum likelihood estimate of bird abundance for grazing intensity 1 is 28.623. CORRECT: When the predictor is a factor, the intercept equals the first factor level (by default, this follows an alphabetical order).
-- We can see in the regression table that the difference between grazing intensity 3 and 4 is significant. WRONG: Comparisons are always related to the intercept, i.e. to the first factor level. For comparisons among other factor levels we need post-hoc tests.
-- The non-significant p-value for grazing intensity 2 indicates that the data are compatible with the null hypothesis "H0: the bird abundance at grazing intensity 2 is on average 0." WRONG: Comparisons are always related to the intercept, i.e. to the first factor level. Only the test for the intercept has H0: mean = 0.
-
-
+-   The maximum likelihood estimate of bird abundance for grazing intensity 1 is 28.623. CORRECT: When the predictor is a factor, the intercept equals the first factor level (by default, this follows an alphabetical order).
+-   We can see in the regression table that the difference between grazing intensity 3 and 4 is significant. WRONG: Comparisons are always related to the intercept, i.e. to the first factor level. For comparisons among other factor levels we need post-hoc tests.
+-   The non-significant p-value for grazing intensity 2 indicates that the data are compatible with the null hypothesis "H0: the bird abundance at grazing intensity 2 is on average 0." WRONG: Comparisons are always related to the intercept, i.e. to the first factor level. Only the test for the intercept has H0: mean = 0.
 
 A reasonable research question is how abundance is influenced by distance and/or grazing. Here, the response variable is abundance, while the predictors are distance and/or grazing.
 

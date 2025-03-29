@@ -260,14 +260,13 @@ mean(sum.sel$coefficients[,4] < 0.05)
 
 ## Formula syntax
 
-| Formula      | Meaning                               | Details                                    |
-|----------------|--------------------------|------------------------------|
-| `y~x_1`      | $y=a_0 +a_1*x_1$                      | Slope+Intercept                            |
-| `y~x_1 - 1`  | $y=a_1*x_1$                           | Slope, no intercept                        |
-| `y~I(x_1^2)` | $y=a_0 + a_1*(x_1^2)$                 | Quadratic effect                           |
-| `y~x_1+x_2`  | $y=a_0+a_1*x_1+a_2*x_2$               | Multiple linear regression (two variables) |
-| `y~x_1:x_2`  | $y=a_0+a_1*(x_1*x_2)$                 | Interaction between x~1~ and x~2~          |
-| `y~x_1*x_2`  | $y=a_0+a_1*(x_1*x_2)+a_2*x_1+a_3*x_2$ | Interaction and main effects               |
+| Formula | Meaning | Details |
+|----|----|----|
+| `y~x_1` | $y=a_0 +a_1*x_1$ | Slope+Intercept |
+| `y~x_1 - 1` | $y=a_1*x_1$ | Slope, no intercept |
+| `y~I(x_1^2)` | $y=a_0 + a_1*(x_1^2)$ | Quadratic effect |
+| `y~x_1+x_2` | $y=a_0+a_1*x_1+a_2*x_2$ | Multiple linear regression (two variables) |
+| `y~x_1:x_2` | $y=a_0+a_1*(x_1*x_2)$ | Interaction between x~1~ and x~2~ |
+| `y~x_1*x_2` | $y=a_0+a_1*(x_1*x_2)+a_2*x_1+a_3*x_2$ | Interaction and main effects |
 
 : Formula syntax
-

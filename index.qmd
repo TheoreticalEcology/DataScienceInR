@@ -11,14 +11,14 @@ set.seed(123)
 
 Material for a introductory 1-week course in Data Science, taught at the University of Regensburg.
 
-Day 1: Getting started, descriptive statistics, and graphics
+Day 1: Getting started with R and descriptive statistics
 
-Day 2: Hypothesis tests
+Day 2: Graphics and statistical inference
 
-Day 3: Linear regression (simple, multiple)
+Day 3: Hypthesis testing and linear regression (simple, multiple)
 
-Day 4: Generalised linear models (GLM), Multivariate statistics
+Day 4: Generalised linear models (GLM) and multivariate statistics
 
-Day 5: Machine Learning, Data and project organisation
+Day 5: Data science skills, data analysis projects workflow, and predictive modeling
 
 Link to the UR GRIPS course [here](https://elearning.uni-regensburg.de/course/view.php?id=54766) (requires UR account)
