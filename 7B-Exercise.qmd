@@ -31,12 +31,9 @@ In this exercise you will practice analyzing multivariate datasets using:
 `biplot()` - plot PCA\
 `metaMDS()` - calculate NMDS\
 `ordiplot(nmds_object)` - plot NMDS\
-`rda()` - calculate RDA\
-`plot(rda_object)` - plot RDA\
 `dist()` - create distance matrix\
 `hclust()` - perform hierarchical clustering; apply to distance matrix\
 `plot(as.phylo(hc_object))` - plot dendrogram from hclust output\
-`agnes()` - another clustering algorithm\
 `kmeans()` - perform kmeans non-hierarchical clustering; access cluster assignments using `kmeans_object\$cluster`
 
 ### Background on the dataset
@@ -111,23 +108,25 @@ library(vegan)
 -   In order to get the proportion of the explained variance, have a look at the summary of your analysis. `str()` shows you what the summary contains. You want to specifically look at the `importance`, here the second row contains the proportion of variance of all components. So what we want to plot is: `summary(pca_species)$importance[2,]`.
 -   Don't forget to give your plots a title.
 
-Now, use your results to **answer the questions on elearning-extern** (Q 1-3) [("07_Test for Exercise in R")](https://elearning.uni-regensburg.de/mod/quiz/view.php?id=2046682).
+Now, use your results to **answer the following questions:**
 
-1.  In which multivariate dataset do the first and second components explain more variance?
-2.  What are the two samples that have the highest score on the respective third PCA axes?
-3.  From looking at the biplot: Which environmental variables would you choose, if you have only the resource to measure three variables?
-    a)  NAP, angle 1 and chalk
-    b)  salinity, penetrability and grain size
-    c)  grain size, chalk and exposure
-4.  Describe the following correlations:
-    a)  salinity and humus
-    b)  angle1 and exposure
-    c)  Polychaeta and Mollusca
+::: callout-warning
+### 1. Task
 
-::: {.callout-tip collapse="true" appearance="minimal" icon="false"}
-### Solution
+**1. In which multivariate dataset do the first and second components explain more variance?**
 
-```{r solution-PCA}
+```{r}
+#| include: false
+opts_p <- c( "Both explain the same amount of variance in the first two compontents",
+             "Environment",
+             answer = "Species")
+```
+
+`r longmcq(opts_p)`
+
+`r hide("Click here to see the solution")`
+
+```{r}
 ## 1.) Conduct the principle component analyses (PCAs):
 
 # a) PCA of environmental data
@@ -149,35 +148,84 @@ barplot(summary(pca_species)$importance[2,], # get the importance measure
      main = "Components of species",
      ylab = "Proportion of variance explained")
 par(op)
+```
 
-# From the *summary()* output we can see that the first and second components explain more variance in the species PCA.
+From the *summary()* output we can see that the first and second components explain more variance in the species PCA.
 
+`r unhide()`
+:::
 
-##  2.) What are the two samples that have the highest score on the third PCA axis?
+::: callout-warning
+### 2. Task
 
+2.  What are the two samples that have the highest score on the respective third PCA axes?
+
+`r hide("Click here to see the solution")`
+
+```{r, eva=F}
 # -> order the samples by their PC3 coordinate:
 order(pca_environment$x[,'PC3'], decreasing = T) # -> 24 is highest
 order(pca_species$x[,'PC3'], decreasing = T) # -> 7 is highest
-
-
-## 3.) Which environmental variables would you choose, if you have only the resource to measure three variables? 
-
-# From looking at the biplot, we choose 3 variables that describe a lot of variation (i.e. have a large length in the biplot) and have little collinearity. 
-# -> For example, an appropriate choice would be salinity, penetrability and grain size.
-
-
-## 4.) We can get information on the correlations of variables by looking at their representation in the biplot: 
-  #  a) salinity and humus:  same direction  ->  positively correlated
-  #  b) angle1 and exposure:  opposite directions  ->  negatively correlated
-  #  c) Polychaeta and Mollusca:  almost perpendicular  ->  uncorrelated
 ```
+
+`r unhide()`
+:::
+
+::: callout-warning
+### 3. Task
+
+3.  From looking at the biplot: Which environmental variables would you choose, if you have only the resource to measure three variables?
+
+```{r}
+#| include: false
+opts_p <- c(
+   answer = "salinity, penetrability and grain size",
+   "NAP, angle 1 and chalk",
+   "grain size, chalck, exposure")
+```
+
+`r longmcq(opts_p)`
+
+`r hide("Click here to see the solution")`
+
+```{r}
+biplot(pca_environment);
+abline(v=0, lty="dashed");abline(h=0, lty="dashed")
+```
+
+From looking at the biplot, we choose 3 variables that describe a lot of variation (i.e. have a large length in the biplot) and have little correlation with others. An appropriate choice would be salinity, penetrability and grain size. `r unhide()`
+:::
+
+::: callout-warning
+### 4. Task
+
+4.  Describe the following correlations:
+    a)  salinity and humus
+    b)  angle1 and exposure
+    c)  Polychaeta and Mollusca
+
+`r hide("Click here to see the solution")`
+
+We can get information on the correlations of variables by looking at their representation in the biplot:
+
+a)  salinity and humus: same direction -\> positively correlated
+
+b)  angle1 and exposure: opposite directions -\> negatively correlated
+
+c)  Polychaeta and Mollusca: almost perpendicular -\> uncorrelated
+
+`r unhide()`
 :::
 
 ## Clustering
 
 ### K-means
 
-We want to use clustering methods to define 3 environmental types. Use the function `kmeans()` with `centers = 3` (number of clusters to be generated). Remember to set a seed; the choice of the first k centers is random.
+We want to use clustering methods to define 3 environmental types. Use the function `kmeans()` with `centers = 3` (number of clusters to be generated).
+
+::: callout-caution
+Remember to set a seed: the choice of the first k centers is random.
+:::
 
 ```{r, eval = FALSE}
 set.seed(467456)
@@ -188,41 +236,56 @@ Compare the three clusters with the result of the PCA using the following code t
 
 ```{r, eval = FALSE}
 library(ggfortify)
-autoplot(pca_environment, colour = cl$cluster, size = 2, loadings = TRUE, loadings.colour = 'black',
-         loadings.label = TRUE, loadings.label.size = 3, loadings.label.colour = "black")
+autoplot(pca_environment, colour = cl$cluster, size = 2, 
+         loadings = TRUE, loadings.colour = 'black',
+         loadings.label = TRUE, loadings.label.size = 3,
+         loadings.label.colour = "black")
 ```
 
-The colors of the points represent the three clusters. **Answer the following question on elearning-extern** (Q 4-5):
+The colors of the points represent the three clusters. 
 
+**Answer the following questions**:
+
+::: callout-warning
+### 1. Task
 -   How is it possible that four observations in the middle (in red - if you have used the same seed) belong to a different cluster than the observations around them (in black)?
--   Which environmental variables are on average high within the black cluster (cluster 1)?
 
-::: {.callout-tip collapse="true" appearance="minimal" icon="false"}
-### Solution
+`r hide("Click here to see the solution")`
 
-```{r solution-Clustering}
-
+```{r}
 # Create clusters using all environmental variables
 set.seed(467456)
 cl <- kmeans(dat[,7:16], centers = 3) # 3 clusters to be generated
 
 # Plot
 library(ggfortify)
-autoplot(pca_environment, colour = cl$cluster, size = 2, loadings = TRUE, loadings.colour = 'black',
-         loadings.label = TRUE, loadings.label.size = 3, loadings.label.colour = "black")
-
-# To understand why the four observations in the middle belong to a different cluster than the observations around them, we must take into account, that the biplot is only a 2-dimensional representation of a more-than-2 dimensional space. Therefore, the four points in the middle will be dissimilar to the points around them with respect to a variable that is not well represented by the first two PCA axes.
-
-# Environmental variables that are on average high within cluster 1:
-# -> looking at the plot we find that exposure and grain size are high on average within cluster 1
+autoplot(pca_environment, colour = cl$cluster, size = 2, 
+         loadings = TRUE, loadings.colour = 'black',
+         loadings.label = TRUE, loadings.label.size = 3,
+         loadings.label.colour = "black")
 ```
+
+To understand why the four observations in the middle belong to a different cluster than the observations around them, we must take into account, that the biplot is only a 2-dimensional representation of a more-than-2 dimensional space. Therefore, the four points in the middle will be dissimilar to the points around them with respect to a variable that is not well represented by the first two PCA axes.
+
+`r unhide()`
 :::
+
+::: callout-warning
+### 2. Task
+-   Which environmental variables are on average high within the black cluster (cluster 1)?
+
+`r hide("Click here to see the solution")`
+Environmental variables that are on average high within cluster 1:
+looking at the plot we find that exposure and grain size are high on average within cluster 1
+`r unhide()`
+:::
+
 
 ### Hierarchical clustering
 
 Now we want to hierarchically cluster the samples with respect to their species richness, as shown in the following plot:
 
-```{r clustering, echo = FALSE}
+```{r clustering, echo = FALSE, fig.height=10}
 hc = hclust(dist(dat[, 2:5]))
 plot(as.phylo(hc), tip.color = dat$week)
 ```
@@ -235,10 +298,23 @@ Create the same plot using the functions:
 
 Load the package `ape`. Have a look at the help for `hclust()` to read what the function does and look at the examples for further help on how to use the function. Then have a look at what the function `as.phylo()` does. Now, color the labels using the variable `week`. You can do this using the argument "tip.color =".
 
-Choose the correct statement(s) about the species richness and its sampling on **elearning-extern**(Q6). To be able to read the plot more easily, you can click *Zoom* in the top pane of the Plots window in RStudio.
+::: callout-warning
+### 1. Task
+Which of the following statements are correct? (could be more than 1)
 
-::: {.callout-tip collapse="true" appearance="minimal" icon="false"}
-### Solution
+Hint: To be able to read the plot more easily, you can click *Zoom* in the top pane of the Plots window in RStudio.
+
+```{r}
+#| include: false
+opts_p <- c( 
+  answer = "Observations 2 and 25 are more similar than 2 and 20.",
+  answer = "The observations taken during Week 1 (here in black) have a more similar species richness than those taken during Week 2 (here in red).",
+  "The tree cleary identifies 4 distinct groups of species diversity.",
+  "Observations 6 and 35 are as similar as 7 and 8.")
+```
+`r longmcq(opts_p)`
+
+`r hide("Click here to see the solution")`
 
 ```{r solution-HierarClcust}
 library(ape)
@@ -246,4 +322,6 @@ library(ape)
 hc = hclust(dist(dat[, 2:5]))
 plot(as.phylo(hc), tip.color = dat$week)
 ```
+
+`r unhide()`
 :::
