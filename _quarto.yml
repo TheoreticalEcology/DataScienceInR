@@ -43,8 +43,8 @@ book:
     - 4C-Exercise.qmd
   - part: Multivariate Statistics
     chapters:
-    - 2B-Multivariate.qmd
-    - 5A-Exercise.qmd
+    - 7A-Multivariate.qmd
+    - 7B-Exercise.qmd
   - part: Predictive Modeling
     chapters: 
     - 8-MachineLearning.qmd
