@@ -65,7 +65,7 @@ abline(h=0, lty="dashed")
 
 Now let’s try **Non-metric Multidimensional Scaling (NMDS)**. This is another type of ordination that works with distance (or dissimilarity) between samples (observations) instead of raw data. It’s often used in ecology to explore patterns in species composition across sites.
 
-The focus on the NMDS is in the observations - the difstance between observations given their properties (the variables).
+The focus on the NMDS is in the observations - the distance between observations given their properties (the variables).
 
 We'll use the `dune` dataset from the `vegan` package, which is a community dataset for plants in dunes. Each **row is a site**, and each **column is a species**. The values are species counts.
 
@@ -88,11 +88,17 @@ NMDS = metaMDS(dune)
 NMDS # gives information on NMDS: distance measure, stress (should be low)
 ```
 
-For the NMDS the stress information should be low:
+The STRESS (Standard Residuals Sum of Squares), is a measure of how the sites positions in the bidimensional configuration deviates from the original distances (from the distance matrix). I can be used as a measure of how adequate is the analysis for the dataset. As a rule of thumb, we have: 
 
--   **stress of \>= 0.2**, be suspicious,
+- stress < 0.05 great representation;
 
--   **stress \>= 0.3** indicates that ordination is arbitrary
+- stress < 0.01 good ordination
+
+- stress < 0.2 reazonable ordination
+
+- stress > 0.2 - be suspicious
+
+- stress >= 0.3 ordination is abitrary (do not interpret it)
 
 The NMDS plot shows how similar or different the sites are in terms of species composition. Sites that are close together have more similar species compositions.
 

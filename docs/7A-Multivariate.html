@@ -557,7 +557,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="nmds" class="level3" data-number="11.1.2">
 <h3 data-number="11.1.2" class="anchored" data-anchor-id="nmds"><span class="header-section-number">11.1.2</span> NMDS</h3>
 <p>Now let’s try <strong>Non-metric Multidimensional Scaling (NMDS)</strong>. This is another type of ordination that works with distance (or dissimilarity) between samples (observations) instead of raw data. It’s often used in ecology to explore patterns in species composition across sites.</p>
-<p>The focus on the NMDS is in the observations - the difstance between observations given their properties (the variables).</p>
+<p>The focus on the NMDS is in the observations - the distance between observations given their properties (the variables).</p>
 <p>We’ll use the <code>dune</code> dataset from the <code>vegan</code> package, which is a community dataset for plants in dunes. Each <strong>row is a site</strong>, and each <strong>column is a species</strong>. The values are species counts.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(vegan)</span>
@@ -699,10 +699,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb7-52"><a href="#cb7-52" aria-hidden="true" tabindex="-1"></a><span class="do">## Scaling: centring, PC rotation, halfchange scaling </span></span>
 <span id="cb7-53"><a href="#cb7-53" aria-hidden="true" tabindex="-1"></a><span class="do">## Species: expanded scores based on 'dune'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>For the NMDS the stress information should be low:</p>
+<p>The STRESS (Standard Residuals Sum of Squares), is a measure of how the sites positions in the bidimensional configuration deviates from the original distances (from the distance matrix). I can be used as a measure of how adequate is the analysis for the dataset. As a rule of thumb, we have:</p>
 <ul>
-<li><p><strong>stress of &gt;= 0.2</strong>, be suspicious,</p></li>
-<li><p><strong>stress &gt;= 0.3</strong> indicates that ordination is arbitrary</p></li>
+<li><p>stress &lt; 0.05 great representation;</p></li>
+<li><p>stress &lt; 0.01 good ordination</p></li>
+<li><p>stress &lt; 0.2 reazonable ordination</p></li>
+<li><p>stress &gt; 0.2 - be suspicious</p></li>
+<li><p>stress &gt;= 0.3 ordination is abitrary (do not interpret it)</p></li>
 </ul>
 <p>The NMDS plot shows how similar or different the sites are in terms of species composition. Sites that are close together have more similar species compositions.</p>
 <div class="cell">
