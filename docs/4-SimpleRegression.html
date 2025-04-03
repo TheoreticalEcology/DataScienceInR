@@ -1081,7 +1081,7 @@ y = N(a_0 + a_1*x, sd)
 </ul>
 <p>If we add a quadratic term, this is still a linear combination: this is called polynomial.</p>
 <p><span class="math display">\[ a0 + a1 * x + a2 * x^2 \]</span></p>
-<p>However, it is not strictly “simple” anymore, because you have two predictors (even though they come from the same variable x).</p>
+<p>Le’ts model Ozone as a function of temperature and it’s quadratic term:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>fit3 <span class="ot">=</span> <span class="fu">lm</span>(Ozone <span class="sc">~</span> Temp <span class="sc">+</span> <span class="fu">I</span>(Temp<span class="sc">^</span><span class="dv">2</span>), <span class="at">data =</span> airquality)</span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit3)</span>

@@ -314,8 +314,7 @@ If we add a quadratic term, this is still a linear combination: this is called p
 
 $$ a0 + a1 * x + a2 * x^2 $$
 
-However, it is not strictly "simple" anymore, because you have two predictors (even though they come from the same variable x).
-
+Le'ts model Ozone as a function of temperature and it's quadratic term:
 ```{r}
 fit3 = lm(Ozone ~ Temp + I(Temp^2), data = airquality)
 summary(fit3)
