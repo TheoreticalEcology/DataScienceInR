@@ -251,7 +251,7 @@ b)  A causal analysis, trying to understand the effect of roads on Elk presence.
 `r hide("Click here to see the solution")` A. Predictive analysis
 
 ```{r}
-load(file = "elk_data.RData")
+load(file = "data/elk_data.RData")
 
 library(MASS)
 fit <- glm(presence ~ dist_roads  + dem + ruggedness, data = elk_data, family = "binomial")

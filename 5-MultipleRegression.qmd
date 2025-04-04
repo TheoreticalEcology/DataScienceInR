@@ -1,3 +1,9 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
 ```{r, include=FALSE}
 set.seed(42)
 ```
@@ -22,16 +28,28 @@ In the worst case it can lead to a Simpson's paradox: An unobserved variable pur
 
 Confounders have effects on the response and another predictor.
 
+Let's simulate some data about `Growth` of plants influenced by `Climate` and `Temperature`. However, we will make `Temperature` also depending on `Climate` to some extent:
 ```{r}
 Climate = runif(100)
 Temp = Climate + rnorm(100, sd = 0.2)
 Growth = 0.5*Temp - 1.0*Climate + rnorm(100, sd = 0.2)
+```
 
+Simple linear model of Growth to temperature
+```{r}
 summary(lm(Growth~Temp))
+```
+
+Take a look at the effects of temperature and compare with the simulated one. What happened here??
+
+Now, we introduce the Climate variable (our confounder):
+```{r}
 summary(lm(Growth~Temp+Climate)) # correct effects!!
 ```
 
-Identifying confounders is the most important challenge in observational studies: For example, several studies showed that overweight adults have lower mortality. However, another study shows that these earlier results might have come up due to confounding: smoking!
+The effect of temperature is now positive as we have created in the data!
+
+Identifying confounders is the most important challenge in observational studies: For example, several studies showed that overweight adults (BMI) have lower mortality. However, another study shows that these earlier results might have come up due to confounding: smoking!
 
 -   smokers: higher mortality and lower BMI -\> people with lower BMI have higher mortality rates
 
@@ -57,50 +75,43 @@ Multiple linear regression expands simple linear regression to a polynomial of s
 
 Let's see an example with the `airquality` data:
 
+Let's use the `airquality` data:
 ```{r}
 ## first remove observations with NA values
 newAirquality = airquality[complete.cases(airquality),]
-summary(newAirquality)
+#summary(newAirquality)
 ```
 
-A simple regression:
+The simple regression of Ozone with temperature:
 
 ```{r}
 # simple regression
 m0 = lm(Ozone ~ Temp , data = newAirquality)
 summary(m0)
-# have a look at the residuals:
-op <- par(mfrow = c(2,2))
-plot(m0)
-par(op)
 
 plot(Ozone ~ Temp , data = newAirquality)
 abline(m0, col = "blue", lwd = 3)
 ```
 
-A multiple linear regression of Ozone affected by temperature and wind:
-
+Including `Wind` effect:
 ```{r}
-# multiple linear regression
 m1 = lm(Ozone ~ Temp + Wind , data = newAirquality)
 summary(m1)
-# have a look at the residuals:
-op <- par(mfrow = c(2,2))
-plot(m1)
-par(op)
 ```
 
 To vizualize the effects of each predictor on the ozone, we can use the package `effects`. The package will plot the effects of each variable separately (plots called partial slopes) "controling" for the other variables in the model. Controling here means that for ploting the effect of `Temp`, the variable `Wind` was fixed at it's average value (the fixed value can be changed by the user, but the default is to take the mean of a continuous variable).
 
 A predictor eﬀect plot summarizes the role of a selected focal predictor in a fitted regression model. These graphs are an alternative to tables of fitted coeﬃcients, which can be much harder to interpret than predictor eﬀect plots. (Info taken from the vignette of the `effects`package, take a look at it!).
 
+
+Plotting multiple regression outputs using the package `effects`:
+
 ```{r}
-# plotting multiple regression outputs
 library(effects)
 plot(allEffects(m1))
 ```
 
-Let's interprete the partial slope plot for `Temp`. It shows that there is a positive relationship of temperature and Ozone. The shaded blue area
+Let's interprete the partial slope plot for `Temp`. It shows that there is a positive relationship of temperature and Ozone. The shaded blue area.
 
 The intercept of the line aﬀects only the height of the line, and is determined by the choices made for averaging over the fixed predictors, but for any choice of averaging method, the slope of the line would be the same (because the model has no interactions between variables - next topic). The shaded area is a pointwise confidence band for the fitted values, based on standard errors computed from the covariance matrix of the fitted regression coeﬃcients. The rug plot at the bottom of the graph shows the location of the `Temp` data values.
 
@@ -112,7 +123,7 @@ both = lm(Ozone ~ Wind + Temp, newAirquality)
 wind = lm(Ozone ~ Wind , newAirquality)
 temp = lm(Ozone ~ Temp, newAirquality)
 #summary(both)
-summary(wind)
+#summary(wind)
 
 slopes <- data.frame(
   predictor = c("Wind", "Temp"),
@@ -121,7 +132,6 @@ slopes <- data.frame(
   only.temp = c("NA", round(coef(temp)[2], digits = 2))
 )
 slopes
-
 ```
 
 Yes, omitting Wind makes the effect of Temperature larger.
@@ -144,23 +154,65 @@ $$
 y \sim a*b
 $$
 
-Let's incude the interaction between `Wind` and `Temp`
+Let's include an interaction effect of `Wind` and `Temp` to the `Ozone` model.
+
+::: callout-note
+## Scale your continous variables!
+if including interactions, always scale your predictor variables!
+scale means: subtracts the mean and divides by standard deviation
+:::
 
 ```{r}
-# Include interaction
-m2 = lm(Ozone ~  scale(Wind)* scale(Temp) , data = newAirquality)
-# if including interactions, always scale your predictor variables!
-# scale: subtracts the mean and divides by standard deviation
+m2 = lm(Ozone ~ scale(Temp)* scale(Wind) , data = newAirquality)
 summary(m2)
-op <- par(mfrow = c(2,2))
-plot(m2)
-par(op)
 ```
 
 The influence of temperature on ozone depends on the amount of wind. When wind is low, the relationship is strongly positive, but when wind is high this relationship becomes slightly negative.
 
+```{r, warning=F}
+plot(allEffects(m2, xlevels=3))
+```
+
+
+
+**Another example:**
+
+How does everything change, if we have factorial predictors?
 ```{r}
-plot(predictorEffect("Temp", m2,xlevels=3))
+newAirquality$MonthFactor = as.factor(newAirquality$Month)
+
+m4 = lm(sqrt(Ozone) ~ MonthFactor + scale(Wind) * scale(Temp) * scale(Solar.R) , 
+        data = newAirquality)
+summary(m4)
+```
+
+
+```{r}
+m5 = lm(sqrt(Ozone) ~ MonthFactor + scale(Wind) + scale(Temp) + scale(Solar.R) 
+                      + scale(Wind):scale(Temp)
+                      + scale(Wind):scale(Solar.R)
+                      + scale(Temp):scale(Solar.R), 
+        data = newAirquality)
+summary(m5)
+
+# short form for including only two-way interactions:
+
+m5 = lm(sqrt(Ozone) ~ MonthFactor + (scale(Wind) + scale(Temp) + scale(Solar.R))^2,
+        data = newAirquality)
+summary(m5)
+```
+
+Get the overall effect of Month:
+```{r}
+anova(m5)
+# this is doing a type I ANOVA = sequential
+# order in which you include the predictors changes the estimates and p-values
+
+# If you want to do a type II ANOVA, use ANova() from the car package
+library(car)
+Anova(m5) # Anova with capital A
+#type II ANOVA: all other predictors have already been taken into account
+# Does an additional predictor explain some of the variance on top of that?
 ```
 
 ## Model selection
@@ -265,7 +317,7 @@ mean(sum.sel$coefficients[,4] < 0.05)
 ## Formula syntax
 
 | Formula | Meaning | Details |
-|----|----|----|
+|------------------------|------------------------|------------------------|
 | `y~x_1` | $y=a_0 +a_1*x_1$ | Slope+Intercept |
 | `y~x_1 - 1` | $y=a_1*x_1$ | Slope, no intercept |
 | `y~I(x_1^2)` | $y=a_0 + a_1*(x_1^2)$ | Quadratic effect |
