@@ -11,7 +11,7 @@ set.seed(42)
 # Exercise - Multiple Linear Regression {.unnumbered}
 
 | Formula | Meaning | Details |
-|----|----|----|
+|------------------------|------------------------|------------------------|
 | `y~x_1` | $y=a_0 +a_1*x_1$ | Slope+Intercept |
 | `y~x_1 - 1` | $y=a_1*x_1$ | Slope, no intercept |
 | `y~I(x_1^2)` | $y=a_0 + a_1*(x_1^2)$ | Quadratic effect |
@@ -62,9 +62,7 @@ use `par(oldpar)` to reset graphic parameter
 
 for model selection
 
-`stepAIC(fullModel)` - perform stepwise AIC model selection; apply to full model object, `MASS` package\
-`dredge(fullModel)` - perform global model selection, `MuMIn` package\
-`model.avg()` - perform model averaging\
+\
 `AIC(fit)` - get AIC for a fitted model\
 `anova(fit1, fit2)` - compare two fitted models via Likelihood Ratio Test (LRT)
 
@@ -178,21 +176,20 @@ plot(allEffects(carsfit))
 ## Interactions with the `plantHeight` dataset
 
 ::: callout-warning
-#### Plant Height revisited
+#### Plant Height 
 
-Revisit exercise our previous analysis of EcoData::plantHeight
+Use the `plantHeight` dataset from `EcoData` package.
 
 ```{r}
 library(EcoData)
-model = lm(loght ~ temp, data = plantHeight)
-
+#str(plantHeight)
 ```
 
-Use (separate) multiple regressions to test if:
+Model (separate) multiple regressions form log of height (`loght`) to test if:
 
-1.  If temp or NPP (net primary productivity) is a more important predictor (importance == absolute effect size).
-2.  If growth forms (variable growthform) differ in their temperature effects. (use an interaction)
-3.  If the effect of temp remains significant if we include latitude and an interaction of latitude with temp. If not, why? Tip: plot temp \~ lat.
+1.  If `temp` (temperature) or `NPP` (net primary productivity) is a more important predictor (importance ==  scaled effect size).
+2.  If growth forms (variable `growthform`) differ in their temperature (`temp`) effects. (use an interaction)
+3.  If the effect of `temp` remains significant if we include latitude (`lat`) and an interaction of latitude with temp. If not, why? Tip: plot temp \~ lat.
 :::
 
 `r hide("Click here to see the solution")`
@@ -213,22 +210,21 @@ fit = lm(loght ~ sTemp + sNPP, data = plantHeight)
 summary(fit)
 ```
 
-NPP is slightly more important
+NPP is slightly more important.
 
 2)  **Interaction with growth form**
 
 ```{r}
 fit = lm(loght ~ growthform2 *  sTemp , data = plantHeight)
 summary(fit)
-
 ```
 
 Yes, because (some) interactions are significant.
 
-Note that the n.s. effect of sTemp is the first growth form (Ferns), for which we had only one observation. In a standard multiple regression, you don't have p-values for the significance of the temperature effect against 0 for the other growth forms, because you test against the reference. What one usually does is to run an ANOVA (see chapter on ANOVA) to see if temp is overall significant.
+Note that the n.s. effect of sTemp is the first growth form (Ferns), for which we had only one observation. In a standard multiple regression, you don't have p-values for the significance of the temperature effect against 0 for the other growth forms, because you test against the reference. What one usually does is to run an ANOVA to see if temp is overall significant.
 
 ```{r}
-anova(lm(loght ~ growthform *  sTemp , data = plantHeight))
+anova(fit)
 ```
 
 Alternatively, if you want to test if a specific growth form has a significant temperature effect, you could either extract the p-value from a multiple regression (a bit complicated) or just run a univariate regression for this growth form
@@ -241,7 +237,7 @@ summary(fit)
 Or you could fit the interaction but turn-off the intercept (by saying +0 or -1) and remove the plantHeight intercepts:
 
 ```{r}
-fit = lm(loght ~ sTemp:growthform + 0, data = plantHeight[,])
+fit = lm(loght ~ sTemp:growthform + 0, data = plantHeight)
 summary(fit)
 ```
 
@@ -258,7 +254,14 @@ All is n.s. ... how did this happen? If we check the correlation between temp an
 cor(plantHeight$temp, plantHeight$lat)
 ```
 
-In principle, the regression model should be able to still separate them, but the higher the collinearity, the more difficult it becomes for the regression to infer if the effect is caused by one or the other predictor. `r unhide()`
+In principle, the regression model should be able to still separate them, but the higher the collinearity, the more difficult it becomes for the regression to infer if the effect is caused by one or the other predictor.
+
+`r unhide()`
+
+
+
+<!---
+MELINA: I hided this exercise, because I and Florian decided to change the content of model selection, and we will not present stepAIC or dredge anymore
 
 ## Model-selection with the `Cement` dataset
 
@@ -302,7 +305,7 @@ Use your results to answer the following questions:
 
 **3. Here's a quote from Wikipedia on the AIC: ["When the sample size is small, there is a substantial probability that AIC will select models that have too many parameters, i.e. that AIC will overfit."](https://en.wikipedia.org/wiki/Akaike_information_criterion) Check the sample size of the Cement dataset. How do you now interpret the AIC values for the full model as compared to the reduced model from global model selection? (Several are correct)**
 
-```{r}
+```{r,eval=F}
 #| include: false
 opts_p <- c(
   "The AIC for the full model is smaller. The full model thus fits better.",
@@ -361,3 +364,4 @@ AICc(opt,full) # This is inf! -> optimal model is better according to AICc
 ```
 
 `r unhide()`
+--->

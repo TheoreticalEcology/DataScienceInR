@@ -29,6 +29,7 @@ In the worst case it can lead to a Simpson's paradox: An unobserved variable pur
 Confounders have effects on the response and another predictor.
 
 Let's simulate some data about `Growth` of plants influenced by `Climate` and `Temperature`. However, we will make `Temperature` also depending on `Climate` to some extent:
+
 ```{r}
 Climate = runif(100)
 Temp = Climate + rnorm(100, sd = 0.2)
@@ -36,6 +37,7 @@ Growth = 0.5*Temp - 1.0*Climate + rnorm(100, sd = 0.2)
 ```
 
 Simple linear model of Growth to temperature
+
 ```{r}
 summary(lm(Growth~Temp))
 ```
@@ -43,6 +45,7 @@ summary(lm(Growth~Temp))
 Take a look at the effects of temperature and compare with the simulated one. What happened here??
 
 Now, we introduce the Climate variable (our confounder):
+
 ```{r}
 summary(lm(Growth~Temp+Climate)) # correct effects!!
 ```
@@ -75,7 +78,6 @@ Multiple linear regression expands simple linear regression to a polynomial of s
 
 Let's see an example with the `airquality` data:
 
-Let's use the `airquality` data:
 ```{r}
 ## first remove observations with NA values
 newAirquality = airquality[complete.cases(airquality),]
@@ -94,22 +96,21 @@ abline(m0, col = "blue", lwd = 3)
 ```
 
 Including `Wind` effect:
+
 ```{r}
 m1 = lm(Ozone ~ Temp + Wind , data = newAirquality)
 summary(m1)
 ```
 
-To vizualize the effects of each predictor on the ozone, we can use the package `effects`. The package will plot the effects of each variable separately (plots called partial slopes) "controling" for the other variables in the model. Controling here means that for ploting the effect of `Temp`, the variable `Wind` was fixed at it's average value (the fixed value can be changed by the user, but the default is to take the mean of a continuous variable).
-
-A predictor eﬀect plot summarizes the role of a selected focal predictor in a fitted regression model. These graphs are an alternative to tables of fitted coeﬃcients, which can be much harder to interpret than predictor eﬀect plots. (Info taken from the vignette of the `effects`package, take a look at it!).
-
+To vizualize the effects of each predictor on the ozone, we can use the package `effects`. The package will plot the effects of each variable separately (plots called partial slopes) controling for (or adjusting for) the other variables in the model. Controling here means that for ploting the effect of `Temp`, the variable `Wind` was fixed at it's average value (the fixed value can be changed by the user, but the default is to take the mean of a continuous variable).
 
 Plotting multiple regression outputs using the package `effects`:
-
 ```{r}
 library(effects)
 plot(allEffects(m1))
 ```
+
+A predictor eﬀect plot summarizes the role of a selected focal predictor in a fitted regression model. These graphs are an alternative to tables of fitted coeﬃcients, which can be much harder to interpret than predictor eﬀect plots. (Info taken from the vignette of the `effects` package, take a look at it!).
 
 Let's interprete the partial slope plot for `Temp`. It shows that there is a positive relationship of temperature and Ozone. The shaded blue area.
 
@@ -158,8 +159,8 @@ Let's include an interaction effect of `Wind` and `Temp` to the `Ozone` model.
 
 ::: callout-note
 ## Scale your continous variables!
-if including interactions, always scale your predictor variables!
-scale means: subtracts the mean and divides by standard deviation
+
+if including interactions, always scale your predictor variables! scale means: subtracts the mean and divides by standard deviation
 :::
 
 ```{r}
@@ -173,146 +174,78 @@ The influence of temperature on ozone depends on the amount of wind. When wind i
 plot(allEffects(m2, xlevels=3))
 ```
 
-
-
-**Another example:**
+### Interactions with categorical variables
 
 How does everything change, if we have factorial predictors?
-```{r}
-newAirquality$MonthFactor = as.factor(newAirquality$Month)
 
-m4 = lm(sqrt(Ozone) ~ MonthFactor + scale(Wind) * scale(Temp) * scale(Solar.R) , 
+```{r}
+newAirquality$MonthFactor = factor(newAirquality$Month)
+m4 = lm(Ozone ~ MonthFactor * scale(Temp), 
         data = newAirquality)
 summary(m4)
+plot(allEffects(m4))
 ```
+
+## Sequential (type I) ANOVA
+
+Let's take our old model with an interaction term between temperature and wind:
 
 
 ```{r}
-m5 = lm(sqrt(Ozone) ~ MonthFactor + scale(Wind) + scale(Temp) + scale(Solar.R) 
-                      + scale(Wind):scale(Temp)
-                      + scale(Wind):scale(Solar.R)
-                      + scale(Temp):scale(Solar.R), 
-        data = newAirquality)
-summary(m5)
-
-# short form for including only two-way interactions:
-
-m5 = lm(sqrt(Ozone) ~ MonthFactor + (scale(Wind) + scale(Temp) + scale(Solar.R))^2,
-        data = newAirquality)
-summary(m5)
-```
-
-Get the overall effect of Month:
-```{r}
-anova(m5)
-# this is doing a type I ANOVA = sequential
-# order in which you include the predictors changes the estimates and p-values
-
-# If you want to do a type II ANOVA, use ANova() from the car package
-library(car)
-Anova(m5) # Anova with capital A
-#type II ANOVA: all other predictors have already been taken into account
-# Does an additional predictor explain some of the variance on top of that?
-```
-
-## Model selection
-
-We've learned that we should include variables in the model that are collinear, that is they correlate with other predictors, but how many and which factors should we include?
-
-Famous example: [Female hurricanes are deadlier than male hurricanes (Jung et al., 2014)](https://www.pnas.org/doi/abs/10.1073/pnas.1402786111)
-
-They have analyzed the number of fatalities of hurricane and claimed that there is an effect of femininity of the name on the number of deads (while correcting for confounders). They recommend to give hurricans only male names because it would considerably reduce the number of deads.
-
-```{r, warning = F}
-# loading packages
-library(EcoData)
-library(DHARMa)
-library(glmmTMB) # package for the model
-library(effects)
-#?hurricanes
-#str(hurricanes)
-```
-
-We will model the number of deaths, so we are going to use a different distribution (Negative Binomial). This is a generalized linear model (GLM), that you will learn about in our next class. So, let's focus on the model selection produre:
-
-```{r, warning=F}
-m1 = glmmTMB(alldeaths ~ MasFem*
-                      (Minpressure_Updated_2014 + scale(NDAM)),
-                           data = hurricanes, family = nbinom2)
-summary(m1)
-```
-
-We have **Interactions** -\> we need to scale variables:
-
-```{r}
-m2 = glmmTMB(alldeaths ~ scale(MasFem)*
-                             (scale(Minpressure_Updated_2014) + scale(NDAM)+scale(sqrt(NDAM))),
-                           data = hurricanes, family = nbinom2)
+m2 = lm(Ozone ~ scale(Temp)* scale(Wind) , data = newAirquality)
 summary(m2)
 ```
 
-The effect of femininity is gone! Already with the scaled variables, but also with the transformation with the NDAM variable. The question was raised which of both models is more reasonable, whether the relationship between damage and mortality isn't a straight line or that the gender of the hurricane names affect deaths ([Bob O'Hara and GrrlScientist](https://www.theguardian.com/science/grrlscientist/2014/jun/04/hurricane-gender-name-bias-sexism-statistics)). They argue that the model with the transformed variable fits the data better which brings us to the topic of this section, how to choose between different models? Answering this question if the goal of model selection.
+The total adjusted R² of the model is `r round(summary(m2)$adj.r.squared,2)`, which is better than the model that only included `Temp` as a predictor (`r round(summary(temp)$adj.r.squared,2)`). However, we might be interested in knowing **how much** each predictor contributes to the model. This is where ANOVA comes in.
 
-Why not include all the variables we can measure in our model? Problem with the full model:
+An ANOVA (Analysis of Variance), or more specifically a **sequential (type I) ANOVA**, evaluates how the model's explanatory power increases as we add predictors one at a time. It allows us to assess the **incremental contribution** of each variable, **in the order they are added**.
 
--   If you have more parameters than data points, the model cannot be fitted at all
-
--   Even with n (samples) \~ k (number of parameters), model properties become very unfavorable (high p-values and uncertainties/standard errors) --\> Overfitting
-
-A "good model" depends on the goal of the analysis, do we want to optimize:
-
--   Predictive ability -- how well can we predict with the model?
-
--   Inferential ability -- do we identify the true values for the parameters (true effects), are the p-values correct, can we correctly say that a variable has an effect?
-
-The more complex a model gets, the better it fits to the data, but there's a downside, the bias-variance tradeoff.
-
-[Explanation bias-variance tradeoff](https://theoreticalecology.github.io/AdvancedRegressionModels/3C-ModelSelection.html#the-bias-variance-trade-off)
-
-[Explanation LRT and AIC](https://theoreticalecology.github.io/AdvancedRegressionModels/3C-ModelSelection.html#model-selection-methods)
-
-[Problem of p-hacking](https://theoreticalecology.github.io/AdvancedRegressionModels/3C-ModelSelection.html#pHacking)
-
-```{r, echo=F}
-#| eval: false
-# this script doesn't make sense in this file - maybe some leftovers> there is no m3 or m5 before
-
-# Compare different competing models:
-# let's compare models m3 and m5 to decide which one explains our data better:
-# 1. LRT
-anova(m3, m5)
-# RSS = residual sum of squares = variance not explained by the model
-# smaller RSS = better model
-# p-value
-
-#2. AIC
-AIC(m3)
-AIC(m5)
-# also here, model m5 is better
-```
-
-**Demonstration**: Why interpretation of effect sizes and p-values after extensive model selection is not a good idea:
+Let's run a type I ANOVA for m2
 
 ```{r}
-#| eval: false
-####:
-library(MASS)
-set.seed(1)
-#make up predictors:
-dat = data.frame(matrix(runif(20000), ncol = 100))
-# create a response variable
-dat$y = rnorm(200)
-fullModel = lm(y ~ ., data = dat)
-sum <- summary(fullModel)
-mean(sum$coefficients[,4] < 0.05)
-# 0.019: less than 2 % false positives = type I error rate
-
-selection = stepAIC(fullModel)
-sum.sel <- summary(selection)
-mean(sum.sel$coefficients[,4] < 0.05)
-# 0.48: Now almost 50 % of our results are false positives!!!
-
+anova(m2)
 ```
+
+This output shows the reduction in residual sum of squares as each term is added to the model. Importantly, because this is **sequential**, the order of variables matters: the second variable is evaluated **after accounting for the first**, and so on.
+
+::: callout-note
+As the name type I suggests, there are also other (non-sequential) types of ANOVA. More on this in the Advanced Regression Model lecture notes [here](https://theoreticalecology.github.io/AdvancedRegressionModels/2B-ANOVA.html#partitioning-variance-if-order-matters).
+:::
+
+## Model selection
+
+Model selection is a **controversial and nuanced** area of statistics. The criteria you use depend heavily on your goal: are you trying to **explain relationships** (inference) or make **accurate predictions**?
+
+Here, we will briefly present two commonly used tools for model selection: the already mentioned `anova` function and the **Akaike Information Criterion (AIC)**.
+
+Let’s return to our `airquality` dataset and fit four increasingly complex models:
+```{r}
+m0 = lm(Ozone ~ 1 , data = newAirquality)
+m1 = lm(Ozone ~ Temp  , data = newAirquality)
+m2 = lm(Ozone ~ Wind , data = newAirquality)
+m3 = lm(Ozone ~ Temp + Wind , data = newAirquality)
+```
+
+We can compare the nested models (one is the smaller version of the other) with the anova:
+
+```{r}
+anova(m0, m1, m3)
+```
+
+This tells us whether each added variable significantly improves the model. However, we **cannot** use ANOVA to compare **non-nested models** — i.e., models that include different predictors but are not subsets of one another:
+
+
+```{r}
+anova(m1, m2) # This doesn't make sense: models are not nested
+```
+
+To compare models regardless of nesting, we can use **AIC (Akaike Information Criterion)**. Lower AIC values indicate better trade-off between goodness-of-fit and model complexity:
+
+```{r}
+AIC(m0, m1, m2,m3)
+```
+
+This allows us to compare all models side by side and select the one that balances fit and parsimony.
 
 ## Formula syntax
 
