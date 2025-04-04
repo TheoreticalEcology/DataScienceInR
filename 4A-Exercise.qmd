@@ -161,7 +161,9 @@ opts_p <- c(
 `r longmcq(opts_p)`
 :::
 
-`r hide("Click here to see the solution")` \### Solution
+`r hide("Click here to see the solution")` 
+
+### Solution
 
 -   The maximum likelihood estimate of bird abundance for grazing intensity 1 is 28.623. CORRECT: When the predictor is a factor, the intercept equals the first factor level (by default, this follows an alphabetical order).
 -   We can see in the regression table that the difference between grazing intensity 3 and 4 is significant. WRONG: Comparisons are always related to the intercept, i.e. to the first factor level. For comparisons among other factor levels we need post-hoc tests.

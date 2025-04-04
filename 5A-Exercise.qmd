@@ -8,242 +8,356 @@ editor_options:
 set.seed(42)
 ```
 
-# Exercise - Multivariate statistics {.unnumbered}
+# Exercise - Multiple Linear Regression {.unnumbered}
 
-```{r load data and libraries, echo=FALSE, message=FALSE, warning=FALSE}
-dat = read.table(file = "http://evol.bio.lmu.de/_statgen/Multivariate/11SS/RIKZGroups.txt", header = T)
-library(vegan)
-library(cluster)
-library(ape)
-library(ggfortify)
+| Formula | Meaning | Details |
+|----|----|----|
+| `y~x_1` | $y=a_0 +a_1*x_1$ | Slope+Intercept |
+| `y~x_1 - 1` | $y=a_1*x_1$ | Slope, no intercept |
+| `y~I(x_1^2)` | $y=a_0 + a_1*(x_1^2)$ | Quadratic effect |
+| `y~x_1+x_2` | $y=a_0+a_1*x_1+a_2*x_2$ | Multiple linear regression (two variables) |
+| `y~x_1:x_2` | $y=a_0+a_1*(x_1*x_2)$ | Interaction between x~1~ and x~2~ |
+| `y~x_1*x_2` | $y=a_0+a_1*(x_1*x_2)+a_2*x_1+a_3*x_2$ | Interaction and main effects |
+
+: Formula syntax
+
+In this exercise you will:
+
+-   perform multiple linear regressions
+-   interpret regression output and check the residuals
+-   plot model predictions including interactions
+
+Before you start, remember to clean your global environment (if you haven't already) using `rm(list=ls())`.
+
+To conduct the exercise, please load the following packages:
+
+```{r, eval=TRUE}
+library(effects)
+library(MuMIn)
 ```
 
-In this exercise you will practice analyzing multivariate datasets using:
+You will work with the following datasets:
 
--   ordination methods which explore higher-order correlations among variables and similarities between observations
--   clustering methods which aggregate individual observations into clusters.
+-   mtcars
+-   Cement{MuMIn}
 
-### Useful functions for multivariate data analyses
+The second dataset is from the MuMIn package (as shown by the curly brackets).
 
-`pairs()` - create pairplot (plot all variables against each other)\
-`prcomp()` - calculate PCA\
-`plot(pca_object)` - plot variance explained by PC axes\
-`biplot()` - plot PCA\
-`metaMDS()` - calculate NMDS\
-`ordiplot(nmds_object)` - plot NMDS\
-`rda()` - calculate RDA\
-`plot(rda_object)` - plot RDA\
-`dist()` - create distance matrix\
-`hclust()` - perform hierarchical clustering; apply to distance matrix\
-`plot(as.phylo(hc_object))` - plot dendrogram from hclust output\
-`agnes()` - another clustering algorithm\
-`kmeans()` - perform kmeans non-hierarchical clustering; access cluster assignments using `kmeans_object\$cluster`
+## Useful functions
 
-### Background on the dataset
+for multiple linear regression
 
-Marine coastal ecosystems harbor the most productive and diverse communities on Earth. However, they are extremely vulnerable to climate change and human activities (such as landclaim, pollution, recreation purposes, ...) As a consequence, the performance of this ecosystem has decreased considerably. To better understand these ecosystems, the dutch governmental institute (RIKZ: Rijksinstituut voor Kust en Zee) started a research project on sandy beaches to investigate the relationship between environmental factors and how they might affect benthic fauna. *(from the LMU and Zuur, Ieno, Smith (2007), Chapter 12.8-12.10 and 27)*
+`lm()` - fit linear model\
+`summary(fit)` - apply to fitted model object to display regression table\
+`plot(fit)` - plot residuals for model validation\
+`anova(fit)` - apply type I ANOVA (variables included sequentially) to model to test for effects all levels of a factor\
+`Anova(fit)` - `car` package; use type II ANOVA (effects for predictors when all other predictors are already included) for overall effects\
+`scale()` - scale variable\
+`sqrt()` - square-root\
+`log()` - calculates natural logarithm\
+`plot(allEffects(fit))` - apply to fitted model object to plot marginal effect; `effects` package\
+`par()` - change graphical parameters\
+use `oldpar \<- par(mfrow = c(number_rows, number_cols))` to change figure layout including more than 1 plot per figure\
+use `par(oldpar)` to reset graphic parameter
 
-**Question**\
-We now want to use ordination methods to explore
+for model selection
 
--   the variability in environmental conditions
--   the variability in species richness
+`stepAIC(fullModel)` - perform stepwise AIC model selection; apply to full model object, `MASS` package\
+`dredge(fullModel)` - perform global model selection, `MuMIn` package\
+`model.avg()` - perform model averaging\
+`AIC(fit)` - get AIC for a fitted model\
+`anova(fit1, fit2)` - compare two fitted models via Likelihood Ratio Test (LRT)
 
-We also want to use clustering methods to define 3 environmental types and hierarchically cluster the samples with respect to their species richness.
+## Analyzing the `mtcars` dataset
 
-**Dataset**
+Imagine a start up company wants to rebuild a car with a nice retro look from the 70ies. The car should be modern though, meaning the fuel consumption should be as low as possible. They've discovered the `mtcars` dataset with all the necessary measurements and they've somehow heard about you and your R skills and asked you for help. And of course you promised to help, kind as you are.
 
-Read in the dataset as follows:
+The company wants you to find out which of the following characteristics affects the fuel consumption measured in miles per gallon (`mpg`). Lower values for `mpg` thus reflect a higher fuel consumption. The company wants you to include the following variables into your analysis:
 
-```{r, eval = FALSE}
-dat = read.table(file = "http://evol.bio.lmu.de/_statgen/Multivariate/11SS/RIKZGroups.txt", header = T)
-head(dat)
-```
+-   number of cylinders (`cyl`)
+-   weight (`wt`)
+-   horsepower (`hp`)
+-   whether the car is driven manually or with automatic (`am`)
 
-You already know the functions `str()` and `summary()` to get an overview of a dataset and to see which variables the dataset contains.
+In addition, Pawl, one of the founders of the company suggested that the effect of weight (`wt`) might be irrelevant for powerful cars (high `hp` values). You are thus asked to test for this interaction in your analysis as well.
 
--   columns 2:5 is **species richness** within four larger faunal groups
--   columns 7:16 are different **environmental variables**
+::: callout-warning
+### Question
 
-Not important for us are:
+Carry out the following tasks:
 
--   column 6 (week), a time stamp\
--   column 17 (sorting1), variable from the observational design
+-   Perform a multiple linear regression (change class for `cyl` and `am` to factor)
+-   Check the model residuals
+-   Interpret and plot all effects
 
-Let's get into the analysis!
+You may need the following functions:
 
-## Unconstrained ordination (PCA)
-
-Carry out the following analyses:
-
--   Make two PCAs, one for the environmental and one for the species richness data (see columns above).
--   Name the results `pca_environment` and `pca_species`.
--   Create a biplot for each PCA.
--   Create a barplot for the proportion of variance explained by each component.
-
-For example, the result for species richness should look like this:
-
-```{r, echo = FALSE}
-pca_species <- prcomp(dat[,2:5], scale = T) # conduct a principle component analysis (pca) with the assinged name "pca"
-
-par(mfrow = c(1, 2))
-biplot(pca_species, main = "PCA") # plot the results of the pca as a rotation matrix
-barplot(summary(pca_species)$importance[2,1:4],
-        main = "Components of species",
-        ylab = "Proportion of variance explained")
-par(mfrow = c(1, 1))
-```
-
-You need the following functions and the package `vegan`:
-
--   `prcomp()`
--   `biplot()`\
--   `barplot()`
+-   `as.factor()`
+-   `lm()`
 -   `summary()`
-
-```{r, eval = FALSE}
-library(vegan)
-```
-
-**Hints**
-
--   Don't forget to scale the variables in the PCA.
--   In order to get the proportion of the explained variance, have a look at the summary of your analysis. `str()` shows you what the summary contains. You want to specifically look at the `importance`, here the second row contains the proportion of variance of all components. So what we want to plot is: `summary(pca_species)$importance[2,]`.
--   Don't forget to give your plots a title.
-
-Now, use your results to **answer the questions on elearning-extern** (Q 1-3) [("07_Test for Exercise in R")](https://elearning.uni-regensburg.de/mod/quiz/view.php?id=2046682).
-
-1.  In which multivariate dataset do the first and second components explain more variance?
-2.  What are the two samples that have the highest score on the respective third PCA axes?
-3.  From looking at the biplot: Which environmental variables would you choose, if you have only the resource to measure three variables?
-    a)  NAP, angle 1 and chalk
-    b)  salinity, penetrability and grain size
-    c)  grain size, chalk and exposure
-4.  Describe the following correlations:
-    a)  salinity and humus
-    b)  angle1 and exposure
-    c)  Polychaeta and Mollusca
-
-::: {.callout-tip collapse="true" appearance="minimal" icon="false"}
-### Solution
-
-```{r solution-PCA}
-## 1.) Conduct the principle component analyses (PCAs):
-
-# a) PCA of environmental data
-pca_environment = prcomp(dat[,7:16], scale = T)
-summary(pca_environment)
-
-op <- par(mfrow = c(1,2))
-biplot(pca_environment, main = "PCA")            # plot the results of the PCA as a rotation matrix
-barplot(summary(pca_environment)$importance[2,], # get the importance measure
-     main = "Components of environment",
-     ylab = "Proportion of variance explained")
-
-# b) PCA of species richness data
-pca_species = prcomp(dat[,2:5], scale = T)
-summary(pca_species)
-
-biplot(pca_species, main = "PCA")            # plot the results of the PCA as a rotation matrix
-barplot(summary(pca_species)$importance[2,], # get the importance measure
-     main = "Components of species",
-     ylab = "Proportion of variance explained")
-par(op)
-
-# From the *summary()* output we can see that the first and second components explain more variance in the species PCA.
-
-
-##  2.) What are the two samples that have the highest score on the third PCA axis?
-
-# -> order the samples by their PC3 coordinate:
-order(pca_environment$x[,'PC3'], decreasing = T) # -> 24 is highest
-order(pca_species$x[,'PC3'], decreasing = T) # -> 7 is highest
-
-
-## 3.) Which environmental variables would you choose, if you have only the resource to measure three variables? 
-
-# From looking at the biplot, we choose 3 variables that describe a lot of variation (i.e. have a large length in the biplot) and have little collinearity. 
-# -> For example, an appropriate choice would be salinity, penetrability and grain size.
-
-
-## 4.) We can get information on the correlations of variables by looking at their representation in the biplot: 
-  #  a) salinity and humus:  same direction  ->  positively correlated
-  #  b) angle1 and exposure:  opposite directions  ->  negatively correlated
-  #  c) Polychaeta and Mollusca:  almost perpendicular  ->  uncorrelated
-```
-:::
-
-## Clustering
-
-### K-means
-
-We want to use clustering methods to define 3 environmental types. Use the function `kmeans()` with `centers = 3` (number of clusters to be generated). Remember to set a seed; the choice of the first k centers is random.
-
-```{r, eval = FALSE}
-set.seed(467456)
-cl = #...
-```
-
-Compare the three clusters with the result of the PCA using the following code that uses another plotting framework called ggplot2:
-
-```{r, eval = FALSE}
-library(ggfortify)
-autoplot(pca_environment, colour = cl$cluster, size = 2, loadings = TRUE, loadings.colour = 'black',
-         loadings.label = TRUE, loadings.label.size = 3, loadings.label.colour = "black")
-```
-
-The colors of the points represent the three clusters. **Answer the following question on elearning-extern** (Q 4-5):
-
--   How is it possible that four observations in the middle (in red - if you have used the same seed) belong to a different cluster than the observations around them (in black)?
--   Which environmental variables are on average high within the black cluster (cluster 1)?
-
-::: {.callout-tip collapse="true" appearance="minimal" icon="false"}
-### Solution
-
-```{r solution-Clustering}
-
-# Create clusters using all environmental variables
-set.seed(467456)
-cl <- kmeans(dat[,7:16], centers = 3) # 3 clusters to be generated
-
-# Plot
-library(ggfortify)
-autoplot(pca_environment, colour = cl$cluster, size = 2, loadings = TRUE, loadings.colour = 'black',
-         loadings.label = TRUE, loadings.label.size = 3, loadings.label.colour = "black")
-
-# To understand why the four observations in the middle belong to a different cluster than the observations around them, we must take into account, that the biplot is only a 2-dimensional representation of a more-than-2 dimensional space. Therefore, the four points in the middle will be dissimilar to the points around them with respect to a variable that is not well represented by the first two PCA axes.
-
-# Environmental variables that are on average high within cluster 1:
-# -> looking at the plot we find that exposure and grain size are high on average within cluster 1
-```
-:::
-
-### Hierarchical clustering
-
-Now we want to hierarchically cluster the samples with respect to their species richness, as shown in the following plot:
-
-```{r clustering, echo = FALSE}
-hc = hclust(dist(dat[, 2:5]))
-plot(as.phylo(hc), tip.color = dat$week)
-```
-
-Create the same plot using the functions:
-
--   `hclust()`\
+-   `anova()`
 -   `plot()`
--   `as.phylo()`
+-   `allEffects()`
 
-Load the package `ape`. Have a look at the help for `hclust()` to read what the function does and look at the examples for further help on how to use the function. Then have a look at what the function `as.phylo()` does. Now, color the labels using the variable `week`. You can do this using the argument "tip.color =".
+Use your results to answer the questions:
 
-Choose the correct statement(s) about the species richness and its sampling on **elearning-extern**(Q6). To be able to read the plot more easily, you can click *Zoom* in the top pane of the Plots window in RStudio.
+**Which of the following statements are correct? (Several are correct).**
 
-::: {.callout-tip collapse="true" appearance="minimal" icon="false"}
-### Solution
-
-```{r solution-HierarClcust}
-library(ape)
-
-hc = hclust(dist(dat[, 2:5]))
-plot(as.phylo(hc), tip.color = dat$week)
+```{r}
+#| include: false
+opts_p <- c(
+  answer = "Cars with 6 cylinders do not differ significantly in their fuel consumption as compared to cars with 4 cylinders.",
+  "Stronger cars (hp) use less fuel (mpg).",
+  answer = "Overall, heavier cars (wt) use significantly more fuel (their range is smaller; mpg)"
+)
 ```
+
+`r longmcq(opts_p)`
+
+**Concerning the interaction between weight (wt) and horsepower (hp), which of the following statements is correct?**
+
+```{r}
+#| include: false
+opts_p <- c(
+  "Pawl was wrong. There is a significant interaction between weight and horsepower, but the direction is opposite to what Pawl thought: The effect of weight is stronger for stronger cars.",
+  "Pawl was wrong, the effect of weight is independent of horsepower.",
+  answer = "Pawl was right. The effect of weight is strong for weaker cars, but becomes indeed irrelevant for stronger cars."
+)
+```
+
+`r longmcq(opts_p)`
 :::
+
+`r hide("Click here to see the solution")`
+
+This is the code that you need to interpret the results.
+
+```{r mtcars}
+# change am and cyl from numeric to factor
+mtcars$am <- as.factor(mtcars$am)
+mtcars$cyl <- as.factor(mtcars$cyl)
+
+# multiple linear regression and results:
+# (we need to scale (standardize) the predictors wt and hp, since we include their interaction)
+carsfit <- lm(mpg ~ am + cyl + scale(wt) * scale(hp), dat = mtcars)
+# weight is included as the first predictor in order to have
+# it as the grouping factor in the allEffects plot
+
+summary(carsfit)
+# The first level of each factor is used as a reference, i.e. in this case a manual gear shift with 4 gears.
+# From the coefficient cyl6 we see that there is no significant difference in fuel consumption (= our response) between 4 gears (the reference) and 6 gears.
+# In contrast, the predictors weight (wt) and horsepower (hp) have a significant negative effect on the range (mpg), so that they both increase fuel consumption.
+
+# check residuals
+old.par = par(mfrow = c(2, 2))
+plot(carsfit)
+par(old.par)
+
+# plot effects
+plot(allEffects(carsfit))
+# We can see in the wt*hp plot, that for high values of hp wt has no effect on the response mpg. We conclude that Pawl was right.
+```
+
+`r unhide()`
+
+<!-- Take from https://theoreticalecology.github.io/DataScienceInR/4A-Exercise.html -->
+
+::: callout-warning
+#### Question
+
+1.  What is the meaning of "An effect is not significant"?
+2.  Is an effect with three \*\*\* more significant / certain than an effect with one \*?
+:::
+
+`r hide("Click here to see the solution")`
+
+1.  You should NOT say that the effect is zero, or that the null hypothesis has been accepted. Official language is "there is no significant evidence for an effect(p = XXX)". If we would like to assess what that means, some people do a post-hoc power analysis (which effect size could have been estimated), but better is typically just to discuss the confidence interval, i.e. look at the confidence interval and say: if there is an effect, we are relatively certain that it is smaller than X, given the confidence interval of XYZ.
+
+2.  Many people view it that way, and some even write "highly significant" for \*\*\* . It is probably true that we should have a slightly higher confidence in a very small p-value, but strictly speaking, however, there is only *significant*, or *not significant*. Interpreting the p-value as a measure of certainty is a slight misinterpretation. Again, if we want to say how certain we are about the effect, it is better to look again at the confidence interval, i.e. the standard error and use this to discuss the precision of the estimate (small confidence interval / standard error = high precision / certainty). `r unhide()`
+
+## Interactions with the `plantHeight` dataset
+
+::: callout-warning
+#### Plant Height revisited
+
+Revisit exercise our previous analysis of EcoData::plantHeight
+
+```{r}
+library(EcoData)
+model = lm(loght ~ temp, data = plantHeight)
+
+```
+
+Use (separate) multiple regressions to test if:
+
+1.  If temp or NPP (net primary productivity) is a more important predictor (importance == absolute effect size).
+2.  If growth forms (variable growthform) differ in their temperature effects. (use an interaction)
+3.  If the effect of temp remains significant if we include latitude and an interaction of latitude with temp. If not, why? Tip: plot temp \~ lat.
+:::
+
+`r hide("Click here to see the solution")`
+
+```{r}
+plantHeight$sTemp = scale(plantHeight$temp)
+plantHeight$sLat = scale(plantHeight$lat)
+plantHeight$sNPP = scale(plantHeight$NPP)
+
+# relevel 
+plantHeight$growthform2 = relevel(as.factor(plantHeight$growthform), "Herb")
+```
+
+1)  **NPP or Temp?**
+
+```{r}
+fit = lm(loght ~ sTemp + sNPP, data = plantHeight)
+summary(fit)
+```
+
+NPP is slightly more important
+
+2)  **Interaction with growth form**
+
+```{r}
+fit = lm(loght ~ growthform2 *  sTemp , data = plantHeight)
+summary(fit)
+
+```
+
+Yes, because (some) interactions are significant.
+
+Note that the n.s. effect of sTemp is the first growth form (Ferns), for which we had only one observation. In a standard multiple regression, you don't have p-values for the significance of the temperature effect against 0 for the other growth forms, because you test against the reference. What one usually does is to run an ANOVA (see chapter on ANOVA) to see if temp is overall significant.
+
+```{r}
+anova(lm(loght ~ growthform *  sTemp , data = plantHeight))
+```
+
+Alternatively, if you want to test if a specific growth form has a significant temperature effect, you could either extract the p-value from a multiple regression (a bit complicated) or just run a univariate regression for this growth form
+
+```{r}
+fit = lm(loght ~ sTemp + 0, data = plantHeight[plantHeight$growthform == "Tree",])
+summary(fit)
+```
+
+Or you could fit the interaction but turn-off the intercept (by saying +0 or -1) and remove the plantHeight intercepts:
+
+```{r}
+fit = lm(loght ~ sTemp:growthform + 0, data = plantHeight[,])
+summary(fit)
+```
+
+3)  **Interaction with lat**
+
+```{r}
+fit = lm(loght ~ sTemp * sLat, data = plantHeight)
+summary(fit)
+```
+
+All is n.s. ... how did this happen? If we check the correlation between temp and lat, we see that the two predictors are highly collinear.
+
+```{r}
+cor(plantHeight$temp, plantHeight$lat)
+```
+
+In principle, the regression model should be able to still separate them, but the higher the collinearity, the more difficult it becomes for the regression to infer if the effect is caused by one or the other predictor. `r unhide()`
+
+## Model-selection with the `Cement` dataset
+
+The process of cement hardening involves exogenous chemical reactions and thus produces heat. The amount of heat produced by the cement depends on the mixture of its constituents. The `Cement` dataset includes heat measurements for different types of cement that consist of different relative amounts of calcium aluminate (`X1`), tricalcium silicate (`X2`), tetracalcium alumino ferrite (`X3`) and dicalcium silicate (`X4`). A cement producing company wants to optimize the composition of its product and wants to know, which of these compounds are mainly responsible for heat production.
+
+::: callout-note
+We only do a model selection here for educational reasons. For your analysis, and if your goal is not a predictive model, think about the model structure before you do the analysis and then stick to it! See here the section about [p-hacking](https://theoreticalecology.github.io/AdvancedRegressionModels/3C-ModelSelection.html#pHacking) (and also consider that AIC selection will/can remove confounders which will violate causality and can lead to spurious correlations!
+:::
+
+::: callout-warning
+### Questions
+
+Carry out the following tasks:
+
+-   Perform a multiple linear regression including all predictor variables and all two-way interactions (remember the notation `(var1 + var2 + var3)^2`.
+-   Perform forward, backward, and global model selection and compare the results
+-   Fit the model considered optimal by global model selection and compare it with the full model based on AIC (or AICc) and LRT.
+
+You may need the following functions:
+
+-   `lm()`
+-   `summary()`
+-   `stepAIC()` from the `MuMIn` package (`library(MuMIn)`)
+-   `options()`
+-   `dredge()`
+-   `AIC()` or `AICc()` (for small datasets)
+-   `anova()`
+
+Use your results to answer the following questions:
+
+**1. You tested 3 different model selection methods: forward stepwise AIC selection, backward stepwise AIC selection and global model selection. How many terms ( = intercept + predictor effects + interactions) did each of the reduced models include?**
+
+-   Forward selection `r fitb(3)`
+-   Backward selection `r fitb(10)`
+-   global model selection `r fitb(3)`
+
+**2. You compared the full model with the reduced model from global model selection based on AIC and LRT (using the `anova()` function). Which of the two models would you choose based on their AIC? And which would you choose based on the LRT?**
+
+-   AIC `r mcq(c(answer = "The full model", "I don't know. Both models fit equally well.", "Also the full model", "The reduced model"))`
+-   LRT `r mcq(c("The full model", answer = "I don't know. Both models fit equally well.", "Also the full model", "The reduced model"))`
+
+**3. Here's a quote from Wikipedia on the AIC: ["When the sample size is small, there is a substantial probability that AIC will select models that have too many parameters, i.e. that AIC will overfit."](https://en.wikipedia.org/wiki/Akaike_information_criterion) Check the sample size of the Cement dataset. How do you now interpret the AIC values for the full model as compared to the reduced model from global model selection? (Several are correct)**
+
+```{r}
+#| include: false
+opts_p <- c(
+  "The AIC for the full model is smaller. The full model thus fits better.",
+  answer = "I would not trust AIC model selection in this case, because the sample size is too small to fit the number of parameters necessary for the full model.",
+  answer = "Instead of using the AIC for model comparison, I would now prefer the AICc, which corrects for small sample sizes."
+)
+```
+
+`r longmcq(opts_p)`
+:::
+
+`r hide("Click here to see the solution")`
+
+This is the code that you need to obtain the results.
+
+```{r  Cement}
+#| eval: false
+
+library(MuMIn)
+library(MASS)
+
+# full model ->  has 11 coefficients
+full = lm(y ~ (X1 + X2 + X3 + X4)^2, data = Cement)
+summary(full)
+
+# forward model selection
+ms_forw = stepAIC(full, direction = "forward")
+summary(ms_forw)
+# lists 11 coefficients (i.e. selects full model)
+
+# backward model selection
+ms_back = stepAIC(full, direction = "backward")
+summary(ms_back)
+# lists 10 coefficients
+
+# global model selection
+options(na.action = "na.fail")
+dd = dredge(full)
+head(dd)
+# The first row lists the best performing model: it includes only the intercept and effects for X1 and X2 (= 3 coefficients).
+
+# Fit the model considered optimal by global model selection and compare it with the full model based on AIC (or AICc) and LRT:
+opt = lm(y ~ X1 + X2, data = Cement)
+summary(opt)
+
+AIC(opt,full) # full model is better according to AIC (lower AIC)
+anova(opt, full) # -> LRT: no significant difference between the models
+
+# sample size in the Cement dataset:
+str(Cement)  # or
+nrow(Cement)
+
+# If the sample size is low, a corrected version of the AIC is recommended to avoid overfitting:
+AICc(opt,full) # This is inf! -> optimal model is better according to AICc
+
+```
+
+`r unhide()`

@@ -10,48 +10,57 @@ set.seed(42)
 
 # Generalized linear models {#sec-glm}
 
-```{r}
-library(EcoData)
-library(effects)
-library(DHARMa)
+We will start by fiting a linear regression (not yet a GLM) to the titanic survival dataset (in `EcoData` package. Let's model the survival as a linear combination of `age` and `sex`:
 
-str(titanic) #from EcoData package
+```{r}
+library(EcoData) # titanic data
+
+#str(titanic) #from EcoData package
+#Convert pclass (passenger class) to a factor for modeling
 titanic$Fpclass = as.factor(titanic$pclass)
+
 m = lm(survived~age+sex, data = titanic)
 summary(m)
+```
+
+The residuals of the model
+```{r}
+# Residuals
 par(mfrow = c(2, 2))
 plot(m)
 par(mfrow = c(1,1))
 ```
 
-We can see that there is something seriously wrong with the residuals! One assumption for the lm is that the residuals and the response variable are normally distributed:
+We can see that there is something seriously wrong with the residuals! One assumption for the lm is that the residuals and the response variable are normally distributed. Let's inspect the distribution of the response variable
 
 ```{r}
 hist(titanic$survived)
 table(titanic$survived)
 ```
 
-Our response consists of 0s and 1s, so it is a binomial distribution. For binomial data we cannot use a lm because we need to restrict our values to be in the range of \[0,1\] (our 'lm' needs to predict probabilites).
+Our response consists of 0s and 1s, so it is a binomial distribution. For binomial data we cannot use a lm because we need to restrict our values to be in the range of \[0,1\] (our model needs to predict probabilites).
 
 The idea of generalized linear models is that we can use link (and inverse link functions) to transform the expected values into the range of our response.
 
--   All GLMs have a linear term to specify the desired dependency on explanatory variables (we already know this) $y = a x + b x_2 + c$
+All GLMs have:
 
--   a link function to scale the linear term to the correct range of values for the distribution that was chosen(this is new)
+- a **linear term** to specify the desired dependency on explanatory variables (we already know this) $y = a x + b x_2 + c$
 
--   and a probability distribution that describes the model from which the dependent variable is generated(this is also new -- so far: normal = gaussian)
+-   a **link function** to scale the linear term to the correct range of values for the distribution that was chosen. (this is new)
+
+-   and a **probability distribution** that describes the model from which the dependent variable is generated. (this is also new -- so far: normal = gaussian)
 
 LM and GLMS -- the three models you should know:
 
 | Type | R call | Properties |
-|----|----|----|
+|------------------------|------------------------|------------------------|
 | Linear regression (continuous data) | `lm(y ~ x)` or `glm(y~x, family = gaussian())` | Identity (no) link, normal distribution (family = gaussian) no inverse link |
 | Logistic regression (1/0 or k out of n data) | `glm(y ~x, family = binomial)` | binomial distribution, logit link: $log(p/(1-p))$ |
-| inverse link: $exp(y)/(1 + exp(y))$ |  |  |
+|  |  |  inverse link: $exp(y)/(1 + exp(y))$|
 | Poisson regression (Count data) | `glm(y ~x, family = poisson)` | Poisson distribution, log link: $log(lambda)$ |
-| inverse link: $exp(y)$ |  |  |
+| |  |  inverse link: $exp(y)$ |
 
-Model diagnostic (residual checks) cannot be done anymore by plotting the model. This can be only done for a lm! For glms we have to use the DHARMa package!
+Model diagnostic (residual checks) cannot be done anymore by plotting the model. This can be only done for a lm! For glms we have to use the `DHARMa` package!
 
 For more details on glms, see the chapter about glms in the [advanced regression book.](https://theoreticalecology.github.io/AdvancedRegressionModels/4A-GLMs.html)
 
@@ -63,7 +72,7 @@ $$
 logit(y) = a_0 +a_1*x
 $$
 
-And with the inverse link:
+And the inverse link:
 
 $$
 y = \frac{1}{1+e^{-(a_0 + a_1) }}
@@ -71,51 +80,74 @@ $$
 
 You can interpret the glm outputs basically like lm outputs.
 
-**BUT:** To get absolute response values, you have to transform the output with the inverse link function. For the logit, e.g. an intercept of 0 means a predicted value of 0.5. Different overall statistics: no R^2^ instead Pseudo R^2^ = 1 - Residual deviance / Null deviance(deviance is based on the likelihood):
+**BUT:** To get absolute response values, you have to transform the output with the inverse link function. For the logit, e.g. an intercept of 0 means a predicted value of 0.5. 
+
+Different overall statistics: no R^2^, instead Pseudo R^2^ = 1 - Residual deviance / Null deviance (deviance is based on the likelihood):
+
+Let's model the surivival data with `sex` as predictor.
 
 ```{r}
 # logistic regression with categorical predictor
 m1 = glm(survived ~ sex, data = titanic, family = "binomial")
 summary(m1)
+```
 
-# 2 groups: sexmale = difference of mean for male from mean for female
-# intercept = linear term for female: 
-0.98 
-# but: this has to be transformed back to original scale before being interpreted!!!
+Because we have 2 groups (female and male), the intercept will consist of one of the groups (female in this case because of alphabetical order - but you can change it as you wish). But this is not the surival probability of females! The coefficients are at the logit link function scale. So, we need to back transform it to the original scale:
+```{r}
+# linear term for female
+coef(m1)[1]
 # survival probability for females
-plogis(0.98)
+plogis(coef(m1)[1])
 # applies inverse logit function
+```
 
-
+To get the survival probabily for males, we have to sum the intercept to the coefficient of the difference (`sexmale`):
+```{r}
 # linear term for male
-0.98 - 2.43
+coef(m1)[1] + coef(m1)[2]
 # survival probability
-plogis(0.98 - 2.43)
+plogis(coef(m1)[1] + coef(m1)[2])
+```
 
+You can get the same information with the predict function:
+```{r}
 # predicted linear term
 table(predict(m1))
 # predicted response
 table(predict(m1, type = "response"))
+```
 
-
+Or nicer with the package `effects`
+```{r}
+library(effects)
 plot(allEffects(m1))
+```
 
+Adding `age` as a predictor
+```{r}
 # more predictors
 m2 = glm(survived ~ sex + age, titanic, family = binomial)
 summary(m2)
 
-
-# Calculate Pseudo R2: 1 - Residual deviance / Null deviance
-1 - 1101.3/1414.6 # Pseudo R2 of model
-
+plot(allEffects(m2))
 # Anova
 anova(m2, test = "Chisq")
-
-
-plot(allEffects(m2))
 ```
 
-Residual check:
+We can calculate the pseudo-R^2 by hand:
+```{r}
+# Calculate Pseudo R2: 1 - Residual deviance / Null deviance
+1 - 1101.3/1414.6 # Pseudo R2 of model
+```
+
+Or using the nice package called `performance`:
+
+```{r}
+library(performance)
+r2(m2)
+```
+
+Let's do a residual check:
 
 ```{r}
 # Model diagnostics
@@ -126,52 +158,56 @@ res = simulateResiduals(m2)
 plot(res)
 ```
 
+All good with our model now!
+
+
 ## Poisson Regression {#sec-poisson}
 
-Poisson regression is used for count data. Properties of count data are: no negative values, only integers, y \~ Poisson(lambda); where lambda = mean = variance, log link function (lambda must be positive).
+Poisson regression is used for count data. Properties of count data are: 
 
-Example:
+- no negative values, 
+
+- only integers, 
+
+- y \~ Poisson(lambda); where lambda = mean = variance, 
+
+- log link function (lambda must be positive).
+
+Example form the `birdfeeding` data from `EcoData` package
 
 ```{r}
-head(birdfeeding)
+#head(birdfeeding)
 
 plot(feeding ~ attractiveness, birdfeeding)
 
 fit = glm(feeding ~ attractiveness, birdfeeding, family = "poisson")
 summary(fit)
-
-# feeding for a bird with attractiveness 3
-# linear term
-1.47 + 0.148 * 3
-# pieces of food, using inverse of the link function, log --> exp
-exp(1.47 + 0.148 * 3)
-
-
-plot(allEffects(fit))
-
-
-# checking residuals
-res = simulateResiduals(fit)
-plot(res, quantreg = F)
-# the warning is because of a recent change in DHARMa 
-# qgam requires more data points
 ```
 
-Normal versus Poisson distribution:
+Plotting prediction:
+```{r}
+plot(allEffects(fit))
+```
 
--   N(mean, sd)This means that fitting a normal distribution estimates a parameter for the variance (sd)
+Checking residuals:
+```{r}
+res = simulateResiduals(fit)
+plot(res)
+```
 
--   Poisson(lambda)lambda = mean = varianceThis means that a Poisson regression does not fit a separate parameter for the variance
+**Normal versus Poisson** distribution:
 
-So in the glm always assume that the variance is the mean, which is a strong assumption. In reality it can often occur that the variance is greater than expected (Overdispersion) or smaller than expected (Underdispersion). (this cannot happen for the lm because there we estimate a variance parameter (residual variance)). Overdispersion can have a HUGE influence on the MLEs and particularly on the p-values!
+-   N(mean, sd). This means that fitting a normal distribution estimates a parameter for the variance (sd)
+
+-   Poisson(lambda). lambda = mean = variance, This means that a Poisson regression does not fit a separate parameter for the variance!
+
+So, the Poisson glm always assume that the variance is the mean, which is a strong assumption! In reality it can often occur that the variance is greater than expected (overdispersion) or smaller than expected (underdispersion). (this cannot happen for the lm because there we estimate a variance parameter (residual variance)). Overdispersion can have a HUGE influence on the MLEs and particularly on the p-values!
 
 We can use the DHARMa package to check for Over or Underdispersion:
 
 ```{r}
 # test for overdispersion
-testDispersion(fit)
-
-# Dispersion test is necessary for all poisson or binomial models with k/n 
-# if positive, you can chose family = quasi-poisson or quasi-binomial
-# or use negative binomial distribution instead of poisson
+testDispersion(fit, type = "PearsonChisq")
 ```
+
+Dispersion test is necessary for all poisson or proportion binomial models (k/n, number of success / number of trials). If you detect overdispersion in your model, you can use negative binomial distribution instead of poisson, and beta-binomial for the binomial. However, there are many nuances of data modeling that can lead to "overdispersion", like misfit, zero-inflation or missing predictors. We suggest caution in dealing with that and you can read more about it at the book of the [Advanced Regression Models course.](https://theoreticalecology.github.io/AdvancedRegressionModels/4A-GLMs.html)

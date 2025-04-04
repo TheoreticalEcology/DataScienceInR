@@ -19,7 +19,7 @@ In this section you will:
 
 ## A recipe for hypothesis testing
 
-**Aim:** We want to know if there is a difference between the control and the treatment
+**Aim:** We want to know if there is a difference between the control and the treatment.
 
 1.  We introduce a **Null hypothesis H~0~** (e.g. no effect, no difference between control and treatment)
 2.  We invent a **test statistic**
@@ -36,48 +36,70 @@ If you want to read more about null hypothesis testing and the p-value, take a l
 
 **Example:**
 
-Imagine we do an experiment with two groups, one treatment and one control group. Test outcomes are binary, e.g. whether individuals are cured.
+Imagine we do an experiment with two groups, one treatment and one control group. Test outcomes are binary, e.g. whether individuals are cured (1) or not (0).
 
-1.  We need a test statistic. For example: number cured of total patients: treat/(treat+control)
+1.  We need a test statistic. For example: proportion of cured patients in the treatment group from the total number of cured patients: treat/(treat+control)
 
-2.  We need the distribution of this test statistic under the null.
+2.  We need the distribution of this test statistic under the null hypothesis (of no diference in proportion of cured patients between .
 
 Let's create a true world without effect:
 
 ```{r}
 set.seed(123)
-# Let's create a true world without effect:
 PperGroup = 50 # number of replicates (e.g., persons per treatment group)
 pC = 0.5 #probability of being cured in control group
-pT = 0.5 #probability of being cured in treatment group; = same because we want to use these to get the distribution of the test statistic we define below when H0 is true (no effect)
+pT = 0.5 #probability of being cured in treatment group;
+# pT is the same as pC, because we want to use these to get the distribution of the test statistic we define below when H0 is true (no effect)
 
 # Let's draw a sample from this world without effect
 control = rbinom(n = 1, size = PperGroup, prob = pC)
 treat = rbinom(n = 1, size = PperGroup, prob = pT)
-#calculate the test statistic: 
+# calculate the test statistic: 
 treat/(treat+control)
-#and plot
-barplot(c(control, treat), ylim = c(0, 50))
+# and plot
+barplot(c(control, treat), ylim = c(0, 50), 
+        names.arg = c("control", "treatment"),
+        ylab = "Counts (cured patients)",
+        main= "Number of cured patients out of 50")
 ```
 
-3.  Now, let's do this very often to get the distribution under H~0~
+::: column-margin
+why do whe use `set.seed()` here?
+Read the help file of the function to understand it! `help(set.seed)`. Experiment changing the number in the set seed in your code and compare the results for tne number of cured patients in the treatment and control groups.
+:::
+
+The table with the results of the experiment would be:
+```{r}
+data <- data.frame(treatment = rep(c("control", "treatment"), each = 50),
+                   cured = c(rep(c(0,1), times=c(50-control, control)),
+                           rep(c(0,1), times=c(50-treat, treat))))
+table(data$treatment, data$cured)
+```
+
+
+
+3.  Now, let's do this very often (100,000 times!) to get the distribution under H~0~ (generating a null distribution of proportion of cured patients in the treatment group):
 
 ```{r}
-testStatistic = rep(NA, 100000) 
+testStatistic = rep(NA, 100000) # to store our results
 for (i in 1:100000) {
   control = rbinom(n = 1, size = PperGroup, prob = pC)
   treat = rbinom(n = 1, size = PperGroup, prob = pT)
-  testStatistic[i] = control/(treat+control) # test statistic 
+  testStatistic[i] = treat/(treat+control) # test statistic 
 }
 hist(testStatistic, breaks = 50)
 ```
 
-4.  We now have our test statistic + the frequency distribution of our statistic if the H~0~ = true. Now we make an experiment: Assume that we observed the following data: C = 30, T = 23.
+::: column-margin
+If you are confused with the `for loop`, read about it [here](1C-Exercise.html#loops)
+:::
+
+4.  We now have our test statistic + the frequency distribution of our statistic if the H~0~ is true. Now we make an experiment: Assume that we observed the data we simulated first (our barplot): Control = 23, Treatment = 28.
 
 ```{r}
 hist(testStatistic, breaks = 50)
-testStatisticData = 30/(30+23)
-abline(v = testStatisticData, col = "red")
+testStatisticData = 28/(28+23)
+abline(v = testStatisticData, col = "red", lwd = 2)
 
 mean(testStatistic > testStatisticData)
 # compare each value in our testStatistic distribution with
@@ -88,7 +110,7 @@ mean(testStatistic > testStatisticData)
 But we know actually that the test statistic follows a Chi^2^ distribution. So to get correct p-values we can use the `prop.test` for this test statistic:
 
 ```{r}
-prop.test(c(30, 23), c(PperGroup, PperGroup))
+prop.test(c(28, 23), c(PperGroup, PperGroup))
 # other test statistic with known distribution
 # Pearson's chi-squared test statistic
 # no need to simulate

@@ -342,13 +342,13 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./4B-Exercise.html" class="sidebar-item-text sidebar-link">
+  <a href="./5A-Exercise.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Exercise - Multiple Linear Regression</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./4C-Exercise.html" class="sidebar-item-text sidebar-link">
+  <a href="./6A-Exercise.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Exercise - GLM</span></a>
   </div>
 </li>
@@ -365,13 +365,13 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./2B-Multivariate.html" class="sidebar-item-text sidebar-link">
+  <a href="./7A-Multivariate.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Multivariate Statistics</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./5A-Exercise.html" class="sidebar-item-text sidebar-link">
+  <a href="./7B-Exercise.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Exercise - Multivariate statistics</span></a>
   </div>
 </li>
@@ -394,7 +394,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./6A-Exercise.html" class="sidebar-item-text sidebar-link">
+  <a href="./8A-Exercise.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Exercise</span></span></a>
   </div>
 </li>
@@ -583,16 +583,26 @@ Warning
 </section>
 <section id="multiple-lm" class="level2" data-number="9.2">
 <h2 data-number="9.2" class="anchored" data-anchor-id="multiple-lm"><span class="header-section-number">9.2</span> Multiple LM</h2>
-<p>The multiple linear regression can deal with confounders:</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A linear regression with a quadratic effect (or any polinomial) of X is a “multiple regression” in the sense that the squared X can be considered another “variable”: <span class="math display">\[  y = a_0 + a_1*x_1 + a_2*x_1^2  \]</span></p>
+</div>
+</div>
+<p>Multiple linear regression expands simple linear regression to a polynomial of several explanatory variables x1, x2… e.g.: <span class="math display">\[
+    y = a_0 + a_1*x_1 + a_2*x_2 + a_3*x_3
+    \]</span></p>
 <ul>
-<li><p>Univariate (simple) linear regression describes how y depends on x using a polynomial of x1 e.g.: <span class="math display">\[
-y = a_0 + a_1*x_1 + a_2*x_1^2
-\]</span></p></li>
-<li><p>Multiple linear regression expands simple linear regression to a polynomial of several explanatory variables x1, x2… e.g.: <span class="math display">\[
-y = a_0 + a_1*x_1 + a_2*x_2 + a_3*x_3
-\]</span></p></li>
-<li><p>Idea: if we jointly consider “all” variables in the model formula, the influence of confounding variables is incorporated</p></li>
+<li>Idea: if we jointly consider “all” variables in the model formula, the influence of confounding variables is incorporated.</li>
 </ul>
+<p>Let’s see an example with the <code>airquality</code> data:</p>
 <p>Let’s use the <code>airquality</code> data:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="do">## first remove observations with NA values</span></span>
@@ -622,8 +632,9 @@ y = a_0 + a_1*x_1 + a_2*x_2 + a_3*x_3
 <span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="do">## Residual standard error: 23.92 on 109 degrees of freedom</span></span>
 <span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a><span class="do">## Multiple R-squared:  0.488,  Adjusted R-squared:  0.4833 </span></span>
 <span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a><span class="do">## F-statistic: 103.9 on 1 and 109 DF,  p-value: &lt; 2.2e-16</span></span>
-<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(Ozone <span class="sc">~</span> Temp , <span class="at">data =</span> newAirquality)</span>
-<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(m0, <span class="at">col =</span> <span class="st">"blue"</span>, <span class="at">lwd =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(Ozone <span class="sc">~</span> Temp , <span class="at">data =</span> newAirquality)</span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(m0, <span class="at">col =</span> <span class="st">"blue"</span>, <span class="at">lwd =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -656,14 +667,15 @@ y = a_0 + a_1*x_1 + a_2*x_2 + a_3*x_3
 <span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="do">## Multiple R-squared:  0.5814, Adjusted R-squared:  0.5736 </span></span>
 <span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a><span class="do">## F-statistic: 74.99 on 2 and 108 DF,  p-value: &lt; 2.2e-16</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>To vizualize the effects of each predictor on the ozone, we can use the package <code>effects</code>. The package will plot the effects of each variable separately (plots called partial slopes) “controling” for the other variables in the model. Controling here means that for ploting the effect of <code>Temp</code>, the variable <code>Wind</code> was fixed at it’s average value (the fixed value can be changed by the user, but the default is to take the mean of a continuous variable).</p>
+<p>A predictor eﬀect plot summarizes the role of a selected focal predictor in a fitted regression model. These graphs are an alternative to tables of fitted coeﬃcients, which can be much harder to interpret than predictor eﬀect plots. (Info taken from the vignette of the <code>effects</code>package, take a look at it!).</p>
 <p>Plotting multiple regression outputs using the package <code>effects</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plotting multiple regression outputs</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(effects)</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="do">## Carregando pacotes exigidos: carData</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="do">## lattice theme set by effectsTheme()</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="do">## See ?effectsTheme for details.</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">allEffects</span>(m1))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(effects)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="do">## Carregando pacotes exigidos: carData</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="do">## lattice theme set by effectsTheme()</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="do">## See ?effectsTheme for details.</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">allEffects</span>(m1))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -672,26 +684,29 @@ y = a_0 + a_1*x_1 + a_2*x_2 + a_3*x_3
 </div>
 </div>
 </div>
-<p>Omitted variable bias, what happened with the Temp and Wind effects when in separated models and together in the same model?</p>
+<p>Let’s interprete the partial slope plot for <code>Temp</code>. It shows that there is a positive relationship of temperature and Ozone. The shaded blue area.</p>
+<p>The intercept of the line aﬀects only the height of the line, and is determined by the choices made for averaging over the fixed predictors, but for any choice of averaging method, the slope of the line would be the same (because the model has no interactions between variables - next topic). The shaded area is a pointwise confidence band for the fitted values, based on standard errors computed from the covariance matrix of the fitted regression coeﬃcients. The rug plot at the bottom of the graph shows the location of the <code>Temp</code> data values.</p>
+<p>If we omit <code>Wind</code> will we have a different effect of <code>Temp</code> in Ozone?</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>both <span class="ot">=</span> <span class="fu">lm</span>(Ozone <span class="sc">~</span> Wind <span class="sc">+</span> Temp, newAirquality)</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>wind <span class="ot">=</span> <span class="fu">lm</span>(Ozone <span class="sc">~</span> Wind , newAirquality)</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>temp <span class="ot">=</span> <span class="fu">lm</span>(Ozone <span class="sc">~</span> Temp, newAirquality)</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co">#summary(both)</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co">#summary(wind)</span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>slopes <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">predictor =</span> <span class="fu">c</span>(<span class="st">"Wind"</span>, <span class="st">"Temp"</span>),</span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">both.pred =</span> <span class="fu">round</span>(<span class="fu">coef</span>(both)[<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>], <span class="at">digits =</span> <span class="dv">2</span>),</span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">only.wind =</span> <span class="fu">c</span>(<span class="fu">round</span>(<span class="fu">coef</span>(wind)[<span class="dv">2</span>], <span class="at">digits =</span> <span class="dv">2</span>), <span class="st">"NA"</span>),</span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">only.temp =</span> <span class="fu">c</span>(<span class="st">"NA"</span>, <span class="fu">round</span>(<span class="fu">coef</span>(temp)[<span class="dv">2</span>], <span class="at">digits =</span> <span class="dv">2</span>))</span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>slopes</span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="do">##      predictor both.pred only.wind only.temp</span></span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="do">## Wind      Wind     -3.29     -5.73        NA</span></span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="do">## Temp      Temp      1.83        NA      2.44</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Omitted variable bias</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>both <span class="ot">=</span> <span class="fu">lm</span>(Ozone <span class="sc">~</span> Wind <span class="sc">+</span> Temp, newAirquality)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>wind <span class="ot">=</span> <span class="fu">lm</span>(Ozone <span class="sc">~</span> Wind , newAirquality)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>temp <span class="ot">=</span> <span class="fu">lm</span>(Ozone <span class="sc">~</span> Temp, newAirquality)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co">#summary(both)</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co">#summary(wind)</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>slopes <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">predictor =</span> <span class="fu">c</span>(<span class="st">"Wind"</span>, <span class="st">"Temp"</span>),</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">both.pred =</span> <span class="fu">round</span>(<span class="fu">coef</span>(both)[<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>], <span class="at">digits =</span> <span class="dv">2</span>),</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">only.wind =</span> <span class="fu">c</span>(<span class="fu">round</span>(<span class="fu">coef</span>(wind)[<span class="dv">2</span>], <span class="at">digits =</span> <span class="dv">2</span>), <span class="st">"NA"</span>),</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">only.temp =</span> <span class="fu">c</span>(<span class="st">"NA"</span>, <span class="fu">round</span>(<span class="fu">coef</span>(temp)[<span class="dv">2</span>], <span class="at">digits =</span> <span class="dv">2</span>))</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>slopes</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="do">##      predictor both.pred only.wind only.temp</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="do">## Wind      Wind     -3.29     -5.73        NA</span></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a><span class="do">## Temp      Temp      1.83        NA      2.44</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Omitting Wind makes the effect of Temperature larger.</p>
+<p>Yes, omitting Wind makes the effect of Temperature larger.</p>
 <p><strong>Problem:</strong> Multiple regression can separate the effect of collinear explanatory variables, but only, if collinearity is not too strong.</p>
 <p><strong>Solution:</strong> If the correlation is really strong, we can omit one variable and interpret the remaining collinear variable as representing both.</p>
 </section>
@@ -743,6 +758,7 @@ Scale your continous variables!
 <span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a><span class="do">## Multiple R-squared:  0.6355, Adjusted R-squared:  0.6253 </span></span>
 <span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a><span class="do">## F-statistic: 62.19 on 3 and 107 DF,  p-value: &lt; 2.2e-16</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>The influence of temperature on ozone depends on the amount of wind. When wind is low, the relationship is strongly positive, but when wind is high this relationship becomes slightly negative.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">allEffects</span>(m2, <span class="at">xlevels=</span><span class="dv">3</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -753,7 +769,6 @@ Scale your continous variables!
 </div>
 </div>
 </div>
-<p>We can see now that the effect of <code>Temp</code> on <code>Ozone</code> depends on the amount of <code>Wind</code>.</p>
 <p><strong>Another example:</strong></p>
 <p>How does everything change, if we have factorial predictors?</p>
 <div class="cell">
@@ -910,99 +925,83 @@ Scale your continous variables!
 <p>Famous example: <a href="https://www.pnas.org/doi/abs/10.1073/pnas.1402786111">Female hurricanes are deadlier than male hurricanes (Jung et al., 2014)</a></p>
 <p>They have analyzed the number of fatalities of hurricane and claimed that there is an effect of femininity of the name on the number of deads (while correcting for confounders). They recommend to give hurricans only male names because it would considerably reduce the number of deads.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DHARMa)</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="do">## This is DHARMa 0.4.7. For overview type '?DHARMa'. For recent changes, type news(package = 'DHARMa')</span></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(effects)</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>?hurricanes</span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(hurricanes)</span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="do">## Classes 'tbl_df', 'tbl' and 'data.frame':    92 obs. of  14 variables:</span></span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Year                    : num  1950 1950 1952 1953 1953 ...</span></span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Name                    : chr  "Easy" "King" "Able" "Barbara" ...</span></span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ MasFem                  : num  6.78 1.39 3.83 9.83 8.33 ...</span></span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ MinPressure_before      : num  958 955 985 987 985 960 954 938 962 987 ...</span></span>
-<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Minpressure_Updated_2014: num  960 955 985 987 985 960 954 938 962 987 ...</span></span>
-<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Gender_MF               : num  1 0 0 1 1 1 1 1 1 1 ...</span></span>
-<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Category                : num  3 3 1 1 1 3 3 4 3 1 ...</span></span>
-<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ alldeaths               : num  2 4 3 1 0 60 20 20 0 200 ...</span></span>
-<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ NDAM                    : num  1590 5350 150 58 15 ...</span></span>
-<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Elapsed_Yrs             : num  63 63 61 60 60 59 59 59 58 58 ...</span></span>
-<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Source                  : chr  "MWR" "MWR" "MWR" "MWR" ...</span></span>
-<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ ZMasFem                 : num  -0.000935 -1.670758 -0.913313 0.945871 0.481075 ...</span></span>
-<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ ZMinPressure_A          : num  -0.356 -0.511 1.038 1.141 1.038 ...</span></span>
-<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ ZNDAM                   : num  -0.439 -0.148 -0.55 -0.558 -0.561 ...</span></span>
-<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(glmmTMB)</span>
-<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a><span class="do">## Warning in check_dep_version(dep_pkg = "TMB"): package version mismatch: </span></span>
-<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a><span class="do">## glmmTMB was built with TMB package version 1.9.15</span></span>
-<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a><span class="do">## Current TMB package version is 1.9.17</span></span>
-<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a><span class="do">## Please re-install glmmTMB from source or restore original 'TMB' package (see '?reinstalling' for more information)</span></span>
-<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a>m1 <span class="ot">=</span> <span class="fu">glmmTMB</span>(alldeaths <span class="sc">~</span> MasFem<span class="sc">*</span></span>
-<span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a>                             (Minpressure_Updated_2014 <span class="sc">+</span> <span class="fu">scale</span>(NDAM)),</span>
-<span id="cb14-30"><a href="#cb14-30" aria-hidden="true" tabindex="-1"></a>                           <span class="at">data =</span> hurricanes, <span class="at">family =</span> nbinom2)</span>
-<span id="cb14-31"><a href="#cb14-31" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m1)</span>
-<span id="cb14-32"><a href="#cb14-32" aria-hidden="true" tabindex="-1"></a><span class="do">##  Family: nbinom2  ( log )</span></span>
-<span id="cb14-33"><a href="#cb14-33" aria-hidden="true" tabindex="-1"></a><span class="do">## Formula:          alldeaths ~ MasFem * (Minpressure_Updated_2014 + scale(NDAM))</span></span>
-<span id="cb14-34"><a href="#cb14-34" aria-hidden="true" tabindex="-1"></a><span class="do">## Data: hurricanes</span></span>
-<span id="cb14-35"><a href="#cb14-35" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb14-36"><a href="#cb14-36" aria-hidden="true" tabindex="-1"></a><span class="do">##      AIC      BIC   logLik deviance df.resid </span></span>
-<span id="cb14-37"><a href="#cb14-37" aria-hidden="true" tabindex="-1"></a><span class="do">##    660.7    678.4   -323.4    646.7       85 </span></span>
-<span id="cb14-38"><a href="#cb14-38" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb14-39"><a href="#cb14-39" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb14-40"><a href="#cb14-40" aria-hidden="true" tabindex="-1"></a><span class="do">## Dispersion parameter for nbinom2 family (): 0.787 </span></span>
-<span id="cb14-41"><a href="#cb14-41" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb14-42"><a href="#cb14-42" aria-hidden="true" tabindex="-1"></a><span class="do">## Conditional model:</span></span>
-<span id="cb14-43"><a href="#cb14-43" aria-hidden="true" tabindex="-1"></a><span class="do">##                                  Estimate Std. Error z value Pr(&gt;|z|)    </span></span>
-<span id="cb14-44"><a href="#cb14-44" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept)                     69.661590  23.425598   2.974 0.002942 ** </span></span>
-<span id="cb14-45"><a href="#cb14-45" aria-hidden="true" tabindex="-1"></a><span class="do">## MasFem                          -5.855078   2.716589  -2.155 0.031138 *  </span></span>
-<span id="cb14-46"><a href="#cb14-46" aria-hidden="true" tabindex="-1"></a><span class="do">## Minpressure_Updated_2014        -0.069870   0.024251  -2.881 0.003964 ** </span></span>
-<span id="cb14-47"><a href="#cb14-47" aria-hidden="true" tabindex="-1"></a><span class="do">## scale(NDAM)                     -0.494094   0.455968  -1.084 0.278536    </span></span>
-<span id="cb14-48"><a href="#cb14-48" aria-hidden="true" tabindex="-1"></a><span class="do">## MasFem:Minpressure_Updated_2014  0.006108   0.002813   2.171 0.029901 *  </span></span>
-<span id="cb14-49"><a href="#cb14-49" aria-hidden="true" tabindex="-1"></a><span class="do">## MasFem:scale(NDAM)               0.205418   0.061956   3.316 0.000915 ***</span></span>
-<span id="cb14-50"><a href="#cb14-50" aria-hidden="true" tabindex="-1"></a><span class="do">## ---</span></span>
-<span id="cb14-51"><a href="#cb14-51" aria-hidden="true" tabindex="-1"></a><span class="do">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># loading packages</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(EcoData)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DHARMa)</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="do">## This is DHARMa 0.4.7. For overview type '?DHARMa'. For recent changes, type news(package = 'DHARMa')</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(glmmTMB) <span class="co"># package for the model</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(effects)</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="co">#?hurricanes</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="co">#str(hurricanes)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Interactions -&gt; we need to scale variables:</p>
+<p>We will model the number of deaths, so we are going to use a different distribution (Negative Binomial). This is a generalized linear model (GLM), that you will learn about in our next class. So, let’s focus on the model selection produre:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>m2 <span class="ot">=</span> <span class="fu">glmmTMB</span>(alldeaths <span class="sc">~</span> <span class="fu">scale</span>(MasFem)<span class="sc">*</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>                             (<span class="fu">scale</span>(Minpressure_Updated_2014) <span class="sc">+</span> <span class="fu">scale</span>(NDAM)<span class="sc">+</span><span class="fu">scale</span>(<span class="fu">sqrt</span>(NDAM))),</span>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>m1 <span class="ot">=</span> <span class="fu">glmmTMB</span>(alldeaths <span class="sc">~</span> MasFem<span class="sc">*</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>                      (Minpressure_Updated_2014 <span class="sc">+</span> <span class="fu">scale</span>(NDAM)),</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>                           <span class="at">data =</span> hurricanes, <span class="at">family =</span> nbinom2)</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m2)</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m1)</span>
 <span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="do">##  Family: nbinom2  ( log )</span></span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="do">## Formula:          </span></span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="do">## alldeaths ~ scale(MasFem) * (scale(Minpressure_Updated_2014) +  </span></span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="do">##     scale(NDAM) + scale(sqrt(NDAM)))</span></span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="do">## Data: hurricanes</span></span>
-<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a><span class="do">##      AIC      BIC   logLik deviance df.resid </span></span>
-<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a><span class="do">##    634.9    657.6   -308.4    616.9       83 </span></span>
-<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="do">## Formula:          alldeaths ~ MasFem * (Minpressure_Updated_2014 + scale(NDAM))</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="do">## Data: hurricanes</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="do">##      AIC      BIC   logLik deviance df.resid </span></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="do">##    660.7    678.4   -323.4    646.7       85 </span></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a><span class="do">## Dispersion parameter for nbinom2 family (): 0.787 </span></span>
 <span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a><span class="do">## Dispersion parameter for nbinom2 family (): 1.12 </span></span>
-<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a><span class="do">## Conditional model:</span></span>
-<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a><span class="do">##                                               Estimate Std. Error z value</span></span>
-<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept)                                    2.28082    0.10850  21.022</span></span>
-<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a><span class="do">## scale(MasFem)                                  0.05608    0.10672   0.525</span></span>
-<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a><span class="do">## scale(Minpressure_Updated_2014)               -0.14267    0.17804  -0.801</span></span>
-<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a><span class="do">## scale(NDAM)                                   -1.11104    0.28030  -3.964</span></span>
-<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a><span class="do">## scale(sqrt(NDAM))                              2.10764    0.36487   5.776</span></span>
-<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a><span class="do">## scale(MasFem):scale(Minpressure_Updated_2014)  0.07371    0.19618   0.376</span></span>
-<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a><span class="do">## scale(MasFem):scale(NDAM)                     -0.10159    0.27080  -0.375</span></span>
-<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a><span class="do">## scale(MasFem):scale(sqrt(NDAM))                0.32960    0.36594   0.901</span></span>
-<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a><span class="do">##                                               Pr(&gt;|z|)    </span></span>
-<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept)                                    &lt; 2e-16 ***</span></span>
-<span id="cb15-29"><a href="#cb15-29" aria-hidden="true" tabindex="-1"></a><span class="do">## scale(MasFem)                                    0.599    </span></span>
-<span id="cb15-30"><a href="#cb15-30" aria-hidden="true" tabindex="-1"></a><span class="do">## scale(Minpressure_Updated_2014)                  0.423    </span></span>
-<span id="cb15-31"><a href="#cb15-31" aria-hidden="true" tabindex="-1"></a><span class="do">## scale(NDAM)                                   7.38e-05 ***</span></span>
-<span id="cb15-32"><a href="#cb15-32" aria-hidden="true" tabindex="-1"></a><span class="do">## scale(sqrt(NDAM))                             7.63e-09 ***</span></span>
-<span id="cb15-33"><a href="#cb15-33" aria-hidden="true" tabindex="-1"></a><span class="do">## scale(MasFem):scale(Minpressure_Updated_2014)    0.707    </span></span>
-<span id="cb15-34"><a href="#cb15-34" aria-hidden="true" tabindex="-1"></a><span class="do">## scale(MasFem):scale(NDAM)                        0.708    </span></span>
-<span id="cb15-35"><a href="#cb15-35" aria-hidden="true" tabindex="-1"></a><span class="do">## scale(MasFem):scale(sqrt(NDAM))                  0.368    </span></span>
-<span id="cb15-36"><a href="#cb15-36" aria-hidden="true" tabindex="-1"></a><span class="do">## ---</span></span>
-<span id="cb15-37"><a href="#cb15-37" aria-hidden="true" tabindex="-1"></a><span class="do">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a><span class="do">## Conditional model:</span></span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a><span class="do">##                                  Estimate Std. Error z value Pr(&gt;|z|)    </span></span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept)                     69.661590  23.425598   2.974 0.002942 ** </span></span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a><span class="do">## MasFem                          -5.855078   2.716589  -2.155 0.031138 *  </span></span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a><span class="do">## Minpressure_Updated_2014        -0.069870   0.024251  -2.881 0.003964 ** </span></span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a><span class="do">## scale(NDAM)                     -0.494094   0.455968  -1.084 0.278536    </span></span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a><span class="do">## MasFem:Minpressure_Updated_2014  0.006108   0.002813   2.171 0.029901 *  </span></span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a><span class="do">## MasFem:scale(NDAM)               0.205418   0.061956   3.316 0.000915 ***</span></span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a><span class="do">## ---</span></span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a><span class="do">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>The effect of femininity is gone! Already with the scaled variables, but also with the transformation with the NDAM variable. The question was raised which of both is more reasonable, whether the relationship between damage and mortality isn’t a straight line or that the gender of the hurricane names affect deaths (<a href="https://www.theguardian.com/science/grrlscientist/2014/jun/04/hurricane-gender-name-bias-sexism-statistics">Bob O’Hara and GrrlScientist</a>). They argue that the model with the transformed variable fits the data better which brings us to the topic of this section, how to choose between different models? Answering this question if the goal of model selection.</p>
+<p>We have <strong>Interactions</strong> -&gt; we need to scale variables:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>m2 <span class="ot">=</span> <span class="fu">glmmTMB</span>(alldeaths <span class="sc">~</span> <span class="fu">scale</span>(MasFem)<span class="sc">*</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>                             (<span class="fu">scale</span>(Minpressure_Updated_2014) <span class="sc">+</span> <span class="fu">scale</span>(NDAM)<span class="sc">+</span><span class="fu">scale</span>(<span class="fu">sqrt</span>(NDAM))),</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>                           <span class="at">data =</span> hurricanes, <span class="at">family =</span> nbinom2)</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m2)</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="do">##  Family: nbinom2  ( log )</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="do">## Formula:          </span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="do">## alldeaths ~ scale(MasFem) * (scale(Minpressure_Updated_2014) +  </span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="do">##     scale(NDAM) + scale(sqrt(NDAM)))</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="do">## Data: hurricanes</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="do">##      AIC      BIC   logLik deviance df.resid </span></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a><span class="do">##    634.9    657.6   -308.4    616.9       83 </span></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a><span class="do">## Dispersion parameter for nbinom2 family (): 1.12 </span></span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a><span class="do">## Conditional model:</span></span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a><span class="do">##                                               Estimate Std. Error z value</span></span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept)                                    2.28082    0.10850  21.022</span></span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a><span class="do">## scale(MasFem)                                  0.05608    0.10672   0.525</span></span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a><span class="do">## scale(Minpressure_Updated_2014)               -0.14267    0.17804  -0.801</span></span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a><span class="do">## scale(NDAM)                                   -1.11104    0.28030  -3.964</span></span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a><span class="do">## scale(sqrt(NDAM))                              2.10764    0.36487   5.776</span></span>
+<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a><span class="do">## scale(MasFem):scale(Minpressure_Updated_2014)  0.07371    0.19618   0.376</span></span>
+<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a><span class="do">## scale(MasFem):scale(NDAM)                     -0.10159    0.27080  -0.375</span></span>
+<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a><span class="do">## scale(MasFem):scale(sqrt(NDAM))                0.32960    0.36594   0.901</span></span>
+<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a><span class="do">##                                               Pr(&gt;|z|)    </span></span>
+<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept)                                    &lt; 2e-16 ***</span></span>
+<span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a><span class="do">## scale(MasFem)                                    0.599    </span></span>
+<span id="cb16-30"><a href="#cb16-30" aria-hidden="true" tabindex="-1"></a><span class="do">## scale(Minpressure_Updated_2014)                  0.423    </span></span>
+<span id="cb16-31"><a href="#cb16-31" aria-hidden="true" tabindex="-1"></a><span class="do">## scale(NDAM)                                   7.38e-05 ***</span></span>
+<span id="cb16-32"><a href="#cb16-32" aria-hidden="true" tabindex="-1"></a><span class="do">## scale(sqrt(NDAM))                             7.63e-09 ***</span></span>
+<span id="cb16-33"><a href="#cb16-33" aria-hidden="true" tabindex="-1"></a><span class="do">## scale(MasFem):scale(Minpressure_Updated_2014)    0.707    </span></span>
+<span id="cb16-34"><a href="#cb16-34" aria-hidden="true" tabindex="-1"></a><span class="do">## scale(MasFem):scale(NDAM)                        0.708    </span></span>
+<span id="cb16-35"><a href="#cb16-35" aria-hidden="true" tabindex="-1"></a><span class="do">## scale(MasFem):scale(sqrt(NDAM))                  0.368    </span></span>
+<span id="cb16-36"><a href="#cb16-36" aria-hidden="true" tabindex="-1"></a><span class="do">## ---</span></span>
+<span id="cb16-37"><a href="#cb16-37" aria-hidden="true" tabindex="-1"></a><span class="do">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The effect of femininity is gone! Already with the scaled variables, but also with the transformation with the NDAM variable. The question was raised which of both models is more reasonable, whether the relationship between damage and mortality isn’t a straight line or that the gender of the hurricane names affect deaths (<a href="https://www.theguardian.com/science/grrlscientist/2014/jun/04/hurricane-gender-name-bias-sexism-statistics">Bob O’Hara and GrrlScientist</a>). They argue that the model with the transformed variable fits the data better which brings us to the topic of this section, how to choose between different models? Answering this question if the goal of model selection.</p>
 <p>Why not include all the variables we can measure in our model? Problem with the full model:</p>
 <ul>
 <li><p>If you have more parameters than data points, the model cannot be fitted at all</p></li>
@@ -1017,39 +1016,24 @@ Scale your continous variables!
 <p><a href="https://theoreticalecology.github.io/AdvancedRegressionModels/3C-ModelSelection.html#the-bias-variance-trade-off">Explanation bias-variance tradeoff</a></p>
 <p><a href="https://theoreticalecology.github.io/AdvancedRegressionModels/3C-ModelSelection.html#model-selection-methods">Explanation LRT and AIC</a></p>
 <p><a href="https://theoreticalecology.github.io/AdvancedRegressionModels/3C-ModelSelection.html#pHacking">Problem of p-hacking</a></p>
-<p><strong>Example:</strong></p>
+<p><strong>Demonstration</strong>: Why interpretation of effect sizes and p-values after extensive model selection is not a good idea:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare different competing models:</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co"># let's compare models m3 and m5 to decide which one explains our data better:</span></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. LRT</span></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(m3, m5)</span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="co"># RSS = residual sum of squares = variance not explained by the model</span></span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="co"># smaller RSS = better model</span></span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="co"># p-value</span></span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="co">#2. AIC</span></span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="fu">AIC</span>(m3)</span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="fu">AIC</span>(m5)</span>
-<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a><span class="co"># also here, model m5 is better</span></span>
-<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a><span class="do">#### Demonstration: Why interpretation of effect sizes and p-values </span></span>
-<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a><span class="do">### after extensive model selection is not a good idea:</span></span>
-<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MASS)</span>
-<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a><span class="co">#make up predictors:</span></span>
-<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="fu">matrix</span>(<span class="fu">runif</span>(<span class="dv">20000</span>), <span class="at">ncol =</span> <span class="dv">100</span>))</span>
-<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a><span class="co"># create a response variable</span></span>
-<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>dat<span class="sc">$</span>y <span class="ot">=</span> <span class="fu">rnorm</span>(<span class="dv">200</span>)</span>
-<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a>fullModel <span class="ot">=</span> <span class="fu">lm</span>(y <span class="sc">~</span> ., <span class="at">data =</span> dat)</span>
-<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a>sum <span class="ot">&lt;-</span> <span class="fu">summary</span>(fullModel)</span>
-<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(sum<span class="sc">$</span>coefficients[,<span class="dv">4</span>] <span class="sc">&lt;</span> <span class="fl">0.05</span>)</span>
-<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a><span class="co"># 0.019: less than 2 % false positives = type I error rate</span></span>
-<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a>selection <span class="ot">=</span> <span class="fu">stepAIC</span>(fullModel)</span>
-<span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a>sum.sel <span class="ot">&lt;-</span> <span class="fu">summary</span>(selection)</span>
-<span id="cb16-30"><a href="#cb16-30" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(sum.sel<span class="sc">$</span>coefficients[,<span class="dv">4</span>] <span class="sc">&lt;</span> <span class="fl">0.05</span>)</span>
-<span id="cb16-31"><a href="#cb16-31" aria-hidden="true" tabindex="-1"></a><span class="co"># 0.48: Now almost 50 % of our results are false positives!!!</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="do">####:</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MASS)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="co">#make up predictors:</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="fu">matrix</span>(<span class="fu">runif</span>(<span class="dv">20000</span>), <span class="at">ncol =</span> <span class="dv">100</span>))</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="co"># create a response variable</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>dat<span class="sc">$</span>y <span class="ot">=</span> <span class="fu">rnorm</span>(<span class="dv">200</span>)</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>fullModel <span class="ot">=</span> <span class="fu">lm</span>(y <span class="sc">~</span> ., <span class="at">data =</span> dat)</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>sum <span class="ot">&lt;-</span> <span class="fu">summary</span>(fullModel)</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(sum<span class="sc">$</span>coefficients[,<span class="dv">4</span>] <span class="sc">&lt;</span> <span class="fl">0.05</span>)</span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a><span class="co"># 0.019: less than 2 % false positives = type I error rate</span></span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>selection <span class="ot">=</span> <span class="fu">stepAIC</span>(fullModel)</span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>sum.sel <span class="ot">&lt;-</span> <span class="fu">summary</span>(selection)</span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(sum.sel<span class="sc">$</span>coefficients[,<span class="dv">4</span>] <span class="sc">&lt;</span> <span class="fl">0.05</span>)</span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a><span class="co"># 0.48: Now almost 50 % of our results are false positives!!!</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="formula-syntax" class="level2" data-number="9.5">
