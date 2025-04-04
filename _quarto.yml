@@ -39,8 +39,8 @@ book:
     - 5-MultipleRegression.qmd
     - 6-GLM.qmd
     - 4A-Exercise.qmd
-    - 4B-Exercise.qmd
-    - 4C-Exercise.qmd
+    - 5A-Exercise.qmd
+    - 6A-Exercise.qmd
   - part: Multivariate Statistics
     chapters:
     - 7A-Multivariate.qmd
@@ -48,7 +48,7 @@ book:
   - part: Predictive Modeling
     chapters: 
     - 8-MachineLearning.qmd
-    - 6A-Exercise.qmd
+    - 8A-Exercise.qmd
   - part: Experimental Design
     chapters: 
     - 9-Design.qmd

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Exercise - Simple linear regression – Introduction to Data Science with R</title>
+<title>13&nbsp; Exercise – Introduction to Data Science with R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -64,8 +64,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./5A-Exercise.html" rel="next">
-<link href="./6-GLM.html" rel="prev">
+<link href="./9-Design.html" rel="next">
+<link href="./8-MachineLearning.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -105,39 +105,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 <link rel="stylesheet" href="include/webex.css">
-<meta name="citation_title" content="Exercise - Simple linear regression">
-<meta name="citation_fulltext_html_url" content="https://TheoreticalEcology.github.io/DataScienceInR/4A-Exercise.html">
+<meta name="citation_title" content="[13]{.chapter-number}&nbsp; [Exercise]{.chapter-title}">
+<meta name="citation_fulltext_html_url" content="https://TheoreticalEcology.github.io/DataScienceInR/8A-Exercise.html">
 <meta name="citation_language" content="en">
 </head>
 
@@ -150,7 +121,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./4-SimpleRegression.html">Regression Analysis</a></li><li class="breadcrumb-item"><a href="./4A-Exercise.html">Exercise - Simple linear regression</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./8-MachineLearning.html">Predictive Modeling</a></li><li class="breadcrumb-item"><a href="./8A-Exercise.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Exercise</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -336,7 +307,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./4A-Exercise.html" class="sidebar-item-text sidebar-link active">
+  <a href="./4A-Exercise.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Exercise - Simple linear regression</span></a>
   </div>
 </li>
@@ -349,7 +320,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./6A-Exercise.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Exercise</span></span></a>
+ <span class="menu-text">Exercise - GLM</span></a>
   </div>
 </li>
       </ul>
@@ -366,7 +337,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./7A-Multivariate.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Multivariate Statistics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Multivariate Statistics</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -389,13 +360,13 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./8-MachineLearning.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Machine Learning</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Machine Learning</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./6A-Exercise.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Exercise</span></span></a>
+  <a href="./8A-Exercise.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Exercise</span></span></a>
   </div>
 </li>
       </ul>
@@ -412,7 +383,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./9-Design.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Design of experiments</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Design of experiments</span></span></a>
   </div>
 </li>
       </ul>
@@ -429,13 +400,13 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./10-DataWrangling.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Exercise - Data handling</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Exercise - Data handling</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./11-Reproducibility.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Reproducibility and project organization</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Reproducibility and project organization</span></span></a>
   </div>
 </li>
       </ul>
@@ -467,18 +438,20 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#analyzing-the-regrowth-dataset" id="toc-analyzing-the-regrowth-dataset" class="nav-link active" data-scroll-target="#analyzing-the-regrowth-dataset">Analyzing the “regrowth” dataset</a></li>
-  <li><a href="#analyzing-the-birdabundance-dataset" id="toc-analyzing-the-birdabundance-dataset" class="nav-link" data-scroll-target="#analyzing-the-birdabundance-dataset">Analyzing the “birdabundance” dataset</a></li>
-  <li><a href="#model-validation-residual-checks" id="toc-model-validation-residual-checks" class="nav-link" data-scroll-target="#model-validation-residual-checks">Model validation: Residual checks</a></li>
+  <li><a href="#birdabundance-dataset" id="toc-birdabundance-dataset" class="nav-link active" data-scroll-target="#birdabundance-dataset"><span class="header-section-number">13.1</span> birdabundance dataset</a></li>
+  <li><a href="#titantic-dataset" id="toc-titantic-dataset" class="nav-link" data-scroll-target="#titantic-dataset"><span class="header-section-number">13.2</span> titantic dataset</a></li>
+  <li><a href="#bias-variance-tradeoff" id="toc-bias-variance-tradeoff" class="nav-link" data-scroll-target="#bias-variance-tradeoff"><span class="header-section-number">13.3</span> Bias-variance tradeoff</a></li>
+  <li><a href="#deep-neural-networks" id="toc-deep-neural-networks" class="nav-link" data-scroll-target="#deep-neural-networks"><span class="header-section-number">13.4</span> Deep Neural Networks</a></li>
+  <li><a href="#ml-pipeline" id="toc-ml-pipeline" class="nav-link" data-scroll-target="#ml-pipeline"><span class="header-section-number">13.5</span> ML pipeline</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/TheoreticalEcology/DataScienceInR/edit/master/4A-Exercise.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/TheoreticalEcology/DataScienceInR/edit/master/8A-Exercise.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./4-SimpleRegression.html">Regression Analysis</a></li><li class="breadcrumb-item"><a href="./4A-Exercise.html">Exercise - Simple linear regression</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./8-MachineLearning.html">Predictive Modeling</a></li><li class="breadcrumb-item"><a href="./8A-Exercise.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Exercise</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Exercise - Simple linear regression</h1>
+<h1 class="title"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Exercise</span></h1>
 </div>
 
 
@@ -495,236 +468,19 @@ window.Quarto = {
 </header>
 
 
-<p>You will work with the following datasets:</p>
-<ul>
-<li>regrowth {EcoData}</li>
-<li>birdabundance {EcoData}</li>
-<li>simulated data</li>
-</ul>
-<section id="analyzing-the-regrowth-dataset" class="level2">
-<h2 class="anchored" data-anchor-id="analyzing-the-regrowth-dataset">Analyzing the “regrowth” dataset</h2>
-<div class="callout callout-style-default callout-warning callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Warning
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Imagine you have a garden with some fruit trees and you were thinking of adding some berry bushes between them. However, you don’t want them to suffer from malnutrition so you want to estimate the volume of root biomass as a function of the fruit biomass.</p>
-<p>Carry out the following tasks</p>
-<ul>
-<li>Perform a simple linear regression for the influence of fruit biomass on root biomass.</li>
-<li>Visualize the data and add the regression line to the plot.</li>
-</ul>
-<p>You will need the following functions:</p>
-<ul>
-<li><code>lm()</code></li>
-<li><code>summary()</code></li>
-<li><code>plot()</code></li>
-<li><code>abline()</code></li>
-</ul>
-<section id="question" class="level3">
-<h3 class="anchored" data-anchor-id="question">Question</h3>
-<p>You have performed a simple linear regression for the influence of fruit biomass on root biomass.</p>
-<p>Which of the following statements are correct? (More than one are correct)</p>
-<div id="radio_QEAYJDRZQO" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_QEAYJDRZQO" value=""> <span>Root biomass is not significantly affected by fruit biomass.</span></label><label><input type="radio" autocomplete="off" name="radio_QEAYJDRZQO" value="answer"> <span>Fruit biomass explains most of the variance (&gt;50%) in the root biomass.</span></label><label><input type="radio" autocomplete="off" name="radio_QEAYJDRZQO" value="answer"> <span>At a fruit biomass of 70, the model would predict root biomass of about 4.18 + 0.05*70.</span></label><label><input type="radio" autocomplete="off" name="radio_QEAYJDRZQO" value="answer"> <span>At a fruit biomass of 0, the model predicts a root biomass of about 4.18.</span></label>
-</div>
-</section>
-</div>
-</div>
-<div class="webex-solution">
-<button>
-Click here to see the solution
-</button>
-<p>### Solution</p>
-<ul>
-<li>Root biomass is not significantly affected by fruit biomass. WRONG: Look at the p-value for the slope (2nd row in the regression table below Pr(&gt;|t|))</li>
-<li>Fruit biomass explains most of the variance (&gt;50%) in the root biomass. CORRECT: The proportion of variance explained by the model is given by R2.</li>
-<li>At a fruit biomass of 70, the model would predict root biomass of about <span class="math inline">\(4.18 + 0.05*70\)</span>. CORRECT: The linear equation for the model is: <span class="math inline">\(y = a*x + b\)</span> that is <span class="math inline">\(Root = slope*Fruit + intercept\)</span></li>
-<li>At a fruit biomass of 0, the model predicts a root biomass of about 4.18. CORRECT: This is the intercept (1st row in the regression table below Estimate)</li>
-</ul>
-<p>This is the code that you need to interpret the results.</p>
+<section id="birdabundance-dataset" class="level2" data-number="13.1">
+<h2 data-number="13.1" class="anchored" data-anchor-id="birdabundance-dataset"><span class="header-section-number">13.1</span> birdabundance dataset</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(EcoData)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># simple linear regression</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(Root <span class="sc">~</span> Fruit, <span class="at">data =</span> regrowth)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># check summary for regression coefficient and p-value</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit)</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="do">## Call:</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="do">## lm(formula = Root ~ Fruit, data = regrowth)</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="do">## Residuals:</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="do">##      Min       1Q   Median       3Q      Max </span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="do">## -1.25105 -0.69970 -0.01755  0.66982  1.63933 </span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="do">## Coefficients:</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="do">##             Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept) 4.184256   0.337987  12.380  6.6e-15 ***</span></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="do">## Fruit       0.050444   0.005264   9.584  1.1e-11 ***</span></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="do">## ---</span></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="do">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="do">## Residual standard error: 0.8111 on 38 degrees of freedom</span></span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="do">## Multiple R-squared:  0.7073, Adjusted R-squared:  0.6996 </span></span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="do">## F-statistic: 91.84 on 1 and 38 DF,  p-value: 1.099e-11</span></span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="co"># plot root explained by fruit biomass</span></span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(Root <span class="sc">~</span> Fruit, <span class="at">data =</span> regrowth, </span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Root biomass in cubic meters"</span>,</span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Fruit biomass in g"</span>)</span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(fit) <span class="co"># add regression line</span></span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> <span class="dv">70</span>, <span class="at">col =</span> <span class="st">"purple"</span>) <span class="co"># add line at x value (here fruit biomass of 70g)</span></span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="fl">4.184256</span> <span class="sc">+</span> <span class="fl">0.050444</span><span class="sc">*</span><span class="dv">70</span>, <span class="at">col =</span> <span class="st">"brown"</span>) <span class="co"># add line at y value according to x = 70 using the intercept and regression coefficient of x</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="4A-Exercise_files/figure-html/regrowth-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(randomForest)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="do">## randomForest 4.7-1.2</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Type rfNews() to see new features/changes/bug fixes.</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>indices <span class="ot">=</span> <span class="fu">sample.int</span>(<span class="fu">nrow</span>(birdabundance), <span class="dv">30</span>)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>train <span class="ot">=</span> birdabundance[<span class="sc">-</span>indices,]</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>test <span class="ot">=</span> birdabundance[indices,]</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># ABUND is the response variable</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</div>
-</div>
-</div>
-</section>
-<section id="analyzing-the-birdabundance-dataset" class="level2">
-<h2 class="anchored" data-anchor-id="analyzing-the-birdabundance-dataset">Analyzing the “birdabundance” dataset</h2>
-<p>The dataset provides bird abundances in forest fragments with different characteristics in Australia. We want to look at the relationship of the variables “abundance”, “distance” and “grazing”.</p>
-<div class="callout callout-style-default callout-warning callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Questions
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>First, answer the following questions?:</p>
-<ul>
-<li>What is the most reasonable research question regarding these variables?</li>
-</ul>
-<div id="radio_XGDYENTZRO" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_XGDYENTZRO" value=""> <span>How is grazing influenced by distance / abundance?</span></label><label><input type="radio" autocomplete="off" name="radio_XGDYENTZRO" value=""> <span>How is distance influenced by grazing / abundance?</span></label><label><input type="radio" autocomplete="off" name="radio_XGDYENTZRO" value="answer"> <span>How is abundance influenced by distance / grazing?</span></label>
-</div>
-<ul>
-<li>What is the response variable?</li>
-</ul>
-<div id="radio_CIYDEMETBH" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_CIYDEMETBH" value="answer"> <span>abundance</span></label><label><input type="radio" autocomplete="off" name="radio_CIYDEMETBH" value=""> <span>distance</span></label><label><input type="radio" autocomplete="off" name="radio_CIYDEMETBH" value=""> <span>grazing</span></label>
-</div>
-<ul>
-<li>What is the predictor variable?</li>
-</ul>
-<div id="radio_CZAJXKOVZH" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_CZAJXKOVZH" value="answer"> <span>either grazing or distance</span></label><label><input type="radio" autocomplete="off" name="radio_CZAJXKOVZH" value=""> <span>either abundance or distance</span></label><label><input type="radio" autocomplete="off" name="radio_CZAJXKOVZH" value=""> <span>either abundance or grazing</span></label>
-</div>
-<p>Then, perform the following tasks:</p>
-<ul>
-<li>Fit a simple linear regression relating the response variable to the categorical predictor (that is the one with five levels, make sure that it is indeed a factor using <code>as.factor()</code>)</li>
-<li>Apply an ANOVA to your model.</li>
-</ul>
-<p>You may need the following functions:</p>
-<ul>
-<li><code>lm()</code></li>
-<li><code>summary()</code></li>
-<li><code>anova()</code></li>
-</ul>
-<p>Use your results to chose the correct statement(s):</p>
-<p>You have now fitted a simple linear regression with a categorical predictor and analyzed it. Which of the following statements are correct? (several statements are correct)</p>
-<div id="radio_DDVRMEDBXR" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_DDVRMEDBXR" value="answer"> <span>The maximum likelihood estimate of bird abundance for grazing intensity 1 is 28.623.</span></label><label><input type="radio" autocomplete="off" name="radio_DDVRMEDBXR" value=""> <span>We can see in the regression table that the difference between grazing intensity 3 and 4 is significant.</span></label><label><input type="radio" autocomplete="off" name="radio_DDVRMEDBXR" value=""> <span>The non-significant p-value for grazing intensity 2 indicates that the data are compatible with the null hypothesis “H0: the bird abundance at grazing intensity 2 is on average 0.”</span></label><label><input type="radio" autocomplete="off" name="radio_DDVRMEDBXR" value="answer"> <span>The confidence interval for the estimate of the intercept is the smallest.</span></label><label><input type="radio" autocomplete="off" name="radio_DDVRMEDBXR" value="answer"> <span>The difference between grazing intensity 1 and 3 is significant.</span></label><label><input type="radio" autocomplete="off" name="radio_DDVRMEDBXR" value="answer"> <span>Grazing intensity in general has a highly significant effect (&lt; 0.001) on bird abundance.</span></label>
-</div>
-</div>
-</div>
-<div class="webex-solution">
-<button>
-Click here to see the solution
-</button>
-<section id="solution" class="level3">
-<h3 class="anchored" data-anchor-id="solution">Solution</h3>
-<ul>
-<li>The maximum likelihood estimate of bird abundance for grazing intensity 1 is 28.623. CORRECT: When the predictor is a factor, the intercept equals the first factor level (by default, this follows an alphabetical order).</li>
-<li>We can see in the regression table that the difference between grazing intensity 3 and 4 is significant. WRONG: Comparisons are always related to the intercept, i.e.&nbsp;to the first factor level. For comparisons among other factor levels we need post-hoc tests.</li>
-<li>The non-significant p-value for grazing intensity 2 indicates that the data are compatible with the null hypothesis “H0: the bird abundance at grazing intensity 2 is on average 0.” WRONG: Comparisons are always related to the intercept, i.e.&nbsp;to the first factor level. Only the test for the intercept has H0: mean = 0.</li>
-</ul>
-<p>A reasonable research question is how abundance is influenced by distance and/or grazing. Here, the response variable is abundance, while the predictors are distance and/or grazing.</p>
-<p>This is the code that you need to interpret the results.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># change variable from integer to factor</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>birdabundance<span class="sc">$</span>GRAZE <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(birdabundance<span class="sc">$</span>GRAZE) </span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(ABUND <span class="sc">~</span> GRAZE, <span class="at">data =</span> birdabundance)</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit)</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="do">## Call:</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="do">## lm(formula = ABUND ~ GRAZE, data = birdabundance)</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="do">## Residuals:</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="do">##      Min       1Q   Median       3Q      Max </span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="do">## -18.3867  -4.1159   0.0269   5.1484  16.4133 </span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="do">## Coefficients:</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="do">##             Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept)   28.623      2.086  13.723  &lt; 2e-16 ***</span></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="do">## GRAZE2        -6.673      3.379  -1.975   0.0537 .  </span></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="do">## GRAZE3        -7.336      2.850  -2.574   0.0130 *  </span></span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="do">## GRAZE4        -8.052      3.526  -2.284   0.0266 *  </span></span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="do">## GRAZE5       -22.331      2.950  -7.571 6.85e-10 ***</span></span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="do">## ---</span></span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="do">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="do">## Residual standard error: 7.52 on 51 degrees of freedom</span></span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a><span class="do">## Multiple R-squared:  0.5449, Adjusted R-squared:  0.5092 </span></span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="do">## F-statistic: 15.27 on 4 and 51 DF,  p-value: 2.846e-08</span></span>
-<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a><span class="co"># anova to check global effect of the factor grazing intensity</span></span>
-<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(fit)</span>
-<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a><span class="do">## Analysis of Variance Table</span></span>
-<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a><span class="do">## Response: ABUND</span></span>
-<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a><span class="do">##           Df Sum Sq Mean Sq F value    Pr(&gt;F)    </span></span>
-<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a><span class="do">## GRAZE      4 3453.7  863.42  15.267 2.846e-08 ***</span></span>
-<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a><span class="do">## Residuals 51 2884.2   56.55                      </span></span>
-<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a><span class="do">## ---</span></span>
-<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a><span class="do">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
-<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a><span class="co"># boxplot</span></span>
-<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(ABUND <span class="sc">~</span> GRAZE, <span class="at">data =</span> birdabundance)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="4A-Exercise_files/figure-html/abund~graze-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-</div>
-</section>
-<section id="model-validation-residual-checks" class="level2">
-<h2 class="anchored" data-anchor-id="model-validation-residual-checks">Model validation: Residual checks</h2>
-<p>Now, we will have a closer look at model diagnostics and residual checks in particular. Of course, we should have done this for all models above as well (we simply didn’t do this because of time restrictions). So remember that you always have to validate your model, if you want to be sure that your conclusions are correct.</p>
-<p>For this exercise, you can prepare a dataset yourself called “dat” with the variables “x” and “y”. Simply copy the following code to generate the data:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">234</span>)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="fu">rnorm</span>(<span class="dv">40</span>, <span class="at">mean =</span> <span class="dv">10</span>, <span class="at">sd =</span> <span class="dv">5</span>)</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>y <span class="ot">=</span> <span class="dv">10</span> <span class="sc">-</span> <span class="dv">2</span><span class="sc">*</span>x <span class="sc">+</span> <span class="fl">0.9</span> <span class="sc">*</span> x<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="dv">40</span>, <span class="at">mean=</span><span class="dv">5</span>, <span class="at">sd =</span> <span class="dv">20</span>)</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(x, y)</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(dat)</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="do">##           x          y</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="do">## 1 13.303849 152.093910</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="do">## 2 -0.264915   6.831275</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="do">## 3  2.503970  45.207691</span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="do">## 4 17.356166 240.274237</span></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="do">## 5 17.295693 240.917066</span></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="do">## 6 10.700695 117.691234</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Perform the following tasks:</p>
 <div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -735,28 +491,12 @@ Warning
 </div>
 </div>
 <div class="callout-body-container callout-body">
+<p>Task:</p>
 <ul>
-<li>Fit a simple linear regression.</li>
-<li>Check the residuals.</li>
-<li>Perform another simple linear regression with a modified formula, if needed.</li>
-<li>Create a scatter plot of the data and add a regression line for the first fit in black and one for the second fit in red. The second model cannot be plotted with the <em>abline()</em> function. Use the following code instead:</li>
-</ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="fu">sort</span>(x), <span class="fu">predict</span>(fit2, <span class="at">newdata =</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">sort</span>(x))), <span class="at">col =</span> <span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>You may also need the following functions:</p>
-<ul>
-<li><code>lm()</code></li>
-<li><code>summary()</code></li>
-<li><code>par(mfrow = c(2, 2))</code></li>
-<li><code>plot()</code></li>
-<li><code>abline()</code></li>
-</ul>
-<p>Use your results to answer the following questions:</p>
-<ul>
-<li>What pattern do the residuals of the first regression model show when plotted against the fitted values?</li>
-<li>What do you have to do to improve your first regression model?</li>
-<li>Identify the correct statement(s) about the residuals of the modified model.</li>
+<li><p>Fit random forest on train data</p></li>
+<li><p>Predict for test data</p></li>
+<li><p>Calculate R2</p></li>
+<li><p>Do the same with a lm and compare the predictive performance of both models</p></li>
 </ul>
 </div>
 </div>
@@ -765,107 +505,401 @@ Warning
 Click here to see the solution
 </button>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">234</span>)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="fu">rnorm</span>(<span class="dv">40</span>, <span class="at">mean =</span> <span class="dv">10</span>, <span class="at">sd =</span> <span class="dv">5</span>)</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>y <span class="ot">=</span> <span class="dv">10</span> <span class="sc">-</span> <span class="dv">2</span><span class="sc">*</span>x <span class="sc">+</span> <span class="fl">0.9</span> <span class="sc">*</span> x<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="dv">40</span>, <span class="at">mean=</span><span class="dv">5</span>, <span class="at">sd =</span> <span class="dv">20</span>)</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(x, y)</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co"># simple linear regression</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> x, dat)</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co"># check residuals</span></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>op <span class="ot">=</span> <span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fit) <span class="co"># residuals show a parabolic relationship (see first plot)  -&gt; to improve, fit a quadratic relationship</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>rf <span class="ot">=</span> <span class="fu">randomForest</span>(ABUND<span class="sc">~</span>., <span class="at">data =</span> train)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>m <span class="ot">=</span> <span class="fu">lm</span>(ABUND<span class="sc">~</span>., <span class="at">data =</span> train)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>pred1 <span class="ot">=</span> <span class="fu">predict</span>(rf, <span class="at">newdata =</span> test)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>pred2 <span class="ot">=</span> <span class="fu">predict</span>(m, <span class="at">newdata =</span> test)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(pred1, test<span class="sc">$</span>ABUND)<span class="sc">**</span><span class="dv">2</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 0.6596678</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(pred2, test<span class="sc">$</span>ABUND)<span class="sc">**</span><span class="dv">2</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 0.1983452</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>RF clearly outperforms the linear regression model!</p>
+</div>
+</section>
+<section id="titantic-dataset" class="level2" data-number="13.2">
+<h2 data-number="13.2" class="anchored" data-anchor-id="titantic-dataset"><span class="header-section-number">13.2</span> titantic dataset</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(EcoData)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(randomForest)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="do">## Anexando pacote: 'dplyr'</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="do">## O seguinte objeto é mascarado por 'package:randomForest':</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="do">##     combine</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="do">## Os seguintes objetos são mascarados por 'package:stats':</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="do">##     filter, lag</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="do">## Os seguintes objetos são mascarados por 'package:base':</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="do">##     intersect, setdiff, setequal, union</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>titanic_sub <span class="ot">=</span> titanic <span class="sc">%&gt;%</span> <span class="fu">select</span>(survived, age, pclass, sex, fare)</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>titanic_sub <span class="ot">=</span> titanic_sub[<span class="fu">complete.cases</span>(titanic_sub),]</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>indices <span class="ot">=</span> <span class="fu">sample.int</span>(<span class="fu">nrow</span>(titanic_sub), <span class="dv">200</span>)</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>train <span class="ot">=</span> titanic_sub[<span class="sc">-</span>indices,]</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>test <span class="ot">=</span> titanic_sub[indices,]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Task:</p>
+<ul>
+<li><p>Fit random forest on train data</p></li>
+<li><p>Predict for test data</p></li>
+<li><p>Calculate Accuracy</p></li>
+<li><p>Do the same with a glm (binomial) and compare the predictive performance of both models</p></li>
+<li><p>What is the most important variable?</p></li>
+</ul>
+</div>
+</div>
+<div class="webex-solution">
+<button>
+Click here to see the solution
+</button>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>rf <span class="ot">=</span> <span class="fu">randomForest</span>(<span class="fu">as.factor</span>(survived)<span class="sc">~</span>., <span class="at">data =</span> train)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>m <span class="ot">=</span> <span class="fu">glm</span>(survived<span class="sc">~</span>., <span class="at">data =</span> train, <span class="at">family =</span> binomial)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>pred1 <span class="ot">=</span> <span class="fu">predict</span>(rf, <span class="at">newdata =</span> test)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>pred2 <span class="ot">=</span> <span class="fu">predict</span>(m, <span class="at">newdata =</span> test, <span class="at">type =</span> <span class="st">"response"</span>)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co"># pred2 are probabilities, we have to change them to levels</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>pred2 <span class="ot">=</span> <span class="fu">ifelse</span>(pred2 <span class="sc">&lt;</span> <span class="fl">0.5</span>, <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(pred1 <span class="sc">==</span> test<span class="sc">$</span>survived) <span class="co"># RF</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 0.82</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(pred2 <span class="sc">==</span> test<span class="sc">$</span>survived) <span class="co"># glm</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 0.765</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>RF is better than the glm!</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">varImpPlot</span>(rf)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="4A-Exercise_files/figure-html/resid-check-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="8A-Exercise_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(op)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co"># scatter plot</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(y <span class="sc">~</span> x, <span class="at">data =</span> dat)</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Sex is the most important variable!</p>
+</div>
+</section>
+<section id="bias-variance-tradeoff" class="level2" data-number="13.3">
+<h2 data-number="13.3" class="anchored" data-anchor-id="bias-variance-tradeoff"><span class="header-section-number">13.3</span> Bias-variance tradeoff</h2>
+<p>An important concept of statistics and, in particular, ML is the concept of the bias-variance tradeoff - or in other words, finding the right complexity of the model. So how flexible should our model be so that it generalizes well to other/new observations. Many ML algorithms have complexity parameters (e.g.&nbsp;nodesize or mtry in RF) that control their complexity. Have a look at the following youtube video about the bias-variance tradeoff:</p>
+<pre><code></code></pre>
+<p>Let’s see how we can control the complexity in the Random Forest algorithm:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(randomForest)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>data <span class="ot">=</span> airquality[<span class="fu">complete.cases</span>(airquality),]</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>rf <span class="ot">=</span> <span class="fu">randomForest</span>(Ozone<span class="sc">~</span>., <span class="at">data =</span> data)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>pred <span class="ot">=</span> <span class="fu">predict</span>(rf, data)</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="fu">importance</span>(rf)</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="do">##         IncNodePurity</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="do">## Solar.R      17969.59</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="do">## Wind         31978.36</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="do">## Temp         34176.71</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="do">## Month        10753.73</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="do">## Day          15436.47</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;         IncNodePurity</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Solar.R      17969.59</span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Wind         31978.36</span></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Temp         34176.71</span></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Month        10753.73</span></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Day          15436.47</span></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"RMSE: "</span>, <span class="fu">sqrt</span>(<span class="fu">mean</span>((data<span class="sc">$</span>Ozone <span class="sc">-</span> pred)<span class="sc">^</span><span class="dv">2</span>)), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a><span class="do">## RMSE:  9.507848</span></span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; RMSE:  9.507848</span></span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(data<span class="sc">$</span>Temp, data<span class="sc">$</span>Ozone)</span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(data<span class="sc">$</span>Temp[<span class="fu">order</span>(data<span class="sc">$</span>Temp)], pred[<span class="fu">order</span>(data<span class="sc">$</span>Temp)], <span class="at">col =</span> <span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="4A-Exercise_files/figure-html/resid-check-2.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="8A-Exercise_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit) <span class="co"># significantly positively correlated, but this doesn't tell the full story because the residuals are not okay</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Call:</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="do">## lm(formula = y ~ x, data = dat)</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="do">## Residuals:</span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="do">##     Min      1Q  Median      3Q     Max </span></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="do">## -39.884 -22.208  -4.948  10.602 118.164 </span></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="do">## Coefficients:</span></span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="do">##             Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept)   -8.459     10.973  -0.771    0.446    </span></span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="do">## x             11.465      1.019  11.248 1.18e-13 ***</span></span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="do">## ---</span></span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="do">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="do">## Residual standard error: 32.11 on 38 degrees of freedom</span></span>
-<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a><span class="do">## Multiple R-squared:  0.769,  Adjusted R-squared:  0.763 </span></span>
-<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a><span class="do">## F-statistic: 126.5 on 1 and 38 DF,  p-value: 1.176e-13</span></span>
-<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a><span class="co"># improved regression model</span></span>
-<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>fit2 <span class="ot">=</span> <span class="fu">lm</span>(y <span class="sc">~</span> x <span class="sc">+</span> <span class="fu">I</span>(x<span class="sc">^</span><span class="dv">2</span>), dat)</span>
-<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a><span class="co"># check residuals</span></span>
-<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>op <span class="ot">=</span> <span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
-<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fit2) <span class="co"># no pattern in residuals anymore (first plot) -&gt; fit is fine</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Task
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Try different values for the nodesize and mtry and describe how the predictions depend on these parameters. (<code>randomForest(..., nodesize = ..., mtry = ...)</code> (<a href="https://theoreticalecology.github.io/machinelearning/fundamental.html#exercises-3">the exercise was taken from the ML course book</a>)</p>
+</div>
+</div>
+<div class="webex-solution">
+<button>
+Click here to see the solution
+</button>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(randomForest)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>data <span class="ot">=</span> airquality[<span class="fu">complete.cases</span>(airquality),]</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(nodesize <span class="cf">in</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">15</span>, <span class="dv">50</span>, <span class="dv">100</span>)){</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(mtry <span class="cf">in</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>)){</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    rf <span class="ot">=</span> <span class="fu">randomForest</span>(Ozone<span class="sc">~</span>., <span class="at">data =</span> data, <span class="at">mtry =</span> mtry, <span class="at">nodesize =</span> nodesize)</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    pred <span class="ot">=</span> <span class="fu">predict</span>(rf, data)</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">plot</span>(data<span class="sc">$</span>Temp, data<span class="sc">$</span>Ozone, <span class="at">main =</span> <span class="fu">paste0</span>(</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>        <span class="st">"mtry: "</span>, mtry, <span class="st">"    nodesize: "</span>, nodesize,</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>        <span class="st">"</span><span class="sc">\n</span><span class="st">RMSE: "</span>, <span class="fu">round</span>(<span class="fu">sqrt</span>(<span class="fu">mean</span>((data<span class="sc">$</span>Ozone <span class="sc">-</span> pred)<span class="sc">^</span><span class="dv">2</span>)), <span class="dv">2</span>)</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">lines</span>(data<span class="sc">$</span>Temp[<span class="fu">order</span>(data<span class="sc">$</span>Temp)], pred[<span class="fu">order</span>(data<span class="sc">$</span>Temp)], <span class="at">col =</span> <span class="st">"red"</span>)</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="4A-Exercise_files/figure-html/resid-check-3.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="8A-Exercise_files/figure-html/rf_complexity-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(op)</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># scatter plot</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(y <span class="sc">~</span> x, <span class="at">data =</span> dat)</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(fit)</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="fu">sort</span>(x), <span class="fu">predict</span>(fit2, <span class="at">newdata =</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">sort</span>(x))), <span class="at">col =</span> <span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="4A-Exercise_files/figure-html/resid-check-4.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="8A-Exercise_files/figure-html/rf_complexity-2.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit2) <span class="co"># significantly negatively correlated, trustworthy now, because residuals are sufficiently uniformly distributed (first plot in plot(fit2))</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="do">## Call:</span></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="do">## lm(formula = y ~ x + I(x^2), data = dat)</span></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="do">## Residuals:</span></span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="do">##     Min      1Q  Median      3Q     Max </span></span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="do">## -33.174 -11.444   0.938  10.164  40.666 </span></span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="do">## Coefficients:</span></span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="do">##             Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept) 17.87505    6.00812   2.975  0.00513 ** </span></span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="do">## x           -1.10100    1.27706  -0.862  0.39417    </span></span>
-<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a><span class="do">## I(x^2)       0.80752    0.07526  10.730 6.49e-13 ***</span></span>
-<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="do">## ---</span></span>
-<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a><span class="do">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
-<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a><span class="do">## Residual standard error: 16.05 on 37 degrees of freedom</span></span>
-<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a><span class="do">## Multiple R-squared:  0.9438, Adjusted R-squared:  0.9408 </span></span>
-<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a><span class="do">## F-statistic: 310.9 on 2 and 37 DF,  p-value: &lt; 2.2e-16</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="8A-Exercise_files/figure-html/rf_complexity-3.png" class="img-fluid figure-img" width="672"></p>
+</figure>
 </div>
 </div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="8A-Exercise_files/figure-html/rf_complexity-4.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="8A-Exercise_files/figure-html/rf_complexity-5.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="8A-Exercise_files/figure-html/rf_complexity-6.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="8A-Exercise_files/figure-html/rf_complexity-7.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="8A-Exercise_files/figure-html/rf_complexity-8.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="8A-Exercise_files/figure-html/rf_complexity-9.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="8A-Exercise_files/figure-html/rf_complexity-10.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="8A-Exercise_files/figure-html/rf_complexity-11.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="8A-Exercise_files/figure-html/rf_complexity-12.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="8A-Exercise_files/figure-html/rf_complexity-13.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="8A-Exercise_files/figure-html/rf_complexity-14.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="8A-Exercise_files/figure-html/rf_complexity-15.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="deep-neural-networks" class="level2" data-number="13.4">
+<h2 data-number="13.4" class="anchored" data-anchor-id="deep-neural-networks"><span class="header-section-number">13.4</span> Deep Neural Networks</h2>
+<p>Task description: Predict the spatial distribution of the African elephant. In Ecology we call such model a species distribution model.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(EcoData)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>?elephant</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The object elephant contains two subdatasets</p>
+<ol type="1">
+<li><p>elephant$occurenceData contains presence / absence data as well as bioclim variables (environmental predictors) for the African elephant</p></li>
+<li><p>elephant$predictionData data with environmental predictors for spatial predictions</p></li>
+</ol>
+<p>The environmental data consists of 19 environmental variables, called bio1 through bio19, which are public and globally available bioclimatic variables (see <a href="https://www.worldclim.org/data/bioclim.html" class="uri">https://www.worldclim.org/data/bioclim.html</a> for a description of the variables). For example, bio1 is the mean annual temperature. No understanding of these variables is required for the task, the only difficulty is that many of them are highly correlated because they encode similar information (e.g.&nbsp;there are several temperature variables).</p>
+<p>The goal of this exercise is to fit a deep neural network based on the observed presence / absences, and then make new predictions of habitat suitability in space across Africa based on the fitted model. Thus, our workflow consists of two steps:</p>
+<ol type="1">
+<li>building and optimizing the predictive model, and</li>
+<li>using the predictive model to make predictions on new data and visualizing the results.</li>
+</ol>
+<p>Here an example of how you could do this</p>
+<p><strong>Build predictive model:</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Use subsample of data because too many observations and use the rest of data to validate our model</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>train_indices <span class="ot">=</span> <span class="fu">sample.int</span>(<span class="fu">nrow</span>(elephant<span class="sc">$</span>occurenceData), <span class="dv">500</span>)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>df <span class="ot">=</span> elephant<span class="sc">$</span>occurenceData[train_indices, ]</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(cito)</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>model <span class="ot">=</span> <span class="fu">dnn</span>(Presence<span class="sc">~</span>bio1, </span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">data =</span> df, </span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">loss =</span> <span class="st">'binomial'</span>, </span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>            <span class="at">verbose =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="8A-Exercise_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="8A-Exercise_files/figure-html/unnamed-chunk-7-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>To check the predictive power of the model for the observations we have not used to train the model (<code>[-train_indices,]</code>)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pROC)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">auc</span>(df<span class="sc">$</span>Presence[<span class="sc">-</span>train_indices], </span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">predict</span>(model, <span class="at">newdata =</span> df[<span class="sc">-</span>train_indices,],<span class="at">type =</span> <span class="st">"response"</span>))</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Warning in roc.default(response, predictor, auc = TRUE, ...): Deprecated use a</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="do">## matrix as predictor. Unexpected results may be produced, please pass a numeric</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="do">## vector.</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="do">## Area under the curve: 0.6947</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The AUC is a common measure of goodness of fit for binary classification.</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tasks
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><p>Drop some of the highly correlated variables (don’t use all of them).</p></li>
+<li><p>Change architecture of the dnn (using the <code>hidden=c(...)</code>argument)</p></li>
+<li><p>Change the number of epochs and the learning rate (see documentation of <code>dnn</code>)</p></li>
+</ul>
+<p><strong>Make new predictions</strong></p>
+<p>The data for making spatial predictions is in elephant$predictionData. This new dataset is not a data.frame but a raster object, which is a special data class for spatial data. You can plot one of the predictors in the following way.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sp)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(raster)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(elephant<span class="sc">$</span>predictionData<span class="sc">$</span>bio1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="8A-Exercise_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>As our new_data object is not a typical data.frame, we are not using the standard predict function for a dnn, which is <code>?predict.citodnn</code>, but the predict function from the raster object (which internally transforms the new_data into a classical data.frame, pass then the data.frame to our model, and then transforms the output back to a raster object). Therefore, the syntax is slightly different to how we previously used <code>predict()</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>predictions <span class="ot">=</span>  <span class="fu">predict</span>(elephant<span class="sc">$</span>predictionData, <span class="at">model =</span> model, <span class="at">type =</span> <span class="st">"response"</span>)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">as.data.frame</span>(predictions))</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="do">##        layer</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="do">## 1 0.07677470</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="do">## 2 0.07236973</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="do">## 3 0.06827698</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="do">## 4 0.06632481</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="do">## 5 0.06258857</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="do">## 6 0.06080152</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The advantage of the raster object is that we can directly use it to create a map (the raster object has coordinates for each observation):</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">spplot</span>(predictions, <span class="at">colorkey =</span> <span class="fu">list</span>(<span class="at">space =</span> <span class="st">"left"</span>) )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="8A-Exercise_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>Task:</strong> play around with the DNN to improve predictive accuracy. You can check predictive accuracy by looking the AUC of the test data. When improving the predictive power of the model, does the map change?</p>
+</div>
+</div>
+</section>
+<section id="ml-pipeline" class="level2" data-number="13.5">
+<h2 data-number="13.5" class="anchored" data-anchor-id="ml-pipeline"><span class="header-section-number">13.5</span> ML pipeline</h2>
+<p>If you want to know more about a typical ML pipeline/workflow, <a href="https://theoreticalecology.github.io/machinelearning/workflow.html">read this chapter from the ML course!</a></p>
 
 
 </section>
@@ -1643,13 +1677,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./6-GLM.html" class="pagination-link" aria-label="Generalized linear models">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Generalized linear models</span></span>
+      <a href="./8-MachineLearning.html" class="pagination-link" aria-label="Machine Learning">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Machine Learning</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./5A-Exercise.html" class="pagination-link" aria-label="Exercise - Multiple Linear Regression">
-        <span class="nav-page-text">Exercise - Multiple Linear Regression</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./9-Design.html" class="pagination-link" aria-label="Design of experiments">
+        <span class="nav-page-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Design of experiments</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -1658,4 +1692,4 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/TheoreticalEcology/DataScienceInR/edit/master/4A-Exercise.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></div></div></footer></body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/TheoreticalEcology/DataScienceInR/edit/master/8A-Exercise.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></div></div></footer></body></html>
