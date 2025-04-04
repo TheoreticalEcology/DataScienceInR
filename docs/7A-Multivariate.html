@@ -65,7 +65,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
 <link href="./7B-Exercise.html" rel="next">
-<link href="./4C-Exercise.html" rel="prev">
+<link href="./6A-Exercise.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -313,13 +313,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./4B-Exercise.html" class="sidebar-item-text sidebar-link">
+  <a href="./5A-Exercise.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Exercise - Multiple Linear Regression</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./4C-Exercise.html" class="sidebar-item-text sidebar-link">
+  <a href="./6A-Exercise.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Exercise - GLM</span></a>
   </div>
 </li>
@@ -365,7 +365,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./6A-Exercise.html" class="sidebar-item-text sidebar-link">
+  <a href="./8A-Exercise.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Exercise</span></span></a>
   </div>
 </li>
@@ -443,10 +443,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#pca" id="toc-pca" class="nav-link" data-scroll-target="#pca"><span class="header-section-number">11.1.1</span> PCA</a></li>
   <li><a href="#nmds" id="toc-nmds" class="nav-link" data-scroll-target="#nmds"><span class="header-section-number">11.1.2</span> NMDS</a></li>
   </ul></li>
-  <li><a href="#cluster-analysis" id="toc-cluster-analysis" class="nav-link" data-scroll-target="#cluster-analysis"><span class="header-section-number">11.2</span> Cluster analysis</a>
+  <li><a href="#constrained-ordination" id="toc-constrained-ordination" class="nav-link" data-scroll-target="#constrained-ordination"><span class="header-section-number">11.2</span> Constrained Ordination</a></li>
+  <li><a href="#cluster-analysis" id="toc-cluster-analysis" class="nav-link" data-scroll-target="#cluster-analysis"><span class="header-section-number">11.3</span> Cluster analysis</a>
   <ul class="collapse">
-  <li><a href="#hierarchical-clustering" id="toc-hierarchical-clustering" class="nav-link" data-scroll-target="#hierarchical-clustering"><span class="header-section-number">11.2.1</span> Hierarchical clustering</a></li>
-  <li><a href="#non-hiearchical-clustering" id="toc-non-hiearchical-clustering" class="nav-link" data-scroll-target="#non-hiearchical-clustering"><span class="header-section-number">11.2.2</span> Non-hiearchical clustering</a></li>
+  <li><a href="#hierarchical-clustering" id="toc-hierarchical-clustering" class="nav-link" data-scroll-target="#hierarchical-clustering"><span class="header-section-number">11.3.1</span> Hierarchical clustering</a></li>
+  <li><a href="#non-hiearchical-clustering" id="toc-non-hiearchical-clustering" class="nav-link" data-scroll-target="#non-hiearchical-clustering"><span class="header-section-number">11.3.2</span> Non-hiearchical clustering</a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/TheoreticalEcology/DataScienceInR/edit/master/7A-Multivariate.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
@@ -763,129 +764,86 @@ Caution
 </div>
 </div>
 </div>
-<!-- 
-MELINA: I hided this part because I decided not to talk about constrained ordination - it would take too much time, and I don't think most of the students would be interested (it may confuse more then help)
-
-## Constrained Ordination
-
-::: {.cell}
-
-```{.r .cell-code}
-# 2 multivariate datasets (abundances + environment)
-
-
-## RDA
-str(dune) # species composition
-## 'data.frame':    20 obs. of  30 variables:
-##  $ Achimill: num  1 3 0 0 2 2 2 0 0 4 ...
-##  $ Agrostol: num  0 0 4 8 0 0 0 4 3 0 ...
-##  $ Airaprae: num  0 0 0 0 0 0 0 0 0 0 ...
-##  $ Alopgeni: num  0 2 7 2 0 0 0 5 3 0 ...
-##  $ Anthodor: num  0 0 0 0 4 3 2 0 0 4 ...
-##  $ Bellpere: num  0 3 2 2 2 0 0 0 0 2 ...
-##  $ Bromhord: num  0 4 0 3 2 0 2 0 0 4 ...
-##  $ Chenalbu: num  0 0 0 0 0 0 0 0 0 0 ...
-##  $ Cirsarve: num  0 0 0 2 0 0 0 0 0 0 ...
-##  $ Comapalu: num  0 0 0 0 0 0 0 0 0 0 ...
-##  $ Eleopalu: num  0 0 0 0 0 0 0 4 0 0 ...
-##  $ Elymrepe: num  4 4 4 4 4 0 0 0 6 0 ...
-##  $ Empenigr: num  0 0 0 0 0 0 0 0 0 0 ...
-##  $ Hyporadi: num  0 0 0 0 0 0 0 0 0 0 ...
-##  $ Juncarti: num  0 0 0 0 0 0 0 4 4 0 ...
-##  $ Juncbufo: num  0 0 0 0 0 0 2 0 4 0 ...
-##  $ Lolipere: num  7 5 6 5 2 6 6 4 2 6 ...
-##  $ Planlanc: num  0 0 0 0 5 5 5 0 0 3 ...
-##  $ Poaprat : num  4 4 5 4 2 3 4 4 4 4 ...
-##  $ Poatriv : num  2 7 6 5 6 4 5 4 5 4 ...
-##  $ Ranuflam: num  0 0 0 0 0 0 0 2 0 0 ...
-##  $ Rumeacet: num  0 0 0 0 5 6 3 0 2 0 ...
-##  $ Sagiproc: num  0 0 0 5 0 0 0 2 2 0 ...
-##  $ Salirepe: num  0 0 0 0 0 0 0 0 0 0 ...
-##  $ Scorautu: num  0 5 2 2 3 3 3 3 2 3 ...
-##  $ Trifprat: num  0 0 0 0 2 5 2 0 0 0 ...
-##  $ Trifrepe: num  0 5 2 1 2 5 2 2 3 6 ...
-##  $ Vicilath: num  0 0 0 0 0 0 0 0 0 1 ...
-##  $ Bracruta: num  0 0 2 2 2 6 2 2 2 2 ...
-##  $ Callcusp: num  0 0 0 0 0 0 0 0 0 0 ...
-data("dune.env")
-str(dune.env) # environmental variables
-## 'data.frame':    20 obs. of  5 variables:
-##  $ A1        : num  2.8 3.5 4.3 4.2 6.3 4.3 2.8 4.2 3.7 3.3 ...
-##  $ Moisture  : Ord.factor w/ 4 levels "1"<"2"<"4"<"5": 1 1 2 2 1 1 1 4 3 2 ...
-##  $ Management: Factor w/ 4 levels "BF","HF","NM",..: 4 1 4 4 2 2 2 2 2 1 ...
-##  $ Use       : Ord.factor w/ 3 levels "Hayfield"<"Haypastu"<..: 2 2 2 2 1 2 3 3 1 1 ...
-##  $ Manure    : Ord.factor w/ 5 levels "0"<"1"<"2"<"3"<..: 5 3 5 5 3 3 4 4 2 2 ...
-
-RDA = rda(dune ~ as.numeric(Manure) + as.numeric(Moisture), 
-         data = dune.env)
-plot(RDA)
-```
-
-::: {.cell-output-display}
-![](7A-Multivariate_files/figure-html/unnamed-chunk-10-1.png){width=672}
-:::
-
-```{.r .cell-code}
-
-summary(RDA)
-## 
-## Call:
-## rda(formula = dune ~ as.numeric(Manure) + as.numeric(Moisture),      data = dune.env) 
-## 
-## Partitioning of variance:
-##               Inertia Proportion
-## Total           84.12     1.0000
-## Constrained     31.20     0.3709
-## Unconstrained   52.92     0.6291
-## 
-## Eigenvalues, and their contribution to the variance 
-## 
-## Importance of components:
-##                          RDA1    RDA2     PC1     PC2     PC3    PC4     PC5
-## Eigenvalue            19.0185 12.1864 10.7889 7.85393 6.67657 6.2084 5.12380
-## Proportion Explained   0.2261  0.1449  0.1283 0.09336 0.07937 0.0738 0.06091
-## Cumulative Proportion  0.2261  0.3709  0.4992 0.59255 0.67192 0.7457 0.80663
-##                           PC6     PC7     PC8     PC9    PC10    PC11    PC12
-## Eigenvalue            3.50320 3.10988 2.47760 1.83130 1.63276 1.03305 0.87265
-## Proportion Explained  0.04164 0.03697 0.02945 0.02177 0.01941 0.01228 0.01037
-## Cumulative Proportion 0.84827 0.88524 0.91469 0.93646 0.95587 0.96815 0.97852
-##                           PC13     PC14     PC15     PC16     PC17
-## Eigenvalue            0.642862 0.469072 0.301387 0.215853 0.177610
-## Proportion Explained  0.007642 0.005576 0.003583 0.002566 0.002111
-## Cumulative Proportion 0.986164 0.991740 0.995323 0.997889 1.000000
-## 
-## Accumulated constrained eigenvalues
-## Importance of components:
-##                          RDA1    RDA2
-## Eigenvalue            19.0185 12.1864
-## Proportion Explained   0.6095  0.3905
-## Cumulative Proportion  0.6095  1.0000
-# important part at the top
-# variance explained by the two variables = prop constrained = 37.09%
-# how much is explained by each RDA = see importance of components prop explained
-# PCs are the unconstrained axes
-
-# species scores = coordinates of species in the plot
-# site scores = coordinates of sites in the plot
-# biplot scores = coordinates of environmental variable vectors
-
-
-barplot(summary(RDA)$cont$importance[2, ],  las = 2,
-        col = c(rep ('red', 2), 
-                rep ('black', length(summary(RDA)$cont$importance[2, ])-2)),
-        ylab="proportion of variance explained") # displays % of variance explained by PCs
-```
-
-::: {.cell-output-display}
-![](7A-Multivariate_files/figure-html/unnamed-chunk-10-2.png){width=672}
-:::
-:::
-
---->
 </section>
 </section>
-<section id="cluster-analysis" class="level2" data-number="11.2">
-<h2 data-number="11.2" class="anchored" data-anchor-id="cluster-analysis"><span class="header-section-number">11.2</span> Cluster analysis</h2>
+<section id="constrained-ordination" class="level2" data-number="11.2">
+<h2 data-number="11.2" class="anchored" data-anchor-id="constrained-ordination"><span class="header-section-number">11.2</span> Constrained Ordination</h2>
+<p>A constrained ordination is similar to a PCA or NMDS, but considers additional predictors for the ordination.</p>
+<p>Here an example, using the dune dataset (see via ?dune, str(dune)) together with the dune.env environmental data</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(dune.env)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>RDA <span class="ot">=</span> <span class="fu">rda</span>(dune <span class="sc">~</span> <span class="fu">as.numeric</span>(Manure) <span class="sc">+</span> <span class="fu">as.numeric</span>(Moisture), </span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">data =</span> dune.env)</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(RDA)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="7A-Multivariate_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(RDA)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Call:</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="do">## rda(formula = dune ~ as.numeric(Manure) + as.numeric(Moisture),      data = dune.env) </span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="do">## Partitioning of variance:</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="do">##               Inertia Proportion</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="do">## Total           84.12     1.0000</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="do">## Constrained     31.20     0.3709</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="do">## Unconstrained   52.92     0.6291</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="do">## Eigenvalues, and their contribution to the variance </span></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a><span class="do">## Importance of components:</span></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a><span class="do">##                          RDA1    RDA2     PC1     PC2     PC3    PC4     PC5</span></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a><span class="do">## Eigenvalue            19.0185 12.1864 10.7889 7.85393 6.67657 6.2084 5.12380</span></span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a><span class="do">## Proportion Explained   0.2261  0.1449  0.1283 0.09336 0.07937 0.0738 0.06091</span></span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a><span class="do">## Cumulative Proportion  0.2261  0.3709  0.4992 0.59255 0.67192 0.7457 0.80663</span></span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a><span class="do">##                           PC6     PC7     PC8     PC9    PC10    PC11    PC12</span></span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a><span class="do">## Eigenvalue            3.50320 3.10988 2.47760 1.83130 1.63276 1.03305 0.87265</span></span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a><span class="do">## Proportion Explained  0.04164 0.03697 0.02945 0.02177 0.01941 0.01228 0.01037</span></span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a><span class="do">## Cumulative Proportion 0.84827 0.88524 0.91469 0.93646 0.95587 0.96815 0.97852</span></span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a><span class="do">##                           PC13     PC14     PC15     PC16     PC17</span></span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a><span class="do">## Eigenvalue            0.642862 0.469072 0.301387 0.215853 0.177610</span></span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a><span class="do">## Proportion Explained  0.007642 0.005576 0.003583 0.002566 0.002111</span></span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a><span class="do">## Cumulative Proportion 0.986164 0.991740 0.995323 0.997889 1.000000</span></span>
+<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a><span class="do">## Accumulated constrained eigenvalues</span></span>
+<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a><span class="do">## Importance of components:</span></span>
+<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a><span class="do">##                          RDA1    RDA2</span></span>
+<span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a><span class="do">## Eigenvalue            19.0185 12.1864</span></span>
+<span id="cb12-33"><a href="#cb12-33" aria-hidden="true" tabindex="-1"></a><span class="do">## Proportion Explained   0.6095  0.3905</span></span>
+<span id="cb12-34"><a href="#cb12-34" aria-hidden="true" tabindex="-1"></a><span class="do">## Cumulative Proportion  0.6095  1.0000</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>important part at the top</li>
+<li>variance explained by the two variables = prop constrained = 37.09%</li>
+<li>how much is explained by each RDA = see importance of components prop explained</li>
+<li>PCs are the unconstrained axes</li>
+<li>species scores = coordinates of species in the plot</li>
+<li>site scores = coordinates of sites in the plot</li>
+<li>biplot scores = coordinates of environmental variable vectors</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(<span class="fu">summary</span>(RDA)<span class="sc">$</span>cont<span class="sc">$</span>importance[<span class="dv">2</span>, ],  <span class="at">las =</span> <span class="dv">2</span>,</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">col =</span> <span class="fu">c</span>(<span class="fu">rep</span> (<span class="st">'red'</span>, <span class="dv">2</span>), </span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>                <span class="fu">rep</span> (<span class="st">'black'</span>, <span class="fu">length</span>(<span class="fu">summary</span>(RDA)<span class="sc">$</span>cont<span class="sc">$</span>importance[<span class="dv">2</span>, ])<span class="sc">-</span><span class="dv">2</span>)),</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">ylab=</span><span class="st">"proportion of variance explained"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="7A-Multivariate_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>displays % of variance explained by PCs</p>
+</section>
+<section id="cluster-analysis" class="level2" data-number="11.3">
+<h2 data-number="11.3" class="anchored" data-anchor-id="cluster-analysis"><span class="header-section-number">11.3</span> Cluster analysis</h2>
 <p>Cluster analysis groups similar observations. It can be useful when we want to classify sites or samples based on their characteristics (variables).</p>
 <p>There are two main types of clustering:</p>
 <ul>
@@ -940,35 +898,22 @@ barplot(summary(RDA)$cont$importance[2, ],  las = 2,
 </tbody>
 </table>
 <p>Hierarchical clustering gives a full tree of nested groups, which is great for exploring data. K-means is simpler and faster, but you need to choose the number of groups first.</p>
-<section id="hierarchical-clustering" class="level3" data-number="11.2.1">
-<h3 data-number="11.2.1" class="anchored" data-anchor-id="hierarchical-clustering"><span class="header-section-number">11.2.1</span> Hierarchical clustering</h3>
+<section id="hierarchical-clustering" class="level3" data-number="11.3.1">
+<h3 data-number="11.3.1" class="anchored" data-anchor-id="hierarchical-clustering"><span class="header-section-number">11.3.1</span> Hierarchical clustering</h3>
 <p>Let’s pretend we don’t know which species the iris individuals belong. We will use a hierarchical clustering technique to see how the individuals will be clustered by their morphological variables. We plot the results and then color individuals by their known species to see if the clustering could provide reliable classifications</p>
 <p>For clustering you also need a dissimilarity matrix, here we are using the default from <code>dist</code>, the euclidian distance.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(cluster) <span class="co"># clustering</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co"># example for distance matrix</span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">dist</span>(iris[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>]) <span class="co"># creates a distance matrix (comparison of all possible sample pairs)</span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="do">##           1         2</span></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="do">## 2 0.5385165          </span></span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="do">## 3 0.5099020 0.3000000</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(cluster) <span class="co"># clustering</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co"># example for distance matrix</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">dist</span>(iris[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>]) <span class="co"># creates a distance matrix (comparison of all possible sample pairs)</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="do">##           1         2</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="do">## 2 0.5385165          </span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="do">## 3 0.5099020 0.3000000</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Clustering and plotting.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>hc <span class="ot">=</span> <span class="fu">hclust</span>(<span class="fu">dist</span>(iris[, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>]))</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(hc)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="7A-Multivariate_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>THe default <code>plot.hclust</code> is ugly and don’t allow to color the tips (individuals). For that, we will use the package <code>ape</code>for phylogenetic analyses to get a pretty dendogram.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ape)</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>new.hc <span class="ot">&lt;-</span> <span class="fu">as.phylo</span>(hc, <span class="at">method =</span> <span class="st">"ward.D2"</span>) <span class="co"># converts object type "hcclust" into type "phylo"</span></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(new.hc, <span class="at">tip.color =</span> <span class="fu">as.numeric</span>(iris<span class="sc">$</span>Species)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>hc <span class="ot">=</span> <span class="fu">hclust</span>(<span class="fu">dist</span>(iris[, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>]))</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(hc)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -976,12 +921,25 @@ barplot(summary(RDA)$cont$importance[2, ],  las = 2,
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># change plotting type:</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">as.phylo</span>(hc), <span class="at">tip.color =</span> <span class="fu">as.numeric</span>(iris<span class="sc">$</span>Species), <span class="at">type =</span> <span class="st">"fan"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>THe default <code>plot.hclust</code> is ugly and don’t allow to color the tips (individuals). For that, we will use the package <code>ape</code>for phylogenetic analyses to get a pretty dendogram.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ape)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>new.hc <span class="ot">&lt;-</span> <span class="fu">as.phylo</span>(hc, <span class="at">method =</span> <span class="st">"ward.D2"</span>) <span class="co"># converts object type "hcclust" into type "phylo"</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(new.hc, <span class="at">tip.color =</span> <span class="fu">as.numeric</span>(iris<span class="sc">$</span>Species)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="7A-Multivariate_files/figure-html/unnamed-chunk-13-2.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="7A-Multivariate_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># change plotting type:</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">as.phylo</span>(hc), <span class="at">tip.color =</span> <span class="fu">as.numeric</span>(iris<span class="sc">$</span>Species), <span class="at">type =</span> <span class="st">"fan"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="7A-Multivariate_files/figure-html/unnamed-chunk-14-2.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1004,59 +962,59 @@ plot(aa, which.plots = 2) #which.plots: plots only plot 2
 :::
 --->
 </section>
-<section id="non-hiearchical-clustering" class="level3" data-number="11.2.2">
-<h3 data-number="11.2.2" class="anchored" data-anchor-id="non-hiearchical-clustering"><span class="header-section-number">11.2.2</span> Non-hiearchical clustering</h3>
+<section id="non-hiearchical-clustering" class="level3" data-number="11.3.2">
+<h3 data-number="11.3.2" class="anchored" data-anchor-id="non-hiearchical-clustering"><span class="header-section-number">11.3.2</span> Non-hiearchical clustering</h3>
 <p>The most common method for non-hierarchical clustering is <strong>K-means clustering</strong>, which partitions the data into a fixed number of groups. K-means clustering requires you to choose the number of clusters in advance. It works by assigning observations to the nearest cluster center, then updating the centers.</p>
 <p>Note: K-means uses raw data (not a distance matrix), so we need to prepare the data differently.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>) <span class="co"># choice of first k centers is random and depends on (random) seed</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>cl <span class="ot">=</span> <span class="fu">kmeans</span>(iris[, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>], <span class="at">centers =</span> <span class="dv">3</span>) <span class="co"># centers = number of clusters</span></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>cl<span class="sc">$</span>cluster</span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="do">##   [1] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1</span></span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="do">##  [38] 1 1 1 1 1 1 1 1 1 1 1 1 1 2 2 3 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2</span></span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="do">##  [75] 2 2 2 3 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 3 2 3 3 3 3 2 3 3 3 3</span></span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="do">## [112] 3 3 2 2 3 3 3 3 2 3 2 3 2 3 3 2 2 3 3 3 3 3 2 3 3 3 3 2 3 3 3 2 3 3 3 2 3</span></span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="do">## [149] 3 2</span></span>
-<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(cl<span class="sc">$</span>cluster) <span class="co"># see the cluster assignment</span></span>
-<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a><span class="do">##  1  2  3 </span></span>
-<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a><span class="do">## 50 62 38</span></span>
-<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a><span class="fu">as.numeric</span>(iris<span class="sc">$</span>Species)</span>
-<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a><span class="do">##   [1] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1</span></span>
-<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a><span class="do">##  [38] 1 1 1 1 1 1 1 1 1 1 1 1 1 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2</span></span>
-<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a><span class="do">##  [75] 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 3 3 3 3 3 3 3 3 3 3 3</span></span>
-<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a><span class="do">## [112] 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3</span></span>
-<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a><span class="do">## [149] 3 3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>) <span class="co"># choice of first k centers is random and depends on (random) seed</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>cl <span class="ot">=</span> <span class="fu">kmeans</span>(iris[, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>], <span class="at">centers =</span> <span class="dv">3</span>) <span class="co"># centers = number of clusters</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>cl<span class="sc">$</span>cluster</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="do">##   [1] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="do">##  [38] 1 1 1 1 1 1 1 1 1 1 1 1 1 2 2 3 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="do">##  [75] 2 2 2 3 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 3 2 3 3 3 3 2 3 3 3 3</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="do">## [112] 3 3 2 2 3 3 3 3 2 3 2 3 2 3 3 2 2 3 3 3 3 3 2 3 3 3 3 2 3 3 3 2 3 3 3 2 3</span></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a><span class="do">## [149] 3 2</span></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(cl<span class="sc">$</span>cluster) <span class="co"># see the cluster assignment</span></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a><span class="do">##  1  2  3 </span></span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a><span class="do">## 50 62 38</span></span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a><span class="fu">as.numeric</span>(iris<span class="sc">$</span>Species)</span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a><span class="do">##   [1] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1</span></span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a><span class="do">##  [38] 1 1 1 1 1 1 1 1 1 1 1 1 1 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2</span></span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a><span class="do">##  [75] 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 3 3 3 3 3 3 3 3 3 3 3</span></span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a><span class="do">## [112] 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3</span></span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a><span class="do">## [149] 3 3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Let’s compare the clustering assignmet with the real species data:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(<span class="at">clusters =</span> cl<span class="sc">$</span>cluster, <span class="at">real =</span> iris<span class="sc">$</span>Species)</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="do">##         real</span></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="do">## clusters setosa versicolor virginica</span></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="do">##        1     50          0         0</span></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="do">##        2      0         48        14</span></span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="do">##        3      0          2        36</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(<span class="at">clusters =</span> cl<span class="sc">$</span>cluster, <span class="at">real =</span> iris<span class="sc">$</span>Species)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="do">##         real</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="do">## clusters setosa versicolor virginica</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="do">##        1     50          0         0</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="do">##        2      0         48        14</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="do">##        3      0          2        36</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We see again that the <code>setosa</code> species had all its individuals correctly clustered. The species <code>versicolor</code> and <code>virginica</code> presented some overlap.</p>
 <p>Let’s see the individuals that were wrongly attributed to another species in the pca plot (now using the function <code>ordiplot</code> from the <code>vegan</code> package):</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>wrong.class <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">cluster =</span> cl<span class="sc">$</span>cluster, <span class="at">species =</span> iris<span class="sc">$</span>Species)</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>wrong.class<span class="sc">$</span>wrong <span class="ot">&lt;-</span> <span class="st">"black"</span> <span class="co"># creating column to color</span></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co"># color red for the wrong classification</span></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>wrong.class<span class="sc">$</span>wrong[wrong.class<span class="sc">$</span>species<span class="sc">==</span><span class="st">"virginica"</span> <span class="sc">&amp;</span> </span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>                           wrong.class<span class="sc">$</span>cluster <span class="sc">!=</span> <span class="dv">3</span> <span class="sc">|</span></span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>                           wrong.class<span class="sc">$</span>species<span class="sc">==</span><span class="st">"versicolor"</span> <span class="sc">&amp;</span> </span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>                           wrong.class<span class="sc">$</span>cluster <span class="sc">!=</span> <span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="st">"red"</span></span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a><span class="fu">ordiplot</span>(pca, <span class="at">display=</span><span class="st">"sites"</span>,) <span class="sc">|&gt;</span></span>
-<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">points</span>(<span class="st">"site"</span>, <span class="at">col=</span>wrong.class<span class="sc">$</span>wrong, <span class="at">pch=</span><span class="dv">16</span>)</span>
-<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v=</span><span class="dv">0</span>, <span class="at">lty=</span><span class="st">"dashed"</span>) <span class="co"># adding lines in 0,0 to see better</span></span>
-<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h=</span><span class="dv">0</span>, <span class="at">lty=</span><span class="st">"dashed"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>wrong.class <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">cluster =</span> cl<span class="sc">$</span>cluster, <span class="at">species =</span> iris<span class="sc">$</span>Species)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>wrong.class<span class="sc">$</span>wrong <span class="ot">&lt;-</span> <span class="st">"black"</span> <span class="co"># creating column to color</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co"># color red for the wrong classification</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>wrong.class<span class="sc">$</span>wrong[wrong.class<span class="sc">$</span>species<span class="sc">==</span><span class="st">"virginica"</span> <span class="sc">&amp;</span> </span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>                           wrong.class<span class="sc">$</span>cluster <span class="sc">!=</span> <span class="dv">3</span> <span class="sc">|</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>                           wrong.class<span class="sc">$</span>species<span class="sc">==</span><span class="st">"versicolor"</span> <span class="sc">&amp;</span> </span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>                           wrong.class<span class="sc">$</span>cluster <span class="sc">!=</span> <span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="st">"red"</span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a><span class="fu">ordiplot</span>(pca, <span class="at">display=</span><span class="st">"sites"</span>,) <span class="sc">|&gt;</span></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">points</span>(<span class="st">"site"</span>, <span class="at">col=</span>wrong.class<span class="sc">$</span>wrong, <span class="at">pch=</span><span class="dv">16</span>)</span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v=</span><span class="dv">0</span>, <span class="at">lty=</span><span class="st">"dashed"</span>) <span class="co"># adding lines in 0,0 to see better</span></span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h=</span><span class="dv">0</span>, <span class="at">lty=</span><span class="st">"dashed"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="7A-Multivariate_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="7A-Multivariate_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1840,7 +1798,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./4C-Exercise.html" class="pagination-link" aria-label="Exercise - GLM">
+      <a href="./6A-Exercise.html" class="pagination-link" aria-label="Exercise - GLM">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Exercise - GLM</span>
       </a>          
   </div>

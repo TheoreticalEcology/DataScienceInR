@@ -88,17 +88,17 @@ NMDS = metaMDS(dune)
 NMDS # gives information on NMDS: distance measure, stress (should be low)
 ```
 
-The STRESS (Standard Residuals Sum of Squares), is a measure of how the sites positions in the bidimensional configuration deviates from the original distances (from the distance matrix). I can be used as a measure of how adequate is the analysis for the dataset. As a rule of thumb, we have: 
+The STRESS (Standard Residuals Sum of Squares), is a measure of how the sites positions in the bidimensional configuration deviates from the original distances (from the distance matrix). I can be used as a measure of how adequate is the analysis for the dataset. As a rule of thumb, we have:
 
-- stress < 0.05 great representation;
+-   stress \< 0.05 great representation;
 
-- stress < 0.01 good ordination
+-   stress \< 0.01 good ordination
 
-- stress < 0.2 reazonable ordination
+-   stress \< 0.2 reazonable ordination
 
-- stress > 0.2 - be suspicious
+-   stress \> 0.2 - be suspicious
 
-- stress >= 0.3 ordination is abitrary (do not interpret it)
+-   stress \>= 0.3 ordination is abitrary (do not interpret it)
 
 The NMDS plot shows how similar or different the sites are in terms of species composition. Sites that are close together have more similar species compositions.
 
@@ -124,45 +124,42 @@ summary(pca) # similar variance on all axes
 ```
 :::
 
-````{=html}
-<!-- 
-MELINA: I hided this part because I decided not to talk about constrained ordination - it would take too much time, and I don't think most of the students would be interested (it may confuse more then help)
+
 
 ## Constrained Ordination
 
+A constrained ordination is similar to a PCA or NMDS, but considers additional predictors for the ordination.
+
+Here an example, using the dune dataset (see via ?dune, str(dune)) together with the dune.env environmental data
+
 ```{r}
-# 2 multivariate datasets (abundances + environment)
-
-
-## RDA
-str(dune) # species composition
-data("dune.env")
-str(dune.env) # environmental variables
-
+data(dune.env)
 RDA = rda(dune ~ as.numeric(Manure) + as.numeric(Moisture), 
          data = dune.env)
 plot(RDA)
 
 summary(RDA)
-# important part at the top
-# variance explained by the two variables = prop constrained = 37.09%
-# how much is explained by each RDA = see importance of components prop explained
-# PCs are the unconstrained axes
 
-# species scores = coordinates of species in the plot
-# site scores = coordinates of sites in the plot
-# biplot scores = coordinates of environmental variable vectors
 
+```
+
+* important part at the top
+* variance explained by the two variables = prop constrained = 37.09%
+* how much is explained by each RDA = see importance of components prop explained
+* PCs are the unconstrained axes
+* species scores = coordinates of species in the plot
+* site scores = coordinates of sites in the plot
+* biplot scores = coordinates of environmental variable vectors
+
+```{r}
 
 barplot(summary(RDA)$cont$importance[2, ],  las = 2,
         col = c(rep ('red', 2), 
                 rep ('black', length(summary(RDA)$cont$importance[2, ])-2)),
-        ylab="proportion of variance explained") # displays % of variance explained by PCs
-
+        ylab="proportion of variance explained") 
 ```
 
---->
-````
+displays % of variance explained by PCs
 
 ## Cluster analysis
 
@@ -176,15 +173,14 @@ There are two main types of clustering:
 
 | Feature | Hierarchical | K-means (Non-hierarchical) |
 |-----------------------|-------------------------|-------------------------|
-| Number of groups       | Decided after tree is built       | Must be chosen before running      |
-| Input/ data type          | Distance matrix                   | Raw (standardized) data            |
+| Number of groups | Decided after tree is built | Must be chosen before running |
+| Input/ data type | Distance matrix | Raw (standardized) data |
 | Result | Dendrogram (tree) | Cluster assignments |
 | Flexibility | Can inspect different levels | Fixed number of groups |
 | Sensitive to scaling? | Yes | Yes |
-| Good for               | Exploring nested group structure  | Partitioning into defined clusters |
+| Good for | Exploring nested group structure | Partitioning into defined clusters |
 
 : Comparing hiearchical and non-hiearchical clustering
-
 
 Hierarchical clustering gives a full tree of nested groups, which is great for exploring data. K-means is simpler and faster, but you need to choose the number of groups first.
 
