@@ -46,8 +46,7 @@ Conclusion: Confounders can cause correlations where no causal relationship exis
 ## Multiple LM
 
 ::: callout-note
-A linear regression with a quadratic effect (or any polinomial) of X is a "multiple regression" in the sense that the squared X can be considered another "variable": 
-$$  y = a_0 + a_1*x_1 + a_2*x_1^2  $$
+A linear regression with a quadratic effect (or any polinomial) of X is a "multiple regression" in the sense that the squared X can be considered another "variable": $$  y = a_0 + a_1*x_1 + a_2*x_1^2  $$
 :::
 
 Multiple linear regression expands simple linear regression to a polynomial of several explanatory variables x1, x2... e.g.: $$
@@ -55,7 +54,6 @@ Multiple linear regression expands simple linear regression to a polynomial of s
     $$
 
 -   Idea: if we jointly consider "all" variables in the model formula, the influence of confounding variables is incorporated.
-
 
 Let's see an example with the `airquality` data:
 
@@ -66,6 +64,7 @@ summary(newAirquality)
 ```
 
 A simple regression:
+
 ```{r}
 # simple regression
 m0 = lm(Ozone ~ Temp , data = newAirquality)
@@ -80,6 +79,7 @@ abline(m0, col = "blue", lwd = 3)
 ```
 
 A multiple linear regression of Ozone affected by temperature and wind:
+
 ```{r}
 # multiple linear regression
 m1 = lm(Ozone ~ Temp + Wind , data = newAirquality)
@@ -100,13 +100,12 @@ library(effects)
 plot(allEffects(m1))
 ```
 
-Let's interprete the partial slope plot for `Temp`. It shows that there is a positive relationship of temperature and Ozone. The shaded blue area  
+Let's interprete the partial slope plot for `Temp`. It shows that there is a positive relationship of temperature and Ozone. The shaded blue area
 
-The intercept of the line aﬀects only the height of the line, and is determined by the choices made for averaging over the fixed predictors, but for any
-choice of averaging method, the slope of the line would be the same (because the model has no interactions between variables - next topic). The shaded area is a pointwise confidence band for the fitted values, based on standard errors computed from the covariance matrix of the fitted regression coeﬃcients. The rug plot at the bottom of the graph shows the location of the `Temp` data values.
-
+The intercept of the line aﬀects only the height of the line, and is determined by the choices made for averaging over the fixed predictors, but for any choice of averaging method, the slope of the line would be the same (because the model has no interactions between variables - next topic). The shaded area is a pointwise confidence band for the fitted values, based on standard errors computed from the covariance matrix of the fitted regression coeﬃcients. The rug plot at the bottom of the graph shows the location of the `Temp` data values.
 
 If we omit `Wind` will we have a different effect of `Temp` in Ozone?
+
 ```{r}
 ## Omitted variable bias
 both = lm(Ozone ~ Wind + Temp, newAirquality)
@@ -146,6 +145,7 @@ y \sim a*b
 $$
 
 Let's incude the interaction between `Wind` and `Temp`
+
 ```{r}
 # Include interaction
 m2 = lm(Ozone ~  scale(Wind)* scale(Temp) , data = newAirquality)
@@ -163,7 +163,6 @@ The influence of temperature on ozone depends on the amount of wind. When wind i
 plot(predictorEffect("Temp", m2,xlevels=3))
 ```
 
-
 ## Model selection
 
 We've learned that we should include variables in the model that are collinear, that is they correlate with other predictors, but how many and which factors should we include?
@@ -173,20 +172,25 @@ Famous example: [Female hurricanes are deadlier than male hurricanes (Jung et al
 They have analyzed the number of fatalities of hurricane and claimed that there is an effect of femininity of the name on the number of deads (while correcting for confounders). They recommend to give hurricans only male names because it would considerably reduce the number of deads.
 
 ```{r, warning = F}
+# loading packages
+library(EcoData)
 library(DHARMa)
+library(glmmTMB) # package for the model
 library(effects)
-?hurricanes
-str(hurricanes)
+#?hurricanes
+#str(hurricanes)
+```
 
-library(glmmTMB)
+We will model the number of deaths, so we are going to use a different distribution (Negative Binomial). This is a generalized linear model (GLM), that you will learn about in our next class. So, let's focus on the model selection produre:
 
+```{r, warning=F}
 m1 = glmmTMB(alldeaths ~ MasFem*
-                             (Minpressure_Updated_2014 + scale(NDAM)),
+                      (Minpressure_Updated_2014 + scale(NDAM)),
                            data = hurricanes, family = nbinom2)
 summary(m1)
 ```
 
-Interactions -\> we need to scale variables:
+We have **Interactions** -\> we need to scale variables:
 
 ```{r}
 m2 = glmmTMB(alldeaths ~ scale(MasFem)*
@@ -195,7 +199,7 @@ m2 = glmmTMB(alldeaths ~ scale(MasFem)*
 summary(m2)
 ```
 
-The effect of femininity is gone! Already with the scaled variables, but also with the transformation with the NDAM variable. The question was raised which of both is more reasonable, whether the relationship between damage and mortality isn't a straight line or that the gender of the hurricane names affect deaths ([Bob O'Hara and GrrlScientist](https://www.theguardian.com/science/grrlscientist/2014/jun/04/hurricane-gender-name-bias-sexism-statistics)). They argue that the model with the transformed variable fits the data better which brings us to the topic of this section, how to choose between different models? Answering this question if the goal of model selection.
+The effect of femininity is gone! Already with the scaled variables, but also with the transformation with the NDAM variable. The question was raised which of both models is more reasonable, whether the relationship between damage and mortality isn't a straight line or that the gender of the hurricane names affect deaths ([Bob O'Hara and GrrlScientist](https://www.theguardian.com/science/grrlscientist/2014/jun/04/hurricane-gender-name-bias-sexism-statistics)). They argue that the model with the transformed variable fits the data better which brings us to the topic of this section, how to choose between different models? Answering this question if the goal of model selection.
 
 Why not include all the variables we can measure in our model? Problem with the full model:
 
@@ -217,8 +221,6 @@ The more complex a model gets, the better it fits to the data, but there's a dow
 
 [Problem of p-hacking](https://theoreticalecology.github.io/AdvancedRegressionModels/3C-ModelSelection.html#pHacking)
 
-
-
 ```{r, echo=F}
 #| eval: false
 # this script doesn't make sense in this file - maybe some leftovers> there is no m3 or m5 before
@@ -238,6 +240,7 @@ AIC(m5)
 ```
 
 **Demonstration**: Why interpretation of effect sizes and p-values after extensive model selection is not a good idea:
+
 ```{r}
 #| eval: false
 ####:
@@ -262,11 +265,7 @@ mean(sum.sel$coefficients[,4] < 0.05)
 ## Formula syntax
 
 | Formula | Meaning | Details |
-<<<<<<< Updated upstream
 |----|----|----|
-=======
-|------------------|-------------------------|-----------------------------|
->>>>>>> Stashed changes
 | `y~x_1` | $y=a_0 +a_1*x_1$ | Slope+Intercept |
 | `y~x_1 - 1` | $y=a_1*x_1$ | Slope, no intercept |
 | `y~I(x_1^2)` | $y=a_0 + a_1*(x_1^2)$ | Quadratic effect |
