@@ -17,6 +17,41 @@ In this section you will:
 -   practice these tests in R
 -   practice the simulation of data and error rates
 
+But before we go into these topics, however, we need to discuss how data arises, and how we represent it.
+
+## Sample, population, and the data-generating process
+
+The very reason for doing statistics is that the data that we observe is somehow random. But how does this randomness arise?
+
+Imagine that we are interested in the average growth rate of trees in Germany during two consecutive years. Ideally, we would measure them all and be done, without having to do statistics. In practice, however, we hardly ever have the resources to do so. We therefore have to make a selection of trees, and infer the growth rate of all trees from that. The statistical term for all the trees is the "population", and the term for the trees that you have observed is the "sample". Hence, we want to infer properties of the population from a sample.
+
+::: column-margin
+The population is the set of all observations that you could have made. The sample is the observations that you have actually made.
+:::
+
+The population as such is fixed and does not change, but every time we observe a random selection (sample) of the population, we may get elements with slightly different properties. As a concrete example: imagine we have the resources to only sample 1000 trees across Germany. Thus, every time we take a random selection of 1000 trees out of the population, we will get a slightly different average growth rate.
+
+::: column-margin
+Sampling creates randomness.
+:::
+
+The process of sampling from the population does explain how randomness arises in our data. However, a slight issue with this concept is that it does not match very well with more complex random processes. Imagine, for example, that data arises from a person going to randomly selected plots to measure radiation (which varies within minutes due to cloud cover), using a measurement instrument that measures with some random error. Does it really make sense to think of the data arising from sampling from a "population" of possible observations?
+
+::: column-margin
+However, not all randomness comes from sampling from a population.
+:::
+
+A more modern and general concept to describe how data is created is the concept of the "data-generating process", which is pretty self-explanatory: the data-generating process describes how the observations from a random sample arise, including systematic and stochastic processes. It therefore includes the properties of what would classically be called "sampling from a population", but it is broader and includes all other processes that would create systematic and random patterns in our data. In this picture, instead of inferring properties of the population from a sample, we would say we want to infer the properties of the data-generating process from a sample of observations created by this process.
+
+::: column-margin
+A more modern concept that replaces the "population" is the "data-generating process". The data-generating process describes how the observations from a random sample arise, including systematic and stochastic processes.
+:::
+
+Whether you think in populations or data-generating processes: the important point to remember from this section is that there are two objects that we have to distinguish well: on the one hand, there is our sample. We may describe it in terms of it's properties (mean, minimum, maximum), but the sample is not the final goal. Ultimately, we want to infer the properties of the population / data-generating process from the sample. We will explain how to do this in the next sections, in particular in the section on inferential statistics. Before we come to that, however, let us talk in a bit more detail about the representation of the sample, i.e. the data that we observe.
+
+
+
+
 ## A recipe for hypothesis testing
 
 **Aim:** We want to know if there is a difference between the control and the treatment.
@@ -64,19 +99,17 @@ barplot(c(control, treat), ylim = c(0, 50),
 ```
 
 ::: column-margin
-why do whe use `set.seed()` here?
-Read the help file of the function to understand it! `help(set.seed)`. Experiment changing the number in the set seed in your code and compare the results for tne number of cured patients in the treatment and control groups.
+why do whe use `set.seed()` here? Read the help file of the function to understand it! `help(set.seed)`. Experiment changing the number in the set seed in your code and compare the results for tne number of cured patients in the treatment and control groups.
 :::
 
 The table with the results of the experiment would be:
+
 ```{r}
 data <- data.frame(treatment = rep(c("control", "treatment"), each = 50),
                    cured = c(rep(c(0,1), times=c(50-control, control)),
                            rep(c(0,1), times=c(50-treat, treat))))
 table(data$treatment, data$cured)
 ```
-
-
 
 3.  Now, let's do this very often (100,000 times!) to get the distribution under H~0~ (generating a null distribution of proportion of cured patients in the treatment group):
 

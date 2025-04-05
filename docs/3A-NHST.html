@@ -210,12 +210,6 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./0-Introduction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Introduction</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./0-GettingStarted.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Getting Started with R</span></span></a>
   </div>
@@ -467,12 +461,13 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#a-recipe-for-hypothesis-testing" id="toc-a-recipe-for-hypothesis-testing" class="nav-link active" data-scroll-target="#a-recipe-for-hypothesis-testing"><span class="header-section-number">6.1</span> A recipe for hypothesis testing</a></li>
-  <li><a href="#t-test" id="toc-t-test" class="nav-link" data-scroll-target="#t-test"><span class="header-section-number">6.2</span> t-test</a></li>
-  <li><a href="#type-i-error-rate" id="toc-type-i-error-rate" class="nav-link" data-scroll-target="#type-i-error-rate"><span class="header-section-number">6.3</span> Type I error rate</a></li>
-  <li><a href="#type-ii-error-rate" id="toc-type-ii-error-rate" class="nav-link" data-scroll-target="#type-ii-error-rate"><span class="header-section-number">6.4</span> Type II error rate</a></li>
-  <li><a href="#statistical-power" id="toc-statistical-power" class="nav-link" data-scroll-target="#statistical-power"><span class="header-section-number">6.5</span> Statistical power</a></li>
-  <li><a href="#false-discovery-rate" id="toc-false-discovery-rate" class="nav-link" data-scroll-target="#false-discovery-rate"><span class="header-section-number">6.6</span> False discovery rate</a></li>
+  <li><a href="#sample-population-and-the-data-generating-process" id="toc-sample-population-and-the-data-generating-process" class="nav-link active" data-scroll-target="#sample-population-and-the-data-generating-process"><span class="header-section-number">6.1</span> Sample, population, and the data-generating process</a></li>
+  <li><a href="#a-recipe-for-hypothesis-testing" id="toc-a-recipe-for-hypothesis-testing" class="nav-link" data-scroll-target="#a-recipe-for-hypothesis-testing"><span class="header-section-number">6.2</span> A recipe for hypothesis testing</a></li>
+  <li><a href="#t-test" id="toc-t-test" class="nav-link" data-scroll-target="#t-test"><span class="header-section-number">6.3</span> t-test</a></li>
+  <li><a href="#type-i-error-rate" id="toc-type-i-error-rate" class="nav-link" data-scroll-target="#type-i-error-rate"><span class="header-section-number">6.4</span> Type I error rate</a></li>
+  <li><a href="#type-ii-error-rate" id="toc-type-ii-error-rate" class="nav-link" data-scroll-target="#type-ii-error-rate"><span class="header-section-number">6.5</span> Type II error rate</a></li>
+  <li><a href="#statistical-power" id="toc-statistical-power" class="nav-link" data-scroll-target="#statistical-power"><span class="header-section-number">6.6</span> Statistical power</a></li>
+  <li><a href="#false-discovery-rate" id="toc-false-discovery-rate" class="nav-link" data-scroll-target="#false-discovery-rate"><span class="header-section-number">6.7</span> False discovery rate</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/TheoreticalEcology/DataScienceInR/edit/master/3A-NHST.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
@@ -505,8 +500,30 @@ window.Quarto = {
 <li>practice these tests in R</li>
 <li>practice the simulation of data and error rates</li>
 </ul>
-<section id="a-recipe-for-hypothesis-testing" class="level2 page-columns page-full" data-number="6.1">
-<h2 data-number="6.1" class="anchored" data-anchor-id="a-recipe-for-hypothesis-testing"><span class="header-section-number">6.1</span> A recipe for hypothesis testing</h2>
+<p>But before we go into these topics, however, we need to discuss how data arises, and how we represent it.</p>
+<section id="sample-population-and-the-data-generating-process" class="level2 page-columns page-full" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="sample-population-and-the-data-generating-process"><span class="header-section-number">6.1</span> Sample, population, and the data-generating process</h2>
+<p>The very reason for doing statistics is that the data that we observe is somehow random. But how does this randomness arise?</p>
+<p>Imagine that we are interested in the average growth rate of trees in Germany during two consecutive years. Ideally, we would measure them all and be done, without having to do statistics. In practice, however, we hardly ever have the resources to do so. We therefore have to make a selection of trees, and infer the growth rate of all trees from that. The statistical term for all the trees is the “population”, and the term for the trees that you have observed is the “sample”. Hence, we want to infer properties of the population from a sample.</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p>The population is the set of all observations that you could have made. The sample is the observations that you have actually made.</p>
+</div></div><p>The population as such is fixed and does not change, but every time we observe a random selection (sample) of the population, we may get elements with slightly different properties. As a concrete example: imagine we have the resources to only sample 1000 trees across Germany. Thus, every time we take a random selection of 1000 trees out of the population, we will get a slightly different average growth rate.</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p>Sampling creates randomness.</p>
+</div></div><p>The process of sampling from the population does explain how randomness arises in our data. However, a slight issue with this concept is that it does not match very well with more complex random processes. Imagine, for example, that data arises from a person going to randomly selected plots to measure radiation (which varies within minutes due to cloud cover), using a measurement instrument that measures with some random error. Does it really make sense to think of the data arising from sampling from a “population” of possible observations?</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p>However, not all randomness comes from sampling from a population.</p>
+</div></div><p>A more modern and general concept to describe how data is created is the concept of the “data-generating process”, which is pretty self-explanatory: the data-generating process describes how the observations from a random sample arise, including systematic and stochastic processes. It therefore includes the properties of what would classically be called “sampling from a population”, but it is broader and includes all other processes that would create systematic and random patterns in our data. In this picture, instead of inferring properties of the population from a sample, we would say we want to infer the properties of the data-generating process from a sample of observations created by this process.</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p>A more modern concept that replaces the “population” is the “data-generating process”. The data-generating process describes how the observations from a random sample arise, including systematic and stochastic processes.</p>
+</div></div><p>Whether you think in populations or data-generating processes: the important point to remember from this section is that there are two objects that we have to distinguish well: on the one hand, there is our sample. We may describe it in terms of it’s properties (mean, minimum, maximum), but the sample is not the final goal. Ultimately, we want to infer the properties of the population / data-generating process from the sample. We will explain how to do this in the next sections, in particular in the section on inferential statistics. Before we come to that, however, let us talk in a bit more detail about the representation of the sample, i.e.&nbsp;the data that we observe.</p>
+</section>
+<section id="a-recipe-for-hypothesis-testing" class="level2 page-columns page-full" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="a-recipe-for-hypothesis-testing"><span class="header-section-number">6.2</span> A recipe for hypothesis testing</h2>
 <p><strong>Aim:</strong> We want to know if there is a difference between the control and the treatment.</p>
 <ol type="1">
 <li>We introduce a <strong>Null hypothesis H<sub>0</sub></strong> (e.g.&nbsp;no effect, no difference between control and treatment)</li>
@@ -641,8 +658,8 @@ Interpretation of the p-value
 </div>
 <p>We pass the data to the function which first calculates the test statistic and then calculates the p-value using the Chi<sup>2</sup> distribution.</p>
 </section>
-<section id="t-test" class="level2" data-number="6.2">
-<h2 data-number="6.2" class="anchored" data-anchor-id="t-test"><span class="header-section-number">6.2</span> t-test</h2>
+<section id="t-test" class="level2" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="t-test"><span class="header-section-number">6.3</span> t-test</h2>
 <p>Originally developed by Wiliam Sealy Gosset (1876-1937) who has worked in the Guinness brewery. He wanted to measure which ingredients result in a better beer. The aim was to compare two beer recipes and decide whether one of the recipes was better (e.g.&nbsp;to test if it results in more alcohol). He published under the pseudonym ‘Student’ because the company considered his statistical methods as a commercial secret.</p>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -806,8 +823,8 @@ Shapiro - Test for normality
 </div>
 </div>
 </section>
-<section id="type-i-error-rate" class="level2" data-number="6.3">
-<h2 data-number="6.3" class="anchored" data-anchor-id="type-i-error-rate"><span class="header-section-number">6.3</span> Type I error rate</h2>
+<section id="type-i-error-rate" class="level2" data-number="6.4">
+<h2 data-number="6.4" class="anchored" data-anchor-id="type-i-error-rate"><span class="header-section-number">6.4</span> Type I error rate</h2>
 <p>Let’s start with a small simulation example:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>results <span class="ot">=</span> <span class="fu">replicate</span>(<span class="dv">1000</span>, {</span>
@@ -878,8 +895,8 @@ Type I error rate and multiple testing
 </div>
 <p>If multiple testing is a problem and if we want to avoid false positives (type I errors), why don’t we use a smaller alpha level? Because if would increase the type II error rate</p>
 </section>
-<section id="type-ii-error-rate" class="level2" data-number="6.4">
-<h2 data-number="6.4" class="anchored" data-anchor-id="type-ii-error-rate"><span class="header-section-number">6.4</span> Type II error rate</h2>
+<section id="type-ii-error-rate" class="level2" data-number="6.5">
+<h2 data-number="6.5" class="anchored" data-anchor-id="type-ii-error-rate"><span class="header-section-number">6.5</span> Type II error rate</h2>
 <p>It can also happen the other way around:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>results <span class="ot">=</span> <span class="fu">replicate</span>(<span class="dv">1000</span>, {</span>
@@ -910,8 +927,8 @@ Type I error rate and multiple testing
 </ul>
 <p>After the experiment, the only parameter we could change would be the significance level <span class="math inline">\(\alpha\)</span>, but increasing it would result in too high Type I error rates.</p>
 </section>
-<section id="statistical-power" class="level2" data-number="6.5">
-<h2 data-number="6.5" class="anchored" data-anchor-id="statistical-power"><span class="header-section-number">6.5</span> Statistical power</h2>
+<section id="statistical-power" class="level2" data-number="6.6">
+<h2 data-number="6.6" class="anchored" data-anchor-id="statistical-power"><span class="header-section-number">6.6</span> Statistical power</h2>
 <p>We can reduce <span class="math inline">\(\alpha\)</span> and we will get fewer type I errors (false positives), but type II errors (false negatives) will increase. So what can we do with this in practice?</p>
 <p>1- <span class="math inline">\(\beta\)</span> is the so called statistical power which is the rate at which a test is significant if the effect truly exists. Power increases with stronger effect, smaller variability, (larger <span class="math inline">\(\alpha\)</span> ), and more data (sample size). So, collect more data? How much data do we need?</p>
 <p>Before the experiment, you can estimate the effect size and the variability. Together with alpha (known), you can calculate the power depending on the sample size:</p>
@@ -989,8 +1006,8 @@ Type I error rate and multiple testing
 </div>
 </div>
 </section>
-<section id="false-discovery-rate" class="level2" data-number="6.6">
-<h2 data-number="6.6" class="anchored" data-anchor-id="false-discovery-rate"><span class="header-section-number">6.6</span> False discovery rate</h2>
+<section id="false-discovery-rate" class="level2" data-number="6.7">
+<h2 data-number="6.7" class="anchored" data-anchor-id="false-discovery-rate"><span class="header-section-number">6.7</span> False discovery rate</h2>
 <p>You may have realized that if we do an experiment with a (weak) effect, we can get a significant result because of the effect but also significant results because of the Type I error rate. How to distinguish between those two? How can we decide whether a significant result is a false positive? This error rate is called the false discovery rate and to lower it we need to increase the power:</p>
 <p><span class="math display">\[
 FDR = \frac{p(H_0)\cdot\alpha}{p(H_0)\cdot\alpha + p(!H_0)\cdot(1-\beta)}
