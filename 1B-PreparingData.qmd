@@ -6,20 +6,21 @@ editor_options:
 
 # Preparing your data
 
-Before we can start with the analysis, we must prepare our data, but how is our data represented?
 
 Data typically consist of a table with several observations with one or more variables:
 
 ```{r}
 #| echo: false
-head(iris)
+knitr::kable(head(iris))
 ```
 
-One row per observation is the standard format for most programs. There are different types of variables (with respect to the analysis):
+The standard of the tabular format is that **columns are the variables** and the **rows are the observations**, with one row per observation. 
 
--   Dependent / response variable variable of interest we want to know what it is influenced by. Typically, there is one variable of particular interest.
+There are different types of variables (with respect to the analysis):
 
--   Explanatory or independent variables, aka. predictors / covariates / treatments variables that potentially influence the response variable
+-  **Response variable** (or outcome or dependent): variable of interest we want to know what it is influenced by. Typically, there is one variable of particular interest.
+
+-   **Predictor variable** (or explanatory or independent or covariates): variables that potentially influence the response variable.
 
 ::: {.callout-tip appearance="default"}
 Example: We measure plant growth and nitrogen in the soil. Growth is the dependent variable and nitrogen is the explanatory variable
@@ -29,15 +30,20 @@ Variables differ in range and scale:
 
 -   Scale of measure: nominal (unordered), ordinal (ordered), metric (differences can be interpreted)
 
--   Numeric or metric variables Examples: Body size, conductivity
+-   Continuous numeric variables (ordered and continuous / real), e.g. temperature
 
--   Non-numeric = categorial variables
+-   Integer numeric variables (ordered, integer). An important special case of those are count data, i.e. 0,1,2,3, ...
 
-    -   unordered / nominal (red, green, blue) ordered /
+-   Categorical variables (e.g. a fixed set of options such as red, green blue), which can further be divided into:
 
-    -   ordinal (tiny, small, large) Attention: categories small = 1m, medium = 1.5m, large = 2m would be interpreted as numeric, because their relative differences are defined
+    -   Unordered categorical variables (Nominal) such as red, green, blue
+    
+    -   Binary (Dichotomous) variables (dead / survived, 0/1)
+    
+    -   Ordered categorical variables (small, medium, large)
 
-    -   Special case: binary variable (0,1), technically it is also categorial, but with two levels only we call in binary
+
+It is important that you record the variables according to their **nature**. You have to make sure that the type is properly recognized after reading in the data, because many methods treat a variable differently if it is numeric or categorical.
 
 But before we can start with our analysis, we need first to prepare our raw data, which includes:
 
@@ -48,7 +54,7 @@ But before we can start with our analysis, we need first to prepare our raw data
 ::: {.callout-note appearance="default" collapse="true"}
 ## Remarks on data handling
 
-Typically, data will be recorded electronically with a measurement device, or you have to enter it manually using a spreadsheet program, e.g. MS Excel. The best format for data storage is csv (comma separated values) because it is long-term compatibility with all kinds of programs / systems (Excel can export to csv).
+Typically, data will be recorded electronically with a measurement device, or you have to enter it manually using a spreadsheet program, e.g. MS Excel. The best format for data storage is **csv** (comma separated values) because it is long-term compatibility with all kinds of programs / systems (MS Excel can export to csv).
 
 After raw data is entered, it should never be manipulated by hand! If you modify data by hand, make a copy and document all changes (additional text file). **Better:** Make changes using a script
 

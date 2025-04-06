@@ -10,9 +10,8 @@ set.seed(42)
 
 # Simple linear regression
 
-In this chapter, you will practice to:
+In this chapter, you will:
 
--   formulate a research question
 -   perform simple linear regression for numeric and categorical predictors
 -   interpret regression outputs
 -   check the residuals of regression models
@@ -25,27 +24,46 @@ The likelihood is the probability to observe the Data given a certain model (whi
 
 It is an approach to optimize a model/parameter to find the set of parameters that describes best the observed data.
 
-A simple example, we want to estimate the average of random vectors and we assume that our model is a normal distribution (so we assume that the data originated from a normal distribution). We want to optimize the two parameters that describe a normal distribution: the mean, and the sd:
+A simple example: we want to estimate the average of a random vector and we assume that our model is a normal distribution (so we assume that the data originated from a normal distribution). We want to optimize the two parameters that describe the normal distribution: the mean, and the standard deviation:
+
+Let's create the "oberved" vector:
 
 ```{r}
-Xobs = rnorm(100, sd = 1.0)
-# Now we assume that mean = 0, and sd = 0.2 are unknown but we want to find them, let's write the likelihood function:
+Xobs = rnorm(n = 100, mean = 0, sd = 1.0)
+```
+
+Now, we assume that the mean and the standard deviation of the vector is unknown and we want to find them. Let's write the likelihood function (in reality, we use logLikelihood for numerical reasons):
+
+```{r}
 likelihood = function(par) { # we give two parameters, mean and sd
-  lls = dnorm(Xobs, mean = par[1], sd = par[2], log = TRUE) # calculate for each observation to observe the data given our model
+  # calculate for each observation to observe the data given our model:
+  lls = dnorm(Xobs, mean = par[1], sd = par[2], log = TRUE) 
   # we use the logLikilihood for numerical reasons
   return(sum(lls))
 }
-
-likelihood(c(0, 0.2))
-# let's try all values of sd:
-likelihood_mean = function(p) likelihood(c(p, 1.0))
-plot(seq(-5, 5.0, length.out = 100), sapply(seq(-5, 5.0, length.out = 100), likelihood_mean), xlab = 'Different mean values', ylab = "negative logLikelihood")
-
-# The optimum is at 0, which corresponds to our mean we used to sample Xobs
-
 ```
 
-However it is tedious to try all values manually to find the best value, especially if we have to optimize several values. For that we can use an optimizer in R which finds for us the best set of parameters:
+Let's guess some values for the mean and sd and see what the function returns
+
+```{r}
+likelihood(c(0, 0.2))
+```
+
+This number alone doens't tell us much, we have com compare many different guesses to see which combination of parameters gives is the most plausible. To make it easier to understand, we will fix the sd in 1 and plot how the likelihood changes with changing the mean:
+
+```{r}
+likelihood_mean = function(mean.par){
+  likelihood(c(mean.par, 1.0))}
+
+plot(seq(-5, 5.0, length.out = 100), 
+     sapply(seq(-5, 5.0, length.out = 100), likelihood_mean),
+     xlab = 'Different mean values', 
+     ylab = "negative logLikelihood")
+```
+
+The optimum (highest peak) is at 0, which corresponds to the mean we used to sample Xobs. We could do the same with the sd - fix the mean and vary the sd to find it.
+
+However it is tedious to try all values manually to find the best value, especially if we have to optimize several parameters. For that, we can use an optimizer in R which finds for us the best set of parameters:
 
 ```{r}
 opt = optim(c(0.0, 1.0), fn = function(par) -likelihood(par), hessian = TRUE )
@@ -69,7 +87,7 @@ In short, if we would do a t.test for our Xobs (to test whether the mean is stat
 t.test(Xobs)
 ```
 
-Almost the same! The t-test also calculates the MLE to get the standard error and the confidence interval.
+The results are lmost the same! The t-test also calculates the MLE to get the standard error and the confidence interval.
 
 ## The theory of linear regression
 
@@ -306,15 +324,16 @@ boxplot(residuals(fit4) ~ chickwts$feed)
 
 What does simple linear regression mean?
 
-- simple = one predictor!
+-   simple = one predictor!
 
-- linear = linear in the parameters
+-   linear = linear in the parameters
 
-If we add a quadratic term, this is still a linear combination: this is called polynomial. 
+If we add a quadratic term, this is still a linear combination: this is called polynomial.
 
 $$ a0 + a1 * x + a2 * x^2 $$
 
 Le'ts model Ozone as a function of temperature and it's quadratic term:
+
 ```{r}
 fit3 = lm(Ozone ~ Temp + I(Temp^2), data = airquality)
 summary(fit3)
@@ -347,6 +366,7 @@ polygon(x,y, col="#99009922", border = F )
 ```
 
 Alternative: use package effects
+
 ```{r}
 library(effects)
 plot(effect("Temp",fit3))
@@ -355,6 +375,7 @@ plot(effect("Temp",fit3,partial.residuals = T) )
 ```
 
 Another alternative:
+
 ```{r}
 # or jtools package
 library(jtools)

@@ -60,6 +60,22 @@ devtools::install_github(repo = "TheoreticalEcology/EcoData",
 
 For your convenience, the EcoData installation also forces the installation of most of the packages needed in this book, so this may take a while. If you want to load only the EcoData package, or if you encounter problems during the install, set `dependencies = F, build_vignettes = F`.
 
+::: {.callout-tip collapse="true"}
+## EcoData alternative installation
+
+If the installation didn't work, download the package file manually from:
+
+<https://github.com/TheoreticalEcology/ecodata/releases/download/v0.2.1/EcoData_0.2.1.tar.gz>
+
+Store the file on your computer in the same folder where you created your R project. Then run the following code:
+
+```{r eval = F}
+install.packages("EcoData_0.2.1.tar.gz", 
+                 repos = NULL, type = "source")
+library(EcoData)
+```
+:::
+
 ## Extra resources
 
 To get to know Rstudio better, [here](https://www.uvm.edu/~tdonovan/RforFledglings/BriefTour2.html) is the link for a brief tour from another "bookdown" page with simple and good explanations for each panel and the many resources.

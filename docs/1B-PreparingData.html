@@ -181,12 +181,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./0-Introduction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Introduction</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./0-GettingStarted.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Getting Started with R</span></span></a>
   </div>
@@ -466,21 +460,71 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>Before we can start with the analysis, we must prepare our data, but how is our data represented?</p>
 <p>Data typically consist of a table with several observations with one or more variables:</p>
 <div class="cell">
-<pre><code>##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
-## 1          5.1         3.5          1.4         0.2  setosa
-## 2          4.9         3.0          1.4         0.2  setosa
-## 3          4.7         3.2          1.3         0.2  setosa
-## 4          4.6         3.1          1.5         0.2  setosa
-## 5          5.0         3.6          1.4         0.2  setosa
-## 6          5.4         3.9          1.7         0.4  setosa</code></pre>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: right;">Sepal.Length</th>
+<th style="text-align: right;">Sepal.Width</th>
+<th style="text-align: right;">Petal.Length</th>
+<th style="text-align: right;">Petal.Width</th>
+<th style="text-align: left;">Species</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">5.1</td>
+<td style="text-align: right;">3.5</td>
+<td style="text-align: right;">1.4</td>
+<td style="text-align: right;">0.2</td>
+<td style="text-align: left;">setosa</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">4.9</td>
+<td style="text-align: right;">3.0</td>
+<td style="text-align: right;">1.4</td>
+<td style="text-align: right;">0.2</td>
+<td style="text-align: left;">setosa</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">4.7</td>
+<td style="text-align: right;">3.2</td>
+<td style="text-align: right;">1.3</td>
+<td style="text-align: right;">0.2</td>
+<td style="text-align: left;">setosa</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">4.6</td>
+<td style="text-align: right;">3.1</td>
+<td style="text-align: right;">1.5</td>
+<td style="text-align: right;">0.2</td>
+<td style="text-align: left;">setosa</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">5.0</td>
+<td style="text-align: right;">3.6</td>
+<td style="text-align: right;">1.4</td>
+<td style="text-align: right;">0.2</td>
+<td style="text-align: left;">setosa</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">5.4</td>
+<td style="text-align: right;">3.9</td>
+<td style="text-align: right;">1.7</td>
+<td style="text-align: right;">0.4</td>
+<td style="text-align: left;">setosa</td>
+</tr>
+</tbody>
+</table>
 </div>
-<p>One row per observation is the standard format for most programs. There are different types of variables (with respect to the analysis):</p>
+</div>
+<p>The standard of the tabular format is that <strong>columns are the variables</strong> and the <strong>rows are the observations</strong>, with one row per observation.</p>
+<p>There are different types of variables (with respect to the analysis):</p>
 <ul>
-<li><p>Dependent / response variable variable of interest we want to know what it is influenced by. Typically, there is one variable of particular interest.</p></li>
-<li><p>Explanatory or independent variables, aka. predictors / covariates / treatments variables that potentially influence the response variable</p></li>
+<li><p><strong>Response variable</strong> (or outcome or dependent): variable of interest we want to know what it is influenced by. Typically, there is one variable of particular interest.</p></li>
+<li><p><strong>Predictor variable</strong> (or explanatory or independent or covariates): variables that potentially influence the response variable.</p></li>
 </ul>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -498,14 +542,16 @@ Tip
 <p>Variables differ in range and scale:</p>
 <ul>
 <li><p>Scale of measure: nominal (unordered), ordinal (ordered), metric (differences can be interpreted)</p></li>
-<li><p>Numeric or metric variables Examples: Body size, conductivity</p></li>
-<li><p>Non-numeric = categorial variables</p>
+<li><p>Continuous numeric variables (ordered and continuous / real), e.g.&nbsp;temperature</p></li>
+<li><p>Integer numeric variables (ordered, integer). An important special case of those are count data, i.e.&nbsp;0,1,2,3, …</p></li>
+<li><p>Categorical variables (e.g.&nbsp;a fixed set of options such as red, green blue), which can further be divided into:</p>
 <ul>
-<li><p>unordered / nominal (red, green, blue) ordered /</p></li>
-<li><p>ordinal (tiny, small, large) Attention: categories small = 1m, medium = 1.5m, large = 2m would be interpreted as numeric, because their relative differences are defined</p></li>
-<li><p>Special case: binary variable (0,1), technically it is also categorial, but with two levels only we call in binary</p></li>
+<li><p>Unordered categorical variables (Nominal) such as red, green, blue</p></li>
+<li><p>Binary (Dichotomous) variables (dead / survived, 0/1)</p></li>
+<li><p>Ordered categorical variables (small, medium, large)</p></li>
 </ul></li>
 </ul>
+<p>It is important that you record the variables according to their <strong>nature</strong>. You have to make sure that the type is properly recognized after reading in the data, because many methods treat a variable differently if it is numeric or categorical.</p>
 <p>But before we can start with our analysis, we need first to prepare our raw data, which includes:</p>
 <ul>
 <li>Reading in the data</li>
@@ -524,7 +570,7 @@ Remarks on data handling
 </div>
 <div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Typically, data will be recorded electronically with a measurement device, or you have to enter it manually using a spreadsheet program, e.g.&nbsp;MS Excel. The best format for data storage is csv (comma separated values) because it is long-term compatibility with all kinds of programs / systems (Excel can export to csv).</p>
+<p>Typically, data will be recorded electronically with a measurement device, or you have to enter it manually using a spreadsheet program, e.g.&nbsp;MS Excel. The best format for data storage is <strong>csv</strong> (comma separated values) because it is long-term compatibility with all kinds of programs / systems (MS Excel can export to csv).</p>
 <p>After raw data is entered, it should never be manipulated by hand! If you modify data by hand, make a copy and document all changes (additional text file). <strong>Better:</strong> Make changes using a script</p>
 <p>Data handling in R:</p>
 <ul>
@@ -540,7 +586,7 @@ Remarks on data handling
 <h2 data-number="3.1" class="anchored" data-anchor-id="importing-data"><span class="header-section-number">3.1</span> Importing data</h2>
 <p>The recommended data format for your raw data is csv. You can export to csv from excel. If you have a csv file in standard (international) format, the command to import is simply</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">=</span> <span class="fu">read.csv</span>(<span class="at">file =</span> <span class="st">"../data/myData.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">=</span> <span class="fu">read.csv</span>(<span class="at">file =</span> <span class="st">"../data/myData.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>If your csv file departs from standard settings (e.g.&nbsp;you use a , insted of a . as decimal points), you will have to modify the function. Go on the <code>read.csv</code> function and press F1 to get the help, which explains all that. Alternatively, you can use the import menu to the top right in RStudio.</p>
 
