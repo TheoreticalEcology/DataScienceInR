@@ -538,7 +538,7 @@ Click here to see the solution
 <ul>
 <li>Root biomass is not significantly affected by fruit biomass. WRONG: Look at the p-value for the slope (2nd row in the regression table below Pr(&gt;|t|))</li>
 <li>Fruit biomass explains most of the variance (&gt;50%) in the root biomass. CORRECT: The proportion of variance explained by the model is given by R2.</li>
-<li>At a fruit biomass of 70, the model would predict root biomass of about <span class="math inline">\(4.18 + 0.05*70\)</span>. CORRECT: The linear equation for the model is: <span class="math inline">\(y = a*x + b\)</span> that is <span class="math inline">\(Root = slope*Fruit + intercept\)</span></li>
+<li>At a fruit biomass of 70, the model would predict root biomass of about <span class="math inline">\(4.18 + 0.05*70\)</span>. CORRECT: The linear equation for the model is: <span class="math inline">\(y = a + b*x\)</span> that is <span class="math inline">\(Root = intercept+ slope*Fruit\)</span></li>
 <li>At a fruit biomass of 0, the model predicts a root biomass of about 4.18. CORRECT: This is the intercept (1st row in the regression table below Estimate)</li>
 </ul>
 <p>This is the code that you need to interpret the results.</p>
@@ -702,12 +702,12 @@ Click here to see the solution
 </section>
 <section id="model-validation-residual-checks" class="level2">
 <h2 class="anchored" data-anchor-id="model-validation-residual-checks">Model validation: Residual checks</h2>
-<p>Now, we will have a closer look at model diagnostics and residual checks in particular. Of course, we should have done this for all models above as well (we simply didn’t do this because of time restrictions). So remember that you always have to validate your model, if you want to be sure that your conclusions are correct.</p>
+<p>Now, we will have a closer look at model diagnostics and residual checks. Of course, we should have done this for all models above as well (we simply didn’t do this because of time restrictions). So remember that you <strong>always have to validate your model, if you want to be sure that your conclusions are correct.</strong></p>
 <p>For this exercise, you can prepare a dataset yourself called “dat” with the variables “x” and “y”. Simply copy the following code to generate the data:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">234</span>)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="fu">rnorm</span>(<span class="dv">40</span>, <span class="at">mean =</span> <span class="dv">10</span>, <span class="at">sd =</span> <span class="dv">5</span>)</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>y <span class="ot">=</span> <span class="dv">10</span> <span class="sc">-</span> <span class="dv">2</span><span class="sc">*</span>x <span class="sc">+</span> <span class="fl">0.9</span> <span class="sc">*</span> x<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="dv">40</span>, <span class="at">mean=</span><span class="dv">5</span>, <span class="at">sd =</span> <span class="dv">20</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>y <span class="ot">=</span> <span class="dv">10</span> <span class="sc">-</span> <span class="dv">2</span><span class="sc">*</span>x <span class="sc">+</span> <span class="fl">0.9</span> <span class="sc">*</span> x<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="dv">40</span>, <span class="at">mean =</span> <span class="dv">5</span>, <span class="at">sd =</span> <span class="dv">20</span>)</span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(x, y)</span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(dat)</span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="do">##           x          y</span></span>
@@ -730,7 +730,7 @@ Warning
 </div>
 <div class="callout-body-container callout-body">
 <ul>
-<li>Fit a simple linear regression.</li>
+<li>Fit a simple linear regression of y ~ x.</li>
 <li>Check the residuals.</li>
 <li>Perform another simple linear regression with a modified formula, if needed.</li>
 <li>Create a scatter plot of the data and add a regression line for the first fit in black and one for the second fit in red. The second model cannot be plotted with the <em>abline()</em> function. Use the following code instead:</li>

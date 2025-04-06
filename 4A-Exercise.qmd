@@ -53,11 +53,13 @@ opts_p <- c(
 `r longmcq(opts_p)`
 :::
 
-`r hide("Click here to see the solution")` \### Solution
+`r hide("Click here to see the solution")`
+
+\### Solution
 
 -   Root biomass is not significantly affected by fruit biomass. WRONG: Look at the p-value for the slope (2nd row in the regression table below Pr(\>\|t\|))
 -   Fruit biomass explains most of the variance (\>50%) in the root biomass. CORRECT: The proportion of variance explained by the model is given by R2.
--   At a fruit biomass of 70, the model would predict root biomass of about $4.18 + 0.05*70$. CORRECT: The linear equation for the model is: $y = a*x + b$ that is $Root = slope*Fruit + intercept$
+-   At a fruit biomass of 70, the model would predict root biomass of about $4.18 + 0.05*70$. CORRECT: The linear equation for the model is: $y = a + b*x$ that is $Root = intercept+ slope*Fruit$
 -   At a fruit biomass of 0, the model predicts a root biomass of about 4.18. CORRECT: This is the intercept (1st row in the regression table below Estimate)
 
 This is the code that you need to interpret the results.
@@ -161,7 +163,7 @@ opts_p <- c(
 `r longmcq(opts_p)`
 :::
 
-`r hide("Click here to see the solution")` 
+`r hide("Click here to see the solution")`
 
 ### Solution
 
@@ -190,14 +192,14 @@ plot(ABUND ~ GRAZE, data = birdabundance)
 
 ## Model validation: Residual checks
 
-Now, we will have a closer look at model diagnostics and residual checks in particular. Of course, we should have done this for all models above as well (we simply didn't do this because of time restrictions). So remember that you always have to validate your model, if you want to be sure that your conclusions are correct.
+Now, we will have a closer look at model diagnostics and residual checks. Of course, we should have done this for all models above as well (we simply didn't do this because of time restrictions). So remember that you **always have to validate your model, if you want to be sure that your conclusions are correct.**
 
 For this exercise, you can prepare a dataset yourself called "dat" with the variables "x" and "y". Simply copy the following code to generate the data:
 
 ```{r}
 set.seed(234)
 x = rnorm(40, mean = 10, sd = 5)
-y = 10 - 2*x + 0.9 * x^2 + rnorm(40, mean=5, sd = 20)
+y = 10 - 2*x + 0.9 * x^2 + rnorm(40, mean = 5, sd = 20)
 dat <- data.frame(x, y)
 head(dat)
 ```
@@ -205,7 +207,7 @@ head(dat)
 Perform the following tasks:
 
 ::: callout-warning
--   Fit a simple linear regression.
+-   Fit a simple linear regression of y \~ x.
 -   Check the residuals.
 -   Perform another simple linear regression with a modified formula, if needed.
 -   Create a scatter plot of the data and add a regression line for the first fit in black and one for the second fit in red. The second model cannot be plotted with the *abline()* function. Use the following code instead:
