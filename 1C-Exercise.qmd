@@ -428,46 +428,6 @@ We will discuss the results together.
 
 When you are finished, save your R script!
 
-## Last task - Install EcoData package
-
-During the course, we will use some datasets that we compiled in the $EcoData$ package. To access the datasets, you need to install the package from github. To do this, you will also need to install the $devtools$ package.
-
-Try the following code to install the two packages:
-
-```{r eval = F}
-install.packages("devtools")
-library(devtools)
-devtools::install_github(repo = "TheoreticalEcology/EcoData", 
-                         dependencies = F, build_vignettes = F)
-library(EcoData)
-```
-
-Remember that you have to install a package only once. If you open R Studio the next time, it is enough to run `library(EcoData)`.
-
-### Alternative ways to get EcoData
-
-If the installation didn't work, download the package file manually from
-
-<https://github.com/TheoreticalEcology/ecodata/releases/download/v0.2.1/EcoData_0.2.1.tar.gz>
-
-Store the file on your computer in the same folder where you created your R project. Then run the following code:
-
-```{r eval = F}
-install.packages("EcoData_0.2.1.tar.gz", 
-                 repos = NULL, type = "source")
-library(EcoData)
-
-```
-
-If this wasn't successful either, you can download the combined datasets from elearning (see Organisation and every-day material)
-
-Store the file on your computer in the same folder where you created your R project. Then run the following code:
-
-```{r eval = F}
-load("EcoData.Rdata")
-```
-
-(Note that you will not be able to access the dataset descriptions when you use this option).
 
 ## Bonus - Advanced programming
 
