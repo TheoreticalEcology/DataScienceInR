@@ -176,7 +176,7 @@ plot(allEffects(carsfit))
 ## Interactions with the `plantHeight` dataset
 
 ::: callout-warning
-#### Plant Height 
+#### Plant Height
 
 Use the `plantHeight` dataset from `EcoData` package.
 
@@ -187,7 +187,7 @@ library(EcoData)
 
 Model (separate) multiple regressions form log of height (`loght`) to test if:
 
-1.  If `temp` (temperature) or `NPP` (net primary productivity) is a more important predictor (importance ==  scaled effect size).
+1.  If `temp` (temperature) or `NPP` (net primary productivity) is a more important predictor (importance == scaled effect size).
 2.  If growth forms (variable `growthform`) differ in their temperature (`temp`) effects. (use an interaction)
 3.  If the effect of `temp` remains significant if we include latitude (`lat`) and an interaction of latitude with temp. If not, why? Tip: plot temp \~ lat.
 :::
@@ -258,8 +258,56 @@ In principle, the regression model should be able to still separate them, but th
 
 `r unhide()`
 
+## Model selection with the Plant Height data
+
+::: callout-warning
+#### Plant Height
+
+Use the `plantHeight` data and the previously fitted models to `loght`.
+
+Compare nested models built with the variables `Temp` and `growthform` through `anova()`. 
+
+Compare all models fitted before with `AIC`.
+
+What's your conclusion?
+
+:::
 
 
+`r hide("Click here to see the solution")`
+
+
+Building models with `Temp` and `growthform`. But first, excluding rows with NA in any of these variables (`loght` as well) - you can't compare models with different number of data points!!
+
+```{r}
+plantNew <- plantHeight[, c("loght", "growthform2", "sTemp")]
+plantNew <- na.omit(plantNew)
+
+fit1 = lm(loght ~ growthform2, data = plantNew)
+fit2 = lm(loght ~ sTemp, data = plantNew)
+fit3 = lm(loght ~ growthform2 + sTemp, data = plantNew)
+fit4 = lm(loght ~ growthform2*sTemp, data = plantNew)
+```
+
+Comparing nested models with anova:
+```{r}
+anova(fit1,fit3,fit4)
+anova(fit2,fit3,fit4)
+anova(fit3,fit4)
+```
+
+Comparing all models with AIC
+```{r}
+res <- AIC(fit1,fit2,fit3,fit4)
+res <- res[order(res$AIC),] # ordering lowest AIC
+res$deltaAIC <- res$AIC - res$AIC[1] # including deltaAIC
+res
+```
+
+
+`r unhide()`
+
+````{=html}
 <!---
 MELINA: I hided this exercise, because I and Florian decided to change the content of model selection, and we will not present stepAIC or dredge anymore
 
@@ -365,3 +413,4 @@ AICc(opt,full) # This is inf! -> optimal model is better according to AICc
 
 `r unhide()`
 --->
+````

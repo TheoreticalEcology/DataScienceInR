@@ -464,6 +464,7 @@ window.Quarto = {
   <li><a href="#useful-functions" id="toc-useful-functions" class="nav-link active" data-scroll-target="#useful-functions">Useful functions</a></li>
   <li><a href="#analyzing-the-mtcars-dataset" id="toc-analyzing-the-mtcars-dataset" class="nav-link" data-scroll-target="#analyzing-the-mtcars-dataset">Analyzing the <code>mtcars</code> dataset</a></li>
   <li><a href="#interactions-with-the-plantheight-dataset" id="toc-interactions-with-the-plantheight-dataset" class="nav-link" data-scroll-target="#interactions-with-the-plantheight-dataset">Interactions with the <code>plantHeight</code> dataset</a></li>
+  <li><a href="#model-selection-with-the-plant-height-data" id="toc-model-selection-with-the-plant-height-data" class="nav-link" data-scroll-target="#model-selection-with-the-plant-height-data">Model selection with the Plant Height data</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/TheoreticalEcology/DataScienceInR/edit/master/5A-Exercise.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
@@ -930,6 +931,89 @@ Click here to see the solution
 </div>
 <p>In principle, the regression model should be able to still separate them, but the higher the collinearity, the more difficult it becomes for the regression to infer if the effect is caused by one or the other predictor.</p>
 </div>
+</section>
+<section id="model-selection-with-the-plant-height-data" class="level2">
+<h2 class="anchored" data-anchor-id="model-selection-with-the-plant-height-data">Model selection with the Plant Height data</h2>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Plant Height
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Use the <code>plantHeight</code> data and the previously fitted models to <code>loght</code>.</p>
+<p>Compare nested models built with the variables <code>Temp</code> and <code>growthform</code> through <code>anova()</code>.</p>
+<p>Compare all models fitted before with <code>AIC</code>.</p>
+<p>What’s your conclusion?</p>
+</div>
+</div>
+<div class="webex-solution">
+<button>
+Click here to see the solution
+</button>
+<p>Building models with <code>Temp</code> and <code>growthform</code>. But first, excluding rows with NA in any of these variables (<code>loght</code> as well) - you can’t compare models with different number of data points!!</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>plantNew <span class="ot">&lt;-</span> plantHeight[, <span class="fu">c</span>(<span class="st">"loght"</span>, <span class="st">"growthform2"</span>, <span class="st">"sTemp"</span>)]</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>plantNew <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(plantNew)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>fit1 <span class="ot">=</span> <span class="fu">lm</span>(loght <span class="sc">~</span> growthform2, <span class="at">data =</span> plantNew)</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>fit2 <span class="ot">=</span> <span class="fu">lm</span>(loght <span class="sc">~</span> sTemp, <span class="at">data =</span> plantNew)</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>fit3 <span class="ot">=</span> <span class="fu">lm</span>(loght <span class="sc">~</span> growthform2 <span class="sc">+</span> sTemp, <span class="at">data =</span> plantNew)</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>fit4 <span class="ot">=</span> <span class="fu">lm</span>(loght <span class="sc">~</span> growthform2<span class="sc">*</span>sTemp, <span class="at">data =</span> plantNew)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Comparing nested models with anova:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(fit1,fit3,fit4)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="do">## Analysis of Variance Table</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Model 1: loght ~ growthform2</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="do">## Model 2: loght ~ growthform2 + sTemp</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="do">## Model 3: loght ~ growthform2 * sTemp</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="do">##   Res.Df    RSS Df Sum of Sq       F    Pr(&gt;F)    </span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="do">## 1    162 28.121                                   </span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="do">## 2    161 24.578  1    3.5426 25.7006 1.104e-06 ***</span></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="do">## 3    158 21.779  3    2.7998  6.7707 0.0002524 ***</span></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a><span class="do">## ---</span></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a><span class="do">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(fit2,fit3,fit4)</span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a><span class="do">## Analysis of Variance Table</span></span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a><span class="do">## Model 1: loght ~ sTemp</span></span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a><span class="do">## Model 2: loght ~ growthform2 + sTemp</span></span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a><span class="do">## Model 3: loght ~ growthform2 * sTemp</span></span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a><span class="do">##   Res.Df    RSS Df Sum of Sq       F    Pr(&gt;F)    </span></span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a><span class="do">## 1    166 80.526                                   </span></span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a><span class="do">## 2    161 24.579  5    55.947 81.1767 &lt; 2.2e-16 ***</span></span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a><span class="do">## 3    158 21.779  3     2.800  6.7707 0.0002524 ***</span></span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a><span class="do">## ---</span></span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a><span class="do">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
+<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(fit3,fit4)</span>
+<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a><span class="do">## Analysis of Variance Table</span></span>
+<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a><span class="do">## Model 1: loght ~ growthform2 + sTemp</span></span>
+<span id="cb15-29"><a href="#cb15-29" aria-hidden="true" tabindex="-1"></a><span class="do">## Model 2: loght ~ growthform2 * sTemp</span></span>
+<span id="cb15-30"><a href="#cb15-30" aria-hidden="true" tabindex="-1"></a><span class="do">##   Res.Df    RSS Df Sum of Sq      F    Pr(&gt;F)    </span></span>
+<span id="cb15-31"><a href="#cb15-31" aria-hidden="true" tabindex="-1"></a><span class="do">## 1    161 24.578                                  </span></span>
+<span id="cb15-32"><a href="#cb15-32" aria-hidden="true" tabindex="-1"></a><span class="do">## 2    158 21.779  3    2.7998 6.7707 0.0002524 ***</span></span>
+<span id="cb15-33"><a href="#cb15-33" aria-hidden="true" tabindex="-1"></a><span class="do">## ---</span></span>
+<span id="cb15-34"><a href="#cb15-34" aria-hidden="true" tabindex="-1"></a><span class="do">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Comparing all models with AIC</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">AIC</span>(fit1,fit2,fit3,fit4)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> res[<span class="fu">order</span>(res<span class="sc">$</span>AIC),] <span class="co"># ordering lowest AIC</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>res<span class="sc">$</span>deltaAIC <span class="ot">&lt;-</span> res<span class="sc">$</span>AIC <span class="sc">-</span> res<span class="sc">$</span>AIC[<span class="dv">1</span>] <span class="co"># including deltaAIC</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>res</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="do">##      df      AIC  deltaAIC</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="do">## fit4 11 155.5342   0.00000</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="do">## fit3  8 169.8521  14.31792</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="do">## fit1  7 190.4728  34.93864</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="do">## fit2  3 359.2179 203.68365</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
 <!---
 MELINA: I hided this exercise, because I and Florian decided to change the content of model selection, and we will not present stepAIC or dredge anymore
 
@@ -977,12 +1061,6 @@ Use your results to answer the following questions:
 
 
 
-
-
-
-
-
-
 <div class='webex-radiogroup' id='radio_CIYDEMETBH'><label><input type="radio" autocomplete="off" name="radio_CIYDEMETBH" value=""></input> <span>Pawl was wrong. There is a significant interaction between weight and horsepower, but the direction is opposite to what Pawl thought: The effect of weight is stronger for stronger cars.</span></label><label><input type="radio" autocomplete="off" name="radio_CIYDEMETBH" value=""></input> <span>Pawl was wrong, the effect of weight is independent of horsepower.</span></label><label><input type="radio" autocomplete="off" name="radio_CIYDEMETBH" value="answer"></input> <span>Pawl was right. The effect of weight is strong for weaker cars, but becomes indeed irrelevant for stronger cars.</span></label></div>
 
 :::
@@ -992,9 +1070,6 @@ Use your results to answer the following questions:
 
 
 This is the code that you need to obtain the results.
-
-
-
 
 ::: {.cell}
 
@@ -1038,9 +1113,6 @@ AICc(opt,full) # This is inf! -> optimal model is better according to AICc
 
 ```
 :::
-
-
-
 
 
 </div>
