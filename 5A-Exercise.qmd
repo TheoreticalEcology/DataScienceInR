@@ -32,16 +32,15 @@ Before you start, remember to clean your global environment (if you haven't alre
 To conduct the exercise, please load the following packages:
 
 ```{r, eval=TRUE}
-library(effects)
-library(MuMIn)
+library(effects) 
+library(EcoData)
 ```
 
 You will work with the following datasets:
 
 -   mtcars
--   Cement{MuMIn}
+-   plantHeight form package `EcoData`
 
-The second dataset is from the MuMIn package (as shown by the curly brackets).
 
 ## Useful functions
 

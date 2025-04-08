@@ -10,7 +10,7 @@ set.seed(42)
 
 # Exercise - NHST and statistical tests {.unnumbered}
 
-[Decision tree for statistical tests](https://elearning.uni-regensburg.de/course/view.php?id=54766#coursecontentcollapse3)
+[Decision tree for statistical tests](https://elearning.uni-regensburg.de/pluginfile.php/3423750/course/section/875131/Decision%20tree.jpg)
 
 ## Streams
 
