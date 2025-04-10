@@ -748,7 +748,7 @@ Plant Height
 <p>Model (separate) multiple regressions form log of height (<code>loght</code>) to test if:</p>
 <ol type="1">
 <li>If <code>temp</code> (temperature) or <code>NPP</code> (net primary productivity) is a more important predictor (importance == scaled effect size).</li>
-<li>If growth forms (variable <code>growthform</code>) differ in their temperature (<code>temp</code>) effects. (use an interaction)</li>
+<li>If growth forms (variable <code>growthform</code>) differ in their temperature (<code>temp</code>) effects. (use an interaction AND relevel your factor variable to have the <code>Herb</code> growth form in the intercept - see the function <code>relevel</code>)</li>
 <li>If the effect of <code>temp</code> remains significant if we include latitude (<code>lat</code>) and an interaction of latitude with temp. If not, why? Tip: plot temp ~ lat.</li>
 </ol>
 </div>
