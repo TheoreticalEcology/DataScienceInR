@@ -16,48 +16,62 @@ R works like a calculator:
 2^2
 ```
 
-We can also use functions that perform specific calculations:
+Always pay attention to the parenthese to set the order of the calculations:
+
+```{r}
+2*4^3-1
+2*4^(3-1)
+(2*4)^3-1
+(2*4)^(3-1)
+```
+
+We can also use **functions** that perform specific calculations:
 
 ```{r}
 sqrt(4)
 sum(c(2,2))
+abs(-1)
 ```
 
-We can assign values/data to variables:
+We can assign values/data to **objects**:
 
 ```{r}
 object.name <- 1
+variable1 <- c(2,2) # c() function to concatenate/group values
 ```
 
-Note that both operators '\<-' or "=" work. Functions in R (e.g. `sum()`, `mean()`, etc.) have arguments that control/change their behavior and are also used to pass the data to the function:
+Note that both operators '\<-' or "=" work when creating a object.
+
+Functions in R (e.g. `sum()`, `mean()`, etc.) have arguments that control/change their behavior and are also used to pass the data to the function:
 
 ```{r}
 mean(x = c(2, 2))
+mean(variable1)
 ```
 
 ::: {.callout-tip appearance="default"}
 ## Help
 
-A list and description of all arguments can be found in the help of a function (which can be accessed via `?mean` or if you place the cursor on the function and press F1)
+A list and description of all arguments in a function can be found in the help of a function (which can be accessed via `?mean` or \`help(mean)\`, or if you place the cursor on the function and press F1 in Rstudio)
 :::
 
 ### Data types and data structures
 
 There are four important data types in R (there are more but we focus on these 5):
 
--   Numeric: 1, 2, 3, 4
+-   **Numeric:** 1, 2, 3, 4
 
--   Logical: TRUE or FALSE
+-   **Logical**: TRUE or FALSE
 
--   Characters: "A", "B",...
+-   **Characters**: "A", "B",...
 
--   Factors which are characters but we have to tell R explicitly that they are factors
+-   **Factors**: "A", "B",... which are characters but we have to tell R explicitly that they are factors - have levels
 
--   Not a number: NA, NaN (empty value)
+-   Not Available/Not a Number: **NA, NaN** (empty value)
 
 Based on the data types we can build data structures which contain either only specific data types or a mixture of data types:
 
--   Vector: Several values of **one** data type, can be created with the `c` function:
+-   **Vector**: Several values of **one** data type, can be created with the `c` function:
 
     ```{r}
     #| eval: false
@@ -67,13 +81,13 @@ Based on the data types we can build data structures which contain either only s
     as.factor(c("A", "B", "C")) # factor vector
     ```
 
--   Matrix: two-dimensional data structure of **one** data type, can be created with the `matrix` function (we can pass a vector to the matrix function and tell it via arguments how the matrix should be constructed):
+-   **Matrix**: two-dimensional data structure of **one** data type, can be created with the `matrix` function (we can pass a vector to the matrix function and tell it via arguments how the matrix should be constructed):
 
     ```{r}
     matrix(c(1, 2, 3, 4, 5, 6), nrow = 3, ncol = 2)
     ```
 
--   Data.frame: Often our data has variables of different types which makes a matrix unsuitable data structure. Data.frames can handle different data types and is organized in columns (one column = one variables) and can be created with the `data.frame` function:
+-   **Data.frame**: Often our data has variables of different types which makes a matrix unsuitable data structure. Data.frames can handle different data types and is organized in columns (one column = one variables) and can be created with the `data.frame` function:
 
     ```{r}
     data.frame(A = c(1, 2, 3), B = c("A", "B", "C"), C = c(TRUE, FALSE, FALSE))
@@ -122,7 +136,7 @@ df[df$y == 5 | df$x == 3,] #show data where y equals 5 OR x equals 3
 ```
 
 ::: {.callout-tip appearance="default" collapse="true"}
-## Logical operators
+### Logical operators
 
 | Operators | Meaning               |
 |-----------|-----------------------|
@@ -147,7 +161,7 @@ df$NAs = NA #fills up a new column named NAs with all NA values
 df
 ```
 
-### Data analysis workflow
+## Data analysis workflow
 
 This is a simple version of what you're going to learn during this course:
 

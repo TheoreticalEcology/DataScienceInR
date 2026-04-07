@@ -10,8 +10,8 @@ editor_options:
 
 In this course, we work with the combination of R + RStudio.
 
--   R is the calculation engine (language and environmet) that performs the computations. You can download the latest R version [here](https://cran.r-project.org/).
--   RStudio is the editor (IDE) that helps you sending inputs to R and collect outputs. You can download the latest Rstudio version [here](https://posit.co/download/rstudio-desktop/).
+-   **R is the calculation engine** **(language and environment)** that performs the computations. You can download the latest R version [here](https://cran.r-project.org/).
+-   **RStudio is the editor (IDE)** that helps you sending inputs to R and collect outputs. You can download the latest Rstudio version [here](https://posit.co/download/rstudio-desktop/).
 
 Make sure you have a recent version of R + RStudio installed on your computer.
 
