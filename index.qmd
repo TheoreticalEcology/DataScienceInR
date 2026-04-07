@@ -9,16 +9,18 @@ knitr::opts_chunk$set(cache = TRUE)
 set.seed(123) 
 ```
 
-Material for a introductory 1-week course in Data Science, taught at the University of Regensburg.
+Material for a introductory block course in Statistics and Data Science with R, taught at the University of Regensburg. The main topics are:
 
--   Day 1: Getting started with R and descriptive statistics
+-   1: Getting started with R and descriptive statistics
 
--   Day 2: Graphics and statistical inference
+-   2: Graphics
 
--   Day 3: Hypthesis testing and linear regression (simple, multiple)
+-   3: Statistical inference
 
--   Day 4: Generalised linear models (GLM) and multivariate statistics
+-   4: Hypthesis testing and linear regression (simple, multiple)
 
--   Day 5: Data science skills, data analysis projects workflow, and predictive modeling
+-   5: Generalised linear models (GLM) and multivariate statistics
 
-Link to the UR GRIPS course [here](https://elearning.uni-regensburg.de/course/view.php?id=54766) (requires UR account)
+-   6: Data science skills, data analysis projects workflow, and predictive modeling
+
+Link to the UR GRIPS course [here](https://elearning.uni-regensburg.de/course/view.php?id=54766) (requires UR account).
