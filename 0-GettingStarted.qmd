@@ -10,14 +10,16 @@ editor_options:
 
 In this course, we work with the combination of R + RStudio.
 
--   R is the calculation engine (language and enviromnet) that performs the computations.
--   RStudio is the editor (IDE) that helps you sending inputs to R and collect outputs.
+-   R is the calculation engine (language and environmet) that performs the computations. You can download the latest R version [here](https://cran.r-project.org/).
+-   RStudio is the editor (IDE) that helps you sending inputs to R and collect outputs. You can download the latest Rstudio version [here](https://posit.co/download/rstudio-desktop/).
 
-Make sure you have a recent version of R + RStudio installed on your computer. If you have never used RStudio, <a href="https://videocampus.sachsen.de/video/First-steps-with-R-and-RStudio/528e5d164219f2d07e32a51736c3f7d1" target="_blank" rel="noopener">here</a> is a good video introducing the basic system and how R and RStudio interact.
+Make sure you have a recent version of R + RStudio installed on your computer.
+
+If you have never used RStudio, <a href="https://videocampus.sachsen.de/video/First-steps-with-R-and-RStudio/528e5d164219f2d07e32a51736c3f7d1" target="_blank" rel="noopener">here</a> is a good video introducing the basic system and how R and RStudio interact, and [here](https://www.uvm.edu/~tdonovan/RforFledglings/BriefTour2.html) you have simple and good explanations for each Rstudio panel and the many resources.
 
 ## Libraries that you will need
 
-The R engine comes with a number of base functions, but one of the great things about R is that you can extend these base functions by libraries that can be programmed by anyone. In principle, you can install libraries from any website or file. In practice, however, most commonly used libraries are distributed via two major repositories. For statistical methods, this is [CRAN](https://cran.r-project.org/), and for bioinformatics, this is ioconductor\](<https://www.bioconductor.org/>).
+The R engine comes with a number of base functions, but one of the great things about R is that you can extend these base functions by libraries that can be programmed by anyone. In principle, you can install libraries from any website or file. In practice, however, most commonly used libraries are distributed via two major repositories. For statistical methods, this is [CRAN](https://cran.r-project.org/), and for bioinformatics, this is \[bioconductor\](<https://www.bioconductor.org/>).
 
 ::: {.callout-tip collapse="true"}
 #### Click to see more on installing libraries in R
@@ -45,7 +47,7 @@ sudo apt update && sudo apt install -y --install-recommends build-essential gfor
 ```
 :::
 
-In this book, we will often use data sets from the `EcoData`{.R} package, which is not on CRAN, but on a GitHub page. To install the package, if you don't have the devtools package installed already, first install devtools from CRAN by running:
+In this book, we will often use data sets from the `EcoData`{.R} package, which is not on CRAN, but on a \[GitHub page\](<https://github.com/TheoreticalEcology/ecodata>). To install the package, if you don't have the \`devtools\` package installed already, first install devtools from CRAN by running:
 
 ```{r, eval=FALSE}
 install.packages("devtools")
@@ -76,6 +78,4 @@ library(EcoData)
 ```
 :::
 
-## Extra resources
-
-To get to know Rstudio better, [here](https://www.uvm.edu/~tdonovan/RforFledglings/BriefTour2.html) is the link for a brief tour from another "bookdown" page with simple and good explanations for each panel and the many resources.
+## 
