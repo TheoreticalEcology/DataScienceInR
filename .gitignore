@@ -16,3 +16,4 @@ elk_data.RData
 .DS_Store
 
 **/*.quarto_ipynb
+.DS_Store

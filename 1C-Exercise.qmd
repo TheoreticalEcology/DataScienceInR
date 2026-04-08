@@ -8,13 +8,12 @@ editor_options:
 
 In this exercise you will practice:
 
--   to set up your working environment (project) in RStudio
 -   to write R scripts and execute code
 -   to access data in dataframes (the most important data class in R)
 -   to query (filter) dataframes
 -   to spot typical mistakes in R code
 
-**Please carefully follow the instructions for setting up your working environment and ask other participants**
+**Please carefully follow the instructions for setting up your working environment in [Getting started with R](https://theoreticalecology.github.io/DataScienceInR/0-GettingStarted.html).**
 
 Tasks:
 
@@ -31,46 +30,9 @@ What is the answer to everything? `r fitb(42)`
 ::: column-margin
 Hints:
 
-The Hitchhiker's Guide to the Galaxy
+The Hitchhiker's Guide to the Galaxy.
 :::
 
-## Setting up the working environment in RStudio
-
-Your first task is to open RStudio and create a new project for the course.
-
--   Click the 'File' button in the menu, then 'New Project' (or the second icon in the bar below the menu "Create a project").
--   Click "New Directory".
--   Click "New Project".
--   Type in the name of the directory to store your project, e.g. "IntroStatsR".
--   "Browse" to the folder on your computer where you want to have your project created.
--   Click the "Create Project" button.
-
-```{r fig, echo=FALSE, fig.cap="", out.width = '90%'}
-knitr::include_graphics("resources/new_project.png")
-```
-
-For all exercises during this week, use this project! You can open it via the file system as follows (please try this out now):
-
--   (Exit RStudio).
--   Navigate to the directory where you created your project.
--   Double click on the "IntroStatsR.Rproj" file in that directory.
-
-You should now be back to RStudio in your project.
-
-In the directory of the R project, generate a folder "scripts" and a folder "data". You can do this either in the file directory or in RStudio. For the latter:
-
--   Go to the "Files" panel in R Studio (bottom right panel).
--   Click the icon "New Folder" in the upper left corner.
--   Enter the folder name.
--   The new folder is now visible in your project directory.
-
-The idea is that you will create an R script for each exercise and save all these files in the scripts folder. You can do this as follows:
-
--   Click the "File" button in the menu, then "New File" and "R Script" (or the first icon in the bar below the menu and then "R Script" in the dropdown menu).
--   Click the "File" button in the menu, then "Save" (or the "Save" icon in the menu).
--   Navigate to your scripts folder.
--   Enter the file name, e.g. "Exercise_01.R".
--   Save the file.
 
 ## A few hints before you can start
 
@@ -79,7 +41,7 @@ Remember the different ways of running code:
 -   click the "Run" button in the top right corner of the top left panel (code editor) OR
 -   hit "Ctrl"+"Enter" (MAC: "Cmd"+"Return")
 
-RStudio will then run
+RStudio will then run:
 
 -   the code that is currently marked OR
 -   the line of code where the text cursor currently is (simply click into that line)
@@ -96,15 +58,15 @@ Have a look at the **shortcuts** by clicking "Tools" and than "Keybord Shortcuts
 
 ## Basic data structures in R
 
-Before we work with real data, we should first recap important data structures in R
+Before we work with real data, we should first recap important data structures in R.
 
-A single value (type does not matter) is called a scalar (it is just one value):
+A single value (type does not matter) is called a **scalar** (it is just one value):
 
 ```{r}
 a = 5
 print(a)
 
-this_letter = "A"
+this_letter = "A" # characters/strings always between quotes
 print(this_letter)
 ```
 
@@ -209,7 +171,9 @@ Don't worry, you don't have to create your own data sets like we did in this sec
 A limitation of the `matrix()` is that is can only consist of one data type (like the vectors), if we mix the data types, all will be cast to the same data type:
 
 ```{r}
-cbind(age, names)
+my.mat <- cbind(age, names)
+my.mat
+my.mat[1,] # first row, all columns
 ```
 
 ::: column-margin
@@ -228,9 +192,9 @@ The `data.frame()` can handle variables with different data types. Data.frames a
 df = data.frame(age, names, weight)
 df
 str(df)
+df[1,] # first row, all columns
 ```
 
-(we will talk below more about data.frames)
 
 ## Getting an overview of a dataset
 
@@ -327,12 +291,12 @@ dat$NAs = NA
 NA -> dat$NAs 
 ```
 
-will get you
+will get you:
 
--   get the second row
--   get column Ozone
--   generate a new column with NA's
--   calculate the sum of columns 3 and 4 and assign to a new column
+-   The second row
+-   The column Ozone
+-   Generate a new column with NA's
+-   Calculate the sum of columns 3 and 4 and assign to a new column
 :::
 
 ::: column-margin
@@ -427,7 +391,6 @@ The `%in%` operator is useful when you want to check whether a value is inside a
 We will discuss the results together.
 
 When you are finished, save your R script!
-
 
 ## Bonus - Advanced programming
 

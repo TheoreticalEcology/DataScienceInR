@@ -17,16 +17,16 @@ book:
   chapters:
   - index.qmd
   - 0-GettingStarted.qmd
-  - part: Data input and manimulation
+  - part: Data input and Manipulation
     chapters:
     - 1A-basicOperations.qmd    
     - 1B-PreparingData.qmd
     - 1C-Exercise.qmd
   - part: Descriptive Statistics
     chapters:
-    - 2A-DescriptiveStatistics.qmd
-    - 2B-SummaryStatistics.qmd
-    - 2A-Exercise.qmd
+    - 2A-SummaryStatistics.qmd
+    - 2B-DescriptiveStatistics.qmd
+    - 2C-Exercise.qmd
   - part: Hypothesis Testing
     chapters:
     - 3A-NHST.qmd

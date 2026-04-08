@@ -13,33 +13,33 @@ set.seed(42)
 Before knowing how to plot something, you should know what you want to plot:
 
 | Scenario | Which plot | R command |
-|----|----|----|
-| Numeric | Histogram or boxplot | `hist()` and`boxplot` |
-| Numeric with numeric | Scatterplot | `plot` |
-| Numeric with categorical | Boxplot | `boxplot(numeric~categorical)` |
-| Categorical with categorical | mosaicplot or grouped barplot | `mosaicplot(table(categorical, categorical))` or `barplot(data, beside=TRUE)` |
+|------------------------|------------------------|------------------------|
+| Numeric | Histogram or boxplot | `hist(num)` and `boxplot(num)` |
+| Numeric with numeric | Scatterplot | `plot(num~num)` |
+| Numeric with categorical | Boxplot | `boxplot(num~cat)` |
+| Categorical with categorical | mosaicplot or grouped barplot | `mosaicplot(table(cat, cat))` or `barplot(data, beside=TRUE)` |
 
 ::: column-margin
 Here is a [website](https://www.data-to-viz.com/) with a decision tree about when to choose which plot.
 :::
 
-Once you know what you want to plot, there are lot of websites that will show you the respective R code. One important consideration, however: there are at least two popular ways of doing R graphis:
+Once you know what you want to plot, there are lot of websites that will show you the respective R code. One important consideration, however: there are at least two popular ways of doing R graphs:
 
--   base R: The `graphics` package is automatically shipped with the R language and is the default plotting package in R. It produces basic scientific plots (no unnecessary information)
--   \`ggplot2\` is a newer plotting package where the default plots are more visually appealling, it belongs to the "tidyverse", which is a group of packages with a different grammar for coding in R.
+-   **base R**: The `graphics` package is automatically shipped with the R language and is the default plotting package in R. It produces basic scientific plots (no unnecessary information)
+-   `ggplot2` is a plotting package where the default plots are more visually appealling, it belongs to the `tidyverse`, which is a group of packages with a different grammar for coding in R.
 
 <!-- {{< video https://youtu.be/maFw5qXyCwg >}} -->
 
 <!-- {{< video https://youtu.be/HeqHMM4ziXA >}} -->
 
-You should probably get to know both types, but we recommend to start with base R. We are just saying this so that you are not confused, because a lot of the examples will also show you ggplot code. Here some useful links:
+You should probably get to know both types, but we recommend to **start with base R**. We are just saying this so that you are not confused, because a lot of the examples will also show you ggplot code. Here some useful links:
 
 -   A few [simple graphs in base R](https://www.statmethods.net/graphs/index.html).
 -   R code for the [most common graphics](https://www.r-graph-gallery.com/index.html) (with a ggplot2 tendecy).
 -   R code [graph tutorials](https://r-coder.com/r-graphs/).
 
 ::: column-margin
-Thinking about how to do [good figures](https://www.cedricscherer.com/2019/05/17/the-evolution-of-a-ggplot-ep.-1/)
+Thinking about how to do [good figures](https://www.cedricscherer.com/2019/05/17/the-evolution-of-a-ggplot-ep.-1/).
 :::
 
 ## Plotting ONE variable
@@ -50,7 +50,7 @@ Thinking about how to do [good figures](https://www.cedricscherer.com/2019/05/17
 -   The boxplot plots the distribution of a numerical variable based on summary statistics (the quantiles). The boxplot is particular useful for comparing/contrasting a numerical with a categorical variable (see below)
 
 ::: column-margin
-In the base R code we introduced `par()` before plotting to create a panel with the plots side by side. In ggplot2 this is done with the package `ggpubr`.
+In the base R code we introduced `par()` before plotting to create a panel with the plots side by side. In ggplot2 this is done with the package `ggpubr` (or `patchwork`).
 :::
 
 ::: panel-tabset
@@ -77,7 +77,7 @@ library(ggpubr)
 
 plt1 = 
   ggplot(iris, aes(x = Sepal.Length)) +
-    geom_histogram() +
+    geom_histogram(bins = 8,col="white") + # same number of bins from baseR
     ggtitle("Histogram") +
     xlab("Sepal.Length") +
     ylab("Frequency") +
@@ -141,13 +141,16 @@ The general idea of plotting is to look for correlations / associations between 
 # Scatterplot
 par(mfrow = c(1,2))
 plot(airquality$Solar.R, airquality$Ozone)
-
 # plot(Ozone ~ Solar.R, data = airquality) #the same
 
 # different symbol for each month
 plot(Ozone ~ Solar.R, data = airquality, pch = Month)
 
 ```
+
+::: column-margin
+The **formula syntax** can also be used for plot functions in base R.
+:::
 
 We can also add other objects such as lines to our existing plot:
 
@@ -160,17 +163,22 @@ abline(h = 50)
 
 ### ggplot2
 
-```{r}
+```{r,warning=F}
 plt1 = ggplot(airquality, aes(x = Solar.R, y = Ozone)) +
         geom_point() +
         theme_bw()
 
-plt2 = ggplot(airquality, aes(x = Solar.R, y = Ozone)) +
-        geom_point(shape = airquality$Month) +
-        theme_bw()
+plt2 = ggplot(airquality, aes(x = Solar.R, y = Ozone, 
+                              shape = as.factor(Month))) +
+        geom_point(show.legend = F) +
+        theme_bw() 
 
 ggarrange(plt1, plt2, ncol = 2L, nrow = 1L)
 ```
+
+:::column-margin
+I "turned off" the legend in plot 2 to be similar to base R plot. Try with `show.legend = T` to see the legend. Also, I had to convert `Month` to a factor to get different shapes.
+:::
 
 We can also add other objects such as lines to our existing plot:
 
@@ -189,7 +197,7 @@ Often we have a numerical variable (e.g. weight/fitness) and a categorical vaira
 ::: panel-tabset
 ### Base R
 
-```{r}
+```{r, warning=F}
 boxplot(mpg ~ cyl, mtcars, notch=TRUE) # formula notation
 # boxplot(x = mtcars$cyl, y = mtcars$mpg) # the same
 
@@ -197,9 +205,17 @@ boxplot(mpg ~ cyl, mtcars, notch=TRUE) # formula notation
 
 ### ggplot2
 
-```{r}
+```{r,warning=F}
 ggplot(mtcars, aes(y = mpg, group = cyl)) +
   geom_boxplot(notch=TRUE) +
     theme_bw()
 ```
 :::
+
+::: {.callout-tip appearance="default"}
+# Hint:
+The `notch` argument adds a notch to the boxplot, which gives a visual indication of the confidence interval around the median. If the notches of two boxes do not overlap, it suggests that the medians are significantly different at the 5% significance level.
+Try `notch = F` and see what you get. 
+:::
+
+

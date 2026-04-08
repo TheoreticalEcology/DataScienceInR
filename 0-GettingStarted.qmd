@@ -78,4 +78,40 @@ library(EcoData)
 ```
 :::
 
-## 
+## Setting up the working environment in RStudio
+
+Your first task is to open RStudio and create a new project for the course.
+
+-   Click the 'File' button in the menu, then 'New Project' (or the second icon in the bar below the menu "Create a project").
+-   Click "New Directory".
+-   Click "New Project".
+-   Type in the name of the directory to store your project, e.g. "IntroStatsR".
+-   "Browse" to the folder on your computer where you want to have your project created.
+-   Click the "Create Project" button.
+
+```{r fig, echo=FALSE, fig.cap="", out.width = '90%'}
+knitr::include_graphics("resources/new_project.png")
+```
+
+For all exercises during this week, use this project! You can open it via the file system as follows (please try this out now):
+
+-   (Exit RStudio).
+-   Navigate to the directory where you created your project.
+-   Double click on the "IntroStatsR.Rproj" file in that directory.
+
+You should now be back to RStudio in your project.
+
+In the directory of the R project, generate a folder "scripts" and a folder "data". You can do this either in the file directory or in RStudio. For the latter:
+
+-   Go to the "Files" panel in R Studio (bottom right panel).
+-   Click the icon "New Folder" in the upper left corner.
+-   Enter the folder name.
+-   The new folder is now visible in your project directory.
+
+The idea is that you will create an R script for each exercise and save all these files in the scripts folder. You can do this as follows:
+
+-   Click the "File" button in the menu, then "New File" and "R Script" (or the first icon in the bar below the menu and then "R Script" in the dropdown menu).
+-   Click the "File" button in the menu, then "Save" (or the "Save" icon in the menu).
+-   Navigate to your scripts folder.
+-   Enter the file name, e.g. "Exercise_01.R".
+-   Save the file.

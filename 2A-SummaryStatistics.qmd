@@ -10,13 +10,15 @@ set.seed(42)
 
 # Summary statistics
 
-**Numeric values**
+## Numeric values
 
-Continuous measurements such as size, weight, time, length, etc.
+For continuous measurements such as size, weight, time, length, etc.
 
 Typical summary statistics:
 
--   quantiles (% of data below/over quantile): e.g. median == 50% quantile, 50% of the data below and 50% over
+- Mean, range, max, min, variance, standard deviation, etc.
+
+- Quantiles (% of data below/over quantile): e.g. median == 50% quantile, 50% of the data below and 50% over.
 
 -   Central moments:
 
@@ -82,17 +84,42 @@ boxplot(airquality$Temp)
 
 In a box plot, the box ranges from 0.25 to 0.75 quantiles (the interquartile range, IQR), with the median as the thick line in the box. The whiskers (the other two vertical lines) are either the min/max values or the distance to 1.5\*IQR (and points outside this range are considered outliers).
 
-**Categorical data**
+## Categorical data
 
 How often do different events occur?
 
 ```{r}
-table(mtcars$gear)
+table(mtcars$gear) # one-way table
+
+table(mtcars$cyl, mtcars$gear) # two-way table
 ```
 
-**Numeric with categorical**
+## Numeric with categorical
 
-We can also calculate summary statistics per level of a categorical variable for a numerical variable of interest. We can do with base R but it is easier with the `dplyr` package:
+We can also calculate summary statistics per level of a categorical variable for a numerical variable of interest, in different ways. Let's calculate the mean temperature per month of the `airquality` dataset.
+
+Using `aggregate`:
+```{r}
+aggregate(Temp ~ Month, data = airquality, FUN = mean) #or
+aggregate(airquality$Temp, by = list(airquality$Month), FUN = mean) #the same
+```
+
+::: column-margin
+
+**NOTE** the **formula syntax**: `Temp ~ Month` means "calculate summary statistics for Temp per level of Month". You specify the dataset in the data argument.
+:::
+
+Or using `tapply`:
+```{r}
+tapply(airquality$Temp, airquality$Month, mean)
+```
+
+::: column-margin
+
+**NOTE** the different output formats of both functions `aggregate` and `tapply`: the first one gives a data.frame, the second one gives a vector with names.
+:::
+
+We can do with base R but nowadays you will see a lot of code using the `dplyr` package:
 
 ```{r}
 library(dplyr) # uses tidyverse syntax
@@ -107,7 +134,7 @@ air_grouped
 ```
 
 ::: {.callout-note appearance="default" collapse="true"}
-## dplyr and tidyverse
+## `dplyr` and `tidyverse`
 
 The `dplyr` package is part of a big software environment called tidyverse. Unique features of the tidyverse are the pipe `%>%` operator and `tibble` objects.
 
@@ -136,9 +163,11 @@ The `dplyr` package is part of a big software environment called tidyverse. Uniq
     ```
 :::
 
-## Correlation
+## Correlations
 
-If two variables A and B are related, we say that they are correlated (correlation != causality!!). We can calculate the magnitude of this relatedness with correlation factors. Correlation factors are normalized covariances (two variables have two variances, how they vary independent of each other, and they share a covariance, how much they vary together) are in the range of $[-1,1]$. The Pearson's correlation coefficient/factor can be calculated by:
+If two variables A and B are related, we say that they are correlated (correlation != causality!!). We can calculate the magnitude of this relatedness with correlation factors. Correlation factors are normalized covariances (two variables have two variances, how they vary independent of each other, and they share a covariance, how much they vary together) in the range of $[-1,1]$. 
+
+The **Pearson's correlation** coefficient/factor can be calculated by:
 
 $$
 r = cor(x_1, x_2) = \frac{ \frac{1}{N} \sum_{i=1}^n (x_{1i} - \overline{x_{1}}) (x_{2i} - \overline{x_{2}}) }{ \sqrt{\frac{1}{N} \sum_{i=1}^n (x_{1i} - \overline{x_{1}})^2 (x_{2i} - \overline{x_{2}})^2} } 
@@ -147,25 +176,26 @@ $$
 The Pearson correlation works well with linear relationship, but poorly with non-linear relationships and is sensitive to outliers. Also transforming one of the variables affects the correlation:
 
 ```{r}
-#| code-fold: true
-A = runif(1000, -6, 6)
-B = plogis(A*3.5)
-par(mfrow = c(1, 2))
+A = runif(1000, -6, 6) # creating A variable
+B = plogis(A*3.5)      # creating B variable 
+par(mfrow = c(1, 2)) # for plotting the plots side by side
 plot(B, A)
-text(x = 0.6, y = -4, paste0("Pearson: ", round(cor(A, B, method = "pearson"), 3)))
+text(x = 0.6, y = -4, paste0("Pearson: ", 
+                             round(cor(A, B, method = "pearson"), 3))) 
 plot(log(B), A)
-text(x = -12, y = 0, paste0("Pearson: ", round(cor(A, log(B), method = "pearson"), 3)))
+text(x = -12, y = 0, paste0("Pearson: ", 
+                            round(cor(A, log(B), method = "pearson"), 3)))
 ```
 
-The correlation factor for the untransformed data is 0.9 but they have a perfect relationship.
+The correlation factor for the untransformed data is 0.9 (left graph) but they have a perfect relationship.
 
 **Rank correlation factors**
 
-Idea: Arranging the data following their order and using their rank 1...n for x und y, respectively. There two different rank correlation factors:
+Idea: Arranging the data following their order and using their rank 1...n for x and y, respectively. There are two different rank correlation factors:
 
--   Spearman: calculate Pearson based on ranks
+-   **Spearman**: calculate Pearson based on ranks.
 
--   Kendall: counts the number of data pairs that point in the same direction
+-   **Kendall**: counts the number of data pairs that point in the same direction
 
 ```{r}
 cor(A, B)
@@ -177,15 +207,20 @@ cor(A, B, method = "kendall")
 **Example:**
 
 ```{r}
-#| warning: false
 cor(airquality$Solar.R, airquality$Ozone, use = "complete.obs") # pearson = default
-cor(airquality$Solar.R, airquality$Ozone, use = "complete.obs", method = "spearman")
+cor(airquality$Solar.R, airquality$Ozone, use = "complete.obs", 
+    method = "spearman")
+```
 
-# pairs plot: correlates all variables to each other
+**Pairs plot** for many variables: correlates all variables to each other:
+```{r}
 plot(airquality)
 pairs(airquality) #the same
+```
 
-# you can change what is plotted in upper and lower panel:
+You can change what is plotted in upper and lower panel:
+```{r}
+#| warning: false
 # copy function from help
 panel.cor <- function(x, y, digits = 2, prefix = "", cex.cor, ...)
 {
@@ -198,7 +233,6 @@ panel.cor <- function(x, y, digits = 2, prefix = "", cex.cor, ...)
   text(0.5, 0.5, txt, cex = cex.cor * r)
 }
 pairs(airquality, lower.panel = panel.smooth, upper.panel = panel.cor)
-
 ```
 
 ::: {.callout-warning appearance="default"}
