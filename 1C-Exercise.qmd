@@ -561,7 +561,7 @@ sum_matrix = function(X) {
     result = sum_matrix(X)
   } else if(which == "row") {
     result = apply(X, 1, sum)
-  } else if(which == "row") {
+  } else if(which == "col") {
     result = apply(X, 2, sum)
   }
   return(result)
