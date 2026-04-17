@@ -163,7 +163,7 @@ Originally developed by Wiliam Sealy Gosset (1876-1937) who has worked in the Gu
 -   H~0~ : the means of both groups are equal
 :::
 
-The idea is that we have two normal distributions (e.g. alcohol distributions):
+The idea is that we have two normal distributions (e.g. alcohol distributions) to compare means. Let's simulate some data and see the distribution of both groups:
 
 ```{r}
 #| code-fold: true
@@ -173,7 +173,9 @@ B = rnorm(100, mean = .3)
 plot(density(A), col = "red", xlim = c(-2, 2), ylim = c(0, 0.6))
 lines(density(B))
 abline(v = mean(A), col = "red")
+text(x = mean(A)-0.4, y = 0.5, labels = "Mean A", pos = 3, xpd = NA, col = "red")
 abline(v = mean(B))
+text(x = mean(B)+0.4, y = 0.5, labels = "Mean B", pos = 3, xpd = NA, col = "black")
 ```
 
 And our goals is now to test if the difference between the two means of the variables is statistically significant or not.
@@ -189,7 +191,7 @@ And our goals is now to test if the difference between the two means of the vari
     B_v = var(B)
     ```
 
--   Calculate t-statistic (difference between means / (Standard deviation/sample size)
+-   Calculate t-statistic (difference between means / (Standard deviations/sample sizes)):  $t = \frac{\bar{x}_1 - \bar{x}_2}{\sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}}$
 
     ```{r}
     t_statistic = (A_m - B_m) / sqrt( A_v  / length(A) + B_v / length(B))
@@ -217,19 +219,24 @@ Let's compare it to the output of the `t.test` function which does everything fo
 t.test(A, B, var.equal = TRUE)
 ```
 
-Usually we also have to test for normality of our data, which we can do with another test.
-
-**Example airquality**
+Usually we also have to test for normality of our data, which we can do with another test, for example the Shapiro-Wilk test:
 
 ```{r}
-# with real data
+# attention: t test assumes normal dirstribution of measurements in both groups!
+shapiro.test(A)
+shapiro.test(B)
+```
+
+Because we know our data comes from a normal distribution (we simulated from there), the example above is boring. Let's have a look on the normality test with real data:
+
+```{r}
 head(PlantGrowth)
 boxplot(weight ~ group, data = PlantGrowth)
 
+# let's use only two groups control and treatment1:
 ctrl = PlantGrowth$weight[PlantGrowth$group == "ctrl"]
 trt1 = PlantGrowth$weight[PlantGrowth$group == "trt1"]
 
-# attention: t test assumes normal dirstribution of measurements in both groups!
 # test normality before doing the t test:
 shapiro.test(ctrl)
 shapiro.test(trt1)
@@ -238,22 +245,26 @@ shapiro.test(trt1)
 t.test(ctrl, trt1)
 # note that this is a "Welch" t-test
 # we will have a look at the differences among t-tests in the next large exercise
-
-# What is H0? equal means
-# What is the result? test is not significant, H0 is not rejected
-# Explain the different values in the output!
-
 ```
+
+From the example above, comparing weight of two groups, answer the questions:
+
+1. What is H0? 
+
+2. What is the result?
+
+3. Explain the different values in the output!
+
 
 ::: callout-warning
 ## Shapiro - Test for normality
 
-If you have a small sample size, the shapiro.test will always be non-significant (i.e. not significantly different from a normal distribution)! This is because small sample size leads to low power for rejecting H~0~ of normal distribution
+If you have a small sample size, the shapiro test will always be non-significant (i.e. not significantly different from a normal distribution)! This is because small sample size leads to low power for rejecting H~0~ of normal distribution. You will see about power in the end of this chapter.
 :::
 
 ## Type I error rate
 
-Let's start with a small simulation example:
+Let's start with a small simulation example of comparing two means with t-test. Simulating many times from a world without effect:
 
 ```{r}
 results = replicate(1000, {
@@ -270,23 +281,24 @@ What's happening here? We have no effect in our simulation but there are many p-
 mean(results < 0.05)
 ```
 
-So in `r mean(results < 0.05)` of our experiments we would reject H~0~ even when there is no effect at all! This is called the type I error rate. Those are false positives.
+So in `r mean(results < 0.05)*100` % of our experiments we would reject H~0~ even when there is no effect at all! This is called the type I error rate. Those are **false positives**.
 
-::: {.callout-note collapse="true"}
-## Type I error rate and multiple testing
+
+### Type I error rate and multiple testing
 
 If there is no effect, the probability of having a positive test result is equal to the significance level $\alpha$. If you test 20 things that don't have an effect, you will have one significant result on average when using a significance level of 0.05. If multiple tests are done, a correction for multiple testing should be used.
 
-This problem is called multiple testing
+This problem is called multiple testing:
 
 -   e.g.: if you try 20 different analyses (Null hypotheses), on average one of them will be significant.
 
--   e.g.: if you test 1000 different genes for their association with cancer, and in reality, none of them is related to cancer, 50 out of the tests will still be significant.
+-   e.g.: if you test 1000 different genes for their association with cancer, and in reality, none of them is related to cancer, 50 out of the tests will still be significant even if there is no effect.
 
--   If multiple tests are done, a correction for multiple testing should be used
+-   If multiple tests are done, a **correction for multiple testing** should be used.
 
--   increases the p-values for each test in a way that the overall alpha level is 0.05
+-   To increase the p-values for each test in a way that the overall alpha level is 0.05:
 
+Let's see it with the `plantGrowth` data:
 ```{r}
 # conduct a t-test for each of the treatment combinations
 # save each test as a new object (test 1 to 3)
@@ -298,17 +310,22 @@ test1 = t.test(control, trt1)
 test2 = t.test(control, trt2)
 test3 = t.test(trt1, trt2)
 
+# the 3 p-values
 c(test1$p.value, test2$p.value, test3$p.value)
+```
 
-# now adjust these values
+We see that two of the three tests are significant at the $\alpha$=0.05 level. But we have to adjust this to avoid false positives. One example is using the `p.adjust` function. This function has 3 methods:
+
+```{r}
 p.adjust(c(test1$p.value, test2$p.value, test3$p.value)) # standard is holm, average conservative
 p.adjust(c(test1$p.value, test2$p.value, test3$p.value), method = "bonferroni") # conservative
 p.adjust(c(test1$p.value, test2$p.value, test3$p.value), method = "BH") # least conservative
-# for details on the methods see help
+# for details on the methods see help of ?p.adjust
 ```
-:::
 
-If multiple testing is a problem and if we want to avoid false positives (type I errors), why don't we use a smaller alpha level? Because if would increase the type II error rate
+We end up with only one significant t-test after adjusting for multiple testing, the one comparing treatment 1 and 2. 
+
+If multiple testing is a problem and if we want to avoid false positives (type I errors), why don't we use a smaller alpha level? Because if would increase the type II error rate. 
 
 ## Type II error rate
 
@@ -317,7 +334,7 @@ It can also happen the other way around:
 ```{r}
 results = replicate(1000, {
   A = rnorm(100, mean = 0.0)
-  B = rnorm(100, mean = 0.2) # effect is there
+  B = rnorm(100, mean = 0.2) # effect is there!
   t.test(A, B)$p.value
 })
 hist(results)
@@ -327,9 +344,9 @@ hist(results)
 mean(results < 0.05)
 ```
 
-No we wouldn't reject the H~0~ in `r 1-mean(results < 0.05)`% of our experiments. This is the type II error rate (false negatives).
+Now, we wouldn't reject the H~0~ in `r (1-mean(results < 0.05))*100`% of our experiments. This is the **type II error rate (false negatives)**.
 
-The type II error rate ($\beta$) is affected by
+The type II error rate ($\beta$) is affected by:
 
 -   sample size $\uparrow$ , decreases $\beta$
 -   true effect size $\uparrow$, decreases $\beta$
@@ -342,9 +359,9 @@ After the experiment, the only parameter we could change would be the significan
 
 We can reduce $\alpha$ and we will get fewer type I errors (false positives), but type II errors (false negatives) will increase. So what can we do with this in practice?
 
-1- $\beta$ is the so called statistical power which is the rate at which a test is significant if the effect truly exists. Power increases with stronger effect, smaller variability, (larger $\alpha$ ), and more data (sample size). So, collect more data? How much data do we need?
+1- $\beta$ is the so called **statistical power** which is the rate at which a test is significant if the effect truly exists. Power increases with stronger effect, smaller variability, (larger $\alpha$ ), and more data (sample size). So, collect more data? How much data do we need?
 
-Before the experiment, you can estimate the effect size and the variability. Together with alpha (known), you can calculate the power depending on the sample size:
+Before the experiment, you can guess the effect size and the variability, and together with alpha (known), you can calculate the power depending on the sample size:
 
 ```{r}
 #| code-fold: true
@@ -361,22 +378,28 @@ results =
 plot(seq(10, 500, by = 20), results, xlab = "Sample size", ylab = "Power", main = "")
 ```
 
-We call that a power analysis and there's a function in R to do that:
+We call that a **power analysis** and there's a function in R to do that:
 
 ```{r}
 power.t.test(n = 10, delta = 1, sd = 1, type = "one.sample")
+```
 
-# Power increases with sample size (effect size constant, sd constant):
+Power increases with sample size (effect size constant, sd constant):
+```{r}
 pow <- function(n) power.t.test(n, delta = 1, sd = 1, type = "one.sample")$power
 plot(1:20, sapply(1:20, pow), xlab = "Sample size", ylab = "Power", pch = 20)
+```
 
-# Power increases with effect size
+Power increases with effect size:
+```{r}
 pow <- function(d) power.t.test(n = 20, delta = d, sd = 1, 
                                 type = "one.sample")$power
 plot(seq(0,1,0.05), sapply(seq(0,1,0.05), pow), xlab = "Effect size", 
      ylab = "Power", pch = 20)
+```
 
-# Power decreases with increasing standard deviation (or variance):
+Power decreases with increasing standard deviation (or variance):
+```{r}
 pow <- function(s) power.t.test(n = 20, delta = 1, sd = s, 
                                 type = "one.sample")$power
 plot(seq(0.5,1.5,0.05), sapply(seq(0.5,1.5,0.05), pow), 
