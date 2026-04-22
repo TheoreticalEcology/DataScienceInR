@@ -50,7 +50,7 @@ To thoroughly check the dataset and perform the operations, you will need the fo
 -   `summary()`
 -   `complete.cases()`
 -   `cor.test()`
--   `%>%` and `group_by()` and `summarize()` from the dlyr package (check demonstration Part 2)
+-   `%>%` and `group_by()` and `summarize()` from the \`dplyr\` package (from tidyverse, check demonstration Part 2)
 
 Regarding the solutions, note we don't expect you to come up with exactly this code - there are many ways to solve the problem. The solutions just give you an idea of a possible solution.
 
@@ -78,8 +78,11 @@ Read the dataset `species.csv` and call it species. The dataset consists of the 
 First, you read in the file using `read.csv`. You have to specify the correct separator for your dataset, here this is ";".
 
 ```{r, eval = F}
-treedata <- read.csv('Where/ever/you/put/it/treedata.csv', sep = ";")
-species <- read.csv('Hopefully/in/the/same/folder/species.csv', sep = ";")
+# if your data is in the root folder of your Rstudio project:
+treedata <- read.csv('treedata.csv', sep = ";")
+species <- read.csv('species.csv', sep = ";")
+# if not, give the relative (ex: "data/treedata.csv") or absolute path, ex:
+# "Where/ever/you/put/it/treedata.csv"
 ```
 
 `r unhide()`
@@ -254,7 +257,8 @@ The remark F4 indicates, that the dbh-measurements might be flawed. Remove these
 `r hide("Click here to see the solution")` \#### Solution
 
 ```{r}
-treedata <- treedata[!treedata$rem %in% 'F4',]
+treedata <- treedata[!treedata$rem %in% 'F4', ] #OR
+treedata <- treedata[treedata$rem != 'F4', ]
 ```
 
 `r unhide()`
@@ -271,6 +275,10 @@ This can be done using `complete.cases` using
 
 ```{r}
 dbh_height <- treedata[complete.cases(treedata$dbh, treedata$height),]
+
+# or filter() in dplyr from tidyverse
+library(tidyverse)
+dbh_height2 <- treedata %>% filter(!is.na(dbh) & !is.na(height))
 ```
 
 `r unhide()`
