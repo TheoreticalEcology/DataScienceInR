@@ -17,3 +17,4 @@ elk_data.RData
 
 **/*.quarto_ipynb
 .DS_Store
+.positai

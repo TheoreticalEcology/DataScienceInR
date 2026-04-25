@@ -157,8 +157,8 @@ wilcox.test(dat$down, dat$up, paired = TRUE)
 ::: {column-margin}
 H_0\_ Hypothesis:
 
--   Shapiro: Data is normal distributed
--   Wilcoxon: No differences in their ranks
+- Shapiro: Data is normal distributed
+- Wilcoxon: No differences in their ranks
 :::
 
 ## Chicken
